@@ -1,0 +1,10 @@
+{
+  "name": "outreader-yjk",
+  "version": "0.0.1",
+  "description": "A YJK output files reader",
+  "main": "lib/index.js",
+  "repository": "https://github.com/an-lee/outreaderjs.git",
+  "author": "an-lee <an.lee.work@gmail.com>",
+  "license": "MIT",
+  "private": true
+}
