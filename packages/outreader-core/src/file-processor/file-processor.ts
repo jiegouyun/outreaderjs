@@ -34,10 +34,7 @@ export async function readLineByLine(
  * @param pathName: string
  * @param initial encoding
  */
-function ensureUtf8Stream(
-  pathName: string,
-  encoding?: string
-): NodeJS.ReadStream {
+function ensureUtf8Stream(pathName: string, encoding?: string) {
   const extname = path.extname(pathName);
   let stream;
 
