@@ -2,7 +2,11 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "lib",
-    "rootDir": "src",
+    "rootDir": "src"
   },
-  "include": ["src/**/*"]
+  "include": [
+    "src/**/*",
+    "../outreader-core/src/file-processor/file-processor.ts",
+    "../outreader-core/src/file-processor/index.ts"
+  ]
 }
