@@ -27,26 +27,26 @@ yarn -v
 
 ```bash
 git clone git@github.com:jiegouyun/outreaderjs.git
+```
+
+### 进入项目目录
+
+```bash
 cd outreaderjs
 ```
 
-安装依赖
+### 安装依赖
 
 ```bash
 yarn install
-```
-
-构建
-
-```bash
-lerna run build
 lerna bootstrap
 ```
 
 ### 执行 CLI
 
 ```
-./packages/outreader-cli/bin/run -h
+yarn build
+yarn cli
 ```
 
 顺利的话会显示 CLI 的使用说明，例如
@@ -63,6 +63,12 @@ USAGE
 COMMANDS
   help  display help for outreader
   yjk   Read from a YJK model
+```
+
+### 以 yjk 读取为例
+
+```bash
+yarn cli yjk ~/Downloads/outreader-model-fixtures/1#
 ```
 
 ## 打包发布

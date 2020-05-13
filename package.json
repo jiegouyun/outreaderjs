@@ -3,6 +3,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "build": "lerna run build",
     "cli": "./packages/outreader-cli/bin/run"
   },
   "devDependencies": {
