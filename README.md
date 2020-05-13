@@ -39,7 +39,7 @@ cd outreaderjs
 
 ```bash
 yarn install
-lerna bootstrap
+yarn lerna bootstrap
 ```
 
 ### 执行 CLI
