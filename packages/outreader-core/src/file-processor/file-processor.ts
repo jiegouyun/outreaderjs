@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import * as readline from "readline";
+import * as iconv from "iconv-lite";
 
 /**
  * @description read a text file line by line
@@ -15,7 +16,10 @@ export async function readLineByLine(
   }
 
   const rl = readline.createInterface({
-    input: fs.createReadStream(path),
+    input: fs
+      .createReadStream(path)
+      .pipe(iconv.decodeStream("gb2312"))
+      .pipe(iconv.encodeStream("utf8")),
   });
 
   for await (const line of rl) {

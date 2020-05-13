@@ -2,6 +2,9 @@
   "name": "outreader",
   "private": true,
   "license": "MIT",
+  "scripts": {
+    "cli": "./packages/outreader-cli/bin/run"
+  },
   "devDependencies": {
     "lerna": "^3.20.2"
   }

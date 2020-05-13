@@ -12,5 +12,6 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "iconv-lite": "^0.5.1"
   }
 }

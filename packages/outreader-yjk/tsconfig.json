@@ -4,9 +4,5 @@
     "outDir": "lib",
     "rootDir": "src"
   },
-  "include": [
-    "src/**/*",
-    "../outreader-core/src/file-processor/file-processor.ts",
-    "../outreader-core/src/file-processor/index.ts"
-  ]
+  "include": ["src/**/*"]
 }

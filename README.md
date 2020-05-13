@@ -36,6 +36,13 @@ cd outreaderjs
 yarn install
 ```
 
+构建
+
+```bash
+lerna run build
+lerna bootstrap
+```
+
 ### 执行 CLI
 
 ```
