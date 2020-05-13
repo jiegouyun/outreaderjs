@@ -1,5 +1,5 @@
 import { Command } from "@oclif/command";
-import { readOutputs } from 'outreader-yjk';
+import { readOutputs } from '@outreader/yjk';
 
 export default class Yjk extends Command {
   static description = "Read from a YJK model";
