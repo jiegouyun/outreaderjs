@@ -7,11 +7,14 @@ import * as iconv from "iconv-lite";
  * @description read a text file line by line
  * @param path: string;
  * @param processFunc: function;
+ * @param options: IOptions;
  */
 export async function readLineByLine(
   pathName: string,
   processFunc: (line: string) => any,
-  options: IOptions = {}
+  options: {
+    encoding?: string;
+  } = {}
 ) {
   if (!fs.existsSync(pathName)) {
     throw new Error(`Can not find ${pathName}!`);
@@ -26,7 +29,15 @@ export async function readLineByLine(
   }
 }
 
-function ensureUtf8Stream(pathName: string, encoding?: string) {
+/**
+ * @description ensure a stream to be utf8
+ * @param pathName: string
+ * @param initial encoding
+ */
+function ensureUtf8Stream(
+  pathName: string,
+  encoding?: string
+): NodeJS.ReadStream {
   const extname = path.extname(pathName);
   let stream;
 
@@ -45,8 +56,4 @@ function ensureUtf8Stream(pathName: string, encoding?: string) {
   }
 
   return stream;
-}
-
-export interface IOptions {
-  encoding?: string;
 }
