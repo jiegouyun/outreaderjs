@@ -21,7 +21,7 @@ export async function readLineByLine(
   }
 
   const rl = readline.createInterface({
-    input: ensureUtf8Stream(pathName, options.encoding),
+    input: createUtf8Stream(pathName, options.encoding),
   });
 
   for await (const line of rl) {
@@ -34,7 +34,7 @@ export async function readLineByLine(
  * @param pathName: string
  * @param initial encoding
  */
-function ensureUtf8Stream(pathName: string, encoding?: string) {
+function createUtf8Stream(pathName: string, encoding?: string) {
   const extname = path.extname(pathName);
   let stream;
 
