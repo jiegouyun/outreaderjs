@@ -4,10 +4,13 @@
   "license": "MIT",
   "scripts": {
     "build": "lerna run build",
-    "cli": "./packages/outreader-cli/bin/run"
+    "cli": "./packages/outreader-cli/bin/run",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "devDependencies": {
     "lerna": "^3.20.2",
-    "typescript": "^3.9.2"
+    "typescript": "^3.9.2",
+    "vuepress": "^1.5.0"
   }
 }
