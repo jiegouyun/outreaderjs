@@ -1,4 +1,4 @@
-name: Deploy
+name: deploy-docs
 
 on:
   push:
@@ -38,4 +38,4 @@ jobs:
           GIHUB_TOKEN: ${{ secrets.GIHUB_TOKEN }}
         run: |
           echo "Deploying"
-          bin/deploy.sh
+          bin/deploy-docs.sh
