@@ -22,8 +22,7 @@ if [[ ${GIHUB_TOKEN} ]]; then
   git add . && \
   git commit -m "vuepress build from Action ${GITHUB_SHA}" && \
   git show-ref && \
-  git push --force $remote_repo master:gh-pages && \
-  rm -fr .git && \
+  git push --force $remote_repo master:gh-pages
 else
   # for local deploy
   git init
@@ -32,4 +31,5 @@ else
   git push -f git@github.com:jiegouyun/outreaderjs.git master:gh-pages
 fi
 
+rm -fr .git
 cd -
