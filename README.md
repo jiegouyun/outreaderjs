@@ -7,11 +7,26 @@ Javascript.
 
 ### 开发环境准备
 
+开发前需要安装 nodejs 以及 yarn 。
+
+#### nodejs 安装
+
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
 source ~/.bashrc
 export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node
 nvm install --lts
+```
+
+检查安装是否安装成功
+
+```bash
+node -v
+```
+
+#### yarn 安装
+
+```bash
 curl -o- -L https://yarnpkg.com/install.sh | bash
 source ~/.bashrc
 ```
@@ -19,7 +34,6 @@ source ~/.bashrc
 检查安装是否安装成功
 
 ```bash
-node -v
 yarn -v
 ```
 
