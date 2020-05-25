@@ -3,6 +3,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "test:yjk": "cd packages/outreader-yjk && yarn test",
     "build": "lerna run build",
     "cli": "./packages/outreader-cli/bin/run",
     "docs:dev": "vuepress dev docs",

@@ -8,6 +8,7 @@
   },
   "bugs": "https://github.com/an-lee/outreaderjs/issues",
   "dependencies": {
+    "@babel/runtime": "^7.9.6",
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
@@ -16,19 +17,25 @@
     "tslib": "^1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-transform-runtime": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-typescript": "^7.9.0",
+    "@babel/register": "^7.9.0",
     "@oclif/dev-cli": "^1",
     "@oclif/test": "^1",
     "@types/chai": "^4",
-    "@types/mocha": "^5",
+    "@types/mocha": "^7.0.2",
     "@types/node": "^10",
     "chai": "^4",
     "eslint": "^5.13",
     "eslint-config-oclif": "^3.1",
     "eslint-config-oclif-typescript": "^0.1",
     "globby": "^10",
-    "mocha": "^5",
-    "nyc": "^14",
-    "ts-node": "^8",
+    "mocha": "^7.2.0",
+    "nyc": "^15.0.1",
+    "ts-node": "^8.10.1",
     "typescript": "^3.3"
   },
   "engines": {
