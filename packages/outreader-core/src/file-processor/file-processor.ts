@@ -25,7 +25,7 @@ export async function readLineByLine(
   });
 
   for await (const line of rl) {
-      processFunc(line);
+    processFunc(line);
   }
 }
 
@@ -62,24 +62,27 @@ function createUtf8Stream(pathName: string, encoding?: string) {
  * @param keyIndex: keywords index
  * @param index: value index, can be array
  */
-export function extractData(lineArray: string[], key: string, keyIndex: number = 0, index: number): string;
-export function extractData(lineArray: string[], key: string, keyIndex: number = 0, index: number[]): string[] {  
+export function extractData(
+  lineArray: string[],
+  key: string,
+  keyIndex: number = 0,
+  index: number[] | number
+): string | string[] | undefined {
   if (lineArray[keyIndex] == key) {
     console.log(`key: ${key},
     kyeIndex: ${keyIndex},
     lineArray[keyIndex]: ${lineArray[keyIndex]},
-    index: ${index}`
-    );
+    index: ${index}`);
 
-    if (typeof(index) == 'number') {
+    if (typeof index == "number") {
       console.log(`return: ${lineArray[index] || ""}`);
-      return lineArray[index] || "";      
-    } else if (typeof(index) == 'object') {
+      return lineArray[index] || "";
+    } else if (typeof index == "object") {
       let result: string[] = [];
       for (const i of index) {
         result.push(lineArray[i]);
       }
-      console.log(`return: ${result}`)
+      console.log(`return: ${result}`);
       return result;
     }
   }
