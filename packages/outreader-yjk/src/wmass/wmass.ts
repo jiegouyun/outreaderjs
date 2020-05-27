@@ -4,21 +4,7 @@ import {
   checkObjectKeysIfAllExtracted,
 } from "@outreader/core";
 import * as path from "path";
-
-export interface IWmass {
-  information: IInformation;
-}
-
-export interface IInformation {
-  engineering?: string;
-  engineeringCode?: string;
-  designer?: string;
-  checker?: string;
-  software?: string;
-  softwareVersion?: string[];
-  calDate?: string[];
-  allExtracted?: boolean;
-}
+import { IInformation, IWmass } from "./wmass.interface";
 
 export async function readWmassOutput(dir: string): Promise<IWmass> {
   const file = path.join(dir, "wmass.out");
@@ -46,7 +32,7 @@ export async function readWmassOutput(dir: string): Promise<IWmass> {
 
     // Extract information{}
     if (!wmass.information.allExtracted) {
-      wmass.information = extractInformation(wmass.information, lineArray);
+      wmass.information = extractInformation(lineArray, wmass.information);
     }
   });
 
@@ -55,8 +41,8 @@ export async function readWmassOutput(dir: string): Promise<IWmass> {
 }
 
 export function extractInformation(
-  information: IInformation,
-  lineArray: string[]
+  lineArray: string[],
+  information: IInformation
 ): IInformation {
   if (!Boolean(information.engineering)) {
     information.engineering = extractData(lineArray, "工程名称", 0, 1);
