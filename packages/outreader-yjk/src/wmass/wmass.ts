@@ -72,7 +72,8 @@ export function extractInformation(
  * @description devide line string and return string array
  * @param line: original line string
  */
-export function lineToArray(line: string): string[] {
+function lineToArray(line: string): string[] {  
   const regexp: RegExp = /[a-zA-Z\u4e00-\u9fa5]+\d*\-?\d*|-?\d+\.?\d*[a-zA-Z]*\+?\d*/g;
-  return line.match(regexp) || [];
+  // const regexp: RegExp = /[a-zA-Z0-9\u4e00-\u9fa5\(\)\《\》-]+\d*\-?.?\d*/g;
+  return line.match(regexp) || [];  
 }

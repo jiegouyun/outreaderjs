@@ -74,10 +74,12 @@ export function extractData(
     lineArray[keyIndex]: ${lineArray[keyIndex]},
     index: ${index}`);
 
-    if (typeof index == 'number') {
-      console.log(`return: ${lineArray[index] || ''}`);
-      return lineArray[index] || '';
-    } else if (typeof index == 'object') {
+    if (typeof(index) == 'number') {
+      let result: string = "";      
+      result = lineArray[index] || "";
+      console.log(`return: ${result}`);
+      return result;
+    } else if (typeof(index) == 'object') {
       let result: string[] = [];
       for (const i of index) {
         result.push(lineArray[i]);
