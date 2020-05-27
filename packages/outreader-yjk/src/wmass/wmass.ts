@@ -21,10 +21,8 @@ export async function readWmassOutput(dir: string): Promise<IWmass> {
 
     // Divide line into array
     let lineArray: string[] = [];
-    if (line.length > 0) {
-      lineArray = lineToArray(line);
-      // console.log(`${typeof(lineArray)} : ${lineArray}`);
-    }
+    lineArray = lineToArray(line);
+    // console.log(`${typeof(lineArray)} : ${lineArray}`);
 
     if (lineArray.length === 0) {
       return;
