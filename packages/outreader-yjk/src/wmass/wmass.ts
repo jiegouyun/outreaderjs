@@ -1,11 +1,15 @@
-import { readLineByLine, extractData } from "@outreader/core";
+import {
+  readLineByLine,
+  extractData,
+  checkObjectKeysIfAllExtracted,
+} from "@outreader/core";
 import * as path from "path";
 
-interface IWmass {
+export interface IWmass {
   information: IInformation;
 }
 
-interface IInformation {
+export interface IInformation {
   engineering?: string;
   engineeringCode?: string;
   designer?: string;
@@ -76,16 +80,7 @@ export function extractInformation(
     information.calDate = extractData(lineArray, "计算日期", 0, [1, 2, 3]);
   }
 
-  let allExtracted = true;
-  Object.keys(information).forEach((key: keyof IInformation | string) => {
-    if (key === "allExtracted" || allExtracted === false) {
-      return;
-    }
-    console.log(key);
-    allExtracted = Boolean(information[key as keyof IInformation]);
-  });
-
-  information.allExtracted = allExtracted;
+  information.allExtracted = checkObjectKeysIfAllExtracted(information);
 
   return information;
 }
