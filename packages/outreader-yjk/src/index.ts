@@ -1,6 +1,6 @@
-import { readWmassOutput } from "./wmass";
+import { readWmassOutput } from './wmass';
 
-export * from "./wmass";
+export * from './wmass';
 export function readOutputs(dir: string) {
   readWmassOutput(dir);
 }

@@ -1,2 +1,2 @@
-export * from "./wmass";
-export * from "./wmass.interface";
+export * from './wmass';
+export * from './wmass.interface';

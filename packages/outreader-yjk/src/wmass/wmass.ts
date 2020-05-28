@@ -2,12 +2,12 @@ import {
   readLineByLine,
   extractData,
   checkObjectKeysIfAllExtracted,
-} from "@outreader/core";
-import * as path from "path";
-import { IInformation, IWmass } from "./wmass.interface";
+} from '@outreader/core';
+import * as path from 'path';
+import { IInformation, IWmass } from './wmass.interface';
 
 export async function readWmassOutput(dir: string): Promise<IWmass> {
-  const file = path.join(dir, "wmass.out");
+  const file = path.join(dir, 'wmass.out');
   let wmass: IWmass = {
     information: { allExtracted: false },
   };
@@ -39,28 +39,28 @@ export async function readWmassOutput(dir: string): Promise<IWmass> {
 
 export function extractInformation(
   lineArray: string[],
-  information: IInformation
+  information: IInformation,
 ): IInformation {
   if (!Boolean(information.engineering)) {
-    information.engineering = extractData(lineArray, "工程名称", 0, 1);
+    information.engineering = extractData(lineArray, '工程名称', 0, 1);
   }
   if (!Boolean(information.engineeringCode)) {
-    information.engineeringCode = extractData(lineArray, "工程代号", 0, 1);
+    information.engineeringCode = extractData(lineArray, '工程代号', 0, 1);
   }
   if (!Boolean(information.designer)) {
-    information.designer = extractData(lineArray, "设计人", 0, 1);
+    information.designer = extractData(lineArray, '设计人', 0, 1);
   }
   if (!Boolean(information.checker)) {
-    information.checker = extractData(lineArray, "校核人", 0, 1);
+    information.checker = extractData(lineArray, '校核人', 0, 1);
   }
   if (!Boolean(information.software)) {
-    information.software = extractData(lineArray, "软件名称", 0, 1);
+    information.software = extractData(lineArray, '软件名称', 0, 1);
   }
   if (!Boolean(information.softwareVersion)) {
-    information.softwareVersion = extractData(lineArray, "版本", 0, [1, 2]);
+    information.softwareVersion = extractData(lineArray, '版本', 0, [1, 2]);
   }
   if (!Boolean(information.calDate)) {
-    information.calDate = extractData(lineArray, "计算日期", 0, [1, 2, 3]);
+    information.calDate = extractData(lineArray, '计算日期', 0, [1, 2, 3]);
   }
 
   information.allExtracted = checkObjectKeysIfAllExtracted(information);

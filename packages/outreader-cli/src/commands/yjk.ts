@@ -1,8 +1,8 @@
-import { Command } from "@oclif/command";
+import { Command } from '@oclif/command';
 import { readOutputs } from '@outreader/yjk';
 
 export default class Yjk extends Command {
-  static description = "Read from a YJK model";
+  static description = 'Read from a YJK model';
 
   static examples = [
     `$ outreader yjk path/to/yjk/model
@@ -10,7 +10,7 @@ export default class Yjk extends Command {
   ];
 
   static args = [
-    { name: "dir", required: true, description: "directory of the YJK model" },
+    { name: 'dir', required: true, description: 'directory of the YJK model' },
   ];
 
   async run() {

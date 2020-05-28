@@ -12,4 +12,3 @@ export interface IInformation {
   calDate?: string[];
   allExtracted?: boolean;
 }
-

@@ -4,7 +4,7 @@
 export function checkObjectKeysIfAllExtracted<T>(obj: T): boolean {
   let allExtracted = true;
   Object.keys(obj).forEach((key: keyof T | string) => {
-    if (key === "allExtracted" || allExtracted === false) {
+    if (key === 'allExtracted' || allExtracted === false) {
       return;
     }
     allExtracted = Boolean(obj[key as keyof T]);

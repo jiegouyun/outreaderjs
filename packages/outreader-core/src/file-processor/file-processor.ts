@@ -1,7 +1,7 @@
-import * as fs from "fs";
-import * as path from "path";
-import * as readline from "readline";
-import * as iconv from "iconv-lite";
+import * as fs from 'fs';
+import * as path from 'path';
+import * as readline from 'readline';
+import * as iconv from 'iconv-lite';
 
 /**
  * @description read a text file line by line
@@ -14,7 +14,7 @@ export async function readLineByLine(
   processFunc: (line: string) => any,
   options: {
     encoding?: string;
-  } = {}
+  } = {},
 ) {
   if (!fs.existsSync(pathName)) {
     throw new Error(`Can not find ${pathName}!`);
@@ -42,12 +42,12 @@ function createUtf8Stream(pathName: string, encoding?: string) {
     stream = fs
       .createReadStream(pathName)
       .pipe(iconv.decodeStream(encoding))
-      .pipe(iconv.encodeStream("utf8"));
-  } else if (extname === ".out" || extname === ".OUT") {
+      .pipe(iconv.encodeStream('utf8'));
+  } else if (extname === '.out' || extname === '.OUT') {
     stream = fs
       .createReadStream(pathName)
-      .pipe(iconv.decodeStream("gb2312"))
-      .pipe(iconv.encodeStream("utf8"));
+      .pipe(iconv.decodeStream('gb2312'))
+      .pipe(iconv.encodeStream('utf8'));
   } else {
     stream = fs.createReadStream(pathName);
   }
@@ -66,7 +66,7 @@ export function extractData(
   lineArray: string[],
   key: string,
   keyIndex: number = 0,
-  index: number[] | number
+  index: number[] | number,
 ): string | string[] | undefined {
   if (lineArray[keyIndex] == key) {
     console.log(`key: ${key},
@@ -74,10 +74,10 @@ export function extractData(
     lineArray[keyIndex]: ${lineArray[keyIndex]},
     index: ${index}`);
 
-    if (typeof index == "number") {
-      console.log(`return: ${lineArray[index] || ""}`);
-      return lineArray[index] || "";
-    } else if (typeof index == "object") {
+    if (typeof index == 'number') {
+      console.log(`return: ${lineArray[index] || ''}`);
+      return lineArray[index] || '';
+    } else if (typeof index == 'object') {
       let result: string[] = [];
       for (const i of index) {
         result.push(lineArray[i]);

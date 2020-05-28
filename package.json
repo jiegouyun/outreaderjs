@@ -3,6 +3,8 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "lint": "prettier --write packages/**/*.{ts,js}",
+    "lint:check": "prettier --check packages/**/*.{ts,js}",
     "test:yjk": "cd packages/outreader-yjk && yarn test",
     "build": "lerna run build",
     "cli": "./packages/outreader-cli/bin/run",
@@ -13,5 +15,20 @@
     "lerna": "^3.20.2",
     "typescript": "^3.9.2",
     "vuepress": "^1.5.0"
+  },
+  "dependencies": {
+    "cz-conventional-changelog": "^3.2.0",
+    "husky": "^4.2.5",
+    "prettier": "^2.0.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint --uncommitted"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
