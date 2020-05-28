@@ -1,6 +1,6 @@
 # OutReader-js
 
-![test](https://github.com/jiegouyun/outreaderjs/workflows/test/badge.svg) ![deploy-docs](https://github.com/jiegouyun/outreaderjs/workflows/deploy-docs/badge.svg)
+![test](https://github.com/jiegouyun/outreaderjs/workflows/test/badge.svg) ![test](https://github.com/jiegouyun/outreaderjs/workflows/lint/badge.svg) ![deploy-docs](https://github.com/jiegouyun/outreaderjs/workflows/deploy-docs/badge.svg)
 
 A structral model (YJK, PKPM, ETABS) output files reader implemented in
 Javascript.
