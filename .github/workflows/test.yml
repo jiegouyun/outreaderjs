@@ -36,6 +36,7 @@ jobs:
         run: |
           yarn install
           yarn lerna bootstrap
+          yarn build
 
       - name: Test
         run: |
