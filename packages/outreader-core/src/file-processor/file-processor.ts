@@ -69,20 +69,20 @@ export function extractData(
   index: number[] | number,
 ): string | string[] | undefined {
   if (lineArray[keyIndex] == key) {
-    console.log(`key: ${key},
-    kyeIndex: ${keyIndex},
-    lineArray[keyIndex]: ${lineArray[keyIndex]},
-    index: ${index}`);
+    // console.log(`key: ${key},
+    // kyeIndex: ${keyIndex},
+    // lineArray[keyIndex]: ${lineArray[keyIndex]},
+    // index: ${index}`);
 
     if (typeof index == 'number') {
-      console.log(`return: ${lineArray[index] || ''}`);
+      // console.log(`return: ${lineArray[index] || ""}`);
       return lineArray[index] || '';
     } else if (typeof index == 'object') {
       let result: string[] = [];
       for (const i of index) {
         result.push(lineArray[i]);
       }
-      console.log(`return: ${result}`);
+      // console.log(`return: ${result}`);
       return result;
     }
   }
