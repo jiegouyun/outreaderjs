@@ -60,7 +60,7 @@ export interface ISeismicInformation {
   siteCategory?: string;
   characteristicPeriod?: number;
   dampingRatio?: number;
-  periodReductionFactor?: number
+  periodReductionFactor?: number;
   eccentricityX?: number;
   eccentricityY?: number;
   maxSpectrumValue?: number;

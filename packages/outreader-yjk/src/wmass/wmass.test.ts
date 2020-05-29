@@ -19,27 +19,27 @@ describe('wmass', () => {
     expect(information.software).toBe('盈建科建筑结构设计软件');
   });
 
-  it("should extract generalInformation", async () => {
+  it('should extract generalInformation', async () => {
     const generalInformation = wmass.generalInformation;
-    expect(generalInformation.structuralSystem).toBe("框筒结构");
+    expect(generalInformation.structuralSystem).toBe('框筒结构');
     expect(generalInformation.podium).toBe(9);
   });
 
-  it("should extract calculationControl", async () => {
+  it('should extract calculationControl', async () => {
     const calculationControl = wmass.calculationControl;
-    expect(calculationControl.couplingBeamFactorSeismic).toBe(0.70);
-    expect(calculationControl.couplingBeamFactorWind).toBe(1.00);
+    expect(calculationControl.couplingBeamFactorSeismic).toBe(0.7);
+    expect(calculationControl.couplingBeamFactorWind).toBe(1.0);
   });
 
-  it("should extract windInformation", async () => {
+  it('should extract windInformation', async () => {
     const windInformation = wmass.windInformation;
     expect(windInformation.pressureModified).toBe(0.75);
     expect(windInformation.dampingRatio).toBe(0.05);
   });
 
-  it("should extract seismicInformation", async () => {
+  it('should extract seismicInformation', async () => {
     const seismicInformation = wmass.seismicInformation;
-    expect(seismicInformation.group).toBe("一");
+    expect(seismicInformation.group).toBe('一');
     expect(seismicInformation.dampingRatio).toBe(0.05);
   });
 });
