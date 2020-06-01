@@ -68,22 +68,26 @@ export function extractData(
   keyIndex: number = 0,
   index: number[] | number,
 ): string | string[] | undefined {
+  let result;
   if (lineArray[keyIndex] == key) {
     // console.log(`key: ${key},
     // kyeIndex: ${keyIndex},
     // lineArray[keyIndex]: ${lineArray[keyIndex]},
     // index: ${index}`);
 
-    if (typeof index == 'number') {
-      // console.log(`return: ${lineArray[index] || ""}`);
-      return lineArray[index] || '';
-    } else if (typeof index == 'object') {
-      let result: string[] = [];
+    if (typeof index === 'number') {      
+      // let result: string;
+      result = lineArray[index] || 'default';
+      // console.log(`return: ${result}`);
+    } else if (typeof index === 'object') {
+      result = [];
       for (const i of index) {
         result.push(lineArray[i]);
       }
       // console.log(`return: ${result}`);
-      return result;
+    } else {
+      throw new Error(`Import wrong index type!`);
     }
   }
+  return result;
 }
