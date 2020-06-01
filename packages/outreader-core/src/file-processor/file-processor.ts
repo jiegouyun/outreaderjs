@@ -75,7 +75,7 @@ export function extractData(
     // lineArray[keyIndex]: ${lineArray[keyIndex]},
     // index: ${index}`);
 
-    if (typeof index === 'number') {      
+    if (typeof index === 'number') {
       // let result: string;
       result = lineArray[index] || 'default';
       // console.log(`return: ${result}`);

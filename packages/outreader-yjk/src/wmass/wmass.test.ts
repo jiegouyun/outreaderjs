@@ -59,7 +59,7 @@ describe('wmass', () => {
   it('should extract massRatio', async () => {
     const massRatio = wmass.massRatio;
     expect(massRatio.storeyID[4]).toBe(50);
-    expect(massRatio.ratio[4]).toBe(1.00);
+    expect(massRatio.ratio[4]).toBe(1.0);
     expect(massRatio.massPerArea[4]).toBe(1481.91);
   });
 
@@ -81,8 +81,8 @@ describe('wmass', () => {
     expect(stiffness.storeyID[4]).toBe(5);
     expect(stiffness.ratx1[4]).toBe(6705.0505);
     expect(stiffness.ratx2[4]).toBe(5258.8637);
-    expect(stiffness.rjx1[4]).toBe(1.8963E+008);
-    expect(stiffness.rjx3[4]).toBe(5.9294E+010);
+    expect(stiffness.rjx1[4]).toBe(1.8963e8);
+    expect(stiffness.rjx3[4]).toBe(5.9294e10);
   });
 
   it('should extract constraintFloorStiffnessRatio', async () => {
@@ -95,8 +95,8 @@ describe('wmass', () => {
   it('should extract overturningCheck', async () => {
     const overturningCheck = wmass.overturningCheck;
     expect(overturningCheck.storeyID).toBe(3);
-    expect(overturningCheck.mrWindX).toBe(1.217E+008);
-    expect(overturningCheck.mrSeismicY).toBe(6.708E+007);
+    expect(overturningCheck.mrWindX).toBe(1.217e8);
+    expect(overturningCheck.mrSeismicY).toBe(6.708e7);
   });
 
   it('should extract stableCheck', async () => {
@@ -124,5 +124,4 @@ describe('wmass', () => {
     expect(shearCapacityCheck.storeyID[4]).toBe(50);
     expect(shearCapacityCheck.ratioX[4]).toBe(1.06);
   });
-
 });
