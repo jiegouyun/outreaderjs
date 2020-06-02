@@ -622,26 +622,26 @@ export function extractStoreyPart1(
 }
 
 export function extractTower(lineArray: string[], tower: ITower): ITower {
-    if (lineArray[0] === '塔属性') {
-      flag = 'keyTower';
-    } else if (lineArray[0] === '各层质量') {
-      tower.allExtracted = true;
-      flag = '';
-    }
+  if (lineArray[0] === '塔属性') {
+    flag = 'keyTower';
+  } else if (lineArray[0] === '各层质量') {
+    tower.allExtracted = true;
+    flag = '';
+  }
 
-    if (flag === 'keyTower') {
-      if (lineArray[0] === '塔号') {
-        if (typeof tower.towerID === 'object') {
-          tower.towerID.push(Number(lineArray[1]));
-        }
-      }
-
-      if (lineArray[0] === '结构体系') {
-        if (typeof tower.structuralSystem === 'object') {
-          tower.structuralSystem.push(lineArray[1]);
-        }
+  if (flag === 'keyTower') {
+    if (lineArray[0] === '塔号') {
+      if (typeof tower.towerID === 'object') {
+        tower.towerID.push(Number(lineArray[1]));
       }
     }
+
+    if (lineArray[0] === '结构体系') {
+      if (typeof tower.structuralSystem === 'object') {
+        tower.structuralSystem.push(lineArray[1]);
+      }
+    }
+  }
 
   return tower;
 }
