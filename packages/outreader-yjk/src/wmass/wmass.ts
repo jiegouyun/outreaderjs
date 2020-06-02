@@ -181,6 +181,7 @@ export async function readWmassOutput(dir: string): Promise<IWmass> {
     if (lineArray[0] === '塔属性') {
       flag = 'keyTower';
     } else if (lineArray[0] === '各层质量') {
+      wmass.tower.allExtracted = true;
       flag = '';
     }
 
@@ -251,6 +252,7 @@ export async function readWmassOutput(dir: string): Promise<IWmass> {
     if (lineArray[0] === '各楼层质量') {
       flag = 'keyMassRatio2';
     } else if (lineArray[0] === '计算时间') {
+      wmass.massRatio.allExtracted = true;
       flag = '';
     }
 
