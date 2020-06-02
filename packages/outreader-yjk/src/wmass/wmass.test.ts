@@ -23,6 +23,8 @@ describe('wmass', () => {
     const generalInformation = wmass.generalInformation;
     expect(generalInformation.structuralSystem).toBe('框筒结构');
     expect(generalInformation.podium).toBe(9);
+    expect(generalInformation.transferStorey).toBe(0);
+    expect(generalInformation.reinforceStorey).toBe(0);
   });
 
   it('should extract calculationControl', async () => {

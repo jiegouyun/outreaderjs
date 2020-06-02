@@ -439,12 +439,12 @@ export function extractGeneralInformation(
       extractData(lineArray, '裙房层数', 0, 1),
     );
   }
-  if (!Boolean(generalInformation.transferStorey)) {
+  if (generalInformation.transferStorey === undefined) {
     generalInformation.transferStorey = Number(
       extractData(lineArray, '转换层所在层号', 0, 1) || '',
     );
   }
-  if (!Boolean(generalInformation.reinforceStorey)) {
+  if (generalInformation.reinforceStorey === undefined) {
     generalInformation.reinforceStorey = Number(
       extractData(lineArray, '加强层所在层号', 0, 1) || '',
     );
