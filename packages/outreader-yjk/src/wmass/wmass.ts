@@ -441,12 +441,12 @@ export function extractGeneralInformation(
   }
   if (!Boolean(generalInformation.transferStorey)) {
     generalInformation.transferStorey = Number(
-      extractData(lineArray, '转换层所在层号', 0, 1),
+      extractData(lineArray, '转换层所在层号', 0, 1) || '',
     );
   }
   if (!Boolean(generalInformation.reinforceStorey)) {
     generalInformation.reinforceStorey = Number(
-      extractData(lineArray, '加强层所在层号', 0, 1),
+      extractData(lineArray, '加强层所在层号', 0, 1) || '',
     );
   }
 
