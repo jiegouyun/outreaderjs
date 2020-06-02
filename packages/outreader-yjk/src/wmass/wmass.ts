@@ -24,7 +24,8 @@ import {
   IWindComfort,
   IShearCapacityCheck,
 } from './wmass.interface';
-import { check } from 'prettier';
+
+let flag: string;
 
 export async function readWmassOutput(dir: string): Promise<IWmass> {
   const file = path.join(dir, 'wmass.out');
@@ -108,7 +109,6 @@ export async function readWmassOutput(dir: string): Promise<IWmass> {
   };
 
   // Define flag
-  let flag: string;
   let innerFlag: string;
 
   await readLineByLine(file, (line: string) => {
@@ -178,18 +178,7 @@ export async function readWmassOutput(dir: string): Promise<IWmass> {
     }
 
     // Extract tower{}
-    if (lineArray[0] === '塔属性') {
-      flag = 'keyTower';
-    } else if (lineArray[0] === '各层质量') {
-      wmass.tower.allExtracted = true;
-      flag = '';
-    }
-
-    if (flag === 'keyTower') {
-      if (!wmass.tower.allExtracted) {
-        wmass.tower = extractTower(lineArray, wmass.tower);
-      }
-    }
+    wmass.tower = extractTower(lineArray, wmass.tower);
 
     // Extract massRatio{} part1/2
     if (lineArray[0] === '各层质量') {
@@ -633,19 +622,26 @@ export function extractStoreyPart1(
 }
 
 export function extractTower(lineArray: string[], tower: ITower): ITower {
-  if (lineArray[0] === '塔号') {
-    if (typeof tower.towerID === 'object') {
-      tower.towerID.push(Number(lineArray[1]));
+    if (lineArray[0] === '塔属性') {
+      flag = 'keyTower';
+    } else if (lineArray[0] === '各层质量') {
+      tower.allExtracted = true;
+      flag = '';
     }
-  }
 
-  if (lineArray[0] === '结构体系') {
-    if (typeof tower.structuralSystem === 'object') {
-      tower.structuralSystem.push(lineArray[1]);
+    if (flag === 'keyTower') {
+      if (lineArray[0] === '塔号') {
+        if (typeof tower.towerID === 'object') {
+          tower.towerID.push(Number(lineArray[1]));
+        }
+      }
+
+      if (lineArray[0] === '结构体系') {
+        if (typeof tower.structuralSystem === 'object') {
+          tower.structuralSystem.push(lineArray[1]);
+        }
+      }
     }
-  }
-
-  // tower.allExtracted = checkObjectKeysIfAllExtracted(tower);
 
   return tower;
 }
