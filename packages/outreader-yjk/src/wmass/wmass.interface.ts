@@ -20,7 +20,16 @@ export interface IWmass {
   shearCapacityCheck: IShearCapacityCheck;
 }
 
-export interface IInformation {
+export interface IStoreyTower {
+  storeyID?: number[];
+  towerID?: number[];
+}
+
+export interface IAllExtracted {
+  allExtracted?: boolean;
+}
+
+export interface IInformation extends IAllExtracted {
   engineering?: string;
   engineeringCode?: string;
   designer?: string;
@@ -28,10 +37,9 @@ export interface IInformation {
   software?: string;
   softwareVersion?: string;
   calDate?: string;
-  allExtracted?: boolean;
 }
 
-export interface IGeneralInformation {
+export interface IGeneralInformation extends IAllExtracted {
   structuralSystem?: string;
   structuralMaterial?: string;
   location?: string;
@@ -40,29 +48,26 @@ export interface IGeneralInformation {
   podium?: number;
   transferStorey?: number;
   reinforceStorey?: number;
-  allExtracted?: boolean;
 }
 
-export interface ICalculationControl {
+export interface ICalculationControl extends IAllExtracted {
   couplingBeamFactorSeismic?: number;
   couplingBeamFactorWind?: number;
   rigidFloorAssumption?: string;
-  allExtracted?: boolean;
 }
 
-export interface IWindInformation {
-  useAssigned?: boolean;
+export interface IWindInformation extends IAllExtracted {
+  useAssigned?: string;
   loadCode?: string;
   terrainRoughness?: string;
   pressureModified?: number;
   dampingRatio?: number;
   pressureComfort?: number;
   dampingRationComfort?: number;
-  allExtracted?: boolean;
 }
 
-export interface ISeismicInformation {
-  use2015GB18306?: boolean;
+export interface ISeismicInformation extends IAllExtracted {
+  use2015GB18306?: string;
   group?: string;
   intensity?: string;
   siteCategory?: string;
@@ -75,58 +80,44 @@ export interface ISeismicInformation {
   maxSpectrumValueL3?: number;
   additionalDampingRatio?: number;
   modifiedSeismicReductionFactor?: number;
-  allExtracted?: boolean;
 }
 
-export interface IStorey {
-  storeyID?: number[];
-  towerID?: number[];
+export interface IStorey extends IAllExtracted, IStoreyTower {
   attribute?: string[];
   height?: number[];
   heightToGround?: number[];
   area?: number[];
-  allExtracted?: boolean;
 }
 
-export interface ITower {
+export interface ITower extends IAllExtracted {
   towerID?: number[];
   structuralSystem?: string[];
-  allExtracted?: boolean;
 }
 
-export interface IMassRatio {
-  storeyID?: number[];
-  towerID?: number[];
+export interface IMassRatio extends IAllExtracted, IStoreyTower {
   ratio?: number[];
   storeyMass?: number[];
   massPerArea?: number[];
   massPerAreaRatio?: number[];
-  allExtracted?: boolean;
 }
 
-export interface IWeight {
+export interface IWeight extends IAllExtracted {
   live?: number;
   dead?: number;
   super?: number;
   sum?: number;
-  allExtracted?: boolean;
 }
 
-export interface IWind {
-  storeyID?: number[];
-  towerID?: number[];
+export interface IWind extends IAllExtracted, IStoreyTower {
   forceX?: number[];
   shearX?: number[];
   momentX?: number[];
   forceY?: number[];
   shearY?: number[];
   momentY?: number[];
-  allExtracted?: boolean;
 }
 
-export interface IStiffness {
-  storeyID?: number[];
-  towerID?: number[];
+export interface IStiffness extends IAllExtracted, IStoreyTower {
   ratx1?: number[];
   ratx2?: number[];
   rjx1?: number[];
@@ -138,10 +129,9 @@ export interface IStiffness {
   rjz1?: number[];
   rjz3?: number[];
   weakStoreyFactor?: number[];
-  allExtracted?: boolean;
 }
 
-export interface IConstraintFloorStiffnessRatio {
+export interface IConstraintFloorStiffnessRatio extends IAllExtracted {
   storeyID?: number;
   towerID?: number;
   stiffnessX0?: number;
@@ -150,10 +140,9 @@ export interface IConstraintFloorStiffnessRatio {
   stiffnessY0?: number;
   stiffnessY1?: number;
   ratioY?: number;
-  allExtracted?: boolean;
 }
 
-export interface IOverturningCheck {
+export interface IOverturningCheck extends IAllExtracted {
   storeyID?: number;
   towerID?: number;
   mrWindX?: number;
@@ -172,10 +161,9 @@ export interface IOverturningCheck {
   movSeismicY?: number;
   ratioSeismicY?: number;
   zeroAreaSeismicY?: number;
-  allExtracted?: boolean;
 }
 
-export interface IStableCheck {
+export interface IStableCheck extends IAllExtracted {
   seismicID?: number;
   seismicTcowerID?: number;
   seismicRatioX?: number;
@@ -184,31 +172,23 @@ export interface IStableCheck {
   windTcowerID?: number;
   windRatioX?: number;
   windRatioY?: number;
-  allExtracted?: boolean;
 }
 
-export interface IShearWeightRatioModify {
-  storeyID?: number[];
-  towerID?: number[];
+export interface IShearWeightRatioModify extends IAllExtracted, IStoreyTower {
   factorX?: number[];
   factorY?: number[];
-  allExtracted?: boolean;
 }
 
-export interface IWindComfort {
+export interface IWindComfort extends IAllExtracted {
   accelerationAlongX?: number;
   accelerationCrossX?: number;
   accelerationAlongY?: number;
   accelerationCrossY?: number;
-  allExtracted?: boolean;
 }
 
-export interface IShearCapacityCheck {
-  storeyID?: number[];
-  towerID?: number[];
+export interface IShearCapacityCheck extends IAllExtracted, IStoreyTower {
   capacityX?: number[];
   ratioX?: number[];
   capacityY?: number[];
   ratioY?: number[];
-  allExtracted?: boolean;
 }
