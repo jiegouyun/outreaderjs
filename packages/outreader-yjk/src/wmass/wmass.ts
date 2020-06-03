@@ -1,7 +1,4 @@
-import {
-  readLineByLine,
-  checkObjectKeysIfAllExtracted,
-} from '@outreader/core';
+import { readLineByLine, checkObjectKeysIfAllExtracted } from '@outreader/core';
 import * as path from 'path';
 import {
   IWmass,
@@ -166,7 +163,7 @@ export async function readWmassOutput(dir: string): Promise<IWmass> {
     if (!wmass.storey.allExtracted) {
       wmass.storey = extractStoreyPart1(lineArray, wmass.storey);
     }
-    
+
     // Extract tower{}
     if (!wmass.tower.allExtracted) {
       wmass.tower = extractTower(lineArray, wmass.tower);
@@ -176,7 +173,7 @@ export async function readWmassOutput(dir: string): Promise<IWmass> {
     if (!wmass.massRatio.allExtracted) {
       wmass.massRatio = extractMassRatioPart1(lineArray, wmass.massRatio);
     }
-    
+
     // Extract weight{}
     if (!wmass.weight.allExtracted) {
       wmass.weight = extractWeight(lineArray, wmass.weight);
@@ -186,27 +183,27 @@ export async function readWmassOutput(dir: string): Promise<IWmass> {
     if (!wmass.storey.allExtracted) {
       wmass.storey = extractStoreyPart2(lineArray, wmass.storey);
     }
-    
+
     // Extract wind{}
     if (!wmass.wind.allExtracted) {
       wmass.wind = extractWind(lineArray, wmass.wind);
     }
-    
+
     // Extract storey[] part3/3
     if (!wmass.storey.allExtracted) {
       wmass.storey = extractStoreyPart3(lineArray, wmass.storey);
     }
-    
+
     // Extract massRatio{} part2/2
     if (!wmass.massRatio.allExtracted) {
       wmass.massRatio = extractMassRatioPart2(lineArray, wmass.massRatio);
     }
-    
+
     // Extract stiffness{}
     if (!wmass.stiffness.allExtracted) {
       wmass.stiffness = extractStiffness(lineArray, wmass.stiffness);
     }
-    
+
     // Extract constraintFloorStiffnessRatio{}
     if (!wmass.constraintFloorStiffnessRatio.allExtracted) {
       wmass.constraintFloorStiffnessRatio = extractConstraintFloorStiffnessRatio(
@@ -217,14 +214,17 @@ export async function readWmassOutput(dir: string): Promise<IWmass> {
 
     // Extract overturningCheck{}
     if (!wmass.overturningCheck.allExtracted) {
-      wmass.overturningCheck = extractOverturningCheck(lineArray, wmass.overturningCheck);
+      wmass.overturningCheck = extractOverturningCheck(
+        lineArray,
+        wmass.overturningCheck,
+      );
     }
-    
+
     // Extract stableCheck{}
     if (!wmass.stableCheck.allExtracted) {
       wmass.stableCheck = extractStableCheck(lineArray, wmass.stableCheck);
     }
-    
+
     // Extract shearWeightRatioModify{}
     if (!wmass.shearWeightRatioModify.allExtracted) {
       wmass.shearWeightRatioModify = extractShearWeightRatioModify(
@@ -232,7 +232,7 @@ export async function readWmassOutput(dir: string): Promise<IWmass> {
         wmass.shearWeightRatioModify,
       );
     }
-    
+
     // Extract windComfort{}
     if (!wmass.windComfort.allExtracted) {
       wmass.windComfort = extractWIndComfort(lineArray, wmass.windComfort);
@@ -244,7 +244,7 @@ export async function readWmassOutput(dir: string): Promise<IWmass> {
         lineArray,
         wmass.shearCapacityCheck,
       );
-    }    
+    }
   });
 
   console.log(wmass);
@@ -411,7 +411,7 @@ export function extractSeismicInformation(
       seismicInformation.modifiedSeismicReductionFactor = Number(lineArray[1]);
       seismicInformation.allExtracted = true;
   }
-  
+
   return seismicInformation;
 }
 
@@ -422,7 +422,7 @@ export function extractStoreyPart1(
   if (lineArray[0] === '楼层属性') {
     flag = 'keyStoreyPart1';
   } else if (lineArray[0] === '塔属性') {
-    flag = '';    
+    flag = '';
   }
 
   if (flag === 'keyStoreyPart1') {
@@ -490,7 +490,7 @@ export function extractMassRatioPart1(
       }
     }
   }
-  
+
   return massRatio;
 }
 
@@ -533,7 +533,7 @@ export function extractStoreyPart2(
       }
     }
   }
-  
+
   return storey;
 }
 
@@ -563,7 +563,7 @@ export function extractWind(lineArray: string[], wind: IWind): IWind {
         wind.momentX.push(Number(lineArray[5]));
       }
     }
-  
+
     if (!isNaN(Number(lineArray[1])) && lineArray.length === 7) {
       if (typeof wind.forceY === 'object') {
         wind.forceY.push(Number(lineArray[1]));
@@ -760,7 +760,7 @@ export function extractOverturningCheck(
         overturningCheck.movSeismicY = Number(lineArray[2]);
         overturningCheck.ratioSeismicY = Number(lineArray[3]);
         overturningCheck.zeroAreaSeismicY = Number(lineArray[4]);
-    }    
+    }
   }
 
   return overturningCheck;
@@ -797,7 +797,7 @@ export function extractStableCheck(
           break;
         case 'Y向刚重比':
           stableCheck.seismicRatioY = Number(lineArray[2]);
-      }      
+      }
     } else if (innerFlag === 'wind') {
       switch (lineArray[0]) {
         case '层号':
@@ -809,10 +809,10 @@ export function extractStableCheck(
           break;
         case 'Y向刚重比':
           stableCheck.windRatioY = Number(lineArray[2]);
-      }      
+      }
     }
   }
-  
+
   return stableCheck;
 }
 
@@ -843,7 +843,7 @@ export function extractShearWeightRatioModify(
       }
     }
   }
-  
+
   return shearWeightRatioModify;
 }
 
@@ -902,7 +902,7 @@ export function extractShearCapacityCheck(
       }
     }
   }
-  
+
   return shearCapacityCheck;
 }
 
