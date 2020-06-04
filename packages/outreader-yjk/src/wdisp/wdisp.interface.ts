@@ -1,5 +1,3 @@
-import { IStoreyTower, IAllExtracted } from './wmass.interface';
-
 export interface IWdisp {
   driftSeismicX: IDrift;
   driftSeismicTwoWayX: IDrift;
@@ -21,14 +19,14 @@ export interface IWdisp {
   ratioSeismicYEccN: IDispRatio;
 }
 
-// export interface IStoreyTower {
-//   storeyID?: number[];
-//   towerID?: number[];
-// }
+interface IStoreyTower {
+  storeyID?: number[];
+  towerID?: number[];
+}
 
-// export interface IAllExtracted {
-//   allExtracted?: boolean;
-// }
+interface IAllExtracted {
+  allExtracted?: boolean;
+}
 
 export interface IDrift extends IStoreyTower, IAllExtracted {
   displacement?: number[];
