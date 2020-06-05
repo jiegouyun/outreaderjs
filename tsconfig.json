@@ -1,9 +1,18 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "importHelpers": true,
+    "allowUnreachableCode": false,
+    "alwaysStrict": true,
     "module": "commonjs",
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
     "strict": true,
-    "target": "es2017"
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "target": "esnext"
   }
 }

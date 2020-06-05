@@ -1,4 +1,5 @@
-import { readWmassOutput, IWmass } from './wmass';
+import { readWmassOutput } from './wmass';
+import { IWmass } from '@outreader/core';
 import * as path from 'path';
 
 describe('wmass', () => {
@@ -14,9 +15,9 @@ describe('wmass', () => {
   });
 
   it('should extract information', async () => {
-    const information = wmass.information;
-    expect(information.engineering).toBe('071A');
-    expect(information.software).toBe('盈建科建筑结构设计软件');
+    const basicInformation = wmass.basicInformation;
+    expect(basicInformation.engineering).toBe('071A');
+    expect(basicInformation.software).toBe('盈建科建筑结构设计软件');
   });
 
   it('should extract generalInformation', async () => {

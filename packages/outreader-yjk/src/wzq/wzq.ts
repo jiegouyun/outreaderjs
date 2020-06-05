@@ -1,6 +1,11 @@
-import { readLineByLine, checkObjectKeysIfAllExtracted } from '@outreader/core';
+import {
+  IMode,
+  IModeMass,
+  ISeismicForce,
+  IWzq,
+  readLineByLine,
+} from '@outreader/core';
 import * as path from 'path';
-import { IWzq, IMode, IModeMass, ISeismicForce } from './wzq.interface';
 
 // Define flag
 let flag: string;
@@ -57,9 +62,6 @@ export async function readWzqOutput(dir: string): Promise<IWzq> {
 
     // Divide line into array
     const lineArray = lineToArray(line);
-    // console.log(`line: ${line}`);
-    // console.log(`lineArray: ${lineArray}`);
-
     if (lineArray.length === 0) {
       return;
     }
@@ -85,7 +87,6 @@ export async function readWzqOutput(dir: string): Promise<IWzq> {
     }
   });
 
-  console.log(wzq);
   return wzq;
 }
 

@@ -1,7 +1,11 @@
-import { readLineByLine, checkObjectKeysIfAllExtracted } from '@outreader/core';
+import {
+  IDispRatio,
+  IDrift,
+  IWdisp,
+  IWindDriftDiap,
+  readLineByLine,
+} from '@outreader/core';
 import * as path from 'path';
-import { IWdisp, IDrift, IWindDriftDiap, IDispRatio } from './wdisp.interface';
-import { check } from 'prettier';
 
 // Define flag
 let flag: string;
@@ -154,9 +158,6 @@ export async function readWdispOutput(dir: string): Promise<IWdisp> {
 
     // Divide line into array
     const lineArray = lineToArray(line);
-    // console.log(`line: ${line}
-    // lineArray: ${lineArray}`);
-
     if (lineArray.length === 0) {
       return;
     }
@@ -294,7 +295,6 @@ export async function readWdispOutput(dir: string): Promise<IWdisp> {
     }
   });
 
-  console.log(wdisp);
   return wdisp;
 }
 

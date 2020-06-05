@@ -8,10 +8,13 @@
     "test:yjk": "cd packages/outreader-yjk && yarn test",
     "build": "lerna run build",
     "cli": "./packages/outreader-cli/bin/run",
+    "migrate:make": "knex migrate:make --migrations-directory=./packages/outreader-core/src/db/migrations -x ts",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
   "devDependencies": {
+    "@types/jest": "^25.2.3",
+    "knex": "^0.21.1",
     "lerna": "^3.22.0",
     "typescript": "^3.9.5",
     "vuepress": "^1.5.0"

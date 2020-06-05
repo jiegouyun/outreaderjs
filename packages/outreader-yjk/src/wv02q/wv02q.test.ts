@@ -1,5 +1,6 @@
-import { readWv02qOutput, IWv02q } from './wv02q';
+import { IWv02q } from '@outreader/core';
 import * as path from 'path';
+import { readWv02qOutput } from './wv02q';
 
 describe('wv02q', () => {
   const dir = path.join(__dirname, '../../../../fixtures/yjk/1');

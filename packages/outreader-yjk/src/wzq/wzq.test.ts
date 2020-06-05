@@ -1,4 +1,5 @@
-import { readWzqOutput, IWzq } from './wzq';
+import { readWzqOutput } from './wzq';
+import { IWzq } from '@outreader/core';
 import * as path from 'path';
 
 describe('wzq', () => {

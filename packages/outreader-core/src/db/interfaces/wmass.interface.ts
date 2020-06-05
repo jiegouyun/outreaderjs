@@ -1,7 +1,5 @@
-import { extractCalculationControl } from './wmass';
-
 export interface IWmass {
-  information: IInformation;
+  basicInformation: IBasicInformation;
   generalInformation: IGeneralInformation;
   calculationControl: ICalculationControl;
   windInformation: IWindInformation;
@@ -29,7 +27,7 @@ export interface IAllExtracted {
   allExtracted?: boolean;
 }
 
-export interface IInformation extends IAllExtracted {
+export interface IBasicInformation extends IAllExtracted {
   engineering?: string;
   engineeringCode?: string;
   designer?: string;

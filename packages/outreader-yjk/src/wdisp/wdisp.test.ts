@@ -1,4 +1,5 @@
-import { readWdispOutput, IWdisp } from './wdisp';
+import { readWdispOutput } from './wdisp';
+import { IWdisp } from '@outreader/core';
 import * as path from 'path';
 
 describe('wdisp', () => {
