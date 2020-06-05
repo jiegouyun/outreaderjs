@@ -1,8 +1,8 @@
-import { readLineByLine, checkObjectKeysIfAllExtracted } from '@outreader/core';
+import { readLineByLine } from '@outreader/core';
 import * as path from 'path';
 import {
   IWmass,
-  IInformation,
+  IBasicInformation,
   IGeneralInformation,
   ICalculationControl,
   IWindInformation,
@@ -28,7 +28,7 @@ let innerFlag: string;
 export async function readWmassOutput(dir: string): Promise<IWmass> {
   const file = path.join(dir, 'wmass.out');
   let wmass: IWmass = {
-    information: { allExtracted: false },
+    basicInformation: { allExtracted: false },
     generalInformation: { allExtracted: false },
     calculationControl: { allExtracted: false },
     windInformation: { allExtracted: false },
@@ -115,16 +115,16 @@ export async function readWmassOutput(dir: string): Promise<IWmass> {
 
     // Divide line into array
     const lineArray = lineToArray(line);
-    // console.log(`line: ${line}`);
-    // console.log(`lineArray: ${lineArray}`);
-
     if (lineArray.length === 0) {
       return;
     }
 
-    // Extract information{}
-    if (!wmass.information.allExtracted) {
-      wmass.information = extractInformation(lineArray, wmass.information);
+    // Extract basicInformation{}
+    if (!wmass.basicInformation.allExtracted) {
+      wmass.basicInformation = extractInformation(
+        lineArray,
+        wmass.basicInformation,
+      );
     }
 
     // Extract generalInformation{}
@@ -247,39 +247,38 @@ export async function readWmassOutput(dir: string): Promise<IWmass> {
     }
   });
 
-  console.log(wmass);
   return wmass;
 }
 
 export function extractInformation(
   lineArray: string[],
-  information: IInformation,
-): IInformation {
+  basicInformation: IBasicInformation,
+): IBasicInformation {
   switch (lineArray[0]) {
     case '工程名称':
-      information.engineering = lineArray[1] || 'default';
+      basicInformation.engineering = lineArray[1] || 'default';
       break;
     case '工程代号':
-      information.engineeringCode = lineArray[1] || 'default';
+      basicInformation.engineeringCode = lineArray[1] || 'default';
       break;
     case '设计人':
-      information.designer = lineArray[1] || 'default';
+      basicInformation.designer = lineArray[1] || 'default';
       break;
     case '校核人':
-      information.checker = lineArray[1] || 'default';
+      basicInformation.checker = lineArray[1] || 'default';
       break;
     case '软件名称':
-      information.software = lineArray[1] || 'default';
+      basicInformation.software = lineArray[1] || 'default';
       break;
     case '版本':
-      information.softwareVersion = lineArray[1] || 'default';
+      basicInformation.softwareVersion = lineArray[1] || 'default';
       break;
     case '计算日期':
-      information.calDate = lineArray[1] || 'default';
-      information.allExtracted = true;
+      basicInformation.calDate = lineArray[1] || 'default';
+      basicInformation.allExtracted = true;
   }
 
-  return information;
+  return basicInformation;
 }
 
 export function extractGeneralInformation(

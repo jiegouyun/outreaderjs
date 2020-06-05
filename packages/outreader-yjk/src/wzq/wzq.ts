@@ -57,9 +57,6 @@ export async function readWzqOutput(dir: string): Promise<IWzq> {
 
     // Divide line into array
     const lineArray = lineToArray(line);
-    // console.log(`line: ${line}`);
-    // console.log(`lineArray: ${lineArray}`);
-
     if (lineArray.length === 0) {
       return;
     }
@@ -85,7 +82,6 @@ export async function readWzqOutput(dir: string): Promise<IWzq> {
     }
   });
 
-  console.log(wzq);
   return wzq;
 }
 
