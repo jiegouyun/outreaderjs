@@ -13,8 +13,6 @@
     "strictNullChecks": true,
     "esModuleInterop": true,
     "allowJs": true,
-    "target": "esnext",
-    "rootDir": "./",
-    "outDir": "lib"
+    "target": "esnext"
   }
 }

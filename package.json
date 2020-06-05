@@ -8,6 +8,9 @@
     "test:yjk": "cd packages/outreader-yjk && yarn test",
     "build": "lerna run build",
     "cli": "./packages/outreader-cli/bin/run",
+    "migrate:make": "knex migrate:make --knexfile=./packages/outreader-core/src/db/knexfile.ts",
+    "migrate:latest": "knex migrate:latest --knexfile=./packages/outreader-core/src/db/knexfile.ts",
+    "migrate:rollback": "knex migrate:rollback --knexfile=./packages/outreader-core/src/db/knexfile.ts",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
