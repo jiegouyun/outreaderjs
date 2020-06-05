@@ -1,11 +1,11 @@
-import { readLineByLine, checkObjectKeysIfAllExtracted } from '@outreader/core';
-import * as path from 'path';
 import {
-  IWv02q,
-  IMomentPercent,
   IColumnShear,
+  IMomentPercent,
   IV02qFactor,
-} from './wv02q.interface';
+  IWv02q,
+  readLineByLine,
+} from '@outreader/core';
+import * as path from 'path';
 
 // Define flag
 let flag: string;

@@ -1,6 +1,11 @@
-import { readLineByLine, checkObjectKeysIfAllExtracted } from '@outreader/core';
+import {
+  IMode,
+  IModeMass,
+  ISeismicForce,
+  IWzq,
+  readLineByLine,
+} from '@outreader/core';
 import * as path from 'path';
-import { IWzq, IMode, IModeMass, ISeismicForce } from './wzq.interface';
 
 // Define flag
 let flag: string;

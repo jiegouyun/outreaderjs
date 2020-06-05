@@ -1,7 +1,11 @@
-import { readLineByLine, checkObjectKeysIfAllExtracted } from '@outreader/core';
+import {
+  IDispRatio,
+  IDrift,
+  IWdisp,
+  IWindDriftDiap,
+  readLineByLine,
+} from '@outreader/core';
 import * as path from 'path';
-import { IWdisp, IDrift, IWindDriftDiap, IDispRatio } from './wdisp.interface';
-import { check } from 'prettier';
 
 // Define flag
 let flag: string;

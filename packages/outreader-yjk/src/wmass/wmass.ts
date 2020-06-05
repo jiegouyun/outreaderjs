@@ -19,7 +19,7 @@ import {
   IShearWeightRatioModify,
   IWindComfort,
   IShearCapacityCheck,
-} from './wmass.interface';
+} from '@outreader/core';
 
 // Define flag
 let flag: string;

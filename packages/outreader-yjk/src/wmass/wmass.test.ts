@@ -1,5 +1,5 @@
 import { readWmassOutput } from './wmass';
-import { IWmass } from './wmass.interface';
+import { IWmass } from '@outreader/core';
 import * as path from 'path';
 
 describe('wmass', () => {
