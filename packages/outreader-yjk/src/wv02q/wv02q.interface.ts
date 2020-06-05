@@ -1,7 +1,7 @@
 export interface IWv02q {
+  momentPercent: IMomentPercent;
   columnShear: IColumnShear;
   v02qFactor: IV02qFactor;
-  momentPercent: IMomentPercent;
 }
 
 interface IStoreyTower {
