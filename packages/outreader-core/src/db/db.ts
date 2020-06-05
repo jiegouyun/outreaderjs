@@ -1,7 +1,7 @@
 import Knex from 'knex';
 import { Model } from 'objection';
 import path from 'path';
-import { Structure } from './models';
+import { StructureModel } from './models';
 
 export async function initDb(config: Knex.Config) {
   const knex = Knex(config);
@@ -11,6 +11,6 @@ export async function initDb(config: Knex.Config) {
   Model.knex(knex);
 
   return {
-    structures: Structure,
+    structures: StructureModel,
   };
 }
