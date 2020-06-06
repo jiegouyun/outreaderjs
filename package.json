@@ -1,8 +1,8 @@
 {
   "name": "outreader",
   "scripts": {
-    "lint": "prettier --write packages/**/*.{ts,js}",
-    "lint:check": "prettier --check packages/**/*.{ts,js}",
+    "lint": "prettier --write packages/**/*.{ts,js,tsx}",
+    "lint:check": "prettier --check packages/**/*.{ts,js,tsx}",
     "test:yjk": "cd packages/outreader-yjk && yarn test",
     "dev:client": "cd packages/outreader-client && yarn dev",
     "build": "lerna run build",
@@ -16,6 +16,7 @@
     "knex": "^0.21.1",
     "lerna": "^3.22.0",
     "lint-staged": "^10.2.9",
+    "stylelint": "^13.6.0",
     "typescript": "^3.9.5",
     "vuepress": "^1.5.0"
   },
@@ -26,9 +27,7 @@
     "prettier": "^2.0.5"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "cross-env NODE_ENV=development prettier --cache"
-    ],
+    "*.{js,jsx,ts,tsx}": ["yarn lint:check"],
     "{*.json,.{babelrc,eslintrc,prettierrc,stylelintrc}}": [
       "prettier --ignore-path .eslintignore --parser json --write"
     ],
