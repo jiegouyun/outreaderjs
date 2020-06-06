@@ -19,8 +19,8 @@ export interface IWmass {
 }
 
 export interface IStoreyTower {
-  storeyID?: number[];
-  towerID?: number[];
+  storeyID: number[];
+  towerID: number[];
 }
 
 export interface IAllExtracted {
@@ -88,8 +88,8 @@ export interface IStorey extends IAllExtracted, IStoreyTower {
 }
 
 export interface ITower extends IAllExtracted {
-  towerID?: number[];
-  structuralSystem?: string[];
+  towerID: number[];
+  structuralSystem: string[];
 }
 
 export interface IMassRatio extends IAllExtracted, IStoreyTower {
