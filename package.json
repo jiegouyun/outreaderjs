@@ -1,11 +1,10 @@
 {
   "name": "outreader",
-  "private": true,
-  "license": "MIT",
   "scripts": {
     "lint": "prettier --write packages/**/*.{ts,js}",
     "lint:check": "prettier --check packages/**/*.{ts,js}",
     "test:yjk": "cd packages/outreader-yjk && yarn test",
+    "dev:client": "cd packages/outreader-client && yarn dev",
     "build": "lerna run build",
     "cli": "./packages/outreader-cli/bin/run",
     "migrate:make": "knex migrate:make --migrations-directory=./packages/outreader-core/src/db/migrations -x ts",
@@ -34,5 +33,23 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  }
+  },
+  "author": {
+    "name": "an-lee",
+    "email": "an.lee.work@gmail.com",
+    "url": "https://outreader.com"
+  },
+  "contributors": [
+    {
+      "name": "ym6",
+      "email": "yangml1988@gmail.com",
+      "url": "https://github.com/ym6"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/jiegouyun/outreaderjs/issues"
+  },
+  "homepage": "https://outreader.com",
+  "private": true,
+  "license": "Apache-2.0"
 }

@@ -13,9 +13,9 @@
     "src": "./src",
     "test": "./test"
   },
-  "repository": "https://github.com/an-lee/outreaderjs.git",
+  "repository": "https://github.com/jiegouyun/outreaderjs.git",
   "author": "an-lee <an.lee.work@gmail.com>",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "private": true,
   "dependencies": {
     "@babel/runtime": "^7.9.6",
