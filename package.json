@@ -15,6 +15,7 @@
     "@types/jest": "^25.2.3",
     "knex": "^0.21.1",
     "lerna": "^3.22.0",
+    "lint-staged": "^10.2.9",
     "typescript": "^3.9.5",
     "vuepress": "^1.5.0"
   },
@@ -26,8 +27,23 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint --uncommitted"
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "cross-env NODE_ENV=development prettier --cache"
+    ],
+    "{*.json,.{babelrc,eslintrc,prettierrc,stylelintrc}}": [
+      "prettier --ignore-path .eslintignore --parser json --write"
+    ],
+    "*.{css,scss}": [
+      "stylelint --ignore-path .eslintignore --syntax scss --fix",
+      "prettier --ignore-path .eslintignore --single-quote --write"
+    ],
+    "*.{html,md,yml}": [
+      "prettier --ignore-path .eslintignore --single-quote --write"
+    ]
   },
   "config": {
     "commitizen": {

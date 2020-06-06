@@ -35,21 +35,6 @@
     "test-e2e-live": "node -r @babel/register ./internals/scripts/CheckBuildsExist.js && cross-env NODE_ENV=test testcafe --live electron:./app ./test/e2e/HomePage.e2e.ts",
     "test-watch": "yarn test --watch"
   },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "cross-env NODE_ENV=development prettier --cache"
-    ],
-    "{*.json,.{babelrc,eslintrc,prettierrc,stylelintrc}}": [
-      "prettier --ignore-path .eslintignore --parser json --write"
-    ],
-    "*.{css,scss}": [
-      "stylelint --ignore-path .eslintignore --syntax scss --fix",
-      "prettier --ignore-path .eslintignore --single-quote --write"
-    ],
-    "*.{html,md,yml}": [
-      "prettier --ignore-path .eslintignore --single-quote --write"
-    ]
-  },
   "build": {
     "productName": "OutreaderClient",
     "appId": "jiegouyun.OutreaderClient",
@@ -189,10 +174,7 @@
     "@types/tapable": "^1.0.5",
     "@types/vfile-message": "^2.0.0",
     "@types/webpack": "^4.41.17",
-    "@typescript-eslint/eslint-plugin": "^3.1.0",
-    "@typescript-eslint/parser": "^3.1.0",
     "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "^10.1.0",
     "babel-jest": "^26.0.1",
     "babel-loader": "^8.1.0",
     "babel-plugin-dev-expression": "^0.2.2",
@@ -211,26 +193,11 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.5.0",
-    "eslint": "^7.2.0",
-    "eslint-config-airbnb-typescript": "^8.0.2",
-    "eslint-config-erb": "^0.3.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-import-resolver-webpack": "^0.12.1",
-    "eslint-plugin-compat": "^3.7.0",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-jest": "^23.13.2",
-    "eslint-plugin-jsx-a11y": "6.2.3",
-    "eslint-plugin-prettier": "^3.1.3",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "^7.20.0",
-    "eslint-plugin-react-hooks": "^4.0.4",
-    "eslint-plugin-testcafe": "^0.2.1",
     "fbjs-scripts": "^1.2.0",
     "file-loader": "^6.0.0",
     "husky": "^4.2.5",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.0.1",
-    "lint-staged": "^10.2.9",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",
     "opencollective-postinstall": "^2.0.3",
@@ -294,7 +261,6 @@
         "files": [
           ".prettierrc",
           ".babelrc",
-          ".eslintrc",
           ".stylelintrc"
         ],
         "options": {
@@ -314,10 +280,5 @@
     "extends": [
       "bliss"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }
