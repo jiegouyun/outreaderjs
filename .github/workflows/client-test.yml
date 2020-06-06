@@ -34,6 +34,7 @@ jobs:
 
       - name: yarn install
         run: |
+          cd packages/outreader-client
           yarn install
 
       - name: yarn test
