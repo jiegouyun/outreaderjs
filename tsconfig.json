@@ -12,7 +12,6 @@
     "strict": true,
     "strictNullChecks": true,
     "esModuleInterop": true,
-    "allowJs": true,
     "target": "esnext"
   }
 }

@@ -644,7 +644,7 @@ export function extractStiffness(
     if (lineArray[0] === 'Floor') {
       if (typeof stiffness.storeyID === 'object') {
         stiffness.storeyID.push(Number(lineArray[2]));
-        stiffness.towerID?.push(Number(lineArray[5]));
+        stiffness.towerID.push(Number(lineArray[5]));
       }
     }
     if (lineArray[0] === '薄弱层地震剪力放大系数') {

@@ -14,5 +14,7 @@
     "postinstall": "yarn electron-rebuild"
   },
   "license": "Apache-2.0",
-  "dependencies": {}
+  "dependencies": {
+    "knex": "^0.21.1"
+  }
 }
