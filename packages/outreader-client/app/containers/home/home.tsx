@@ -1,8 +1,9 @@
-import { Button, Divider, Row, Space, message } from 'antd';
+import { Button, Divider, Row, Space, message, Descriptions } from 'antd';
 import { remote } from 'electron';
 import React, { useState } from 'react';
 import { IStyles } from '../../utils';
 import { readOutputs } from '@outreader/yjk';
+import { IWmass } from '@outreader/core';
 const { dialog } = remote;
 
 const styles: IStyles = {
@@ -14,13 +15,14 @@ const styles: IStyles = {
 
 export function Home() {
   const [dir, setDir] = useState('');
+  const [wmass, setWmass] = useState<IWmass | null>(null);
   const [loading, setLoading] = useState(false);
   const readYjkOutputs = async () => {
     setLoading(true);
     const res = await readOutputs(dir);
     setLoading(false);
+    setWmass(res.wmass);
     message.success('读取成功');
-    console.log(res);
   };
   return (
     <div style={styles.container}>
@@ -55,6 +57,23 @@ export function Home() {
           开始读取
         </Button>
       </Row>
+      <Divider />
+      {wmass && (
+        <Row>
+          <Descriptions title="模型概况" bordered>
+            <Descriptions.Item label="计算软件">
+              {wmass?.basicInformation.software}(
+              {wmass.basicInformation.softwareVersion})
+            </Descriptions.Item>
+            <Descriptions.Item label="计算日期">
+              {wmass?.basicInformation.calDate}
+            </Descriptions.Item>
+            <Descriptions.Item label="设计人">
+              {wmass?.basicInformation.designer}
+            </Descriptions.Item>
+          </Descriptions>
+        </Row>
+      )}
     </div>
   );
 }
