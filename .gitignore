@@ -118,3 +118,6 @@ lib
 
 # database
 *.sqlite
+
+# prod file
+*.prod.js
