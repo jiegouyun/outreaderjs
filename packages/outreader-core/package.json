@@ -13,10 +13,7 @@
   "private": true,
   "dependencies": {
     "@babel/runtime": "^7.10.2",
-    "iconv-lite": "^0.5.1",
-    "knex": "^0.21.1",
-    "objection": "^2.1.5",
-    "sqlite3": "^4.2.0"
+    "iconv-lite": "^0.5.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.1",

@@ -1,9 +1,10 @@
 import { Button, Divider, Row, Space, message, Descriptions } from 'antd';
 import { remote } from 'electron';
 import React, { useState } from 'react';
-import { IStyles } from '../../utils';
+import { IStyles } from '../../interfaces';
 import { readOutputs } from '@outreader/yjk';
 import { IWmass } from '@outreader/core';
+import { useDb } from '../../hooks';
 const { dialog } = remote;
 
 const styles: IStyles = {
@@ -14,6 +15,8 @@ const styles: IStyles = {
 };
 
 export function Home() {
+  const db = useDb();
+  console.log(db.structures.query());
   const [dir, setDir] = useState('');
   const [wmass, setWmass] = useState<IWmass | null>(null);
   const [loading, setLoading] = useState(false);

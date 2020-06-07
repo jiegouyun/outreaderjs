@@ -1,6 +1,6 @@
 import { Model } from 'objection';
-import { IBasicInformation } from '../interfaces';
-import { applyMixins } from '../../utils';
+import { IBasicInformation } from '@outreader/core';
+import { applyMixins } from '../../../utils';
 
 interface StructureInterface extends IBasicInformation {
   id: string;

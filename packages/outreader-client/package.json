@@ -61,10 +61,17 @@
       ]
     },
     "win": {
-      "target": ["nsis", "msi"]
+      "target": [
+        "nsis",
+        "msi"
+      ]
     },
     "linux": {
-      "target": ["deb", "rpm", "AppImage"],
+      "target": [
+        "deb",
+        "rpm",
+        "AppImage"
+      ],
       "category": "Development"
     },
     "directories": {
@@ -98,7 +105,13 @@
   "bugs": {
     "url": "https://github.com/jiegouyun/outreaderjs/issues"
   },
-  "keywords": ["outreader", "structural engineer", "react", "typescript", "ts"],
+  "keywords": [
+    "outreader",
+    "structural engineer",
+    "react",
+    "typescript",
+    "ts"
+  ],
   "homepage": "https://outreader.com",
   "jest": {
     "testURL": "http://localhost/",
@@ -106,9 +119,20 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/internals/mocks/fileMock.js",
       "\\.(css|less|sass|scss)$": "identity-obj-proxy"
     },
-    "moduleFileExtensions": ["js", "jsx", "ts", "tsx", "json"],
-    "moduleDirectories": ["node_modules", "app/node_modules"],
-    "setupFiles": ["./internals/scripts/CheckBuildsExist.js"]
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "ts",
+      "tsx",
+      "json"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "app/node_modules"
+    ],
+    "setupFiles": [
+      "./internals/scripts/CheckBuildsExist.js"
+    ]
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
@@ -213,23 +237,32 @@
     "electron-log": "^4.2.1",
     "electron-updater": "^4.3.1",
     "history": "^4.10.1",
+    "knex": "^0.21.1",
+    "objection": "^2.1.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.21",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "source-map-support": "^0.5.19"
+    "source-map-support": "^0.5.19",
+    "sqlite3": "^4.2.0"
   },
   "devEngines": {
     "node": ">=7.x",
     "npm": ">=4.x",
     "yarn": ">=0.21.3"
   },
-  "browserslist": ["extends browserslist-config-erb"],
+  "browserslist": [
+    "extends browserslist-config-erb"
+  ],
   "prettier": {
     "overrides": [
       {
-        "files": [".prettierrc", ".babelrc", ".stylelintrc"],
+        "files": [
+          ".prettierrc",
+          ".babelrc",
+          ".stylelintrc"
+        ],
         "options": {
           "parser": "json"
         }
@@ -238,9 +271,14 @@
     "singleQuote": true
   },
   "stylelint": {
-    "extends": ["stylelint-config-standard", "stylelint-config-prettier"]
+    "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-prettier"
+    ]
   },
   "renovate": {
-    "extends": ["bliss"]
+    "extends": [
+      "bliss"
+    ]
   }
 }

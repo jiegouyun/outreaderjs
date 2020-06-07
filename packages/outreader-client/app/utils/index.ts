@@ -1,1 +1,1 @@
-export * from './interfaces';
+export * from './apply-mixins';

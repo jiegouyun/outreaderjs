@@ -3,14 +3,19 @@ import { render } from 'react-dom';
 import { AppContainer as ReactHotAppContainer } from 'react-hot-loader';
 import './app.global.css';
 import Root from './root';
+import { DbContext } from './hooks';
+import { initDb } from './data';
 
 const AppContainer = process.env.PLAIN_HMR ? Fragment : ReactHotAppContainer;
 
-document.addEventListener('DOMContentLoaded', () =>
+document.addEventListener('DOMContentLoaded', async () => {
+  const db = await initDb();
   render(
     <AppContainer>
-      <Root />
+      <DbContext.Provider value={db}>
+        <Root />
+      </DbContext.Provider>
     </AppContainer>,
     document.getElementById('root')
-  )
-);
+  );
+});
