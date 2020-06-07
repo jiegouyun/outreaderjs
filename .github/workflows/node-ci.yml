@@ -1,4 +1,4 @@
-name: CI
+name: NodeCI
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  CI:
+  NodeCI:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

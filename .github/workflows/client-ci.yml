@@ -1,9 +1,9 @@
-name: Test
+name: ClientCI
 
 on: push
 
 jobs:
-  release:
+  ClientCI:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -43,6 +43,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          yarn package-ci
+          # yarn package-ci
           yarn lint
           yarn tsc
