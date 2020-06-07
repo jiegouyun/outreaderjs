@@ -19,10 +19,15 @@ export function Home() {
   const [loading, setLoading] = useState(false);
   const readYjkOutputs = async () => {
     setLoading(true);
-    const res = await readOutputs(dir);
+    try {
+      const res = await readOutputs(dir);
+      setWmass(res.wmass);
+      message.success('读取成功');
+    } catch (error) {
+      message.error('读取失败，请选择正确的模型目录');
+      console.error(error);
+    }
     setLoading(false);
-    setWmass(res.wmass);
-    message.success('读取成功');
   };
   return (
     <div style={styles.container}>
