@@ -1,33 +1,42 @@
-import { readLineByLine } from '@outreader/core';
-import * as path from 'path';
 import {
-  IWmass,
+  hashFile,
   IBasicInformation,
-  IGeneralInformation,
   ICalculationControl,
-  IWindInformation,
+  IConstraintFloorStiffnessRatio,
+  IGeneralInformation,
+  IMassRatio,
+  IOverturningCheck,
   ISeismicInformation,
+  IShearCapacityCheck,
+  IShearWeightRatioModify,
+  IStableCheck,
+  IStiffness,
   IStorey,
   ITower,
-  IMassRatio,
   IWeight,
   IWind,
-  IStiffness,
-  IConstraintFloorStiffnessRatio,
-  IOverturningCheck,
-  IStableCheck,
-  IShearWeightRatioModify,
   IWindComfort,
-  IShearCapacityCheck,
+  IWindInformation,
+  IWmass,
+  readLineByLine,
 } from '@outreader/core';
+import path from 'path';
+import fs from 'fs';
 
 // Define flag
 let flag: string;
 let innerFlag: string;
 
-export async function readWmassOutput(dir: string): Promise<IWmass> {
+export async function readWmassOutput(
+  dir: string,
+): Promise<IWmass | undefined> {
   const file = path.join(dir, 'wmass.out');
+  if (!fs.existsSync(file)) {
+    console.error('cannot find file', file);
+    return;
+  }
   let wmass: IWmass = {
+    hash: hashFile(file),
     basicInformation: { allExtracted: false },
     generalInformation: { allExtracted: false },
     calculationControl: { allExtracted: false },

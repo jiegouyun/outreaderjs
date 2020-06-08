@@ -1,4 +1,5 @@
 export interface IWmass {
+  hash: string;
   basicInformation: IBasicInformation;
   generalInformation: IGeneralInformation;
   calculationControl: ICalculationControl;

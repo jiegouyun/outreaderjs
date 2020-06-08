@@ -1,18 +1,25 @@
 import {
+  hashFile,
   IMode,
   IModeMass,
   ISeismicForce,
   IWzq,
   readLineByLine,
 } from '@outreader/core';
-import * as path from 'path';
+import fs from 'fs';
+import path from 'path';
 
 // Define flag
 let flag: string;
 
-export async function readWzqOutput(dir: string): Promise<IWzq> {
+export async function readWzqOutput(dir: string): Promise<IWzq | undefined> {
   const file = path.join(dir, 'wzq.out');
+  if (!fs.existsSync(file)) {
+    console.error('cannot find file', file);
+    return;
+  }
   let wzq: IWzq = {
+    hash: hashFile(file),
     modeCoupling: {
       modeID: [],
       period: [],

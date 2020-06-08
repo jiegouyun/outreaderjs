@@ -1,7 +1,8 @@
-import * as fs from 'fs';
-import * as path from 'path';
-import * as readline from 'readline';
-import * as iconv from 'iconv-lite';
+import fs from 'fs';
+import path from 'path';
+import readline from 'readline';
+import iconv from 'iconv-lite';
+import { keccak256 } from 'js-sha3';
 
 /**
  * @description read a text file line by line
@@ -27,6 +28,26 @@ export async function readLineByLine(
   for await (const line of rl) {
     processFunc(line);
   }
+}
+
+/**
+ * @description calculate the unique hash of a file
+ * @param pathName: string;
+ */
+export function hashFile(pathName: string) {
+  if (!fs.existsSync(pathName)) {
+    throw new Error(`Can not find ${pathName}!`);
+  }
+
+  return keccak256(fs.readFileSync(pathName));
+}
+
+/**
+ * @description calculate the unique hash of a string
+ * @param str: string;
+ */
+export function hashStr(str: string) {
+  return keccak256(str);
 }
 
 /**

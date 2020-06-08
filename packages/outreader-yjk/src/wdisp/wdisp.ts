@@ -1,18 +1,27 @@
 import {
+  hashFile,
   IDispRatio,
   IDrift,
   IWdisp,
   IWindDriftDiap,
   readLineByLine,
 } from '@outreader/core';
-import * as path from 'path';
+import fs from 'fs';
+import path from 'path';
 
 // Define flag
 let flag: string;
 
-export async function readWdispOutput(dir: string): Promise<IWdisp> {
+export async function readWdispOutput(
+  dir: string,
+): Promise<IWdisp | undefined> {
   const file = path.join(dir, 'wdisp.out');
+  if (!fs.existsSync(file)) {
+    console.error('cannot find file', file);
+    return;
+  }
   let wdisp: IWdisp = {
+    hash: hashFile(file),
     driftSeismicX: {
       storeyID: [],
       towerID: [],

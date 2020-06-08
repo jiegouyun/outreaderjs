@@ -1,4 +1,5 @@
 export interface IWdisp {
+  hash: string;
   driftSeismicX: IDrift;
   driftSeismicTwoWayX: IDrift;
   driftSeismicXEccP: IDrift;

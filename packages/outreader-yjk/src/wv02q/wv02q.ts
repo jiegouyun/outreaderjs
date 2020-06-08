@@ -1,18 +1,27 @@
 import {
+  hashFile,
   IColumnShear,
   IMomentPercent,
   IV02qFactor,
   IWv02q,
   readLineByLine,
 } from '@outreader/core';
-import * as path from 'path';
+import fs from 'fs';
+import path from 'path';
 
 // Define flag
 let flag: string;
 
-export async function readWv02qOutput(dir: string): Promise<IWv02q> {
+export async function readWv02qOutput(
+  dir: string,
+): Promise<IWv02q | undefined> {
   const file = path.join(dir, 'wv02q.out');
+  if (!fs.existsSync(file)) {
+    console.error('cannot find file', file);
+    return;
+  }
   let wv02q: IWv02q = {
+    hash: hashFile(file),
     momentPercent: {
       storeyID: [],
       towerID: [],

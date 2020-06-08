@@ -13,7 +13,8 @@
   "private": true,
   "dependencies": {
     "@babel/runtime": "^7.10.2",
-    "iconv-lite": "^0.5.1"
+    "iconv-lite": "^0.5.1",
+    "js-sha3": "^0.8.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.1",

@@ -1,5 +1,5 @@
 import { Command } from '@oclif/command';
-import { readOutputs } from '@outreader/yjk';
+import { readStructure } from '@outreader/yjk';
 
 export default class Yjk extends Command {
   static description = 'Read from a YJK model';
@@ -17,6 +17,6 @@ export default class Yjk extends Command {
     const { args } = this.parse(Yjk);
 
     this.log(`Reading from ${args.dir}`);
-    readOutputs(args.dir);
+    readStructure(args.dir);
   }
 }

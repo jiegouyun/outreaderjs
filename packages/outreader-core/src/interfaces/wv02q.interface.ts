@@ -1,4 +1,5 @@
 export interface IWv02q {
+  hash: string;
   momentPercent: IMomentPercent;
   columnShear: IColumnShear;
   v02qFactor: IV02qFactor;

@@ -1,4 +1,5 @@
 export interface IWzq {
+  hash: string;
   modeCoupling: IMode;
   modeSeismic: IMode;
   modeMass: IModeMass;
