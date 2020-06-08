@@ -16,7 +16,7 @@ const styles: IStyles = {
 
 export function Home() {
   const db = useDb();
-  console.log(db.structures.query());
+  console.log(db.get('yjk-1'));
   const [dir, setDir] = useState('');
   const [wmass, setWmass] = useState<IWmass | null>(null);
   const [loading, setLoading] = useState(false);
@@ -25,6 +25,7 @@ export function Home() {
     try {
       const res = await readOutputs(dir);
       setWmass(res.wmass);
+      db.set('yjk-1.wmass', res.wmass).write();
       message.success('读取成功');
     } catch (error) {
       message.error('读取失败，请选择正确的模型目录');

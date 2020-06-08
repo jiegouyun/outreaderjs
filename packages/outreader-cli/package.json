@@ -12,8 +12,8 @@
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
-    "@outreader/core": "^0.0.1",
-    "@outreader/yjk": "^0.0.1",
+    "@outreader/core": "link:../outreader-core",
+    "@outreader/yjk": "link:../outreader-yjk",
     "tslib": "^1"
   },
   "devDependencies": {
