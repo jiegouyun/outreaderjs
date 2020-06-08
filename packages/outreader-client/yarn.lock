@@ -1096,7 +1096,7 @@
     pirates "^4.0.0"
     source-map-support "^0.5.16"
 
-"@babel/runtime@^7.1.2", "@babel/runtime@^7.10.1", "@babel/runtime@^7.10.2", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.6":
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.10.1", "@babel/runtime@^7.10.2", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.4":
   version "7.10.2"
   resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.10.2.tgz#d103f21f2602497d38348a32e008637d506db839"
   integrity sha1-0QPyHyYCSX04NIoy4AhjfVBtuDk=
@@ -1420,14 +1420,6 @@
   integrity sha1-3hAwcNrA9IzknPZpPCOvWcD3BGQ=
   dependencies:
     mkdirp "^1.0.4"
-
-"@outreader/core@link:../outreader-core":
-  version "0.0.0"
-  uid ""
-
-"@outreader/yjk@link:../outreader-yjk":
-  version "0.0.0"
-  uid ""
 
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"

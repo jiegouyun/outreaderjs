@@ -797,13 +797,6 @@
     pirates "^4.0.0"
     source-map-support "^0.5.16"
 
-"@babel/runtime@^7.10.2":
-  version "7.10.2"
-  resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.10.2.tgz#d103f21f2602497d38348a32e008637d506db839"
-  integrity sha1-0QPyHyYCSX04NIoy4AhjfVBtuDk=
-  dependencies:
-    regenerator-runtime "^0.13.4"
-
 "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.6":
   version "7.9.6"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.9.6.tgz#a9102eb5cadedf3f31d08a9ecf294af7827ea29f"
@@ -1048,10 +1041,6 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
-
-"@outreader/core@link:../outreader-core":
-  version "0.0.0"
-  uid ""
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.0"
@@ -2324,13 +2313,6 @@ iconv-lite@0.4.24:
   version "0.4.24"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
   integrity sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==
-  dependencies:
-    safer-buffer ">= 2.1.2 < 3"
-
-iconv-lite@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.npm.taobao.org/iconv-lite/download/iconv-lite-0.5.1.tgz?cache=0&sync_timestamp=1579333981154&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ficonv-lite%2Fdownload%2Ficonv-lite-0.5.1.tgz#b2425d3c7b18f7219f2ca663d103bddb91718d64"
-  integrity sha1-skJdPHsY9yGfLKZj0QO925FxjWQ=
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
 
