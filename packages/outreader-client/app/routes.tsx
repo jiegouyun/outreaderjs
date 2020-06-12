@@ -1,9 +1,9 @@
+import { Layout, Menu } from 'antd';
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import routes from './constants/routes.json';
-import { Home } from './containers';
-import { Layout, Menu } from 'antd';
-import { IStyles } from './utils';
+import { HomePage, StructurePage } from './containers';
+import { IStyles } from './interfaces';
 
 const styles: IStyles = {
   content: {
@@ -25,7 +25,12 @@ export default function Routes() {
         </Layout.Header>
         <Layout.Content style={styles.content}>
           <Switch>
-            <Route path={routes.HOME} component={Home} />
+            <Route path={routes.HOME} exact>
+              <HomePage />
+            </Route>
+            <Route path={routes.STRUCTURE} exact>
+              <StructurePage />
+            </Route>
           </Switch>
         </Layout.Content>
       </Layout>

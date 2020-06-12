@@ -1,5 +1,7 @@
 {
-  "HOME": "/",
-  "STRUCTURES": "/structures",
-  "ABOUT": "/about"
+  "HOME": "",
+  "STRUCTURES": "structures",
+  "STRUCTURE": "structures/:hash",
+  "COMPARE": "compare/:hashes",
+  "ABOUT": "about"
 }

@@ -8,8 +8,9 @@ import Root from './root';
 
 const AppContainer = process.env.PLAIN_HMR ? Fragment : ReactHotAppContainer;
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const db = await initDb();
+document.addEventListener('DOMContentLoaded', () => {
+  const db = initDb();
+  db.defaults({ structures: [] }).write();
   render(
     <AppContainer>
       <DbContext.Provider value={db}>

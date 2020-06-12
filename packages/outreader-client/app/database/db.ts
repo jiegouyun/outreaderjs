@@ -3,7 +3,7 @@ import path from 'path';
 import lowdb from 'lowdb';
 import FileSync from 'lowdb/adapters/FileSync';
 
-export async function initDb(db: string = 'outreader') {
+export function initDb(db: string = 'outreader') {
   return lowdb(
     new FileSync(
       path.join(
