@@ -5,9 +5,6 @@
   "author": "an-lee <an.lee.work@gmail.com>",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "scripts": {
-    "build": "./node_modules/.bin/babel src --out-dir lib --extensions \".ts\" && tsc"
-  },
   "repository": "https://github.com/jiegouyun/outreaderjs.git",
   "license": "Apache-2.0",
   "private": true,
