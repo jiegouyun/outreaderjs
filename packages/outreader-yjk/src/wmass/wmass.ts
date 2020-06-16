@@ -24,8 +24,8 @@ import path from 'path';
 import fs from 'fs';
 
 // Define flag
-let flag: string;
-let innerFlag: string;
+let FLAG: string;
+let INNERFLAG: string;
 
 export async function readWmassOutput(
   dir: string,
@@ -428,12 +428,12 @@ export function extractStoreyPart1(
   storey: IStorey,
 ): IStorey {
   if (lineArray[0] === '楼层属性') {
-    flag = 'keyStoreyPart1';
+    FLAG = 'keyStoreyPart1';
   } else if (lineArray[0] === '塔属性') {
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyStoreyPart1') {
+  if (FLAG === 'keyStoreyPart1') {
     if (!isNaN(Number(lineArray[0]))) {
       if (typeof storey.storeyID === 'object') {
         storey.storeyID.push(Number(lineArray[0]));
@@ -452,13 +452,13 @@ export function extractStoreyPart1(
 
 export function extractTower(lineArray: string[], tower: ITower): ITower {
   if (lineArray[0] === '塔属性') {
-    flag = 'keyTower';
+    FLAG = 'keyTower';
   } else if (lineArray[0] === '各层质量') {
     tower.allExtracted = true;
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyTower') {
+  if (FLAG === 'keyTower') {
     if (lineArray[0] === '塔号') {
       if (typeof tower.towerID === 'object') {
         tower.towerID.push(Number(lineArray[1]));
@@ -480,12 +480,12 @@ export function extractMassRatioPart1(
   massRatio: IMassRatio,
 ): IMassRatio {
   if (lineArray[0] === '各层质量') {
-    flag = 'keyMassRatio1';
+    FLAG = 'keyMassRatio1';
   } else if (lineArray[0] === '活载总质量') {
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyMassRatio1') {
+  if (FLAG === 'keyMassRatio1') {
     if (!isNaN(Number(lineArray[0]))) {
       if (typeof massRatio.storeyID === 'object') {
         massRatio.storeyID.push(Number(lineArray[0]));
@@ -526,12 +526,12 @@ export function extractStoreyPart2(
   storey: IStorey,
 ): IStorey {
   if (lineArray[0] === '各层构件数量') {
-    flag = 'keyStoreyPart2';
+    FLAG = 'keyStoreyPart2';
   } else if (lineArray[0] === '保护层') {
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyStoreyPart2') {
+  if (FLAG === 'keyStoreyPart2') {
     if (!isNaN(Number(lineArray[0]))) {
       if (typeof storey.height === 'object') {
         storey.height.push(Number(lineArray[6]));
@@ -547,13 +547,13 @@ export function extractStoreyPart2(
 
 export function extractWind(lineArray: string[], wind: IWind): IWind {
   if (lineArray[0] === '风荷载信息') {
-    flag = 'keyWind';
+    FLAG = 'keyWind';
   } else if (lineArray[0] === '各楼层等效尺寸(单位') {
     wind.allExtracted = true;
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyWind') {
+  if (FLAG === 'keyWind') {
     if (!isNaN(Number(lineArray[0])) && lineArray.length === 9) {
       if (typeof wind.storeyID === 'object') {
         wind.storeyID.push(Number(lineArray[0]));
@@ -593,13 +593,13 @@ export function extractStoreyPart3(
   storey: IStorey,
 ): IStorey {
   if (lineArray[0] === '各楼层等效尺寸(单位') {
-    flag = 'keyStoreyPart3';
+    FLAG = 'keyStoreyPart3';
   } else if (lineArray[0] === '各楼层质量') {
     storey.allExtracted = true;
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyStoreyPart3') {
+  if (FLAG === 'keyStoreyPart3') {
     if (!isNaN(Number(lineArray[0]))) {
       if (typeof storey.area === 'object') {
         storey.area.push(Number(lineArray[2]));
@@ -615,13 +615,13 @@ export function extractMassRatioPart2(
   massRatio: IMassRatio,
 ): IMassRatio {
   if (lineArray[0] === '各楼层质量') {
-    flag = 'keyMassRatio2';
+    FLAG = 'keyMassRatio2';
   } else if (lineArray[0] === '计算时间') {
     massRatio.allExtracted = true;
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyMassRatio2') {
+  if (FLAG === 'keyMassRatio2') {
     if (!isNaN(Number(lineArray[0]))) {
       if (typeof massRatio.storeyMass === 'object') {
         massRatio.storeyMass.push(Number(lineArray[2]));
@@ -643,13 +643,13 @@ export function extractStiffness(
   stiffness: IStiffness,
 ): IStiffness {
   if (lineArray[0] === 'RJX3，RJY3，RJZ3') {
-    flag = 'keyStiffness';
+    FLAG = 'keyStiffness';
   } else if (lineArray[0] === 'X方向最小刚度比') {
     stiffness.allExtracted = true;
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyStiffness') {
+  if (FLAG === 'keyStiffness') {
     if (lineArray[0] === 'Floor') {
       if (typeof stiffness.storeyID === 'object') {
         stiffness.storeyID.push(Number(lineArray[2]));
@@ -733,13 +733,13 @@ export function extractOverturningCheck(
   overturningCheck: IOverturningCheck,
 ): IOverturningCheck {
   if (lineArray[0] === '结构整体抗倾覆验算') {
-    flag = 'keyOverturning';
+    FLAG = 'keyOverturning';
   } else if (lineArray[0] === '结构整体稳定验算') {
     overturningCheck.allExtracted = true;
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyOverturning') {
+  if (FLAG === 'keyOverturning') {
     switch (lineArray[0]) {
       case '层号':
         overturningCheck.storeyID = Number(lineArray[1]);
@@ -779,22 +779,22 @@ export function extractStableCheck(
   stableCheck: IStableCheck,
 ): IStableCheck {
   if (lineArray[0] === '结构整体稳定验算') {
-    flag = 'keyStable';
+    FLAG = 'keyStable';
   } else if (lineArray[0] === '二阶效应系数(仅针对于钢框架结构)') {
     stableCheck.allExtracted = true;
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyStable') {
+  if (FLAG === 'keyStable') {
     if (lineArray[0] === '地震') {
-      innerFlag = 'seismic';
+      INNERFLAG = 'seismic';
     } else if (lineArray[0] === '风荷载') {
-      innerFlag = 'wind';
+      INNERFLAG = 'wind';
     } else if (lineArray[0] === '二阶效应系数(仅针对于钢框架结构)') {
-      innerFlag = '';
+      INNERFLAG = '';
     }
 
-    if (innerFlag === 'seismic') {
+    if (INNERFLAG === 'seismic') {
       switch (lineArray[0]) {
         case '层号':
           stableCheck.seismicID = Number(lineArray[1]);
@@ -806,7 +806,7 @@ export function extractStableCheck(
         case 'Y向刚重比':
           stableCheck.seismicRatioY = Number(lineArray[2]);
       }
-    } else if (innerFlag === 'wind') {
+    } else if (INNERFLAG === 'wind') {
       switch (lineArray[0]) {
         case '层号':
           stableCheck.windID = Number(lineArray[1]);
@@ -829,13 +829,13 @@ export function extractShearWeightRatioModify(
   shearWeightRatioModify: IShearWeightRatioModify,
 ): IShearWeightRatioModify {
   if (lineArray[0] === '本工程如下楼层进行了最小剪重比调整') {
-    flag = 'keyShearWeightRatioModify';
+    FLAG = 'keyShearWeightRatioModify';
   } else if (lineArray[0] === '风振舒适度验算') {
     shearWeightRatioModify.allExtracted = true;
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyShearWeightRatioModify') {
+  if (FLAG === 'keyShearWeightRatioModify') {
     if (!isNaN(Number(lineArray[0]))) {
       if (typeof shearWeightRatioModify.storeyID === 'object') {
         shearWeightRatioModify.storeyID.push(Number(lineArray[0]));
@@ -882,10 +882,10 @@ export function extractShearCapacityCheck(
   shearCapacityCheck: IShearCapacityCheck,
 ): IShearCapacityCheck {
   if (lineArray[0] === '楼层抗剪承载力验算') {
-    flag = 'keyShearCapacityCheck';
+    FLAG = 'keyShearCapacityCheck';
   }
 
-  if (flag === 'keyShearCapacityCheck') {
+  if (FLAG === 'keyShearCapacityCheck') {
     if (!isNaN(Number(lineArray[0]))) {
       if (typeof shearCapacityCheck.storeyID === 'object') {
         shearCapacityCheck.storeyID.push(Number(lineArray[0]));

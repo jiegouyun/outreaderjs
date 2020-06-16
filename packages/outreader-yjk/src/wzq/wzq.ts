@@ -10,7 +10,7 @@ import fs from 'fs';
 import path from 'path';
 
 // Define flag
-let flag: string;
+let FLAG: string;
 
 export async function readWzqOutput(dir: string): Promise<IWzq | undefined> {
   const file = path.join(dir, 'wzq.out');
@@ -102,16 +102,16 @@ export function extractModeCoupling(
   modeCoupling: IMode,
 ): IMode {
   if (lineArray[lineArray.length - 1] === '强制刚性楼板模型') {
-    flag = 'keyMOdeCoupling';
+    FLAG = 'keyMOdeCoupling';
   } else if (lineArray[0] === '地震作用最大的方向') {
-    if (flag === 'keyMOdeCoupling') {
+    if (FLAG === 'keyMOdeCoupling') {
       modeCoupling.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyMOdeCoupling') {
+  if (FLAG === 'keyMOdeCoupling') {
     modeCoupling = extractMode(lineArray, modeCoupling);
   }
   return modeCoupling;
@@ -122,16 +122,16 @@ export function extractModeSeismic(
   modeSeismic: IMode,
 ): IMode {
   if (lineArray[lineArray.length - 2] === '扭转系数') {
-    flag = 'keyModeSeismic';
+    FLAG = 'keyModeSeismic';
   } else if (lineArray[1] === 'X向平动质量系数') {
-    if (flag === 'keyModeSeismic') {
+    if (FLAG === 'keyModeSeismic') {
       modeSeismic.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyModeSeismic') {
+  if (FLAG === 'keyModeSeismic') {
     modeSeismic = extractMode(lineArray, modeSeismic);
   }
   return modeSeismic;
@@ -142,9 +142,9 @@ export function extractModeMass(
   modeMass: IModeMass,
 ): IModeMass {
   if (lineArray[1] === 'X向平动质量系数') {
-    flag = 'keyModeMass';
+    FLAG = 'keyModeMass';
   } else if (lineArray[0] === 'X向平动振型参与质量系数总计') {
-    if (flag === 'keyModeMass') {
+    if (FLAG === 'keyModeMass') {
       if (typeof modeMass.factorX === 'object') {
         modeMass.sumX = modeMass.factorX.reduce(
           (sum, current) => sum + current,
@@ -166,10 +166,10 @@ export function extractModeMass(
       modeMass.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyModeMass') {
+  if (FLAG === 'keyModeMass') {
     if (!isNaN(Number(lineArray[0]))) {
       if (typeof modeMass.modeID === 'object') {
         modeMass.modeID.push(Number(lineArray[0]));
@@ -194,29 +194,29 @@ export function extractSeismicForce(
   seismicForce: ISeismicForce,
 ): ISeismicForce {
   if (lineArray[0] + lineArray[1] + lineArray[2] === '各层X方向的作用力') {
-    flag = 'keySeismicForceX';
+    FLAG = 'keySeismicForceX';
   } else if (
     lineArray[0] + lineArray[1] + lineArray[2] ===
     '抗震规范5.2.5条要求的X向楼层最小剪重比'
   ) {
-    flag = '';
+    FLAG = '';
   } else if (
     lineArray[0] + lineArray[1] + lineArray[2] ===
     '各层Y方向的作用力'
   ) {
-    flag = 'keySeismicForceY';
+    FLAG = 'keySeismicForceY';
   } else if (
     lineArray[0] + lineArray[1] + lineArray[2] ===
     '抗震规范5.2.5条要求的Y向楼层最小剪重比'
   ) {
-    if (flag === 'keySeismicForceY') {
+    if (FLAG === 'keySeismicForceY') {
       seismicForce.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keySeismicForceX') {
+  if (FLAG === 'keySeismicForceX') {
     if (!isNaN(Number(lineArray[0]))) {
       if (typeof seismicForce.storeyID === 'object') {
         seismicForce.storeyID.push(Number(lineArray[0]));
@@ -237,7 +237,7 @@ export function extractSeismicForce(
         seismicForce.shearWeiightRatioX.push(Number(lineArray[4]));
       }
     }
-  } else if (flag === 'keySeismicForceY') {
+  } else if (FLAG === 'keySeismicForceY') {
     if (!isNaN(Number(lineArray[0]))) {
       if (typeof seismicForce.forceY === 'object') {
         seismicForce.forceY.push(Number(lineArray[2]));
