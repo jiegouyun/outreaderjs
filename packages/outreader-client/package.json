@@ -3,6 +3,38 @@
   "productName": "OutreaderClient",
   "version": "0.0.1",
   "description": "A real helper for structural engineer",
+  "scripts": {
+    "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
+    "build-dll": "cross-env NODE_ENV=development webpack --config ./configs/webpack.config.renderer.dev.dll.babel.js --colors",
+    "build-e2e": "cross-env E2E_BUILD=true yarn build",
+    "build-main": "cross-env NODE_ENV=production webpack --config ./configs/webpack.config.main.prod.babel.js --colors",
+    "build-renderer": "cross-env NODE_ENV=production webpack --config ./configs/webpack.config.renderer.prod.babel.js --colors",
+    "dev": "cross-env START_HOT=1 node -r @babel/register ./internals/scripts/CheckPortInUse.js && cross-env START_HOT=1 yarn start-renderer-dev",
+    "electron-rebuild": "electron-rebuild --parallel --force --types prod,dev,optional --module-dir app",
+    "lint": "cross-env NODE_ENV=development prettier . --cache --ext .js,.jsx,.ts,.tsx",
+    "lint-fix": "yarn --silent lint --fix; exit 0",
+    "lint-styles": "stylelint --ignore-path .eslintignore '**/*.*(css|scss)' --syntax scss",
+    "lint-styles-fix": "yarn --silent lint-styles --fix; exit 0",
+    "package": "yarn build && electron-builder build --publish never",
+    "package-all": "yarn build && electron-builder build -mwl",
+    "package-ci": "yarn postinstall && yarn build && electron-builder --publish always",
+    "package-mac": "yarn build && electron-builder build --mac",
+    "package-linux": "yarn build && electron-builder build --linux",
+    "package-win": "yarn build && electron-builder build --win --x64",
+    "postinstall-manual": "node -r @babel/register internals/scripts/CheckNativeDep.js && electron-builder install-app-deps && yarn build-dll && opencollective-postinstall",
+    "postlint-fix": "prettier --ignore-path .eslintignore --single-quote --write '**/*.{js,jsx,json,html,css,less,scss,yml}'",
+    "postlint-styles-fix": "prettier --ignore-path .eslintignore --single-quote --write '**/*.{css,scss}'",
+    "preinstall": "node ./internals/scripts/CheckYarn.js",
+    "prestart": "yarn build",
+    "start": "cross-env NODE_ENV=production electron ./app/main.prod.js",
+    "start-main-dev": "cross-env START_HOT=1 NODE_ENV=development electron -r ./internals/scripts/BabelRegister ./app/main.dev.ts",
+    "start-renderer-dev": "cross-env NODE_ENV=development webpack-dev-server --config configs/webpack.config.renderer.dev.babel.js",
+    "test": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 jest",
+    "test-all": "yarn lint && yarn tsc && yarn build && yarn test && yarn build-e2e && yarn test-e2e",
+    "test-e2e": "node -r @babel/register ./internals/scripts/CheckBuildsExist.js && cross-env NODE_ENV=test testcafe electron:./app ./test/e2e/HomePage.e2e.ts",
+    "test-e2e-live": "node -r @babel/register ./internals/scripts/CheckBuildsExist.js && cross-env NODE_ENV=test testcafe --live electron:./app ./test/e2e/HomePage.e2e.ts",
+    "test-watch": "yarn test --watch"
+  },
   "build": {
     "productName": "OutreaderClient",
     "appId": "jiegouyun.OutreaderClient",
@@ -29,10 +61,17 @@
       ]
     },
     "win": {
-      "target": ["nsis", "msi"]
+      "target": [
+        "nsis",
+        "msi"
+      ]
     },
     "linux": {
-      "target": ["deb", "rpm", "AppImage"],
+      "target": [
+        "deb",
+        "rpm",
+        "AppImage"
+      ],
       "category": "Development"
     },
     "directories": {
@@ -66,7 +105,13 @@
   "bugs": {
     "url": "https://github.com/jiegouyun/outreaderjs/issues"
   },
-  "keywords": ["outreader", "structural engineer", "react", "typescript", "ts"],
+  "keywords": [
+    "outreader",
+    "structural engineer",
+    "react",
+    "typescript",
+    "ts"
+  ],
   "homepage": "https://outreader.com",
   "jest": {
     "testURL": "http://localhost/",
@@ -74,9 +119,20 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/internals/mocks/fileMock.js",
       "\\.(css|less|sass|scss)$": "identity-obj-proxy"
     },
-    "moduleFileExtensions": ["js", "jsx", "ts", "tsx", "json"],
-    "moduleDirectories": ["node_modules", "app/node_modules"],
-    "setupFiles": ["./internals/scripts/CheckBuildsExist.js"]
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "ts",
+      "tsx",
+      "json"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "app/node_modules"
+    ],
+    "setupFiles": [
+      "./internals/scripts/CheckBuildsExist.js"
+    ]
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
@@ -172,6 +228,8 @@
     "@ant-design/icons": "^4.2.1",
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@hot-loader/react-dom": "^16.13.0",
+    "@outreader/core": "^0.0.1",
+    "@outreader/yjk": "^0.0.1",
     "@types/lowdb": "^1.0.9",
     "antd": "^4.3.1",
     "core-js": "^3.6.5",
@@ -193,11 +251,17 @@
     "npm": ">=4.x",
     "yarn": ">=0.21.3"
   },
-  "browserslist": ["extends browserslist-config-erb"],
+  "browserslist": [
+    "extends browserslist-config-erb"
+  ],
   "prettier": {
     "overrides": [
       {
-        "files": [".prettierrc", ".babelrc", ".stylelintrc"],
+        "files": [
+          ".prettierrc",
+          ".babelrc",
+          ".stylelintrc"
+        ],
         "options": {
           "parser": "json"
         }
@@ -206,9 +270,14 @@
     "singleQuote": true
   },
   "stylelint": {
-    "extends": ["stylelint-config-standard", "stylelint-config-prettier"]
+    "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-prettier"
+    ]
   },
   "renovate": {
-    "extends": ["bliss"]
+    "extends": [
+      "bliss"
+    ]
   }
 }
