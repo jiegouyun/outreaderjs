@@ -168,8 +168,8 @@ export function extractWallRebar(
 
 export function extractProjectRebar(
   lineArray: string[],
-  projectRebar: IRebarQuantity,
-): IRebarQuantity {
+  projectRebar: IProjectQuantity,
+): IProjectQuantity {
   switch (lineArray[0]) {
     case '基础插筋':
       projectRebar.insertBasement = Number(lineArray[1]);

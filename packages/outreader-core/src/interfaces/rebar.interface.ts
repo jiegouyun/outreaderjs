@@ -5,7 +5,7 @@ export interface IRebar {
   beamRebar: IRebarQuantity;
   columnRebar: IRebarQuantity;
   wallRebar: IRebarQuantity;
-  projictRebar: IProjectQuantity;
+  projectRebar: IProjectQuantity;
 }
 
 interface IStoreyID {
@@ -32,5 +32,5 @@ export interface IRebarQuantity extends IStoreyID, IAllExtracted, ITotal {
 }
 
 export interface IProjectQuantity extends IAllExtracted, ITotal {
-  instertBasement?: number;
+  insertBasement?: number;
 }
