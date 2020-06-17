@@ -2,7 +2,7 @@ import { readWmassOutput } from '../wmass';
 import { readWdispOutput } from '../wdisp';
 import { readWzqOutput } from '../wzq';
 import { readWv02qOutput } from '../wv02q';
-import { readConcreteSteelOutput } from '../concreteSteel';
+import { readConcreteSteelOutput } from '../concrete-steel';
 import { IStructure, hashStr } from '@outreader/core';
 
 export async function readStructure(dir: string): Promise<IStructure> {

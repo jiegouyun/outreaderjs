@@ -113,11 +113,11 @@ export function extractStoreyID(
 ): IQuantity {
   STOREYID = Number(lineArray[1].slice(0, -3));
   for (let key in quantity) {
-    if (typeof quantity[key] === 'object') {
+    if (typeof quantity[key as keyof IQuantity] === 'object') {
       if (key === 'storeyID') {
         quantity.storeyID[STOREYID - 1] = STOREYID;
       } else {
-        quantity[key][STOREYID - 1] = 0;
+        (quantity[key as keyof IQuantity] as number[])[STOREYID - 1] = 0;
       }
     }
   }

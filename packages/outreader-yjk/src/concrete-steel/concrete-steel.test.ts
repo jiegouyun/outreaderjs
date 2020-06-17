@@ -1,4 +1,4 @@
-import { readConcreteSteelOutput } from './concreteSteel';
+import { readConcreteSteelOutput } from './concrete-steel';
 import { IConcreteSteel } from '@outreader/core';
 import * as path from 'path';
 
