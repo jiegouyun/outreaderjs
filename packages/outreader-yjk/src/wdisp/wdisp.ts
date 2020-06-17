@@ -10,7 +10,7 @@ import fs from 'fs';
 import path from 'path';
 
 // Define flag
-let flag: string;
+let FLAG: string;
 
 export async function readWdispOutput(
   dir: string,
@@ -312,16 +312,16 @@ export function extractDriftSeismicX(
   loadCaseDrift: IDrift,
 ): IDrift {
   if (lineArray[1] === 'X' && lineArray[2] === '方向地震作用下的楼层最大位移') {
-    flag = 'keyDriftSeismicX';
+    FLAG = 'keyDriftSeismicX';
   } else if (lineArray[0] === 'X向最大层间位移角') {
-    if (flag === 'keyDriftSeismicX') {
+    if (FLAG === 'keyDriftSeismicX') {
       loadCaseDrift.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyDriftSeismicX') {
+  if (FLAG === 'keyDriftSeismicX') {
     loadCaseDrift = extractDrift(lineArray, loadCaseDrift);
   }
 
@@ -333,16 +333,16 @@ export function extractDriftSeismicTwoWayX(
   loadCaseDrift: IDrift,
 ): IDrift {
   if (lineArray[1] === 'X' && lineArray[2] === '双向地震作用下的楼层最大位移') {
-    flag = 'keyDriftSeismicTwoWayX';
+    FLAG = 'keyDriftSeismicTwoWayX';
   } else if (lineArray[0] === 'X向最大层间位移角') {
-    if (flag === 'keyDriftSeismicTwoWayX') {
+    if (FLAG === 'keyDriftSeismicTwoWayX') {
       loadCaseDrift.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyDriftSeismicTwoWayX') {
+  if (FLAG === 'keyDriftSeismicTwoWayX') {
     loadCaseDrift = extractDrift(lineArray, loadCaseDrift);
   }
 
@@ -357,16 +357,16 @@ export function extractDriftSeismicXEccP(
     lineArray[1] === 'X+' &&
     lineArray[2] === '偶然偏心地震作用下的楼层最大位移'
   ) {
-    flag = 'keydriftSeismicXEccP';
+    FLAG = 'keydriftSeismicXEccP';
   } else if (lineArray[0] === 'X向最大层间位移角') {
-    if (flag === 'keydriftSeismicXEccP') {
+    if (FLAG === 'keydriftSeismicXEccP') {
       loadCaseDrift.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keydriftSeismicXEccP') {
+  if (FLAG === 'keydriftSeismicXEccP') {
     loadCaseDrift = extractDrift(lineArray, loadCaseDrift);
   }
 
@@ -381,16 +381,16 @@ export function extractDriftSeismicXEccN(
     lineArray[1] === 'X-' &&
     lineArray[2] === '偶然偏心地震作用下的楼层最大位移'
   ) {
-    flag = 'keydriftSeismicXEccN';
+    FLAG = 'keydriftSeismicXEccN';
   } else if (lineArray[0] === 'X向最大层间位移角') {
-    if (flag === 'keydriftSeismicXEccN') {
+    if (FLAG === 'keydriftSeismicXEccN') {
       loadCaseDrift.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keydriftSeismicXEccN') {
+  if (FLAG === 'keydriftSeismicXEccN') {
     loadCaseDrift = extractDrift(lineArray, loadCaseDrift);
   }
 
@@ -402,16 +402,16 @@ export function extractDriftSeismicY(
   loadCaseDrift: IDrift,
 ): IDrift {
   if (lineArray[1] === 'Y' && lineArray[2] === '方向地震作用下的楼层最大位移') {
-    flag = 'keyDriftSeismicY';
+    FLAG = 'keyDriftSeismicY';
   } else if (lineArray[0] === 'Y向最大层间位移角') {
-    if (flag === 'keyDriftSeismicY') {
+    if (FLAG === 'keyDriftSeismicY') {
       loadCaseDrift.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyDriftSeismicY') {
+  if (FLAG === 'keyDriftSeismicY') {
     loadCaseDrift = extractDrift(lineArray, loadCaseDrift);
   }
 
@@ -423,16 +423,16 @@ export function extractDriftSeismicTwoWayY(
   loadCaseDrift: IDrift,
 ): IDrift {
   if (lineArray[1] === 'Y' && lineArray[2] === '双向地震作用下的楼层最大位移') {
-    flag = 'keyDriftSeismicTwoWayY';
+    FLAG = 'keyDriftSeismicTwoWayY';
   } else if (lineArray[0] === 'Y向最大层间位移角') {
-    if (flag === 'keyDriftSeismicTwoWayY') {
+    if (FLAG === 'keyDriftSeismicTwoWayY') {
       loadCaseDrift.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyDriftSeismicTwoWayY') {
+  if (FLAG === 'keyDriftSeismicTwoWayY') {
     loadCaseDrift = extractDrift(lineArray, loadCaseDrift);
   }
 
@@ -447,16 +447,16 @@ export function extractDriftSeismicYEccP(
     lineArray[1] === 'Y+' &&
     lineArray[2] === '偶然偏心地震作用下的楼层最大位移'
   ) {
-    flag = 'keydriftSeismicYEccP';
+    FLAG = 'keydriftSeismicYEccP';
   } else if (lineArray[0] === 'Y向最大层间位移角') {
-    if (flag === 'keydriftSeismicYEccP') {
+    if (FLAG === 'keydriftSeismicYEccP') {
       loadCaseDrift.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keydriftSeismicYEccP') {
+  if (FLAG === 'keydriftSeismicYEccP') {
     loadCaseDrift = extractDrift(lineArray, loadCaseDrift);
   }
 
@@ -471,16 +471,16 @@ export function extractDriftSeismicYEccN(
     lineArray[1] === 'Y-' &&
     lineArray[2] === '偶然偏心地震作用下的楼层最大位移'
   ) {
-    flag = 'keydriftSeismicYEccN';
+    FLAG = 'keydriftSeismicYEccN';
   } else if (lineArray[0] === 'Y向最大层间位移角') {
-    if (flag === 'keydriftSeismicYEccN') {
+    if (FLAG === 'keydriftSeismicYEccN') {
       loadCaseDrift.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keydriftSeismicYEccN') {
+  if (FLAG === 'keydriftSeismicYEccN') {
     loadCaseDrift = extractDrift(lineArray, loadCaseDrift);
   }
 
@@ -495,16 +495,16 @@ export function extractDriftWindXP(
     lineArray[1] === '+X' &&
     lineArray[2] === '方向风荷载作用下的楼层最大位移'
   ) {
-    flag = 'keyDriftWindXP';
+    FLAG = 'keyDriftWindXP';
   } else if (lineArray[0] === 'X向最大层间位移角') {
-    if (flag === 'keyDriftWindXP') {
+    if (FLAG === 'keyDriftWindXP') {
       loadCaseDrift.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyDriftWindXP') {
+  if (FLAG === 'keyDriftWindXP') {
     loadCaseDrift = extractWindDriftDisp(lineArray, loadCaseDrift);
   }
 
@@ -519,16 +519,16 @@ export function extractDriftWindXN(
     lineArray[1] === '-X' &&
     lineArray[2] === '方向风荷载作用下的楼层最大位移'
   ) {
-    flag = 'keyDriftWindXN';
+    FLAG = 'keyDriftWindXN';
   } else if (lineArray[0] === 'X向最大层间位移角') {
-    if (flag === 'keyDriftWindXN') {
+    if (FLAG === 'keyDriftWindXN') {
       loadCaseDrift.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyDriftWindXN') {
+  if (FLAG === 'keyDriftWindXN') {
     loadCaseDrift = extractWindDriftDisp(lineArray, loadCaseDrift);
   }
 
@@ -543,16 +543,16 @@ export function extractDriftWindYP(
     lineArray[1] === '+Y' &&
     lineArray[2] === '方向风荷载作用下的楼层最大位移'
   ) {
-    flag = 'keyDriftWindYP';
+    FLAG = 'keyDriftWindYP';
   } else if (lineArray[0] === 'Y向最大层间位移角') {
-    if (flag === 'keyDriftWindYP') {
+    if (FLAG === 'keyDriftWindYP') {
       loadCaseDrift.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyDriftWindYP') {
+  if (FLAG === 'keyDriftWindYP') {
     loadCaseDrift = extractWindDriftDisp(lineArray, loadCaseDrift);
   }
 
@@ -567,16 +567,16 @@ export function extractDriftWindYN(
     lineArray[1] === '-Y' &&
     lineArray[2] === '方向风荷载作用下的楼层最大位移'
   ) {
-    flag = 'keyDriftWindYN';
+    FLAG = 'keyDriftWindYN';
   } else if (lineArray[0] === 'Y向最大层间位移角') {
-    if (flag === 'keyDriftWindYN') {
+    if (FLAG === 'keyDriftWindYN') {
       loadCaseDrift.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyDriftWindYN') {
+  if (FLAG === 'keyDriftWindYN') {
     loadCaseDrift = extractWindDriftDisp(lineArray, loadCaseDrift);
   }
 
@@ -591,16 +591,16 @@ export function extractRatioSeismicX(
     lineArray[1] === 'X' &&
     lineArray[2] === '方向规定水平力作用下的楼层最大位移'
   ) {
-    flag = 'keyRatioSeismicX';
+    FLAG = 'keyRatioSeismicX';
   } else if (lineArray[0] === 'X方向最大位移与层平均位移的比值') {
-    if (flag === 'keyRatioSeismicX') {
+    if (FLAG === 'keyRatioSeismicX') {
       loadCaseRatio.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyRatioSeismicX') {
+  if (FLAG === 'keyRatioSeismicX') {
     loadCaseRatio = extractRatio(lineArray, loadCaseRatio);
   }
 
@@ -615,16 +615,16 @@ export function extractRatioSeismicXEccP(
     lineArray[1] === 'X+' &&
     lineArray[2] === '偶然偏心规定水平力作用下的楼层最大位移'
   ) {
-    flag = 'keyRatioSeismicXEccP';
+    FLAG = 'keyRatioSeismicXEccP';
   } else if (lineArray[0] === 'X方向最大位移与层平均位移的比值') {
-    if (flag === 'keyRatioSeismicXEccP') {
+    if (FLAG === 'keyRatioSeismicXEccP') {
       loadCaseRatio.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyRatioSeismicXEccP') {
+  if (FLAG === 'keyRatioSeismicXEccP') {
     loadCaseRatio = extractRatio(lineArray, loadCaseRatio);
   }
 
@@ -639,16 +639,16 @@ export function extractRatioSeismicXEccN(
     lineArray[1] === 'X-' &&
     lineArray[2] === '偶然偏心规定水平力作用下的楼层最大位移'
   ) {
-    flag = 'keyRatioSeismicXEccN';
+    FLAG = 'keyRatioSeismicXEccN';
   } else if (lineArray[0] === 'X方向最大位移与层平均位移的比值') {
-    if (flag === 'keyRatioSeismicXEccN') {
+    if (FLAG === 'keyRatioSeismicXEccN') {
       loadCaseRatio.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyRatioSeismicXEccN') {
+  if (FLAG === 'keyRatioSeismicXEccN') {
     loadCaseRatio = extractRatio(lineArray, loadCaseRatio);
   }
 
@@ -663,16 +663,16 @@ export function extractRatioSeismicY(
     lineArray[1] === 'Y' &&
     lineArray[2] === '方向规定水平力作用下的楼层最大位移'
   ) {
-    flag = 'keyRatioSeismicY';
+    FLAG = 'keyRatioSeismicY';
   } else if (lineArray[0] === 'Y方向最大位移与层平均位移的比值') {
-    if (flag === 'keyRatioSeismicY') {
+    if (FLAG === 'keyRatioSeismicY') {
       loadCaseRatio.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyRatioSeismicY') {
+  if (FLAG === 'keyRatioSeismicY') {
     loadCaseRatio = extractRatio(lineArray, loadCaseRatio);
   }
 
@@ -687,16 +687,16 @@ export function extractRatioSeismicYEccP(
     lineArray[1] === 'Y+' &&
     lineArray[2] === '偶然偏心规定水平力作用下的楼层最大位移'
   ) {
-    flag = 'keyRatioSeismicYEccP';
+    FLAG = 'keyRatioSeismicYEccP';
   } else if (lineArray[0] === 'Y方向最大位移与层平均位移的比值') {
-    if (flag === 'keyRatioSeismicYEccP') {
+    if (FLAG === 'keyRatioSeismicYEccP') {
       loadCaseRatio.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyRatioSeismicYEccP') {
+  if (FLAG === 'keyRatioSeismicYEccP') {
     loadCaseRatio = extractRatio(lineArray, loadCaseRatio);
   }
 
@@ -711,16 +711,16 @@ export function extractRatioSeismicYEccN(
     lineArray[1] === 'Y-' &&
     lineArray[2] === '偶然偏心规定水平力作用下的楼层最大位移'
   ) {
-    flag = 'keyRatioSeismicYEccN';
+    FLAG = 'keyRatioSeismicYEccN';
   } else if (lineArray[0] === 'Y方向最大位移与层平均位移的比值') {
-    if (flag === 'keyRatioSeismicYEccN') {
+    if (FLAG === 'keyRatioSeismicYEccN') {
       loadCaseRatio.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyRatioSeismicYEccN') {
+  if (FLAG === 'keyRatioSeismicYEccN') {
     loadCaseRatio = extractRatio(lineArray, loadCaseRatio);
   }
 

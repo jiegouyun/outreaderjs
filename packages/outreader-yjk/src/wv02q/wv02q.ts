@@ -10,7 +10,7 @@ import fs from 'fs';
 import path from 'path';
 
 // Define flag
-let flag: string;
+let FLAG: string;
 
 export async function readWv02qOutput(
   dir: string,
@@ -93,18 +93,18 @@ export function extractMomentPercent(
   momentPercent: IMomentPercent,
 ): IMomentPercent {
   if (lineArray[0] === '规定水平力下框架柱、短肢墙地震倾覆力矩百分比') {
-    flag = 'keyMomentPercent';
+    FLAG = 'keyMomentPercent';
   } else if (
     lineArray[0] === '规定水平力下框架柱、短肢墙地震倾覆力矩（轴力方式）'
   ) {
-    if (flag === 'keyMomentPercent') {
+    if (FLAG === 'keyMomentPercent') {
       momentPercent.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyMomentPercent') {
+  if (FLAG === 'keyMomentPercent') {
     if (!isNaN(Number(lineArray[0]))) {
       if (lineArray[2] === 'X') {
         if (typeof momentPercent.storeyID === 'object') {
@@ -138,16 +138,16 @@ export function extractColumnShear(
   columnShear: IColumnShear,
 ): IColumnShear {
   if (lineArray[0] === '框架柱地震剪力百分比') {
-    flag = 'keyColumnShear';
+    FLAG = 'keyColumnShear';
   } else if (lineArray[0] === '框架柱风倾覆力矩百分比') {
-    if (flag === 'keyColumnShear') {
+    if (FLAG === 'keyColumnShear') {
       columnShear.allExtracted = true;
     }
 
-    flag = '';
+    FLAG = '';
   }
 
-  if (flag === 'keyColumnShear') {
+  if (FLAG === 'keyColumnShear') {
     if (!isNaN(Number(lineArray[0]))) {
       if (lineArray[2] === 'X') {
         if (typeof columnShear.storeyID === 'object') {
@@ -193,10 +193,10 @@ export function extractv02qFactor(
   v02qFactor: IV02qFactor,
 ): IV02qFactor {
   if (lineArray[0] === '0.2V0调整系数') {
-    flag = 'keyV02qFactor';
+    FLAG = 'keyV02qFactor';
   }
 
-  if (flag === 'keyV02qFactor') {
+  if (FLAG === 'keyV02qFactor') {
     if (lineArray[0] === '层号') {
       if (typeof v02qFactor.storeyID === 'object') {
         v02qFactor.storeyID.push(Number(lineArray[1]));
