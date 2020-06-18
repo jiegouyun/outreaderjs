@@ -2,15 +2,7 @@ import { Layout, Menu } from 'antd';
 import React from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import routes from './constants/routes.json';
-import { HomePage, StructurePage, StructureListPage } from './containers';
-import { IStyles } from './interfaces';
-
-const styles: IStyles = {
-  content: {
-    minHeight: 'calc(100vh - 4em)',
-    padding: '2rem',
-  },
-};
+import { HomePage, StructureListPage, StructurePage } from './containers';
 
 export default function Routes() {
   const handleMenuChange = (item: any) => {
@@ -32,7 +24,7 @@ export default function Routes() {
             <Menu.Item key={routes.ABOUT}>关于</Menu.Item>
           </Menu>
         </Layout.Header>
-        <Layout.Content style={styles.content}>
+        <Layout.Content>
           <Route path={routes.HOME} exact>
             <HomePage />
           </Route>

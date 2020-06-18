@@ -25,7 +25,7 @@ export function HomePage() {
     try {
       const res = await readStructure(dir);
       if (!db.get('structures').find({ hash: res.hash }).value()) {
-        db.get('structures').push({ hash: res.hash }).write();
+        db.get('structures').push({ hash: res.hash, dir }).write();
       }
       const structure = initDb(res.hash);
       structure.defaults(res).write();
