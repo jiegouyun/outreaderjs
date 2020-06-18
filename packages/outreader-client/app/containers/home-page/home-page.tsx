@@ -1,5 +1,5 @@
 import { readStructure } from '@outreader/yjk';
-import { Button, Divider, message, Row, Space } from 'antd';
+import { Button, Divider, message, Row, Space, Table } from 'antd';
 import { remote } from 'electron';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
@@ -30,7 +30,7 @@ export function HomePage() {
       const structure = initDb(res.hash);
       structure.defaults(res).write();
       message.success('读取成功');
-      history.push(`structures/${res.hash}`);
+      history.push(`/structures/${res.hash}`);
     } catch (error) {
       message.error('读取失败，请选择正确的模型目录');
       console.error(error);

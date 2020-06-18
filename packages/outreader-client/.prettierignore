@@ -1,3 +1,10 @@
+# Add files here to ignore them from prettier formatting
+
+package.json
+node_modules/**/*
+**/node_modules/**/*
+**/lib/**/*
+
 # Logs
 logs
 *.log
@@ -42,6 +49,7 @@ dist
 dll
 main.js
 main.js.map
+*.prod.js
 
 .idea
 npm-debug.log.*
