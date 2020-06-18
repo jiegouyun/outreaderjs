@@ -2,7 +2,12 @@ import { Layout, Menu } from 'antd';
 import React from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import routes from './constants/routes.json';
-import { HomePage, StructureListPage, StructurePage } from './containers';
+import {
+  HomePage,
+  StructureListPage,
+  StructurePage,
+  AboutPage,
+} from './containers';
 
 export default function Routes() {
   const handleMenuChange = (item: any) => {
@@ -27,6 +32,9 @@ export default function Routes() {
         <Layout.Content>
           <Route path={routes.HOME} exact>
             <HomePage />
+          </Route>
+          <Route path={routes.ABOUT} exact>
+            <AboutPage />
           </Route>
           <Switch>
             <Route path={routes.STRUCTURES} exact>
