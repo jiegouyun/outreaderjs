@@ -15,7 +15,11 @@ let FLAG: string;
 export async function readRebarOutput(
   dir: string,
 ): Promise<IRebar | undefined> {
-  const file = path.join(dir, '全楼钢筋用量_20200616.txt');
+  const files = fs.readdirSync(dir);
+  const filename = files.filter(function (item) {
+    return item.match(/全楼钢筋用量\w*.txt/gi);
+  });
+  const file = path.join(dir, filename[0]);
   if (!fs.existsSync(file)) {
     console.error('cannot find file', file);
     return;
