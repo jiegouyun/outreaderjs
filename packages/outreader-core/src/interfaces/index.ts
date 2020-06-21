@@ -4,3 +4,4 @@ export * from './wmass.interface';
 export * from './wv02q.interface';
 export * from './wzq.interface';
 export * from './concrete-steel.interface';
+export * from './rebar.interface';

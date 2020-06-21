@@ -19,12 +19,12 @@ export interface IWmass {
   shearCapacityCheck: IShearCapacityCheck;
 }
 
-export interface IStoreyTower {
+interface IStoreyTower {
   storeyID: number[];
   towerID: number[];
 }
 
-export interface IAllExtracted {
+interface IAllExtracted {
   allExtracted?: boolean;
 }
 
