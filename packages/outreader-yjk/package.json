@@ -6,7 +6,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "./node_modules/.bin/babel src --out-dir lib --extensions \".ts\" && tsc",
-    "test": "jest src/**/*.test.ts"
+    "test": "jest src/**/excel.test.ts"
   },
   "directories": {
     "lib": "./lib",
@@ -19,7 +19,8 @@
   "private": true,
   "dependencies": {
     "@babel/runtime": "^7.9.6",
-    "@outreader/core": "^0.0.1"
+    "@outreader/core": "^0.0.1",
+    "exceljs": "^4.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
