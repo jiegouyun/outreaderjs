@@ -3,6 +3,7 @@ import { IWmass } from './wmass.interface';
 import { IWv02q } from './wv02q.interface';
 import { IWzq } from './wzq.interface';
 import { IConcreteSteel } from './concrete-steel.interface';
+import { IRebar } from './rebar.interface';
 
 export interface IStructure {
   hash: string;
@@ -11,4 +12,5 @@ export interface IStructure {
   wv02q?: IWv02q;
   wzq?: IWzq;
   concreteSteel?: IConcreteSteel;
+  rebar?: IRebar;
 }
