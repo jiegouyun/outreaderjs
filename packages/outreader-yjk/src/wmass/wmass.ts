@@ -710,8 +710,8 @@ export function extractConstraintFloorStiffnessRatio(
 ): IConstraintFloorStiffnessRatio {
   switch (lineArray[0]) {
     case '地下室层号':
-      constraintFloorStiffnessRatio.storeyID = Number(lineArray[1]);
-      constraintFloorStiffnessRatio.towerID = Number(lineArray[3]);
+      constraintFloorStiffnessRatio.storeyNo = Number(lineArray[1]);
+      constraintFloorStiffnessRatio.towerNo = Number(lineArray[3]);
       break;
     case 'X方向地下一层剪切刚度':
       constraintFloorStiffnessRatio.stiffnessX0 = Number(lineArray[1]);
@@ -742,8 +742,8 @@ export function extractOverturningCheck(
   if (FLAG === 'keyOverturning') {
     switch (lineArray[0]) {
       case '层号':
-        overturningCheck.storeyID = Number(lineArray[1]);
-        overturningCheck.towerID = Number(lineArray[3]);
+        overturningCheck.storeyNo = Number(lineArray[1]);
+        overturningCheck.towerNo = Number(lineArray[3]);
         break;
       case 'X向风':
         overturningCheck.mrWindX = Number(lineArray[1]);
@@ -797,8 +797,8 @@ export function extractStableCheck(
     if (INNERFLAG === 'seismic') {
       switch (lineArray[0]) {
         case '层号':
-          stableCheck.seismicID = Number(lineArray[1]);
-          stableCheck.seismicTcowerID = Number(lineArray[3]);
+          stableCheck.seismicStoreyNo = Number(lineArray[1]);
+          stableCheck.seismicTcowerNo = Number(lineArray[3]);
           break;
         case 'X向刚重比':
           stableCheck.seismicRatioX = Number(lineArray[2]);
@@ -809,8 +809,8 @@ export function extractStableCheck(
     } else if (INNERFLAG === 'wind') {
       switch (lineArray[0]) {
         case '层号':
-          stableCheck.windID = Number(lineArray[1]);
-          stableCheck.windTcowerID = Number(lineArray[3]);
+          stableCheck.windStoreyNo = Number(lineArray[1]);
+          stableCheck.windTcowerNo = Number(lineArray[3]);
           break;
         case 'X向刚重比':
           stableCheck.windRatioX = Number(lineArray[2]);
