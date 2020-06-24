@@ -69,12 +69,18 @@ export async function readWmassOutput(
     wind: {
       storeyID: [],
       towerID: [],
-      forceX: [],
-      shearX: [],
-      momentX: [],
-      forceY: [],
-      shearY: [],
-      momentY: [],
+      forceAlongX: [],
+      shearAlongX: [],
+      momentAlongX: [],
+      forceAlongY: [],
+      shearAlongY: [],
+      momentAlongY: [],
+      forceCrossX: [],
+      shearCrossX: [],
+      momentCrossX: [],
+      forceCrossY: [],
+      shearCrossY: [],
+      momentCrossY: [],
       allExtracted: false,
     },
     stiffness: {
@@ -561,26 +567,44 @@ export function extractWind(lineArray: string[], wind: IWind): IWind {
       if (typeof wind.towerID === 'object') {
         wind.towerID.push(Number(lineArray[1]));
       }
-      if (typeof wind.forceX === 'object') {
-        wind.forceX.push(Number(lineArray[3]));
+      if (typeof wind.forceAlongX === 'object') {
+        wind.forceAlongX.push(Number(lineArray[3]));
       }
-      if (typeof wind.shearX === 'object') {
-        wind.shearX.push(Number(lineArray[4]));
+      if (typeof wind.shearAlongX === 'object') {
+        wind.shearAlongX.push(Number(lineArray[4]));
       }
-      if (typeof wind.momentX === 'object') {
-        wind.momentX.push(Number(lineArray[5]));
+      if (typeof wind.momentAlongX === 'object') {
+        wind.momentAlongX.push(Number(lineArray[5]));
+      }
+      if (typeof wind.forceCrossX === 'object') {
+        wind.forceCrossX.push(Number(lineArray[6]));
+      }
+      if (typeof wind.shearCrossX === 'object') {
+        wind.shearCrossX.push(Number(lineArray[7]));
+      }
+      if (typeof wind.momentCrossX === 'object') {
+        wind.momentCrossX.push(Number(lineArray[8]));
       }
     }
 
     if (!isNaN(Number(lineArray[1])) && lineArray.length === 7) {
-      if (typeof wind.forceY === 'object') {
-        wind.forceY.push(Number(lineArray[1]));
+      if (typeof wind.forceAlongY === 'object') {
+        wind.forceAlongY.push(Number(lineArray[1]));
       }
-      if (typeof wind.shearY === 'object') {
-        wind.shearY.push(Number(lineArray[2]));
+      if (typeof wind.shearAlongY === 'object') {
+        wind.shearAlongY.push(Number(lineArray[2]));
       }
-      if (typeof wind.momentY === 'object') {
-        wind.momentY.push(Number(lineArray[3]));
+      if (typeof wind.momentAlongY === 'object') {
+        wind.momentAlongY.push(Number(lineArray[3]));
+      }
+      if (typeof wind.forceCrossY === 'object') {
+        wind.forceCrossY.push(Number(lineArray[4]));
+      }
+      if (typeof wind.shearCrossY === 'object') {
+        wind.shearCrossY.push(Number(lineArray[5]));
+      }
+      if (typeof wind.momentCrossY === 'object') {
+        wind.momentCrossY.push(Number(lineArray[6]));
       }
     }
   }

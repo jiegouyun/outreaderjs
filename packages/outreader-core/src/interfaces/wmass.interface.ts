@@ -108,12 +108,18 @@ export interface IWeight extends IAllExtracted {
 }
 
 export interface IWind extends IAllExtracted, IStoreyTower {
-  forceX: number[];
-  shearX: number[];
-  momentX: number[];
-  forceY: number[];
-  shearY: number[];
-  momentY: number[];
+  forceAlongX: number[];
+  shearAlongX: number[];
+  momentAlongX: number[];
+  forceAlongY: number[];
+  shearAlongY: number[];
+  momentAlongY: number[];
+  forceCrossX: number[];
+  shearCrossX: number[];
+  momentCrossX: number[];
+  forceCrossY: number[];
+  shearCrossY: number[];
+  momentCrossY: number[];
 }
 
 export interface IStiffness extends IAllExtracted, IStoreyTower {
