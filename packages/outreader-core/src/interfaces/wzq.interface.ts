@@ -38,9 +38,11 @@ export interface ISeismicForce extends IAllExtracted, IStoreyTower {
   forceX: number[];
   shearX: number[];
   momentX: number[];
-  shearWeiightRatioX: number[];
+  shearWeightRatioX: number[];
+  shearWeightRatioLimitX?: number;
   forceY: number[];
   shearY: number[];
   momentY: number[];
-  shearWeiightRatioY: number[];
+  shearWeightRatioY: number[];
+  shearWeightRatioLimitY?: number;
 }
