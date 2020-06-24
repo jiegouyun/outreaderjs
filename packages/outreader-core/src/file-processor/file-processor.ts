@@ -75,3 +75,35 @@ function createUtf8Stream(pathName: string, encoding?: string) {
 
   return stream;
 }
+
+/**
+ * @description look up a specific value in lookUp array, get value;
+ * match same index in result array, get result; return value and result.
+ * if not  given result array, return value and index in lookUp array.
+ * @param mode string, should be 'max' or 'min';
+ * @param lookUpArray number[], array to search value;
+ * @param resultArray number[], array  of match result;
+ */
+export function lookUp(
+  mode: string,
+  lookUpArray: number[],
+  resultArray?: number[],
+) {
+  let value: number;
+  let result: number;
+  if (mode === 'max') {
+    value = Math.max(...lookUpArray);
+  } else if (mode === 'min') {
+    value = Math.min(...lookUpArray);
+  } else {
+    throw new Error(`mode should be 'max' or 'min'.`);
+  }
+
+  if (resultArray) {
+    result = resultArray[lookUpArray.indexOf(value)];
+    return [value, result];
+  } else {
+    result = lookUpArray.indexOf(value);
+    return [value, result];
+  }
+}
