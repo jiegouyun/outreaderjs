@@ -113,37 +113,84 @@ export function writeSummaryQuantity(
   worksheet: Excel.Worksheet,
 ): void {
   // write basic information
-  worksheet.getCell('B1').value = { formula: '汇总信息!D3' };
-  worksheet.getCell('C2').value = { formula: '汇总信息!F6' };
+  worksheet.getCell('B1').value = { formula: '汇总信息!D3', date1904: false };
+  worksheet.getCell('C2').value = { formula: '汇总信息!F6', date1904: false };
   worksheet.getCell('C3').value =
     Math.round(structure.rebar?.area.totalArea as number) || '';
   worksheet.getCell('C4').value = {
     formula: '汇总信息!C39 & "/" & 汇总信息!C40 & "/" & 汇总信息!C41',
+    date1904: false,
   };
   worksheet.getCell('C5').value = {
     formula: 'min(汇总信息!D12:D13) & "/" & min(汇总信息!D14:D15)',
+    date1904: false,
   };
 
   // write rebar perarea
-  worksheet.getCell('C10').value = { formula: 'round(C35*1000/C3,2)' };
-  worksheet.getCell('C11').value = { formula: 'round(C36*1000/C3,2)' };
-  worksheet.getCell('C12').value = { formula: 'round(C37*1000/C3,2)' };
-  worksheet.getCell('C13').value = { formula: 'round(C38*1000/C3,2)' };
-  worksheet.getCell('C14').value = { formula: 'round(C39*1000/C3,2)' };
+  worksheet.getCell('C10').value = {
+    formula: 'round(C35*1000/C3,2)',
+    date1904: false,
+  };
+  worksheet.getCell('C11').value = {
+    formula: 'round(C36*1000/C3,2)',
+    date1904: false,
+  };
+  worksheet.getCell('C12').value = {
+    formula: 'round(C37*1000/C3,2)',
+    date1904: false,
+  };
+  worksheet.getCell('C13').value = {
+    formula: 'round(C38*1000/C3,2)',
+    date1904: false,
+  };
+  worksheet.getCell('C14').value = {
+    formula: 'round(C39*1000/C3,2)',
+    date1904: false,
+  };
 
   // wtite concrete perarea
-  worksheet.getCell('C15').value = { formula: 'round(C40/C3,2)' };
-  worksheet.getCell('C16').value = { formula: 'round(C41/C3,2)' };
-  worksheet.getCell('C17').value = { formula: 'round(C42/C3,2)' };
-  worksheet.getCell('C18').value = { formula: 'round(C43/C3,2)' };
-  worksheet.getCell('C19').value = { formula: 'round(C44/C3,2)' };
+  worksheet.getCell('C15').value = {
+    formula: 'round(C40/C3,2)',
+    date1904: false,
+  };
+  worksheet.getCell('C16').value = {
+    formula: 'round(C41/C3,2)',
+    date1904: false,
+  };
+  worksheet.getCell('C17').value = {
+    formula: 'round(C42/C3,2)',
+    date1904: false,
+  };
+  worksheet.getCell('C18').value = {
+    formula: 'round(C43/C3,2)',
+    date1904: false,
+  };
+  worksheet.getCell('C19').value = {
+    formula: 'round(C44/C3,2)',
+    date1904: false,
+  };
 
   // wtite steel perarea
-  worksheet.getCell('C20').value = { formula: 'round(C45*1000/C3,2)' };
-  worksheet.getCell('C21').value = { formula: 'round(C46*1000/C3,2)' };
-  worksheet.getCell('C22').value = { formula: 'round(C47*1000/C3,2)' };
-  worksheet.getCell('C23').value = { formula: 'round(C48*1000/C3,2)' };
-  worksheet.getCell('C24').value = { formula: 'round(C49*1000/C3,2)' };
+  worksheet.getCell('C20').value = {
+    formula: 'round(C45*1000/C3,2)',
+    date1904: false,
+  };
+  worksheet.getCell('C21').value = {
+    formula: 'round(C46*1000/C3,2)',
+    date1904: false,
+  };
+  worksheet.getCell('C22').value = {
+    formula: 'round(C47*1000/C3,2)',
+    date1904: false,
+  };
+  worksheet.getCell('C23').value = {
+    formula: 'round(C48*1000/C3,2)',
+    date1904: false,
+  };
+  worksheet.getCell('C24').value = {
+    formula: 'round(C49*1000/C3,2)',
+    date1904: false,
+  };
 
   // write rebar
   worksheet.getCell('C35').value = Math.round(

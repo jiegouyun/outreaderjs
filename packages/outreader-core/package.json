@@ -6,7 +6,8 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "build": "./node_modules/.bin/babel src --out-dir lib --extensions \".ts\" && tsc"
+    "build": "./node_modules/.bin/babel src --out-dir lib --extensions \".ts\" && tsc",
+    "test": "jest src/**/*.test.ts"
   },
   "repository": "https://github.com/jiegouyun/outreaderjs.git",
   "license": "Apache-2.0",
