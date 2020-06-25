@@ -147,19 +147,19 @@ export function extractModeMass(
     if (FLAG === 'keyModeMass') {
       if (typeof modeMass.factorX === 'object') {
         modeMass.sumX = modeMass.factorX.reduce(
-          (sum, current) => sum + current,
+          (sum: number, current: number) => sum + current,
           0,
         );
       }
       if (typeof modeMass.factorY === 'object') {
         modeMass.sumY = modeMass.factorY.reduce(
-          (sum, current) => sum + current,
+          (sum: number, current: number) => sum + current,
           0,
         );
       }
       if (typeof modeMass.factorZ === 'object') {
         modeMass.sumZ = modeMass.factorZ.reduce(
-          (sum, current) => sum + current,
+          (sum: number, current: number) => sum + current,
           0,
         );
       }

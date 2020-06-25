@@ -1,5 +1,6 @@
-import { IStructure, hashStr, lookUp, IModeMass, IMode } from '@outreader/core';
-import * as Excel from 'exceljs';
+import { IStructure, IModeMass, IMode } from '@outreader/core';
+import { lookUp, rangeSetBorder, rangeFillColor } from './commom';
+import Excel from 'exceljs';
 
 export function initSummary(worksheet: Excel.Worksheet): void {
   worksheet.mergeCells('A1:F1');
@@ -7,7 +8,7 @@ export function initSummary(worksheet: Excel.Worksheet): void {
 
   worksheet.mergeCells('A2:B4');
   worksheet.getCell('A2').value = '工程信息';
-  worksheet.getCell('C2').value = '工程文件路径';
+  worksheet.getCell('C2').value = '工程路径';
   worksheet.mergeCells('D2:F2');
   worksheet.getCell('C3').value = '工程名称';
   worksheet.getCell('C4').value = '软件名称';
@@ -20,11 +21,11 @@ export function initSummary(worksheet: Excel.Worksheet): void {
   worksheet.getCell('C6').value = '楼层数';
   worksheet.getCell('C7').value = '地下室层数';
   worksheet.getCell('C8').value = '地震烈度';
-  worksheet.getCell('C9').value = '刚性楼板假定';
+  worksheet.getCell('C9').value = '楼板假定';
   worksheet.getCell('E5').value = '结构材料';
   worksheet.getCell('E6').value = '结构高度';
   worksheet.getCell('E7').value = '嵌固层';
-  worksheet.getCell('E8').value = '修正后基本风压';
+  worksheet.getCell('E8').value = '基本风压';
   worksheet.getCell('E9').value = '周期折减系数';
 
   worksheet.mergeCells('A10:B11');
@@ -140,10 +141,10 @@ export function initSummary(worksheet: Excel.Worksheet): void {
   worksheet.getCell('B43').value = 5;
   worksheet.getCell('B44').value = 6;
   worksheet.getCell('B45').value = '周期比';
-  worksheet.getCell('E45').value = '计算振型个数';
+  worksheet.getCell('E45').value = '计算振型数';
   worksheet.mergeCells('A46:B46');
   worksheet.getCell('A46').value = '振型质量参与系数';
-  worksheet.getCell('B46').value = 'X向';
+  worksheet.getCell('C46').value = 'X向';
   worksheet.getCell('E46').value = 'Y向';
 
   worksheet.mergeCells('A47:F47');
@@ -158,7 +159,7 @@ export function initSummary(worksheet: Excel.Worksheet): void {
   worksheet.getCell('E49').value = 'Y向';
 
   worksheet.mergeCells('A50:A51');
-  worksheet.getCell('A50').value = '基底倾覆弯矩';
+  worksheet.getCell('A50').value = '基底弯矩';
   worksheet.getCell('B50').value = '风荷载';
   worksheet.getCell('B51').value = '地震';
   worksheet.getCell('C50').value = 'X向';
@@ -169,256 +170,338 @@ export function initSummary(worksheet: Excel.Worksheet): void {
 
 export function writeSummary(
   dir: string,
-  strunture: IStructure,
+  structure: IStructure,
   worksheet: Excel.Worksheet,
 ): void {
   // write project information
   worksheet.getCell('D2').value = dir;
   worksheet.getCell('D3').value =
-    strunture.wmass?.basicInformation.engineering || '';
+    structure.wmass?.basicInformation.engineering || '';
   worksheet.getCell('D4').value =
-    strunture.wmass?.basicInformation.software || '';
+    structure.wmass?.basicInformation.software || '';
   worksheet.getCell('F3').value =
-    strunture.wmass?.basicInformation.calDate || '';
+    structure.wmass?.basicInformation.calDate || '';
   worksheet.getCell('F4').value =
-    strunture.wmass?.basicInformation.softwareVersion || '';
+    structure.wmass?.basicInformation.softwareVersion || '';
 
   // write structure information
   worksheet.getCell('D5').value =
-    strunture.wmass?.generalInformation.structuralSystem || '';
-  worksheet.getCell('D6').value = strunture.wmass?.storey.storeyID[0] || '';
+    structure.wmass?.generalInformation.structuralSystem || '';
+  worksheet.getCell('D6').value = structure.wmass?.storey.storeyID[0] || '';
   worksheet.getCell('D7').value =
-    strunture.wmass?.generalInformation.basement || '';
+    structure.wmass?.generalInformation.basement || '';
   worksheet.getCell('D8').value =
-    strunture.wmass?.seismicInformation.intensity || '';
+    structure.wmass?.seismicInformation.intensity || '';
   worksheet.getCell('D9').value =
-    strunture.wmass?.calculationControl.rigidFloorAssumption || '';
+    structure.wmass?.calculationControl.rigidFloorAssumption || '';
   worksheet.getCell('F5').value =
-    strunture.wmass?.generalInformation.structuralMaterial || '';
+    structure.wmass?.generalInformation.structuralMaterial || '';
   worksheet.getCell('F6').value =
-    strunture.wmass?.storey.heightToGround[0] || '';
+    structure.wmass?.storey.heightToGround[0] || '';
   worksheet.getCell('F7').value =
-    strunture.wmass?.generalInformation.constraintFloor || '';
+    structure.wmass?.generalInformation.constraintFloor || '';
   worksheet.getCell('F8').value =
-    strunture.wmass?.windInformation.pressureModified || '';
+    structure.wmass?.windInformation.pressureModified || '';
   worksheet.getCell('F9').value =
-    strunture.wmass?.seismicInformation.periodReductionFactor || '';
+    structure.wmass?.seismicInformation.periodReductionFactor || '';
 
   // write mass information
-  worksheet.getCell('D10').value = strunture.wmass?.weight.live || '';
-  worksheet.getCell('D11').value = strunture.wmass?.weight.dead || '';
-  worksheet.getCell('F10').value = strunture.wmass?.weight.super || '';
-  worksheet.getCell('F11').value = strunture.wmass?.weight.sum || '';
+  worksheet.getCell('D10').value =
+    Math.round(structure.wmass?.weight.live as number) || '';
+  worksheet.getCell('D11').value =
+    Math.round(structure.wmass?.weight.dead as number) || '';
+  worksheet.getCell('F10').value =
+    Math.round(structure.wmass?.weight.super as number) || '';
+  worksheet.getCell('F11').value =
+    Math.round(structure.wmass?.weight.sum as number) || '';
 
   // write drift information
   [worksheet.getCell('D12').value, worksheet.getCell('F12').value] = lookUp(
     'min',
-    strunture.wdisp?.driftWindXP.drift as number[],
-    strunture.wdisp?.driftWindXP.storeyID as number[],
+    structure.wdisp?.driftWindXP.drift as number[],
+    structure.wdisp?.driftWindXP.storeyID as number[],
   );
   [worksheet.getCell('D13').value, worksheet.getCell('F13').value] = lookUp(
     'min',
-    strunture.wdisp?.driftWindYP.drift as number[],
-    strunture.wdisp?.driftWindYP.storeyID as number[],
+    structure.wdisp?.driftWindYP.drift as number[],
+    structure.wdisp?.driftWindYP.storeyID as number[],
   );
   [worksheet.getCell('D14').value, worksheet.getCell('F14').value] = lookUp(
     'min',
-    strunture.wdisp?.driftSeismicX.drift as number[],
-    strunture.wdisp?.driftSeismicX.storeyID as number[],
+    structure.wdisp?.driftSeismicX.drift as number[],
+    structure.wdisp?.driftSeismicX.storeyID as number[],
   );
   [worksheet.getCell('D15').value, worksheet.getCell('F15').value] = lookUp(
     'min',
-    strunture.wdisp?.driftSeismicY.drift as number[],
-    strunture.wdisp?.driftSeismicY.storeyID as number[],
+    structure.wdisp?.driftSeismicY.drift as number[],
+    structure.wdisp?.driftSeismicY.storeyID as number[],
   );
   worksheet.getCell('D16').value = calcDriftLimit(
-    strunture.wmass?.generalInformation.location as string,
-    strunture.wmass?.generalInformation.structuralSystem as string,
-    strunture.wmass?.generalInformation.structuralMaterial as string,
-    strunture.wmass?.storey.heightToGround[0] as number,
+    structure.wmass?.generalInformation.location as string,
+    structure.wmass?.generalInformation.structuralSystem as string,
+    structure.wmass?.generalInformation.structuralMaterial as string,
+    structure.wmass?.storey.heightToGround[0] as number,
   );
 
   // write displacement ratio information
   [worksheet.getCell('D17').value, worksheet.getCell('F17').value] = lookUp(
     'max',
-    strunture.wdisp?.ratioSeismicXEccP.ratio as number[],
-    strunture.wdisp?.ratioSeismicXEccP.storeyID as number[],
+    structure.wdisp?.ratioSeismicXEccP.ratio as number[],
+    structure.wdisp?.ratioSeismicXEccP.storeyID as number[],
   );
   [worksheet.getCell('D18').value, worksheet.getCell('F18').value] = lookUp(
     'max',
-    strunture.wdisp?.ratioSeismicYEccP.ratio as number[],
-    strunture.wdisp?.ratioSeismicYEccP.storeyID as number[],
+    structure.wdisp?.ratioSeismicYEccP.ratio as number[],
+    structure.wdisp?.ratioSeismicYEccP.storeyID as number[],
   );
   [worksheet.getCell('D19').value, worksheet.getCell('F19').value] = lookUp(
     'max',
-    strunture.wdisp?.ratioSeismicXEccN.ratio as number[],
-    strunture.wdisp?.ratioSeismicXEccN.storeyID as number[],
+    structure.wdisp?.ratioSeismicXEccN.ratio as number[],
+    structure.wdisp?.ratioSeismicXEccN.storeyID as number[],
   );
   [worksheet.getCell('D20').value, worksheet.getCell('F20').value] = lookUp(
     'max',
-    strunture.wdisp?.ratioSeismicYEccN.ratio as number[],
-    strunture.wdisp?.ratioSeismicYEccN.storeyID as number[],
+    structure.wdisp?.ratioSeismicYEccN.ratio as number[],
+    structure.wdisp?.ratioSeismicYEccN.storeyID as number[],
   );
   worksheet.getCell('D21').value = '1.2 / 1.4';
 
   // write storey displacement ratio information
   [worksheet.getCell('D22').value, worksheet.getCell('F22').value] = lookUp(
     'max',
-    strunture.wdisp?.ratioSeismicXEccP.ratioD as number[],
-    strunture.wdisp?.ratioSeismicXEccP.storeyID as number[],
+    structure.wdisp?.ratioSeismicXEccP.ratioD as number[],
+    structure.wdisp?.ratioSeismicXEccP.storeyID as number[],
   );
   [worksheet.getCell('D23').value, worksheet.getCell('F23').value] = lookUp(
     'max',
-    strunture.wdisp?.ratioSeismicYEccP.ratioD as number[],
-    strunture.wdisp?.ratioSeismicYEccP.storeyID as number[],
+    structure.wdisp?.ratioSeismicYEccP.ratioD as number[],
+    structure.wdisp?.ratioSeismicYEccP.storeyID as number[],
   );
   [worksheet.getCell('D24').value, worksheet.getCell('F24').value] = lookUp(
     'max',
-    strunture.wdisp?.ratioSeismicXEccN.ratioD as number[],
-    strunture.wdisp?.ratioSeismicXEccN.storeyID as number[],
+    structure.wdisp?.ratioSeismicXEccN.ratioD as number[],
+    structure.wdisp?.ratioSeismicXEccN.storeyID as number[],
   );
   [worksheet.getCell('D25').value, worksheet.getCell('F25').value] = lookUp(
     'max',
-    strunture.wdisp?.ratioSeismicYEccN.ratioD as number[],
-    strunture.wdisp?.ratioSeismicYEccN.storeyID as number[],
+    structure.wdisp?.ratioSeismicYEccN.ratioD as number[],
+    structure.wdisp?.ratioSeismicYEccN.storeyID as number[],
   );
   worksheet.getCell('D26').value = '1.2 / 1.4';
 
   // write shear weight ratio information
   worksheet.getCell('D27').value =
-    strunture.wzq?.seismicForce.shearWeightRatioX[
-      strunture.wzq?.seismicForce.shearWeightRatioX.length -
-        (strunture.wmass?.generalInformation.constraintFloor as number) -
+    structure.wzq?.seismicForce.shearWeightRatioX[
+      structure.wzq?.seismicForce.shearWeightRatioX.length -
+        (structure.wmass?.generalInformation.constraintFloor as number) -
         1
     ] || '';
   worksheet.getCell('F27').value =
-    strunture.wzq?.seismicForce.shearWeightRatioLimitX || '';
+    structure.wzq?.seismicForce.shearWeightRatioLimitX || '';
   worksheet.getCell('D28').value =
-    strunture.wzq?.seismicForce.shearWeightRatioY[
-      strunture.wzq?.seismicForce.shearWeightRatioY.length -
-        (strunture.wmass?.generalInformation.constraintFloor as number) -
+    structure.wzq?.seismicForce.shearWeightRatioY[
+      structure.wzq?.seismicForce.shearWeightRatioY.length -
+        (structure.wmass?.generalInformation.constraintFloor as number) -
         1
     ] || '';
   worksheet.getCell('F28').value =
-    strunture.wzq?.seismicForce.shearWeightRatioLimitY || '';
+    structure.wzq?.seismicForce.shearWeightRatioLimitY || '';
 
   // write stiffness weight ratio information
   worksheet.getCell('D29').value =
-    strunture.wmass?.stableCheck.windRatioX || '';
+    structure.wmass?.stableCheck.windRatioX || '';
   worksheet.getCell('D30').value =
-    strunture.wmass?.stableCheck.windRatioY || '';
+    structure.wmass?.stableCheck.windRatioY || '';
   worksheet.getCell('D31').value =
-    strunture.wmass?.stableCheck.seismicRatioX || '';
+    structure.wmass?.stableCheck.seismicRatioX || '';
   worksheet.getCell('D32').value =
-    strunture.wmass?.stableCheck.seismicRatioY || '';
+    structure.wmass?.stableCheck.seismicRatioY || '';
   worksheet.getCell('F29').value = stiffnessWeightRatioCheck(
-    strunture.wmass?.stableCheck.windRatioX as number,
+    structure.wmass?.stableCheck.windRatioX as number,
   );
   worksheet.getCell('F30').value = stiffnessWeightRatioCheck(
-    strunture.wmass?.stableCheck.windRatioY as number,
+    structure.wmass?.stableCheck.windRatioY as number,
   );
   worksheet.getCell('F31').value = stiffnessWeightRatioCheck(
-    strunture.wmass?.stableCheck.seismicRatioX as number,
+    structure.wmass?.stableCheck.seismicRatioX as number,
   );
   worksheet.getCell('F32').value = stiffnessWeightRatioCheck(
-    strunture.wmass?.stableCheck.seismicRatioY as number,
+    structure.wmass?.stableCheck.seismicRatioY as number,
   );
 
   // write stiffness ratio information
-  if (strunture.wmass?.generalInformation.structuralSystem === '框架结构') {
+  if (structure.wmass?.generalInformation.structuralSystem === '框架结构') {
     [worksheet.getCell('D33').value, worksheet.getCell('F33').value] = lookUp(
       'min',
-      strunture.wmass?.stiffness.ratx1 as number[],
-      strunture.wmass?.stiffness.storeyID as number[],
+      structure.wmass?.stiffness.ratx1 as number[],
+      structure.wmass?.stiffness.storeyID as number[],
     );
     [worksheet.getCell('D34').value, worksheet.getCell('F34').value] = lookUp(
       'min',
-      strunture.wmass?.stiffness.raty1 as number[],
-      strunture.wmass?.stiffness.storeyID as number[],
+      structure.wmass?.stiffness.raty1 as number[],
+      structure.wmass?.stiffness.storeyID as number[],
     );
   } else {
     [worksheet.getCell('D33').value, worksheet.getCell('F33').value] = lookUp(
       'min',
-      strunture.wmass?.stiffness.ratx2 as number[],
-      strunture.wmass?.stiffness.storeyID as number[],
+      structure.wmass?.stiffness.ratx2 as number[],
+      structure.wmass?.stiffness.storeyID as number[],
     );
     [worksheet.getCell('D34').value, worksheet.getCell('F34').value] = lookUp(
       'min',
-      strunture.wmass?.stiffness.raty2 as number[],
-      strunture.wmass?.stiffness.storeyID as number[],
+      structure.wmass?.stiffness.raty2 as number[],
+      structure.wmass?.stiffness.storeyID as number[],
     );
   }
 
   // write shear capacity ratio
   [worksheet.getCell('D35').value, worksheet.getCell('F35').value] = lookUp(
     'min',
-    strunture.wmass?.shearCapacityCheck.ratioX as number[],
-    strunture.wmass?.shearCapacityCheck.storeyID as number[],
+    structure.wmass?.shearCapacityCheck.ratioX as number[],
+    structure.wmass?.shearCapacityCheck.storeyID as number[],
   );
   [worksheet.getCell('D36').value, worksheet.getCell('F36').value] = lookUp(
     'min',
-    strunture.wmass?.shearCapacityCheck.ratioY as number[],
-    strunture.wmass?.shearCapacityCheck.storeyID as number[],
+    structure.wmass?.shearCapacityCheck.ratioY as number[],
+    structure.wmass?.shearCapacityCheck.storeyID as number[],
   );
 
   // write mode informatio
   writeMode(
     worksheet,
-    strunture.wzq?.modeCoupling as IMode,
-    strunture.wzq?.modeMass as IModeMass,
+    structure.wzq?.modeCoupling as IMode,
+    structure.wzq?.modeMass as IModeMass,
   );
 
   // write base shear
   worksheet.getCell('D48').value =
-    strunture.wmass?.wind.shearAlongX[
-      strunture.wmass?.wind.shearAlongX.length -
-        (strunture.wmass?.generalInformation.constraintFloor as number) -
-        1
-    ].toFixed(0) || '';
+    Math.round(
+      structure.wmass?.wind.shearAlongX[
+        structure.wmass?.wind.shearAlongX.length -
+          (structure.wmass?.generalInformation.constraintFloor as number) -
+          1
+      ] as number,
+    ) || '';
   worksheet.getCell('F48').value =
-    strunture.wmass?.wind.shearAlongY[
-      strunture.wmass?.wind.shearAlongY.length -
-        (strunture.wmass?.generalInformation.constraintFloor as number) -
-        1
-    ].toFixed(0) || '';
+    Math.round(
+      structure.wmass?.wind.shearAlongY[
+        structure.wmass?.wind.shearAlongY.length -
+          (structure.wmass?.generalInformation.constraintFloor as number) -
+          1
+      ] as number,
+    ) || '';
   worksheet.getCell('D49').value =
-    strunture.wzq?.seismicForce.shearX[
-      strunture.wzq?.seismicForce.shearX.length -
-        (strunture.wmass?.generalInformation.constraintFloor as number) -
-        1
-    ].toFixed(0) || '';
+    Math.round(
+      structure.wzq?.seismicForce.shearX[
+        structure.wzq?.seismicForce.shearX.length -
+          (structure.wmass?.generalInformation.constraintFloor as number) -
+          1
+      ] as number,
+    ) || '';
   worksheet.getCell('F49').value =
-    strunture.wzq?.seismicForce.shearY[
-      strunture.wzq?.seismicForce.shearY.length -
-        (strunture.wmass?.generalInformation.constraintFloor as number) -
-        1
-    ].toFixed(0) || '';
+    Math.round(
+      structure.wzq?.seismicForce.shearY[
+        structure.wzq?.seismicForce.shearY.length -
+          (structure.wmass?.generalInformation.constraintFloor as number) -
+          1
+      ] as number,
+    ) || '';
 
   // write base moment
   worksheet.getCell('D50').value =
-    strunture.wmass?.wind.momentAlongX[
-      strunture.wmass?.wind.momentAlongX.length -
-        (strunture.wmass?.generalInformation.constraintFloor as number) -
-        1
-    ].toFixed(0) || '';
+    Math.round(
+      structure.wmass?.wind.momentAlongX[
+        structure.wmass?.wind.momentAlongX.length -
+          (structure.wmass?.generalInformation.constraintFloor as number) -
+          1
+      ] as number,
+    ) || '';
   worksheet.getCell('F50').value =
-    strunture.wmass?.wind.momentAlongY[
-      strunture.wmass?.wind.momentAlongY.length -
-        (strunture.wmass?.generalInformation.constraintFloor as number) -
-        1
-    ].toFixed(0) || '';
+    Math.round(
+      structure.wmass?.wind.momentAlongY[
+        structure.wmass?.wind.momentAlongY.length -
+          (structure.wmass?.generalInformation.constraintFloor as number) -
+          1
+      ] as number,
+    ) || '';
   worksheet.getCell('D51').value =
-    strunture.wzq?.seismicForce.momentX[
-      strunture.wzq?.seismicForce.momentX.length -
-        (strunture.wmass?.generalInformation.constraintFloor as number) -
-        1
-    ].toFixed(0) || '';
+    Math.round(
+      structure.wzq?.seismicForce.momentX[
+        structure.wzq?.seismicForce.momentX.length -
+          (structure.wmass?.generalInformation.constraintFloor as number) -
+          1
+      ] as number,
+    ) || '';
   worksheet.getCell('F51').value =
-    strunture.wzq?.seismicForce.momentY[
-      strunture.wzq?.seismicForce.momentY.length -
-        (strunture.wmass?.generalInformation.constraintFloor as number) -
-        1
-    ].toFixed(0) || '';
+    Math.round(
+      structure.wzq?.seismicForce.momentY[
+        structure.wzq?.seismicForce.momentY.length -
+          (structure.wmass?.generalInformation.constraintFloor as number) -
+          1
+      ] as number,
+    ) || '';
+}
+
+export function formatSummary(worksheet: Excel.Worksheet): void {
+  for (let col = 1; col <= worksheet.columnCount; col++) {
+    worksheet.getColumn(col).width = 15;
+    worksheet.getColumn(col).alignment = {
+      horizontal: 'center',
+      vertical: 'middle',
+    };
+    worksheet.getColumn(col).font = { name: 'Arial', size: 10 };
+  }
+
+  for (let row = 1; row <= worksheet.rowCount; row++) {
+    worksheet.getRow(row).height = 20;
+  }
+
+  worksheet.getColumn(2).width = 10;
+  worksheet.getRow(1).height = 25;
+  worksheet.getRow(1).font = { name: 'Arial', size: 14, bold: true };
+
+  rangeSetBorder(worksheet, 1, 1, 51, 6, 'thin', 'thin', 'thin', 'thin');
+  rangeSetBorder(worksheet, 1, 1, 51, 1, 'thin', 'medium', 'thin', 'thin');
+  rangeSetBorder(worksheet, 51, 1, 51, 6, 'thin', 'thin', 'medium', 'thin');
+  rangeSetBorder(worksheet, 1, 6, 51, 6, 'thin', 'thin', 'thin', 'medium');
+  rangeSetBorder(worksheet, 51, 1, 51, 1, 'thin', 'medium', 'medium', 'thin');
+  rangeSetBorder(worksheet, 51, 6, 51, 6, 'thin', 'thin', 'medium', 'medium');
+  rangeSetBorder(worksheet, 1, 1, 1, 1, 'medium', 'medium', 'medium', 'medium');
+  rangeSetBorder(
+    worksheet,
+    37,
+    1,
+    37,
+    1,
+    'medium',
+    'medium',
+    'medium',
+    'medium',
+  );
+  rangeSetBorder(
+    worksheet,
+    47,
+    1,
+    47,
+    1,
+    'medium',
+    'medium',
+    'medium',
+    'medium',
+  );
+
+  rangeFillColor(worksheet, 2, 1, 36, 3, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 3, 5, 15, 5, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 17, 5, 20, 5, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 22, 5, 25, 5, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 27, 5, 36, 5, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 38, 1, 38, 1, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 38, 2, 38, 6, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 39, 2, 45, 2, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 46, 1, 46, 3, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 45, 5, 46, 5, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 48, 1, 51, 3, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 48, 5, 51, 5, 'solid', '00F0FFF0', '00FFFFFF');
 }
 
 export function calcDriftLimit(
@@ -519,21 +602,25 @@ export function writeMode(
   mass: IModeMass,
 ): void {
   for (let i: number = 0; i < 6; i++) {
-    worksheet.getCell(`C${39 + i}`).value = mode.period[i].toFixed(2);
-    worksheet.getCell(`D${39 + i}`).value = mode.factorX[i].toFixed(2);
-    worksheet.getCell(`E${39 + i}`).value = mode.factorY[i].toFixed(2);
-    worksheet.getCell(`F${39 + i}`).value = mode.factorZ[i].toFixed(2);
+    worksheet.getCell(`C${39 + i}`).value =
+      Math.round(mode.period[i] * 100) / 100;
+    worksheet.getCell(`D${39 + i}`).value =
+      Math.round(mode.factorX[i] * 100) / 100;
+    worksheet.getCell(`E${39 + i}`).value =
+      Math.round(mode.factorY[i] * 100) / 100;
+    worksheet.getCell(`F${39 + i}`).value =
+      Math.round(mode.factorZ[i] * 100) / 100;
   }
 
   let indexPeriodZ: number = mode.factorZ.findIndex((value) => value >= 0.5);
   let indexPeriodXY: number = mode.factorZ.findIndex((value) => value < 0.5);
   let periodRatio: number =
     mode.period[indexPeriodZ] / mode.period[indexPeriodXY];
-  worksheet.getCell('C45').value = periodRatio.toFixed(2);
+  worksheet.getCell('C45').value = Math.round(periodRatio * 100) / 100;
   worksheet.getCell('D45').value = periodRatio < 0.85 ? '<0.85' : '>0.85';
 
   worksheet.getCell('F45').value = mode.modeID.length;
 
-  worksheet.getCell('D46').value = (mass.sumX as number).toFixed(2);
-  worksheet.getCell('F46').value = (mass.sumY as number).toFixed(2);
+  worksheet.getCell('D46').value = Math.round(mass.sumX as number);
+  worksheet.getCell('F46').value = Math.round(mass.sumY as number);
 }

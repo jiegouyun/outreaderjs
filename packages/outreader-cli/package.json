@@ -12,8 +12,6 @@
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
-    "@outreader/core": "^0.0.1",
-    "@outreader/yjk": "^0.0.1",
     "tslib": "^1"
   },
   "devDependencies": {
@@ -41,32 +39,16 @@
   "engines": {
     "node": ">=8.0.0"
   },
-  "files": [
-    "/bin",
-    "/lib",
-    "/npm-shrinkwrap.json",
-    "/oclif.manifest.json"
-  ],
+  "files": ["/bin", "/lib", "/npm-shrinkwrap.json", "/oclif.manifest.json"],
   "homepage": "https://github.com/an-lee/outreaderjs",
-  "keywords": [
-    "oclif"
-  ],
+  "keywords": ["oclif"],
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "oclif": {
     "commands": "./lib/commands",
     "bin": "outreader",
-    "plugins": [
-      "@oclif/plugin-help"
-    ]
+    "plugins": ["@oclif/plugin-help"]
   },
   "repository": "outreaderjs/outreaderjs",
-  "scripts": {
-    "postpack": "rm -f oclif.manifest.json",
-    "posttest": "eslint . --ext .ts --config .eslintrc",
-    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
-    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
-    "version": "oclif-dev readme && git add README.md"
-  },
   "types": "lib/index.d.ts"
 }

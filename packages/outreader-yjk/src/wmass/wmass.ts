@@ -392,7 +392,7 @@ export function extractSeismicInformation(
       seismicInformation.group = lineArray[1];
       break;
     case '地震烈度':
-      seismicInformation.intensity = lineArray[1];
+      seismicInformation.intensity = lineArray[1] + lineArray[2];
       break;
     case '场地类别':
       seismicInformation.siteCategory = lineArray[1];

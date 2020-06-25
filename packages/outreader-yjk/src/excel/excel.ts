@@ -1,5 +1,10 @@
-import { initSummary, writeSummary } from './summary';
-import { IStructure, hashStr } from '@outreader/core';
+import { initSummary, writeSummary, formatSummary } from './summary';
+import {
+  initSummaryQuantity,
+  writeSummaryQuantity,
+  formatSummaryQuantity,
+} from './summary-quantity';
+import { IStructure } from '@outreader/core';
 import Excel from 'exceljs';
 import path from 'path';
 
@@ -12,17 +17,21 @@ export function exportExcel(dir: string, structure: IStructure): boolean {
 
   // inirial structure data.
   initStructureData(structure);
+
   // initial workbook.
   const workbook = new Excel.Workbook();
-  // workbook.xlsx.readFile(templateDir);
-  // const sheetSummary = workbook.getWorksheet('汇总信息');
 
   // initial and write worksheet sumamary information.
   const sheetSummary = workbook.addWorksheet('汇总信息');
   initSummary(sheetSummary);
   writeSummary(dir, structure, sheetSummary);
+  formatSummary(sheetSummary);
 
   const sheetSummaryQuantity = workbook.addWorksheet('含钢量汇总');
+  initSummaryQuantity(sheetSummaryQuantity);
+  writeSummaryQuantity(structure, sheetSummaryQuantity);
+  formatSummaryQuantity(sheetSummaryQuantity);
+
   const sheetParameter = workbook.addWorksheet('计算参数');
   const sheetPeriod = workbook.addWorksheet('周期');
   const sheetForce = workbook.addWorksheet('内力');
