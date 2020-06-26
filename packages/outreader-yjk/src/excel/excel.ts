@@ -22,6 +22,7 @@ import {
   writeDistributeResult,
   formatDistributeResult,
 } from './distribute-result';
+import { initFactor, writeFactor, formatFactor } from './factor';
 import { IStructure } from '@outreader/core';
 import Excel from 'exceljs';
 import path from 'path';
@@ -81,7 +82,12 @@ export function exportExcel(dir: string, structure: IStructure): boolean {
   writeDistributeResult(structure, sheetDistributeResult);
   formatDistributeResult(sheetDistributeResult);
 
+  // write modify factor
   const sheetFactor = workbook.addWorksheet('调整系数');
+  initFactor(sheetFactor);
+  writeFactor(structure, sheetFactor);
+  formatFactor(sheetFactor);
+
   const sheetQuantity = workbook.addWorksheet('工程量');
 
   // write xlsx file.
