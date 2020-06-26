@@ -10,6 +10,7 @@ import {
   formatParameters,
 } from './parameters';
 import { initPeriod, writePeriod, formatPeriod } from './period';
+import { initForce, writeForce, formatForce } from './force';
 import { IStructure } from '@outreader/core';
 import Excel from 'exceljs';
 import path from 'path';
@@ -45,7 +46,12 @@ export function exportExcel(dir: string, structure: IStructure): boolean {
   writePeriod(structure, sheetPeriod);
   formatPeriod(sheetPeriod);
 
+  // write force information
   const sheetForce = workbook.addWorksheet('内力');
+  initForce(sheetForce);
+  writeForce(structure, sheetForce);
+  formatForce(sheetForce);
+
   const sheetDrift = workbook.addWorksheet('位移角');
   const sheetGeneralResult = workbook.addWorksheet('整体验算结果');
   const sheetDistributeResult = workbook.addWorksheet('楼层分布数据');
