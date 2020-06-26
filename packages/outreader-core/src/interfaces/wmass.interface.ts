@@ -170,11 +170,11 @@ export interface IOverturningCheck extends IAllExtracted {
 
 export interface IStableCheck extends IAllExtracted {
   seismicStoreyNo?: number;
-  seismicTcowerNo?: number;
+  seismicTowerNo?: number;
   seismicRatioX?: number;
   seismicRatioY?: number;
   windStoreyNo?: number;
-  windTcowerNo?: number;
+  windTowerNo?: number;
   windRatioX?: number;
   windRatioY?: number;
 }

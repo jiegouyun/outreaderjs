@@ -12,6 +12,11 @@ import {
 import { initPeriod, writePeriod, formatPeriod } from './period';
 import { initForce, writeForce, formatForce } from './force';
 import { initDrift, writeDrift, formatDrift } from './drift';
+import {
+  initGeneralResult,
+  writeGeneralResult,
+  formatGeneralResult,
+} from './general-result';
 import { IStructure } from '@outreader/core';
 import Excel from 'exceljs';
 import path from 'path';
@@ -59,7 +64,12 @@ export function exportExcel(dir: string, structure: IStructure): boolean {
   writeDrift(structure, sheetDrift);
   formatDrift(sheetDrift);
 
+  // write feneral result information
   const sheetGeneralResult = workbook.addWorksheet('整体验算结果');
+  initGeneralResult(sheetGeneralResult);
+  writeGeneralResult(structure, sheetGeneralResult);
+  formatGeneralResult(sheetGeneralResult);
+
   const sheetDistributeResult = workbook.addWorksheet('楼层分布数据');
   const sheetFactor = workbook.addWorksheet('调整系数');
   const sheetQuantity = workbook.addWorksheet('工程量');

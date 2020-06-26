@@ -822,7 +822,7 @@ export function extractStableCheck(
       switch (lineArray[0]) {
         case '层号':
           stableCheck.seismicStoreyNo = Number(lineArray[1]);
-          stableCheck.seismicTcowerNo = Number(lineArray[3]);
+          stableCheck.seismicTowerNo = Number(lineArray[3]);
           break;
         case 'X向刚重比':
           stableCheck.seismicRatioX = Number(lineArray[2]);
@@ -834,7 +834,7 @@ export function extractStableCheck(
       switch (lineArray[0]) {
         case '层号':
           stableCheck.windStoreyNo = Number(lineArray[1]);
-          stableCheck.windTcowerNo = Number(lineArray[3]);
+          stableCheck.windTowerNo = Number(lineArray[3]);
           break;
         case 'X向刚重比':
           stableCheck.windRatioX = Number(lineArray[2]);
