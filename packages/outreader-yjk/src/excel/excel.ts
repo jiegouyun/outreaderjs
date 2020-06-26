@@ -17,6 +17,11 @@ import {
   writeGeneralResult,
   formatGeneralResult,
 } from './general-result';
+import {
+  initDistributeResult,
+  writeDistributeResult,
+  formatDistributeResult,
+} from './distribute-result';
 import { IStructure } from '@outreader/core';
 import Excel from 'exceljs';
 import path from 'path';
@@ -70,7 +75,12 @@ export function exportExcel(dir: string, structure: IStructure): boolean {
   writeGeneralResult(structure, sheetGeneralResult);
   formatGeneralResult(sheetGeneralResult);
 
+  // write distribute result
   const sheetDistributeResult = workbook.addWorksheet('楼层分布数据');
+  initDistributeResult(sheetDistributeResult);
+  writeDistributeResult(structure, sheetDistributeResult);
+  formatDistributeResult(sheetDistributeResult);
+
   const sheetFactor = workbook.addWorksheet('调整系数');
   const sheetQuantity = workbook.addWorksheet('工程量');
 
