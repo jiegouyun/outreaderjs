@@ -302,11 +302,11 @@ export function formatSummaryQuantity(worksheet: Excel.Worksheet): void {
 
   rangeFillColor(worksheet, 1, 1, 1, 1, 'solid', '00F0FFF0', '00FFFFFF');
   rangeFillColor(worksheet, 2, 1, 7, 2, 'solid', '00F0FFF0', '00FFFFFF');
-  rangeFillColor(worksheet, 9, 1, 9, 1, 'solid', '00F0FFF0', '00FFFFFF');
-  rangeFillColor(worksheet, 10, 1, 32, 2, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 9, 1, 9, 1, 'solid', '00F0FFFF', '00FFFFFF');
+  rangeFillColor(worksheet, 10, 1, 32, 2, 'solid', '00F0FFFF', '00FFFFFF');
   rangeFillColor(worksheet, 34, 1, 34, 1, 'solid', '00F0FFF0', '00FFFFFF');
   rangeFillColor(worksheet, 35, 1, 49, 2, 'solid', '00F0FFF0', '00FFFFFF');
-  rangeFillColor(worksheet, 51, 1, 51, 1, 'solid', '00F0FFF0', '00FFFFFF');
-  rangeFillColor(worksheet, 52, 1, 58, 2, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 51, 1, 51, 1, 'solid', '00F0FFFF', '00FFFFFF');
+  rangeFillColor(worksheet, 52, 1, 58, 2, 'solid', '00F0FFFF', '00FFFFFF');
   rangeFillColor(worksheet, 52, 3, 58, 3, 'solid', '00FFFFF0', '00FFFFFF');
 }

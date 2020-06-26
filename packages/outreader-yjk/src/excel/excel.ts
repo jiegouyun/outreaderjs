@@ -9,6 +9,7 @@ import {
   writeParameters,
   formatParameters,
 } from './parameters';
+import { initPeriod, writePeriod, formatPeriod } from './period';
 import { IStructure } from '@outreader/core';
 import Excel from 'exceljs';
 import path from 'path';
@@ -38,7 +39,12 @@ export function exportExcel(dir: string, structure: IStructure): boolean {
   writeParameters(structure, sheetParameters);
   formatParameters(sheetParameters);
 
+  // write worksheet period information
   const sheetPeriod = workbook.addWorksheet('周期');
+  initPeriod(sheetPeriod);
+  writePeriod(structure, sheetPeriod);
+  formatPeriod(sheetPeriod);
+
   const sheetForce = workbook.addWorksheet('内力');
   const sheetDrift = workbook.addWorksheet('位移角');
   const sheetGeneralResult = workbook.addWorksheet('整体验算结果');

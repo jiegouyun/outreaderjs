@@ -184,7 +184,7 @@ export function formatParameters(worksheet: Excel.Worksheet): void {
   );
 
   rangeFillColor(worksheet, 1, 1, 9, 1, 'solid', '00F0FFF0', '00FFFFFF');
-  rangeFillColor(worksheet, 11, 1, 14, 1, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 11, 1, 14, 1, 'solid', '00F0FFFF', '00FFFFFF');
   rangeFillColor(worksheet, 16, 1, 23, 1, 'solid', '00F0FFF0', '00FFFFFF');
-  rangeFillColor(worksheet, 25, 1, 38, 1, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 25, 1, 38, 1, 'solid', '00F0FFFF', '00FFFFFF');
 }
