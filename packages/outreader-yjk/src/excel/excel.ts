@@ -11,6 +11,7 @@ import {
 } from './parameters';
 import { initPeriod, writePeriod, formatPeriod } from './period';
 import { initForce, writeForce, formatForce } from './force';
+import { initDrift, writeDrift, formatDrift } from './drift';
 import { IStructure } from '@outreader/core';
 import Excel from 'exceljs';
 import path from 'path';
@@ -52,7 +53,12 @@ export function exportExcel(dir: string, structure: IStructure): boolean {
   writeForce(structure, sheetForce);
   formatForce(sheetForce);
 
+  // write drift information
   const sheetDrift = workbook.addWorksheet('位移角');
+  initDrift(sheetDrift);
+  writeDrift(structure, sheetDrift);
+  formatDrift(sheetDrift);
+
   const sheetGeneralResult = workbook.addWorksheet('整体验算结果');
   const sheetDistributeResult = workbook.addWorksheet('楼层分布数据');
   const sheetFactor = workbook.addWorksheet('调整系数');
