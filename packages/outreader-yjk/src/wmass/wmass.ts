@@ -370,7 +370,7 @@ export function extractWindInformation(
       windInformation.dampingRatio = Number(lineArray[1]);
       break;
     case '舒适度验算用基本风压':
-      windInformation.dampingRationComfort = Number(lineArray[2]);
+      windInformation.pressureComfort = Number(lineArray[2]);
       break;
     case '舒适度验算用阻尼比':
       windInformation.dampingRationComfort = Number(lineArray[1]);

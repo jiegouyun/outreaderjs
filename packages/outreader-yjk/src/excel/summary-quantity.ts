@@ -262,6 +262,7 @@ export function formatSummaryQuantity(worksheet: Excel.Worksheet): void {
     };
     worksheet.getColumn(col).font = { name: 'Arial', size: 10 };
   }
+
   for (let row = 1; row <= worksheet.rowCount; row++) {
     worksheet.getRow(row).height = 20;
   }

@@ -4,35 +4,40 @@ import {
   writeSummaryQuantity,
   formatSummaryQuantity,
 } from './summary-quantity';
+import {
+  initParameters,
+  writeParameters,
+  formatParameters,
+} from './parameters';
 import { IStructure } from '@outreader/core';
 import Excel from 'exceljs';
 import path from 'path';
 
 export function exportExcel(dir: string, structure: IStructure): boolean {
-  const templateDir = path.join(
-    __dirname,
-    '../../../../fixtures/template',
-    'template.xlsx',
-  );
-
   // inirial structure data.
   initStructureData(structure);
 
   // initial workbook.
   const workbook = new Excel.Workbook();
 
-  // initial and write worksheet sumamary information.
+  // write worksheet sumamary information.
   const sheetSummary = workbook.addWorksheet('汇总信息');
   initSummary(sheetSummary);
   writeSummary(dir, structure, sheetSummary);
   formatSummary(sheetSummary);
 
+  // write worksheet sumamary quantity information.
   const sheetSummaryQuantity = workbook.addWorksheet('含钢量汇总');
   initSummaryQuantity(sheetSummaryQuantity);
   writeSummaryQuantity(structure, sheetSummaryQuantity);
   formatSummaryQuantity(sheetSummaryQuantity);
 
-  const sheetParameter = workbook.addWorksheet('计算参数');
+  // write worksheet parameters information.
+  const sheetParameters = workbook.addWorksheet('计算参数');
+  initParameters(sheetParameters);
+  writeParameters(structure, sheetParameters);
+  formatParameters(sheetParameters);
+
   const sheetPeriod = workbook.addWorksheet('周期');
   const sheetForce = workbook.addWorksheet('内力');
   const sheetDrift = workbook.addWorksheet('位移角');
