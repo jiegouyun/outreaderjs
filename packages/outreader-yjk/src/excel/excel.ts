@@ -23,6 +23,7 @@ import {
   formatDistributeResult,
 } from './distribute-result';
 import { initFactor, writeFactor, formatFactor } from './factor';
+import { initQuantity, writeQuantity, formatQuantity } from './quantity';
 import { IStructure } from '@outreader/core';
 import Excel from 'exceljs';
 import path from 'path';
@@ -88,7 +89,11 @@ export function exportExcel(dir: string, structure: IStructure): boolean {
   writeFactor(structure, sheetFactor);
   formatFactor(sheetFactor);
 
+  // write quantity
   const sheetQuantity = workbook.addWorksheet('工程量');
+  initQuantity(sheetQuantity);
+  writeQuantity(structure, sheetQuantity);
+  formatQuantity(sheetQuantity);
 
   // write xlsx file.
   const filename = path.join(dir, 'OutReader.xlsx');
