@@ -75,8 +75,8 @@ describe('wmass', () => {
   it('should extract wind', async () => {
     const wind = wmass.wind;
     expect(wind.storeyID[4]).toBe(50);
-    expect(wind.shearX[4]).toBe(-1600.5);
-    expect(wind.shearY[4]).toBe(2770.6);
+    expect(wind.shearAlongX[4]).toBe(-1600.5);
+    expect(wind.shearAlongY[4]).toBe(2770.6);
   });
 
   it('should extract stiffness', async () => {
