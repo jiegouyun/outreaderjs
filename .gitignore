@@ -121,3 +121,9 @@ lib
 
 # prod file
 *.prod.js
+
+# mac
+.DS_Store
+
+# excel output
+fixtures/**/*.xlsx
