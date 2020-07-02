@@ -1,4 +1,4 @@
-import { IStructure, IModeMass, IMode } from '@outreader/core';
+import { IStructure, IModeMass, IMode } from '../interfaces';
 import { lookUp, rangeSetBorder, rangeFillColor } from './commom';
 import Excel from 'exceljs';
 

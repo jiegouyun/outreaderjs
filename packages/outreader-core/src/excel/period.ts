@@ -1,4 +1,4 @@
-import { IStructure } from '@outreader/core';
+import { IStructure } from '../interfaces';
 import { rangeSetBorder, rangeFillColor, distributeFormat } from './commom';
 import Excel from 'exceljs';
 

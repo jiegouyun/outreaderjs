@@ -24,7 +24,7 @@ import {
 } from './distribute-result';
 import { initFactor, writeFactor, formatFactor } from './factor';
 import { initQuantity, writeQuantity, formatQuantity } from './quantity';
-import { IStructure } from '@outreader/core';
+import { IStructure } from '../interfaces';
 import Excel from 'exceljs';
 import path from 'path';
 

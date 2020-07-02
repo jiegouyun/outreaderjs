@@ -1,6 +1,6 @@
 import { readStructure } from '../structure';
-import { exportExcel } from './excel';
-import { IStructure, hashStr } from '@outreader/core';
+// import { exportExcel } from '@outreader/core/src/excel/excel';
+import { IStructure, hashStr, exportExcel } from '@outreader/core';
 import * as path from 'path';
 
 describe('exportExcel', () => {
