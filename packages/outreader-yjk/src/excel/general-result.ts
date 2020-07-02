@@ -33,6 +33,8 @@ export function initGeneralResult(worksheet: Excel.Worksheet): void {
   worksheet.getCell('B22').value = '地下一层';
   worksheet.getCell('C22').value = '地上一层';
   worksheet.getCell('D22').value = '刚度比';
+  worksheet.getCell('A23').value = 'X向';
+  worksheet.getCell('A24').value = 'Y向';
 
   worksheet.mergeCells('A26:E26');
   worksheet.getCell('A26').value = '结构整体抗倾覆验算';

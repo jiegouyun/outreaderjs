@@ -45,7 +45,7 @@ export function initQuantity(worksheet: Excel.Worksheet): void {
   worksheet.getCell('W2').value = '墙';
   worksheet.getCell('X2').value = '柱';
   worksheet.getCell('Y2').value = '梁';
-  worksheet.getCell('ZA2').value = '板';
+  worksheet.getCell('Z2').value = '板';
   worksheet.getCell('AA2').value = '合计';
 
   worksheet.mergeCells('AB1:AF1');
