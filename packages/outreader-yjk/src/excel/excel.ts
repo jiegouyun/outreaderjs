@@ -103,16 +103,24 @@ export function exportExcel(dir: string, structure: IStructure): boolean {
 }
 
 export function initStructureData(structure: IStructure): void {
-  // need revise.
-  reverseArray(structure.wmass?.stiffness);
-  reverseArray(structure.wv02q?.v02qFactor);
-  reverseArray(structure.concreteSteel?.concrete);
-  reverseArray(structure.concreteSteel?.steel);
-  reverseArray(structure.rebar?.area);
-  reverseArray(structure.rebar?.floorRebar);
-  reverseArray(structure.rebar?.beamRebar);
-  reverseArray(structure.rebar?.columnRebar);
-  reverseArray(structure.rebar?.wallRebar);
+  Object.values(structure).forEach(function (subFile) {
+    Object.values(subFile).forEach(function (customInterface) {
+      filterInterface(customInterface);
+    });
+  });
+}
+
+export function filterInterface<T>(obj: T): void {
+  if (Object.keys(obj).includes('storeyID')) {
+    if (
+      Array.prototype.slice.call(obj['storeyID' as keyof T])[0] <
+      Array.prototype.slice.call(obj['storeyID' as keyof T])[
+        Array.prototype.slice.call(obj['storeyID' as keyof T]).length - 1
+      ]
+    ) {
+      reverseArray(obj);
+    }
+  }
 }
 
 export function reverseArray<T>(obj: T): void {
