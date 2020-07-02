@@ -75,8 +75,8 @@ describe('wmass', () => {
   it('should extract wind', async () => {
     const wind = wmass.wind;
     expect(wind.storeyID[4]).toBe(50);
-    expect(wind.shearX[4]).toBe(-1600.5);
-    expect(wind.shearY[4]).toBe(2770.6);
+    expect(wind.shearAlongX[4]).toBe(-1600.5);
+    expect(wind.shearAlongY[4]).toBe(2770.6);
   });
 
   it('should extract stiffness', async () => {
@@ -90,23 +90,23 @@ describe('wmass', () => {
 
   it('should extract constraintFloorStiffnessRatio', async () => {
     const constraintFloorStiffnessRatio = wmass.constraintFloorStiffnessRatio;
-    expect(constraintFloorStiffnessRatio.storeyID).toBe(5);
+    expect(constraintFloorStiffnessRatio.storeyNo).toBe(5);
     expect(constraintFloorStiffnessRatio.ratioX).toBe(1.9499);
     expect(constraintFloorStiffnessRatio.ratioY).toBe(2.2203);
   });
 
   it('should extract overturningCheck', async () => {
     const overturningCheck = wmass.overturningCheck;
-    expect(overturningCheck.storeyID).toBe(3);
+    expect(overturningCheck.storeyNo).toBe(3);
     expect(overturningCheck.mrWindX).toBe(1.217e8);
     expect(overturningCheck.mrSeismicY).toBe(6.708e7);
   });
 
   it('should extract stableCheck', async () => {
     const stableCheck = wmass.stableCheck;
-    expect(stableCheck.seismicID).toBe(6);
+    expect(stableCheck.seismicStoreyNo).toBe(6);
     expect(stableCheck.seismicRatioX).toBe(2.334);
-    expect(stableCheck.windID).toBe(6);
+    expect(stableCheck.windStoreyNo).toBe(6);
     expect(stableCheck.windRatioY).toBe(1.878);
   });
 

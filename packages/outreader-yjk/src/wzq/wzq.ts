@@ -51,11 +51,11 @@ export async function readWzqOutput(dir: string): Promise<IWzq | undefined> {
       forceX: [],
       shearX: [],
       momentX: [],
-      shearWeiightRatioX: [],
+      shearWeightRatioX: [],
       forceY: [],
       shearY: [],
       momentY: [],
-      shearWeiightRatioY: [],
+      shearWeightRatioY: [],
       allExtracted: false,
     },
   };
@@ -147,19 +147,19 @@ export function extractModeMass(
     if (FLAG === 'keyModeMass') {
       if (typeof modeMass.factorX === 'object') {
         modeMass.sumX = modeMass.factorX.reduce(
-          (sum, current) => sum + current,
+          (sum: number, current: number) => sum + current,
           0,
         );
       }
       if (typeof modeMass.factorY === 'object') {
         modeMass.sumY = modeMass.factorY.reduce(
-          (sum, current) => sum + current,
+          (sum: number, current: number) => sum + current,
           0,
         );
       }
       if (typeof modeMass.factorZ === 'object') {
         modeMass.sumZ = modeMass.factorZ.reduce(
-          (sum, current) => sum + current,
+          (sum: number, current: number) => sum + current,
           0,
         );
       }
@@ -199,6 +199,10 @@ export function extractSeismicForce(
     lineArray[0] + lineArray[1] + lineArray[2] ===
     '抗震规范5.2.5条要求的X向楼层最小剪重比'
   ) {
+    if (FLAG === 'keySeismicForceX') {
+      seismicForce.shearWeightRatioLimitX = Number(lineArray[3]);
+    }
+
     FLAG = '';
   } else if (
     lineArray[0] + lineArray[1] + lineArray[2] ===
@@ -210,6 +214,7 @@ export function extractSeismicForce(
     '抗震规范5.2.5条要求的Y向楼层最小剪重比'
   ) {
     if (FLAG === 'keySeismicForceY') {
+      seismicForce.shearWeightRatioLimitY = Number(lineArray[3]);
       seismicForce.allExtracted = true;
     }
 
@@ -233,8 +238,8 @@ export function extractSeismicForce(
       if (typeof seismicForce.momentX === 'object') {
         seismicForce.momentX.push(Number(lineArray[5]));
       }
-      if (typeof seismicForce.shearWeiightRatioX === 'object') {
-        seismicForce.shearWeiightRatioX.push(Number(lineArray[4]));
+      if (typeof seismicForce.shearWeightRatioX === 'object') {
+        seismicForce.shearWeightRatioX.push(Number(lineArray[4]));
       }
     }
   } else if (FLAG === 'keySeismicForceY') {
@@ -248,8 +253,8 @@ export function extractSeismicForce(
       if (typeof seismicForce.momentY === 'object') {
         seismicForce.momentY.push(Number(lineArray[5]));
       }
-      if (typeof seismicForce.shearWeiightRatioY === 'object') {
-        seismicForce.shearWeiightRatioY.push(Number(lineArray[4]));
+      if (typeof seismicForce.shearWeightRatioY === 'object') {
+        seismicForce.shearWeightRatioY.push(Number(lineArray[4]));
       }
     }
   }

@@ -8,10 +8,10 @@ export interface IWdisp {
   driftSeismicTwoWayY: IDrift;
   driftSeismicYEccP: IDrift;
   driftSeismicYEccN: IDrift;
-  driftWindXP: IWindDriftDiap;
-  driftWindXN: IWindDriftDiap;
-  driftWindYP: IWindDriftDiap;
-  driftWindYN: IWindDriftDiap;
+  driftWindXP: IWindDriftDisp;
+  driftWindXN: IWindDriftDisp;
+  driftWindYP: IWindDriftDisp;
+  driftWindYN: IWindDriftDisp;
   ratioSeismicX: IDispRatio;
   ratioSeismicXEccP: IDispRatio;
   ratioSeismicXEccN: IDispRatio;
@@ -21,22 +21,22 @@ export interface IWdisp {
 }
 
 interface IStoreyTower {
-  storeyID?: number[];
-  towerID?: number[];
+  storeyID: number[];
+  towerID: number[];
 }
 
 interface IAllExtracted {
-  allExtracted?: boolean;
+  allExtracted: boolean;
 }
 
 export interface IDrift extends IStoreyTower, IAllExtracted {
-  displacement?: number[];
-  drift?: number[];
+  displacement: number[];
+  drift: number[];
 }
 
 export interface IDispRatio extends IStoreyTower, IAllExtracted {
-  ratio?: number[];
-  ratioD?: number[];
+  ratio: number[];
+  ratioD: number[];
 }
 
-export interface IWindDriftDiap extends IDrift, IDispRatio {}
+export interface IWindDriftDisp extends IDrift, IDispRatio {}

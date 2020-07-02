@@ -25,7 +25,7 @@ interface IStoreyTower {
 }
 
 interface IAllExtracted {
-  allExtracted?: boolean;
+  allExtracted: boolean;
 }
 
 export interface IBasicInformation extends IAllExtracted {
@@ -82,10 +82,10 @@ export interface ISeismicInformation extends IAllExtracted {
 }
 
 export interface IStorey extends IAllExtracted, IStoreyTower {
-  attribute?: string[];
-  height?: number[];
-  heightToGround?: number[];
-  area?: number[];
+  attribute: string[];
+  height: number[];
+  heightToGround: number[];
+  area: number[];
 }
 
 export interface ITower extends IAllExtracted {
@@ -94,10 +94,10 @@ export interface ITower extends IAllExtracted {
 }
 
 export interface IMassRatio extends IAllExtracted, IStoreyTower {
-  ratio?: number[];
-  storeyMass?: number[];
-  massPerArea?: number[];
-  massPerAreaRatio?: number[];
+  ratio: number[];
+  storeyMass: number[];
+  massPerArea: number[];
+  massPerAreaRatio: number[];
 }
 
 export interface IWeight extends IAllExtracted {
@@ -108,31 +108,37 @@ export interface IWeight extends IAllExtracted {
 }
 
 export interface IWind extends IAllExtracted, IStoreyTower {
-  forceX?: number[];
-  shearX?: number[];
-  momentX?: number[];
-  forceY?: number[];
-  shearY?: number[];
-  momentY?: number[];
+  forceAlongX: number[];
+  shearAlongX: number[];
+  momentAlongX: number[];
+  forceAlongY: number[];
+  shearAlongY: number[];
+  momentAlongY: number[];
+  forceCrossX: number[];
+  shearCrossX: number[];
+  momentCrossX: number[];
+  forceCrossY: number[];
+  shearCrossY: number[];
+  momentCrossY: number[];
 }
 
 export interface IStiffness extends IAllExtracted, IStoreyTower {
-  ratx1?: number[];
-  ratx2?: number[];
-  rjx1?: number[];
-  rjx3?: number[];
-  raty1?: number[];
-  raty2?: number[];
-  rjy1?: number[];
-  rjy3?: number[];
-  rjz1?: number[];
-  rjz3?: number[];
-  weakStoreyFactor?: number[];
+  ratx1: number[];
+  ratx2: number[];
+  rjx1: number[];
+  rjx3: number[];
+  raty1: number[];
+  raty2: number[];
+  rjy1: number[];
+  rjy3: number[];
+  rjz1: number[];
+  rjz3: number[];
+  weakStoreyFactor: number[];
 }
 
 export interface IConstraintFloorStiffnessRatio extends IAllExtracted {
-  storeyID?: number;
-  towerID?: number;
+  storeyNo?: number;
+  towerNo?: number;
   stiffnessX0?: number;
   stiffnessX1?: number;
   ratioX?: number;
@@ -142,8 +148,8 @@ export interface IConstraintFloorStiffnessRatio extends IAllExtracted {
 }
 
 export interface IOverturningCheck extends IAllExtracted {
-  storeyID?: number;
-  towerID?: number;
+  storeyNo?: number;
+  towerNo?: number;
   mrWindX?: number;
   movWindX?: number;
   ratioWindX?: number;
@@ -163,19 +169,19 @@ export interface IOverturningCheck extends IAllExtracted {
 }
 
 export interface IStableCheck extends IAllExtracted {
-  seismicID?: number;
-  seismicTcowerID?: number;
+  seismicStoreyNo?: number;
+  seismicTowerNo?: number;
   seismicRatioX?: number;
   seismicRatioY?: number;
-  windID?: number;
-  windTcowerID?: number;
+  windStoreyNo?: number;
+  windTowerNo?: number;
   windRatioX?: number;
   windRatioY?: number;
 }
 
 export interface IShearWeightRatioModify extends IAllExtracted, IStoreyTower {
-  factorX?: number[];
-  factorY?: number[];
+  factorX: number[];
+  factorY: number[];
 }
 
 export interface IWindComfort extends IAllExtracted {
@@ -186,8 +192,8 @@ export interface IWindComfort extends IAllExtracted {
 }
 
 export interface IShearCapacityCheck extends IAllExtracted, IStoreyTower {
-  capacityX?: number[];
-  ratioX?: number[];
-  capacityY?: number[];
-  ratioY?: number[];
+  capacityX: number[];
+  ratioX: number[];
+  capacityY: number[];
+  ratioY: number[];
 }

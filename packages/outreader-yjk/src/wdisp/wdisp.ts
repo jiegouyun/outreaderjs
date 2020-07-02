@@ -2,8 +2,8 @@ import {
   hashFile,
   IDispRatio,
   IDrift,
+  IWindDriftDisp,
   IWdisp,
-  IWindDriftDiap,
   readLineByLine,
 } from '@outreader/core';
 import fs from 'fs';
@@ -489,8 +489,8 @@ export function extractDriftSeismicYEccN(
 
 export function extractDriftWindXP(
   lineArray: string[],
-  loadCaseDrift: IDrift,
-): IDrift {
+  loadCaseDrift: IWindDriftDisp,
+): IWindDriftDisp {
   if (
     lineArray[1] === '+X' &&
     lineArray[2] === '方向风荷载作用下的楼层最大位移'
@@ -513,8 +513,8 @@ export function extractDriftWindXP(
 
 export function extractDriftWindXN(
   lineArray: string[],
-  loadCaseDrift: IDrift,
-): IDrift {
+  loadCaseDrift: IWindDriftDisp,
+): IWindDriftDisp {
   if (
     lineArray[1] === '-X' &&
     lineArray[2] === '方向风荷载作用下的楼层最大位移'
@@ -537,8 +537,8 @@ export function extractDriftWindXN(
 
 export function extractDriftWindYP(
   lineArray: string[],
-  loadCaseDrift: IDrift,
-): IDrift {
+  loadCaseDrift: IWindDriftDisp,
+): IWindDriftDisp {
   if (
     lineArray[1] === '+Y' &&
     lineArray[2] === '方向风荷载作用下的楼层最大位移'
@@ -561,8 +561,8 @@ export function extractDriftWindYP(
 
 export function extractDriftWindYN(
   lineArray: string[],
-  loadCaseDrift: IDrift,
-): IDrift {
+  loadCaseDrift: IWindDriftDisp,
+): IWindDriftDisp {
   if (
     lineArray[1] === '-Y' &&
     lineArray[2] === '方向风荷载作用下的楼层最大位移'
@@ -754,8 +754,8 @@ export function extractDrift(
 
 export function extractWindDriftDisp(
   lineArray: string[],
-  loadCaseDrift: IWindDriftDiap,
-): IWindDriftDiap {
+  loadCaseDrift: IWindDriftDisp,
+): IWindDriftDisp {
   if (!isNaN(Number(lineArray[0]))) {
     if (Number(lineArray[0]) < 1000000) {
       if (typeof loadCaseDrift.storeyID === 'object') {

@@ -9,11 +9,11 @@ export interface IRebar {
 }
 
 interface IStoreyID {
-  storeyID?: number[];
+  storeyID: number[];
 }
 
 interface IAllExtracted {
-  allExtracted?: boolean;
+  allExtracted: boolean;
 }
 
 interface ITotal {
@@ -22,13 +22,13 @@ interface ITotal {
 }
 
 export interface IArea extends IStoreyID, IAllExtracted {
-  storey?: number[];
+  storey: number[];
   totalArea?: number;
 }
 
 export interface IRebarQuantity extends IStoreyID, IAllExtracted, ITotal {
-  storey?: number[];
-  perArea?: number[];
+  storey: number[];
+  perArea: number[];
 }
 
 export interface IProjectQuantity extends IAllExtracted, ITotal {

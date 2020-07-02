@@ -69,12 +69,18 @@ export async function readWmassOutput(
     wind: {
       storeyID: [],
       towerID: [],
-      forceX: [],
-      shearX: [],
-      momentX: [],
-      forceY: [],
-      shearY: [],
-      momentY: [],
+      forceAlongX: [],
+      shearAlongX: [],
+      momentAlongX: [],
+      forceAlongY: [],
+      shearAlongY: [],
+      momentAlongY: [],
+      forceCrossX: [],
+      shearCrossX: [],
+      momentCrossX: [],
+      forceCrossY: [],
+      shearCrossY: [],
+      momentCrossY: [],
       allExtracted: false,
     },
     stiffness: {
@@ -364,7 +370,7 @@ export function extractWindInformation(
       windInformation.dampingRatio = Number(lineArray[1]);
       break;
     case '舒适度验算用基本风压':
-      windInformation.dampingRationComfort = Number(lineArray[2]);
+      windInformation.pressureComfort = Number(lineArray[2]);
       break;
     case '舒适度验算用阻尼比':
       windInformation.dampingRationComfort = Number(lineArray[1]);
@@ -386,7 +392,7 @@ export function extractSeismicInformation(
       seismicInformation.group = lineArray[1];
       break;
     case '地震烈度':
-      seismicInformation.intensity = lineArray[1];
+      seismicInformation.intensity = lineArray[1] + lineArray[2];
       break;
     case '场地类别':
       seismicInformation.siteCategory = lineArray[1];
@@ -561,26 +567,44 @@ export function extractWind(lineArray: string[], wind: IWind): IWind {
       if (typeof wind.towerID === 'object') {
         wind.towerID.push(Number(lineArray[1]));
       }
-      if (typeof wind.forceX === 'object') {
-        wind.forceX.push(Number(lineArray[3]));
+      if (typeof wind.forceAlongX === 'object') {
+        wind.forceAlongX.push(Number(lineArray[3]));
       }
-      if (typeof wind.shearX === 'object') {
-        wind.shearX.push(Number(lineArray[4]));
+      if (typeof wind.shearAlongX === 'object') {
+        wind.shearAlongX.push(Number(lineArray[4]));
       }
-      if (typeof wind.momentX === 'object') {
-        wind.momentX.push(Number(lineArray[5]));
+      if (typeof wind.momentAlongX === 'object') {
+        wind.momentAlongX.push(Number(lineArray[5]));
+      }
+      if (typeof wind.forceCrossX === 'object') {
+        wind.forceCrossX.push(Number(lineArray[6]));
+      }
+      if (typeof wind.shearCrossX === 'object') {
+        wind.shearCrossX.push(Number(lineArray[7]));
+      }
+      if (typeof wind.momentCrossX === 'object') {
+        wind.momentCrossX.push(Number(lineArray[8]));
       }
     }
 
     if (!isNaN(Number(lineArray[1])) && lineArray.length === 7) {
-      if (typeof wind.forceY === 'object') {
-        wind.forceY.push(Number(lineArray[1]));
+      if (typeof wind.forceAlongY === 'object') {
+        wind.forceAlongY.push(Number(lineArray[1]));
       }
-      if (typeof wind.shearY === 'object') {
-        wind.shearY.push(Number(lineArray[2]));
+      if (typeof wind.shearAlongY === 'object') {
+        wind.shearAlongY.push(Number(lineArray[2]));
       }
-      if (typeof wind.momentY === 'object') {
-        wind.momentY.push(Number(lineArray[3]));
+      if (typeof wind.momentAlongY === 'object') {
+        wind.momentAlongY.push(Number(lineArray[3]));
+      }
+      if (typeof wind.forceCrossY === 'object') {
+        wind.forceCrossY.push(Number(lineArray[4]));
+      }
+      if (typeof wind.shearCrossY === 'object') {
+        wind.shearCrossY.push(Number(lineArray[5]));
+      }
+      if (typeof wind.momentCrossY === 'object') {
+        wind.momentCrossY.push(Number(lineArray[6]));
       }
     }
   }
@@ -710,8 +734,8 @@ export function extractConstraintFloorStiffnessRatio(
 ): IConstraintFloorStiffnessRatio {
   switch (lineArray[0]) {
     case '地下室层号':
-      constraintFloorStiffnessRatio.storeyID = Number(lineArray[1]);
-      constraintFloorStiffnessRatio.towerID = Number(lineArray[3]);
+      constraintFloorStiffnessRatio.storeyNo = Number(lineArray[1]);
+      constraintFloorStiffnessRatio.towerNo = Number(lineArray[3]);
       break;
     case 'X方向地下一层剪切刚度':
       constraintFloorStiffnessRatio.stiffnessX0 = Number(lineArray[1]);
@@ -742,8 +766,8 @@ export function extractOverturningCheck(
   if (FLAG === 'keyOverturning') {
     switch (lineArray[0]) {
       case '层号':
-        overturningCheck.storeyID = Number(lineArray[1]);
-        overturningCheck.towerID = Number(lineArray[3]);
+        overturningCheck.storeyNo = Number(lineArray[1]);
+        overturningCheck.towerNo = Number(lineArray[3]);
         break;
       case 'X向风':
         overturningCheck.mrWindX = Number(lineArray[1]);
@@ -797,8 +821,8 @@ export function extractStableCheck(
     if (INNERFLAG === 'seismic') {
       switch (lineArray[0]) {
         case '层号':
-          stableCheck.seismicID = Number(lineArray[1]);
-          stableCheck.seismicTcowerID = Number(lineArray[3]);
+          stableCheck.seismicStoreyNo = Number(lineArray[1]);
+          stableCheck.seismicTowerNo = Number(lineArray[3]);
           break;
         case 'X向刚重比':
           stableCheck.seismicRatioX = Number(lineArray[2]);
@@ -809,8 +833,8 @@ export function extractStableCheck(
     } else if (INNERFLAG === 'wind') {
       switch (lineArray[0]) {
         case '层号':
-          stableCheck.windID = Number(lineArray[1]);
-          stableCheck.windTcowerID = Number(lineArray[3]);
+          stableCheck.windStoreyNo = Number(lineArray[1]);
+          stableCheck.windTowerNo = Number(lineArray[3]);
           break;
         case 'X向刚重比':
           stableCheck.windRatioX = Number(lineArray[2]);
