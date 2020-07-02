@@ -28,6 +28,11 @@ import { IStructure } from '@outreader/core';
 import Excel from 'exceljs';
 import path from 'path';
 
+/**
+ * @description export data into a excel file.
+ * @param dir string, export folder path;
+ * @param structure IStructure, structure data.
+ */
 export async function exportExcel(dir: string, structure: IStructure) {
   // inirial structure data.
   initStructureData(structure);
