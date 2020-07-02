@@ -2,7 +2,7 @@ import { IStructure, IModeMass, IMode } from '@outreader/core';
 import { lookUp, rangeSetBorder, rangeFillColor } from './commom';
 import Excel from 'exceljs';
 
-export function initSummary(worksheet: Excel.Worksheet): void {
+export async function initSummary(worksheet: Excel.Worksheet) {
   worksheet.mergeCells('A1:F1');
   worksheet.getCell('A1').value = '计算结果记录表';
 
@@ -168,11 +168,11 @@ export function initSummary(worksheet: Excel.Worksheet): void {
   worksheet.getCell('E51').value = 'Y向';
 }
 
-export function writeSummary(
+export async function writeSummary(
   dir: string,
   structure: IStructure,
   worksheet: Excel.Worksheet,
-): void {
+) {
   // write project information
   worksheet.getCell('D2').value = dir;
   worksheet.getCell('D3').value =
@@ -442,7 +442,7 @@ export function writeSummary(
     ) || '';
 }
 
-export function formatSummary(worksheet: Excel.Worksheet): void {
+export async function formatSummary(worksheet: Excel.Worksheet) {
   for (let col = 1; col <= worksheet.columnCount; col++) {
     worksheet.getColumn(col).width = 15;
     worksheet.getColumn(col).alignment = {

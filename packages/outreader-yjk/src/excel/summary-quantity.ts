@@ -2,7 +2,7 @@ import { IStructure } from '@outreader/core';
 import { rangeSetBorder, rangeFillColor } from './commom';
 import Excel from 'exceljs';
 
-export function initSummaryQuantity(worksheet: Excel.Worksheet): void {
+export async function initSummaryQuantity(worksheet: Excel.Worksheet) {
   worksheet.getCell('A1').value = '工程名称';
   worksheet.mergeCells('B1:C1');
   worksheet.getCell('A2').value = '结构高度';
@@ -108,10 +108,10 @@ export function initSummaryQuantity(worksheet: Excel.Worksheet): void {
   worksheet.getCell('B58').value = '元/m^2';
 }
 
-export function writeSummaryQuantity(
+export async function writeSummaryQuantity(
   structure: IStructure,
   worksheet: Excel.Worksheet,
-): void {
+) {
   // write basic information
   worksheet.getCell('B1').value = { formula: '汇总信息!D3', date1904: false };
   worksheet.getCell('C2').value = { formula: '汇总信息!F6', date1904: false };
@@ -253,7 +253,7 @@ export function writeSummaryQuantity(
   worksheet.getCell('C58').value = 65.7;
 }
 
-export function formatSummaryQuantity(worksheet: Excel.Worksheet): void {
+export async function formatSummaryQuantity(worksheet: Excel.Worksheet) {
   for (let col = 1; col <= worksheet.columnCount; col++) {
     worksheet.getColumn(col).width = 15;
     worksheet.getColumn(col).alignment = {

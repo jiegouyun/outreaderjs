@@ -2,7 +2,7 @@ import { IStructure } from '@outreader/core';
 import { rangeSetBorder, rangeFillColor } from './commom';
 import Excel from 'exceljs';
 
-export function initParameters(worksheet: Excel.Worksheet): void {
+export async function initParameters(worksheet: Excel.Worksheet) {
   worksheet.mergeCells('A1:B1');
   worksheet.getCell('A1').value = '结构总体信息';
   worksheet.getCell('A2').value = '结构体系';
@@ -54,10 +54,10 @@ export function initParameters(worksheet: Excel.Worksheet): void {
   worksheet.getCell('A38').value = '调整后水平向减震系数 ';
 }
 
-export function writeParameters(
+export async function writeParameters(
   structure: IStructure,
   worksheet: Excel.Worksheet,
-): void {
+) {
   // write general information
   worksheet.getCell('B2').value =
     structure.wmass?.generalInformation.structuralSystem || '';
@@ -129,7 +129,7 @@ export function writeParameters(
     structure.wmass?.seismicInformation.modifiedSeismicReductionFactor || '';
 }
 
-export function formatParameters(worksheet: Excel.Worksheet): void {
+export async function formatParameters(worksheet: Excel.Worksheet) {
   for (let col = 1; col <= worksheet.columnCount; col++) {
     worksheet.getColumn(col).width = 20;
     worksheet.getColumn(col).alignment = {

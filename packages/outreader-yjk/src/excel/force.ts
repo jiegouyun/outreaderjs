@@ -2,7 +2,7 @@ import { IStructure } from '@outreader/core';
 import { rangeSetBorder, rangeFillColor, distributeFormat } from './commom';
 import Excel from 'exceljs';
 
-export function initForce(worksheet: Excel.Worksheet): void {
+export async function initForce(worksheet: Excel.Worksheet) {
   worksheet.mergeCells('A1:B1');
   worksheet.getCell('A1').value = '楼层信息';
   worksheet.getCell('A2').value = '层号';
@@ -33,10 +33,10 @@ export function initForce(worksheet: Excel.Worksheet): void {
   worksheet.getCell('T2').value = '弯矩Y\nkNm';
 }
 
-export function writeForce(
+export async function writeForce(
   structure: IStructure,
   worksheet: Excel.Worksheet,
-): void {
+) {
   // write storey
   for (
     let i = 0;
@@ -102,7 +102,7 @@ export function writeForce(
   }
 }
 
-export function formatForce(worksheet: Excel.Worksheet): void {
+export async function formatForce(worksheet: Excel.Worksheet) {
   distributeFormat(worksheet);
 
   worksheet.getRow(2).height = 30;

@@ -2,7 +2,7 @@ import { IStructure } from '@outreader/core';
 import { rangeSetBorder, rangeFillColor, distributeFormat } from './commom';
 import Excel from 'exceljs';
 
-export function initDrift(worksheet: Excel.Worksheet): void {
+export async function initDrift(worksheet: Excel.Worksheet) {
   worksheet.mergeCells('A1:B1');
   worksheet.getCell('A1').value = '楼层信息';
   worksheet.getCell('A2').value = '层号';
@@ -65,10 +65,10 @@ export function initDrift(worksheet: Excel.Worksheet): void {
   worksheet.getCell('AT2').value = 'WY-';
 }
 
-export function writeDrift(
+export async function writeDrift(
   structure: IStructure,
   worksheet: Excel.Worksheet,
-): void {
+) {
   // write storey
   for (
     let i = 0;
@@ -184,7 +184,7 @@ export function writeDrift(
   }
 }
 
-export function formatDrift(worksheet: Excel.Worksheet): void {
+export async function formatDrift(worksheet: Excel.Worksheet) {
   distributeFormat(worksheet);
 
   rangeFillColor(worksheet, 1, 1, 2, 2, 'solid', '00F0FFF0', '00FFFFFF');

@@ -2,7 +2,7 @@ import { IStructure } from '@outreader/core';
 import { rangeSetBorder, rangeFillColor, distributeFormat } from './commom';
 import Excel from 'exceljs';
 
-export function initDistributeResult(worksheet: Excel.Worksheet): void {
+export async function initDistributeResult(worksheet: Excel.Worksheet) {
   worksheet.mergeCells('A1:B1');
   worksheet.getCell('A1').value = '楼层信息';
   worksheet.getCell('A2').value = '层号';
@@ -66,10 +66,10 @@ export function initDistributeResult(worksheet: Excel.Worksheet): void {
   worksheet.getCell('AL2').value = 'Y向柱\n百分比';
 }
 
-export function writeDistributeResult(
+export async function writeDistributeResult(
   structure: IStructure,
   worksheet: Excel.Worksheet,
-): void {
+) {
   for (
     let i = 0;
     i < (structure.wmass?.storey.storeyID as number[]).length;
@@ -179,7 +179,7 @@ export function writeDistributeResult(
   }
 }
 
-export function formatDistributeResult(worksheet: Excel.Worksheet): void {
+export async function formatDistributeResult(worksheet: Excel.Worksheet) {
   distributeFormat(worksheet);
 
   worksheet.getRow(2).height = 30;

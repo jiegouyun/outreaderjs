@@ -2,7 +2,7 @@ import { IStructure } from '@outreader/core';
 import { rangeSetBorder, rangeFillColor, distributeFormat } from './commom';
 import Excel from 'exceljs';
 
-export function initPeriod(worksheet: Excel.Worksheet): void {
+export async function initPeriod(worksheet: Excel.Worksheet) {
   worksheet.getCell('A2').value = '振型';
 
   worksheet.mergeCells('B1:F1');
@@ -28,10 +28,10 @@ export function initPeriod(worksheet: Excel.Worksheet): void {
   worksheet.getCell('N2').value = 'Z';
 }
 
-export function writePeriod(
+export async function writePeriod(
   structure: IStructure,
   worksheet: Excel.Worksheet,
-): void {
+) {
   let modeCount: number = (structure.wzq?.modeCoupling.modeID as number[])
     .length;
   for (let i = 0; i < modeCount; i++) {
@@ -73,7 +73,7 @@ export function writePeriod(
   }
 }
 
-export function formatPeriod(worksheet: Excel.Worksheet): void {
+export async function formatPeriod(worksheet: Excel.Worksheet) {
   distributeFormat(worksheet);
 
   rangeFillColor(worksheet, 1, 1, 2, 1, 'solid', '00F0FFF0', '00FFFFFF');

@@ -2,7 +2,7 @@ import { IStructure } from '@outreader/core';
 import { rangeSetBorder, rangeFillColor, distributeFormat } from './commom';
 import Excel from 'exceljs';
 
-export function initFactor(worksheet: Excel.Worksheet): void {
+export async function initFactor(worksheet: Excel.Worksheet) {
   worksheet.mergeCells('A1:B1');
   worksheet.getCell('A1').value = '楼层信息';
   worksheet.getCell('A2').value = '层号';
@@ -22,10 +22,10 @@ export function initFactor(worksheet: Excel.Worksheet): void {
   worksheet.getCell('G2').value = 'Y向';
 }
 
-export function writeFactor(
+export async function writeFactor(
   structure: IStructure,
   worksheet: Excel.Worksheet,
-): void {
+) {
   for (
     let i = 0;
     i < (structure.wmass?.storey.storeyID as number[]).length;
@@ -61,7 +61,7 @@ export function writeFactor(
   }
 }
 
-export function formatFactor(worksheet: Excel.Worksheet): void {
+export async function formatFactor(worksheet: Excel.Worksheet) {
   distributeFormat(worksheet);
 
   rangeFillColor(worksheet, 1, 1, 2, 2, 'solid', '00F0FFF0', '00FFFFFF');

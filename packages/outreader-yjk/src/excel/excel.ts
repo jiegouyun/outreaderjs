@@ -28,7 +28,7 @@ import { IStructure } from '@outreader/core';
 import Excel from 'exceljs';
 import path from 'path';
 
-export function exportExcel(dir: string, structure: IStructure): boolean {
+export async function exportExcel(dir: string, structure: IStructure) {
   // inirial structure data.
   initStructureData(structure);
 
@@ -37,67 +37,67 @@ export function exportExcel(dir: string, structure: IStructure): boolean {
 
   // write worksheet sumamary information.
   const sheetSummary = workbook.addWorksheet('汇总信息');
-  initSummary(sheetSummary);
-  writeSummary(dir, structure, sheetSummary);
-  formatSummary(sheetSummary);
+  await initSummary(sheetSummary);
+  await writeSummary(dir, structure, sheetSummary);
+  await formatSummary(sheetSummary);
 
   // write worksheet sumamary quantity information.
   const sheetSummaryQuantity = workbook.addWorksheet('含钢量汇总');
-  initSummaryQuantity(sheetSummaryQuantity);
-  writeSummaryQuantity(structure, sheetSummaryQuantity);
-  formatSummaryQuantity(sheetSummaryQuantity);
+  await initSummaryQuantity(sheetSummaryQuantity);
+  await writeSummaryQuantity(structure, sheetSummaryQuantity);
+  await formatSummaryQuantity(sheetSummaryQuantity);
 
   // write worksheet parameters information.
   const sheetParameters = workbook.addWorksheet('计算参数');
-  initParameters(sheetParameters);
-  writeParameters(structure, sheetParameters);
-  formatParameters(sheetParameters);
+  await initParameters(sheetParameters);
+  await writeParameters(structure, sheetParameters);
+  await formatParameters(sheetParameters);
 
   // write worksheet period information
   const sheetPeriod = workbook.addWorksheet('周期');
-  initPeriod(sheetPeriod);
-  writePeriod(structure, sheetPeriod);
-  formatPeriod(sheetPeriod);
+  await initPeriod(sheetPeriod);
+  await writePeriod(structure, sheetPeriod);
+  await formatPeriod(sheetPeriod);
 
   // write force information
   const sheetForce = workbook.addWorksheet('内力');
-  initForce(sheetForce);
-  writeForce(structure, sheetForce);
-  formatForce(sheetForce);
+  await initForce(sheetForce);
+  await writeForce(structure, sheetForce);
+  await formatForce(sheetForce);
 
   // write drift information
   const sheetDrift = workbook.addWorksheet('位移角');
-  initDrift(sheetDrift);
-  writeDrift(structure, sheetDrift);
-  formatDrift(sheetDrift);
+  await initDrift(sheetDrift);
+  await writeDrift(structure, sheetDrift);
+  await formatDrift(sheetDrift);
 
   // write feneral result information
   const sheetGeneralResult = workbook.addWorksheet('整体验算结果');
-  initGeneralResult(sheetGeneralResult);
-  writeGeneralResult(structure, sheetGeneralResult);
-  formatGeneralResult(sheetGeneralResult);
+  await initGeneralResult(sheetGeneralResult);
+  await writeGeneralResult(structure, sheetGeneralResult);
+  await formatGeneralResult(sheetGeneralResult);
 
   // write distribute result
   const sheetDistributeResult = workbook.addWorksheet('楼层分布数据');
-  initDistributeResult(sheetDistributeResult);
-  writeDistributeResult(structure, sheetDistributeResult);
-  formatDistributeResult(sheetDistributeResult);
+  await initDistributeResult(sheetDistributeResult);
+  await writeDistributeResult(structure, sheetDistributeResult);
+  await formatDistributeResult(sheetDistributeResult);
 
   // write modify factor
   const sheetFactor = workbook.addWorksheet('调整系数');
-  initFactor(sheetFactor);
-  writeFactor(structure, sheetFactor);
-  formatFactor(sheetFactor);
+  await initFactor(sheetFactor);
+  await writeFactor(structure, sheetFactor);
+  await formatFactor(sheetFactor);
 
   // write quantity
   const sheetQuantity = workbook.addWorksheet('工程量');
-  initQuantity(sheetQuantity);
-  writeQuantity(structure, sheetQuantity);
-  formatQuantity(sheetQuantity);
+  await initQuantity(sheetQuantity);
+  await writeQuantity(structure, sheetQuantity);
+  await formatQuantity(sheetQuantity);
 
   // write xlsx file.
   const filename = path.join(dir, 'OutReader.xlsx');
-  workbook.xlsx.writeFile(filename);
+  await workbook.xlsx.writeFile(filename);
 
   return true;
 }

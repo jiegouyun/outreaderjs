@@ -2,7 +2,7 @@ import { IStructure } from '@outreader/core';
 import { rangeSetBorder, rangeFillColor } from './commom';
 import Excel from 'exceljs';
 
-export function initGeneralResult(worksheet: Excel.Worksheet): void {
+export async function initGeneralResult(worksheet: Excel.Worksheet) {
   worksheet.mergeCells('A1:B1');
   worksheet.getCell('A1').value = '工程信息';
   worksheet.getCell('A2').value = '工程名称';
@@ -66,10 +66,10 @@ export function initGeneralResult(worksheet: Excel.Worksheet): void {
   worksheet.getCell('A42').value = '横风向';
 }
 
-export function writeGeneralResult(
+export async function writeGeneralResult(
   structure: IStructure,
   worksheet: Excel.Worksheet,
-): void {
+) {
   // write base information
   worksheet.getCell('B2').value =
     structure.wmass?.basicInformation.engineering || '';
@@ -189,7 +189,7 @@ export function writeGeneralResult(
     structure.wmass?.windComfort.accelerationCrossY || '';
 }
 
-export function formatGeneralResult(worksheet: Excel.Worksheet): void {
+export async function formatGeneralResult(worksheet: Excel.Worksheet) {
   for (let col = 1; col <= worksheet.columnCount; col++) {
     worksheet.getColumn(col).width = 15;
     worksheet.getColumn(col).alignment = {

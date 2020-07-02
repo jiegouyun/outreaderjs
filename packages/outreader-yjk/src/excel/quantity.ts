@@ -2,7 +2,7 @@ import { IStructure } from '@outreader/core';
 import { rangeSetBorder, rangeFillColor, distributeFormat } from './commom';
 import Excel from 'exceljs';
 
-export function initQuantity(worksheet: Excel.Worksheet): void {
+export async function initQuantity(worksheet: Excel.Worksheet) {
   worksheet.mergeCells('A1:B1');
   worksheet.getCell('A1').value = '楼层信息';
   worksheet.getCell('A2').value = '层号';
@@ -57,10 +57,10 @@ export function initQuantity(worksheet: Excel.Worksheet): void {
   worksheet.getCell('AF2').value = '合计';
 }
 
-export function writeQuantity(
+export async function writeQuantity(
   structure: IStructure,
   worksheet: Excel.Worksheet,
-): void {
+) {
   // write storey
   for (
     let i = 0;
@@ -194,7 +194,7 @@ export function writeQuantity(
   }
 }
 
-export function formatQuantity(worksheet: Excel.Worksheet): void {
+export async function formatQuantity(worksheet: Excel.Worksheet) {
   distributeFormat(worksheet);
 
   rangeFillColor(worksheet, 1, 1, 2, 2, 'solid', '00F0FFF0', '00FFFFFF');
