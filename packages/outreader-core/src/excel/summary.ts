@@ -511,76 +511,65 @@ export function calcDriftLimit(
   height: number,
 ): number {
   let limit = 0;
-  if (/广东/gi.test(location)) {
-    if (system === '框架结构') {
-      limit = 500;
+
+  if (material === '钢结构') {
+    return 250;
+  }
+
+  if (height <= 150) {
+    if (['框架结构', '异形柱框架结构'].includes(system)) {
+      limit = /广东/gi.test(location) ? 500 : 550;
     } else if (
-      ['框筒结构', '框剪结构', '板柱剪力墙结构', '巨型框架核心筒结构'].includes(
+      ['框剪结构', '框筒结构', '板柱-剪力墙结构', '异形柱框剪结构'].includes(
         system,
       )
     ) {
-      if (height <= 150) {
-        limit = 650;
-      } else if (height < 250) {
-        limit = Math.round(
-          1 / (((1 / 500 - 1 / 650) * (height - 150)) / (250 - 150) + 1 / 650),
-        );
-      } else {
-        limit = 500;
-      }
-    } else if (['筒中筒结构', '剪力墙结构'].includes(system)) {
-      if (height <= 150) {
-        limit = 800;
-      } else if (height < 250) {
-        limit = Math.round(
-          1 / (((1 / 500 - 1 / 800) * (height - 150)) / (250 - 150) + 1 / 800),
-        );
-      } else {
-        limit = 500;
-      }
-    } else {
-      throw new Error(`could not find structural system type.`);
+      limit = /广东/gi.test(location) ? 650 : 800;
+    } else if (
+      ['筒中筒结构', '剪力墙结构', '部分框支剪力墙结构'].includes(system)
+    ) {
+      limit = /广东/gi.test(location) ? 800 : 1000;
     }
-  } else if (/全国/gi.test(location)) {
-    if (material === '钢结构') {
-      return 250;
+  } else if (height < 250) {
+    if (['框架结构', '异形柱框架结构'].includes(system)) {
+      limit = /广东/gi.test(location)
+        ? 500
+        : Math.round(
+            1 /
+              (((1 / 500 - 1 / 550) * (height - 150)) / (250 - 150) + 1 / 550),
+          );
+    } else if (
+      ['框剪结构', '框筒结构', '板柱-剪力墙结构', '异形柱框剪结构'].includes(
+        system,
+      )
+    ) {
+      limit = /广东/gi.test(location)
+        ? Math.round(
+            1 /
+              (((1 / 500 - 1 / 650) * (height - 150)) / (250 - 150) + 1 / 650),
+          )
+        : Math.round(
+            1 /
+              (((1 / 500 - 1 / 800) * (height - 150)) / (250 - 150) + 1 / 800),
+          );
+    } else if (
+      ['筒中筒结构', '剪力墙结构', '部分框支剪力墙结构'].includes(system)
+    ) {
+      limit = /广东/gi.test(location)
+        ? Math.round(
+            1 /
+              (((1 / 500 - 1 / 800) * (height - 150)) / (250 - 150) + 1 / 800),
+          )
+        : Math.round(
+            1 /
+              (((1 / 500 - 1 / 1000) * (height - 150)) / (250 - 150) +
+                1 / 1000),
+          );
     }
-
-    if (system === '框架结构') {
-      if (height <= 150) {
-        limit = 550;
-      } else if (height < 250) {
-        limit = Math.round(
-          1 / (((1 / 500 - 1 / 550) * (height - 150)) / (250 - 150) + 1 / 550),
-        );
-      } else {
-        limit = 500;
-      }
-    } else if (['框筒结构', '框剪结构', '板柱剪力墙结构'].includes(system)) {
-      if (height <= 150) {
-        limit = 800;
-      } else if (height < 250) {
-        limit = Math.round(
-          1 / (((1 / 500 - 1 / 800) * (height - 150)) / (250 - 150) + 1 / 800),
-        );
-      } else {
-        limit = 500;
-      }
-    } else if (['筒中筒结构', '剪力墙结构'].includes(system)) {
-      if (height <= 150) {
-        limit = 1000;
-      } else if (height < 250) {
-        limit = Math.round(
-          1 /
-            (((1 / 500 - 1 / 1000) * (height - 150)) / (250 - 150) + 1 / 1000),
-        );
-      } else {
-        limit = 500;
-      }
-    } else {
-      throw new Error(`could not find structural system type.`);
-    }
+  } else {
+    limit = 500;
   }
+
   return limit;
 }
 
