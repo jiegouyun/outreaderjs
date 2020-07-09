@@ -4,7 +4,7 @@ import { IStructure, hashStr, exportExcel } from '@outreader/core';
 import * as path from 'path';
 
 describe('exportExcel', () => {
-  const dir = path.join(__dirname, '../../../../fixtures/yjk/1');
+  const dir = path.join(__dirname, '../../../../fixtures/yjk/2');
   let structure: IStructure;
   let result: boolean;
 

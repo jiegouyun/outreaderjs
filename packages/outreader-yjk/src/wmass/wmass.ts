@@ -804,7 +804,10 @@ export function extractStableCheck(
 ): IStableCheck {
   if (lineArray[0] === '结构整体稳定验算') {
     FLAG = 'keyStable';
-  } else if (lineArray[0] === '二阶效应系数(仅针对于钢框架结构)') {
+  } else if (
+    lineArray[0] === '二阶效应系数(仅针对于钢框架结构)' ||
+    lineArray[0] === '结构抗震验算'
+  ) {
     stableCheck.allExtracted = true;
     FLAG = '';
   }
@@ -814,7 +817,10 @@ export function extractStableCheck(
       INNERFLAG = 'seismic';
     } else if (lineArray[0] === '风荷载') {
       INNERFLAG = 'wind';
-    } else if (lineArray[0] === '二阶效应系数(仅针对于钢框架结构)') {
+    } else if (
+      lineArray[0] === '二阶效应系数(仅针对于钢框架结构)' ||
+      lineArray[0] === '结构抗震验算'
+    ) {
       INNERFLAG = '';
     }
 
