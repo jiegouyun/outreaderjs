@@ -3,7 +3,7 @@ import { IConcreteSteel } from '@outreader/core';
 import * as path from 'path';
 
 describe('concreteSteel', () => {
-  const dir = path.join(__dirname, '../../../../fixtures/yjk/1');
+  const dir = path.join(__dirname, '../../../../fixtures/yjk/2');
   let concreteSteel: IConcreteSteel;
 
   beforeEach(async () => {

@@ -87,7 +87,25 @@ export async function readWdispOutput(
       ratioD: [],
       allExtracted: false,
     },
+    driftCrossWindXP: {
+      storeyID: [],
+      towerID: [],
+      displacement: [],
+      drift: [],
+      ratio: [],
+      ratioD: [],
+      allExtracted: false,
+    },
     driftWindXN: {
+      storeyID: [],
+      towerID: [],
+      displacement: [],
+      drift: [],
+      ratio: [],
+      ratioD: [],
+      allExtracted: false,
+    },
+    driftCrossWindXN: {
       storeyID: [],
       towerID: [],
       displacement: [],
@@ -105,7 +123,25 @@ export async function readWdispOutput(
       ratioD: [],
       allExtracted: false,
     },
+    driftCrossWindYP: {
+      storeyID: [],
+      towerID: [],
+      displacement: [],
+      drift: [],
+      ratio: [],
+      ratioD: [],
+      allExtracted: false,
+    },
     driftWindYN: {
+      storeyID: [],
+      towerID: [],
+      displacement: [],
+      drift: [],
+      ratio: [],
+      ratioD: [],
+      allExtracted: false,
+    },
+    driftCrossWindYN: {
       storeyID: [],
       towerID: [],
       displacement: [],
@@ -240,9 +276,25 @@ export async function readWdispOutput(
       wdisp.driftWindXP = extractDriftWindXP(lineArray, wdisp.driftWindXP);
     }
 
+    // Extract driftCrossWindXP{}
+    if (!wdisp.driftCrossWindXP.allExtracted) {
+      wdisp.driftCrossWindXP = extractDriftCrossWindXP(
+        lineArray,
+        wdisp.driftCrossWindXP,
+      );
+    }
+
     // Extract driftWindXN{}
     if (!wdisp.driftWindXN.allExtracted) {
       wdisp.driftWindXN = extractDriftWindXN(lineArray, wdisp.driftWindXN);
+    }
+
+    // Extract driftCrossWindXN{}
+    if (!wdisp.driftCrossWindXN.allExtracted) {
+      wdisp.driftCrossWindXN = extractDriftCrossWindXN(
+        lineArray,
+        wdisp.driftCrossWindXN,
+      );
     }
 
     // Extract driftWindYP{}
@@ -250,9 +302,25 @@ export async function readWdispOutput(
       wdisp.driftWindYP = extractDriftWindYP(lineArray, wdisp.driftWindYP);
     }
 
+    // Extract driftCrossWindYP{}
+    if (!wdisp.driftCrossWindYP.allExtracted) {
+      wdisp.driftCrossWindYP = extractDriftCrossWindYP(
+        lineArray,
+        wdisp.driftCrossWindYP,
+      );
+    }
+
     // Extract driftWindYN{}
     if (!wdisp.driftWindYN.allExtracted) {
       wdisp.driftWindYN = extractDriftWindYN(lineArray, wdisp.driftWindYN);
+    }
+
+    // Extract driftCrossWindYN{}
+    if (!wdisp.driftCrossWindYN.allExtracted) {
+      wdisp.driftCrossWindYN = extractDriftCrossWindYN(
+        lineArray,
+        wdisp.driftCrossWindYN,
+      );
     }
 
     // Extract ratioSeismicX{}
@@ -511,6 +579,30 @@ export function extractDriftWindXP(
   return loadCaseDrift;
 }
 
+export function extractDriftCrossWindXP(
+  lineArray: string[],
+  loadCaseDrift: IWindDriftDisp,
+): IWindDriftDisp {
+  if (
+    lineArray[1] === '+X' &&
+    lineArray[2] === '方向风荷载作用下横风向风振的楼层最大位移'
+  ) {
+    FLAG = 'keyDriftCrossWindXP';
+  } else if (lineArray[0] === 'Y向最大层间位移角') {
+    if (FLAG === 'keyDriftCrossWindXP') {
+      loadCaseDrift.allExtracted = true;
+    }
+
+    FLAG = '';
+  }
+
+  if (FLAG === 'keyDriftCrossWindXP') {
+    loadCaseDrift = extractWindDriftDisp(lineArray, loadCaseDrift);
+  }
+
+  return loadCaseDrift;
+}
+
 export function extractDriftWindXN(
   lineArray: string[],
   loadCaseDrift: IWindDriftDisp,
@@ -529,6 +621,30 @@ export function extractDriftWindXN(
   }
 
   if (FLAG === 'keyDriftWindXN') {
+    loadCaseDrift = extractWindDriftDisp(lineArray, loadCaseDrift);
+  }
+
+  return loadCaseDrift;
+}
+
+export function extractDriftCrossWindXN(
+  lineArray: string[],
+  loadCaseDrift: IWindDriftDisp,
+): IWindDriftDisp {
+  if (
+    lineArray[1] === '-X' &&
+    lineArray[2] === '方向风荷载作用下横风向风振的楼层最大位移'
+  ) {
+    FLAG = 'keyDriftCrossWindXN';
+  } else if (lineArray[0] === 'Y向最大层间位移角') {
+    if (FLAG === 'keyDriftCrossWindXN') {
+      loadCaseDrift.allExtracted = true;
+    }
+
+    FLAG = '';
+  }
+
+  if (FLAG === 'keyDriftCrossWindXN') {
     loadCaseDrift = extractWindDriftDisp(lineArray, loadCaseDrift);
   }
 
@@ -559,6 +675,30 @@ export function extractDriftWindYP(
   return loadCaseDrift;
 }
 
+export function extractDriftCrossWindYP(
+  lineArray: string[],
+  loadCaseDrift: IWindDriftDisp,
+): IWindDriftDisp {
+  if (
+    lineArray[1] === '+Y' &&
+    lineArray[2] === '方向风荷载作用下横风向风振的楼层最大位移'
+  ) {
+    FLAG = 'keyDriftCrossWindYP';
+  } else if (lineArray[0] === 'X向最大层间位移角') {
+    if (FLAG === 'keyDriftCrossWindYP') {
+      loadCaseDrift.allExtracted = true;
+    }
+
+    FLAG = '';
+  }
+
+  if (FLAG === 'keyDriftCrossWindYP') {
+    loadCaseDrift = extractWindDriftDisp(lineArray, loadCaseDrift);
+  }
+
+  return loadCaseDrift;
+}
+
 export function extractDriftWindYN(
   lineArray: string[],
   loadCaseDrift: IWindDriftDisp,
@@ -577,6 +717,30 @@ export function extractDriftWindYN(
   }
 
   if (FLAG === 'keyDriftWindYN') {
+    loadCaseDrift = extractWindDriftDisp(lineArray, loadCaseDrift);
+  }
+
+  return loadCaseDrift;
+}
+
+export function extractDriftCrossWindYN(
+  lineArray: string[],
+  loadCaseDrift: IWindDriftDisp,
+): IWindDriftDisp {
+  if (
+    lineArray[1] === '-Y' &&
+    lineArray[2] === '方向风荷载作用下横风向风振的楼层最大位移'
+  ) {
+    FLAG = 'keyDriftCrossWindYN';
+  } else if (lineArray[0] === 'X向最大层间位移角') {
+    if (FLAG === 'keyDriftCrossWindYN') {
+      loadCaseDrift.allExtracted = true;
+    }
+
+    FLAG = '';
+  }
+
+  if (FLAG === 'keyDriftCrossWindYN') {
     loadCaseDrift = extractWindDriftDisp(lineArray, loadCaseDrift);
   }
 
