@@ -1,7 +1,7 @@
 {
   "name": "outreader",
   "scripts": {
-    "lint": "prettier --write packages/**/*.{ts,js,tsx}",
+    "lint": "prettier --write packages/**/*.{ts,js,tsx} fixtures/test-result/**/*.ts",
     "lint:check": "prettier --check packages/**/*.{ts,js,tsx}",
     "test:yjk": "cd packages/outreader-yjk && yarn test",
     "dev:client": "cd packages/outreader-client && yarn dev",
