@@ -1,8 +1,10 @@
 import { readWmassOutput } from './wmass';
 import { IWmass } from '@outreader/core';
 import * as path from 'path';
+import { wmass as wmass1 } from '../../../../fixtures/test-result/yjk-1/wmass';
+import { wmass as wmass2 } from '../../../../fixtures/test-result/yjk-2/wmass';
 
-describe('wmass', () => {
+describe('wmass1', () => {
   const dir = path.join(__dirname, '../../../../fixtures/yjk/1');
   let wmass: IWmass;
 
@@ -16,115 +18,266 @@ describe('wmass', () => {
 
   it('should extract information', async () => {
     const basicInformation = wmass.basicInformation;
-    expect(basicInformation.engineering).toBe('071A');
-    expect(basicInformation.software).toBe('盈建科建筑结构设计软件');
+    expect(basicInformation.engineering).toBe(wmass1.engineering);
+    expect(basicInformation.software).toBe(wmass1.software);
   });
 
   it('should extract generalInformation', async () => {
     const generalInformation = wmass.generalInformation;
-    expect(generalInformation.structuralSystem).toBe('框筒结构');
-    expect(generalInformation.podium).toBe(9);
-    expect(generalInformation.transferStorey).toBe(0);
-    expect(generalInformation.reinforceStorey).toBe(0);
+    expect(generalInformation.structuralSystem).toBe(wmass1.structuralSystem);
+    expect(generalInformation.podium).toBe(wmass1.podium);
+    expect(generalInformation.transferStorey).toBe(wmass1.transferStorey);
+    expect(generalInformation.reinforceStorey).toBe(wmass1.reinforceStorey);
   });
 
   it('should extract calculationControl', async () => {
     const calculationControl = wmass.calculationControl;
-    expect(calculationControl.couplingBeamFactorSeismic).toBe(0.7);
-    expect(calculationControl.couplingBeamFactorWind).toBe(1.0);
+    expect(calculationControl.couplingBeamFactorSeismic).toBe(
+      wmass1.couplingBeamFactorSeismic,
+    );
+    expect(calculationControl.couplingBeamFactorWind).toBe(
+      wmass1.couplingBeamFactorWind,
+    );
   });
 
   it('should extract windInformation', async () => {
     const windInformation = wmass.windInformation;
-    expect(windInformation.pressureModified).toBe(0.75);
-    expect(windInformation.dampingRatio).toBe(0.05);
+    expect(windInformation.pressureModified).toBe(wmass1.windPressureModified);
+    expect(windInformation.dampingRatio).toBe(wmass1.windDampingRatio);
   });
 
   it('should extract seismicInformation', async () => {
     const seismicInformation = wmass.seismicInformation;
-    expect(seismicInformation.group).toBe('一');
-    expect(seismicInformation.dampingRatio).toBe(0.05);
+    expect(seismicInformation.group).toBe(wmass1.seismicGroup);
+    expect(seismicInformation.dampingRatio).toBe(wmass1.seismicDampingRatio);
   });
 
   it('should extract storey', async () => {
     const storey = wmass.storey;
-    expect(storey.storeyID[4]).toBe(50);
-    expect(storey.height[4]).toBe(4.5);
-    expect(storey.area[4]).toBe(1614.89);
+    expect(storey.storeyID[4]).toBe(wmass1.storeyID);
+    expect(storey.height[4]).toBe(wmass1.storeyHeight);
+    expect(storey.area[4]).toBe(wmass1.sotreyArea);
   });
 
   it('should extract tower', async () => {
     const tower = wmass.tower;
-    expect(tower.towerID[0]).toBe(1);
-    expect(tower.structuralSystem[0]).toBe('框筒结构');
+    expect(tower.towerID[0]).toBe(wmass1.towerID);
+    expect(tower.structuralSystem[0]).toBe(wmass1.structuralSystem);
   });
 
   it('should extract massRatio', async () => {
     const massRatio = wmass.massRatio;
-    expect(massRatio.storeyID[4]).toBe(50);
-    expect(massRatio.ratio[4]).toBe(1.0);
-    expect(massRatio.massPerArea[4]).toBe(1481.91);
+    expect(massRatio.storeyID[4]).toBe(wmass1.storeyID);
+    expect(massRatio.ratio[4]).toBe(wmass1.massRatio);
+    expect(massRatio.massPerArea[4]).toBe(wmass1.massPerArea);
   });
 
   it('should extract weight', async () => {
     const weight = wmass.weight;
-    expect(weight.live).toBe(23980.664);
-    expect(weight.dead).toBe(198539.547);
+    expect(weight.live).toBe(wmass1.live);
+    expect(weight.dead).toBe(wmass1.dead);
   });
 
   it('should extract wind', async () => {
     const wind = wmass.wind;
-    expect(wind.storeyID[4]).toBe(50);
-    expect(wind.shearAlongX[4]).toBe(-1600.5);
-    expect(wind.shearAlongY[4]).toBe(2770.6);
+    expect(wind.storeyID[4]).toBe(wmass1.storeyID);
+    expect(wind.shearAlongX[4]).toBe(wmass1.shearAlongX);
+    expect(wind.shearAlongY[4]).toBe(wmass1.shearAlongY);
   });
 
   it('should extract stiffness', async () => {
     const stiffness = wmass.stiffness;
-    expect(stiffness.storeyID[4]).toBe(5);
-    expect(stiffness.ratx1[4]).toBe(6705.0505);
-    expect(stiffness.ratx2[4]).toBe(5258.8637);
-    expect(stiffness.rjx1[4]).toBe(1.8963e8);
-    expect(stiffness.rjx3[4]).toBe(5.9294e10);
+    expect(stiffness.storeyID[4]).toBe(wmass1.stiffnessStoreyID);
+    expect(stiffness.ratx1[4]).toBe(wmass1.ratx1);
+    expect(stiffness.ratx2[4]).toBe(wmass1.ratx2);
+    expect(stiffness.rjx1[4]).toBe(wmass1.rjx1);
+    expect(stiffness.rjx3[4]).toBe(wmass1.rjx3);
   });
 
   it('should extract constraintFloorStiffnessRatio', async () => {
     const constraintFloorStiffnessRatio = wmass.constraintFloorStiffnessRatio;
-    expect(constraintFloorStiffnessRatio.storeyNo).toBe(5);
-    expect(constraintFloorStiffnessRatio.ratioX).toBe(1.9499);
-    expect(constraintFloorStiffnessRatio.ratioY).toBe(2.2203);
+    expect(constraintFloorStiffnessRatio.storeyNo).toBe(
+      wmass1.constraintFloorStiffnessRatioStoreyNo,
+    );
+    expect(constraintFloorStiffnessRatio.ratioX).toBe(
+      wmass1.constraintFloorStiffnessRatioRatioX,
+    );
+    expect(constraintFloorStiffnessRatio.ratioY).toBe(
+      wmass1.constraintFloorStiffnessRatioRatioY,
+    );
   });
 
   it('should extract overturningCheck', async () => {
     const overturningCheck = wmass.overturningCheck;
-    expect(overturningCheck.storeyNo).toBe(3);
-    expect(overturningCheck.mrWindX).toBe(1.217e8);
-    expect(overturningCheck.mrSeismicY).toBe(6.708e7);
+    expect(overturningCheck.storeyNo).toBe(wmass1.overturningCheckStoreyNo);
+    expect(overturningCheck.mrWindX).toBe(wmass1.overturningCheckMrWindX);
+    expect(overturningCheck.mrSeismicY).toBe(wmass1.overturningCheckMrSeismicY);
   });
 
   it('should extract stableCheck', async () => {
     const stableCheck = wmass.stableCheck;
-    expect(stableCheck.seismicStoreyNo).toBe(6);
-    expect(stableCheck.seismicRatioX).toBe(2.334);
-    expect(stableCheck.windStoreyNo).toBe(6);
-    expect(stableCheck.windRatioY).toBe(1.878);
+    expect(stableCheck.seismicStoreyNo).toBe(wmass1.stableCheckSeismicStoreyNo);
+    expect(stableCheck.seismicRatioX).toBe(wmass1.stableCheckSeismicRatioX);
+    expect(stableCheck.windStoreyNo).toBe(wmass1.stableCheckWindStoreyNo);
+    expect(stableCheck.windRatioY).toBe(wmass1.stableCheckWindRatioY);
   });
 
   it('should extract shearWeightRatioModify', async () => {
     const shearWeightRatioModify = wmass.shearWeightRatioModify;
-    expect(shearWeightRatioModify.storeyID[4]).toBe(50);
-    expect(shearWeightRatioModify.factorX[4]).toBe(1.116);
+    expect(shearWeightRatioModify.storeyID[4]).toBe(wmass1.storeyID);
+    expect(shearWeightRatioModify.factorX[4]).toBe(
+      wmass1.shearWeightRatioModifyFactorX,
+    );
   });
 
   it('should extract windComfort', async () => {
     const windComfort = wmass.windComfort;
-    expect(windComfort.accelerationAlongX).toBe(0.063);
-    expect(windComfort.accelerationCrossY).toBe(0.083);
+    expect(windComfort.accelerationAlongX).toBe(wmass1.accelerationAlongX);
+    expect(windComfort.accelerationCrossY).toBe(wmass1.accelerationCrossY);
   });
 
   it('should extract shearCapacityCheck', async () => {
     const shearCapacityCheck = wmass.shearCapacityCheck;
-    expect(shearCapacityCheck.storeyID[4]).toBe(50);
-    expect(shearCapacityCheck.ratioX[4]).toBe(1.06);
+    expect(shearCapacityCheck.storeyID[4]).toBe(wmass1.storeyID);
+    expect(shearCapacityCheck.ratioX[4]).toBe(wmass1.shearCapacityCheckRatioX);
+  });
+});
+
+describe('wmass2', () => {
+  const dir = path.join(__dirname, '../../../../fixtures/yjk/2');
+  let wmass: IWmass;
+
+  beforeEach(async () => {
+    wmass = await readWmassOutput(dir);
+  });
+
+  it('should read wmass.out', async () => {
+    expect(wmass).toBeTruthy();
+  });
+
+  it('should extract information', async () => {
+    const basicInformation = wmass.basicInformation;
+    expect(basicInformation.engineering).toBe(wmass2.engineering);
+    expect(basicInformation.software).toBe(wmass2.software);
+  });
+
+  it('should extract generalInformation', async () => {
+    const generalInformation = wmass.generalInformation;
+    expect(generalInformation.structuralSystem).toBe(wmass2.structuralSystem);
+    expect(generalInformation.podium).toBe(wmass2.podium);
+    expect(generalInformation.transferStorey).toBe(wmass2.transferStorey);
+    expect(generalInformation.reinforceStorey).toBe(wmass2.reinforceStorey);
+  });
+
+  it('should extract calculationControl', async () => {
+    const calculationControl = wmass.calculationControl;
+    expect(calculationControl.couplingBeamFactorSeismic).toBe(
+      wmass2.couplingBeamFactorSeismic,
+    );
+    expect(calculationControl.couplingBeamFactorWind).toBe(
+      wmass2.couplingBeamFactorWind,
+    );
+  });
+
+  it('should extract windInformation', async () => {
+    const windInformation = wmass.windInformation;
+    expect(windInformation.pressureModified).toBe(wmass2.windPressureModified);
+    expect(windInformation.dampingRatio).toBe(wmass2.windDampingRatio);
+  });
+
+  it('should extract seismicInformation', async () => {
+    const seismicInformation = wmass.seismicInformation;
+    expect(seismicInformation.group).toBe(wmass2.seismicGroup);
+    expect(seismicInformation.dampingRatio).toBe(wmass2.seismicDampingRatio);
+  });
+
+  it('should extract storey', async () => {
+    const storey = wmass.storey;
+    expect(storey.storeyID[4]).toBe(wmass2.storeyID);
+    expect(storey.height[4]).toBe(wmass2.storeyHeight);
+    expect(storey.area[4]).toBe(wmass2.sotreyArea);
+  });
+
+  it('should extract tower', async () => {
+    const tower = wmass.tower;
+    expect(tower.towerID[0]).toBe(wmass2.towerID);
+    expect(tower.structuralSystem[0]).toBe(wmass2.structuralSystem);
+  });
+
+  it('should extract massRatio', async () => {
+    const massRatio = wmass.massRatio;
+    expect(massRatio.storeyID[4]).toBe(wmass2.storeyID);
+    expect(massRatio.ratio[4]).toBe(wmass2.massRatio);
+    expect(massRatio.massPerArea[4]).toBe(wmass2.massPerArea);
+  });
+
+  it('should extract weight', async () => {
+    const weight = wmass.weight;
+    expect(weight.live).toBe(wmass2.live);
+    expect(weight.dead).toBe(wmass2.dead);
+  });
+
+  it('should extract wind', async () => {
+    const wind = wmass.wind;
+    expect(wind.storeyID[4]).toBe(wmass2.storeyID);
+    expect(wind.shearAlongX[4]).toBe(wmass2.shearAlongX);
+    expect(wind.shearAlongY[4]).toBe(wmass2.shearAlongY);
+  });
+
+  it('should extract stiffness', async () => {
+    const stiffness = wmass.stiffness;
+    expect(stiffness.storeyID[4]).toBe(wmass2.stiffnessStoreyID);
+    expect(stiffness.ratx1[4]).toBe(wmass2.ratx1);
+    expect(stiffness.ratx2[4]).toBe(wmass2.ratx2);
+    expect(stiffness.rjx1[4]).toBe(wmass2.rjx1);
+    expect(stiffness.rjx3[4]).toBe(wmass2.rjx3);
+  });
+
+  it('should extract constraintFloorStiffnessRatio', async () => {
+    const constraintFloorStiffnessRatio = wmass.constraintFloorStiffnessRatio;
+    expect(constraintFloorStiffnessRatio.storeyNo).toBe(
+      wmass2.constraintFloorStiffnessRatioStoreyNo,
+    );
+    expect(constraintFloorStiffnessRatio.ratioX).toBe(
+      wmass2.constraintFloorStiffnessRatioRatioX,
+    );
+    expect(constraintFloorStiffnessRatio.ratioY).toBe(
+      wmass2.constraintFloorStiffnessRatioRatioY,
+    );
+  });
+
+  it('should extract overturningCheck', async () => {
+    const overturningCheck = wmass.overturningCheck;
+    expect(overturningCheck.storeyNo).toBe(wmass2.overturningCheckStoreyNo);
+    expect(overturningCheck.mrWindX).toBe(wmass2.overturningCheckMrWindX);
+    expect(overturningCheck.mrSeismicY).toBe(wmass2.overturningCheckMrSeismicY);
+  });
+
+  it('should extract stableCheck', async () => {
+    const stableCheck = wmass.stableCheck;
+    expect(stableCheck.seismicStoreyNo).toBe(wmass2.stableCheckSeismicStoreyNo);
+    expect(stableCheck.seismicRatioX).toBe(wmass2.stableCheckSeismicRatioX);
+    expect(stableCheck.windStoreyNo).toBe(wmass2.stableCheckWindStoreyNo);
+    expect(stableCheck.windRatioY).toBe(wmass2.stableCheckWindRatioY);
+  });
+
+  it('should extract shearWeightRatioModify', async () => {
+    const shearWeightRatioModify = wmass.shearWeightRatioModify;
+    expect(shearWeightRatioModify.storeyID[4]).toBe(wmass2.storeyID);
+    expect(shearWeightRatioModify.factorX[4]).toBe(
+      wmass2.shearWeightRatioModifyFactorX,
+    );
+  });
+
+  it('should extract windComfort', async () => {
+    const windComfort = wmass.windComfort;
+    expect(windComfort.accelerationAlongX).toBe(wmass2.accelerationAlongX);
+    expect(windComfort.accelerationCrossY).toBe(wmass2.accelerationCrossY);
+  });
+
+  it('should extract shearCapacityCheck', async () => {
+    const shearCapacityCheck = wmass.shearCapacityCheck;
+    expect(shearCapacityCheck.storeyID[4]).toBe(wmass2.storeyID);
+    expect(shearCapacityCheck.ratioX[4]).toBe(wmass2.shearCapacityCheckRatioX);
   });
 });

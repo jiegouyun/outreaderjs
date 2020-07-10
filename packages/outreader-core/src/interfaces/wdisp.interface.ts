@@ -9,9 +9,13 @@ export interface IWdisp {
   driftSeismicYEccP: IDrift;
   driftSeismicYEccN: IDrift;
   driftWindXP: IWindDriftDisp;
+  driftCrossWindXP: IWindDriftDisp;
   driftWindXN: IWindDriftDisp;
+  driftCrossWindXN: IWindDriftDisp;
   driftWindYP: IWindDriftDisp;
+  driftCrossWindYP: IWindDriftDisp;
   driftWindYN: IWindDriftDisp;
+  driftCrossWindYN: IWindDriftDisp;
   ratioSeismicX: IDispRatio;
   ratioSeismicXEccP: IDispRatio;
   ratioSeismicXEccN: IDispRatio;
