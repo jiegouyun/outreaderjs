@@ -79,17 +79,17 @@ export async function readWzqOutput(dir: string): Promise<IWzq | undefined> {
     }
 
     // Extract modeSeismic{}
-    if (wzq.modeCoupling.allExtracted && !wzq.modeSeismic.allExtracted) {
+    if (!wzq.modeSeismic.allExtracted) {
       wzq.modeSeismic = extractModeSeismic(lineArray, wzq.modeSeismic);
     }
 
     // Extract modeMass{}
-    if (wzq.modeSeismic.allExtracted && !wzq.modeMass.allExtracted) {
+    if (!wzq.modeMass.allExtracted) {
       wzq.modeMass = extractModeMass(lineArray, wzq.modeMass);
     }
 
     // Extract seismicForce{}
-    if (wzq.modeMass.allExtracted && !wzq.seismicForce.allExtracted) {
+    if (!wzq.seismicForce.allExtracted) {
       wzq.seismicForce = extractSeismicForce(lineArray, wzq.seismicForce);
     }
   });
