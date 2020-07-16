@@ -196,8 +196,13 @@ export async function writeSummary(
     structure.wmass?.calculationControl.rigidFloorAssumption || '';
   worksheet.getCell('F5').value =
     structure.wmass?.generalInformation.structuralMaterial || '';
-  worksheet.getCell('F6').value =
-    structure.wmass?.storey.heightToGround[0] || '';
+  worksheet.getCell('F6').value = structure.wmass?.generalInformation.basement
+    ? (structure.wmass?.storey.heightToGround[0] as number) -
+      (structure.wmass?.storey.heightToGround[
+        structure.wmass?.storey.heightToGround.length -
+          (structure.wmass?.generalInformation.basement as number)
+      ] as number)
+    : structure.wmass?.storey.heightToGround[0] || '';
   worksheet.getCell('F7').value =
     structure.wmass?.generalInformation.constraintFloor || '';
   worksheet.getCell('F8').value =
@@ -236,12 +241,23 @@ export async function writeSummary(
     structure.wdisp?.driftSeismicY.drift as number[],
     structure.wdisp?.driftSeismicY.storeyID as number[],
   );
-  worksheet.getCell('D16').value = calcDriftLimit(
-    structure.wmass?.generalInformation.location as string,
-    structure.wmass?.generalInformation.structuralSystem as string,
-    structure.wmass?.generalInformation.structuralMaterial as string,
-    structure.wmass?.storey.heightToGround[0] as number,
-  );
+  worksheet.getCell('D16').value = structure.wmass?.generalInformation.basement
+    ? calcDriftLimit(
+        structure.wmass?.generalInformation.location as string,
+        structure.wmass?.generalInformation.structuralSystem as string,
+        structure.wmass?.generalInformation.structuralMaterial as string,
+        (structure.wmass?.storey.heightToGround[0] as number) -
+          (structure.wmass?.storey.heightToGround[
+            structure.wmass?.storey.heightToGround.length -
+              (structure.wmass?.generalInformation.basement as number)
+          ] as number),
+      )
+    : calcDriftLimit(
+        structure.wmass?.generalInformation.location as string,
+        structure.wmass?.generalInformation.structuralSystem as string,
+        structure.wmass?.generalInformation.structuralMaterial as string,
+        structure.wmass?.storey.heightToGround[0] as number,
+      );
 
   // write displacement ratio information
   [worksheet.getCell('D17').value, worksheet.getCell('F17').value] = lookUp(
