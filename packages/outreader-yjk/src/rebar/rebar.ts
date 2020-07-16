@@ -122,12 +122,8 @@ export function extractArea(lineArray: string[], area: IArea): IArea {
 
   if (FLAG === 'keyArea') {
     if (!isNaN(Number(lineArray[0]))) {
-      if (typeof area.storeyID === 'object') {
-        area.storeyID.push(Number(lineArray[0]));
-      }
-      if (typeof area.storey === 'object') {
-        area.storey.push(Number(lineArray[1]));
-      }
+      area.storeyID.push(Number(lineArray[0]));
+      area.storey.push(Number(lineArray[1]));
     }
   }
 
@@ -208,15 +204,9 @@ export function extractRebar(
 
   if (FLAG === beginKeywords) {
     if (!isNaN(Number(lineArray[0]))) {
-      if (typeof partRebar.storeyID === 'object') {
-        partRebar.storeyID.push(Number(lineArray[0]));
-      }
-      if (typeof partRebar.storey === 'object') {
-        partRebar.storey.push(Number(lineArray[lineArray.length - 2]));
-      }
-      if (typeof partRebar.perArea === 'object') {
-        partRebar.perArea.push(Number(lineArray[lineArray.length - 1]));
-      }
+      partRebar.storeyID.push(Number(lineArray[0]));
+      partRebar.storey.push(Number(lineArray[lineArray.length - 2]));
+      partRebar.perArea.push(Number(lineArray[lineArray.length - 1]));
     }
   }
 
