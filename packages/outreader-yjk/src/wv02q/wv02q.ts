@@ -75,7 +75,7 @@ export async function readWv02qOutput(
     }
 
     // Extract columnShear{}
-    if (wv02q.momentPercent.allExtracted && !wv02q.columnShear.allExtracted) {
+    if (!wv02q.columnShear.allExtracted) {
       wv02q.columnShear = extractColumnShear(lineArray, wv02q.columnShear);
     }
 
@@ -107,25 +107,13 @@ export function extractMomentPercent(
   if (FLAG === 'keyMomentPercent') {
     if (!isNaN(Number(lineArray[0]))) {
       if (lineArray[2] === 'X') {
-        if (typeof momentPercent.storeyID === 'object') {
-          momentPercent.storeyID.push(Number(lineArray[0]));
-        }
-        if (typeof momentPercent.towerID === 'object') {
-          momentPercent.towerID.push(Number(lineArray[1]));
-        }
-        if (typeof momentPercent.percentColumnX === 'object') {
-          momentPercent.percentColumnX.push(Number(lineArray[3]));
-        }
-        if (typeof momentPercent.percentWallX === 'object') {
-          momentPercent.percentWallX.push(Number(lineArray[4]));
-        }
+        momentPercent.storeyID.push(Number(lineArray[0]));
+        momentPercent.towerID.push(Number(lineArray[1]));
+        momentPercent.percentColumnX.push(Number(lineArray[3]));
+        momentPercent.percentWallX.push(Number(lineArray[4]));
       } else if (lineArray[2] === 'Y') {
-        if (typeof momentPercent.percentColumnY === 'object') {
-          momentPercent.percentColumnY.push(Number(lineArray[3]));
-        }
-        if (typeof momentPercent.percentWallY === 'object') {
-          momentPercent.percentWallY.push(Number(lineArray[4]));
-        }
+        momentPercent.percentColumnY.push(Number(lineArray[3]));
+        momentPercent.percentWallY.push(Number(lineArray[4]));
       }
     }
   }
@@ -150,37 +138,17 @@ export function extractColumnShear(
   if (FLAG === 'keyColumnShear') {
     if (!isNaN(Number(lineArray[0]))) {
       if (lineArray[2] === 'X') {
-        if (typeof columnShear.storeyID === 'object') {
-          columnShear.storeyID.push(Number(lineArray[0]));
-        }
-        if (typeof columnShear.towerID === 'object') {
-          columnShear.towerID.push(Number(lineArray[1]));
-        }
-        if (typeof columnShear.columnX === 'object') {
-          columnShear.columnX.push(Number(lineArray[3]));
-        }
-        if (typeof columnShear.wallX === 'object') {
-          columnShear.wallX.push(Number(lineArray[4]));
-        }
-        if (typeof columnShear.totalX === 'object') {
-          columnShear.totalX.push(Number(lineArray[5]));
-        }
-        if (typeof columnShear.percentColumnX === 'object') {
-          columnShear.percentColumnX.push(Number(lineArray[7]));
-        }
+        columnShear.storeyID.push(Number(lineArray[0]));
+        columnShear.towerID.push(Number(lineArray[1]));
+        columnShear.columnX.push(Number(lineArray[3]));
+        columnShear.wallX.push(Number(lineArray[4]));
+        columnShear.totalX.push(Number(lineArray[5]));
+        columnShear.percentColumnX.push(Number(lineArray[7]));
       } else if (lineArray[2] === 'Y') {
-        if (typeof columnShear.columnY === 'object') {
-          columnShear.columnY.push(Number(lineArray[3]));
-        }
-        if (typeof columnShear.wallY === 'object') {
-          columnShear.wallY.push(Number(lineArray[4]));
-        }
-        if (typeof columnShear.totalY === 'object') {
-          columnShear.totalY.push(Number(lineArray[5]));
-        }
-        if (typeof columnShear.percentColumnY === 'object') {
-          columnShear.percentColumnY.push(Number(lineArray[7]));
-        }
+        columnShear.columnY.push(Number(lineArray[3]));
+        columnShear.wallY.push(Number(lineArray[4]));
+        columnShear.totalY.push(Number(lineArray[5]));
+        columnShear.percentColumnY.push(Number(lineArray[7]));
       }
     }
   }
@@ -198,20 +166,12 @@ export function extractv02qFactor(
 
   if (FLAG === 'keyV02qFactor') {
     if (lineArray[0] === '层号') {
-      if (typeof v02qFactor.storeyID === 'object') {
-        v02qFactor.storeyID.push(Number(lineArray[1]));
-      }
-      if (typeof v02qFactor.towerID === 'object') {
-        v02qFactor.towerID.push(Number(lineArray[3]));
-      }
+      v02qFactor.storeyID.push(Number(lineArray[1]));
+      v02qFactor.towerID.push(Number(lineArray[3]));
     }
     if (!isNaN(Number(lineArray[0])) && lineArray.length === 4) {
-      if (typeof v02qFactor.factorX === 'object') {
-        v02qFactor.factorX.push(Number(lineArray[0]));
-      }
-      if (typeof v02qFactor.factorY === 'object') {
-        v02qFactor.factorY.push(Number(lineArray[1]));
-      }
+      v02qFactor.factorX.push(Number(lineArray[0]));
+      v02qFactor.factorY.push(Number(lineArray[1]));
     }
   }
 

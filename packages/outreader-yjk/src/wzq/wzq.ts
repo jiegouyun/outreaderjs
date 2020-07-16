@@ -79,17 +79,17 @@ export async function readWzqOutput(dir: string): Promise<IWzq | undefined> {
     }
 
     // Extract modeSeismic{}
-    if (wzq.modeCoupling.allExtracted && !wzq.modeSeismic.allExtracted) {
+    if (!wzq.modeSeismic.allExtracted) {
       wzq.modeSeismic = extractModeSeismic(lineArray, wzq.modeSeismic);
     }
 
     // Extract modeMass{}
-    if (wzq.modeSeismic.allExtracted && !wzq.modeMass.allExtracted) {
+    if (!wzq.modeMass.allExtracted) {
       wzq.modeMass = extractModeMass(lineArray, wzq.modeMass);
     }
 
     // Extract seismicForce{}
-    if (wzq.modeMass.allExtracted && !wzq.seismicForce.allExtracted) {
+    if (!wzq.seismicForce.allExtracted) {
       wzq.seismicForce = extractSeismicForce(lineArray, wzq.seismicForce);
     }
   });
@@ -145,24 +145,18 @@ export function extractModeMass(
     FLAG = 'keyModeMass';
   } else if (lineArray[0] === 'X向平动振型参与质量系数总计') {
     if (FLAG === 'keyModeMass') {
-      if (typeof modeMass.factorX === 'object') {
-        modeMass.sumX = modeMass.factorX.reduce(
-          (sum: number, current: number) => sum + current,
-          0,
-        );
-      }
-      if (typeof modeMass.factorY === 'object') {
-        modeMass.sumY = modeMass.factorY.reduce(
-          (sum: number, current: number) => sum + current,
-          0,
-        );
-      }
-      if (typeof modeMass.factorZ === 'object') {
-        modeMass.sumZ = modeMass.factorZ.reduce(
-          (sum: number, current: number) => sum + current,
-          0,
-        );
-      }
+      modeMass.sumX = modeMass.factorX.reduce(
+        (sum: number, current: number) => sum + current,
+        0,
+      );
+      modeMass.sumY = modeMass.factorY.reduce(
+        (sum: number, current: number) => sum + current,
+        0,
+      );
+      modeMass.sumZ = modeMass.factorZ.reduce(
+        (sum: number, current: number) => sum + current,
+        0,
+      );
       modeMass.allExtracted = true;
     }
 
@@ -171,18 +165,10 @@ export function extractModeMass(
 
   if (FLAG === 'keyModeMass') {
     if (!isNaN(Number(lineArray[0]))) {
-      if (typeof modeMass.modeID === 'object') {
-        modeMass.modeID.push(Number(lineArray[0]));
-      }
-      if (typeof modeMass.factorX === 'object') {
-        modeMass.factorX.push(Number(lineArray[1]));
-      }
-      if (typeof modeMass.factorY === 'object') {
-        modeMass.factorY.push(Number(lineArray[3]));
-      }
-      if (typeof modeMass.factorZ === 'object') {
-        modeMass.factorZ.push(Number(lineArray[5]));
-      }
+      modeMass.modeID.push(Number(lineArray[0]));
+      modeMass.factorX.push(Number(lineArray[1]));
+      modeMass.factorY.push(Number(lineArray[3]));
+      modeMass.factorZ.push(Number(lineArray[5]));
     }
   }
 
@@ -223,39 +209,19 @@ export function extractSeismicForce(
 
   if (FLAG === 'keySeismicForceX') {
     if (!isNaN(Number(lineArray[0]))) {
-      if (typeof seismicForce.storeyID === 'object') {
-        seismicForce.storeyID.push(Number(lineArray[0]));
-      }
-      if (typeof seismicForce.towerID === 'object') {
-        seismicForce.towerID.push(Number(lineArray[1]));
-      }
-      if (typeof seismicForce.forceX === 'object') {
-        seismicForce.forceX.push(Number(lineArray[2]));
-      }
-      if (typeof seismicForce.shearX === 'object') {
-        seismicForce.shearX.push(Number(lineArray[3]));
-      }
-      if (typeof seismicForce.momentX === 'object') {
-        seismicForce.momentX.push(Number(lineArray[5]));
-      }
-      if (typeof seismicForce.shearWeightRatioX === 'object') {
-        seismicForce.shearWeightRatioX.push(Number(lineArray[4]));
-      }
+      seismicForce.storeyID.push(Number(lineArray[0]));
+      seismicForce.towerID.push(Number(lineArray[1]));
+      seismicForce.forceX.push(Number(lineArray[2]));
+      seismicForce.shearX.push(Number(lineArray[3]));
+      seismicForce.momentX.push(Number(lineArray[5]));
+      seismicForce.shearWeightRatioX.push(Number(lineArray[4]));
     }
   } else if (FLAG === 'keySeismicForceY') {
     if (!isNaN(Number(lineArray[0]))) {
-      if (typeof seismicForce.forceY === 'object') {
-        seismicForce.forceY.push(Number(lineArray[2]));
-      }
-      if (typeof seismicForce.shearY === 'object') {
-        seismicForce.shearY.push(Number(lineArray[3]));
-      }
-      if (typeof seismicForce.momentY === 'object') {
-        seismicForce.momentY.push(Number(lineArray[5]));
-      }
-      if (typeof seismicForce.shearWeightRatioY === 'object') {
-        seismicForce.shearWeightRatioY.push(Number(lineArray[4]));
-      }
+      seismicForce.forceY.push(Number(lineArray[2]));
+      seismicForce.shearY.push(Number(lineArray[3]));
+      seismicForce.momentY.push(Number(lineArray[5]));
+      seismicForce.shearWeightRatioY.push(Number(lineArray[4]));
     }
   }
 
@@ -264,24 +230,12 @@ export function extractSeismicForce(
 
 export function extractMode(lineArray: string[], mode: IMode): IMode {
   if (!isNaN(Number(lineArray[0]))) {
-    if (typeof mode.modeID === 'object') {
-      mode.modeID.push(Number(lineArray[0]));
-    }
-    if (typeof mode.period === 'object') {
-      mode.period.push(Number(lineArray[1]));
-    }
-    if (typeof mode.angle === 'object') {
-      mode.angle.push(Number(lineArray[2]));
-    }
-    if (typeof mode.factorX === 'object') {
-      mode.factorX.push(Number(lineArray[4]));
-    }
-    if (typeof mode.factorY === 'object') {
-      mode.factorY.push(Number(lineArray[5]));
-    }
-    if (typeof mode.factorZ === 'object') {
-      mode.factorZ.push(Number(lineArray[6]));
-    }
+    mode.modeID.push(Number(lineArray[0]));
+    mode.period.push(Number(lineArray[1]));
+    mode.angle.push(Number(lineArray[2]));
+    mode.factorX.push(Number(lineArray[4]));
+    mode.factorY.push(Number(lineArray[5]));
+    mode.factorZ.push(Number(lineArray[6]));
   }
 
   return mode;

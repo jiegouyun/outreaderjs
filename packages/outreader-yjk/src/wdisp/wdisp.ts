@@ -897,19 +897,11 @@ export function extractDrift(
 ): IDrift {
   if (!isNaN(Number(lineArray[0]))) {
     if (Number(lineArray[0]) < 1000000) {
-      if (typeof loadCaseDrift.storeyID === 'object') {
-        loadCaseDrift.storeyID.push(Number(lineArray[0]));
-      }
-      if (typeof loadCaseDrift.towerID === 'object') {
-        loadCaseDrift.towerID.push(Number(lineArray[1]));
-      }
+      loadCaseDrift.storeyID.push(Number(lineArray[0]));
+      loadCaseDrift.towerID.push(Number(lineArray[1]));
+      loadCaseDrift.displacement.push(Number(lineArray[4]));
     } else {
-      if (typeof loadCaseDrift.displacement === 'object') {
-        loadCaseDrift.displacement.push(Number(lineArray[1]));
-      }
-      if (typeof loadCaseDrift.drift === 'object') {
-        loadCaseDrift.drift.push(Number(lineArray[4]));
-      }
+      loadCaseDrift.drift.push(Number(lineArray[4]));
     }
   }
 
@@ -922,25 +914,13 @@ export function extractWindDriftDisp(
 ): IWindDriftDisp {
   if (!isNaN(Number(lineArray[0]))) {
     if (Number(lineArray[0]) < 1000000) {
-      if (typeof loadCaseDrift.storeyID === 'object') {
-        loadCaseDrift.storeyID.push(Number(lineArray[0]));
-      }
-      if (typeof loadCaseDrift.towerID === 'object') {
-        loadCaseDrift.towerID.push(Number(lineArray[1]));
-      }
-      if (typeof loadCaseDrift.ratio === 'object') {
-        loadCaseDrift.ratio.push(Number(lineArray[5]));
-      }
+      loadCaseDrift.storeyID.push(Number(lineArray[0]));
+      loadCaseDrift.towerID.push(Number(lineArray[1]));
+      loadCaseDrift.displacement.push(Number(lineArray[4]));
+      loadCaseDrift.ratio.push(Number(lineArray[5]));
     } else {
-      if (typeof loadCaseDrift.displacement === 'object') {
-        loadCaseDrift.displacement.push(Number(lineArray[1]));
-      }
-      if (typeof loadCaseDrift.drift === 'object') {
-        loadCaseDrift.drift.push(Number(lineArray[5]));
-      }
-      if (typeof loadCaseDrift.ratioD === 'object') {
-        loadCaseDrift.ratioD.push(Number(lineArray[3]));
-      }
+      loadCaseDrift.ratioD.push(Number(lineArray[3]));
+      loadCaseDrift.drift.push(Number(lineArray[5]));
     }
   }
 
@@ -953,19 +933,11 @@ export function extractRatio(
 ): IDispRatio {
   if (!isNaN(Number(lineArray[0]))) {
     if (Number(lineArray[0]) < 1000000) {
-      if (typeof loadCaseRatio.storeyID === 'object') {
-        loadCaseRatio.storeyID.push(Number(lineArray[0]));
-      }
-      if (typeof loadCaseRatio.towerID === 'object') {
-        loadCaseRatio.towerID.push(Number(lineArray[1]));
-      }
-      if (typeof loadCaseRatio.ratio === 'object') {
-        loadCaseRatio.ratio.push(Number(lineArray[5]));
-      }
+      loadCaseRatio.storeyID.push(Number(lineArray[0]));
+      loadCaseRatio.towerID.push(Number(lineArray[1]));
+      loadCaseRatio.ratio.push(Number(lineArray[5]));
     } else {
-      if (typeof loadCaseRatio.ratioD === 'object') {
-        loadCaseRatio.ratioD.push(Number(lineArray[3]));
-      }
+      loadCaseRatio.ratioD.push(Number(lineArray[3]));
     }
   }
 
