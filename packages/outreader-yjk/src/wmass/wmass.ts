@@ -441,13 +441,13 @@ export function extractStoreyPart1(
 
   if (FLAG === 'keyStoreyPart1') {
     if (!isNaN(Number(lineArray[0]))) {
-      if (typeof storey.storeyID === 'object') {
+      if (storey.storeyID instanceof Array) {
         storey.storeyID.push(Number(lineArray[0]));
       }
-      if (typeof storey.towerID === 'object') {
+      if (storey.towerID instanceof Array) {
         storey.towerID.push(Number(lineArray[1]));
       }
-      if (typeof storey.attribute === 'object') {
+      if (storey.attribute instanceof Array) {
         storey.attribute.push(lineArray[2]);
       }
     }
@@ -466,13 +466,13 @@ export function extractTower(lineArray: string[], tower: ITower): ITower {
 
   if (FLAG === 'keyTower') {
     if (lineArray[0] === '塔号') {
-      if (typeof tower.towerID === 'object') {
+      if (tower.towerID instanceof Array) {
         tower.towerID.push(Number(lineArray[1]));
       }
     }
 
     if (lineArray[0] === '结构体系') {
-      if (typeof tower.structuralSystem === 'object') {
+      if (tower.structuralSystem instanceof Array) {
         tower.structuralSystem.push(lineArray[1]);
       }
     }
@@ -493,13 +493,13 @@ export function extractMassRatioPart1(
 
   if (FLAG === 'keyMassRatio1') {
     if (!isNaN(Number(lineArray[0]))) {
-      if (typeof massRatio.storeyID === 'object') {
+      if (massRatio.storeyID instanceof Array) {
         massRatio.storeyID.push(Number(lineArray[0]));
       }
-      if (typeof massRatio.towerID === 'object') {
+      if (massRatio.towerID instanceof Array) {
         massRatio.towerID.push(Number(lineArray[1]));
       }
-      if (typeof massRatio.ratio === 'object') {
+      if (massRatio.ratio instanceof Array) {
         massRatio.ratio.push(Number(lineArray[9]));
       }
     }
@@ -539,10 +539,10 @@ export function extractStoreyPart2(
 
   if (FLAG === 'keyStoreyPart2') {
     if (!isNaN(Number(lineArray[0]))) {
-      if (typeof storey.height === 'object') {
+      if (storey.height instanceof Array) {
         storey.height.push(Number(lineArray[6]));
       }
-      if (typeof storey.heightToGround === 'object') {
+      if (storey.heightToGround instanceof Array) {
         storey.heightToGround.push(Number(lineArray[7]));
       }
     }
@@ -561,49 +561,49 @@ export function extractWind(lineArray: string[], wind: IWind): IWind {
 
   if (FLAG === 'keyWind') {
     if (!isNaN(Number(lineArray[0])) && lineArray.length === 9) {
-      if (typeof wind.storeyID === 'object') {
+      if (wind.storeyID instanceof Array) {
         wind.storeyID.push(Number(lineArray[0]));
       }
-      if (typeof wind.towerID === 'object') {
+      if (wind.towerID instanceof Array) {
         wind.towerID.push(Number(lineArray[1]));
       }
-      if (typeof wind.forceAlongX === 'object') {
+      if (wind.forceAlongX instanceof Array) {
         wind.forceAlongX.push(Number(lineArray[3]));
       }
-      if (typeof wind.shearAlongX === 'object') {
+      if (wind.shearAlongX instanceof Array) {
         wind.shearAlongX.push(Number(lineArray[4]));
       }
-      if (typeof wind.momentAlongX === 'object') {
+      if (wind.momentAlongX instanceof Array) {
         wind.momentAlongX.push(Number(lineArray[5]));
       }
-      if (typeof wind.forceCrossX === 'object') {
+      if (wind.forceCrossX instanceof Array) {
         wind.forceCrossX.push(Number(lineArray[6]));
       }
-      if (typeof wind.shearCrossX === 'object') {
+      if (wind.shearCrossX instanceof Array) {
         wind.shearCrossX.push(Number(lineArray[7]));
       }
-      if (typeof wind.momentCrossX === 'object') {
+      if (wind.momentCrossX instanceof Array) {
         wind.momentCrossX.push(Number(lineArray[8]));
       }
     }
 
     if (!isNaN(Number(lineArray[1])) && lineArray.length === 7) {
-      if (typeof wind.forceAlongY === 'object') {
+      if (wind.forceAlongY instanceof Array) {
         wind.forceAlongY.push(Number(lineArray[1]));
       }
-      if (typeof wind.shearAlongY === 'object') {
+      if (wind.shearAlongY instanceof Array) {
         wind.shearAlongY.push(Number(lineArray[2]));
       }
-      if (typeof wind.momentAlongY === 'object') {
+      if (wind.momentAlongY instanceof Array) {
         wind.momentAlongY.push(Number(lineArray[3]));
       }
-      if (typeof wind.forceCrossY === 'object') {
+      if (wind.forceCrossY instanceof Array) {
         wind.forceCrossY.push(Number(lineArray[4]));
       }
-      if (typeof wind.shearCrossY === 'object') {
+      if (wind.shearCrossY instanceof Array) {
         wind.shearCrossY.push(Number(lineArray[5]));
       }
-      if (typeof wind.momentCrossY === 'object') {
+      if (wind.momentCrossY instanceof Array) {
         wind.momentCrossY.push(Number(lineArray[6]));
       }
     }
@@ -625,7 +625,7 @@ export function extractStoreyPart3(
 
   if (FLAG === 'keyStoreyPart3') {
     if (!isNaN(Number(lineArray[0]))) {
-      if (typeof storey.area === 'object') {
+      if (storey.area instanceof Array) {
         storey.area.push(Number(lineArray[2]));
       }
     }
@@ -647,13 +647,13 @@ export function extractMassRatioPart2(
 
   if (FLAG === 'keyMassRatio2') {
     if (!isNaN(Number(lineArray[0]))) {
-      if (typeof massRatio.storeyMass === 'object') {
+      if (massRatio.storeyMass instanceof Array) {
         massRatio.storeyMass.push(Number(lineArray[2]));
       }
-      if (typeof massRatio.massPerArea === 'object') {
+      if (massRatio.massPerArea instanceof Array) {
         massRatio.massPerArea.push(Number(lineArray[3]));
       }
-      if (typeof massRatio.massPerAreaRatio === 'object') {
+      if (massRatio.massPerAreaRatio instanceof Array) {
         massRatio.massPerAreaRatio.push(Number(lineArray[4]));
       }
     }
@@ -675,51 +675,51 @@ export function extractStiffness(
 
   if (FLAG === 'keyStiffness') {
     if (lineArray[0] === 'Floor') {
-      if (typeof stiffness.storeyID === 'object') {
+      if (stiffness.storeyID instanceof Array) {
         stiffness.storeyID.push(Number(lineArray[2]));
         stiffness.towerID.push(Number(lineArray[5]));
       }
     }
     if (lineArray[0] === '薄弱层地震剪力放大系数') {
-      if (typeof stiffness.weakStoreyFactor === 'object') {
+      if (stiffness.weakStoreyFactor instanceof Array) {
         stiffness.weakStoreyFactor.push(Number(lineArray[1]));
       }
     }
     if (lineArray[0] === 'Ratx1') {
-      if (typeof stiffness.ratx1 === 'object') {
+      if (stiffness.ratx1 instanceof Array) {
         stiffness.ratx1.push(Number(lineArray[1]));
       }
-      if (typeof stiffness.raty1 === 'object') {
+      if (stiffness.raty1 instanceof Array) {
         stiffness.raty1.push(Number(lineArray[3]));
       }
     }
     if (lineArray[0] === 'Ratx2') {
-      if (typeof stiffness.ratx2 === 'object') {
+      if (stiffness.ratx2 instanceof Array) {
         stiffness.ratx2.push(Number(lineArray[1]));
       }
-      if (typeof stiffness.raty2 === 'object') {
+      if (stiffness.raty2 instanceof Array) {
         stiffness.raty2.push(Number(lineArray[3]));
       }
     }
     if (lineArray[0] === 'RJX1') {
-      if (typeof stiffness.rjx1 === 'object') {
+      if (stiffness.rjx1 instanceof Array) {
         stiffness.rjx1.push(Number(lineArray[1].split('(')[0]));
       }
-      if (typeof stiffness.rjy1 === 'object') {
+      if (stiffness.rjy1 instanceof Array) {
         stiffness.rjy1.push(Number(lineArray[3].split('(')[0]));
       }
-      if (typeof stiffness.rjz1 === 'object') {
+      if (stiffness.rjz1 instanceof Array) {
         stiffness.rjz1.push(Number(lineArray[5].split('(')[0]));
       }
     }
     if (lineArray[0] === 'RJX3') {
-      if (typeof stiffness.rjx3 === 'object') {
+      if (stiffness.rjx3 instanceof Array) {
         stiffness.rjx3.push(Number(lineArray[1].split('(')[0]));
       }
-      if (typeof stiffness.rjy3 === 'object') {
+      if (stiffness.rjy3 instanceof Array) {
         stiffness.rjy3.push(Number(lineArray[3].split('(')[0]));
       }
-      if (typeof stiffness.rjz3 === 'object') {
+      if (stiffness.rjz3 instanceof Array) {
         stiffness.rjz3.push(Number(lineArray[5].split('(')[0]));
       }
     }
@@ -867,16 +867,16 @@ export function extractShearWeightRatioModify(
 
   if (FLAG === 'keyShearWeightRatioModify') {
     if (!isNaN(Number(lineArray[0]))) {
-      if (typeof shearWeightRatioModify.storeyID === 'object') {
+      if (shearWeightRatioModify.storeyID instanceof Array) {
         shearWeightRatioModify.storeyID.push(Number(lineArray[0]));
       }
-      if (typeof shearWeightRatioModify.towerID === 'object') {
+      if (shearWeightRatioModify.towerID instanceof Array) {
         shearWeightRatioModify.towerID.push(Number(lineArray[1]));
       }
-      if (typeof shearWeightRatioModify.factorX === 'object') {
+      if (shearWeightRatioModify.factorX instanceof Array) {
         shearWeightRatioModify.factorX.push(Number(lineArray[2]));
       }
-      if (typeof shearWeightRatioModify.factorY === 'object') {
+      if (shearWeightRatioModify.factorY instanceof Array) {
         shearWeightRatioModify.factorY.push(Number(lineArray[3]));
       }
     }
@@ -917,22 +917,22 @@ export function extractShearCapacityCheck(
 
   if (FLAG === 'keyShearCapacityCheck') {
     if (!isNaN(Number(lineArray[0]))) {
-      if (typeof shearCapacityCheck.storeyID === 'object') {
+      if (shearCapacityCheck.storeyID instanceof Array) {
         shearCapacityCheck.storeyID.push(Number(lineArray[0]));
       }
-      if (typeof shearCapacityCheck.towerID === 'object') {
+      if (shearCapacityCheck.towerID instanceof Array) {
         shearCapacityCheck.towerID.push(Number(lineArray[1]));
       }
-      if (typeof shearCapacityCheck.capacityX === 'object') {
+      if (shearCapacityCheck.capacityX instanceof Array) {
         shearCapacityCheck.capacityX.push(Number(lineArray[2]));
       }
-      if (typeof shearCapacityCheck.capacityY === 'object') {
+      if (shearCapacityCheck.capacityY instanceof Array) {
         shearCapacityCheck.capacityY.push(Number(lineArray[3]));
       }
-      if (typeof shearCapacityCheck.ratioX === 'object') {
+      if (shearCapacityCheck.ratioX instanceof Array) {
         shearCapacityCheck.ratioX.push(Number(lineArray[4]));
       }
-      if (typeof shearCapacityCheck.ratioY === 'object') {
+      if (shearCapacityCheck.ratioY instanceof Array) {
         shearCapacityCheck.ratioY.push(Number(lineArray[5]));
       }
       if (lineArray[0] === '1') {
