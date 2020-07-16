@@ -441,15 +441,9 @@ export function extractStoreyPart1(
 
   if (FLAG === 'keyStoreyPart1') {
     if (!isNaN(Number(lineArray[0]))) {
-      if (storey.storeyID instanceof Array) {
-        storey.storeyID.push(Number(lineArray[0]));
-      }
-      if (storey.towerID instanceof Array) {
-        storey.towerID.push(Number(lineArray[1]));
-      }
-      if (storey.attribute instanceof Array) {
-        storey.attribute.push(lineArray[2]);
-      }
+      storey.storeyID.push(Number(lineArray[0]));
+      storey.towerID.push(Number(lineArray[1]));
+      storey.attribute.push(lineArray[2]);
     }
   }
 
@@ -459,22 +453,18 @@ export function extractStoreyPart1(
 export function extractTower(lineArray: string[], tower: ITower): ITower {
   if (lineArray[0] === '塔属性') {
     FLAG = 'keyTower';
-  } else if (lineArray[0] === '各层质量') {
+  } else if (lineArray[0] === '各层质量' || lineArray[0] === '人防信息输出') {
     tower.allExtracted = true;
     FLAG = '';
   }
 
   if (FLAG === 'keyTower') {
     if (lineArray[0] === '塔号') {
-      if (tower.towerID instanceof Array) {
-        tower.towerID.push(Number(lineArray[1]));
-      }
+      tower.towerID.push(Number(lineArray[1]));
     }
 
     if (lineArray[0] === '结构体系') {
-      if (tower.structuralSystem instanceof Array) {
-        tower.structuralSystem.push(lineArray[1]);
-      }
+      tower.structuralSystem.push(lineArray[1]);
     }
   }
 
@@ -493,15 +483,9 @@ export function extractMassRatioPart1(
 
   if (FLAG === 'keyMassRatio1') {
     if (!isNaN(Number(lineArray[0]))) {
-      if (massRatio.storeyID instanceof Array) {
-        massRatio.storeyID.push(Number(lineArray[0]));
-      }
-      if (massRatio.towerID instanceof Array) {
-        massRatio.towerID.push(Number(lineArray[1]));
-      }
-      if (massRatio.ratio instanceof Array) {
-        massRatio.ratio.push(Number(lineArray[9]));
-      }
+      massRatio.storeyID.push(Number(lineArray[0]));
+      massRatio.towerID.push(Number(lineArray[1]));
+      massRatio.ratio.push(Number(lineArray[9]));
     }
   }
 
@@ -539,12 +523,8 @@ export function extractStoreyPart2(
 
   if (FLAG === 'keyStoreyPart2') {
     if (!isNaN(Number(lineArray[0]))) {
-      if (storey.height instanceof Array) {
-        storey.height.push(Number(lineArray[6]));
-      }
-      if (storey.heightToGround instanceof Array) {
-        storey.heightToGround.push(Number(lineArray[7]));
-      }
+      storey.height.push(Number(lineArray[6]));
+      storey.heightToGround.push(Number(lineArray[7]));
     }
   }
 
@@ -561,51 +541,23 @@ export function extractWind(lineArray: string[], wind: IWind): IWind {
 
   if (FLAG === 'keyWind') {
     if (!isNaN(Number(lineArray[0])) && lineArray.length === 9) {
-      if (wind.storeyID instanceof Array) {
-        wind.storeyID.push(Number(lineArray[0]));
-      }
-      if (wind.towerID instanceof Array) {
-        wind.towerID.push(Number(lineArray[1]));
-      }
-      if (wind.forceAlongX instanceof Array) {
-        wind.forceAlongX.push(Number(lineArray[3]));
-      }
-      if (wind.shearAlongX instanceof Array) {
-        wind.shearAlongX.push(Number(lineArray[4]));
-      }
-      if (wind.momentAlongX instanceof Array) {
-        wind.momentAlongX.push(Number(lineArray[5]));
-      }
-      if (wind.forceCrossX instanceof Array) {
-        wind.forceCrossX.push(Number(lineArray[6]));
-      }
-      if (wind.shearCrossX instanceof Array) {
-        wind.shearCrossX.push(Number(lineArray[7]));
-      }
-      if (wind.momentCrossX instanceof Array) {
-        wind.momentCrossX.push(Number(lineArray[8]));
-      }
+      wind.storeyID.push(Number(lineArray[0]));
+      wind.towerID.push(Number(lineArray[1]));
+      wind.forceAlongX.push(Number(lineArray[3]));
+      wind.shearAlongX.push(Number(lineArray[4]));
+      wind.momentAlongX.push(Number(lineArray[5]));
+      wind.forceCrossX.push(Number(lineArray[6]));
+      wind.shearCrossX.push(Number(lineArray[7]));
+      wind.momentCrossX.push(Number(lineArray[8]));
     }
 
     if (!isNaN(Number(lineArray[1])) && lineArray.length === 7) {
-      if (wind.forceAlongY instanceof Array) {
-        wind.forceAlongY.push(Number(lineArray[1]));
-      }
-      if (wind.shearAlongY instanceof Array) {
-        wind.shearAlongY.push(Number(lineArray[2]));
-      }
-      if (wind.momentAlongY instanceof Array) {
-        wind.momentAlongY.push(Number(lineArray[3]));
-      }
-      if (wind.forceCrossY instanceof Array) {
-        wind.forceCrossY.push(Number(lineArray[4]));
-      }
-      if (wind.shearCrossY instanceof Array) {
-        wind.shearCrossY.push(Number(lineArray[5]));
-      }
-      if (wind.momentCrossY instanceof Array) {
-        wind.momentCrossY.push(Number(lineArray[6]));
-      }
+      wind.forceAlongY.push(Number(lineArray[1]));
+      wind.shearAlongY.push(Number(lineArray[2]));
+      wind.momentAlongY.push(Number(lineArray[3]));
+      wind.forceCrossY.push(Number(lineArray[4]));
+      wind.shearCrossY.push(Number(lineArray[5]));
+      wind.momentCrossY.push(Number(lineArray[6]));
     }
   }
 
@@ -625,9 +577,7 @@ export function extractStoreyPart3(
 
   if (FLAG === 'keyStoreyPart3') {
     if (!isNaN(Number(lineArray[0]))) {
-      if (storey.area instanceof Array) {
-        storey.area.push(Number(lineArray[2]));
-      }
+      storey.area.push(Number(lineArray[2]));
     }
   }
 
@@ -647,15 +597,9 @@ export function extractMassRatioPart2(
 
   if (FLAG === 'keyMassRatio2') {
     if (!isNaN(Number(lineArray[0]))) {
-      if (massRatio.storeyMass instanceof Array) {
-        massRatio.storeyMass.push(Number(lineArray[2]));
-      }
-      if (massRatio.massPerArea instanceof Array) {
-        massRatio.massPerArea.push(Number(lineArray[3]));
-      }
-      if (massRatio.massPerAreaRatio instanceof Array) {
-        massRatio.massPerAreaRatio.push(Number(lineArray[4]));
-      }
+      massRatio.storeyMass.push(Number(lineArray[2]));
+      massRatio.massPerArea.push(Number(lineArray[3]));
+      massRatio.massPerAreaRatio.push(Number(lineArray[4]));
     }
   }
 
@@ -675,53 +619,29 @@ export function extractStiffness(
 
   if (FLAG === 'keyStiffness') {
     if (lineArray[0] === 'Floor') {
-      if (stiffness.storeyID instanceof Array) {
-        stiffness.storeyID.push(Number(lineArray[2]));
-        stiffness.towerID.push(Number(lineArray[5]));
-      }
+      stiffness.storeyID.push(Number(lineArray[2]));
+      stiffness.towerID.push(Number(lineArray[5]));
     }
     if (lineArray[0] === '薄弱层地震剪力放大系数') {
-      if (stiffness.weakStoreyFactor instanceof Array) {
-        stiffness.weakStoreyFactor.push(Number(lineArray[1]));
-      }
+      stiffness.weakStoreyFactor.push(Number(lineArray[1]));
     }
     if (lineArray[0] === 'Ratx1') {
-      if (stiffness.ratx1 instanceof Array) {
-        stiffness.ratx1.push(Number(lineArray[1]));
-      }
-      if (stiffness.raty1 instanceof Array) {
-        stiffness.raty1.push(Number(lineArray[3]));
-      }
+      stiffness.ratx1.push(Number(lineArray[1]));
+      stiffness.raty1.push(Number(lineArray[3]));
     }
     if (lineArray[0] === 'Ratx2') {
-      if (stiffness.ratx2 instanceof Array) {
-        stiffness.ratx2.push(Number(lineArray[1]));
-      }
-      if (stiffness.raty2 instanceof Array) {
-        stiffness.raty2.push(Number(lineArray[3]));
-      }
+      stiffness.ratx2.push(Number(lineArray[1]));
+      stiffness.raty2.push(Number(lineArray[3]));
     }
     if (lineArray[0] === 'RJX1') {
-      if (stiffness.rjx1 instanceof Array) {
-        stiffness.rjx1.push(Number(lineArray[1].split('(')[0]));
-      }
-      if (stiffness.rjy1 instanceof Array) {
-        stiffness.rjy1.push(Number(lineArray[3].split('(')[0]));
-      }
-      if (stiffness.rjz1 instanceof Array) {
-        stiffness.rjz1.push(Number(lineArray[5].split('(')[0]));
-      }
+      stiffness.rjx1.push(Number(lineArray[1].split('(')[0]));
+      stiffness.rjy1.push(Number(lineArray[3].split('(')[0]));
+      stiffness.rjz1.push(Number(lineArray[5].split('(')[0]));
     }
     if (lineArray[0] === 'RJX3') {
-      if (stiffness.rjx3 instanceof Array) {
-        stiffness.rjx3.push(Number(lineArray[1].split('(')[0]));
-      }
-      if (stiffness.rjy3 instanceof Array) {
-        stiffness.rjy3.push(Number(lineArray[3].split('(')[0]));
-      }
-      if (stiffness.rjz3 instanceof Array) {
-        stiffness.rjz3.push(Number(lineArray[5].split('(')[0]));
-      }
+      stiffness.rjx3.push(Number(lineArray[1].split('(')[0]));
+      stiffness.rjy3.push(Number(lineArray[3].split('(')[0]));
+      stiffness.rjz3.push(Number(lineArray[5].split('(')[0]));
     }
   }
 
@@ -860,25 +780,20 @@ export function extractShearWeightRatioModify(
 ): IShearWeightRatioModify {
   if (lineArray[0] === '本工程如下楼层进行了最小剪重比调整') {
     FLAG = 'keyShearWeightRatioModify';
-  } else if (lineArray[0] === '风振舒适度验算') {
+  } else if (
+    lineArray[0] === '风振舒适度验算' ||
+    lineArray[0] === '本工程如下楼层进行了0.2V0调整'
+  ) {
     shearWeightRatioModify.allExtracted = true;
     FLAG = '';
   }
 
   if (FLAG === 'keyShearWeightRatioModify') {
     if (!isNaN(Number(lineArray[0]))) {
-      if (shearWeightRatioModify.storeyID instanceof Array) {
-        shearWeightRatioModify.storeyID.push(Number(lineArray[0]));
-      }
-      if (shearWeightRatioModify.towerID instanceof Array) {
-        shearWeightRatioModify.towerID.push(Number(lineArray[1]));
-      }
-      if (shearWeightRatioModify.factorX instanceof Array) {
-        shearWeightRatioModify.factorX.push(Number(lineArray[2]));
-      }
-      if (shearWeightRatioModify.factorY instanceof Array) {
-        shearWeightRatioModify.factorY.push(Number(lineArray[3]));
-      }
+      shearWeightRatioModify.storeyID.push(Number(lineArray[0]));
+      shearWeightRatioModify.towerID.push(Number(lineArray[1]));
+      shearWeightRatioModify.factorX.push(Number(lineArray[2]));
+      shearWeightRatioModify.factorY.push(Number(lineArray[3]));
     }
   }
 
@@ -917,24 +832,12 @@ export function extractShearCapacityCheck(
 
   if (FLAG === 'keyShearCapacityCheck') {
     if (!isNaN(Number(lineArray[0]))) {
-      if (shearCapacityCheck.storeyID instanceof Array) {
-        shearCapacityCheck.storeyID.push(Number(lineArray[0]));
-      }
-      if (shearCapacityCheck.towerID instanceof Array) {
-        shearCapacityCheck.towerID.push(Number(lineArray[1]));
-      }
-      if (shearCapacityCheck.capacityX instanceof Array) {
-        shearCapacityCheck.capacityX.push(Number(lineArray[2]));
-      }
-      if (shearCapacityCheck.capacityY instanceof Array) {
-        shearCapacityCheck.capacityY.push(Number(lineArray[3]));
-      }
-      if (shearCapacityCheck.ratioX instanceof Array) {
-        shearCapacityCheck.ratioX.push(Number(lineArray[4]));
-      }
-      if (shearCapacityCheck.ratioY instanceof Array) {
-        shearCapacityCheck.ratioY.push(Number(lineArray[5]));
-      }
+      shearCapacityCheck.storeyID.push(Number(lineArray[0]));
+      shearCapacityCheck.towerID.push(Number(lineArray[1]));
+      shearCapacityCheck.capacityX.push(Number(lineArray[2]));
+      shearCapacityCheck.capacityY.push(Number(lineArray[3]));
+      shearCapacityCheck.ratioX.push(Number(lineArray[4]));
+      shearCapacityCheck.ratioY.push(Number(lineArray[5]));
       if (lineArray[0] === '1') {
         shearCapacityCheck.allExtracted = true;
       }
