@@ -117,7 +117,7 @@ export function extractStoreyID(
 ): IQuantity {
   STOREYID = Number(lineArray[1].slice(0, -3));
   for (let key in quantity) {
-    if (typeof quantity[key as keyof IQuantity] === 'object') {
+    if (quantity[key as keyof IQuantity] instanceof Array) {
       if (key === 'storeyID') {
         quantity.storeyID[STOREYID - 1] = STOREYID;
       } else {
