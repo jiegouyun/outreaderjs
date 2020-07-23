@@ -2098,9 +2098,9 @@ esutils@^2.0.2:
   integrity sha1-dNLrTeC42hKTcRkQ1Qd1ubcQ72Q=
 
 exceljs@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/exceljs/-/exceljs-4.1.0.tgz#bafd163bad3688ea69308ed23e4938f55556f362"
-  integrity sha512-0lJifIPTS/8ERlZW+IBE0Fk/qUfalA6MOhJDKwip6NVVjpd0LxHz+q2lHhEfZTF2Klv9wGgUwCEP++Db576ZVQ==
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/exceljs/-/exceljs-4.1.1.tgz#a7e7592ed43e55624f9d78a0babda332ab34a745"
+  integrity sha512-DWdCXInpk69qY+Xf7VLiQJulg5B6VpcbSidsgLl92Pu0v9/sh83VLkAsaWbw58Ap8gfhH2sVoGyxHMqRKnyAPA==
   dependencies:
     archiver "^4.0.1"
     dayjs "^1.8.26"
