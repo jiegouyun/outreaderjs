@@ -65,6 +65,6 @@
     "url": "https://github.com/jiegouyun/outreaderjs/issues"
   },
   "homepage": "https://outreader.com",
-  "private": true,
+  "private": false,
   "license": "Apache-2.0"
 }

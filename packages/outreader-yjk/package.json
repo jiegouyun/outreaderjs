@@ -16,7 +16,7 @@
   "repository": "https://github.com/jiegouyun/outreaderjs.git",
   "author": "an-lee <an.lee.work@gmail.com>",
   "license": "Apache-2.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@babel/runtime": "^7.9.6",
     "@outreader/core": "^0.0.1"

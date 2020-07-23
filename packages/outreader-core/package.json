@@ -10,7 +10,7 @@
   },
   "repository": "https://github.com/jiegouyun/outreaderjs.git",
   "license": "Apache-2.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@babel/runtime": "^7.10.2",
     "exceljs": "^4.1.0",
