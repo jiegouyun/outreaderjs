@@ -12,20 +12,20 @@
   "license": "Apache-2.0",
   "private": false,
   "dependencies": {
-    "@babel/runtime": "^7.10.2",
-    "exceljs": "^4.1.0",
-    "iconv-lite": "^0.5.1",
+    "@babel/runtime": "^7.10.5",
+    "exceljs": "^4.1.1",
+    "iconv-lite": "^0.6.2",
     "js-sha3": "^0.8.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.1",
-    "@babel/core": "^7.10.2",
-    "@babel/plugin-transform-runtime": "^7.10.1",
-    "@babel/preset-env": "^7.10.2",
-    "@babel/preset-typescript": "^7.10.1",
-    "@babel/register": "^7.10.1",
-    "@types/jest": "^25.2.3",
-    "jest": "^26.0.1",
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/plugin-transform-runtime": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
+    "@babel/register": "^7.10.5",
+    "@types/jest": "^26.0.5",
+    "jest": "^26.1.0",
     "ts-node": "^8.10.2"
   },
   "publishConfig": {
