@@ -244,5 +244,8 @@
   },
   "renovate": {
     "extends": ["bliss"]
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
