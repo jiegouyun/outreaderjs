@@ -1656,9 +1656,9 @@
     "@types/node" "*"
 
 "@types/history@*", "@types/history@^4.7.6":
-  version "4.7.6"
-  resolved "https://registry.npm.taobao.org/@types/history/download/@types/history-4.7.6.tgz#ed8fc802c45b8e8f54419c2d054e55c9ea344356"
-  integrity sha1-7Y/IAsRbjo9UQZwtBU5Vyeo0Q1Y=
+  version "4.7.7"
+  resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.7.tgz#613957d900fab9ff84c8dfb24fa3eef0c2a40896"
+  integrity sha512-2xtoL22/3Mv6a70i4+4RB7VgbDDORoWwjcqeNysojZA0R7NK17RbY5Gof/2QiFfJgX+KkWghbwJ+d/2SB8Ndzg==
 
 "@types/http-cache-semantics@*":
   version "4.0.0"
