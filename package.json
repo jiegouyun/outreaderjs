@@ -6,8 +6,9 @@
     "test:yjk": "cd packages/outreader-yjk && yarn test",
     "dev:client": "cd packages/outreader-client && yarn dev",
     "build": "lerna run build",
+    "build:core": "cd packages/outreader-core && yarn build",
+    "build:yjk": "cd packages/outreader-yjk && yarn build",
     "cli": "./packages/outreader-cli/bin/run",
-    "migrate:make": "knex migrate:make --migrations-directory=./packages/outreader-core/src/db/migrations -x ts",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
@@ -67,7 +68,7 @@
   "homepage": "https://outreader.com",
   "private": false,
   "license": "Apache-2.0",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publishConfig": {
     "access": "public"
   }

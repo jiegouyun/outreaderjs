@@ -7,6 +7,7 @@ import { IRebar } from './rebar.interface';
 
 export interface IStructure {
   hash: string;
+  dir: string;
   wmass?: IWmass;
   wdisp?: IWdisp;
   wv02q?: IWv02q;

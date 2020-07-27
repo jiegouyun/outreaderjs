@@ -24,6 +24,7 @@ export async function readStructure(dir: string): Promise<IStructure> {
 
   return {
     hash,
+    dir,
     wmass,
     wdisp,
     wv02q,
