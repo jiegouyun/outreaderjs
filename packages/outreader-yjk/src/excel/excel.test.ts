@@ -10,7 +10,7 @@ describe('exportExcel1', () => {
 
   beforeEach(async () => {
     structure = await readStructure(dir);
-    result = await exportExcel(dir, structure);
+    result = await exportExcel(structure);
   });
 
   it('should extract result', async () => {
@@ -25,7 +25,7 @@ describe('exportExcel2', () => {
 
   beforeEach(async () => {
     structure = await readStructure(dir);
-    result = await exportExcel(dir, structure);
+    result = await exportExcel(structure);
   });
 
   it('should extract result', async () => {

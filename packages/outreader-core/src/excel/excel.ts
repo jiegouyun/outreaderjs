@@ -30,10 +30,9 @@ import path from 'path';
 
 /**
  * @description export data into a excel file.
- * @param dir string, export folder path;
  * @param structure IStructure, structure data.
  */
-export async function exportExcel(dir: string, structure: IStructure) {
+export async function exportExcel(structure: IStructure) {
   // inirial structure data.
   initStructureData(structure);
 
@@ -43,7 +42,7 @@ export async function exportExcel(dir: string, structure: IStructure) {
   // write worksheet sumamary information.
   const sheetSummary = workbook.addWorksheet('汇总信息');
   await initSummary(sheetSummary);
-  await writeSummary(dir, structure, sheetSummary);
+  await writeSummary(structure, sheetSummary);
   await formatSummary(sheetSummary);
 
   // write worksheet sumamary quantity information.
@@ -101,7 +100,7 @@ export async function exportExcel(dir: string, structure: IStructure) {
   await formatQuantity(sheetQuantity);
 
   // write xlsx file.
-  const filename = path.join(dir, 'OutReader.xlsx');
+  const filename = path.join(structure.dir, 'OutReader.xlsx');
   await workbook.xlsx.writeFile(filename);
 
   return true;

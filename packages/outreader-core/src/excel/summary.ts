@@ -169,12 +169,11 @@ export async function initSummary(worksheet: Excel.Worksheet) {
 }
 
 export async function writeSummary(
-  dir: string,
   structure: IStructure,
   worksheet: Excel.Worksheet,
 ) {
   // write project information
-  worksheet.getCell('D2').value = dir;
+  worksheet.getCell('D2').value = structure.dir;
   worksheet.getCell('D3').value =
     structure.wmass?.basicInformation.engineering || '';
   worksheet.getCell('D4').value =
