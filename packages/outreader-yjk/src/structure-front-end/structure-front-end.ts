@@ -1,17 +1,4 @@
-import {
-  IStructure,
-  IStructureFrontEnd,
-  ISummaryFE,
-  ISummaryQuantityFE,
-  IParametersFE,
-  IPeriodFE,
-  IForceFE,
-  IDriftFE,
-  IGeneralResultFE,
-  IDistributeResultFE,
-  IFactorFE,
-  IQuantityFE,
-} from '@outreader/core';
+import { IStructure, IStructureFrontEnd } from '@outreader/core';
 import { convertSummary } from './summary';
 import { convertSummaryQuantity } from './summary-quantity';
 import { convertParameters } from './parameters';
@@ -20,10 +7,14 @@ import { convertForce } from './force';
 import { convertDrift } from './drift';
 import { convertGeneralResult } from './general-result';
 import { convertDistributeResult } from './distribute-result';
+import { convertFactor } from './factor';
+import { convertQuantity } from './quantity';
+import { initStructureData } from './tools';
 
-export function convertStructure(
-  structure: IStructure,
-): Promise<IStructureFrontEnd> {
+export function convertStructure(structure: IStructure): IStructureFrontEnd {
+  // inirial structure data.
+  initStructureData(structure);
+
   const structureFE: IStructureFrontEnd = {
     summary: convertSummary(structure),
     summaryQuantity: convertSummaryQuantity(structure),
@@ -38,16 +29,4 @@ export function convertStructure(
   };
 
   return structureFE;
-}
-
-function convertFactor(structure: IStructure): Promise<IFactorFE> {
-  const factor: IFactorFE = {};
-
-  return factor;
-}
-
-function convertQuantity(structure: IStructure): Promise<IQuantityFE> {
-  const quantity: IQuantityFE = {};
-
-  return quantity;
 }

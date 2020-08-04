@@ -1,3 +1,5 @@
+import { IStructure } from '@outreader/core';
+
 /**
  * @description look up a specific value in lookUp array, get value;
  * match same index in result array, get result; return value and result.
@@ -120,4 +122,37 @@ export function stiffnessWeightRatioCheck(ratio: number): string {
     result = '满足稳定,不计二阶';
   }
   return result;
+}
+
+/**
+ * @description sort array by DESC in storeyID.
+ * @param structure IStructure, structure data.
+ */
+export function initStructureData(structure: IStructure): void {
+  Object.values(structure).forEach(function (subFile) {
+    Object.values(subFile).forEach(function (customInterface) {
+      filterInterface(customInterface);
+    });
+  });
+}
+
+export function filterInterface<T>(obj: T): void {
+  if (Object.keys(obj).includes('storeyID')) {
+    if (
+      Array.prototype.slice.call(obj['storeyID' as keyof T])[0] <
+      Array.prototype.slice.call(obj['storeyID' as keyof T])[
+        Array.prototype.slice.call(obj['storeyID' as keyof T]).length - 1
+      ]
+    ) {
+      reverseArray(obj);
+    }
+  }
+}
+
+export function reverseArray<T>(obj: T): void {
+  for (let key in obj) {
+    if (Array.isArray(obj[key])) {
+      Array.prototype.reverse.call(obj[key]);
+    }
+  }
 }

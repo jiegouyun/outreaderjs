@@ -449,18 +449,22 @@ export interface IFactorFE {
     towerID: number[];
     weakStoreyFactor: number[];
   };
-  shearWeightRatioModify: {
-    storeyID: number[];
-    towerID: number[];
-    factorX: number[];
-    factorY: number[];
-  };
-  v02qFactor: {
-    storeyID: number[];
-    towerID: number[];
-    factorX: number[];
-    factorY: number[];
-  };
+  shearWeightRatioModify: IShearWeightRatioModifyFE;
+  v02qFactor: IV02qFactorFE;
+}
+
+export interface IShearWeightRatioModifyFE {
+  storeyID: number[];
+  towerID: number[];
+  factorX: number[];
+  factorY: number[];
+}
+
+export interface IV02qFactorFE {
+  storeyID: number[];
+  towerID: number[];
+  factorX: number[];
+  factorY: number[];
 }
 
 export interface IQuantityFE {
