@@ -1,34 +1,34 @@
 import { readStructure } from '../structure';
-// import { exportExcel } from '@outreader/core/src/excel/excel';
-import { IStructure, hashStr, exportExcel } from '@outreader/core';
+import { convertStructure } from '../structure-front-end';
+import { IStructure, IStructureFrontEnd } from '@outreader/core';
 import * as path from 'path';
 
-describe('exportExcel1', () => {
+describe('convertStructure1', () => {
   const dir = path.join(__dirname, '../../../../fixtures/yjk/1');
   let structure: IStructure;
-  let result: boolean;
+  let result: IStructureFrontEnd;
 
   beforeEach(async () => {
     structure = await readStructure(dir);
-    result = await exportExcel(structure);
+    result = convertStructure(structure);
   });
 
   it('should extract result', async () => {
-    expect(result).toBe(true);
+    expect(typeof result).toBe('object');
   });
 });
 
-describe('exportExcel2', () => {
+describe('convertStructure2', () => {
   const dir = path.join(__dirname, '../../../../fixtures/yjk/2');
   let structure: IStructure;
-  let result: boolean;
+  let result: IStructureFrontEnd;
 
   beforeEach(async () => {
     structure = await readStructure(dir);
-    result = await exportExcel(structure);
+    result = convertStructure(structure);
   });
 
   it('should extract result', async () => {
-    expect(result).toBe(true);
+    expect(typeof result).toBe('object');
   });
 });
