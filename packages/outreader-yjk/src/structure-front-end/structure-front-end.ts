@@ -16,6 +16,7 @@ import { convertSummary } from './summary';
 import { convertSummaryQuantity } from './summary-quantity';
 import { convertParameters } from './parameters';
 import { convertPeriod } from './period';
+import { convertForce } from './force';
 
 export function convertStructure(
   structure: IStructure,
@@ -34,12 +35,6 @@ export function convertStructure(
   };
 
   return structureFE;
-}
-
-function convertForce(structure: IStructure): Promise<IForceFE> {
-  const force: IForceFE = {};
-
-  return force;
 }
 
 function convertDrift(structure: IStructure): Promise<IDriftFE> {

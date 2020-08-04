@@ -200,32 +200,36 @@ export interface IModeMassFE {
 }
 
 export interface IForceFE {
-  wind: {
-    storeyID: number[];
-    towerID: number[];
-    forceAlongX: number[];
-    shearAlongX: number[];
-    momentAlongX: number[];
-    forceAlongY: number[];
-    shearAlongY: number[];
-    momentAlongY: number[];
-    forceCrossX: number[];
-    shearCrossX: number[];
-    momentCrossX: number[];
-    forceCrossY: number[];
-    shearCrossY: number[];
-    momentCrossY: number[];
-  };
-  seismic: {
-    storeyID: number[];
-    towerID: number[];
-    forceX: number[];
-    shearX: number[];
-    momentX: number[];
-    forceY: number[];
-    shearY: number[];
-    momentY: number[];
-  };
+  wind: IWindFE;
+  seismic: ISeismicFE;
+}
+
+export interface IWindFE {
+  storeyID: number[];
+  towerID: number[];
+  forceAlongX: number[];
+  shearAlongX: number[];
+  momentAlongX: number[];
+  forceAlongY: number[];
+  shearAlongY: number[];
+  momentAlongY: number[];
+  forceCrossX: number[];
+  shearCrossX: number[];
+  momentCrossX: number[];
+  forceCrossY: number[];
+  shearCrossY: number[];
+  momentCrossY: number[];
+}
+
+export interface ISeismicFE {
+  storeyID: number[];
+  towerID: number[];
+  forceX: number[];
+  shearX: number[];
+  momentX: number[];
+  forceY: number[];
+  shearY: number[];
+  momentY: number[];
 }
 
 export interface IDriftFE {
