@@ -17,6 +17,7 @@ import { convertSummaryQuantity } from './summary-quantity';
 import { convertParameters } from './parameters';
 import { convertPeriod } from './period';
 import { convertForce } from './force';
+import { convertDrift } from './drift';
 
 export function convertStructure(
   structure: IStructure,
@@ -35,12 +36,6 @@ export function convertStructure(
   };
 
   return structureFE;
-}
-
-function convertDrift(structure: IStructure): Promise<IDriftFE> {
-  const drift: IDriftFE = {};
-
-  return drift;
 }
 
 function convertGeneralResult(
