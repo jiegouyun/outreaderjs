@@ -28,6 +28,6 @@ export function convertStructure(structure: IStructure): IStructureFrontEnd {
     quantity: convertQuantity(structure),
   };
 
-  console.log(structureFE.summary);
+  console.log(structureFE.summaryQuantity);
   return structureFE;
 }

@@ -14,11 +14,16 @@ export function convertSummaryQuantity(
           ] as number)
         : (structure.wmass?.storey.heightToGround[0] as number),
       area: structure.rebar?.area.totalArea as number,
-      period: `
-        ${structure.wzq?.modeCoupling.period[0]}/
-        ${structure.wzq?.modeCoupling.period[1]}/
-        ${structure.wzq?.modeCoupling.period[2]}
-      `,
+      period: `${
+        Math.round((structure.wzq?.modeCoupling.period[0] as number) * 100) /
+        100
+      }/${
+        Math.round((structure.wzq?.modeCoupling.period[1] as number) * 100) /
+        100
+      }/${
+        Math.round((structure.wzq?.modeCoupling.period[2] as number) * 100) /
+        100
+      }`,
       drift: `${Math.min(
         ...(structure.wdisp?.driftWindXP.drift as number[]),
         ...(structure.wdisp?.driftWindYP.drift as number[]),
