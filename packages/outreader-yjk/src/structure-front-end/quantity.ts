@@ -59,7 +59,7 @@ export function convertQuantity(structure: IStructure): IQuantityFE {
       storey: storeyRebar(
         structure.rebar?.wallRebar.storey as number[],
         structure.rebar?.columnRebar.storey as number[],
-        structure.rebar?.wallRebar.storey as number[],
+        structure.rebar?.beamRebar.storey as number[],
         structure.rebar?.floorRebar.storey as number[],
       ) as number[],
     },
@@ -85,7 +85,7 @@ export function convertQuantity(structure: IStructure): IQuantityFE {
         storeyRebar(
           structure.rebar?.wallRebar.storey as number[],
           structure.rebar?.columnRebar.storey as number[],
-          structure.rebar?.wallRebar.storey as number[],
+          structure.rebar?.beamRebar.storey as number[],
           structure.rebar?.floorRebar.storey as number[],
         ) as number[],
         structure.rebar?.area.storey as number[],
@@ -133,7 +133,8 @@ function storeyRebar(
   );
 
   for (let i: number = 0; i <= count - 1; i++) {
-    result[i] = wall[i] + column[i] + beam[i] + floor[i];
+    result[i] =
+      (wall[i] || 0) + (column[i] || 0) + (beam[i] || 0) + (floor[i] || 0);
   }
 
   return result;
