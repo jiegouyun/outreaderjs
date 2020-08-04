@@ -15,30 +15,25 @@ import {
 import { convertSummary } from './summary';
 import { convertSummaryQuantity } from './summary-quantity';
 import { convertParameters } from './parameters';
+import { convertPeriod } from './period';
 
-export async function convertStructure(
+export function convertStructure(
   structure: IStructure,
 ): Promise<IStructureFrontEnd> {
   const structureFE: IStructureFrontEnd = {
-    summary: await convertSummary(structure),
-    summaryQuantity: await convertSummaryQuantity(structure),
-    parameters: await convertParameters(structure),
-    period: await convertPeriod(structure),
-    force: await convertForce(structure),
-    drift: await convertDrift(structure),
-    generalResult: await convertGeneralResult(structure),
-    distributeResult: await convertDistributeResult(structure),
-    factor: await convertFactor(structure),
-    quantity: await convertQuantity(structure),
+    summary: convertSummary(structure),
+    summaryQuantity: convertSummaryQuantity(structure),
+    parameters: convertParameters(structure),
+    period: convertPeriod(structure),
+    force: convertForce(structure),
+    drift: convertDrift(structure),
+    generalResult: convertGeneralResult(structure),
+    distributeResult: convertDistributeResult(structure),
+    factor: convertFactor(structure),
+    quantity: convertQuantity(structure),
   };
 
   return structureFE;
-}
-
-function convertPeriod(structure: IStructure): Promise<IPeriodFE> {
-  const period: IPeriodFE = {};
-
-  return period;
 }
 
 function convertForce(structure: IStructure): Promise<IForceFE> {

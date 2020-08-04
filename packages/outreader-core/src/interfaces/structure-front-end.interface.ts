@@ -177,15 +177,7 @@ export interface IParametersFE {
 export interface IPeriodFE {
   modeCoupling: IModeFE;
   modeSeismic: IModeFE;
-  modeMass: {
-    modeID: number[];
-    factorX: number[];
-    factorY: number[];
-    factorZ: number[];
-    sumX: number;
-    sumY: number;
-    sumZ: number;
-  };
+  modeMass: IModeMassFE;
 }
 
 export interface IModeFE {
@@ -195,6 +187,16 @@ export interface IModeFE {
   factorX: number[];
   factorY: number[];
   factorZ: number[];
+}
+
+export interface IModeMassFE {
+  modeID: number[];
+  factorX: number[];
+  factorY: number[];
+  factorZ: number[];
+  sumX: number;
+  sumY: number;
+  sumZ: number;
 }
 
 export interface IForceFE {
