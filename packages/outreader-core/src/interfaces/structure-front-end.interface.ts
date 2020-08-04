@@ -6,12 +6,12 @@ export interface IStructureFrontEnd {
   force: IForceFE;
   drift: IDriftFE;
   generalResult: IGeneralResultFE;
-  distributeResult: IDistributeResult;
+  distributeResult: IDistributeResultFE;
   factor: IFactorFE;
   quantity: IQuantityFE;
 }
 
-interface ISummaryFE {
+export interface ISummaryFE {
   project: {
     dir: string;
     engineering: string;
@@ -19,7 +19,7 @@ interface ISummaryFE {
     software: string;
     softwareVersion: string;
   };
-  structure: {
+  structures: {
     system: string;
     material: string;
     storeys: number;
@@ -38,36 +38,24 @@ interface ISummaryFE {
     sum: number;
   };
   drift: {
-    windX: number;
-    windXStorey: number;
-    windY: number;
-    windYStorey: number;
-    seismicX: number;
-    seismicXStorey: number;
-    seismicY: number;
-    seismicYStorey: number;
+    windX: number[];
+    windY: number[];
+    seismicX: number[];
+    seismicY: number[];
     limit: number;
   };
   dispRatio: {
-    eccPX: number;
-    eccPXStorey: number;
-    eccNX: number;
-    eccNXStorey: number;
-    eccPY: number;
-    eccPYStorey: number;
-    eccNY: number;
-    eccNYStorey: number;
+    eccPX: number[];
+    eccNX: number[];
+    eccPY: number[];
+    eccNY: number[];
     limit: string;
   };
   dispRatioStorey: {
-    eccPX: number;
-    eccPXStorey: number;
-    eccNX: number;
-    eccNXStorey: number;
-    eccPY: number;
-    eccPYStorey: number;
-    eccNY: number;
-    eccNYStorey: number;
+    eccPX: number[];
+    eccNX: number[];
+    eccPY: number[];
+    eccNY: number[];
     limit: string;
   };
   shearWeightRatio: {
@@ -87,16 +75,12 @@ interface ISummaryFE {
     seidmicYCheck: string;
   };
   stiffRatio: {
-    x: number;
-    xStorey: number;
-    y: number;
-    yStorey: number;
+    x: number[];
+    y: number[];
   };
   shearCapacityRatio: {
-    x: number;
-    xStorey: number;
-    y: number;
-    yStorey: number;
+    x: number[];
+    y: number[];
   };
   mode: {
     period: number[];
@@ -124,7 +108,7 @@ interface ISummaryFE {
   };
 }
 
-interface ISummaryQuantityFE {
+export interface ISummaryQuantityFE {
   structure: {
     engineering: string;
     height: number;
@@ -140,7 +124,7 @@ interface ISummaryQuantityFE {
   steel: IPartQuantityFE;
 }
 
-interface IPartQuantityFE {
+export interface IPartQuantityFE {
   wall: number;
   column: number;
   beam: number;
@@ -148,7 +132,7 @@ interface IPartQuantityFE {
   total: number;
 }
 
-interface IParametersFE {
+export interface IParametersFE {
   general: {
     system: string;
     material: string;
@@ -190,7 +174,7 @@ interface IParametersFE {
   };
 }
 
-interface IPeriodFE {
+export interface IPeriodFE {
   modeCoupling: IModeFE;
   modeSeismic: IModeFE;
   modeMass: {
@@ -204,7 +188,7 @@ interface IPeriodFE {
   };
 }
 
-interface IModeFE {
+export interface IModeFE {
   modeID: number[];
   period: number[];
   angle: number[];
@@ -213,7 +197,7 @@ interface IModeFE {
   factorZ: number[];
 }
 
-interface IForceFE {
+export interface IForceFE {
   wind: {
     storeyID: number[];
     towerID: number[];
@@ -242,7 +226,7 @@ interface IForceFE {
   };
 }
 
-interface IDriftFE {
+export interface IDriftFE {
   driftSeismicX: ISeismicDriftFE;
   driftSeismicTwoWayX: ISeismicDriftFE;
   driftSeismicXEccP: ISeismicDriftFE;
@@ -267,14 +251,14 @@ interface IDriftFE {
   ratioSeismicYEccN: ISeismicDispRatio;
 }
 
-interface ISeismicDriftFE {
+export interface ISeismicDriftFE {
   storeyID: number[];
   towerID: number[];
   displacement: number[];
   drift: number[];
 }
 
-interface IWindDriftFE {
+export interface IWindDriftFE {
   storeyID: number[];
   towerID: number[];
   displacement: number[];
@@ -283,14 +267,14 @@ interface IWindDriftFE {
   ratioD: number[];
 }
 
-interface ISeismicDispRatio {
+export interface ISeismicDispRatio {
   storeyID: number[];
   towerID: number[];
   ratio: number[];
   ratioD: number[];
 }
 
-interface IGeneralResultFE {
+export interface IGeneralResultFE {
   project: {
     engineering: string;
     engineeringCode: string;
@@ -358,7 +342,7 @@ interface IGeneralResultFE {
   };
 }
 
-interface IDistributeResult {
+export interface IDistributeResultFE {
   storey: {
     storeyID: number[];
     towerID: number[];
@@ -425,7 +409,7 @@ interface IDistributeResult {
   };
 }
 
-interface IFactorFE {
+export interface IFactorFE {
   stiffness: {
     storeyID: number[];
     towerID: number[];
@@ -445,7 +429,7 @@ interface IFactorFE {
   };
 }
 
-interface IQuantityFE {
+export interface IQuantityFE {
   concrete: ISubQuantityFE;
   unitConcrete: ISubQuantityFE;
   steel: ISubQuantityFE;
@@ -454,7 +438,7 @@ interface IQuantityFE {
   unitRebar: ISubQuantityFE;
 }
 
-interface ISubQuantityFE {
+export interface ISubQuantityFE {
   storeyID: number[];
   wall: number[];
   beam: number[];
