@@ -19,6 +19,7 @@ import { convertPeriod } from './period';
 import { convertForce } from './force';
 import { convertDrift } from './drift';
 import { convertGeneralResult } from './general-result';
+import { convertDistributeResult } from './distribute-result';
 
 export function convertStructure(
   structure: IStructure,
@@ -37,14 +38,6 @@ export function convertStructure(
   };
 
   return structureFE;
-}
-
-function convertDistributeResult(
-  structure: IStructure,
-): Promise<IDistributeResultFE> {
-  const distributeResult: IDistributeResultFE = {};
-
-  return distributeResult;
 }
 
 function convertFactor(structure: IStructure): Promise<IFactorFE> {

@@ -363,70 +363,84 @@ export interface IWindComfortFE {
 }
 
 export interface IDistributeResultFE {
-  storey: {
-    storeyID: number[];
-    towerID: number[];
-    attribute: string[];
-    height: number[];
-    heightToGround: number[];
-    area: number[];
-  };
-  massRatio: {
-    storeyID: number[];
-    towerID: number[];
-    ratio: number[];
-    storeyMass: number[];
-    massPerArea: number[];
-    massPerAreaRatio: number[];
-  };
-  stiffness: {
-    storeyID: number[];
-    towerID: number[];
-    ratx1: number[];
-    ratx2: number[];
-    rjx1: number[];
-    rjx3: number[];
-    raty1: number[];
-    raty2: number[];
-    rjy1: number[];
-    rjy3: number[];
-    rjz1: number[];
-    rjz3: number[];
-  };
-  shearWeightRatioModify: {
-    storeyID: number[];
-    towerID: number[];
-    factorX: number[];
-    factorY: number[];
-  };
-  shearCapacityCheck: {
-    storeyID: number[];
-    towerID: number[];
-    capacityX: number[];
-    ratioX: number[];
-    capacityY: number[];
-    ratioY: number[];
-  };
-  momentPercent: {
-    storeyID: number[];
-    towerID: number[];
-    percentColumnX: number[];
-    percentWallX: number[];
-    percentColumnY: number[];
-    percentWallY: number[];
-  };
-  columnShear: {
-    storeyID: number[];
-    towerID: number[];
-    columnX: number[];
-    wallX: number[];
-    totalX: number[];
-    percentColumnX: number[];
-    columnY: number[];
-    wallY: number[];
-    totalY: number[];
-    percentColumnY: number[];
-  };
+  storey: IStoreyFE;
+  massRatio: IMassRatioFE;
+  stiffness: IStiffnessFE;
+  shearWeightRatioModify: IShearWeightRatioModifyFE;
+  shearCapacityCheck: IShearCapacityCheckFE;
+  momentPercent: IMomentPercentFE;
+  columnShear: IColumnShearFE;
+}
+
+export interface IStoreyFE {
+  storeyID: number[];
+  towerID: number[];
+  attribute: string[];
+  height: number[];
+  heightToGround: number[];
+  area: number[];
+}
+
+export interface IMassRatioFE {
+  storeyID: number[];
+  towerID: number[];
+  ratio: number[];
+  storeyMass: number[];
+  massPerArea: number[];
+  massPerAreaRatio: number[];
+}
+
+export interface IStiffnessFE {
+  storeyID: number[];
+  towerID: number[];
+  ratx1: number[];
+  ratx2: number[];
+  rjx1: number[];
+  rjx3: number[];
+  raty1: number[];
+  raty2: number[];
+  rjy1: number[];
+  rjy3: number[];
+  rjz1: number[];
+  rjz3: number[];
+}
+
+export interface IShearWeightRatioModifyFE {
+  storeyID: number[];
+  towerID: number[];
+  factorX: number[];
+  factorY: number[];
+}
+
+export interface IShearCapacityCheckFE {
+  storeyID: number[];
+  towerID: number[];
+  capacityX: number[];
+  ratioX: number[];
+  capacityY: number[];
+  ratioY: number[];
+}
+
+export interface IMomentPercentFE {
+  storeyID: number[];
+  towerID: number[];
+  percentColumnX: number[];
+  percentWallX: number[];
+  percentColumnY: number[];
+  percentWallY: number[];
+}
+
+export interface IColumnShearFE {
+  storeyID: number[];
+  towerID: number[];
+  columnX: number[];
+  wallX: number[];
+  totalX: number[];
+  percentColumnX: number[];
+  columnY: number[];
+  wallY: number[];
+  totalY: number[];
+  percentColumnY: number[];
 }
 
 export interface IFactorFE {
