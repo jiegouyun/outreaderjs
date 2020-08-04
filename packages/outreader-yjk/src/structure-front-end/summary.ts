@@ -244,6 +244,7 @@ export function convertSummary(structure: IStructure): ISummaryFE {
 }
 
 function writeMode(structure: IStructure) {
+  const modeID: number[] = structure.wzq?.modeCoupling.modeID as number[];
   const period: number[] = structure.wzq?.modeCoupling.period as number[];
   const factorX: number[] = structure.wzq?.modeMass.factorX as number[];
   const factorY: number[] = structure.wzq?.modeMass.factorY as number[];
@@ -264,6 +265,7 @@ function writeMode(structure: IStructure) {
   const sumZ: number = structure.wzq?.modeMass.sumZ as number;
 
   return {
+    modeID,
     period,
     factorX,
     factorY,

@@ -83,6 +83,7 @@ export interface ISummaryFE {
     y: number[];
   };
   mode: {
+    modeID: number[];
     period: number[];
     factorX: number[];
     factorY: number[];
