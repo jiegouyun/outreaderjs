@@ -18,6 +18,7 @@ import { convertParameters } from './parameters';
 import { convertPeriod } from './period';
 import { convertForce } from './force';
 import { convertDrift } from './drift';
+import { convertGeneralResult } from './general-result';
 
 export function convertStructure(
   structure: IStructure,
@@ -36,14 +37,6 @@ export function convertStructure(
   };
 
   return structureFE;
-}
-
-function convertGeneralResult(
-  structure: IStructure,
-): Promise<IGeneralResultFE> {
-  const generalResult: IGeneralResultFE = {};
-
-  return generalResult;
 }
 
 function convertDistributeResult(

@@ -281,71 +281,85 @@ export interface ISeismicDispRatio {
 }
 
 export interface IGeneralResultFE {
-  project: {
-    engineering: string;
-    engineeringCode: string;
-    designer: string;
-    checker: string;
-    software: string;
-    softwareVersion: string;
-    calDate: string;
-  };
-  tower: {
-    towerID: number[];
-    structuralSystem: string[];
-  };
-  weight: {
-    live: number;
-    dead: number;
-    super: number;
-    sum: number;
-  };
-  constraintFloorStiffnessRatio: {
-    storeyNo: number;
-    towerNo: number;
-    stiffnessX0: number;
-    stiffnessX1: number;
-    ratioX: number;
-    stiffnessY0: number;
-    stiffnessY1: number;
-    ratioY: number;
-  };
-  overturningCheck: {
-    storeyNo: number;
-    towerNo: number;
-    mrWindX: number;
-    movWindX: number;
-    ratioWindX: number;
-    zeroAreaWindX: number;
-    mrWindY: number;
-    movWindY: number;
-    ratioWindY: number;
-    zeroAreaWindY: number;
-    mrSeismicX: number;
-    movSeismicX: number;
-    ratioSeismicX: number;
-    zeroAreaSeismicX: number;
-    mrSeismicY: number;
-    movSeismicY: number;
-    ratioSeismicY: number;
-    zeroAreaSeismicY: number;
-  };
-  stableCheck: {
-    seismicStoreyNo: number;
-    seismicTowerNo: number;
-    seismicRatioX: number;
-    seismicRatioY: number;
-    windStoreyNo: number;
-    windTowerNo: number;
-    windRatioX: number;
-    windRatioY: number;
-  };
-  windComfort: {
-    accelerationAlongX: number;
-    accelerationCrossX: number;
-    accelerationAlongY: number;
-    accelerationCrossY: number;
-  };
+  project: IProjectFE;
+  tower: ITowerFE;
+  weight: IWeightFE;
+  constraintFloorStiffnessRatio: IConstraintFloorStiffnessRatioFE;
+  overturningCheck: IOverturningCheckFE;
+  stableCheck: IStableCheckFE;
+  windComfort: IWindComfortFE;
+}
+
+export interface IProjectFE {
+  engineering: string;
+  engineeringCode: string;
+  designer: string;
+  checker: string;
+  software: string;
+  softwareVersion: string;
+  calDate: string;
+}
+
+export interface ITowerFE {
+  towerID: number[];
+  structuralSystem: string[];
+}
+
+export interface IWeightFE {
+  live: number;
+  dead: number;
+  super: number;
+  sum: number;
+}
+
+export interface IConstraintFloorStiffnessRatioFE {
+  storeyNo: number;
+  towerNo: number;
+  stiffnessX0: number;
+  stiffnessX1: number;
+  ratioX: number;
+  stiffnessY0: number;
+  stiffnessY1: number;
+  ratioY: number;
+}
+
+export interface IOverturningCheckFE {
+  storeyNo: number;
+  towerNo: number;
+  mrWindX: number;
+  movWindX: number;
+  ratioWindX: number;
+  zeroAreaWindX: number;
+  mrWindY: number;
+  movWindY: number;
+  ratioWindY: number;
+  zeroAreaWindY: number;
+  mrSeismicX: number;
+  movSeismicX: number;
+  ratioSeismicX: number;
+  zeroAreaSeismicX: number;
+  mrSeismicY: number;
+  movSeismicY: number;
+  ratioSeismicY: number;
+  zeroAreaSeismicY: number;
+}
+
+export interface IStableCheckFE {
+  seismicStoreyNo: number;
+  seismicTowerNo: number;
+  seismicRatioX: number;
+  seismicRatioY: number;
+  windStoreyNo: number;
+  windTowerNo: number;
+  windRatioX: number;
+  windRatioY: number;
+}
+
+export interface IWindComfortFE {
+  accelerationAlongX: number;
+  accelerationCrossX: number;
+  accelerationAlongY: number;
+  accelerationCrossY: number;
 }
 
 export interface IDistributeResultFE {
