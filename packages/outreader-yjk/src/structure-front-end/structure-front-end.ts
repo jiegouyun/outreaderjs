@@ -14,6 +14,7 @@ import {
 } from '@outreader/core';
 import { convertSummary } from './summary';
 import { convertSummaryQuantity } from './summary-quantity';
+import { convertParameters } from './parameters';
 
 export async function convertStructure(
   structure: IStructure,
@@ -32,12 +33,6 @@ export async function convertStructure(
   };
 
   return structureFE;
-}
-
-function convertParameters(structure: IStructure): Promise<IParametersFE> {
-  const parameters: IParametersFE = {};
-
-  return parameters;
 }
 
 function convertPeriod(structure: IStructure): Promise<IPeriodFE> {
