@@ -1,4 +1,4 @@
-import { IStructure } from '../interfaces';
+import { IParametersFE } from '../interfaces';
 import { rangeSetBorder, rangeFillColor } from './commom';
 import Excel from 'exceljs';
 
@@ -55,78 +55,49 @@ export async function initParameters(worksheet: Excel.Worksheet) {
 }
 
 export async function writeParameters(
-  structure: IStructure,
+  parameters: IParametersFE,
   worksheet: Excel.Worksheet,
 ) {
   // write general information
-  worksheet.getCell('B2').value =
-    structure.wmass?.generalInformation.structuralSystem || '';
-  worksheet.getCell('B3').value =
-    structure.wmass?.generalInformation.structuralMaterial || '';
-  worksheet.getCell('B4').value =
-    structure.wmass?.generalInformation.location || '';
-  worksheet.getCell('B5').value =
-    structure.wmass?.generalInformation.basement || '';
-  worksheet.getCell('B6').value =
-    structure.wmass?.generalInformation.constraintFloor || '';
-  worksheet.getCell('B7').value =
-    structure.wmass?.generalInformation.podium || '';
-  worksheet.getCell('B8').value =
-    structure.wmass?.generalInformation.transferStorey || '';
-  worksheet.getCell('B9').value =
-    structure.wmass?.generalInformation.reinforceStorey || '';
+  worksheet.getCell('B2').value = parameters.general.system;
+  worksheet.getCell('B3').value = parameters.general.material;
+  worksheet.getCell('B4').value = parameters.general.location;
+  worksheet.getCell('B5').value = parameters.general.basement;
+  worksheet.getCell('B6').value = parameters.general.constraintFloor;
+  worksheet.getCell('B7').value = parameters.general.podium;
+  worksheet.getCell('B8').value = parameters.general.transferStorey;
+  worksheet.getCell('B9').value = parameters.general.reinforceStorey;
 
   // write calculation information
   worksheet.getCell('B12').value =
-    structure.wmass?.calculationControl.couplingBeamFactorSeismic || '';
-  worksheet.getCell('B13').value =
-    structure.wmass?.calculationControl.couplingBeamFactorWind || '';
-  worksheet.getCell('B14').value =
-    structure.wmass?.calculationControl.rigidFloorAssumption || '';
+    parameters.calculate.couplingBeamFactorSeismic;
+  worksheet.getCell('B13').value = parameters.calculate.couplingBeamFactorWind;
+  worksheet.getCell('B14').value = parameters.calculate.rigidFloorAssumption;
 
   // write wind information
-  worksheet.getCell('B17').value =
-    structure.wmass?.windInformation.useAssigned || '';
-  worksheet.getCell('B18').value =
-    structure.wmass?.windInformation.loadCode || '';
-  worksheet.getCell('B19').value =
-    structure.wmass?.windInformation.terrainRoughness || '';
-  worksheet.getCell('B20').value =
-    structure.wmass?.windInformation.pressureModified || '';
-  worksheet.getCell('B21').value =
-    structure.wmass?.windInformation.dampingRatio || '';
-  worksheet.getCell('B22').value =
-    structure.wmass?.windInformation.pressureComfort || '';
-  worksheet.getCell('B23').value =
-    structure.wmass?.windInformation.dampingRationComfort || '';
+  worksheet.getCell('B17').value = parameters.wind.assigned;
+  worksheet.getCell('B18').value = parameters.wind.loadCode;
+  worksheet.getCell('B19').value = parameters.wind.terrainRoughness;
+  worksheet.getCell('B20').value = parameters.wind.pressureModified;
+  worksheet.getCell('B21').value = parameters.wind.dampingRatio;
+  worksheet.getCell('B22').value = parameters.wind.pressureComfort;
+  worksheet.getCell('B23').value = parameters.wind.dampingRationComfort;
 
   // write seismic information
-  worksheet.getCell('B26').value =
-    structure.wmass?.seismicInformation.use2015GB18306 || '';
-  worksheet.getCell('B27').value =
-    structure.wmass?.seismicInformation.group || '';
-  worksheet.getCell('B28').value =
-    structure.wmass?.seismicInformation.intensity || '';
-  worksheet.getCell('B29').value =
-    structure.wmass?.seismicInformation.siteCategory || '';
-  worksheet.getCell('B30').value =
-    structure.wmass?.seismicInformation.characteristicPeriod || '';
-  worksheet.getCell('B31').value =
-    structure.wmass?.seismicInformation.dampingRatio || '';
-  worksheet.getCell('B32').value =
-    structure.wmass?.seismicInformation.periodReductionFactor || '';
-  worksheet.getCell('B33').value =
-    structure.wmass?.seismicInformation.eccentricityX || '';
-  worksheet.getCell('B34').value =
-    structure.wmass?.seismicInformation.eccentricityY || '';
-  worksheet.getCell('B35').value =
-    structure.wmass?.seismicInformation.maxSpectrumValue || '';
-  worksheet.getCell('B36').value =
-    structure.wmass?.seismicInformation.maxSpectrumValueL3 || '';
-  worksheet.getCell('B37').value =
-    structure.wmass?.seismicInformation.additionalDampingRatio || '';
+  worksheet.getCell('B26').value = parameters.seismic.use2015GB18306;
+  worksheet.getCell('B27').value = parameters.seismic.group;
+  worksheet.getCell('B28').value = parameters.seismic.intensity;
+  worksheet.getCell('B29').value = parameters.seismic.siteCategory;
+  worksheet.getCell('B30').value = parameters.seismic.characteristicPeriod;
+  worksheet.getCell('B31').value = parameters.seismic.dampingRatio;
+  worksheet.getCell('B32').value = parameters.seismic.periodReductionFactor;
+  worksheet.getCell('B33').value = parameters.seismic.eccentricityX;
+  worksheet.getCell('B34').value = parameters.seismic.eccentricityY;
+  worksheet.getCell('B35').value = parameters.seismic.maxSpectrumValue;
+  worksheet.getCell('B36').value = parameters.seismic.maxSpectrumValueL3;
+  worksheet.getCell('B37').value = parameters.seismic.additionalDampingRatio;
   worksheet.getCell('B38').value =
-    structure.wmass?.seismicInformation.modifiedSeismicReductionFactor || '';
+    parameters.seismic.modifiedSeismicReductionFactor;
 }
 
 export async function formatParameters(worksheet: Excel.Worksheet) {

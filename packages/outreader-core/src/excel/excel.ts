@@ -51,7 +51,7 @@ export async function exportExcel(structure: IStructureFrontEnd) {
   // write worksheet parameters information.
   const sheetParameters = workbook.addWorksheet('计算参数');
   await initParameters(sheetParameters);
-  await writeParameters(structure, sheetParameters);
+  await writeParameters(structure.parameters, sheetParameters);
   await formatParameters(sheetParameters);
 
   // write worksheet period information
