@@ -1,5 +1,5 @@
-import { IStructure } from '../interfaces';
-import { rangeSetBorder, rangeFillColor, distributeFormat } from './commom';
+import { IForceFE } from '../interfaces';
+import { rangeFillColor, distributeFormat } from './commom';
 import Excel from 'exceljs';
 
 export async function initForce(worksheet: Excel.Worksheet) {
@@ -33,72 +33,34 @@ export async function initForce(worksheet: Excel.Worksheet) {
   worksheet.getCell('T2').value = '弯矩Y\nkNm';
 }
 
-export async function writeForce(
-  structure: IStructure,
-  worksheet: Excel.Worksheet,
-) {
+export async function writeForce(force: IForceFE, worksheet: Excel.Worksheet) {
   // write storey
-  for (
-    let i = 0;
-    i < (structure.wmass?.storey.storeyID as number[]).length;
-    i++
-  ) {
-    worksheet.getCell(`A${3 + i}`).value =
-      structure.wmass?.storey.storeyID[i] || '';
-    worksheet.getCell(`B${3 + i}`).value =
-      structure.wmass?.storey.towerID[i] || '';
-  }
+  const count: number = force.wind.storeyID.length;
+  for (let i = 0; i < count; i++) {
+    worksheet.getCell(`A${3 + i}`).value = force.wind.storeyID[i];
+    worksheet.getCell(`B${3 + i}`).value = force.wind.towerID[i];
 
-  // write wind force
-  for (
-    let i = 0;
-    i < (structure.wmass?.wind.storeyID as number[]).length;
-    i++
-  ) {
-    worksheet.getCell(`C${3 + i}`).value =
-      structure.wmass?.wind.forceAlongX[i] || '';
-    worksheet.getCell(`D${3 + i}`).value =
-      structure.wmass?.wind.shearAlongX[i] || '';
-    worksheet.getCell(`E${3 + i}`).value =
-      structure.wmass?.wind.momentAlongX[i] || '';
-    worksheet.getCell(`F${3 + i}`).value =
-      structure.wmass?.wind.forceAlongY[i] || '';
-    worksheet.getCell(`G${3 + i}`).value =
-      structure.wmass?.wind.shearAlongY[i] || '';
-    worksheet.getCell(`H${3 + i}`).value =
-      structure.wmass?.wind.momentAlongY[i] || '';
-    worksheet.getCell(`I${3 + i}`).value =
-      structure.wmass?.wind.forceCrossX[i] || '';
-    worksheet.getCell(`J${3 + i}`).value =
-      structure.wmass?.wind.shearCrossX[i] || '';
-    worksheet.getCell(`K${3 + i}`).value =
-      structure.wmass?.wind.momentCrossX[i] || '';
-    worksheet.getCell(`L${3 + i}`).value =
-      structure.wmass?.wind.forceCrossY[i] || '';
-    worksheet.getCell(`M${3 + i}`).value =
-      structure.wmass?.wind.shearCrossY[i] || '';
-    worksheet.getCell(`N${3 + i}`).value =
-      structure.wmass?.wind.momentCrossY[i] || '';
-  }
+    // write wind force
+    worksheet.getCell(`C${3 + i}`).value = force.wind.forceAlongX[i];
+    worksheet.getCell(`D${3 + i}`).value = force.wind.shearAlongX[i];
+    worksheet.getCell(`E${3 + i}`).value = force.wind.momentAlongX[i];
+    worksheet.getCell(`F${3 + i}`).value = force.wind.forceAlongY[i];
+    worksheet.getCell(`G${3 + i}`).value = force.wind.shearAlongY[i];
+    worksheet.getCell(`H${3 + i}`).value = force.wind.momentAlongY[i];
+    worksheet.getCell(`I${3 + i}`).value = force.wind.forceCrossX[i];
+    worksheet.getCell(`J${3 + i}`).value = force.wind.shearCrossX[i];
+    worksheet.getCell(`K${3 + i}`).value = force.wind.momentCrossX[i];
+    worksheet.getCell(`L${3 + i}`).value = force.wind.forceCrossY[i];
+    worksheet.getCell(`M${3 + i}`).value = force.wind.shearCrossY[i];
+    worksheet.getCell(`N${3 + i}`).value = force.wind.momentCrossY[i];
 
-  // write seismic force
-  for (
-    let i = 0;
-    i < (structure.wzq?.seismicForce.storeyID as number[]).length;
-    i++
-  ) {
-    worksheet.getCell(`O${3 + i}`).value =
-      structure.wzq?.seismicForce.forceX[i] || '';
-    worksheet.getCell(`P${3 + i}`).value =
-      structure.wzq?.seismicForce.shearX[i] || '';
-    worksheet.getCell(`Q${3 + i}`).value =
-      structure.wzq?.seismicForce.momentX[i] || '';
-    worksheet.getCell(`R${3 + i}`).value =
-      structure.wzq?.seismicForce.forceY[i] || '';
-    worksheet.getCell(`S${3 + i}`).value =
-      structure.wzq?.seismicForce.shearY[i] || '';
-    worksheet.getCell(`T${3 + i}`).value =
-      structure.wzq?.seismicForce.momentY[i] || '';
+    // write seismic force
+    worksheet.getCell(`O${3 + i}`).value = force.seismic.forceX[i];
+    worksheet.getCell(`P${3 + i}`).value = force.seismic.shearX[i];
+    worksheet.getCell(`Q${3 + i}`).value = force.seismic.momentX[i];
+    worksheet.getCell(`R${3 + i}`).value = force.seismic.forceY[i];
+    worksheet.getCell(`S${3 + i}`).value = force.seismic.shearY[i];
+    worksheet.getCell(`T${3 + i}`).value = force.seismic.momentY[i];
   }
 }
 

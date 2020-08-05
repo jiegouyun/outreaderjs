@@ -57,13 +57,13 @@ export async function exportExcel(structure: IStructureFrontEnd) {
   // write worksheet period information
   const sheetPeriod = workbook.addWorksheet('周期');
   await initPeriod(sheetPeriod);
-  await writePeriod(structure, sheetPeriod);
+  await writePeriod(structure.period, sheetPeriod);
   await formatPeriod(sheetPeriod);
 
   // write force information
   const sheetForce = workbook.addWorksheet('内力');
   await initForce(sheetForce);
-  await writeForce(structure, sheetForce);
+  await writeForce(structure.force, sheetForce);
   await formatForce(sheetForce);
 
   // write drift information

@@ -32,7 +32,7 @@ export async function writePeriod(
   period: IPeriodFE,
   worksheet: Excel.Worksheet,
 ) {
-  let modeCount: number = period.modeCoupling.modeID.length;
+  const modeCount: number = period.modeCoupling.modeID.length;
   for (let i = 0; i < modeCount; i++) {
     // write mode
     worksheet.getCell(`A${3 + i}`).value = period.modeCoupling.modeID[i];
