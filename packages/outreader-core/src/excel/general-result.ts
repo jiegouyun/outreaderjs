@@ -1,4 +1,4 @@
-import { IStructure } from '../interfaces';
+import { IGeneralResultFE } from '../interfaces';
 import { rangeSetBorder, rangeFillColor } from './commom';
 import Excel from 'exceljs';
 
@@ -67,126 +67,81 @@ export async function initGeneralResult(worksheet: Excel.Worksheet) {
 }
 
 export async function writeGeneralResult(
-  structure: IStructure,
+  general: IGeneralResultFE,
   worksheet: Excel.Worksheet,
 ) {
   // write base information
-  worksheet.getCell('B2').value =
-    structure.wmass?.basicInformation.engineering || '';
-  worksheet.getCell('B3').value =
-    structure.wmass?.basicInformation.engineeringCode || '';
-  worksheet.getCell('B4').value =
-    structure.wmass?.basicInformation.designer || '';
-  worksheet.getCell('B5').value =
-    structure.wmass?.basicInformation.checker || '';
-  worksheet.getCell('B6').value =
-    structure.wmass?.basicInformation.software || '';
-  worksheet.getCell('B7').value =
-    structure.wmass?.basicInformation.softwareVersion || '';
-  worksheet.getCell('B8').value =
-    structure.wmass?.basicInformation.calDate || '';
+  worksheet.getCell('B2').value = general.project.engineering;
+  worksheet.getCell('B3').value = general.project.engineeringCode;
+  worksheet.getCell('B4').value = general.project.designer;
+  worksheet.getCell('B5').value = general.project.checker;
+  worksheet.getCell('B6').value = general.project.software;
+  worksheet.getCell('B7').value = general.project.softwareVersion;
+  worksheet.getCell('B8').value = general.project.calDate;
 
   // write tower information
-  for (
-    let i = 0;
-    i < (structure.wmass?.tower.towerID as number[]).length;
-    i++
-  ) {
-    worksheet.getCell(11, 2 + i).value =
-      structure.wmass?.tower.towerID[i] || '';
-    worksheet.getCell(12, 2 + i).value =
-      structure.wmass?.tower.structuralSystem[i] || '';
+  for (let i = 0; i < general.tower.towerID.length; i++) {
+    worksheet.getCell(11, 2 + i).value = general.tower.towerID[i];
+    worksheet.getCell(12, 2 + i).value = general.tower.structuralSystem[i];
   }
 
   // write weight information
-  worksheet.getCell('B15').value = structure.wmass?.weight.live || '';
-  worksheet.getCell('B16').value = structure.wmass?.weight.dead || '';
-  worksheet.getCell('B17').value = structure.wmass?.weight.super || '';
-  worksheet.getCell('B18').value = structure.wmass?.weight.sum || '';
+  worksheet.getCell('B15').value = general.weight.live;
+  worksheet.getCell('B16').value = general.weight.dead;
+  worksheet.getCell('B17').value = general.weight.super;
+  worksheet.getCell('B18').value = general.weight.sum;
 
   // write constraint floor stiffness
   worksheet.getCell('B21').value =
-    structure.wmass?.constraintFloorStiffnessRatio.storeyNo || '';
+    general.constraintFloorStiffnessRatio.storeyNo;
   worksheet.getCell('D21').value =
-    structure.wmass?.constraintFloorStiffnessRatio.towerNo || '';
+    general.constraintFloorStiffnessRatio.towerNo;
   worksheet.getCell('B23').value =
-    structure.wmass?.constraintFloorStiffnessRatio.stiffnessX0 || '';
+    general.constraintFloorStiffnessRatio.stiffnessX0;
   worksheet.getCell('C23').value =
-    structure.wmass?.constraintFloorStiffnessRatio.stiffnessX1 || '';
-  worksheet.getCell('D23').value =
-    structure.wmass?.constraintFloorStiffnessRatio.ratioX || '';
+    general.constraintFloorStiffnessRatio.stiffnessX1;
+  worksheet.getCell('D23').value = general.constraintFloorStiffnessRatio.ratioX;
   worksheet.getCell('B24').value =
-    structure.wmass?.constraintFloorStiffnessRatio.stiffnessY0 || '';
+    general.constraintFloorStiffnessRatio.stiffnessY0;
   worksheet.getCell('C24').value =
-    structure.wmass?.constraintFloorStiffnessRatio.stiffnessY1 || '';
-  worksheet.getCell('D24').value =
-    structure.wmass?.constraintFloorStiffnessRatio.ratioY || '';
+    general.constraintFloorStiffnessRatio.stiffnessY1;
+  worksheet.getCell('D24').value = general.constraintFloorStiffnessRatio.ratioY;
 
   // write overturning
-  worksheet.getCell('C27').value =
-    structure.wmass?.overturningCheck.storeyNo || '';
-  worksheet.getCell('E27').value =
-    structure.wmass?.overturningCheck.towerNo || '';
-  worksheet.getCell('B29').value =
-    structure.wmass?.overturningCheck.mrWindX || '';
-  worksheet.getCell('C29').value =
-    structure.wmass?.overturningCheck.movWindX || '';
-  worksheet.getCell('D29').value =
-    structure.wmass?.overturningCheck.ratioWindX || '';
-  worksheet.getCell('E29').value =
-    structure.wmass?.overturningCheck.zeroAreaWindX || '';
-  worksheet.getCell('B30').value =
-    structure.wmass?.overturningCheck.mrWindY || '';
-  worksheet.getCell('C30').value =
-    structure.wmass?.overturningCheck.movWindY || '';
-  worksheet.getCell('D30').value =
-    structure.wmass?.overturningCheck.ratioWindY || '';
-  worksheet.getCell('E30').value =
-    structure.wmass?.overturningCheck.zeroAreaWindY || '';
-  worksheet.getCell('B31').value =
-    structure.wmass?.overturningCheck.mrSeismicX || '';
-  worksheet.getCell('C31').value =
-    structure.wmass?.overturningCheck.movSeismicX || '';
-  worksheet.getCell('D31').value =
-    structure.wmass?.overturningCheck.ratioSeismicX || '';
-  worksheet.getCell('E31').value =
-    structure.wmass?.overturningCheck.zeroAreaSeismicX || '';
-  worksheet.getCell('B32').value =
-    structure.wmass?.overturningCheck.mrSeismicY || '';
-  worksheet.getCell('C32').value =
-    structure.wmass?.overturningCheck.movSeismicY || '';
-  worksheet.getCell('D32').value =
-    structure.wmass?.overturningCheck.ratioSeismicY || '';
-  worksheet.getCell('E32').value =
-    structure.wmass?.overturningCheck.zeroAreaSeismicY || '';
+  worksheet.getCell('C27').value = general.overturningCheck.storeyNo;
+  worksheet.getCell('E27').value = general.overturningCheck.towerNo;
+  worksheet.getCell('B29').value = general.overturningCheck.mrWindX;
+  worksheet.getCell('C29').value = general.overturningCheck.movWindX;
+  worksheet.getCell('D29').value = general.overturningCheck.ratioWindX;
+  worksheet.getCell('E29').value = general.overturningCheck.zeroAreaWindX;
+  worksheet.getCell('B30').value = general.overturningCheck.mrWindY;
+  worksheet.getCell('C30').value = general.overturningCheck.movWindY;
+  worksheet.getCell('D30').value = general.overturningCheck.ratioWindY;
+  worksheet.getCell('E30').value = general.overturningCheck.zeroAreaWindY;
+  worksheet.getCell('B31').value = general.overturningCheck.mrSeismicX;
+  worksheet.getCell('C31').value = general.overturningCheck.movSeismicX;
+  worksheet.getCell('D31').value = general.overturningCheck.ratioSeismicX;
+  worksheet.getCell('E31').value = general.overturningCheck.zeroAreaSeismicX;
+  worksheet.getCell('B32').value = general.overturningCheck.mrSeismicY;
+  worksheet.getCell('C32').value = general.overturningCheck.movSeismicY;
+  worksheet.getCell('D32').value = general.overturningCheck.ratioSeismicY;
+  worksheet.getCell('E32').value = general.overturningCheck.zeroAreaSeismicY;
 
   // write stable check
-  worksheet.getCell('B36').value =
-    structure.wmass?.stableCheck.seismicStoreyNo || '';
-  worksheet.getCell('C36').value =
-    structure.wmass?.stableCheck.seismicTowerNo || '';
-  worksheet.getCell('D36').value =
-    structure.wmass?.stableCheck.seismicRatioX || '';
-  worksheet.getCell('E36').value =
-    structure.wmass?.stableCheck.seismicRatioY || '';
-  worksheet.getCell('B37').value =
-    structure.wmass?.stableCheck.windStoreyNo || '';
-  worksheet.getCell('C37').value =
-    structure.wmass?.stableCheck.windTowerNo || '';
-  worksheet.getCell('D37').value =
-    structure.wmass?.stableCheck.windRatioX || '';
-  worksheet.getCell('E37').value =
-    structure.wmass?.stableCheck.windRatioY || '';
+  worksheet.getCell('B36').value = general.stableCheck.seismicStoreyNo;
+  worksheet.getCell('C36').value = general.stableCheck.seismicTowerNo;
+  worksheet.getCell('D36').value = general.stableCheck.seismicRatioX;
+  worksheet.getCell('E36').value = general.stableCheck.seismicRatioY;
+  worksheet.getCell('B37').value = general.stableCheck.windStoreyNo;
+  worksheet.getCell('C37').value = general.stableCheck.windTowerNo;
+  worksheet.getCell('D37').value = general.stableCheck.windRatioX;
+  worksheet.getCell('E37').value = general.stableCheck.windRatioY;
 
   // write wind comfort
-  worksheet.getCell('B41').value =
-    structure.wmass?.windComfort.accelerationAlongX || '';
-  worksheet.getCell('C41').value =
-    structure.wmass?.windComfort.accelerationAlongY || '';
-  worksheet.getCell('B42').value =
-    structure.wmass?.windComfort.accelerationCrossX || '';
-  worksheet.getCell('C42').value =
-    structure.wmass?.windComfort.accelerationCrossY || '';
+  worksheet.getCell('B41').value = general.windComfort.accelerationAlongX;
+  worksheet.getCell('C41').value = general.windComfort.accelerationAlongY;
+  worksheet.getCell('B42').value = general.windComfort.accelerationCrossX;
+  worksheet.getCell('C42').value = general.windComfort.accelerationCrossY;
 }
 
 export async function formatGeneralResult(worksheet: Excel.Worksheet) {

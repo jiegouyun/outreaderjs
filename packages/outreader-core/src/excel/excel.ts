@@ -69,13 +69,13 @@ export async function exportExcel(structure: IStructureFrontEnd) {
   // write drift information
   const sheetDrift = workbook.addWorksheet('位移角');
   await initDrift(sheetDrift);
-  await writeDrift(structure, sheetDrift);
+  await writeDrift(structure.drift, sheetDrift);
   await formatDrift(sheetDrift);
 
   // write feneral result information
   const sheetGeneralResult = workbook.addWorksheet('整体验算结果');
   await initGeneralResult(sheetGeneralResult);
-  await writeGeneralResult(structure, sheetGeneralResult);
+  await writeGeneralResult(structure.generalResult, sheetGeneralResult);
   await formatGeneralResult(sheetGeneralResult);
 
   // write distribute result
