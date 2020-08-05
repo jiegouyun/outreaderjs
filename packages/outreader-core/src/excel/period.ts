@@ -1,5 +1,5 @@
-import { IStructure } from '../interfaces';
-import { rangeSetBorder, rangeFillColor, distributeFormat } from './commom';
+import { IPeriodFE } from '../interfaces';
+import { rangeFillColor, distributeFormat } from './commom';
 import Excel from 'exceljs';
 
 export async function initPeriod(worksheet: Excel.Worksheet) {
@@ -29,47 +29,32 @@ export async function initPeriod(worksheet: Excel.Worksheet) {
 }
 
 export async function writePeriod(
-  structure: IStructure,
+  period: IPeriodFE,
   worksheet: Excel.Worksheet,
 ) {
-  let modeCount: number = (structure.wzq?.modeCoupling.modeID as number[])
-    .length;
+  const modeCount: number = period.modeCoupling.modeID.length;
   for (let i = 0; i < modeCount; i++) {
     // write mode
-    worksheet.getCell(`A${3 + i}`).value =
-      structure.wzq?.modeCoupling.modeID[i] || '';
+    worksheet.getCell(`A${3 + i}`).value = period.modeCoupling.modeID[i];
 
     // write coupling period
-    worksheet.getCell(`B${3 + i}`).value =
-      structure.wzq?.modeCoupling.period[i] || '';
-    worksheet.getCell(`C${3 + i}`).value =
-      structure.wzq?.modeCoupling.angle[i] || '';
-    worksheet.getCell(`D${3 + i}`).value =
-      structure.wzq?.modeCoupling.factorX[i] || '';
-    worksheet.getCell(`E${3 + i}`).value =
-      structure.wzq?.modeCoupling.factorY[i] || '';
-    worksheet.getCell(`F${3 + i}`).value =
-      structure.wzq?.modeCoupling.factorZ[i] || '';
+    worksheet.getCell(`B${3 + i}`).value = period.modeCoupling.period[i];
+    worksheet.getCell(`C${3 + i}`).value = period.modeCoupling.angle[i];
+    worksheet.getCell(`D${3 + i}`).value = period.modeCoupling.factorX[i];
+    worksheet.getCell(`E${3 + i}`).value = period.modeCoupling.factorY[i];
+    worksheet.getCell(`F${3 + i}`).value = period.modeCoupling.factorZ[i];
 
     // write seismic period
-    worksheet.getCell(`G${3 + i}`).value =
-      structure.wzq?.modeSeismic.period[i] || '';
-    worksheet.getCell(`H${3 + i}`).value =
-      structure.wzq?.modeSeismic.angle[i] || '';
-    worksheet.getCell(`I${3 + i}`).value =
-      structure.wzq?.modeSeismic.factorX[i] || '';
-    worksheet.getCell(`J${3 + i}`).value =
-      structure.wzq?.modeSeismic.factorY[i] || '';
-    worksheet.getCell(`K${3 + i}`).value =
-      structure.wzq?.modeSeismic.factorZ[i] || '';
+    worksheet.getCell(`G${3 + i}`).value = period.modeSeismic.period[i];
+    worksheet.getCell(`H${3 + i}`).value = period.modeSeismic.angle[i];
+    worksheet.getCell(`I${3 + i}`).value = period.modeSeismic.factorX[i];
+    worksheet.getCell(`J${3 + i}`).value = period.modeSeismic.factorY[i];
+    worksheet.getCell(`K${3 + i}`).value = period.modeSeismic.factorZ[i];
 
     // write mode mass
-    worksheet.getCell(`L${3 + i}`).value =
-      structure.wzq?.modeMass.factorX[i] || '';
-    worksheet.getCell(`M${3 + i}`).value =
-      structure.wzq?.modeMass.factorY[i] || '';
-    worksheet.getCell(`N${3 + i}`).value =
-      structure.wzq?.modeMass.factorZ[i] || '';
+    worksheet.getCell(`L${3 + i}`).value = period.modeMass.factorX[i];
+    worksheet.getCell(`M${3 + i}`).value = period.modeMass.factorY[i];
+    worksheet.getCell(`N${3 + i}`).value = period.modeMass.factorZ[i];
   }
 }
 

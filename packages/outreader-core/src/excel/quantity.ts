@@ -1,5 +1,5 @@
-import { IStructure } from '../interfaces';
-import { rangeSetBorder, rangeFillColor, distributeFormat } from './commom';
+import { IQuantityFE } from '../interfaces';
+import { rangeFillColor, distributeFormat } from './commom';
 import Excel from 'exceljs';
 
 export async function initQuantity(worksheet: Excel.Worksheet) {
@@ -58,181 +58,156 @@ export async function initQuantity(worksheet: Excel.Worksheet) {
 }
 
 export async function writeQuantity(
-  structure: IStructure,
+  quantity: IQuantityFE,
   worksheet: Excel.Worksheet,
 ) {
   // write storey
-  for (
-    let i = 0;
-    i < (structure.wmass?.storey.storeyID as number[]).length;
-    i++
-  ) {
+  for (let i = 0; i < quantity.storeyID.length; i++) {
     // write storey
-    worksheet.getCell(`A${3 + i}`).value =
-      structure.wmass?.storey.storeyID[i] || '';
-    worksheet.getCell(`B${3 + i}`).value =
-      Math.round(structure.wmass?.storey.area[i] as number) || '';
+    worksheet.getCell(`A${3 + i}`).value = quantity.storeyID[i];
+    worksheet.getCell(`B${3 + i}`).value = {
+      formula: `round(${quantity.area[i]},0)`,
+      date1904: false,
+    };
   }
 
   // write concrete
-  for (
-    let i = 0;
-    i < (structure.concreteSteel?.concrete.storeyID as number[]).length;
-    i++
-  ) {
+  for (let i = 0; i < quantity.concrete.storeyID.length; i++) {
     // write concrete
     worksheet.getCell(`C${3 + i}`).value = {
-      formula: `round(${
-        structure.concreteSteel?.concrete.wall[i] as number
-      },0)`,
+      formula: `round(${quantity.concrete.wall[i]},0)`,
       date1904: false,
     };
     worksheet.getCell(`D${3 + i}`).value = {
-      formula: `round(${
-        structure.concreteSteel?.concrete.column[i] as number
-      },0)`,
+      formula: `round(${quantity.concrete.column[i]},0)`,
       date1904: false,
     };
     worksheet.getCell(`E${3 + i}`).value = {
-      formula: `round(${
-        structure.concreteSteel?.concrete.beam[i] as number
-      },0)`,
+      formula: `round(${quantity.concrete.beam[i]},0)`,
       date1904: false,
     };
     worksheet.getCell(`F${3 + i}`).value = {
-      formula: `round(${
-        structure.concreteSteel?.concrete.floor[i] as number
-      },0)`,
+      formula: `round(${quantity.concrete.floor[i]},0)`,
       date1904: false,
     };
     worksheet.getCell(`G${3 + i}`).value = {
-      formula: `round(${
-        structure.concreteSteel?.concrete.storey[i] as number
-      },0)`,
+      formula: `round(${quantity.concrete.storey[i]},0)`,
       date1904: false,
     };
 
     // write concrete pre area
     worksheet.getCell(`H${3 + i}`).value = {
-      formula: `round(C${3 + i}/B${3 + i},2)`,
+      formula: `round(${quantity.unitConcrete.wall[i]},2)`,
       date1904: false,
     };
     worksheet.getCell(`I${3 + i}`).value = {
-      formula: `round(D${3 + i}/B${3 + i},2)`,
+      formula: `round(${quantity.unitConcrete.column[i]},2)`,
       date1904: false,
     };
     worksheet.getCell(`J${3 + i}`).value = {
-      formula: `round(E${3 + i}/B${3 + i},2)`,
+      formula: `round(${quantity.unitConcrete.beam[i]},2)`,
       date1904: false,
     };
     worksheet.getCell(`K${3 + i}`).value = {
-      formula: `round(F${3 + i}/B${3 + i},2)`,
+      formula: `round(${quantity.unitConcrete.floor[i]},2)`,
       date1904: false,
     };
     worksheet.getCell(`L${3 + i}`).value = {
-      formula: `round(G${3 + i}/B${3 + i},2)`,
+      formula: `round(${quantity.unitConcrete.storey[i]},2)`,
       date1904: false,
     };
   }
 
   // write steel
-  for (
-    let i = 0;
-    i < (structure.concreteSteel?.steel.storeyID as number[]).length;
-    i++
-  ) {
+  for (let i = 0; i < quantity.steel.storeyID.length; i++) {
     // write steel
     worksheet.getCell(`M${3 + i}`).value = {
-      formula: `round(${structure.concreteSteel?.steel.wall[i] as number},0)`,
+      formula: `round(${quantity.steel.wall[i]},0)`,
       date1904: false,
     };
     worksheet.getCell(`N${3 + i}`).value = {
-      formula: `round(${structure.concreteSteel?.steel.column[i] as number},0)`,
+      formula: `round(${quantity.steel.column[i]},0)`,
       date1904: false,
     };
     worksheet.getCell(`O${3 + i}`).value = {
-      formula: `round(${structure.concreteSteel?.steel.beam[i] as number},0)`,
+      formula: `round(${quantity.steel.beam[i]},0)`,
       date1904: false,
     };
     worksheet.getCell(`P${3 + i}`).value = {
-      formula: `round(${structure.concreteSteel?.steel.floor[i] as number},0)`,
+      formula: `round(${quantity.steel.floor[i]},0)`,
       date1904: false,
     };
     worksheet.getCell(`Q${3 + i}`).value = {
-      formula: `round(${structure.concreteSteel?.steel.storey[i] as number},0)`,
+      formula: `round(${quantity.steel.storey[i]},0)`,
       date1904: false,
     };
 
     // write steel pre area
     worksheet.getCell(`R${3 + i}`).value = {
-      formula: `round(M${3 + i}/B${3 + i},2)`,
+      formula: `round(${quantity.unitSteel.wall[i]} * 1000,2)`,
       date1904: false,
     };
     worksheet.getCell(`S${3 + i}`).value = {
-      formula: `round(N${3 + i}/B${3 + i},2)`,
+      formula: `round(${quantity.unitSteel.column[i]} * 1000,2)`,
       date1904: false,
     };
     worksheet.getCell(`T${3 + i}`).value = {
-      formula: `round(O${3 + i}/B${3 + i},2)`,
+      formula: `round(${quantity.unitSteel.beam[i]} * 1000,2)`,
       date1904: false,
     };
     worksheet.getCell(`U${3 + i}`).value = {
-      formula: `round(P${3 + i}/B${3 + i},2)`,
+      formula: `round(${quantity.unitSteel.floor[i]} * 1000,2)`,
       date1904: false,
     };
     worksheet.getCell(`V${3 + i}`).value = {
-      formula: `round(Q${3 + i}/B${3 + i},2)`,
+      formula: `round(${quantity.unitSteel.storey[i]} * 1000,2)`,
       date1904: false,
     };
   }
 
   // write rebar
-  for (
-    let i = 0;
-    i < (structure.rebar?.area.storeyID as number[]).length;
-    i++
-  ) {
+  for (let i = 0; i < quantity.rebar.storeyID.length; i++) {
     // write rebar
     worksheet.getCell(`W${3 + i}`).value = {
-      formula: `round(${
-        structure.rebar?.wallRebar.storey[i] as number
-      } / 1000,2)`,
+      formula: `round(${quantity.rebar.wall[i]} / 1000,2)`,
       date1904: false,
     };
     worksheet.getCell(`X${3 + i}`).value = {
-      formula: `round(${
-        structure.rebar?.columnRebar.storey[i] as number
-      } / 1000,2)`,
+      formula: `round(${quantity.rebar.column[i]} / 1000,2)`,
       date1904: false,
     };
     worksheet.getCell(`Y${3 + i}`).value = {
-      formula: `round(${
-        structure.rebar?.beamRebar.storey[i] as number
-      } / 1000,2)`,
+      formula: `round(${quantity.rebar.beam[i]} / 1000,2)`,
       date1904: false,
     };
     worksheet.getCell(`Z${3 + i}`).value = {
-      formula: `round(${
-        structure.rebar?.floorRebar.storey[i] as number
-      } / 1000,2)`,
+      formula: `round(${quantity.rebar.floor[i]} / 1000,2)`,
       date1904: false,
     };
     worksheet.getCell(`AA${3 + i}`).value = {
-      formula: `sum(W${3 + i}:Z${3 + i})`,
+      formula: `round(${quantity.rebar.storey[i]} / 1000,2)`,
       date1904: false,
     };
 
     // write rebar pre area
-    worksheet.getCell(`AB${3 + i}`).value =
-      structure.rebar?.wallRebar.perArea[i] || '';
-    worksheet.getCell(`AC${3 + i}`).value =
-      structure.rebar?.columnRebar.perArea[i] || '';
-    worksheet.getCell(`AD${3 + i}`).value =
-      structure.rebar?.beamRebar.perArea[i] || '';
-    worksheet.getCell(`AE${3 + i}`).value =
-      structure.rebar?.floorRebar.perArea[i] || '';
+    worksheet.getCell(`AB${3 + i}`).value = {
+      formula: `round(${quantity.unitRebar.wall[i]},2)`,
+      date1904: false,
+    };
+    worksheet.getCell(`AC${3 + i}`).value = {
+      formula: `round(${quantity.unitRebar.column[i]},2)`,
+      date1904: false,
+    };
+    worksheet.getCell(`AD${3 + i}`).value = {
+      formula: `round(${quantity.unitRebar.beam[i]},2)`,
+      date1904: false,
+    };
+    worksheet.getCell(`AE${3 + i}`).value = {
+      formula: `round(${quantity.unitRebar.floor[i]},2)`,
+      date1904: false,
+    };
     worksheet.getCell(`AF${3 + i}`).value = {
-      formula: `sum(AB${3 + i}:AE${3 + i})`,
+      formula: `round(${quantity.unitRebar.storey[i]},2)`,
       date1904: false,
     };
   }

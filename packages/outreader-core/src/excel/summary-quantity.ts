@@ -1,4 +1,4 @@
-import { IStructure } from '../interfaces';
+import { ISummaryQuantityFE } from '../interfaces';
 import { rangeSetBorder, rangeFillColor } from './commom';
 import Excel from 'exceljs';
 
@@ -109,139 +109,147 @@ export async function initSummaryQuantity(worksheet: Excel.Worksheet) {
 }
 
 export async function writeSummaryQuantity(
-  structure: IStructure,
+  summaryQuantity: ISummaryQuantityFE,
   worksheet: Excel.Worksheet,
 ) {
   // write basic information
-  worksheet.getCell('B1').value = { formula: '汇总信息!D3', date1904: false };
-  worksheet.getCell('C2').value = { formula: '汇总信息!F6', date1904: false };
-  worksheet.getCell('C3').value =
-    Math.round(structure.rebar?.area.totalArea as number) || '';
-  worksheet.getCell('C4').value = {
-    formula: '汇总信息!C39 & "/" & 汇总信息!C40 & "/" & 汇总信息!C41',
-    date1904: false,
-  };
-  worksheet.getCell('C5').value = {
-    formula: 'min(汇总信息!D12:D13) & "/" & min(汇总信息!D14:D15)',
-    date1904: false,
-  };
+  worksheet.getCell('B1').value = summaryQuantity.structure.engineering;
+  worksheet.getCell('C2').value = summaryQuantity.structure.height;
+  worksheet.getCell('C3').value = summaryQuantity.structure.area;
+  worksheet.getCell('C4').value = summaryQuantity.structure.period;
+  worksheet.getCell('C5').value = summaryQuantity.structure.drift;
 
   // write rebar perarea
   worksheet.getCell('C10').value = {
-    formula: 'round(C35*1000/C3,2)',
+    formula: `round(${summaryQuantity.unitRebar.wall},2)`,
     date1904: false,
   };
   worksheet.getCell('C11').value = {
-    formula: 'round(C36*1000/C3,2)',
+    formula: `round(${summaryQuantity.unitRebar.column},2)`,
     date1904: false,
   };
   worksheet.getCell('C12').value = {
-    formula: 'round(C37*1000/C3,2)',
+    formula: `round(${summaryQuantity.unitRebar.beam},2)`,
     date1904: false,
   };
   worksheet.getCell('C13').value = {
-    formula: 'round(C38*1000/C3,2)',
+    formula: `round(${summaryQuantity.unitRebar.floor},2)`,
     date1904: false,
   };
   worksheet.getCell('C14').value = {
-    formula: 'round(C39*1000/C3,2)',
+    formula: `round(${summaryQuantity.unitRebar.total},2)`,
     date1904: false,
   };
 
   // wtite concrete perarea
   worksheet.getCell('C15').value = {
-    formula: 'round(C40/C3,2)',
+    formula: `round(${summaryQuantity.unitConcrete.wall},2)`,
     date1904: false,
   };
   worksheet.getCell('C16').value = {
-    formula: 'round(C41/C3,2)',
+    formula: `round(${summaryQuantity.unitConcrete.column},2)`,
     date1904: false,
   };
   worksheet.getCell('C17').value = {
-    formula: 'round(C42/C3,2)',
+    formula: `round(${summaryQuantity.unitConcrete.beam},2)`,
     date1904: false,
   };
   worksheet.getCell('C18').value = {
-    formula: 'round(C43/C3,2)',
+    formula: `round(${summaryQuantity.unitConcrete.floor},2)`,
     date1904: false,
   };
   worksheet.getCell('C19').value = {
-    formula: 'round(C44/C3,2)',
+    formula: `round(${summaryQuantity.unitConcrete.total},2)`,
     date1904: false,
   };
 
   // wtite steel perarea
   worksheet.getCell('C20').value = {
-    formula: 'round(C45*1000/C3,2)',
+    formula: `round(${summaryQuantity.unitSteel.wall} * 1000,2)`,
     date1904: false,
   };
   worksheet.getCell('C21').value = {
-    formula: 'round(C46*1000/C3,2)',
+    formula: `round(${summaryQuantity.unitSteel.column} * 1000,2)`,
     date1904: false,
   };
   worksheet.getCell('C22').value = {
-    formula: 'round(C47*1000/C3,2)',
+    formula: `round(${summaryQuantity.unitSteel.beam} * 1000,2)`,
     date1904: false,
   };
   worksheet.getCell('C23').value = {
-    formula: 'round(C48*1000/C3,2)',
+    formula: `round(${summaryQuantity.unitSteel.floor} * 1000,2)`,
     date1904: false,
   };
   worksheet.getCell('C24').value = {
-    formula: 'round(C49*1000/C3,2)',
+    formula: `round(${summaryQuantity.unitSteel.total} * 1000,2)`,
     date1904: false,
   };
 
   // write rebar
-  worksheet.getCell('C35').value = Math.round(
-    (structure.rebar?.wallRebar.total as number) / 1000,
-  );
-  worksheet.getCell('C36').value = Math.round(
-    (structure.rebar?.columnRebar.total as number) / 1000,
-  );
-  worksheet.getCell('C37').value = Math.round(
-    (structure.rebar?.beamRebar.total as number) / 1000,
-  );
-  worksheet.getCell('C38').value = Math.round(
-    (structure.rebar?.floorRebar.total as number) / 1000,
-  );
-  worksheet.getCell('C39').value = Math.round(
-    (structure.rebar?.projectRebar.total as number) / 1000,
-  );
+  worksheet.getCell('C35').value = {
+    formula: `round(${summaryQuantity.rebar.wall} / 1000,0)`,
+    date1904: false,
+  };
+  worksheet.getCell('C36').value = {
+    formula: `round(${summaryQuantity.rebar.column} / 1000,0)`,
+    date1904: false,
+  };
+  worksheet.getCell('C37').value = {
+    formula: `round(${summaryQuantity.rebar.beam} / 1000,0)`,
+    date1904: false,
+  };
+  worksheet.getCell('C38').value = {
+    formula: `round(${summaryQuantity.rebar.floor} / 1000,0)`,
+    date1904: false,
+  };
+  worksheet.getCell('C39').value = {
+    formula: `round(${summaryQuantity.rebar.total} / 1000,0)`,
+    date1904: false,
+  };
 
   // write concrete
-  worksheet.getCell('C40').value = Math.round(
-    structure.concreteSteel?.concrete.totalWall as number,
-  );
-  worksheet.getCell('C41').value = Math.round(
-    structure.concreteSteel?.concrete.totalColumn as number,
-  );
-  worksheet.getCell('C42').value = Math.round(
-    structure.concreteSteel?.concrete.totalBeam as number,
-  );
-  worksheet.getCell('C43').value = Math.round(
-    structure.concreteSteel?.concrete.totalFloor as number,
-  );
-  worksheet.getCell('C44').value = Math.round(
-    structure.concreteSteel?.concrete.totalStorey as number,
-  );
+  worksheet.getCell('C40').value = {
+    formula: `round(${summaryQuantity.concrete.wall},0)`,
+    date1904: false,
+  };
+  worksheet.getCell('C41').value = {
+    formula: `round(${summaryQuantity.concrete.column},0)`,
+    date1904: false,
+  };
+  worksheet.getCell('C42').value = {
+    formula: `round(${summaryQuantity.concrete.beam},0)`,
+    date1904: false,
+  };
+  worksheet.getCell('C43').value = {
+    formula: `round(${summaryQuantity.concrete.floor},0)`,
+    date1904: false,
+  };
+  worksheet.getCell('C44').value = {
+    formula: `round(${summaryQuantity.concrete.total},0)`,
+    date1904: false,
+  };
 
   // write steel
-  worksheet.getCell('C45').value = Math.round(
-    structure.concreteSteel?.steel.totalWall as number,
-  );
-  worksheet.getCell('C46').value = Math.round(
-    structure.concreteSteel?.steel.totalColumn as number,
-  );
-  worksheet.getCell('C47').value = Math.round(
-    structure.concreteSteel?.steel.totalBeam as number,
-  );
-  worksheet.getCell('C48').value = Math.round(
-    structure.concreteSteel?.steel.totalFloor as number,
-  );
-  worksheet.getCell('C49').value = Math.round(
-    structure.concreteSteel?.steel.totalStorey as number,
-  );
+  worksheet.getCell('C45').value = {
+    formula: `round(${summaryQuantity.steel.wall},0)`,
+    date1904: false,
+  };
+  worksheet.getCell('C46').value = {
+    formula: `round(${summaryQuantity.steel.column},0)`,
+    date1904: false,
+  };
+  worksheet.getCell('C47').value = {
+    formula: `round(${summaryQuantity.steel.beam},0)`,
+    date1904: false,
+  };
+  worksheet.getCell('C48').value = {
+    formula: `round(${summaryQuantity.steel.floor},0)`,
+    date1904: false,
+  };
+  worksheet.getCell('C49').value = {
+    formula: `round(${summaryQuantity.steel.total},0)`,
+    date1904: false,
+  };
 
   // write price
   worksheet.getCell('C52').value = 750;
