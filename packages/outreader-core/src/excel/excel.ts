@@ -81,7 +81,10 @@ export async function exportExcel(structure: IStructureFrontEnd) {
   // write distribute result
   const sheetDistributeResult = workbook.addWorksheet('楼层分布数据');
   await initDistributeResult(sheetDistributeResult);
-  await writeDistributeResult(structure, sheetDistributeResult);
+  await writeDistributeResult(
+    structure.distributeResult,
+    sheetDistributeResult,
+  );
   await formatDistributeResult(sheetDistributeResult);
 
   // write modify factor

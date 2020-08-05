@@ -1,5 +1,5 @@
-import { IStructure } from '../interfaces';
-import { rangeSetBorder, rangeFillColor, distributeFormat } from './commom';
+import { IDistributeResultFE } from '../interfaces';
+import { rangeFillColor, distributeFormat } from './commom';
 import Excel from 'exceljs';
 
 export async function initDistributeResult(worksheet: Excel.Worksheet) {
@@ -67,115 +67,78 @@ export async function initDistributeResult(worksheet: Excel.Worksheet) {
 }
 
 export async function writeDistributeResult(
-  structure: IStructure,
+  distribute: IDistributeResultFE,
   worksheet: Excel.Worksheet,
 ) {
-  for (
-    let i = 0;
-    i < (structure.wmass?.storey.storeyID as number[]).length;
-    i++
-  ) {
+  for (let i = 0; i < distribute.storey.storeyID.length; i++) {
     // write storey
-    worksheet.getCell(`A${3 + i}`).value =
-      structure.wmass?.storey.storeyID[i] || '';
-    worksheet.getCell(`B${3 + i}`).value =
-      structure.wmass?.storey.towerID[i] || '';
-    worksheet.getCell(`C${3 + i}`).value =
-      structure.wmass?.storey.attribute[i] || '';
-    worksheet.getCell(`D${3 + i}`).value =
-      structure.wmass?.storey.height[i] || '';
-    worksheet.getCell(`E${3 + i}`).value =
-      structure.wmass?.storey.heightToGround[i] || '';
-    worksheet.getCell(`F${3 + i}`).value =
-      structure.wmass?.storey.area[i] || '';
+    worksheet.getCell(`A${3 + i}`).value = distribute.storey.storeyID[i];
+    worksheet.getCell(`B${3 + i}`).value = distribute.storey.towerID[i];
+    worksheet.getCell(`C${3 + i}`).value = distribute.storey.attribute[i];
+    worksheet.getCell(`D${3 + i}`).value = distribute.storey.height[i];
+    worksheet.getCell(`E${3 + i}`).value = distribute.storey.heightToGround[i];
+    worksheet.getCell(`F${3 + i}`).value = distribute.storey.area[i];
 
     // write mass ratio
-    worksheet.getCell(`G${3 + i}`).value =
-      structure.wmass?.massRatio.storeyMass[i] || '';
-    worksheet.getCell(`H${3 + i}`).value =
-      structure.wmass?.massRatio.ratio[i] || '';
-    worksheet.getCell(`I${3 + i}`).value =
-      structure.wmass?.massRatio.massPerArea[i] || '';
+    worksheet.getCell(`G${3 + i}`).value = distribute.massRatio.storeyMass[i];
+    worksheet.getCell(`H${3 + i}`).value = distribute.massRatio.ratio[i];
+    worksheet.getCell(`I${3 + i}`).value = distribute.massRatio.massPerArea[i];
     worksheet.getCell(`J${3 + i}`).value =
-      structure.wmass?.massRatio.massPerAreaRatio[i] || '';
+      distribute.massRatio.massPerAreaRatio[i];
 
     // write stiffness
-    worksheet.getCell(`K${3 + i}`).value =
-      structure.wmass?.stiffness.ratx1[i] || '';
-    worksheet.getCell(`L${3 + i}`).value =
-      structure.wmass?.stiffness.ratx2[i] || '';
-    worksheet.getCell(`M${3 + i}`).value =
-      structure.wmass?.stiffness.rjx1[i] || '';
-    worksheet.getCell(`N${3 + i}`).value =
-      structure.wmass?.stiffness.rjx3[i] || '';
-    worksheet.getCell(`O${3 + i}`).value =
-      structure.wmass?.stiffness.raty1[i] || '';
-    worksheet.getCell(`P${3 + i}`).value =
-      structure.wmass?.stiffness.raty2[i] || '';
-    worksheet.getCell(`Q${3 + i}`).value =
-      structure.wmass?.stiffness.rjy1[i] || '';
-    worksheet.getCell(`R${3 + i}`).value =
-      structure.wmass?.stiffness.rjy3[i] || '';
-    worksheet.getCell(`S${3 + i}`).value =
-      structure.wmass?.stiffness.rjz1[i] || '';
-    worksheet.getCell(`T${3 + i}`).value =
-      structure.wmass?.stiffness.rjz3[i] || '';
+    worksheet.getCell(`K${3 + i}`).value = distribute.stiffness.ratx1[i];
+    worksheet.getCell(`L${3 + i}`).value = distribute.stiffness.ratx2[i];
+    worksheet.getCell(`M${3 + i}`).value = distribute.stiffness.rjx1[i];
+    worksheet.getCell(`N${3 + i}`).value = distribute.stiffness.rjx3[i];
+    worksheet.getCell(`O${3 + i}`).value = distribute.stiffness.raty1[i];
+    worksheet.getCell(`P${3 + i}`).value = distribute.stiffness.raty2[i];
+    worksheet.getCell(`Q${3 + i}`).value = distribute.stiffness.rjy1[i];
+    worksheet.getCell(`R${3 + i}`).value = distribute.stiffness.rjy3[i];
+    worksheet.getCell(`S${3 + i}`).value = distribute.stiffness.rjz1[i];
+    worksheet.getCell(`T${3 + i}`).value = distribute.stiffness.rjz3[i];
 
     // write shear capacity check
     worksheet.getCell(`W${3 + i}`).value =
-      structure.wmass?.shearCapacityCheck.capacityX[i] || '';
+      distribute.shearCapacityCheck.capacityX[i];
     worksheet.getCell(`X${3 + i}`).value =
-      structure.wmass?.shearCapacityCheck.ratioX[i] || '';
+      distribute.shearCapacityCheck.ratioX[i];
     worksheet.getCell(`Y${3 + i}`).value =
-      structure.wmass?.shearCapacityCheck.capacityY[i] || '';
+      distribute.shearCapacityCheck.capacityY[i];
     worksheet.getCell(`Z${3 + i}`).value =
-      structure.wmass?.shearCapacityCheck.ratioY[i] || '';
+      distribute.shearCapacityCheck.ratioY[i];
   }
 
-  for (
-    let i = 0;
-    i < (structure.wzq?.seismicForce.storeyID as number[]).length;
-    i++
-  ) {
+  for (let i = 0; i < distribute.shearWeightRatio.storeyID.length; i++) {
     // write shear weight ratio
     worksheet.getCell(`U${3 + i}`).value =
-      structure.wzq?.seismicForce.shearWeightRatioX[i] || '';
+      distribute.shearWeightRatio.factorX[i];
     worksheet.getCell(`V${3 + i}`).value =
-      structure.wzq?.seismicForce.shearWeightRatioX[i] || '';
+      distribute.shearWeightRatio.factorY[i];
   }
 
-  for (
-    let i = 0;
-    i < (structure.wv02q?.momentPercent.storeyID as number[]).length;
-    i++
-  ) {
+  for (let i = 0; i < distribute.momentPercent.storeyID.length; i++) {
     // write moment distribute
     worksheet.getCell(`AA${3 + i}`).value =
-      structure.wv02q?.momentPercent.percentColumnX[i] || '';
+      distribute.momentPercent.percentColumnX[i];
     worksheet.getCell(`AB${3 + i}`).value =
-      structure.wv02q?.momentPercent.percentWallX[i] || '';
+      distribute.momentPercent.percentWallX[i];
     worksheet.getCell(`AC${3 + i}`).value =
-      structure.wv02q?.momentPercent.percentColumnY[i] || '';
+      distribute.momentPercent.percentColumnY[i];
     worksheet.getCell(`AD${3 + i}`).value =
-      structure.wv02q?.momentPercent.percentWallY[i] || '';
+      distribute.momentPercent.percentWallY[i];
 
     // write column shear distribute
-    worksheet.getCell(`AE${3 + i}`).value =
-      structure.wv02q?.columnShear.columnX[i] || '';
-    worksheet.getCell(`AF${3 + i}`).value =
-      structure.wv02q?.columnShear.wallX[i] || '';
-    worksheet.getCell(`AG${3 + i}`).value =
-      structure.wv02q?.columnShear.totalX[i] || '';
+    worksheet.getCell(`AE${3 + i}`).value = distribute.columnShear.columnX[i];
+    worksheet.getCell(`AF${3 + i}`).value = distribute.columnShear.wallX[i];
+    worksheet.getCell(`AG${3 + i}`).value = distribute.columnShear.totalX[i];
     worksheet.getCell(`AH${3 + i}`).value =
-      structure.wv02q?.columnShear.percentColumnX[i] || '';
-    worksheet.getCell(`AI${3 + i}`).value =
-      structure.wv02q?.columnShear.columnY[i] || '';
-    worksheet.getCell(`AJ${3 + i}`).value =
-      structure.wv02q?.columnShear.wallY[i] || '';
-    worksheet.getCell(`AK${3 + i}`).value =
-      structure.wv02q?.columnShear.totalY[i] || '';
+      distribute.columnShear.percentColumnX[i];
+    worksheet.getCell(`AI${3 + i}`).value = distribute.columnShear.columnY[i];
+    worksheet.getCell(`AJ${3 + i}`).value = distribute.columnShear.wallY[i];
+    worksheet.getCell(`AK${3 + i}`).value = distribute.columnShear.totalY[i];
     worksheet.getCell(`AL${3 + i}`).value =
-      structure.wv02q?.columnShear.percentColumnY[i] || '';
+      distribute.columnShear.percentColumnY[i];
   }
 }
 

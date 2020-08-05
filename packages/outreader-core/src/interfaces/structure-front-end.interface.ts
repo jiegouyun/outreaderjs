@@ -367,7 +367,7 @@ export interface IDistributeResultFE {
   storey: IStoreyFE;
   massRatio: IMassRatioFE;
   stiffness: IStiffnessFE;
-  shearWeightRatioModify: IShearWeightRatioModifyFE;
+  shearWeightRatio: IShearWeightRatioFE;
   shearCapacityCheck: IShearCapacityCheckFE;
   momentPercent: IMomentPercentFE;
   columnShear: IColumnShearFE;
@@ -406,7 +406,7 @@ export interface IStiffnessFE {
   rjz3: number[];
 }
 
-export interface IShearWeightRatioModifyFE {
+export interface IShearWeightRatioFE {
   storeyID: number[];
   towerID: number[];
   factorX: number[];
