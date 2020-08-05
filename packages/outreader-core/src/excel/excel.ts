@@ -96,7 +96,7 @@ export async function exportExcel(structure: IStructureFrontEnd) {
   // write quantity
   const sheetQuantity = workbook.addWorksheet('工程量');
   await initQuantity(sheetQuantity);
-  await writeQuantity(structure, sheetQuantity);
+  await writeQuantity(structure.quantity, sheetQuantity);
   await formatQuantity(sheetQuantity);
 
   // write xlsx file.

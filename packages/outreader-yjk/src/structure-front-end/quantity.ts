@@ -2,28 +2,31 @@ import { IStructure, IQuantityFE, ISubQuantityFE } from '@outreader/core';
 
 export function convertQuantity(structure: IStructure): IQuantityFE {
   const quantity: IQuantityFE = {
+    storeyID: structure.wmass?.storey.storeyID as number[],
+    towerID: structure.wmass?.storey.towerID as number[],
+    area: structure.wmass?.storey.area as number[],
     concrete: structure.concreteSteel?.concrete as ISubQuantityFE,
     unitConcrete: {
       storeyID: structure.concreteSteel?.concrete.storeyID as number[],
       wall: quantityPerArea(
         structure.concreteSteel?.concrete.wall as number[],
-        structure.rebar?.area.storey as number[],
+        structure.wmass?.storey.area as number[],
       ) as number[],
       beam: quantityPerArea(
         structure.concreteSteel?.concrete.beam as number[],
-        structure.rebar?.area.storey as number[],
+        structure.wmass?.storey.area as number[],
       ) as number[],
       column: quantityPerArea(
         structure.concreteSteel?.concrete.column as number[],
-        structure.rebar?.area.storey as number[],
+        structure.wmass?.storey.area as number[],
       ) as number[],
       floor: quantityPerArea(
         structure.concreteSteel?.concrete.floor as number[],
-        structure.rebar?.area.storey as number[],
+        structure.wmass?.storey.area as number[],
       ) as number[],
       storey: quantityPerArea(
         structure.concreteSteel?.concrete.storey as number[],
-        structure.rebar?.area.storey as number[],
+        structure.wmass?.storey.area as number[],
       ) as number[],
     },
     steel: structure.concreteSteel?.steel as ISubQuantityFE,
@@ -31,23 +34,23 @@ export function convertQuantity(structure: IStructure): IQuantityFE {
       storeyID: structure.concreteSteel?.steel.storeyID as number[],
       wall: quantityPerArea(
         structure.concreteSteel?.steel.wall as number[],
-        structure.rebar?.area.storey as number[],
+        structure.wmass?.storey.area as number[],
       ) as number[],
       beam: quantityPerArea(
         structure.concreteSteel?.steel.beam as number[],
-        structure.rebar?.area.storey as number[],
+        structure.wmass?.storey.area as number[],
       ) as number[],
       column: quantityPerArea(
         structure.concreteSteel?.steel.column as number[],
-        structure.rebar?.area.storey as number[],
+        structure.wmass?.storey.area as number[],
       ) as number[],
       floor: quantityPerArea(
         structure.concreteSteel?.steel.floor as number[],
-        structure.rebar?.area.storey as number[],
+        structure.wmass?.storey.area as number[],
       ) as number[],
       storey: quantityPerArea(
         structure.concreteSteel?.steel.storey as number[],
-        structure.rebar?.area.storey as number[],
+        structure.wmass?.storey.area as number[],
       ) as number[],
     },
     rebar: {
@@ -67,19 +70,19 @@ export function convertQuantity(structure: IStructure): IQuantityFE {
       storeyID: structure.rebar?.area.storeyID as number[],
       wall: quantityPerArea(
         structure.rebar?.wallRebar.storey as number[],
-        structure.rebar?.area.storey as number[],
+        structure.wmass?.storey.area as number[],
       ) as number[],
       beam: quantityPerArea(
         structure.rebar?.beamRebar.storey as number[],
-        structure.rebar?.area.storey as number[],
+        structure.wmass?.storey.area as number[],
       ) as number[],
       column: quantityPerArea(
         structure.rebar?.columnRebar.storey as number[],
-        structure.rebar?.area.storey as number[],
+        structure.wmass?.storey.area as number[],
       ) as number[],
       floor: quantityPerArea(
         structure.rebar?.floorRebar.storey as number[],
-        structure.rebar?.area.storey as number[],
+        structure.wmass?.storey.area as number[],
       ) as number[],
       storey: quantityPerArea(
         storeyRebar(
@@ -88,7 +91,7 @@ export function convertQuantity(structure: IStructure): IQuantityFE {
           structure.rebar?.beamRebar.storey as number[],
           structure.rebar?.floorRebar.storey as number[],
         ) as number[],
-        structure.rebar?.area.storey as number[],
+        structure.wmass?.storey.area as number[],
       ) as number[],
     },
   };

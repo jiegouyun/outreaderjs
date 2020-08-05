@@ -469,6 +469,9 @@ export interface IV02qFactorFE {
 }
 
 export interface IQuantityFE {
+  storeyID: number[];
+  towerID: number[];
+  area: number[];
   concrete: ISubQuantityFE;
   unitConcrete: ISubQuantityFE;
   steel: ISubQuantityFE;
