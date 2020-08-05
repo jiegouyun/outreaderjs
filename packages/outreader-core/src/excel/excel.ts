@@ -90,7 +90,7 @@ export async function exportExcel(structure: IStructureFrontEnd) {
   // write modify factor
   const sheetFactor = workbook.addWorksheet('调整系数');
   await initFactor(sheetFactor);
-  await writeFactor(structure, sheetFactor);
+  await writeFactor(structure.factor, sheetFactor);
   await formatFactor(sheetFactor);
 
   // write quantity
@@ -100,7 +100,7 @@ export async function exportExcel(structure: IStructureFrontEnd) {
   await formatQuantity(sheetQuantity);
 
   // write xlsx file.
-  const filename = path.join(structure.dir, 'OutReader.xlsx');
+  const filename = path.join(structure.summary.project.dir, 'OutReader.xlsx');
   await workbook.xlsx.writeFile(filename);
 
   return true;

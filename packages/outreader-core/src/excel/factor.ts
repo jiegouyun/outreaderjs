@@ -1,5 +1,5 @@
-import { IStructure } from '../interfaces';
-import { rangeSetBorder, rangeFillColor, distributeFormat } from './commom';
+import { IFactorFE } from '../interfaces';
+import { rangeFillColor, distributeFormat } from './commom';
 import Excel from 'exceljs';
 
 export async function initFactor(worksheet: Excel.Worksheet) {
@@ -23,41 +23,30 @@ export async function initFactor(worksheet: Excel.Worksheet) {
 }
 
 export async function writeFactor(
-  structure: IStructure,
+  factor: IFactorFE,
   worksheet: Excel.Worksheet,
 ) {
-  for (
-    let i = 0;
-    i < (structure.wmass?.storey.storeyID as number[]).length;
-    i++
-  ) {
+  for (let i = 0; i < factor.shearWeightRatioModify.storeyID.length; i++) {
     // write storey
     worksheet.getCell(`A${3 + i}`).value =
-      structure.wmass?.storey.storeyID[i] || '';
+      factor.shearWeightRatioModify.storeyID[i];
     worksheet.getCell(`B${3 + i}`).value =
-      structure.wmass?.storey.towerID[i] || '';
+      factor.shearWeightRatioModify.towerID[i];
 
     // write wesk storey shear factor
-    worksheet.getCell(`C${3 + i}`).value =
-      structure.wmass?.stiffness.weakStoreyFactor[i] || '';
+    worksheet.getCell(`C${3 + i}`).value = factor.stiffness.weakStoreyFactor[i];
 
     // write shear weight ratio factor
     worksheet.getCell(`D${3 + i}`).value =
-      structure.wmass?.shearWeightRatioModify.factorX[i] || '';
+      factor.shearWeightRatioModify.factorX[i];
     worksheet.getCell(`E${3 + i}`).value =
-      structure.wmass?.shearWeightRatioModify.factorY[i] || '';
+      factor.shearWeightRatioModify.factorY[i];
   }
 
-  for (
-    let i = 0;
-    i < (structure.wv02q?.v02qFactor.storeyID as number[]).length;
-    i++
-  ) {
+  for (let i = 0; i < factor.v02qFactor.storeyID.length; i++) {
     // write storey
-    worksheet.getCell(`F${3 + i}`).value =
-      structure.wv02q?.v02qFactor.factorX[i] || '';
-    worksheet.getCell(`G${3 + i}`).value =
-      structure.wv02q?.v02qFactor.factorY[i] || '';
+    worksheet.getCell(`F${3 + i}`).value = factor.v02qFactor.factorX[i];
+    worksheet.getCell(`G${3 + i}`).value = factor.v02qFactor.factorY[i];
   }
 }
 
