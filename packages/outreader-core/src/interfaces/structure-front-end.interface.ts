@@ -24,7 +24,7 @@ export interface ISummaryFE {
     material: string;
     storeys: number;
     height: number;
-    basemnet: number;
+    basement: number;
     constraintFloor: number;
     intensity: string;
     pressureModified: number;
@@ -72,7 +72,7 @@ export interface ISummaryFE {
     seismicX: number;
     seismicXCheck: string;
     seismicY: number;
-    seidmicYCheck: string;
+    seismicYCheck: string;
   };
   stiffRatio: {
     x: number[];

@@ -1,4 +1,4 @@
-import { IStructure } from '../interfaces';
+import { ISummaryQuantityFE } from '../interfaces';
 import { rangeSetBorder, rangeFillColor } from './commom';
 import Excel from 'exceljs';
 
@@ -109,22 +109,15 @@ export async function initSummaryQuantity(worksheet: Excel.Worksheet) {
 }
 
 export async function writeSummaryQuantity(
-  structure: IStructure,
+  summaryQuantity: ISummaryQuantityFE,
   worksheet: Excel.Worksheet,
 ) {
   // write basic information
-  worksheet.getCell('B1').value = { formula: '汇总信息!D3', date1904: false };
-  worksheet.getCell('C2').value = { formula: '汇总信息!F6', date1904: false };
-  worksheet.getCell('C3').value =
-    Math.round(structure.rebar?.area.totalArea as number) || '';
-  worksheet.getCell('C4').value = {
-    formula: '汇总信息!C39 & "/" & 汇总信息!C40 & "/" & 汇总信息!C41',
-    date1904: false,
-  };
-  worksheet.getCell('C5').value = {
-    formula: 'min(汇总信息!D12:D13) & "/" & min(汇总信息!D14:D15)',
-    date1904: false,
-  };
+  worksheet.getCell('B1').value = summaryQuantity.structure.engineering;
+  worksheet.getCell('C2').value = summaryQuantity.structure.height;
+  worksheet.getCell('C3').value = summaryQuantity.structure.area;
+  worksheet.getCell('C4').value = summaryQuantity.structure.period;
+  worksheet.getCell('C5').value = summaryQuantity.structure.drift;
 
   // write rebar perarea
   worksheet.getCell('C10').value = {

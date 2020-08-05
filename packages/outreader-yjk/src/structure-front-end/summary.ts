@@ -21,7 +21,7 @@ export function convertSummary(structure: IStructure): ISummaryFE {
               (structure.wmass?.generalInformation.basement as number)
           ] as number)
         : (structure.wmass?.storey.heightToGround[0] as number),
-      basemnet: structure.wmass?.generalInformation.basement as number,
+      basement: structure.wmass?.generalInformation.basement as number,
       constraintFloor: structure.wmass?.generalInformation
         .constraintFloor as number,
       intensity: structure.wmass?.seismicInformation.intensity || '',
@@ -151,7 +151,7 @@ export function convertSummary(structure: IStructure): ISummaryFE {
         structure.wmass?.stableCheck.seismicRatioX as number,
       ),
       seismicY: structure.wmass?.stableCheck.seismicRatioY as number,
-      seidmicYCheck: stiffnessWeightRatioCheck(
+      seismicYCheck: stiffnessWeightRatioCheck(
         structure.wmass?.stableCheck.seismicRatioY as number,
       ),
     },

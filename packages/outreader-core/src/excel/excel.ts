@@ -24,7 +24,7 @@ import {
 } from './distribute-result';
 import { initFactor, writeFactor, formatFactor } from './factor';
 import { initQuantity, writeQuantity, formatQuantity } from './quantity';
-import { IStructure } from '../interfaces';
+import { IStructureFrontEnd } from '../interfaces';
 import Excel from 'exceljs';
 import path from 'path';
 
@@ -32,23 +32,20 @@ import path from 'path';
  * @description export data into a excel file.
  * @param structure IStructure, structure data.
  */
-export async function exportExcel(structure: IStructure) {
-  // inirial structure data.
-  initStructureData(structure);
-
+export async function exportExcel(structure: IStructureFrontEnd) {
   // initial workbook.
   const workbook = new Excel.Workbook();
 
   // write worksheet sumamary information.
   const sheetSummary = workbook.addWorksheet('汇总信息');
   await initSummary(sheetSummary);
-  await writeSummary(structure, sheetSummary);
+  await writeSummary(structure.summary, sheetSummary);
   await formatSummary(sheetSummary);
 
   // write worksheet sumamary quantity information.
   const sheetSummaryQuantity = workbook.addWorksheet('含钢量汇总');
   await initSummaryQuantity(sheetSummaryQuantity);
-  await writeSummaryQuantity(structure, sheetSummaryQuantity);
+  await writeSummaryQuantity(structure.summaryQuantity, sheetSummaryQuantity);
   await formatSummaryQuantity(sheetSummaryQuantity);
 
   // write worksheet parameters information.
@@ -104,33 +101,4 @@ export async function exportExcel(structure: IStructure) {
   await workbook.xlsx.writeFile(filename);
 
   return true;
-}
-
-export function initStructureData(structure: IStructure): void {
-  Object.values(structure).forEach(function (subFile) {
-    Object.values(subFile).forEach(function (customInterface) {
-      filterInterface(customInterface);
-    });
-  });
-}
-
-export function filterInterface<T>(obj: T): void {
-  if (Object.keys(obj).includes('storeyID')) {
-    if (
-      Array.prototype.slice.call(obj['storeyID' as keyof T])[0] <
-      Array.prototype.slice.call(obj['storeyID' as keyof T])[
-        Array.prototype.slice.call(obj['storeyID' as keyof T]).length - 1
-      ]
-    ) {
-      reverseArray(obj);
-    }
-  }
-}
-
-export function reverseArray<T>(obj: T): void {
-  for (let key in obj) {
-    if (Array.isArray(obj[key])) {
-      Array.prototype.reverse.call(obj[key]);
-    }
-  }
 }
