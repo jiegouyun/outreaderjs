@@ -24,13 +24,14 @@ export function StructurePage() {
   const structure = structureData.value();
   const structureFE = convertStructure(structure);
   const summaryData = structureFE.summary;
+  const summaryQuantityData = structureFE.summaryQuantity;
   console.log(structure);
   if (!structure.hash) {
     message.error('找不到模型');
     history.replace('/');
   }
 
-  const tableColumns = [
+  const summaryColumns = [
     {
       title: '振型',
       dataIndex: 'modeID',
@@ -57,9 +58,9 @@ export function StructurePage() {
     },
   ];
 
-  const tableData = [];
+  const summaryTableData = [];
   for (let i = 0; i < 6; i++) {
-    tableData.push({
+    summaryTableData.push({
       modeID: summaryData.mode.modeID[i],
       period: Math.round(summaryData.mode.period[i] * 100) / 100,
       angle: Math.round(summaryData.mode.angle[i]),
@@ -375,8 +376,8 @@ export function StructurePage() {
       </Descriptions>
       <Descriptions title="动力特性" bordered size="small"></Descriptions>
       <Table
-        columns={tableColumns}
-        dataSource={tableData}
+        columns={summaryColumns}
+        dataSource={summaryTableData}
         bordered
         pagination={false}
         style={{ marginBottom: 20 }}
@@ -467,9 +468,141 @@ export function StructurePage() {
     </div>
   );
 
+  const summaryQuantityColumns = [
+    {
+      title: '分项',
+      dataIndex: 'part',
+    },
+    {
+      title: '墙',
+      dataIndex: 'wall',
+    },
+    {
+      title: '柱',
+      dataIndex: 'column',
+    },
+    {
+      title: '梁',
+      dataIndex: 'beam',
+    },
+    {
+      title: '板',
+      dataIndex: 'floor',
+    },
+    {
+      title: '合计',
+      dataIndex: 'total',
+    },
+  ];
+
+  const summaryQuantityTableData = [];
+  summaryQuantityTableData.push(
+    {
+      part: '钢筋含量(kg/m^2)',
+      wall: Math.round(summaryQuantityData.unitRebar.wall * 100) / 100,
+      column: Math.round(summaryQuantityData.unitRebar.column * 100) / 100,
+      beam: Math.round(summaryQuantityData.unitRebar.beam * 100) / 100,
+      floor: Math.round(summaryQuantityData.unitRebar.floor * 100) / 100,
+      total: Math.round(summaryQuantityData.unitRebar.total * 100) / 100,
+    },
+    {
+      part: '砼含量(m^3/m^2)',
+      wall: Math.round(summaryQuantityData.unitConcrete.wall * 100) / 100,
+      column: Math.round(summaryQuantityData.unitConcrete.column * 100) / 100,
+      beam: Math.round(summaryQuantityData.unitConcrete.beam * 100) / 100,
+      floor: Math.round(summaryQuantityData.unitConcrete.floor * 100) / 100,
+      total: Math.round(summaryQuantityData.unitConcrete.total * 100) / 100,
+    },
+    {
+      part: '型钢含量(kg/m^2)',
+      wall: Math.round(summaryQuantityData.unitSteel.wall * 100) / 100,
+      column: Math.round(summaryQuantityData.unitSteel.column * 100) / 100,
+      beam: Math.round(summaryQuantityData.unitSteel.beam * 100) / 100,
+      floor: Math.round(summaryQuantityData.unitSteel.floor * 100) / 100,
+      total: Math.round(summaryQuantityData.unitSteel.total * 100) / 100,
+    },
+    {
+      part: '钢筋总量(t)',
+      wall: Math.round(summaryQuantityData.rebar.wall / 1000),
+      column: Math.round(summaryQuantityData.rebar.column / 1000),
+      beam: Math.round(summaryQuantityData.rebar.beam / 1000),
+      floor: Math.round(summaryQuantityData.rebar.floor / 1000),
+      total: Math.round(summaryQuantityData.rebar.total / 1000),
+    },
+    {
+      part: '砼总量(m^3)',
+      wall: Math.round(summaryQuantityData.concrete.wall),
+      column: Math.round(summaryQuantityData.concrete.column),
+      beam: Math.round(summaryQuantityData.concrete.beam),
+      floor: Math.round(summaryQuantityData.concrete.floor),
+      total: Math.round(summaryQuantityData.concrete.total),
+    },
+    {
+      part: '型钢总量(t)',
+      wall: Math.round(summaryQuantityData.steel.wall),
+      column: Math.round(summaryQuantityData.steel.column),
+      beam: Math.round(summaryQuantityData.steel.beam),
+      floor: Math.round(summaryQuantityData.steel.floor),
+      total: Math.round(summaryQuantityData.steel.total),
+    }
+  );
+
+  const SummaryQuantity = (
+    <div>
+      <Descriptions
+        title="含钢量汇总"
+        bordered
+        size="small"
+        column={{ xs: 1, sm: 1 }}
+        style={{ marginBottom: 20 }}
+      >
+        <Descriptions.Item label="工程名称">
+          {summaryQuantityData.structure.engineering}
+        </Descriptions.Item>
+        <Descriptions.Item label="结构高度(m)">
+          {Math.round(summaryQuantityData.structure.height * 10) / 10}
+        </Descriptions.Item>
+        <Descriptions.Item label="结构面积(m^2)">
+          {Math.round(summaryQuantityData.structure.area)}
+        </Descriptions.Item>
+        <Descriptions.Item label="结构周期(T1/T2/T3)">
+          {summaryQuantityData.structure.period}
+        </Descriptions.Item>
+        <Descriptions.Item label="层间位移角(风/地震)">
+          {summaryQuantityData.structure.drift}
+        </Descriptions.Item>
+        <Descriptions.Item label="底层墙厚(X/Y mm)">{}</Descriptions.Item>
+        <Descriptions.Item label="底层柱截面(mm)">{}</Descriptions.Item>
+      </Descriptions>
+      <Table
+        columns={summaryQuantityColumns}
+        dataSource={summaryQuantityTableData}
+        bordered
+        pagination={false}
+        style={{ marginBottom: 20 }}
+      />
+      <Descriptions
+        title="材料价格参考"
+        bordered
+        size="small"
+        column={{ xs: 1, sm: 1 }}
+        style={{ marginBottom: 20 }}
+      >
+        <Descriptions.Item label="钢筋(元/t)">{6500}</Descriptions.Item>
+        <Descriptions.Item label="砼(元/m^3)">{750}</Descriptions.Item>
+        <Descriptions.Item label="钢材(元/t)">{13500}</Descriptions.Item>
+        <Descriptions.Item label="型钢(元/t)">{10000}</Descriptions.Item>
+        <Descriptions.Item label="压型钢板(元/m^2)">{65.7}</Descriptions.Item>
+      </Descriptions>
+    </div>
+  );
+
   const dataMapping = {
     summary: () => {
       return Summary;
+    },
+    summaryQuantity: () => {
+      return SummaryQuantity;
     },
   };
 
@@ -485,9 +618,16 @@ export function StructurePage() {
               setActvieItemKey(key as string);
             }}
           >
-            <Menu.Item key="summary">项目概况</Menu.Item>
-            <Menu.Item key="earthquake">地震作用</Menu.Item>
-            <Menu.Item key="wind-force">风荷载</Menu.Item>
+            <Menu.Item key="summary">汇总信息</Menu.Item>
+            <Menu.Item key="summaryQuantity">含钢量汇总</Menu.Item>
+            <Menu.Item key="parameters">计算参数</Menu.Item>
+            <Menu.Item key="period">周期</Menu.Item>
+            <Menu.Item key="force">内力</Menu.Item>
+            <Menu.Item key="drift">位移角</Menu.Item>
+            <Menu.Item key="generalResult">整体验算结果</Menu.Item>
+            <Menu.Item key="distributeResult">楼层分布数据</Menu.Item>
+            <Menu.Item key="factor">调整系数</Menu.Item>
+            <Menu.Item key="quantity">工程量</Menu.Item>
           </Menu>
         </Layout.Sider>
         <Layout.Content style={styles.content}>
