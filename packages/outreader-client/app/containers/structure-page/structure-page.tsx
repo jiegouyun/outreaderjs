@@ -26,13 +26,15 @@ export function StructurePage() {
   const summaryData = structureFE.summary;
   const summaryQuantityData = structureFE.summaryQuantity;
   const parameters = structureFE.parameters;
+  const period = structureFE.period;
   console.log(structure);
+  console.log(structureFE);
   if (!structure.hash) {
     message.error('找不到模型');
     history.replace('/');
   }
 
-  const summaryColumns = [
+  const modeColumns = [
     {
       title: '振型',
       dataIndex: 'modeID',
@@ -377,7 +379,7 @@ export function StructurePage() {
       </Descriptions>
       <Descriptions title="动力特性" bordered size="small"></Descriptions>
       <Table
-        columns={summaryColumns}
+        columns={modeColumns}
         dataSource={summaryTableData}
         bordered
         pagination={false}
@@ -728,6 +730,91 @@ export function StructurePage() {
     </div>
   );
 
+  const periodModeTableData = [];
+  for (let i = 0; i < period.modeCoupling.modeID.length; i++) {
+    periodModeTableData.push({
+      modeID: period.modeCoupling.modeID[i],
+      period: period.modeCoupling.period[i],
+      angle: period.modeCoupling.angle[i],
+      factorX: period.modeCoupling.factorX[i],
+      factorY: period.modeCoupling.factorY[i],
+      factorZ: period.modeCoupling.factorZ[i],
+    });
+  }
+
+  const periodSeismicTableData = [];
+  for (let i = 0; i < period.modeSeismic.modeID.length; i++) {
+    periodSeismicTableData.push({
+      modeID: period.modeSeismic.modeID[i],
+      period: period.modeSeismic.period[i],
+      angle: period.modeSeismic.angle[i],
+      factorX: period.modeSeismic.factorX[i],
+      factorY: period.modeSeismic.factorY[i],
+      factorZ: period.modeSeismic.factorZ[i],
+    });
+  }
+
+  const periodMassColumns = [
+    {
+      title: '振型',
+      dataIndex: 'modeID',
+    },
+    {
+      title: 'X',
+      dataIndex: 'factorX',
+    },
+    {
+      title: 'Y',
+      dataIndex: 'factorY',
+    },
+    {
+      title: 'Z',
+      dataIndex: 'factorZ',
+    },
+  ];
+
+  const periodMassTableData = [];
+  for (let i = 0; i < period.modeMass.modeID.length; i++) {
+    periodMassTableData.push({
+      modeID: period.modeMass.modeID[i],
+      factorX: period.modeMass.factorX[i],
+      factorY: period.modeMass.factorY[i],
+      factorZ: period.modeMass.factorZ[i],
+    });
+  }
+
+  const Period = (
+    <div>
+      <Descriptions title="考虑扭转耦联时的动力特性"></Descriptions>
+      <Table
+        columns={modeColumns}
+        dataSource={periodModeTableData}
+        bordered
+        pagination={{ pageSize: 30 }}
+        scroll={{ y: 240 }}
+        style={{ marginBottom: 20 }}
+      />
+      <Descriptions title="地震最大作用方向的动力特性"></Descriptions>
+      <Table
+        columns={modeColumns}
+        dataSource={periodSeismicTableData}
+        bordered
+        pagination={{ pageSize: 30 }}
+        scroll={{ y: 240 }}
+        style={{ marginBottom: 20 }}
+      />
+      <Descriptions title="质量参与系数"></Descriptions>
+      <Table
+        columns={periodMassColumns}
+        dataSource={periodMassTableData}
+        bordered
+        pagination={{ pageSize: 30 }}
+        scroll={{ y: 240 }}
+        style={{ marginBottom: 20 }}
+      />
+    </div>
+  );
+
   const dataMapping = {
     summary: () => {
       return Summary;
@@ -737,6 +824,9 @@ export function StructurePage() {
     },
     parameters: () => {
       return Parameters;
+    },
+    period: () => {
+      return Period;
     },
   };
 
