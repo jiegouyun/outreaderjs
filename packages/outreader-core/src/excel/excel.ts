@@ -30,7 +30,7 @@ import path from 'path';
 
 /**
  * @description export data into a excel file.
- * @param structure IStructure, structure data.
+ * @param structure IStructureFrontEnd, structure data.
  */
 export async function exportExcel(structure: IStructureFrontEnd) {
   // initial workbook.
