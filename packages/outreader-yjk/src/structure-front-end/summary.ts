@@ -34,8 +34,8 @@ export function convertSummary(structure: IStructure): ISummaryFE {
     },
     weight: {
       live: structure.wmass?.weight.live as number,
-      super: structure.wmass?.weight.dead as number,
-      dead: structure.wmass?.weight.super as number,
+      super: structure.wmass?.weight.super as number,
+      dead: structure.wmass?.weight.dead as number,
       sum: structure.wmass?.weight.sum as number,
     },
     drift: {
@@ -246,6 +246,7 @@ export function convertSummary(structure: IStructure): ISummaryFE {
 function writeMode(structure: IStructure) {
   const modeID: number[] = structure.wzq?.modeCoupling.modeID as number[];
   const period: number[] = structure.wzq?.modeCoupling.period as number[];
+  const angle: number[] = structure.wzq?.modeCoupling.angle as number[];
   const factorX: number[] = structure.wzq?.modeMass.factorX as number[];
   const factorY: number[] = structure.wzq?.modeMass.factorY as number[];
   const factorZ: number[] = structure.wzq?.modeMass.factorZ as number[];
@@ -267,6 +268,7 @@ function writeMode(structure: IStructure) {
   return {
     modeID,
     period,
+    angle,
     factorX,
     factorY,
     factorZ,
