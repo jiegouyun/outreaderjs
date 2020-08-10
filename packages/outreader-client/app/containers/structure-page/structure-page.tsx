@@ -9,6 +9,7 @@ import { SummaryQuantityComponent } from './summary-quantity';
 import { ParametersComponent } from './parameters';
 import { PeriodComponent } from './period';
 import { ForceComponent } from './force';
+import { DriftComponent } from './drift';
 import { GeneralResultComponent } from './general-result';
 import { DistributeResultComponent } from './distribute-result';
 import { FactorComponent } from './factor';
@@ -37,6 +38,7 @@ export function StructurePage() {
   const parameters = structureFE.parameters;
   const period = structureFE.period;
   const force = structureFE.force;
+  const drift = structureFE.drift;
   const generalResult = structureFE.generalResult;
   const distributeResult = structureFE.distributeResult;
   const factor = structureFE.factor;
@@ -53,6 +55,7 @@ export function StructurePage() {
   const Parameters = ParametersComponent(parameters);
   const Period = PeriodComponent(period);
   const Force = ForceComponent(force);
+  const Drift = DriftComponent(drift);
   const GeneralResult = GeneralResultComponent(generalResult);
   const DistributeResult = DistributeResultComponent(distributeResult);
   const Factor = FactorComponent(factor);
@@ -73,6 +76,9 @@ export function StructurePage() {
     },
     force: () => {
       return Force;
+    },
+    drift: () => {
+      return Drift;
     },
     generalResult: () => {
       return GeneralResult;
