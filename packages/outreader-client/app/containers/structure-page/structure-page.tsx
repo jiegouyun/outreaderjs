@@ -1,19 +1,19 @@
+import { convertStructure } from '@outreader/yjk';
 import { Breadcrumb, Layout, Menu, message } from 'antd';
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router';
-import { convertStructure } from '@outreader/yjk';
+import { DistributeResultComponent } from '../../components';
 import { initDb } from '../../database';
 import { IStyles } from '../../interfaces';
-import { SummaryComponent } from './summary';
-import { SummaryQuantityComponent } from './summary-quantity';
+import { DriftComponent } from './drift';
+import { FactorComponent } from './factor';
+import { ForceComponent } from './force';
+import { GeneralResultComponent } from './general-result';
 import { ParametersComponent } from './parameters';
 import { PeriodComponent } from './period';
-import { ForceComponent } from './force';
-import { DriftComponent } from './drift';
-import { GeneralResultComponent } from './general-result';
-import { DistributeResultComponent } from './distribute-result';
-import { FactorComponent } from './factor';
 import { QuantityComponent } from './quantity';
+import { SummaryComponent } from './summary';
+import { SummaryQuantityComponent } from './summary-quantity';
 
 const styles: IStyles = {
   container: {
