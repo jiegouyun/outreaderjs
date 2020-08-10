@@ -49,11 +49,11 @@ export function SummaryQuantityComponent(summaryQuantity: ISummaryQuantityFE) {
     },
     {
       part: '型钢含量(kg/m^2)',
-      wall: Math.round(summaryQuantity.unitSteel.wall * 100) / 100,
-      column: Math.round(summaryQuantity.unitSteel.column * 100) / 100,
-      beam: Math.round(summaryQuantity.unitSteel.beam * 100) / 100,
-      floor: Math.round(summaryQuantity.unitSteel.floor * 100) / 100,
-      total: Math.round(summaryQuantity.unitSteel.total * 100) / 100,
+      wall: Math.round(summaryQuantity.unitSteel.wall * 100000) / 100,
+      column: Math.round(summaryQuantity.unitSteel.column * 100000) / 100,
+      beam: Math.round(summaryQuantity.unitSteel.beam * 100000) / 100,
+      floor: Math.round(summaryQuantity.unitSteel.floor * 100000) / 100,
+      total: Math.round(summaryQuantity.unitSteel.total * 100000) / 100,
     },
     {
       part: '钢筋总量(t)',
