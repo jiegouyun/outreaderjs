@@ -10,6 +10,7 @@ import { ParametersComponent } from './parameters';
 import { PeriodComponent } from './period';
 import { ForceComponent } from './force';
 import { GeneralResultComponent } from './general-result';
+import { FactorComponent } from './factor';
 
 const styles: IStyles = {
   container: {
@@ -35,6 +36,7 @@ export function StructurePage() {
   const period = structureFE.period;
   const force = structureFE.force;
   const generalResult = structureFE.generalResult;
+  const factor = structureFE.factor;
   console.log(structure);
   console.log(structureFE);
   if (!structure.hash) {
@@ -48,6 +50,7 @@ export function StructurePage() {
   const Period = PeriodComponent(period);
   const Force = ForceComponent(force);
   const GeneralResult = GeneralResultComponent(generalResult);
+  const Factor = FactorComponent(factor);
 
   const dataMapping = {
     summary: () => {
@@ -67,6 +70,9 @@ export function StructurePage() {
     },
     generalResult: () => {
       return GeneralResult;
+    },
+    factor: () => {
+      return Factor;
     },
   };
 
