@@ -112,8 +112,8 @@ export function DriftComponent(drift: IDriftFE) {
         columns={driftDispColumns}
         dataSource={dispTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="层间位移角"></Descriptions>
@@ -121,8 +121,8 @@ export function DriftComponent(drift: IDriftFE) {
         columns={driftDispColumns}
         dataSource={driftTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="位移比"></Descriptions>
@@ -130,8 +130,8 @@ export function DriftComponent(drift: IDriftFE) {
         columns={dispRatioColumns}
         dataSource={dispRatioTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="层间位移比"></Descriptions>
@@ -139,8 +139,8 @@ export function DriftComponent(drift: IDriftFE) {
         columns={dispRatioColumns}
         dataSource={dispRatioStoreyTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
     </div>

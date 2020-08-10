@@ -87,8 +87,8 @@ export function ForceComponent(force: IForceFE) {
         columns={forceColumns}
         dataSource={forceAlongWindTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="横风向风荷载"></Descriptions>
@@ -96,8 +96,8 @@ export function ForceComponent(force: IForceFE) {
         columns={forceColumns}
         dataSource={forceCrossWindTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="地震作用"></Descriptions>
@@ -105,8 +105,8 @@ export function ForceComponent(force: IForceFE) {
         columns={forceColumns}
         dataSource={forceSeismicTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
     </div>

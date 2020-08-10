@@ -118,8 +118,8 @@ export function QuantityComponent(quantity: IQuantityFE) {
         columns={quantityColumns}
         dataSource={concreteTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="砼含量(m^3/m^2)"></Descriptions>
@@ -127,8 +127,8 @@ export function QuantityComponent(quantity: IQuantityFE) {
         columns={quantityColumns}
         dataSource={unitConcreteTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="型钢用量(t)"></Descriptions>
@@ -136,8 +136,8 @@ export function QuantityComponent(quantity: IQuantityFE) {
         columns={quantityColumns}
         dataSource={steelTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="型钢含量(kg/m^2)"></Descriptions>
@@ -145,8 +145,8 @@ export function QuantityComponent(quantity: IQuantityFE) {
         columns={quantityColumns}
         dataSource={unitSteelTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="钢筋用量(t)"></Descriptions>
@@ -154,8 +154,8 @@ export function QuantityComponent(quantity: IQuantityFE) {
         columns={quantityColumns}
         dataSource={rebarTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="钢筋含量(kg/m^2)"></Descriptions>
@@ -163,8 +163,8 @@ export function QuantityComponent(quantity: IQuantityFE) {
         columns={quantityColumns}
         dataSource={unitRebarTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
     </div>

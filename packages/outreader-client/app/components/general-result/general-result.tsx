@@ -214,6 +214,7 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
         columns={towerColumns}
         dataSource={towerTableData}
         bordered
+        size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
       />
@@ -255,6 +256,7 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
         columns={stiffRatioColumns}
         dataSource={stiffRatioTableData}
         bordered
+        size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
       />
@@ -276,6 +278,7 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
         columns={overturningColumns}
         dataSource={overturningTableData}
         bordered
+        size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
       />
@@ -284,6 +287,7 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
         columns={stableColumns}
         dataSource={stableTableData}
         bordered
+        size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
       />
@@ -292,6 +296,7 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
         columns={windComfortColumns}
         dataSource={windComfortTableData}
         bordered
+        size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
       />

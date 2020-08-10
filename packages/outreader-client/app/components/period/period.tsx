@@ -89,8 +89,8 @@ export function PeriodComponent(period: IPeriodFE) {
         columns={modeColumns}
         dataSource={periodModeTableData}
         bordered
-        pagination={{ pageSize: 30 }}
-        scroll={{ y: 240 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="地震最大作用方向的动力特性"></Descriptions>
@@ -98,17 +98,33 @@ export function PeriodComponent(period: IPeriodFE) {
         columns={modeColumns}
         dataSource={periodSeismicTableData}
         bordered
-        pagination={{ pageSize: 30 }}
-        scroll={{ y: 240 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
-      <Descriptions title="质量参与系数"></Descriptions>
+      <Descriptions
+        title="质量参与系数"
+        bordered
+        size="small"
+        column={{ xs: 1, sm: 3 }}
+        style={{ marginBottom: 20 }}
+      >
+        <Descriptions.Item label="sumX">
+          {Math.round(period.modeMass.sumX * 100) / 100}
+        </Descriptions.Item>
+        <Descriptions.Item label="sumY">
+          {Math.round(period.modeMass.sumY * 100) / 100}
+        </Descriptions.Item>
+        <Descriptions.Item label="sumZ">
+          {Math.round(period.modeMass.sumZ * 100) / 100}
+        </Descriptions.Item>
+      </Descriptions>
       <Table
         columns={periodMassColumns}
         dataSource={periodMassTableData}
         bordered
-        pagination={{ pageSize: 30 }}
-        scroll={{ y: 240 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
     </div>

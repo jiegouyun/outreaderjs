@@ -73,8 +73,8 @@ export function FactorComponent(factor: IFactorFE) {
         columns={weakColumns}
         dataSource={weakTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="剪重比调整系数"></Descriptions>
@@ -82,8 +82,8 @@ export function FactorComponent(factor: IFactorFE) {
         columns={factorColumns}
         dataSource={shearTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="0.2V0调整系数"></Descriptions>
@@ -91,8 +91,8 @@ export function FactorComponent(factor: IFactorFE) {
         columns={factorColumns}
         dataSource={v02qTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
     </div>

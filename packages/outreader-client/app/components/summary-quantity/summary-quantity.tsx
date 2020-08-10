@@ -112,6 +112,7 @@ export function SummaryQuantityComponent(summaryQuantity: ISummaryQuantityFE) {
         columns={summaryQuantityColumns}
         dataSource={summaryQuantityTableData}
         bordered
+        size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
       />

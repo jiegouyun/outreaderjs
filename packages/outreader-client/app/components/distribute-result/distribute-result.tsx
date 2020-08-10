@@ -259,8 +259,8 @@ export function DistributeResultComponent(
         columns={storeyColumns}
         dataSource={storeyTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="质量比"></Descriptions>
@@ -268,8 +268,8 @@ export function DistributeResultComponent(
         columns={massRatioColumns}
         dataSource={massRatioTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="刚度比"></Descriptions>
@@ -277,8 +277,8 @@ export function DistributeResultComponent(
         columns={stiffRatioColumns}
         dataSource={stiffRatioTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="剪重比"></Descriptions>
@@ -286,8 +286,8 @@ export function DistributeResultComponent(
         columns={shearWeightColumns}
         dataSource={shearWeightTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="抗剪承载力比"></Descriptions>
@@ -295,8 +295,8 @@ export function DistributeResultComponent(
         columns={shearCapacityColumns}
         dataSource={shearCapacityTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="规定水平力下倾覆力矩分配"></Descriptions>
@@ -304,8 +304,8 @@ export function DistributeResultComponent(
         columns={momentDistributeColumns}
         dataSource={momentDistributeTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="柱剪力与分段基底剪力百分比"></Descriptions>
@@ -313,8 +313,8 @@ export function DistributeResultComponent(
         columns={shearDistributeColumns}
         dataSource={shearDistributeTableData}
         bordered
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 480 }}
+        size="small"
+        pagination={false}
         style={{ marginBottom: 20 }}
       />
     </div>

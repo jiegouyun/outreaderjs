@@ -351,6 +351,7 @@ export function SummaryComponent(summary: ISummaryFE) {
         columns={modeColumns}
         dataSource={summaryTableData}
         bordered
+        size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
       />
