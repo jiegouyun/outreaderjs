@@ -3,7 +3,7 @@ import React from 'react';
 import { IFactorFE } from '@outreader/core';
 
 export function FactorComponent(factor: IFactorFE) {
-  const WeakColumns = [
+  const weakColumns = [
     {
       title: '层号',
       dataIndex: 'storeyID',
@@ -70,7 +70,7 @@ export function FactorComponent(factor: IFactorFE) {
     <div>
       <Descriptions title="薄弱层剪力放大系数"></Descriptions>
       <Table
-        columns={WeakColumns}
+        columns={weakColumns}
         dataSource={weakTableData}
         bordered
         pagination={{ pageSize: 50 }}

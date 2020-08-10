@@ -10,6 +10,7 @@ import { ParametersComponent } from './parameters';
 import { PeriodComponent } from './period';
 import { ForceComponent } from './force';
 import { GeneralResultComponent } from './general-result';
+import { DistributeResultComponent } from './distribute-result';
 import { FactorComponent } from './factor';
 import { QuantityComponent } from './quantity';
 
@@ -37,6 +38,7 @@ export function StructurePage() {
   const period = structureFE.period;
   const force = structureFE.force;
   const generalResult = structureFE.generalResult;
+  const distributeResult = structureFE.distributeResult;
   const factor = structureFE.factor;
   const quantity = structureFE.quantity;
   console.log(structure);
@@ -52,6 +54,7 @@ export function StructurePage() {
   const Period = PeriodComponent(period);
   const Force = ForceComponent(force);
   const GeneralResult = GeneralResultComponent(generalResult);
+  const DistributeResult = DistributeResultComponent(distributeResult);
   const Factor = FactorComponent(factor);
   const Quantity = QuantityComponent(quantity);
 
@@ -73,6 +76,9 @@ export function StructurePage() {
     },
     generalResult: () => {
       return GeneralResult;
+    },
+    distributeResult: () => {
+      return DistributeResult;
     },
     factor: () => {
       return Factor;
