@@ -6869,9 +6869,9 @@ kind-of@^6.0.0, kind-of@^6.0.2, kind-of@^6.0.3:
   integrity sha1-B8BQNKbDSfoG4k+jWqdttFgM5N0=
 
 knex@^0.21.2:
-  version "0.21.3"
-  resolved "https://registry.yarnpkg.com/knex/-/knex-0.21.3.tgz#e9de972d290c96419ecaa792a0cd308aca9e4564"
-  integrity sha512-XENKsDdeKmn5yBENTRoik5AOlrxhjTUbDuML6iX7TtOtFHQ5rTfuUce7jk9UVKKmxgbzyA0wsSKWs6xfRgAwfA==
+  version "0.21.4"
+  resolved "https://registry.yarnpkg.com/knex/-/knex-0.21.4.tgz#cf0fdf43a119f6c9458e24cfe576a3864898bebf"
+  integrity sha512-vUrR4mJBKWJPouV9C7kqvle9cTpiuuzBWqrQXP7bAv+Ua9oeKkEhhorJwArzcjVrVBojZYPMMtNVliW9B00sTA==
   dependencies:
     colorette "1.2.1"
     commander "^5.1.0"
