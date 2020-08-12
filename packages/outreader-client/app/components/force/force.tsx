@@ -154,7 +154,7 @@ export function ForceComponent(force: IForceFE) {
         pagination={false}
         style={{ marginBottom: 20 }}
       />
-      <Descriptions title="横风向风荷载"></Descriptions>
+      {/* <Descriptions title="横风向风荷载"></Descriptions>
       <Table
         columns={forceColumns}
         dataSource={forceCrossWindTableData}
@@ -162,7 +162,7 @@ export function ForceComponent(force: IForceFE) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
-      />
+      /> */}
       <Descriptions title="地震作用"></Descriptions>
       <Row>
         <Col span={12}>

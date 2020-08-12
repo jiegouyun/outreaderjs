@@ -19,7 +19,7 @@ export function StoreyChart(props: {
   return (
     <ScatterChart
       width={300}
-      height={500}
+      height={400}
       margin={{
         top: 10,
         right: 10,
@@ -31,7 +31,13 @@ export function StoreyChart(props: {
       <XAxis type="number" dataKey="x" name="" unit="">
         <Label value={props.xLabel} offset={0} position="bottom" />
       </XAxis>
-      <YAxis type="number" dataKey="y" name="楼层" unit="">
+      <YAxis
+        type="number"
+        dataKey="y"
+        name=""
+        unit=""
+        domain={[0, (dataMax) => Math.ceil(dataMax / 5) * 5]}
+      >
         <Label value="楼层" angle={-90} offset={10} position="insideLeft" />
       </YAxis>
       <ZAxis type="number" range={[25]} />
