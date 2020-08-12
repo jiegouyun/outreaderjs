@@ -1,6 +1,7 @@
-import { Descriptions, Table } from 'antd';
+import { Descriptions, Table, Row, Col } from 'antd';
 import React from 'react';
 import { IDistributeResultFE } from '@outreader/core';
+import { StoreyChart } from './../storey-chart';
 
 export function DistributeResultComponent(
   distributeResult: IDistributeResultFE
@@ -72,6 +73,8 @@ export function DistributeResultComponent(
   ];
 
   const massRatioTableData = [];
+  const massRatioChartData = [];
+  const unitMassRatioChartData = [];
   for (let i = 0; i < distributeResult.massRatio.storeyID.length; i++) {
     massRatioTableData.push({
       storeyID: distributeResult.massRatio.storeyID[i],
@@ -80,6 +83,14 @@ export function DistributeResultComponent(
       ratio: distributeResult.massRatio.ratio[i],
       unitMass: distributeResult.massRatio.massPerArea[i],
       unitRatio: distributeResult.massRatio.massPerAreaRatio[i],
+    });
+    massRatioChartData.push({
+      x: distributeResult.massRatio.ratio[i],
+      y: distributeResult.massRatio.storeyID[i],
+    });
+    unitMassRatioChartData.push({
+      x: distributeResult.massRatio.massPerAreaRatio[i],
+      y: distributeResult.massRatio.storeyID[i],
     });
   }
 
@@ -111,6 +122,10 @@ export function DistributeResultComponent(
   ];
 
   const stiffRatioTableData = [];
+  const stiffRatioXChartData = [];
+  const stiffRatioYChartData = [];
+  const sriffRatioXModifyChartData = [];
+  const sriffRatioYModifyChartData = [];
   for (let i = 0; i < distributeResult.stiffness.storeyID.length; i++) {
     stiffRatioTableData.push({
       storeyID: distributeResult.stiffness.storeyID[i],
@@ -119,6 +134,22 @@ export function DistributeResultComponent(
       raty1: distributeResult.stiffness.raty1[i],
       ratx2: distributeResult.stiffness.ratx2[i],
       raty2: distributeResult.stiffness.raty2[i],
+    });
+    stiffRatioXChartData.push({
+      x: distributeResult.stiffness.ratx1[i],
+      y: distributeResult.stiffness.storeyID[i],
+    });
+    stiffRatioYChartData.push({
+      x: distributeResult.stiffness.raty1[i],
+      y: distributeResult.stiffness.storeyID[i],
+    });
+    sriffRatioXModifyChartData.push({
+      x: distributeResult.stiffness.ratx2[i],
+      y: distributeResult.stiffness.storeyID[i],
+    });
+    sriffRatioYModifyChartData.push({
+      x: distributeResult.stiffness.raty2[i],
+      y: distributeResult.stiffness.storeyID[i],
     });
   }
 
@@ -142,12 +173,22 @@ export function DistributeResultComponent(
   ];
 
   const shearWeightTableData = [];
+  const shearWeightXChartData = [];
+  const shearWeightYChartData = [];
   for (let i = 0; i < distributeResult.shearWeightRatio.storeyID.length; i++) {
     shearWeightTableData.push({
       storeyID: distributeResult.shearWeightRatio.storeyID[i],
       towerID: distributeResult.shearWeightRatio.towerID[i],
       ratioX: distributeResult.shearWeightRatio.factorX[i],
       ratioY: distributeResult.shearWeightRatio.factorY[i],
+    });
+    shearWeightXChartData.push({
+      x: distributeResult.shearWeightRatio.factorX[i],
+      y: distributeResult.shearWeightRatio.storeyID[i],
+    });
+    shearWeightYChartData.push({
+      x: distributeResult.shearWeightRatio.factorY[i],
+      y: distributeResult.shearWeightRatio.storeyID[i],
     });
   }
 
@@ -171,6 +212,8 @@ export function DistributeResultComponent(
   ];
 
   const shearCapacityTableData = [];
+  const shearCapacityXChartData = [];
+  const shearCapacityYChartData = [];
   for (
     let i = 0;
     i < distributeResult.shearCapacityCheck.storeyID.length;
@@ -181,6 +224,14 @@ export function DistributeResultComponent(
       towerID: distributeResult.shearCapacityCheck.towerID[i],
       ratioX: distributeResult.shearCapacityCheck.ratioX[i],
       ratioY: distributeResult.shearCapacityCheck.ratioY[i],
+    });
+    shearCapacityXChartData.push({
+      x: distributeResult.shearCapacityCheck.ratioX[i],
+      y: distributeResult.shearCapacityCheck.storeyID[i],
+    });
+    shearCapacityYChartData.push({
+      x: distributeResult.shearCapacityCheck.ratioY[i],
+      y: distributeResult.shearCapacityCheck.storeyID[i],
     });
   }
 
@@ -212,6 +263,10 @@ export function DistributeResultComponent(
   ];
 
   const momentDistributeTableData = [];
+  const momentColumnXChartData = [];
+  const momentColumnYChartData = [];
+  const momentWallXChartData = [];
+  const momentWallYChartData = [];
   for (let i = 0; i < distributeResult.momentPercent.storeyID.length; i++) {
     momentDistributeTableData.push({
       storeyID: distributeResult.momentPercent.storeyID[i],
@@ -220,6 +275,22 @@ export function DistributeResultComponent(
       wallX: distributeResult.momentPercent.percentWallX[i],
       columnY: distributeResult.momentPercent.percentColumnY[i],
       wallY: distributeResult.momentPercent.percentWallY[i],
+    });
+    momentColumnXChartData.push({
+      x: distributeResult.momentPercent.percentColumnX[i],
+      y: distributeResult.momentPercent.storeyID[i],
+    });
+    momentColumnYChartData.push({
+      x: distributeResult.momentPercent.percentColumnY[i],
+      y: distributeResult.momentPercent.storeyID[i],
+    });
+    momentWallXChartData.push({
+      x: distributeResult.momentPercent.percentWallX[i],
+      y: distributeResult.momentPercent.storeyID[i],
+    });
+    momentWallYChartData.push({
+      x: distributeResult.momentPercent.percentWallY[i],
+      y: distributeResult.momentPercent.storeyID[i],
     });
   }
 
@@ -243,12 +314,22 @@ export function DistributeResultComponent(
   ];
 
   const shearDistributeTableData = [];
+  const shearColumnXChartData = [];
+  const shearColumnYChartData = [];
   for (let i = 0; i < distributeResult.columnShear.storeyID.length; i++) {
     shearDistributeTableData.push({
       storeyID: distributeResult.columnShear.storeyID[i],
       towerID: distributeResult.columnShear.towerID[i],
       ratioX: distributeResult.columnShear.percentColumnX[i],
       ratioY: distributeResult.columnShear.percentColumnY[i],
+    });
+    shearColumnXChartData.push({
+      x: distributeResult.columnShear.percentColumnX[i],
+      y: distributeResult.columnShear.storeyID[i],
+    });
+    shearColumnYChartData.push({
+      x: distributeResult.columnShear.percentColumnY[i],
+      y: distributeResult.columnShear.storeyID[i],
     });
   }
 
@@ -264,6 +345,11 @@ export function DistributeResultComponent(
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="质量比"></Descriptions>
+      <StoreyChart
+        data1={massRatioChartData}
+        data2={unitMassRatioChartData}
+        xLabel="质量比"
+      />
       <Table
         columns={massRatioColumns}
         dataSource={massRatioTableData}
@@ -273,6 +359,22 @@ export function DistributeResultComponent(
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="刚度比"></Descriptions>
+      <Row>
+        <Col span={12}>
+          <StoreyChart
+            data1={stiffRatioXChartData}
+            data2={stiffRatioYChartData}
+            xLabel="刚度比"
+          />
+        </Col>
+        <Col span={12}>
+          <StoreyChart
+            data1={sriffRatioXModifyChartData}
+            data2={sriffRatioYModifyChartData}
+            xLabel="层高修正刚度比"
+          />
+        </Col>
+      </Row>
       <Table
         columns={stiffRatioColumns}
         dataSource={stiffRatioTableData}
@@ -282,6 +384,11 @@ export function DistributeResultComponent(
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="剪重比"></Descriptions>
+      <StoreyChart
+        data1={shearWeightXChartData}
+        data2={shearWeightYChartData}
+        xLabel="剪重比"
+      />
       <Table
         columns={shearWeightColumns}
         dataSource={shearWeightTableData}
@@ -291,6 +398,11 @@ export function DistributeResultComponent(
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="抗剪承载力比"></Descriptions>
+      <StoreyChart
+        data1={shearCapacityXChartData}
+        data2={shearCapacityYChartData}
+        xLabel="抗剪承载力比"
+      />
       <Table
         columns={shearCapacityColumns}
         dataSource={shearCapacityTableData}
@@ -300,6 +412,22 @@ export function DistributeResultComponent(
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="规定水平力下倾覆力矩分配"></Descriptions>
+      <Row>
+        <Col span={12}>
+          <StoreyChart
+            data1={momentColumnXChartData}
+            data2={momentColumnYChartData}
+            xLabel="框架柱倾覆力矩占比(%)"
+          />
+        </Col>
+        <Col span={12}>
+          <StoreyChart
+            data1={momentWallXChartData}
+            data2={momentWallYChartData}
+            xLabel="短肢墙倾覆力矩占比(%)"
+          />
+        </Col>
+      </Row>
       <Table
         columns={momentDistributeColumns}
         dataSource={momentDistributeTableData}
@@ -309,6 +437,11 @@ export function DistributeResultComponent(
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="柱剪力与分段基底剪力百分比"></Descriptions>
+      <StoreyChart
+        data1={shearColumnXChartData}
+        data2={shearColumnYChartData}
+        xLabel="柱剪力与分段基底剪力百分比(%)"
+      />
       <Table
         columns={shearDistributeColumns}
         dataSource={shearDistributeTableData}

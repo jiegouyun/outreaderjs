@@ -1,4 +1,4 @@
-import { Descriptions, Table, Row, Col } from 'antd';
+import { Descriptions, Table } from 'antd';
 import React from 'react';
 import { IFactorFE } from '@outreader/core';
 import { StoreyChart } from './../storey-chart';
