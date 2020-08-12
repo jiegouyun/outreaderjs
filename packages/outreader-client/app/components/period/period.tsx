@@ -84,15 +84,6 @@ export function PeriodComponent(period: IPeriodFE) {
   ];
 
   const periodMassTableData = [];
-  for (let i = 0; i < period.modeMass.modeID.length; i++) {
-    periodMassTableData.push({
-      modeID: period.modeMass.modeID[i],
-      factorX: period.modeMass.factorX[i],
-      factorY: period.modeMass.factorY[i],
-      factorZ: period.modeMass.factorZ[i],
-    });
-  }
-
   const modeMassX = [];
   const modeMassY = [];
   const modeMassZ = [];
@@ -100,6 +91,12 @@ export function PeriodComponent(period: IPeriodFE) {
   let sumY: number = 0;
   let sumZ: number = 0;
   for (let i = 0; i < period.modeMass.modeID.length; i++) {
+    periodMassTableData.push({
+      modeID: period.modeMass.modeID[i],
+      factorX: period.modeMass.factorX[i],
+      factorY: period.modeMass.factorY[i],
+      factorZ: period.modeMass.factorZ[i],
+    });
     sumX += period.modeMass.factorX[i];
     sumY += period.modeMass.factorY[i];
     sumZ += period.modeMass.factorZ[i];

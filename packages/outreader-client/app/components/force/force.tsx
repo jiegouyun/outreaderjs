@@ -40,6 +40,10 @@ export function ForceComponent(force: IForceFE) {
   ];
 
   const forceAlongWindTableData = [];
+  const shearWindXChartData = [];
+  const shearWindYChartData = [];
+  const momentWindXChartData = [];
+  const momentWindYChartData = [];
   for (let i = 0; i < force.wind.storeyID.length; i++) {
     forceAlongWindTableData.push({
       storeyID: force.wind.storeyID[i],
@@ -50,6 +54,22 @@ export function ForceComponent(force: IForceFE) {
       forceY: force.wind.forceAlongY[i],
       shearY: force.wind.shearAlongY[i],
       momentY: force.wind.momentAlongY[i],
+    });
+    shearWindXChartData.push({
+      x: Math.abs(force.wind.shearAlongX[i]),
+      y: Math.abs(force.wind.storeyID[i]),
+    });
+    shearWindYChartData.push({
+      x: Math.abs(force.wind.shearAlongY[i]),
+      y: Math.abs(force.wind.storeyID[i]),
+    });
+    momentWindXChartData.push({
+      x: Math.abs(force.wind.momentAlongX[i]),
+      y: Math.abs(force.wind.storeyID[i]),
+    });
+    momentWindYChartData.push({
+      x: Math.abs(force.wind.momentAlongY[i]),
+      y: Math.abs(force.wind.storeyID[i]),
     });
   }
 
@@ -68,6 +88,10 @@ export function ForceComponent(force: IForceFE) {
   }
 
   const forceSeismicTableData = [];
+  const shearSeismicXChartData = [];
+  const shearSeismicYChartData = [];
+  const momentSeismicXChartData = [];
+  const momentSeismicYChartData = [];
   for (let i = 0; i < force.seismic.storeyID.length; i++) {
     forceSeismicTableData.push({
       storeyID: force.seismic.storeyID[i],
@@ -79,49 +103,19 @@ export function ForceComponent(force: IForceFE) {
       shearY: force.seismic.shearY[i],
       momentY: force.seismic.momentY[i],
     });
-  }
-
-  const shearWindX = [];
-  const shearWindY = [];
-  const momentWindX = [];
-  const momentWindY = [];
-  for (let i = 0; i < force.wind.storeyID.length; i++) {
-    shearWindX.push({
-      x: Math.abs(force.wind.shearAlongX[i]),
-      y: Math.abs(force.wind.storeyID[i]),
-    });
-    shearWindY.push({
-      x: Math.abs(force.wind.shearAlongY[i]),
-      y: Math.abs(force.wind.storeyID[i]),
-    });
-    momentWindX.push({
-      x: Math.abs(force.wind.momentAlongX[i]),
-      y: Math.abs(force.wind.storeyID[i]),
-    });
-    momentWindY.push({
-      x: Math.abs(force.wind.momentAlongY[i]),
-      y: Math.abs(force.wind.storeyID[i]),
-    });
-  }
-
-  const shearSeismicX = [];
-  const shearSeismicY = [];
-  const momentSeismicX = [];
-  const momentSeismicY = [];
-  for (let i = 0; i < force.seismic.storeyID.length; i++) {
-    shearSeismicX.push({
+    shearSeismicXChartData.push({
       x: Math.abs(force.seismic.shearX[i]),
       y: Math.abs(force.seismic.storeyID[i]),
     });
-    shearSeismicY.push({
+    shearSeismicYChartData.push({
       x: Math.abs(force.seismic.shearY[i]),
       y: Math.abs(force.seismic.storeyID[i]),
     });
-    momentSeismicX.push({
+    momentSeismicXChartData.push({
       x: Math.abs(force.seismic.momentX[i]),
       y: Math.abs(force.seismic.storeyID[i]),
     });
-    momentSeismicY.push({
+    momentSeismicYChartData.push({
       x: Math.abs(force.seismic.momentY[i]),
       y: Math.abs(force.seismic.storeyID[i]),
     });
@@ -133,15 +127,15 @@ export function ForceComponent(force: IForceFE) {
       <Row>
         <Col span={12}>
           <StoreyChart
-            data1={shearWindX}
-            data2={shearWindY}
+            data1={shearWindXChartData}
+            data2={shearWindYChartData}
             xLabel="剪力(kN)"
           />
         </Col>
         <Col span={12}>
           <StoreyChart
-            data1={momentWindX}
-            data2={momentWindY}
+            data1={momentWindXChartData}
+            data2={momentWindYChartData}
             xLabel="弯矩(kNm)"
           />
         </Col>
@@ -167,15 +161,15 @@ export function ForceComponent(force: IForceFE) {
       <Row>
         <Col span={12}>
           <StoreyChart
-            data1={shearSeismicX}
-            data2={shearSeismicY}
+            data1={shearSeismicXChartData}
+            data2={shearSeismicYChartData}
             xLabel="剪力(kN)"
           />
         </Col>
         <Col span={12}>
           <StoreyChart
-            data1={momentSeismicX}
-            data2={momentSeismicY}
+            data1={momentSeismicXChartData}
+            data2={momentSeismicYChartData}
             xLabel="弯矩(kNm)"
           />
         </Col>
