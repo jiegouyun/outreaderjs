@@ -1,6 +1,7 @@
-import { Descriptions, Table } from 'antd';
+import { Descriptions, Table, Row, Col } from 'antd';
 import React from 'react';
 import { IFactorFE } from '@outreader/core';
+import { StoreyChart } from './../storey-chart';
 
 export function FactorComponent(factor: IFactorFE) {
   const weakColumns = [
@@ -19,11 +20,16 @@ export function FactorComponent(factor: IFactorFE) {
   ];
 
   const weakTableData = [];
+  const weakChartData = [];
   for (let i = 0; i < factor.stiffness.storeyID.length; i++) {
     weakTableData.push({
       storeyID: factor.stiffness.storeyID[i],
       towerID: factor.stiffness.towerID[i],
       factor: factor.stiffness.weakStoreyFactor[i],
+    });
+    weakChartData.push({
+      x: factor.stiffness.weakStoreyFactor[i],
+      y: factor.stiffness.storeyID[i],
     });
   }
 
@@ -47,6 +53,8 @@ export function FactorComponent(factor: IFactorFE) {
   ];
 
   const shearTableData = [];
+  const shearXChartData = [];
+  const shearYChartData = [];
   for (let i = 0; i < factor.shearWeightRatioModify.storeyID.length; i++) {
     shearTableData.push({
       storeyID: factor.shearWeightRatioModify.storeyID[i],
@@ -54,9 +62,19 @@ export function FactorComponent(factor: IFactorFE) {
       factorX: factor.shearWeightRatioModify.factorX[i],
       factorY: factor.shearWeightRatioModify.factorY[i],
     });
+    shearXChartData.push({
+      x: factor.shearWeightRatioModify.factorX[i],
+      y: factor.shearWeightRatioModify.storeyID[i],
+    });
+    shearYChartData.push({
+      x: factor.shearWeightRatioModify.factorY[i],
+      y: factor.shearWeightRatioModify.storeyID[i],
+    });
   }
 
   const v02qTableData = [];
+  const v02qXChartData = [];
+  const v02qYChartData = [];
   for (let i = 0; i < factor.v02qFactor.storeyID.length; i++) {
     v02qTableData.push({
       storeyID: factor.v02qFactor.storeyID[i],
@@ -64,11 +82,24 @@ export function FactorComponent(factor: IFactorFE) {
       factorX: factor.v02qFactor.factorX[i],
       factorY: factor.v02qFactor.factorY[i],
     });
+    v02qXChartData.push({
+      x: factor.v02qFactor.factorX[i],
+      y: factor.v02qFactor.storeyID[i],
+    });
+    v02qYChartData.push({
+      x: factor.v02qFactor.factorY[i],
+      y: factor.v02qFactor.storeyID[i],
+    });
   }
 
   const Factor = (
     <div>
       <Descriptions title="薄弱层剪力放大系数"></Descriptions>
+      <StoreyChart
+        data1={weakChartData}
+        data2={weakChartData}
+        xLabel="薄弱层剪力放大系数"
+      />
       <Table
         columns={weakColumns}
         dataSource={weakTableData}
@@ -78,6 +109,11 @@ export function FactorComponent(factor: IFactorFE) {
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="剪重比调整系数"></Descriptions>
+      <StoreyChart
+        data1={shearXChartData}
+        data2={shearYChartData}
+        xLabel="剪重比调整系数"
+      />
       <Table
         columns={factorColumns}
         dataSource={shearTableData}
@@ -87,6 +123,11 @@ export function FactorComponent(factor: IFactorFE) {
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="0.2V0调整系数"></Descriptions>
+      <StoreyChart
+        data1={shearXChartData}
+        data2={shearYChartData}
+        xLabel="0.2V0调整系数"
+      />
       <Table
         columns={factorColumns}
         dataSource={v02qTableData}
