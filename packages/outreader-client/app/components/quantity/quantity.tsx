@@ -1,6 +1,7 @@
-import { Descriptions, Table } from 'antd';
+import { Descriptions, Table, Row, Col } from 'antd';
 import React from 'react';
 import { IQuantityFE } from '@outreader/core';
+import { QuantityChart } from './../quantity-chart';
 
 export function QuantityComponent(quantity: IQuantityFE) {
   const quantityColumns = [
@@ -48,6 +49,7 @@ export function QuantityComponent(quantity: IQuantityFE) {
   }
 
   const concreteTableData = [];
+  const concretePercentChartData = [];
   for (let i = 0; i < quantity.concrete.storeyID.length; i++) {
     concreteTableData.push({
       storeyID: quantity.storeyID[i],
@@ -57,6 +59,17 @@ export function QuantityComponent(quantity: IQuantityFE) {
       beam: Math.round(quantity.concrete.beam[i]),
       floor: Math.round(quantity.concrete.floor[i]),
       total: Math.round(quantity.concrete.storey[i]),
+    });
+    concretePercentChartData.push({
+      storeyID: quantity.storeyID[i],
+      wall: quantity.concrete.wall[i] / quantity.concrete.storey[i],
+      column: quantity.concrete.column[i] / quantity.concrete.storey[i],
+      beam: quantity.concrete.beam[i] / quantity.concrete.storey[i],
+      floor:
+        1 -
+        quantity.concrete.wall[i] / quantity.concrete.storey[i] -
+        quantity.concrete.column[i] / quantity.concrete.storey[i] -
+        quantity.concrete.beam[i] / quantity.concrete.storey[i],
     });
   }
 
@@ -74,6 +87,7 @@ export function QuantityComponent(quantity: IQuantityFE) {
   }
 
   const steelTableData = [];
+  const steelPercentChartData = [];
   for (let i = 0; i < quantity.steel.storeyID.length; i++) {
     steelTableData.push({
       storeyID: quantity.storeyID[i],
@@ -83,6 +97,17 @@ export function QuantityComponent(quantity: IQuantityFE) {
       beam: Math.round(quantity.steel.beam[i]),
       floor: Math.round(quantity.steel.floor[i]),
       total: Math.round(quantity.steel.storey[i]),
+    });
+    steelPercentChartData.push({
+      storeyID: quantity.storeyID[i],
+      wall: quantity.steel.wall[i] / quantity.steel.storey[i],
+      column: quantity.steel.column[i] / quantity.steel.storey[i],
+      beam: quantity.steel.beam[i] / quantity.steel.storey[i],
+      floor:
+        1 -
+        quantity.steel.wall[i] / quantity.steel.storey[i] -
+        quantity.steel.column[i] / quantity.steel.storey[i] -
+        quantity.steel.beam[i] / quantity.steel.storey[i],
     });
   }
 
@@ -100,6 +125,7 @@ export function QuantityComponent(quantity: IQuantityFE) {
   }
 
   const rebarTableData = [];
+  const rebarPercentChartData = [];
   for (let i = 0; i < quantity.rebar.storeyID.length; i++) {
     rebarTableData.push({
       storeyID: quantity.storeyID[i],
@@ -109,11 +135,30 @@ export function QuantityComponent(quantity: IQuantityFE) {
       floor: Math.round(quantity.rebar.floor[i] / 1000),
       total: Math.round(quantity.rebar.storey[i] / 1000),
     });
+    rebarPercentChartData.push({
+      storeyID: quantity.storeyID[i],
+      wall: quantity.rebar.wall[i] / quantity.rebar.storey[i],
+      column: quantity.rebar.column[i] / quantity.rebar.storey[i],
+      beam: quantity.rebar.beam[i] / quantity.rebar.storey[i],
+      floor:
+        1 -
+        quantity.rebar.wall[i] / quantity.rebar.storey[i] -
+        quantity.rebar.column[i] / quantity.rebar.storey[i] -
+        quantity.rebar.beam[i] / quantity.rebar.storey[i],
+    });
   }
 
   const Quantity = (
     <div>
       <Descriptions title="砼用量(m^3)"></Descriptions>
+      <Row>
+        <Col span={12}>
+          <QuantityChart data={concreteTableData.slice()} xLabel="砼用量" />
+        </Col>
+        <Col span={12}>
+          <QuantityChart data={concretePercentChartData} xLabel="砼用量占比" />
+        </Col>
+      </Row>
       <Table
         columns={quantityColumns}
         dataSource={concreteTableData}
@@ -132,6 +177,14 @@ export function QuantityComponent(quantity: IQuantityFE) {
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="型钢用量(t)"></Descriptions>
+      <Row>
+        <Col span={12}>
+          <QuantityChart data={steelTableData.slice()} xLabel="型钢用量" />
+        </Col>
+        <Col span={12}>
+          <QuantityChart data={steelPercentChartData} xLabel="型钢用量占比" />
+        </Col>
+      </Row>
       <Table
         columns={quantityColumns}
         dataSource={steelTableData}
@@ -150,6 +203,14 @@ export function QuantityComponent(quantity: IQuantityFE) {
         style={{ marginBottom: 20 }}
       />
       <Descriptions title="钢筋用量(t)"></Descriptions>
+      <Row>
+        <Col span={12}>
+          <QuantityChart data={rebarTableData.slice()} xLabel="钢筋用量" />
+        </Col>
+        <Col span={12}>
+          <QuantityChart data={rebarPercentChartData} xLabel="钢筋用量占比" />
+        </Col>
+      </Row>
       <Table
         columns={quantityColumns}
         dataSource={rebarTableData}
