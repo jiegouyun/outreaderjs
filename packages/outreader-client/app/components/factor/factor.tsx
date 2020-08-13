@@ -1,4 +1,4 @@
-import { Descriptions, Table } from 'antd';
+import { Descriptions, Table, Collapse } from 'antd';
 import React from 'react';
 import { IFactorFE } from '@outreader/core';
 import { StoreyChart } from './../storey-chart';
@@ -25,7 +25,7 @@ export function FactorComponent(factor: IFactorFE) {
     weakTableData.push({
       storeyID: factor.stiffness.storeyID[i],
       towerID: factor.stiffness.towerID[i],
-      factor: factor.stiffness.weakStoreyFactor[i],
+      factor: factor.stiffness.weakStoreyFactor[i].toFixed(2),
     });
     weakChartData.push({
       x: factor.stiffness.weakStoreyFactor[i],
@@ -59,8 +59,8 @@ export function FactorComponent(factor: IFactorFE) {
     shearTableData.push({
       storeyID: factor.shearWeightRatioModify.storeyID[i],
       towerID: factor.shearWeightRatioModify.towerID[i],
-      factorX: factor.shearWeightRatioModify.factorX[i],
-      factorY: factor.shearWeightRatioModify.factorY[i],
+      factorX: factor.shearWeightRatioModify.factorX[i].toFixed(3),
+      factorY: factor.shearWeightRatioModify.factorY[i].toFixed(3),
     });
     shearXChartData.push({
       x: factor.shearWeightRatioModify.factorX[i],
@@ -79,8 +79,8 @@ export function FactorComponent(factor: IFactorFE) {
     v02qTableData.push({
       storeyID: factor.v02qFactor.storeyID[i],
       towerID: factor.v02qFactor.towerID[i],
-      factorX: factor.v02qFactor.factorX[i],
-      factorY: factor.v02qFactor.factorY[i],
+      factorX: factor.v02qFactor.factorX[i].toFixed(3),
+      factorY: factor.v02qFactor.factorY[i].toFixed(3),
     });
     v02qXChartData.push({
       x: factor.v02qFactor.factorX[i],
@@ -92,6 +92,7 @@ export function FactorComponent(factor: IFactorFE) {
     });
   }
 
+  const { Panel } = Collapse;
   const Factor = (
     <div>
       <Descriptions title="薄弱层剪力放大系数"></Descriptions>
@@ -100,42 +101,54 @@ export function FactorComponent(factor: IFactorFE) {
         data2={weakChartData}
         xLabel="薄弱层剪力放大系数"
       />
-      <Table
-        columns={weakColumns}
-        dataSource={weakTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={weakColumns}
+            dataSource={weakTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
       <Descriptions title="剪重比调整系数"></Descriptions>
       <StoreyChart
         data1={shearXChartData}
         data2={shearYChartData}
         xLabel="剪重比调整系数"
       />
-      <Table
-        columns={factorColumns}
-        dataSource={shearTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={factorColumns}
+            dataSource={shearTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
       <Descriptions title="0.2V0调整系数"></Descriptions>
       <StoreyChart
         data1={shearXChartData}
         data2={shearYChartData}
         xLabel="0.2V0调整系数"
       />
-      <Table
-        columns={factorColumns}
-        dataSource={v02qTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={factorColumns}
+            dataSource={v02qTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
     </div>
   );
 

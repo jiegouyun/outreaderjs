@@ -29,22 +29,24 @@ export default function Routes() {
             <Menu.Item key={routes.ABOUT}>关于</Menu.Item>
           </Menu>
         </Layout.Header>
-        <Layout.Content>
-          <Route path={routes.HOME} exact>
-            <HomePage />
-          </Route>
-          <Route path={routes.ABOUT} exact>
-            <AboutPage />
-          </Route>
-          <Switch>
-            <Route path={routes.STRUCTURES} exact>
-              <StructureListPage />
+        <Layout>
+          <Layout.Content>
+            <Route path={routes.HOME} exact>
+              <HomePage />
             </Route>
-            <Route path={routes.STRUCTURE} exact>
-              <StructurePage />
+            <Route path={routes.ABOUT} exact>
+              <AboutPage />
             </Route>
-          </Switch>
-        </Layout.Content>
+            <Switch>
+              <Route path={routes.STRUCTURES} exact>
+                <StructureListPage />
+              </Route>
+              <Route path={routes.STRUCTURE} exact>
+                <StructurePage />
+              </Route>
+            </Switch>
+          </Layout.Content>
+        </Layout>
       </Layout>
     </Router>
   );

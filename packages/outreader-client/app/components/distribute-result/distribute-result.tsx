@@ -1,4 +1,4 @@
-import { Descriptions, Table, Row, Col } from 'antd';
+import { Descriptions, Table, Row, Col, Collapse } from 'antd';
 import React from 'react';
 import { IDistributeResultFE } from '@outreader/core';
 import { StoreyChart } from './../storey-chart';
@@ -39,9 +39,9 @@ export function DistributeResultComponent(
       storeyID: distributeResult.storey.storeyID[i],
       towerID: distributeResult.storey.towerID[i],
       attribute: distributeResult.storey.attribute[i],
-      height: distributeResult.storey.height[i],
-      heightTD: distributeResult.storey.heightToGround[i],
-      area: distributeResult.storey.area[i],
+      height: distributeResult.storey.height[i].toFixed(2),
+      heightTD: distributeResult.storey.heightToGround[i].toFixed(2),
+      area: distributeResult.storey.area[i].toFixed(0),
     });
   }
 
@@ -55,7 +55,7 @@ export function DistributeResultComponent(
       dataIndex: 'towerID',
     },
     {
-      title: '楼层质量(kg)',
+      title: '楼层质量(t)',
       dataIndex: 'mass',
     },
     {
@@ -79,10 +79,10 @@ export function DistributeResultComponent(
     massRatioTableData.push({
       storeyID: distributeResult.massRatio.storeyID[i],
       towerID: distributeResult.massRatio.towerID[i],
-      mass: distributeResult.massRatio.storeyMass[i],
-      ratio: distributeResult.massRatio.ratio[i],
-      unitMass: distributeResult.massRatio.massPerArea[i],
-      unitRatio: distributeResult.massRatio.massPerAreaRatio[i],
+      mass: (distributeResult.massRatio.storeyMass[i] / 1000).toFixed(0),
+      ratio: distributeResult.massRatio.ratio[i].toFixed(2),
+      unitMass: distributeResult.massRatio.massPerArea[i].toFixed(2),
+      unitRatio: distributeResult.massRatio.massPerAreaRatio[i].toFixed(2),
     });
     massRatioChartData.push({
       x: distributeResult.massRatio.ratio[i],
@@ -130,10 +130,10 @@ export function DistributeResultComponent(
     stiffRatioTableData.push({
       storeyID: distributeResult.stiffness.storeyID[i],
       towerID: distributeResult.stiffness.towerID[i],
-      ratx1: distributeResult.stiffness.ratx1[i],
-      raty1: distributeResult.stiffness.raty1[i],
-      ratx2: distributeResult.stiffness.ratx2[i],
-      raty2: distributeResult.stiffness.raty2[i],
+      ratx1: distributeResult.stiffness.ratx1[i].toFixed(3),
+      raty1: distributeResult.stiffness.raty1[i].toFixed(3),
+      ratx2: distributeResult.stiffness.ratx2[i].toFixed(3),
+      raty2: distributeResult.stiffness.raty2[i].toFixed(3),
     });
     stiffRatioXChartData.push({
       x: distributeResult.stiffness.ratx1[i],
@@ -179,8 +179,8 @@ export function DistributeResultComponent(
     shearWeightTableData.push({
       storeyID: distributeResult.shearWeightRatio.storeyID[i],
       towerID: distributeResult.shearWeightRatio.towerID[i],
-      ratioX: distributeResult.shearWeightRatio.factorX[i],
-      ratioY: distributeResult.shearWeightRatio.factorY[i],
+      ratioX: distributeResult.shearWeightRatio.factorX[i].toFixed(3),
+      ratioY: distributeResult.shearWeightRatio.factorY[i].toFixed(3),
     });
     shearWeightXChartData.push({
       x: distributeResult.shearWeightRatio.factorX[i],
@@ -222,8 +222,8 @@ export function DistributeResultComponent(
     shearCapacityTableData.push({
       storeyID: distributeResult.shearCapacityCheck.storeyID[i],
       towerID: distributeResult.shearCapacityCheck.towerID[i],
-      ratioX: distributeResult.shearCapacityCheck.ratioX[i],
-      ratioY: distributeResult.shearCapacityCheck.ratioY[i],
+      ratioX: distributeResult.shearCapacityCheck.ratioX[i].toFixed(2),
+      ratioY: distributeResult.shearCapacityCheck.ratioY[i].toFixed(2),
     });
     shearCapacityXChartData.push({
       x: distributeResult.shearCapacityCheck.ratioX[i],
@@ -271,10 +271,10 @@ export function DistributeResultComponent(
     momentDistributeTableData.push({
       storeyID: distributeResult.momentPercent.storeyID[i],
       towerID: distributeResult.momentPercent.towerID[i],
-      columnX: distributeResult.momentPercent.percentColumnX[i],
-      wallX: distributeResult.momentPercent.percentWallX[i],
-      columnY: distributeResult.momentPercent.percentColumnY[i],
-      wallY: distributeResult.momentPercent.percentWallY[i],
+      columnX: distributeResult.momentPercent.percentColumnX[i].toFixed(1),
+      wallX: distributeResult.momentPercent.percentWallX[i].toFixed(1),
+      columnY: distributeResult.momentPercent.percentColumnY[i].toFixed(1),
+      wallY: distributeResult.momentPercent.percentWallY[i].toFixed(1),
     });
     momentColumnXChartData.push({
       x: distributeResult.momentPercent.percentColumnX[i],
@@ -320,8 +320,8 @@ export function DistributeResultComponent(
     shearDistributeTableData.push({
       storeyID: distributeResult.columnShear.storeyID[i],
       towerID: distributeResult.columnShear.towerID[i],
-      ratioX: distributeResult.columnShear.percentColumnX[i],
-      ratioY: distributeResult.columnShear.percentColumnY[i],
+      ratioX: distributeResult.columnShear.percentColumnX[i].toFixed(1),
+      ratioY: distributeResult.columnShear.percentColumnY[i].toFixed(1),
     });
     shearColumnXChartData.push({
       x: distributeResult.columnShear.percentColumnX[i],
@@ -333,31 +333,40 @@ export function DistributeResultComponent(
     });
   }
 
+  const { Panel } = Collapse;
   const DistributeResult = (
     <div>
       <Descriptions title="楼层属性"></Descriptions>
-      <Table
-        columns={storeyColumns}
-        dataSource={storeyTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={storeyColumns}
+            dataSource={storeyTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
       <Descriptions title="质量比"></Descriptions>
       <StoreyChart
         data1={massRatioChartData}
         data2={unitMassRatioChartData}
         xLabel="质量比"
       />
-      <Table
-        columns={massRatioColumns}
-        dataSource={massRatioTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={massRatioColumns}
+            dataSource={massRatioTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
       <Descriptions title="刚度比"></Descriptions>
       <Row>
         <Col span={12}>
@@ -375,42 +384,54 @@ export function DistributeResultComponent(
           />
         </Col>
       </Row>
-      <Table
-        columns={stiffRatioColumns}
-        dataSource={stiffRatioTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={stiffRatioColumns}
+            dataSource={stiffRatioTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
       <Descriptions title="剪重比"></Descriptions>
       <StoreyChart
         data1={shearWeightXChartData}
         data2={shearWeightYChartData}
         xLabel="剪重比"
       />
-      <Table
-        columns={shearWeightColumns}
-        dataSource={shearWeightTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={shearWeightColumns}
+            dataSource={shearWeightTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
       <Descriptions title="抗剪承载力比"></Descriptions>
       <StoreyChart
         data1={shearCapacityXChartData}
         data2={shearCapacityYChartData}
         xLabel="抗剪承载力比"
       />
-      <Table
-        columns={shearCapacityColumns}
-        dataSource={shearCapacityTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={shearCapacityColumns}
+            dataSource={shearCapacityTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
       <Descriptions title="规定水平力下倾覆力矩分配"></Descriptions>
       <Row>
         <Col span={12}>
@@ -428,28 +449,36 @@ export function DistributeResultComponent(
           />
         </Col>
       </Row>
-      <Table
-        columns={momentDistributeColumns}
-        dataSource={momentDistributeTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={momentDistributeColumns}
+            dataSource={momentDistributeTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
       <Descriptions title="柱剪力与分段基底剪力百分比"></Descriptions>
       <StoreyChart
         data1={shearColumnXChartData}
         data2={shearColumnYChartData}
         xLabel="柱剪力与分段基底剪力百分比(%)"
       />
-      <Table
-        columns={shearDistributeColumns}
-        dataSource={shearDistributeTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={shearDistributeColumns}
+            dataSource={shearDistributeTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
     </div>
   );
 

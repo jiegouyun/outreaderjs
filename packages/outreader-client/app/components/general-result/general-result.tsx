@@ -46,13 +46,13 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
       direction: 'X向',
       basement1: generalResult.constraintFloorStiffnessRatio.stiffnessX0,
       storey1: generalResult.constraintFloorStiffnessRatio.stiffnessX1,
-      ratio: generalResult.constraintFloorStiffnessRatio.ratioX,
+      ratio: generalResult.constraintFloorStiffnessRatio.ratioX.toFixed(3),
     },
     {
       direction: 'Y向',
       basement1: generalResult.constraintFloorStiffnessRatio.stiffnessY0,
       storey1: generalResult.constraintFloorStiffnessRatio.stiffnessY1,
-      ratio: generalResult.constraintFloorStiffnessRatio.ratioY,
+      ratio: generalResult.constraintFloorStiffnessRatio.ratioY.toFixed(3),
     },
   ];
 
@@ -84,29 +84,29 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
       direction: 'X向风',
       mr: generalResult.overturningCheck.mrWindX,
       mov: generalResult.overturningCheck.movWindX,
-      ratio: generalResult.overturningCheck.ratioWindX,
-      zeroArea: generalResult.overturningCheck.zeroAreaWindX,
+      ratio: generalResult.overturningCheck.ratioWindX.toFixed(2),
+      zeroArea: generalResult.overturningCheck.zeroAreaWindX.toFixed(2),
     },
     {
       direction: 'Y向风',
       mr: generalResult.overturningCheck.mrWindY,
       mov: generalResult.overturningCheck.movWindY,
-      ratio: generalResult.overturningCheck.ratioWindY,
-      zeroArea: generalResult.overturningCheck.zeroAreaWindY,
+      ratio: generalResult.overturningCheck.ratioWindY.toFixed(2),
+      zeroArea: generalResult.overturningCheck.zeroAreaWindY.toFixed(2),
     },
     {
       direction: 'X向地震',
       mr: generalResult.overturningCheck.mrSeismicX,
       mov: generalResult.overturningCheck.movSeismicX,
-      ratio: generalResult.overturningCheck.ratioSeismicX,
-      zeroArea: generalResult.overturningCheck.zeroAreaSeismicX,
+      ratio: generalResult.overturningCheck.ratioSeismicX.toFixed(2),
+      zeroArea: generalResult.overturningCheck.zeroAreaSeismicX.toFixed(2),
     },
     {
       direction: 'Y向地震',
       mr: generalResult.overturningCheck.mrSeismicY,
       mov: generalResult.overturningCheck.movSeismicY,
-      ratio: generalResult.overturningCheck.ratioSeismicY,
-      zeroArea: generalResult.overturningCheck.zeroAreaSeismicY,
+      ratio: generalResult.overturningCheck.ratioSeismicY.toFixed(2),
+      zeroArea: generalResult.overturningCheck.zeroAreaSeismicY.toFixed(2),
     },
   ];
 
@@ -226,16 +226,16 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
         style={{ marginBottom: 20 }}
       >
         <Descriptions.Item label="活载质量">
-          {Math.round(generalResult.weight.live)}
+          {generalResult.weight.live.toFixed(0)}
         </Descriptions.Item>
         <Descriptions.Item label="恒载质量">
-          {Math.round(generalResult.weight.dead)}
+          {generalResult.weight.dead.toFixed(0)}
         </Descriptions.Item>
         <Descriptions.Item label="附加质量">
-          {Math.round(generalResult.weight.super)}
+          {generalResult.weight.super.toFixed(0)}
         </Descriptions.Item>
         <Descriptions.Item label="总质量">
-          {Math.round(generalResult.weight.sum)}
+          {generalResult.weight.sum.toFixed(0)}
         </Descriptions.Item>
       </Descriptions>
       <Descriptions

@@ -1,4 +1,4 @@
-import { Descriptions, Table, Row, Col } from 'antd';
+import { Descriptions, Table, Row, Col, Collapse } from 'antd';
 import React from 'react';
 import { IQuantityFE } from '@outreader/core';
 import { QuantityChart } from './../quantity-chart';
@@ -62,14 +62,35 @@ export function QuantityComponent(quantity: IQuantityFE) {
     });
     concretePercentChartData.push({
       storeyID: quantity.storeyID[i],
-      wall: quantity.concrete.wall[i] / quantity.concrete.storey[i],
-      column: quantity.concrete.column[i] / quantity.concrete.storey[i],
-      beam: quantity.concrete.beam[i] / quantity.concrete.storey[i],
+      wall:
+        Math.round(
+          (quantity.concrete.wall[i] / quantity.concrete.storey[i]) * 100
+        ) / 100,
+      column:
+        Math.round(
+          (quantity.concrete.column[i] / quantity.concrete.storey[i]) * 100
+        ) / 100,
+      beam:
+        Math.round(
+          (quantity.concrete.beam[i] / quantity.concrete.storey[i]) * 100
+        ) / 100,
       floor:
-        1 -
-        quantity.concrete.wall[i] / quantity.concrete.storey[i] -
-        quantity.concrete.column[i] / quantity.concrete.storey[i] -
-        quantity.concrete.beam[i] / quantity.concrete.storey[i],
+        Math.round(
+          (1 -
+            Math.round(
+              (quantity.concrete.wall[i] / quantity.concrete.storey[i]) * 100
+            ) /
+              100 -
+            Math.round(
+              (quantity.concrete.column[i] / quantity.concrete.storey[i]) * 100
+            ) /
+              100 -
+            Math.round(
+              (quantity.concrete.beam[i] / quantity.concrete.storey[i]) * 100
+            ) /
+              100) *
+            100
+        ) / 100,
     });
   }
 
@@ -100,14 +121,33 @@ export function QuantityComponent(quantity: IQuantityFE) {
     });
     steelPercentChartData.push({
       storeyID: quantity.storeyID[i],
-      wall: quantity.steel.wall[i] / quantity.steel.storey[i],
-      column: quantity.steel.column[i] / quantity.steel.storey[i],
-      beam: quantity.steel.beam[i] / quantity.steel.storey[i],
+      wall:
+        Math.round((quantity.steel.wall[i] / quantity.steel.storey[i]) * 100) /
+        100,
+      column:
+        Math.round(
+          (quantity.steel.column[i] / quantity.steel.storey[i]) * 100
+        ) / 100,
+      beam:
+        Math.round((quantity.steel.beam[i] / quantity.steel.storey[i]) * 100) /
+        100,
       floor:
-        1 -
-        quantity.steel.wall[i] / quantity.steel.storey[i] -
-        quantity.steel.column[i] / quantity.steel.storey[i] -
-        quantity.steel.beam[i] / quantity.steel.storey[i],
+        Math.round(
+          (1 -
+            Math.round(
+              (quantity.steel.wall[i] / quantity.steel.storey[i]) * 100
+            ) /
+              100 -
+            Math.round(
+              (quantity.steel.column[i] / quantity.steel.storey[i]) * 100
+            ) /
+              100 -
+            Math.round(
+              (quantity.steel.beam[i] / quantity.steel.storey[i]) * 100
+            ) /
+              100) *
+            100
+        ) / 100,
     });
   }
 
@@ -137,17 +177,37 @@ export function QuantityComponent(quantity: IQuantityFE) {
     });
     rebarPercentChartData.push({
       storeyID: quantity.storeyID[i],
-      wall: quantity.rebar.wall[i] / quantity.rebar.storey[i],
-      column: quantity.rebar.column[i] / quantity.rebar.storey[i],
-      beam: quantity.rebar.beam[i] / quantity.rebar.storey[i],
+      wall:
+        Math.round((quantity.rebar.wall[i] / quantity.rebar.storey[i]) * 100) /
+        100,
+      column:
+        Math.round(
+          (quantity.rebar.column[i] / quantity.rebar.storey[i]) * 100
+        ) / 100,
+      beam:
+        Math.round((quantity.rebar.beam[i] / quantity.rebar.storey[i]) * 100) /
+        100,
       floor:
-        1 -
-        quantity.rebar.wall[i] / quantity.rebar.storey[i] -
-        quantity.rebar.column[i] / quantity.rebar.storey[i] -
-        quantity.rebar.beam[i] / quantity.rebar.storey[i],
+        Math.round(
+          (1 -
+            Math.round(
+              (quantity.rebar.wall[i] / quantity.rebar.storey[i]) * 100
+            ) /
+              100 -
+            Math.round(
+              (quantity.rebar.column[i] / quantity.rebar.storey[i]) * 100
+            ) /
+              100 -
+            Math.round(
+              (quantity.rebar.beam[i] / quantity.rebar.storey[i]) * 100
+            ) /
+              100) *
+            100
+        ) / 100,
     });
   }
 
+  const { Panel } = Collapse;
   const Quantity = (
     <div>
       <Descriptions title="砼用量(m^3)"></Descriptions>
@@ -159,23 +219,31 @@ export function QuantityComponent(quantity: IQuantityFE) {
           <QuantityChart data={concretePercentChartData} xLabel="砼用量占比" />
         </Col>
       </Row>
-      <Table
-        columns={quantityColumns}
-        dataSource={concreteTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={quantityColumns}
+            dataSource={concreteTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
       <Descriptions title="砼含量(m^3/m^2)"></Descriptions>
-      <Table
-        columns={quantityColumns}
-        dataSource={unitConcreteTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={quantityColumns}
+            dataSource={unitConcreteTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
       <Descriptions title="型钢用量(t)"></Descriptions>
       <Row>
         <Col span={12}>
@@ -185,23 +253,31 @@ export function QuantityComponent(quantity: IQuantityFE) {
           <QuantityChart data={steelPercentChartData} xLabel="型钢用量占比" />
         </Col>
       </Row>
-      <Table
-        columns={quantityColumns}
-        dataSource={steelTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={quantityColumns}
+            dataSource={steelTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
       <Descriptions title="型钢含量(kg/m^2)"></Descriptions>
-      <Table
-        columns={quantityColumns}
-        dataSource={unitSteelTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={quantityColumns}
+            dataSource={unitSteelTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
       <Descriptions title="钢筋用量(t)"></Descriptions>
       <Row>
         <Col span={12}>
@@ -211,23 +287,31 @@ export function QuantityComponent(quantity: IQuantityFE) {
           <QuantityChart data={rebarPercentChartData} xLabel="钢筋用量占比" />
         </Col>
       </Row>
-      <Table
-        columns={quantityColumns}
-        dataSource={rebarTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={quantityColumns}
+            dataSource={rebarTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
       <Descriptions title="钢筋含量(kg/m^2)"></Descriptions>
-      <Table
-        columns={quantityColumns}
-        dataSource={unitRebarTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={quantityColumns}
+            dataSource={unitRebarTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
     </div>
   );
 

@@ -33,51 +33,51 @@ export function SummaryQuantityComponent(summaryQuantity: ISummaryQuantityFE) {
   const summaryQuantityTableData = [
     {
       part: '钢筋含量(kg/m^2)',
-      wall: Math.round(summaryQuantity.unitRebar.wall * 100) / 100,
-      column: Math.round(summaryQuantity.unitRebar.column * 100) / 100,
-      beam: Math.round(summaryQuantity.unitRebar.beam * 100) / 100,
-      floor: Math.round(summaryQuantity.unitRebar.floor * 100) / 100,
-      total: Math.round(summaryQuantity.unitRebar.total * 100) / 100,
+      wall: summaryQuantity.unitRebar.wall.toFixed(2),
+      column: summaryQuantity.unitRebar.column.toFixed(2),
+      beam: summaryQuantity.unitRebar.beam.toFixed(2),
+      floor: summaryQuantity.unitRebar.floor.toFixed(2),
+      total: summaryQuantity.unitRebar.total.toFixed(2),
     },
     {
       part: '砼含量(m^3/m^2)',
-      wall: Math.round(summaryQuantity.unitConcrete.wall * 100) / 100,
-      column: Math.round(summaryQuantity.unitConcrete.column * 100) / 100,
-      beam: Math.round(summaryQuantity.unitConcrete.beam * 100) / 100,
-      floor: Math.round(summaryQuantity.unitConcrete.floor * 100) / 100,
-      total: Math.round(summaryQuantity.unitConcrete.total * 100) / 100,
+      wall: summaryQuantity.unitConcrete.wall.toFixed(2),
+      column: summaryQuantity.unitConcrete.column.toFixed(2),
+      beam: summaryQuantity.unitConcrete.beam.toFixed(2),
+      floor: summaryQuantity.unitConcrete.floor.toFixed(2),
+      total: summaryQuantity.unitConcrete.total.toFixed(2),
     },
     {
       part: '型钢含量(kg/m^2)',
-      wall: Math.round(summaryQuantity.unitSteel.wall * 100000) / 100,
-      column: Math.round(summaryQuantity.unitSteel.column * 100000) / 100,
-      beam: Math.round(summaryQuantity.unitSteel.beam * 100000) / 100,
-      floor: Math.round(summaryQuantity.unitSteel.floor * 100000) / 100,
-      total: Math.round(summaryQuantity.unitSteel.total * 100000) / 100,
+      wall: (summaryQuantity.unitSteel.wall * 1000).toFixed(2),
+      column: (summaryQuantity.unitSteel.column * 1000).toFixed(2),
+      beam: (summaryQuantity.unitSteel.beam * 1000).toFixed(2),
+      floor: (summaryQuantity.unitSteel.floor * 1000).toFixed(2),
+      total: (summaryQuantity.unitSteel.total * 1000).toFixed(2),
     },
     {
       part: '钢筋总量(t)',
-      wall: Math.round(summaryQuantity.rebar.wall / 1000),
-      column: Math.round(summaryQuantity.rebar.column / 1000),
-      beam: Math.round(summaryQuantity.rebar.beam / 1000),
-      floor: Math.round(summaryQuantity.rebar.floor / 1000),
-      total: Math.round(summaryQuantity.rebar.total / 1000),
+      wall: (summaryQuantity.rebar.wall / 1000).toFixed(0),
+      column: (summaryQuantity.rebar.column / 1000).toFixed(0),
+      beam: (summaryQuantity.rebar.beam / 1000).toFixed(0),
+      floor: (summaryQuantity.rebar.floor / 1000).toFixed(0),
+      total: (summaryQuantity.rebar.total / 1000).toFixed(0),
     },
     {
       part: '砼总量(m^3)',
-      wall: Math.round(summaryQuantity.concrete.wall),
-      column: Math.round(summaryQuantity.concrete.column),
-      beam: Math.round(summaryQuantity.concrete.beam),
-      floor: Math.round(summaryQuantity.concrete.floor),
-      total: Math.round(summaryQuantity.concrete.total),
+      wall: summaryQuantity.concrete.wall.toFixed(0),
+      column: summaryQuantity.concrete.column.toFixed(0),
+      beam: summaryQuantity.concrete.beam.toFixed(0),
+      floor: summaryQuantity.concrete.floor.toFixed(0),
+      total: summaryQuantity.concrete.total.toFixed(0),
     },
     {
       part: '型钢总量(t)',
-      wall: Math.round(summaryQuantity.steel.wall),
-      column: Math.round(summaryQuantity.steel.column),
-      beam: Math.round(summaryQuantity.steel.beam),
-      floor: Math.round(summaryQuantity.steel.floor),
-      total: Math.round(summaryQuantity.steel.total),
+      wall: summaryQuantity.steel.wall.toFixed(0),
+      column: summaryQuantity.steel.column.toFixed(0),
+      beam: summaryQuantity.steel.beam.toFixed(0),
+      floor: summaryQuantity.steel.floor.toFixed(0),
+      total: summaryQuantity.steel.total.toFixed(0),
     },
   ];
 
@@ -94,10 +94,10 @@ export function SummaryQuantityComponent(summaryQuantity: ISummaryQuantityFE) {
           {summaryQuantity.structure.engineering}
         </Descriptions.Item>
         <Descriptions.Item label="结构高度(m)">
-          {Math.round(summaryQuantity.structure.height * 10) / 10}
+          {summaryQuantity.structure.height.toFixed(1)}
         </Descriptions.Item>
         <Descriptions.Item label="结构面积(m^2)">
-          {Math.round(summaryQuantity.structure.area)}
+          {summaryQuantity.structure.area.toFixed(0)}
         </Descriptions.Item>
         <Descriptions.Item label="结构周期(T1/T2/T3)">
           {summaryQuantity.structure.period}

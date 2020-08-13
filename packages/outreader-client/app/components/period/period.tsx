@@ -1,4 +1,4 @@
-import { Descriptions, Table } from 'antd';
+import { Descriptions, Table, Collapse } from 'antd';
 import React from 'react';
 import {
   ScatterChart,
@@ -44,11 +44,11 @@ export function PeriodComponent(period: IPeriodFE) {
   for (let i = 0; i < period.modeCoupling.modeID.length; i++) {
     periodModeTableData.push({
       modeID: period.modeCoupling.modeID[i],
-      period: period.modeCoupling.period[i],
-      angle: period.modeCoupling.angle[i],
-      factorX: period.modeCoupling.factorX[i],
-      factorY: period.modeCoupling.factorY[i],
-      factorZ: period.modeCoupling.factorZ[i],
+      period: period.modeCoupling.period[i].toFixed(3),
+      angle: period.modeCoupling.angle[i].toFixed(2),
+      factorX: period.modeCoupling.factorX[i].toFixed(2),
+      factorY: period.modeCoupling.factorY[i].toFixed(2),
+      factorZ: period.modeCoupling.factorZ[i].toFixed(2),
     });
   }
 
@@ -56,11 +56,11 @@ export function PeriodComponent(period: IPeriodFE) {
   for (let i = 0; i < period.modeSeismic.modeID.length; i++) {
     periodSeismicTableData.push({
       modeID: period.modeSeismic.modeID[i],
-      period: period.modeSeismic.period[i],
-      angle: period.modeSeismic.angle[i],
-      factorX: period.modeSeismic.factorX[i],
-      factorY: period.modeSeismic.factorY[i],
-      factorZ: period.modeSeismic.factorZ[i],
+      period: period.modeSeismic.period[i].toFixed(3),
+      angle: period.modeSeismic.angle[i].toFixed(2),
+      factorX: period.modeSeismic.factorX[i].toFixed(2),
+      factorY: period.modeSeismic.factorY[i].toFixed(2),
+      factorZ: period.modeSeismic.factorZ[i].toFixed(2),
     });
   }
 
@@ -93,67 +93,60 @@ export function PeriodComponent(period: IPeriodFE) {
   for (let i = 0; i < period.modeMass.modeID.length; i++) {
     periodMassTableData.push({
       modeID: period.modeMass.modeID[i],
-      factorX: period.modeMass.factorX[i],
-      factorY: period.modeMass.factorY[i],
-      factorZ: period.modeMass.factorZ[i],
+      factorX: period.modeMass.factorX[i].toFixed(2),
+      factorY: period.modeMass.factorY[i].toFixed(2),
+      factorZ: period.modeMass.factorZ[i].toFixed(2),
     });
     sumX += period.modeMass.factorX[i];
     sumY += period.modeMass.factorY[i];
     sumZ += period.modeMass.factorZ[i];
     modeMassX.push({
       x: period.modeMass.modeID[i],
-      y: Math.round(sumX * 100) / 100,
+      y: sumX.toFixed(2),
     });
     modeMassY.push({
       x: period.modeMass.modeID[i],
-      y: Math.round(sumY * 100) / 100,
+      y: sumY.toFixed(2),
     });
     modeMassZ.push({
       x: period.modeMass.modeID[i],
-      y: Math.round(sumZ * 100) / 100,
+      y: sumZ.toFixed(2),
     });
   }
 
+  const { Panel } = Collapse;
   const Period = (
     <div>
       <Descriptions title="考虑扭转耦联时的动力特性"></Descriptions>
-      <Table
-        columns={modeColumns}
-        dataSource={periodModeTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={modeColumns}
+            dataSource={periodModeTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
       <Descriptions title="地震最大作用方向的动力特性"></Descriptions>
-      <Table
-        columns={modeColumns}
-        dataSource={periodSeismicTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
-      <Descriptions
-        title="质量参与系数"
-        bordered
-        size="small"
-        column={{ xs: 1, sm: 3 }}
-        style={{ marginBottom: 20 }}
-      >
-        <Descriptions.Item label="sumX">
-          {Math.round(period.modeMass.sumX * 100) / 100}
-        </Descriptions.Item>
-        <Descriptions.Item label="sumY">
-          {Math.round(period.modeMass.sumY * 100) / 100}
-        </Descriptions.Item>
-        <Descriptions.Item label="sumZ">
-          {Math.round(period.modeMass.sumZ * 100) / 100}
-        </Descriptions.Item>
-      </Descriptions>
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={modeColumns}
+            dataSource={periodSeismicTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
+      <Descriptions title="质量参与系数"></Descriptions>
       <ScatterChart
-        width={600}
-        height={400}
+        width={550}
+        height={350}
         margin={{
           top: 10,
           right: 10,
@@ -188,35 +181,39 @@ export function PeriodComponent(period: IPeriodFE) {
           iconType="line"
         />
         <Scatter
-          name="X向"
+          name={'X: ' + period.modeMass.sumX.toFixed(2)}
           data={modeMassX}
           fill="#8884d8"
           line={{ strokeWidth: 2 }}
           shape="cross"
         />
         <Scatter
-          name="Y向"
+          name={'Y: ' + period.modeMass.sumY.toFixed(2)}
           data={modeMassY}
           fill="#82ca9d"
           line={{ strokeWidth: 2 }}
           shape="cicle"
         />
         <Scatter
-          name="Z向"
+          name={'Z: ' + period.modeMass.sumZ.toFixed(2)}
           data={modeMassZ}
           fill="#ffc658"
           line={{ strokeWidth: 2 }}
           shape="diamond"
         />
       </ScatterChart>
-      <Table
-        columns={periodMassColumns}
-        dataSource={periodMassTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={periodMassColumns}
+            dataSource={periodMassTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
     </div>
   );
 

@@ -34,11 +34,11 @@ export function SummaryComponent(summary: ISummaryFE) {
   for (let i = 0; i < 6; i++) {
     summaryTableData.push({
       modeID: summary.mode.modeID[i],
-      period: Math.round(summary.mode.period[i] * 100) / 100,
-      angle: Math.round(summary.mode.angle[i]),
-      factorX: Math.round(summary.mode.factorX[i]),
-      factorY: Math.round(summary.mode.factorY[i]),
-      factorZ: Math.round(summary.mode.factorZ[i]),
+      period: summary.mode.period[i].toFixed(2),
+      angle: summary.mode.angle[i].toFixed(0),
+      factorX: summary.mode.factorX[i].toFixed(0),
+      factorY: summary.mode.factorY[i].toFixed(0),
+      factorZ: summary.mode.factorZ[i].toFixed(0),
     });
   }
 
@@ -84,7 +84,7 @@ export function SummaryComponent(summary: ISummaryFE) {
           {summary.structures.storeys}
         </Descriptions.Item>
         <Descriptions.Item label="结构高度">
-          {Math.round(summary.structures.height * 10) / 10}
+          {summary.structures.height.toFixed(1)}
         </Descriptions.Item>
         <Descriptions.Item label="地下室层数">
           {summary.structures.basement}
@@ -113,16 +113,16 @@ export function SummaryComponent(summary: ISummaryFE) {
         style={{ marginBottom: 20 }}
       >
         <Descriptions.Item label="活载质量">
-          {Math.round(summary.weight.live)}
+          {summary.weight.live.toFixed(0)}
         </Descriptions.Item>
         <Descriptions.Item label="附加质量">
-          {Math.round(summary.weight.super)}
+          {summary.weight.super.toFixed(0)}
         </Descriptions.Item>
         <Descriptions.Item label="恒载质量">
-          {Math.round(summary.weight.dead)}
+          {summary.weight.dead.toFixed(0)}
         </Descriptions.Item>
         <Descriptions.Item label="总质量">
-          {Math.round(summary.weight.sum)}
+          {summary.weight.sum.toFixed(0)}
         </Descriptions.Item>
       </Descriptions>
       <Descriptions
@@ -314,13 +314,13 @@ export function SummaryComponent(summary: ISummaryFE) {
         style={{ marginBottom: 20 }}
       >
         <Descriptions.Item label="X向">
-          {summary.stiffRatio.x[0]}
+          {summary.stiffRatio.x[0].toFixed(3)}
         </Descriptions.Item>
         <Descriptions.Item label="楼层">
           {summary.stiffRatio.x[1]}
         </Descriptions.Item>
         <Descriptions.Item label="Y向">
-          {summary.stiffRatio.y[0]}
+          {summary.stiffRatio.y[0].toFixed(3)}
         </Descriptions.Item>
         <Descriptions.Item label="楼层">
           {summary.stiffRatio.y[1]}
@@ -365,7 +365,7 @@ export function SummaryComponent(summary: ISummaryFE) {
           {}
         </Descriptions.Item>
         <Descriptions.Item label="周期比">
-          {Math.round(summary.mode.periodRatio * 100) / 100}
+          {summary.mode.periodRatio.toFixed(2)}
         </Descriptions.Item>
         <Descriptions.Item label="判断">
           {summary.mode.periodRatioCheck}
@@ -377,13 +377,13 @@ export function SummaryComponent(summary: ISummaryFE) {
           {}
         </Descriptions.Item>
         <Descriptions.Item label="X向">
-          {Math.round(summary.mode.sumX * 10) / 10}
+          {summary.mode.sumX.toFixed(2)}
         </Descriptions.Item>
         <Descriptions.Item label="Y向">
-          {Math.round(summary.mode.sumY * 10) / 10}
+          {summary.mode.sumY.toFixed(2)}
         </Descriptions.Item>
         <Descriptions.Item label="Z向">
-          {Math.round(summary.mode.sumZ * 10) / 10}
+          {summary.mode.sumZ.toFixed(2)}
         </Descriptions.Item>
       </Descriptions>
       <Descriptions
@@ -397,19 +397,19 @@ export function SummaryComponent(summary: ISummaryFE) {
           {}
         </Descriptions.Item>
         <Descriptions.Item label="X向">
-          {Math.round(summary.baseShear.windX)}
+          {summary.baseShear.windX.toFixed(0)}
         </Descriptions.Item>
         <Descriptions.Item label="Y向">
-          {Math.round(summary.baseShear.windY)}
+          {summary.baseShear.windY.toFixed(0)}
         </Descriptions.Item>
         <Descriptions.Item label="地震" span={2}>
           {}
         </Descriptions.Item>
         <Descriptions.Item label="X向">
-          {Math.round(summary.baseShear.seismicX)}
+          {summary.baseShear.seismicX.toFixed(0)}
         </Descriptions.Item>
         <Descriptions.Item label="Y向">
-          {Math.round(summary.baseShear.seismicY)}
+          {summary.baseShear.seismicY.toFixed(0)}
         </Descriptions.Item>
       </Descriptions>
       <Descriptions
@@ -423,19 +423,19 @@ export function SummaryComponent(summary: ISummaryFE) {
           {}
         </Descriptions.Item>
         <Descriptions.Item label="X向">
-          {Math.round(summary.baseMoment.windX)}
+          {summary.baseMoment.windX.toFixed(0)}
         </Descriptions.Item>
         <Descriptions.Item label="Y向">
-          {Math.round(summary.baseMoment.windY)}
+          {summary.baseMoment.windY.toFixed(0)}
         </Descriptions.Item>
         <Descriptions.Item label="地震" span={2}>
           {}
         </Descriptions.Item>
         <Descriptions.Item label="X向">
-          {Math.round(summary.baseMoment.seismicX)}
+          {summary.baseMoment.seismicX.toFixed(0)}
         </Descriptions.Item>
         <Descriptions.Item label="Y向">
-          {Math.round(summary.baseMoment.seismicY)}
+          {summary.baseMoment.seismicY.toFixed(0)}
         </Descriptions.Item>
       </Descriptions>
     </div>

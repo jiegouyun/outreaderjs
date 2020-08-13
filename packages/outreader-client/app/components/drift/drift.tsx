@@ -1,4 +1,4 @@
-import { Descriptions, Table, Row, Col } from 'antd';
+import { Descriptions, Table, Row, Col, Collapse } from 'antd';
 import React from 'react';
 import { IDriftFE } from '@outreader/core';
 import { StoreyChart } from './../storey-chart';
@@ -45,10 +45,10 @@ export function DriftComponent(drift: IDriftFE) {
     dispTableData.push({
       storeyID: drift.driftWindXP.storeyID[i],
       towerID: drift.driftWindXP.towerID[i],
-      windX: drift.driftWindXP.displacement[i],
-      windY: drift.driftWindYP.displacement[i],
-      seismicX: drift.driftSeismicX.displacement[i],
-      seismicY: drift.driftSeismicY.displacement[i],
+      windX: drift.driftWindXP.displacement[i].toFixed(2),
+      windY: drift.driftWindYP.displacement[i].toFixed(2),
+      seismicX: drift.driftSeismicX.displacement[i].toFixed(2),
+      seismicY: drift.driftSeismicY.displacement[i].toFixed(2),
     });
     driftTableData.push({
       storeyID: drift.driftWindXP.storeyID[i],
@@ -133,18 +133,18 @@ export function DriftComponent(drift: IDriftFE) {
     dispRatioTableData.push({
       storeyID: drift.ratioSeismicXEccP.storeyID[i],
       towerID: drift.ratioSeismicXEccP.towerID[i],
-      eccXP: drift.ratioSeismicXEccP.ratio[i],
-      eccXN: drift.ratioSeismicXEccN.ratio[i],
-      eccYP: drift.ratioSeismicYEccP.ratio[i],
-      eccYN: drift.ratioSeismicYEccN.ratio[i],
+      eccXP: drift.ratioSeismicXEccP.ratio[i].toFixed(2),
+      eccXN: drift.ratioSeismicXEccN.ratio[i].toFixed(2),
+      eccYP: drift.ratioSeismicYEccP.ratio[i].toFixed(2),
+      eccYN: drift.ratioSeismicYEccN.ratio[i].toFixed(2),
     });
     dispRatioStoreyTableData.push({
       storeyID: drift.ratioSeismicXEccP.storeyID[i],
       towerID: drift.ratioSeismicXEccP.towerID[i],
-      eccXP: drift.ratioSeismicXEccP.ratioD[i],
-      eccXN: drift.ratioSeismicXEccN.ratioD[i],
-      eccYP: drift.ratioSeismicYEccP.ratioD[i],
-      eccYN: drift.ratioSeismicYEccN.ratioD[i],
+      eccXP: drift.ratioSeismicXEccP.ratioD[i].toFixed(2),
+      eccXN: drift.ratioSeismicXEccN.ratioD[i].toFixed(2),
+      eccYP: drift.ratioSeismicYEccP.ratioD[i].toFixed(2),
+      eccYN: drift.ratioSeismicYEccN.ratioD[i].toFixed(2),
     });
     ratioChartEXP.push({
       x: drift.ratioSeismicXEccP.ratio[i],
@@ -180,6 +180,7 @@ export function DriftComponent(drift: IDriftFE) {
     });
   }
 
+  const { Panel } = Collapse;
   const Drift = (
     <div>
       <Descriptions title="位移(mm)"></Descriptions>
@@ -199,14 +200,18 @@ export function DriftComponent(drift: IDriftFE) {
           />
         </Col>
       </Row>
-      <Table
-        columns={driftDispColumns}
-        dataSource={dispTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={driftDispColumns}
+            dataSource={dispTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
       <Descriptions title="层间位移角"></Descriptions>
       <Row>
         <Col span={12}>
@@ -224,14 +229,18 @@ export function DriftComponent(drift: IDriftFE) {
           />
         </Col>
       </Row>
-      <Table
-        columns={driftDispColumns}
-        dataSource={driftTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={driftDispColumns}
+            dataSource={driftTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
       <Descriptions title="位移比"></Descriptions>
       <Row>
         <Col span={12}>
@@ -249,14 +258,18 @@ export function DriftComponent(drift: IDriftFE) {
           />
         </Col>
       </Row>
-      <Table
-        columns={dispRatioColumns}
-        dataSource={dispRatioTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={dispRatioColumns}
+            dataSource={dispRatioTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
       <Descriptions title="层间位移比"></Descriptions>
       <Row>
         <Col span={12}>
@@ -274,14 +287,18 @@ export function DriftComponent(drift: IDriftFE) {
           />
         </Col>
       </Row>
-      <Table
-        columns={dispRatioColumns}
-        dataSource={dispRatioStoreyTableData}
-        bordered
-        size="small"
-        pagination={false}
-        style={{ marginBottom: 20 }}
-      />
+      <Collapse ghost>
+        <Panel header="详细数据" key="1">
+          <Table
+            columns={dispRatioColumns}
+            dataSource={dispRatioStoreyTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+          />
+        </Panel>
+      </Collapse>
     </div>
   );
 
