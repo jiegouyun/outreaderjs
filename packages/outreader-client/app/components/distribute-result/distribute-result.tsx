@@ -336,7 +336,7 @@ export function DistributeResultComponent(
   const { Panel } = Collapse;
   const DistributeResult = (
     <div>
-      <Descriptions title="楼层属性"></Descriptions>
+      <h3>楼层属性</h3>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <Table
@@ -349,7 +349,7 @@ export function DistributeResultComponent(
           />
         </Panel>
       </Collapse>
-      <Descriptions title="质量比"></Descriptions>
+      <h3>质量比</h3>
       <StoreyChart
         data1={massRatioChartData}
         data2={unitMassRatioChartData}
@@ -367,7 +367,7 @@ export function DistributeResultComponent(
           />
         </Panel>
       </Collapse>
-      <Descriptions title="刚度比"></Descriptions>
+      <h3>刚度比</h3>
       <Row>
         <Col span={12}>
           <StoreyChart
@@ -396,7 +396,7 @@ export function DistributeResultComponent(
           />
         </Panel>
       </Collapse>
-      <Descriptions title="剪重比"></Descriptions>
+      <h3>剪重比</h3>
       <StoreyChart
         data1={shearWeightXChartData}
         data2={shearWeightYChartData}
@@ -414,7 +414,7 @@ export function DistributeResultComponent(
           />
         </Panel>
       </Collapse>
-      <Descriptions title="抗剪承载力比"></Descriptions>
+      <h3>抗剪承载力比</h3>
       <StoreyChart
         data1={shearCapacityXChartData}
         data2={shearCapacityYChartData}
@@ -432,7 +432,7 @@ export function DistributeResultComponent(
           />
         </Panel>
       </Collapse>
-      <Descriptions title="规定水平力下倾覆力矩分配"></Descriptions>
+      <h3>规定水平力下倾覆力矩分配</h3>
       <Row>
         <Col span={12}>
           <StoreyChart
@@ -461,7 +461,7 @@ export function DistributeResultComponent(
           />
         </Panel>
       </Collapse>
-      <Descriptions title="柱剪力与分段基底剪力百分比"></Descriptions>
+      <h3>柱剪力与分段基底剪力百分比</h3>
       <StoreyChart
         data1={shearColumnXChartData}
         data2={shearColumnYChartData}

@@ -5,8 +5,8 @@ import { IParametersFE } from '@outreader/core';
 export function ParametersComponent(parameters: IParametersFE) {
   const Parameters = (
     <div>
+      <h3>结构总体信息</h3>
       <Descriptions
-        title="结构总体信息"
         bordered
         size="small"
         column={{ xs: 1, sm: 1 }}
@@ -37,8 +37,8 @@ export function ParametersComponent(parameters: IParametersFE) {
           {parameters.general.reinforceStorey}
         </Descriptions.Item>
       </Descriptions>
+      <h3>计算控制信息</h3>
       <Descriptions
-        title="计算控制信息"
         bordered
         size="small"
         column={{ xs: 1, sm: 1 }}
@@ -54,8 +54,8 @@ export function ParametersComponent(parameters: IParametersFE) {
           {parameters.calculate.rigidFloorAssumption}
         </Descriptions.Item>
       </Descriptions>
+      <h3>风荷载信息</h3>
       <Descriptions
-        title="风荷载信息"
         bordered
         size="small"
         column={{ xs: 1, sm: 1 }}
@@ -83,8 +83,8 @@ export function ParametersComponent(parameters: IParametersFE) {
           {parameters.wind.dampingRationComfort}
         </Descriptions.Item>
       </Descriptions>
+      <h3>地震信息</h3>
       <Descriptions
-        title="地震信息"
         bordered
         size="small"
         column={{ xs: 1, sm: 1 }}

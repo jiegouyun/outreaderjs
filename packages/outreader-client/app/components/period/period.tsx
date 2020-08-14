@@ -117,7 +117,7 @@ export function PeriodComponent(period: IPeriodFE) {
   const { Panel } = Collapse;
   const Period = (
     <div>
-      <Descriptions title="考虑扭转耦联时的动力特性"></Descriptions>
+      <h3>考虑扭转耦联时的动力特性</h3>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <Table
@@ -130,7 +130,7 @@ export function PeriodComponent(period: IPeriodFE) {
           />
         </Panel>
       </Collapse>
-      <Descriptions title="地震最大作用方向的动力特性"></Descriptions>
+      <h3>地震最大作用方向的动力特性</h3>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <Table
@@ -143,7 +143,7 @@ export function PeriodComponent(period: IPeriodFE) {
           />
         </Panel>
       </Collapse>
-      <Descriptions title="质量参与系数"></Descriptions>
+      <h3>质量参与系数</h3>
       <ScatterChart
         width={550}
         height={350}
