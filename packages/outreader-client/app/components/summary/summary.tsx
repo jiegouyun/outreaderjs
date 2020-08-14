@@ -44,8 +44,8 @@ export function SummaryComponent(summary: ISummaryFE) {
 
   const Summary = (
     <div>
+      <h3>工程信息</h3>
       <Descriptions
-        title="工程信息"
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
@@ -67,8 +67,8 @@ export function SummaryComponent(summary: ISummaryFE) {
           {summary.project.softwareVersion}
         </Descriptions.Item>
       </Descriptions>
+      <h3>结构信息</h3>
       <Descriptions
-        title="结构信息"
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
@@ -105,8 +105,8 @@ export function SummaryComponent(summary: ISummaryFE) {
           {summary.structures.periodReductionFactor}
         </Descriptions.Item>
       </Descriptions>
+      <h3>质量</h3>
       <Descriptions
-        title="质量"
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
@@ -125,8 +125,8 @@ export function SummaryComponent(summary: ISummaryFE) {
           {summary.weight.sum.toFixed(0)}
         </Descriptions.Item>
       </Descriptions>
+      <h3>层间位移角</h3>
       <Descriptions
-        title="层间位移角"
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
@@ -166,8 +166,8 @@ export function SummaryComponent(summary: ISummaryFE) {
           1 / {summary.drift.limit}
         </Descriptions.Item>
       </Descriptions>
+      <h3>位移比</h3>
       <Descriptions
-        title="位移比"
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
@@ -207,8 +207,8 @@ export function SummaryComponent(summary: ISummaryFE) {
           {summary.dispRatio.limit}
         </Descriptions.Item>
       </Descriptions>
+      <h3>层间位移比</h3>
       <Descriptions
-        title="层间位移比"
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
@@ -248,8 +248,8 @@ export function SummaryComponent(summary: ISummaryFE) {
           {summary.dispRatioStorey.limit}
         </Descriptions.Item>
       </Descriptions>
+      <h3>剪重比</h3>
       <Descriptions
-        title="剪重比"
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
@@ -268,8 +268,8 @@ export function SummaryComponent(summary: ISummaryFE) {
           {summary.shearWeightRatio.yLimit}
         </Descriptions.Item>
       </Descriptions>
+      <h3>刚重比</h3>
       <Descriptions
-        title="刚重比"
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
@@ -306,8 +306,8 @@ export function SummaryComponent(summary: ISummaryFE) {
           {summary.stiffWeightRatio.seismicYCheck}
         </Descriptions.Item>
       </Descriptions>
+      <h3>刚度比</h3>
       <Descriptions
-        title="刚度比"
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
@@ -326,8 +326,8 @@ export function SummaryComponent(summary: ISummaryFE) {
           {summary.stiffRatio.y[1]}
         </Descriptions.Item>
       </Descriptions>
+      <h3>受剪承载力比</h3>
       <Descriptions
-        title="受剪承载力比"
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
@@ -346,7 +346,8 @@ export function SummaryComponent(summary: ISummaryFE) {
           {summary.shearCapacityRatio.y[1]}
         </Descriptions.Item>
       </Descriptions>
-      <Descriptions title="动力特性" bordered size="small"></Descriptions>
+      <h3>动力特性</h3>
+      <Descriptions bordered size="small"></Descriptions>
       <Table
         columns={modeColumns}
         dataSource={summaryTableData}
@@ -386,8 +387,8 @@ export function SummaryComponent(summary: ISummaryFE) {
           {summary.mode.sumZ.toFixed(2)}
         </Descriptions.Item>
       </Descriptions>
+      <h3>基底剪力</h3>
       <Descriptions
-        title="基底剪力"
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
@@ -412,8 +413,8 @@ export function SummaryComponent(summary: ISummaryFE) {
           {summary.baseShear.seismicY.toFixed(0)}
         </Descriptions.Item>
       </Descriptions>
+      <h3>基底倾覆力矩</h3>
       <Descriptions
-        title="基底倾覆力矩"
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}

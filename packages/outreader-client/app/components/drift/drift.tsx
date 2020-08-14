@@ -183,7 +183,7 @@ export function DriftComponent(drift: IDriftFE) {
   const { Panel } = Collapse;
   const Drift = (
     <div>
-      <Descriptions title="位移(mm)"></Descriptions>
+      <h3>位移</h3>
       <Row>
         <Col span={12}>
           <StoreyChart
@@ -212,7 +212,7 @@ export function DriftComponent(drift: IDriftFE) {
           />
         </Panel>
       </Collapse>
-      <Descriptions title="层间位移角"></Descriptions>
+      <h3>层间位移角</h3>
       <Row>
         <Col span={12}>
           <StoreyChart
@@ -241,7 +241,7 @@ export function DriftComponent(drift: IDriftFE) {
           />
         </Panel>
       </Collapse>
-      <Descriptions title="位移比"></Descriptions>
+      <h3>位移比</h3>
       <Row>
         <Col span={12}>
           <StoreyChart
@@ -270,7 +270,7 @@ export function DriftComponent(drift: IDriftFE) {
           />
         </Panel>
       </Collapse>
-      <Descriptions title="层间位移比"></Descriptions>
+      <h3>层间位移比</h3>
       <Row>
         <Col span={12}>
           <StoreyChart

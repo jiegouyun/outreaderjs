@@ -210,10 +210,13 @@ export function QuantityComponent(quantity: IQuantityFE) {
   const { Panel } = Collapse;
   const Quantity = (
     <div>
-      <Descriptions title="砼用量(m^3)"></Descriptions>
+      <h3>砼用量</h3>
       <Row>
         <Col span={12}>
-          <QuantityChart data={concreteTableData.slice()} xLabel="砼用量" />
+          <QuantityChart
+            data={concreteTableData.slice()}
+            xLabel="砼用量(m^3)"
+          />
         </Col>
         <Col span={12}>
           <QuantityChart data={concretePercentChartData} xLabel="砼用量占比" />
@@ -231,7 +234,7 @@ export function QuantityComponent(quantity: IQuantityFE) {
           />
         </Panel>
       </Collapse>
-      <Descriptions title="砼含量(m^3/m^2)"></Descriptions>
+      <h3>砼含量</h3>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <Table
@@ -244,10 +247,10 @@ export function QuantityComponent(quantity: IQuantityFE) {
           />
         </Panel>
       </Collapse>
-      <Descriptions title="型钢用量(t)"></Descriptions>
+      <h3>型钢用量</h3>
       <Row>
         <Col span={12}>
-          <QuantityChart data={steelTableData.slice()} xLabel="型钢用量" />
+          <QuantityChart data={steelTableData.slice()} xLabel="型钢用量(t)" />
         </Col>
         <Col span={12}>
           <QuantityChart data={steelPercentChartData} xLabel="型钢用量占比" />
@@ -265,7 +268,7 @@ export function QuantityComponent(quantity: IQuantityFE) {
           />
         </Panel>
       </Collapse>
-      <Descriptions title="型钢含量(kg/m^2)"></Descriptions>
+      <h3>型钢含量</h3>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <Table
@@ -278,10 +281,10 @@ export function QuantityComponent(quantity: IQuantityFE) {
           />
         </Panel>
       </Collapse>
-      <Descriptions title="钢筋用量(t)"></Descriptions>
+      <h3>钢筋用量</h3>
       <Row>
         <Col span={12}>
-          <QuantityChart data={rebarTableData.slice()} xLabel="钢筋用量" />
+          <QuantityChart data={rebarTableData.slice()} xLabel="钢筋用量(t)" />
         </Col>
         <Col span={12}>
           <QuantityChart data={rebarPercentChartData} xLabel="钢筋用量占比" />
@@ -299,7 +302,7 @@ export function QuantityComponent(quantity: IQuantityFE) {
           />
         </Panel>
       </Collapse>
-      <Descriptions title="钢筋含量(kg/m^2)"></Descriptions>
+      <h3>钢筋含量</h3>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <Table

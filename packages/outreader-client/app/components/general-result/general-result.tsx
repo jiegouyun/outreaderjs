@@ -180,8 +180,8 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
 
   const GeneralResult = (
     <div>
+      <h3>工程信息</h3>
       <Descriptions
-        title="工程信息"
         bordered
         size="small"
         column={{ xs: 1, sm: 1 }}
@@ -209,7 +209,7 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
           {generalResult.project.calDate}
         </Descriptions.Item>
       </Descriptions>
-      <Descriptions title="塔属性"></Descriptions>
+      <h3>塔属性</h3>
       <Table
         columns={towerColumns}
         dataSource={towerTableData}
@@ -218,8 +218,8 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
         pagination={false}
         style={{ marginBottom: 20 }}
       />
+      <h3>质量信息</h3>
       <Descriptions
-        title="质量信息(t)"
         bordered
         size="small"
         column={{ xs: 1, sm: 1 }}
@@ -238,8 +238,8 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
           {generalResult.weight.sum.toFixed(0)}
         </Descriptions.Item>
       </Descriptions>
+      <h3>地下室楼层侧向刚度比验算(剪切刚度)</h3>
       <Descriptions
-        title="地下室楼层侧向刚度比验算(剪切刚度)"
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
@@ -260,8 +260,8 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
         pagination={false}
         style={{ marginBottom: 20 }}
       />
+      <h3>结构整体抗倾覆验算</h3>
       <Descriptions
-        title="结构整体抗倾覆验算"
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
@@ -282,7 +282,7 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
         pagination={false}
         style={{ marginBottom: 20 }}
       />
-      <Descriptions title="结构整体稳定验算(刚重比)"></Descriptions>
+      <h3>结构整体稳定验算(刚重比)</h3>
       <Table
         columns={stableColumns}
         dataSource={stableTableData}
@@ -291,7 +291,7 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
         pagination={false}
         style={{ marginBottom: 20 }}
       />
-      <Descriptions title="风振舒适度验算(顶点加速度)"></Descriptions>
+      <h3>风振舒适度验算(顶点加速度)</h3>
       <Table
         columns={windComfortColumns}
         dataSource={windComfortTableData}

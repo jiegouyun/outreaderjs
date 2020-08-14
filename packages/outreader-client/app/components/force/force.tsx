@@ -144,7 +144,7 @@ export function ForceComponent(force: IForceFE) {
   const { Panel } = Collapse;
   const Force = (
     <div>
-      <Descriptions title="顺风向风荷载"></Descriptions>
+      <h3>顺风向风荷载</h3>
       <Row>
         <Col span={12}>
           <StoreyChart
@@ -173,7 +173,7 @@ export function ForceComponent(force: IForceFE) {
           />
         </Panel>
       </Collapse>
-      <Descriptions title="横风向风荷载"></Descriptions>
+      <h3>横风向风荷载</h3>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <Row>
@@ -202,7 +202,7 @@ export function ForceComponent(force: IForceFE) {
           />
         </Panel>
       </Collapse>
-      <Descriptions title="地震作用"></Descriptions>
+      <h3>地震作用</h3>
       <Row>
         <Col span={12}>
           <StoreyChart

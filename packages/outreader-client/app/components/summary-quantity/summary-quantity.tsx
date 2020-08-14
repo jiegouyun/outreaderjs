@@ -83,8 +83,8 @@ export function SummaryQuantityComponent(summaryQuantity: ISummaryQuantityFE) {
 
   const SummaryQuantity = (
     <div>
+      <h3>含钢量汇总</h3>
       <Descriptions
-        title="含钢量汇总"
         bordered
         size="small"
         column={{ xs: 1, sm: 1 }}
@@ -116,8 +116,8 @@ export function SummaryQuantityComponent(summaryQuantity: ISummaryQuantityFE) {
         pagination={false}
         style={{ marginBottom: 20 }}
       />
+      <h3>材料价格参考</h3>
       <Descriptions
-        title="材料价格参考"
         bordered
         size="small"
         column={{ xs: 1, sm: 1 }}

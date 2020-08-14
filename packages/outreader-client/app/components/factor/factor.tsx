@@ -95,7 +95,7 @@ export function FactorComponent(factor: IFactorFE) {
   const { Panel } = Collapse;
   const Factor = (
     <div>
-      <Descriptions title="薄弱层剪力放大系数"></Descriptions>
+      <h3>薄弱层剪力放大系数</h3>
       <StoreyChart
         data1={weakChartData}
         data2={weakChartData}
@@ -113,7 +113,7 @@ export function FactorComponent(factor: IFactorFE) {
           />
         </Panel>
       </Collapse>
-      <Descriptions title="剪重比调整系数"></Descriptions>
+      <h3>剪重比调整系数</h3>
       <StoreyChart
         data1={shearXChartData}
         data2={shearYChartData}
@@ -131,7 +131,7 @@ export function FactorComponent(factor: IFactorFE) {
           />
         </Panel>
       </Collapse>
-      <Descriptions title="0.2V0调整系数"></Descriptions>
+      <h3>0.2V0调整系数</h3>
       <StoreyChart
         data1={shearXChartData}
         data2={shearYChartData}
