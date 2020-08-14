@@ -1,3 +1,4 @@
+import { saveAs } from 'file-saver';
 import { initSummary, writeSummary, formatSummary } from './summary';
 import {
   initSummaryQuantity,
@@ -32,7 +33,7 @@ import path from 'path';
  * @description export data into a excel file.
  * @param structure IStructureFrontEnd, structure data.
  */
-export async function exportExcel(structure: IStructureFrontEnd) {
+export async function exportExcel(structure: IStructureFrontEnd, dir?: string) {
   // initial workbook.
   const workbook = new Excel.Workbook();
 
@@ -100,8 +101,13 @@ export async function exportExcel(structure: IStructureFrontEnd) {
   await formatQuantity(sheetQuantity);
 
   // write xlsx file.
-  const filename = path.join(structure.summary.project.dir, 'OutReader.xlsx');
-  await workbook.xlsx.writeFile(filename);
+  // const filename = path.join(dir ? dir : structure.summary.project.dir, 'OutReader.xlsx');
+  // await workbook.xlsx.writeFile(filename);
+  const buffer = await workbook.xlsx.writeBuffer();
+  const fileType =
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+  const blob = new Blob([buffer], { type: fileType });
+  saveAs(blob, 'OutReader.xlsx');
 
   return true;
 }

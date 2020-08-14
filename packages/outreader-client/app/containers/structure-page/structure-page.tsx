@@ -1,5 +1,6 @@
 import { convertStructure } from '@outreader/yjk';
-import { Breadcrumb, Layout, Menu, message } from 'antd';
+import { exportExcel } from '@outreader/core';
+import { Breadcrumb, Layout, Menu, message, Divider } from 'antd';
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { SummaryComponent } from '../../components';
@@ -43,8 +44,8 @@ export function StructurePage() {
   const distributeResult = structureFE.distributeResult;
   const factor = structureFE.factor;
   const quantity = structureFE.quantity;
-  console.log(structure);
-  console.log(structureFE);
+  // console.log(structure);
+  // console.log(structureFE);
   if (!structure.hash) {
     message.error('找不到模型');
     history.replace('/');
@@ -94,6 +95,18 @@ export function StructurePage() {
     },
   };
 
+  const exportXLSX = async () => {
+    try {
+      const res = await exportExcel(structureFE);
+      if (res) message.success('导出成功');
+    } catch (error) {
+      if (error) {
+        message.error('导出失败，请检查');
+        console.error(error);
+      }
+    }
+  };
+
   return (
     <React.Fragment>
       <Layout>
@@ -116,6 +129,10 @@ export function StructurePage() {
             <Menu.Item key="distributeResult">楼层分布数据</Menu.Item>
             <Menu.Item key="factor">调整系数</Menu.Item>
             <Menu.Item key="quantity">工程量</Menu.Item>
+            <Divider />
+            <a style={{ marginLeft: 24 }} onClick={() => exportXLSX()}>
+              导出Excel
+            </a>
           </Menu>
         </Layout.Sider>
         <Layout.Content style={styles.content}>
