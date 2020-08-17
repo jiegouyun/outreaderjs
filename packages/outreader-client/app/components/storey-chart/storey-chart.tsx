@@ -12,10 +12,12 @@ import {
 } from 'recharts';
 
 export function StoreyChart(props: {
-  data1: { x: number; y: number }[];
-  data2: { x: number; y: number }[];
+  // data1: { x: number; y: number }[];
+  // data2: { x: number; y: number }[];
   xLabel: string;
-}) {
+  [data: string]: { x: number; y: number }[] | string;
+}) {  
+  const {xLabel, ...rests} = props;
   return (
     <ScatterChart
       width={300}
@@ -45,14 +47,14 @@ export function StoreyChart(props: {
       <Legend align="right" verticalAlign="top" iconSize={20} iconType="line" />
       <Scatter
         name="X向"
-        data={props.data1}
+        data={rests[`data${1}`]}
         fill="#8884d8"
         line={{ strokeWidth: 2 }}
         shape="cross"
       />
       <Scatter
         name="Y向"
-        data={props.data2}
+        data={rests[`data${2}`]}
         fill="#82ca9d"
         line={{ strokeWidth: 2 }}
         shape="cicle"
