@@ -148,16 +148,42 @@ export function ForceComponent(force: IForceFE) {
       <Row>
         <Col span={12}>
           <StoreyChart
-            data1={shearAlongWindXChartData}
-            data2={shearAlongWindYChartData}
-            xLabel="剪力(kN)"
+            labels={{
+              xLabel: '剪力(kN)',
+            }}
+            describe={[
+              {
+                name: 'X向',
+                fill: '#8884d8',
+                shape: 'cross',
+              },
+              {
+                name: 'Y向',
+                fill: '#82ca9d',
+                shape: 'circle',
+              },
+            ]}
+            datas={[shearAlongWindXChartData, shearAlongWindYChartData]}
           />
         </Col>
         <Col span={12}>
           <StoreyChart
-            data1={momentAlongWindXChartData}
-            data2={momentAlongWindYChartData}
-            xLabel="弯矩(kNm)"
+            labels={{
+              xLabel: '弯矩(kNm)',
+            }}
+            describe={[
+              {
+                name: 'X向',
+                fill: '#8884d8',
+                shape: 'cross',
+              },
+              {
+                name: 'Y向',
+                fill: '#82ca9d',
+                shape: 'circle',
+              },
+            ]}
+            datas={[momentAlongWindXChartData, momentAlongWindYChartData]}
           />
         </Col>
       </Row>
@@ -179,16 +205,42 @@ export function ForceComponent(force: IForceFE) {
           <Row>
             <Col span={12}>
               <StoreyChart
-                data1={shearCrossWindXChartData}
-                data2={shearCrossWindYChartData}
-                xLabel="剪力(kN)"
+                labels={{
+                  xLabel: '剪力(kN)',
+                }}
+                describe={[
+                  {
+                    name: 'X向',
+                    fill: '#8884d8',
+                    shape: 'cross',
+                  },
+                  {
+                    name: 'Y向',
+                    fill: '#82ca9d',
+                    shape: 'circle',
+                  },
+                ]}
+                datas={[shearCrossWindXChartData, shearCrossWindYChartData]}
               />
             </Col>
             <Col span={12}>
               <StoreyChart
-                data1={momentCrossWindXChartData}
-                data2={momentCrossWindYChartData}
-                xLabel="弯矩(kNm)"
+                labels={{
+                  xLabel: '弯矩(kNm)',
+                }}
+                describe={[
+                  {
+                    name: 'X向',
+                    fill: '#8884d8',
+                    shape: 'cross',
+                  },
+                  {
+                    name: 'Y向',
+                    fill: '#82ca9d',
+                    shape: 'circle',
+                  },
+                ]}
+                datas={[momentCrossWindXChartData, momentCrossWindYChartData]}
               />
             </Col>
           </Row>
@@ -206,16 +258,42 @@ export function ForceComponent(force: IForceFE) {
       <Row>
         <Col span={12}>
           <StoreyChart
-            data1={shearSeismicXChartData}
-            data2={shearSeismicYChartData}
-            xLabel="剪力(kN)"
+            labels={{
+              xLabel: '剪力(kN)',
+            }}
+            describe={[
+              {
+                name: 'X向',
+                fill: '#8884d8',
+                shape: 'cross',
+              },
+              {
+                name: 'Y向',
+                fill: '#82ca9d',
+                shape: 'circle',
+              },
+            ]}
+            datas={[shearSeismicXChartData, shearSeismicYChartData]}
           />
         </Col>
         <Col span={12}>
           <StoreyChart
-            data1={momentSeismicXChartData}
-            data2={momentSeismicYChartData}
-            xLabel="弯矩(kNm)"
+            labels={{
+              xLabel: '弯矩(kNm)',
+            }}
+            describe={[
+              {
+                name: 'X向',
+                fill: '#8884d8',
+                shape: 'cross',
+              },
+              {
+                name: 'Y向',
+                fill: '#82ca9d',
+                shape: 'circle',
+              },
+            ]}
+            datas={[momentSeismicXChartData, momentSeismicYChartData]}
           />
         </Col>
       </Row>

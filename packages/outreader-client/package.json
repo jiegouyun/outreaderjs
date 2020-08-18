@@ -231,6 +231,7 @@
     "@outreader/core": "^0.0.2",
     "@outreader/yjk": "^0.0.2",
     "@types/lowdb": "^1.0.9",
+    "@types/recharts": "^1.8.14",
     "antd": "^4.4.3",
     "core-js": "^3.6.5",
     "devtron": "^1.4.0",
