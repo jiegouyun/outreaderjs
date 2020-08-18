@@ -1,98 +1,114 @@
-import { IStructure, IQuantityFE, ISubQuantityFE } from '@outreader/core';
+import { IStructure, IQuantityFE } from '@outreader/core';
 
 export function convertQuantity(structure: IStructure): IQuantityFE {
+  const area: number[] = structure.wmass?.storey.area ||
+    structure.rebar?.area.storey || [1];
   const quantity: IQuantityFE = {
-    storeyID: structure.wmass?.storey.storeyID as number[],
-    towerID: structure.wmass?.storey.towerID as number[],
-    area: structure.wmass?.storey.area as number[],
-    concrete: structure.concreteSteel?.concrete as ISubQuantityFE,
-    unitConcrete: {
-      storeyID: structure.concreteSteel?.concrete.storeyID as number[],
-      wall: quantityPerArea(
-        structure.concreteSteel?.concrete.wall as number[],
-        structure.wmass?.storey.area as number[],
-      ) as number[],
-      beam: quantityPerArea(
-        structure.concreteSteel?.concrete.beam as number[],
-        structure.wmass?.storey.area as number[],
-      ) as number[],
-      column: quantityPerArea(
-        structure.concreteSteel?.concrete.column as number[],
-        structure.wmass?.storey.area as number[],
-      ) as number[],
-      floor: quantityPerArea(
-        structure.concreteSteel?.concrete.floor as number[],
-        structure.wmass?.storey.area as number[],
-      ) as number[],
-      storey: quantityPerArea(
-        structure.concreteSteel?.concrete.storey as number[],
-        structure.wmass?.storey.area as number[],
-      ) as number[],
+    storeyID: structure.wmass?.storey.storeyID ||
+      structure.concreteSteel?.concrete.storeyID ||
+      structure.rebar?.area.storeyID || [0],
+    towerID: structure.wmass?.storey.towerID || [0],
+    area: area,
+    concrete: {
+      storeyID: structure.concreteSteel?.concrete.storeyID || [0],
+      wall: structure.concreteSteel?.concrete.wall || [0],
+      beam: structure.concreteSteel?.concrete.beam || [0],
+      column: structure.concreteSteel?.concrete.column || [0],
+      floor: structure.concreteSteel?.concrete.floor || [0],
+      storey: structure.concreteSteel?.concrete.storey || [0],
     },
-    steel: structure.concreteSteel?.steel as ISubQuantityFE,
-    unitSteel: {
-      storeyID: structure.concreteSteel?.steel.storeyID as number[],
+    unitConcrete: {
+      storeyID: structure.concreteSteel?.concrete.storeyID || [0],
       wall: quantityPerArea(
-        structure.concreteSteel?.steel.wall as number[],
-        structure.wmass?.storey.area as number[],
-      ) as number[],
+        structure.concreteSteel?.concrete.wall || [0],
+        area,
+      ) || [0],
       beam: quantityPerArea(
-        structure.concreteSteel?.steel.beam as number[],
-        structure.wmass?.storey.area as number[],
-      ) as number[],
+        structure.concreteSteel?.concrete.beam || [0],
+        area,
+      ) || [0],
       column: quantityPerArea(
-        structure.concreteSteel?.steel.column as number[],
-        structure.wmass?.storey.area as number[],
-      ) as number[],
+        structure.concreteSteel?.concrete.column || [0],
+        area,
+      ) || [0],
       floor: quantityPerArea(
-        structure.concreteSteel?.steel.floor as number[],
-        structure.wmass?.storey.area as number[],
-      ) as number[],
+        structure.concreteSteel?.concrete.floor || [0],
+        area,
+      ) || [0],
       storey: quantityPerArea(
-        structure.concreteSteel?.steel.storey as number[],
-        structure.wmass?.storey.area as number[],
-      ) as number[],
+        structure.concreteSteel?.concrete.storey || [0],
+        area,
+      ) || [0],
+    },
+    steel: {
+      storeyID: structure.concreteSteel?.steel.storeyID || [0],
+      wall: structure.concreteSteel?.steel.wall || [0],
+      beam: structure.concreteSteel?.steel.beam || [0],
+      column: structure.concreteSteel?.steel.column || [0],
+      floor: structure.concreteSteel?.steel.floor || [0],
+      storey: structure.concreteSteel?.steel.storey || [0],
+    },
+    unitSteel: {
+      storeyID: structure.concreteSteel?.steel.storeyID || [0],
+      wall: quantityPerArea(
+        structure.concreteSteel?.steel.wall || [0],
+        area,
+      ) || [0],
+      beam: quantityPerArea(
+        structure.concreteSteel?.steel.beam || [0],
+        area,
+      ) || [0],
+      column: quantityPerArea(
+        structure.concreteSteel?.steel.column || [0],
+        area,
+      ) || [0],
+      floor: quantityPerArea(
+        structure.concreteSteel?.steel.floor || [0],
+        area,
+      ) || [0],
+      storey: quantityPerArea(
+        structure.concreteSteel?.steel.storey || [0],
+        area,
+      ) || [0],
     },
     rebar: {
-      storeyID: structure.rebar?.area.storeyID as number[],
-      wall: structure.rebar?.wallRebar.storey as number[],
-      beam: structure.rebar?.beamRebar.storey as number[],
-      column: structure.rebar?.columnRebar.storey as number[],
-      floor: structure.rebar?.floorRebar.storey as number[],
+      storeyID: structure.rebar?.area.storeyID || [0],
+      wall: structure.rebar?.wallRebar.storey || [0],
+      beam: structure.rebar?.beamRebar.storey || [0],
+      column: structure.rebar?.columnRebar.storey || [0],
+      floor: structure.rebar?.floorRebar.storey || [0],
       storey: storeyRebar(
-        structure.rebar?.wallRebar.storey as number[],
-        structure.rebar?.columnRebar.storey as number[],
-        structure.rebar?.beamRebar.storey as number[],
-        structure.rebar?.floorRebar.storey as number[],
-      ) as number[],
+        structure.rebar?.wallRebar.storey || [0],
+        structure.rebar?.columnRebar.storey || [0],
+        structure.rebar?.beamRebar.storey || [0],
+        structure.rebar?.floorRebar.storey || [0],
+      ) || [0],
     },
     unitRebar: {
-      storeyID: structure.rebar?.area.storeyID as number[],
-      wall: quantityPerArea(
-        structure.rebar?.wallRebar.storey as number[],
-        structure.wmass?.storey.area as number[],
-      ) as number[],
-      beam: quantityPerArea(
-        structure.rebar?.beamRebar.storey as number[],
-        structure.wmass?.storey.area as number[],
-      ) as number[],
+      storeyID: structure.rebar?.area.storeyID || [0],
+      wall: quantityPerArea(structure.rebar?.wallRebar.storey || [0], area) || [
+        0,
+      ],
+      beam: quantityPerArea(structure.rebar?.beamRebar.storey || [0], area) || [
+        0,
+      ],
       column: quantityPerArea(
-        structure.rebar?.columnRebar.storey as number[],
-        structure.wmass?.storey.area as number[],
-      ) as number[],
+        structure.rebar?.columnRebar.storey || [0],
+        area,
+      ) || [0],
       floor: quantityPerArea(
-        structure.rebar?.floorRebar.storey as number[],
-        structure.wmass?.storey.area as number[],
-      ) as number[],
+        structure.rebar?.floorRebar.storey || [0],
+        area,
+      ) || [0],
       storey: quantityPerArea(
         storeyRebar(
-          structure.rebar?.wallRebar.storey as number[],
-          structure.rebar?.columnRebar.storey as number[],
-          structure.rebar?.beamRebar.storey as number[],
-          structure.rebar?.floorRebar.storey as number[],
-        ) as number[],
-        structure.wmass?.storey.area as number[],
-      ) as number[],
+          structure.rebar?.wallRebar.storey || [0],
+          structure.rebar?.columnRebar.storey || [0],
+          structure.rebar?.beamRebar.storey || [0],
+          structure.rebar?.floorRebar.storey || [0],
+        ) || [0],
+        area,
+      ) || [0],
     },
   };
 
@@ -103,8 +119,8 @@ function quantityPerArea(
   quantity: number[],
   area: number[],
 ): number[] | undefined {
-  if (!quantity || !area) {
-    return;
+  if (quantity === [0] || area === [0]) {
+    return [0];
   }
 
   let result: number[] = [];
