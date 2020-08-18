@@ -55,7 +55,7 @@ export function StoreyChart(props: {
         data={props.data2}
         fill="#82ca9d"
         line={{ strokeWidth: 2 }}
-        shape="cicle"
+        shape="circle"
       />
     </ScatterChart>
   );
