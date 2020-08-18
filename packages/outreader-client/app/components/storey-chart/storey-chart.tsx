@@ -34,8 +34,6 @@ interface IData {
 }
 
 export function StoreyChart(props: {
-  // data1: { x: number; y: number }[];
-  // data2: { x: number; y: number }[];
   labels: ILabel;
   describe: IDescribe[];
   datas: IData[][];
@@ -83,20 +81,6 @@ export function StoreyChart(props: {
           />
         );
       })}
-      {/* <Scatter
-        name="X向"
-        data={rests[`data${1}`]}
-        fill="#8884d8"
-        line={{ strokeWidth: 2 }}
-        shape="cross"
-      />
-      <Scatter
-        name="Y向"
-        data={rests[`data${2}`]}
-        fill="#82ca9d"
-        line={{ strokeWidth: 2 }}
-        shape="cicle"
-      /> */}
     </ScatterChart>
   );
 }
