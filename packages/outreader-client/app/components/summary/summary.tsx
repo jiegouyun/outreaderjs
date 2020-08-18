@@ -31,7 +31,7 @@ export function SummaryComponent(summary: ISummaryFE) {
   ];
 
   const summaryTableData = [];
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < Math.min(6, summary.mode.modeID.length); i++) {
     summaryTableData.push({
       modeID: summary.mode.modeID[i],
       period: summary.mode.period[i].toFixed(2),

@@ -19,11 +19,11 @@ export async function readRebarOutput(
   const filename = files.filter(function (item) {
     return item.match(/全楼钢筋用量\w*.txt/gi);
   });
-  const file = path.join(dir, filename[0]);
-  if (!fs.existsSync(file)) {
-    console.error('cannot find file', file);
+  if (!filename[0]) {
+    console.error('cannot find file', '全楼钢筋用量.txt');
     return;
   }
+  const file = path.join(dir, filename[0]);
   let rebar: IRebar = {
     hash: hashFile(file),
     area: {

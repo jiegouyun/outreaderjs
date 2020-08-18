@@ -18,11 +18,11 @@ export async function readConcreteSteelOutput(
   const filename = files.filter(function (item) {
     return item.match(/上部结构工程量\w*.txt/gi);
   });
-  const file = path.join(dir, filename[0]);
-  if (!fs.existsSync(file)) {
-    console.error('cannot find file', file);
+  if (!filename[0]) {
+    console.error('cannot find file', '上部结构工程量.txt');
     return;
   }
+  const file = path.join(dir, filename[0]);
   let concreteSteel: IConcreteSteel = {
     hash: hashFile(file),
     concrete: {
