@@ -351,9 +351,22 @@ export function DistributeResultComponent(
       </Collapse>
       <h3>质量比</h3>
       <StoreyChart
-        data1={massRatioChartData}
-        data2={unitMassRatioChartData}
-        xLabel="质量比"
+        labels={{
+          xLabel: '质量比',
+        }}
+        describe={[
+          {
+            name: '质量比',
+            fill: '#8884d8',
+            shape: 'cross',
+          },
+          {
+            name: '单位面积质量比',
+            fill: '#82ca9d',
+            shape: 'circle',
+          },
+        ]}
+        datas={[massRatioChartData, unitMassRatioChartData]}
       />
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -371,16 +384,42 @@ export function DistributeResultComponent(
       <Row>
         <Col span={12}>
           <StoreyChart
-            data1={stiffRatioXChartData}
-            data2={stiffRatioYChartData}
-            xLabel="刚度比"
+            labels={{
+              xLabel: '刚度比',
+            }}
+            describe={[
+              {
+                name: 'X向',
+                fill: '#8884d8',
+                shape: 'cross',
+              },
+              {
+                name: 'Y向',
+                fill: '#82ca9d',
+                shape: 'circle',
+              },
+            ]}
+            datas={[stiffRatioXChartData, stiffRatioYChartData]}
           />
         </Col>
         <Col span={12}>
           <StoreyChart
-            data1={sriffRatioXModifyChartData}
-            data2={sriffRatioYModifyChartData}
-            xLabel="层高修正刚度比"
+            labels={{
+              xLabel: '层高修正刚度比',
+            }}
+            describe={[
+              {
+                name: 'X向',
+                fill: '#8884d8',
+                shape: 'cross',
+              },
+              {
+                name: 'Y向',
+                fill: '#82ca9d',
+                shape: 'circle',
+              },
+            ]}
+            datas={[sriffRatioXModifyChartData, sriffRatioYModifyChartData]}
           />
         </Col>
       </Row>
@@ -398,9 +437,22 @@ export function DistributeResultComponent(
       </Collapse>
       <h3>剪重比</h3>
       <StoreyChart
-        data1={shearWeightXChartData}
-        data2={shearWeightYChartData}
-        xLabel="剪重比"
+        labels={{
+          xLabel: '剪重比',
+        }}
+        describe={[
+          {
+            name: 'X向',
+            fill: '#8884d8',
+            shape: 'cross',
+          },
+          {
+            name: 'Y向',
+            fill: '#82ca9d',
+            shape: 'circle',
+          },
+        ]}
+        datas={[shearWeightXChartData, shearWeightYChartData]}
       />
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -416,9 +468,22 @@ export function DistributeResultComponent(
       </Collapse>
       <h3>抗剪承载力比</h3>
       <StoreyChart
-        data1={shearCapacityXChartData}
-        data2={shearCapacityYChartData}
-        xLabel="抗剪承载力比"
+        labels={{
+          xLabel: '抗剪承载力比',
+        }}
+        describe={[
+          {
+            name: 'X向',
+            fill: '#8884d8',
+            shape: 'cross',
+          },
+          {
+            name: 'Y向',
+            fill: '#82ca9d',
+            shape: 'circle',
+          },
+        ]}
+        datas={[shearCapacityXChartData, shearCapacityYChartData]}
       />
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -436,16 +501,42 @@ export function DistributeResultComponent(
       <Row>
         <Col span={12}>
           <StoreyChart
-            data1={momentColumnXChartData}
-            data2={momentColumnYChartData}
-            xLabel="框架柱倾覆力矩占比(%)"
+            labels={{
+              xLabel: '规定水平力下倾覆力矩分配',
+            }}
+            describe={[
+              {
+                name: 'X向',
+                fill: '#8884d8',
+                shape: 'cross',
+              },
+              {
+                name: 'Y向',
+                fill: '#82ca9d',
+                shape: 'circle',
+              },
+            ]}
+            datas={[momentColumnXChartData, momentColumnYChartData]}
           />
         </Col>
         <Col span={12}>
           <StoreyChart
-            data1={momentWallXChartData}
-            data2={momentWallYChartData}
-            xLabel="短肢墙倾覆力矩占比(%)"
+            labels={{
+              xLabel: '短肢墙倾覆力矩占比(%)',
+            }}
+            describe={[
+              {
+                name: 'X向',
+                fill: '#8884d8',
+                shape: 'cross',
+              },
+              {
+                name: 'Y向',
+                fill: '#82ca9d',
+                shape: 'circle',
+              },
+            ]}
+            datas={[momentWallXChartData, momentWallYChartData]}
           />
         </Col>
       </Row>
@@ -463,9 +554,22 @@ export function DistributeResultComponent(
       </Collapse>
       <h3>柱剪力与分段基底剪力百分比</h3>
       <StoreyChart
-        data1={shearColumnXChartData}
-        data2={shearColumnYChartData}
-        xLabel="柱剪力与分段基底剪力百分比(%)"
+        labels={{
+          xLabel: '柱剪力与分段基底剪力百分比(%)',
+        }}
+        describe={[
+          {
+            name: 'X向',
+            fill: '#8884d8',
+            shape: 'cross',
+          },
+          {
+            name: 'Y向',
+            fill: '#82ca9d',
+            shape: 'circle',
+          },
+        ]}
+        datas={[shearColumnXChartData, shearColumnYChartData]}
       />
       <Collapse ghost>
         <Panel header="详细数据" key="1">
