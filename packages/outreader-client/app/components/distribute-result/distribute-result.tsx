@@ -36,6 +36,7 @@ export function DistributeResultComponent(
   const storeyTableData = [];
   for (let i = 0; i < distributeResult.storey.storeyID.length; i++) {
     storeyTableData.push({
+      key: i,
       storeyID: distributeResult.storey.storeyID[i],
       towerID: distributeResult.storey.towerID[i],
       attribute: distributeResult.storey.attribute[i],
@@ -77,6 +78,7 @@ export function DistributeResultComponent(
   const unitMassRatioChartData = [];
   for (let i = 0; i < distributeResult.massRatio.storeyID.length; i++) {
     massRatioTableData.push({
+      key: i,
       storeyID: distributeResult.massRatio.storeyID[i],
       towerID: distributeResult.massRatio.towerID[i],
       mass: (distributeResult.massRatio.storeyMass[i] / 1000).toFixed(0),
@@ -128,6 +130,7 @@ export function DistributeResultComponent(
   const sriffRatioYModifyChartData = [];
   for (let i = 0; i < distributeResult.stiffness.storeyID.length; i++) {
     stiffRatioTableData.push({
+      key: i,
       storeyID: distributeResult.stiffness.storeyID[i],
       towerID: distributeResult.stiffness.towerID[i],
       ratx1: distributeResult.stiffness.ratx1[i].toFixed(3),
@@ -177,6 +180,7 @@ export function DistributeResultComponent(
   const shearWeightYChartData = [];
   for (let i = 0; i < distributeResult.shearWeightRatio.storeyID.length; i++) {
     shearWeightTableData.push({
+      key: i,
       storeyID: distributeResult.shearWeightRatio.storeyID[i],
       towerID: distributeResult.shearWeightRatio.towerID[i],
       ratioX: distributeResult.shearWeightRatio.factorX[i].toFixed(3),
@@ -220,6 +224,7 @@ export function DistributeResultComponent(
     i++
   ) {
     shearCapacityTableData.push({
+      key: i,
       storeyID: distributeResult.shearCapacityCheck.storeyID[i],
       towerID: distributeResult.shearCapacityCheck.towerID[i],
       ratioX: distributeResult.shearCapacityCheck.ratioX[i].toFixed(2),
@@ -269,6 +274,7 @@ export function DistributeResultComponent(
   const momentWallYChartData = [];
   for (let i = 0; i < distributeResult.momentPercent.storeyID.length; i++) {
     momentDistributeTableData.push({
+      key: i,
       storeyID: distributeResult.momentPercent.storeyID[i],
       towerID: distributeResult.momentPercent.towerID[i],
       columnX: distributeResult.momentPercent.percentColumnX[i].toFixed(1),
@@ -318,6 +324,7 @@ export function DistributeResultComponent(
   const shearColumnYChartData = [];
   for (let i = 0; i < distributeResult.columnShear.storeyID.length; i++) {
     shearDistributeTableData.push({
+      key: i,
       storeyID: distributeResult.columnShear.storeyID[i],
       towerID: distributeResult.columnShear.towerID[i],
       ratioX: distributeResult.columnShear.percentColumnX[i].toFixed(1),

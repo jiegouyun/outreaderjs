@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
   Label,
+  LabelList,
 } from 'recharts';
 
 interface ILabel {
@@ -40,6 +41,7 @@ export function StoreyChart(props: {
 }) {
   return (
     <ScatterChart
+      key={props.labels.xLabel}
       width={300}
       height={400}
       margin={{
@@ -73,6 +75,7 @@ export function StoreyChart(props: {
       {props.datas.map(function (data, i) {
         return (
           <Scatter
+            key={i}
             name={props.describe[i].name}
             data={data}
             fill={props.describe[i].fill}

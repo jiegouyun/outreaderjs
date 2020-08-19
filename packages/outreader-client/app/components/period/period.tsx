@@ -43,6 +43,7 @@ export function PeriodComponent(period: IPeriodFE) {
   const periodModeTableData = [];
   for (let i = 0; i < period.modeCoupling.modeID.length; i++) {
     periodModeTableData.push({
+      key: i,
       modeID: period.modeCoupling.modeID[i],
       period: period.modeCoupling.period[i].toFixed(3),
       angle: period.modeCoupling.angle[i].toFixed(2),
@@ -55,6 +56,7 @@ export function PeriodComponent(period: IPeriodFE) {
   const periodSeismicTableData = [];
   for (let i = 0; i < period.modeSeismic.modeID.length; i++) {
     periodSeismicTableData.push({
+      key: i,
       modeID: period.modeSeismic.modeID[i],
       period: period.modeSeismic.period[i].toFixed(3),
       angle: period.modeSeismic.angle[i].toFixed(2),
@@ -92,6 +94,7 @@ export function PeriodComponent(period: IPeriodFE) {
   let sumZ: number = 0;
   for (let i = 0; i < period.modeMass.modeID.length; i++) {
     periodMassTableData.push({
+      key: i,
       modeID: period.modeMass.modeID[i],
       factorX: period.modeMass.factorX[i].toFixed(2),
       factorY: period.modeMass.factorY[i].toFixed(2),

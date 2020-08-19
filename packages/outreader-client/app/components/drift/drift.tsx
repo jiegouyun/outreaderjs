@@ -43,6 +43,7 @@ export function DriftComponent(drift: IDriftFE) {
   const driftChartSeismicY = [];
   for (let i = 0; i < drift.driftWindXP.storeyID.length; i++) {
     dispTableData.push({
+      key: i,
       storeyID: drift.driftWindXP.storeyID[i],
       towerID: drift.driftWindXP.towerID[i],
       windX: drift.driftWindXP.displacement[i].toFixed(2),
@@ -51,6 +52,7 @@ export function DriftComponent(drift: IDriftFE) {
       seismicY: drift.driftSeismicY.displacement[i].toFixed(2),
     });
     driftTableData.push({
+      key: i,
       storeyID: drift.driftWindXP.storeyID[i],
       towerID: drift.driftWindXP.towerID[i],
       windX: drift.driftWindXP.drift[i],
@@ -131,6 +133,7 @@ export function DriftComponent(drift: IDriftFE) {
   const ratioDChartEYN = [];
   for (let i = 0; i < drift.ratioSeismicXEccP.storeyID.length; i++) {
     dispRatioTableData.push({
+      key: i,
       storeyID: drift.ratioSeismicXEccP.storeyID[i],
       towerID: drift.ratioSeismicXEccP.towerID[i],
       eccXP: drift.ratioSeismicXEccP.ratio[i].toFixed(2),
@@ -139,6 +142,7 @@ export function DriftComponent(drift: IDriftFE) {
       eccYN: drift.ratioSeismicYEccN.ratio[i].toFixed(2),
     });
     dispRatioStoreyTableData.push({
+      key: i,
       storeyID: drift.ratioSeismicXEccP.storeyID[i],
       towerID: drift.ratioSeismicXEccP.towerID[i],
       eccXP: drift.ratioSeismicXEccP.ratioD[i].toFixed(2),

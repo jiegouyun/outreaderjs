@@ -23,6 +23,7 @@ export function FactorComponent(factor: IFactorFE) {
   const weakChartData = [];
   for (let i = 0; i < factor.stiffness.storeyID.length; i++) {
     weakTableData.push({
+      key: i,
       storeyID: factor.stiffness.storeyID[i],
       towerID: factor.stiffness.towerID[i],
       factor: factor.stiffness.weakStoreyFactor[i].toFixed(2),
@@ -57,6 +58,7 @@ export function FactorComponent(factor: IFactorFE) {
   const shearYChartData = [];
   for (let i = 0; i < factor.shearWeightRatioModify.storeyID.length; i++) {
     shearTableData.push({
+      key: i,
       storeyID: factor.shearWeightRatioModify.storeyID[i],
       towerID: factor.shearWeightRatioModify.towerID[i],
       factorX: factor.shearWeightRatioModify.factorX[i].toFixed(3),
@@ -77,6 +79,7 @@ export function FactorComponent(factor: IFactorFE) {
   const v02qYChartData = [];
   for (let i = 0; i < factor.v02qFactor.storeyID.length; i++) {
     v02qTableData.push({
+      key: i,
       storeyID: factor.v02qFactor.storeyID[i],
       towerID: factor.v02qFactor.towerID[i],
       factorX: factor.v02qFactor.factorX[i].toFixed(3),

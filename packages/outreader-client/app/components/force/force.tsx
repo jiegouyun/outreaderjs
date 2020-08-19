@@ -46,6 +46,7 @@ export function ForceComponent(force: IForceFE) {
   const momentAlongWindYChartData = [];
   for (let i = 0; i < force.wind.storeyID.length; i++) {
     forceAlongWindTableData.push({
+      key: i,
       storeyID: force.wind.storeyID[i],
       towerID: force.wind.towerID[i],
       forceX: force.wind.forceAlongX[i].toFixed(0),
@@ -80,6 +81,7 @@ export function ForceComponent(force: IForceFE) {
   const momentCrossWindYChartData = [];
   for (let i = 0; i < force.wind.storeyID.length; i++) {
     forceCrossWindTableData.push({
+      key: i,
       storeyID: force.wind.storeyID[i],
       towerID: force.wind.towerID[i],
       forceX: force.wind.forceCrossX[i].toFixed(0),
@@ -114,6 +116,7 @@ export function ForceComponent(force: IForceFE) {
   const momentSeismicYChartData = [];
   for (let i = 0; i < force.seismic.storeyID.length; i++) {
     forceSeismicTableData.push({
+      key: i,
       storeyID: force.seismic.storeyID[i],
       towerID: force.seismic.towerID[i],
       forceX: force.seismic.forceX[i].toFixed(0),
