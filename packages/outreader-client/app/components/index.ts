@@ -8,3 +8,5 @@ export * from './general-result';
 export * from './distribute-result';
 export * from './factor';
 export * from './quantity';
+export * from './compare-summary';
+export * from './compare-summary-quantity';
