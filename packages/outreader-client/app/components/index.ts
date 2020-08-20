@@ -11,3 +11,4 @@ export * from './quantity';
 export * from './compare-summary';
 export * from './compare-summary-quantity';
 export * from './compare-parameters';
+export * from './compare-period';
