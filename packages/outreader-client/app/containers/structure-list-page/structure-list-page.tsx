@@ -1,25 +1,36 @@
-import { convertStructure } from '@outreader/yjk';
 import { exportExcel } from '@outreader/core';
-import { Table, message, Divider, Button, Checkbox } from 'antd';
+import { convertStructure } from '@outreader/yjk';
+import { Button, Divider, message, Table } from 'antd';
 import React, { useState } from 'react';
-import { useDb } from '../../hooks';
-import { IStyles } from '../../interfaces';
 import { useHistory } from 'react-router';
 import { initDb } from '../../database';
+import { useDb } from '../../hooks';
+import { IStyles } from '../../interfaces';
 
 const styles: IStyles = {
   container: {
     background: '#fff',
     padding: '2rem',
   },
+  toolbar: {
+    marginTop: '2rem',
+  },
 };
 
 export function StructureListPage() {
   const db = useDb();
   const history = useHistory();
+  const [selectedHashes, setSelectedHashes] = useState<string[]>([]);
   const structures = db.get('structures').value();
   const redirectToStructure = (hash: string) => {
     history.push(`/structures/${hash}`);
+  };
+  const redirectToStructureCompare = () => {
+    if (selectedHashes.length < 2) {
+      message.warn('请先选择要对比的模型');
+      return;
+    }
+    history.push(`/compare?hashes=${selectedHashes}`);
   };
   const exportXLSX = async (hash: string) => {
     try {
@@ -54,7 +65,7 @@ export function StructureListPage() {
       title: '操作',
       dataIndex: 'actions',
       key: 'actions',
-      render: (_, record) => (
+      render: (_, record: any) => (
         <span>
           <a onClick={() => redirectToStructure(record.hash)}>查看</a>
           <Divider type="vertical" />
@@ -64,17 +75,33 @@ export function StructureListPage() {
     },
   ];
 
-  //todo
+  const rowSelection = {
+    onChange: (selectedRowKeys: any[], selectedRows: any[]) => {
+      console.log(
+        `selectedRowKeys: ${selectedRowKeys}`,
+        'selectedRows: ',
+        selectedRows
+      );
+      // TODO: prevent all selected keys <= 3?
+      setSelectedHashes(selectedRowKeys as string[]);
+    },
+    hideSelectAll: true,
+  };
 
   return (
     <div style={styles.container}>
       <Table
-        // rowSelection={rowSelection}
+        rowSelection={rowSelection}
         columns={tableColumns}
         rowKey="hash"
         dataSource={structures}
         pagination={false}
       />
+      <div style={styles.toolbar}>
+        {selectedHashes.length > 1 && (
+          <Button onClick={redirectToStructureCompare}>对比模型</Button>
+        )}
+      </div>
     </div>
   );
 }

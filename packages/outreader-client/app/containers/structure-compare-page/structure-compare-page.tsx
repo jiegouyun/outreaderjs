@@ -1,18 +1,20 @@
-import { convertStructure } from '@outreader/yjk';
 import { exportExcel } from '@outreader/core';
-import { Breadcrumb, Layout, Menu, message, Divider } from 'antd';
+import { convertStructure } from '@outreader/yjk';
+import { Breadcrumb, Divider, Layout, Menu, message } from 'antd';
 import React, { useState } from 'react';
-import { useHistory, useParams } from 'react-router';
-import { SummaryComponent } from '../../components';
-import { SummaryQuantityComponent } from '../../components';
-import { ParametersComponent } from '../../components';
-import { PeriodComponent } from '../../components';
-import { ForceComponent } from '../../components';
-import { DriftComponent } from '../../components';
-import { GeneralResultComponent } from '../../components';
-import { DistributeResultComponent } from '../../components';
-import { FactorComponent } from '../../components';
-import { QuantityComponent } from '../../components';
+import { useHistory, useLocation } from 'react-router';
+import {
+  DistributeResultComponent,
+  DriftComponent,
+  FactorComponent,
+  ForceComponent,
+  GeneralResultComponent,
+  ParametersComponent,
+  PeriodComponent,
+  QuantityComponent,
+  SummaryComponent,
+  SummaryQuantityComponent,
+} from '../../components';
 import { initDb } from '../../database';
 import { IStyles } from '../../interfaces';
 
@@ -28,7 +30,13 @@ const styles: IStyles = {
 };
 
 export function StructureComparePage() {
-  const { hash } = useParams();
+  const query = new URLSearchParams(useLocation().search);
+  const hashes = query.get('hashes')?.split(',');
+  // TODO: guard hashed undefined or hashes.length < 2
+  console.log(hashes);
+
+  // TODO: read all structures to compare
+  const hash = hashes[0];
   const history = useHistory();
   const [activeItemKey, setActvieItemKey] = useState('summary');
   const structureData = initDb(hash);

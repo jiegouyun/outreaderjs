@@ -45,7 +45,7 @@ export default function Routes() {
               <Route path={routes.STRUCTURE} exact>
                 <StructurePage />
               </Route>
-              <Route path={routes.STRUCTURE} exact>
+              <Route path={routes.COMPARE} exact>
                 <StructureComparePage />
               </Route>
             </Switch>
