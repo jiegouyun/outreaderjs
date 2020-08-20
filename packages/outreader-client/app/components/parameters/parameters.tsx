@@ -15,25 +15,25 @@ export function ParametersComponent(parameters: IParametersFE) {
         <Descriptions.Item label="结构体系">
           {parameters.general.system}
         </Descriptions.Item>
-        <Descriptions.Item label="结构材料信息">
+        <Descriptions.Item label="结构材料">
           {parameters.general.material}
         </Descriptions.Item>
-        <Descriptions.Item label="结构所在地区">
+        <Descriptions.Item label="所在地区">
           {parameters.general.location}
         </Descriptions.Item>
         <Descriptions.Item label="地下室层数">
           {parameters.general.basement}
         </Descriptions.Item>
-        <Descriptions.Item label="嵌固端所在层号">
+        <Descriptions.Item label="嵌固端层">
           {parameters.general.constraintFloor}
         </Descriptions.Item>
         <Descriptions.Item label="裙房层数">
           {parameters.general.podium}
         </Descriptions.Item>
-        <Descriptions.Item label="转换层所在层号">
+        <Descriptions.Item label="转换层">
           {parameters.general.transferStorey}
         </Descriptions.Item>
-        <Descriptions.Item label="加强层所在层号">
+        <Descriptions.Item label="加强层">
           {parameters.general.reinforceStorey}
         </Descriptions.Item>
       </Descriptions>

@@ -6,7 +6,7 @@ import { ICompare } from '../../interfaces';
 export function CompareSummaryQuantityComponent(
   summaryQuantities: ISummaryQuantityFE[]
 ) {
-  const n: number = summaryQuantities.length;
+  const n = summaryQuantities.length;
 
   const modelColumns = [
     {

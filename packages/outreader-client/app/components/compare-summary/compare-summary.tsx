@@ -4,7 +4,7 @@ import { ISummaryFE } from '@outreader/core';
 import { ICompare } from '../../interfaces';
 
 export function CompareSummaryComponent(summarys: ISummaryFE[]) {
-  const n: number = summarys.length;
+  const n = summarys.length;
 
   const modelColumns = [
     {

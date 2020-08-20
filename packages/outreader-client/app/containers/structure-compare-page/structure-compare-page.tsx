@@ -1,4 +1,9 @@
-import { exportExcel, ISummaryFE, ISummaryQuantityFE } from '@outreader/core';
+import {
+  exportExcel,
+  ISummaryFE,
+  ISummaryQuantityFE,
+  IParametersFE,
+} from '@outreader/core';
 import { convertStructure } from '@outreader/yjk';
 import { Breadcrumb, Divider, Layout, Menu, message } from 'antd';
 import React, { useState } from 'react';
@@ -9,7 +14,7 @@ import {
   FactorComponent,
   ForceComponent,
   GeneralResultComponent,
-  ParametersComponent,
+  CompareParametersComponent,
   PeriodComponent,
   QuantityComponent,
   CompareSummaryComponent,
@@ -38,12 +43,14 @@ export function StructureComparePage() {
   // TODO: read all structures to compare
   const summarys: ISummaryFE[] = [];
   const summaryQuantities: ISummaryQuantityFE[] = [];
+  const parameters: IParametersFE[] = [];
   hashes?.forEach((hash) => {
     const structureData = initDb(hash);
     const structure = structureData.value();
     const structureFE = convertStructure(structure);
     summarys.push(structureFE.summary);
     summaryQuantities.push(structureFE.summaryQuantity);
+    parameters.push(structureFE.parameters);
     if (!structure.hash) {
       message.error('找不到模型');
       history.replace('/');
@@ -75,7 +82,7 @@ export function StructureComparePage() {
 
   const Summarys = CompareSummaryComponent(summarys);
   const SummaryQuantities = CompareSummaryQuantityComponent(summaryQuantities);
-  // const Parameters = ParametersComponent(parameters);
+  const Parameters = CompareParametersComponent(parameters);
   // const Period = PeriodComponent(period);
   // const Force = ForceComponent(force);
   // const Drift = DriftComponent(drift);
@@ -91,9 +98,9 @@ export function StructureComparePage() {
     summaryQuantity: () => {
       return SummaryQuantities;
     },
-    // parameters: () => {
-    //   return Parameters;
-    // },
+    parameters: () => {
+      return Parameters;
+    },
     // period: () => {
     //   return Period;
     // },
