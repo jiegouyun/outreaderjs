@@ -13,8 +13,7 @@
     "docs:build": "vuepress build docs"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.7",
-    "knex": "^0.21.2",
+    "@types/jest": "^26.0.10",
     "lerna": "^3.22.0",
     "lint-staged": "^10.2.9",
     "stylelint": "^13.6.0",
