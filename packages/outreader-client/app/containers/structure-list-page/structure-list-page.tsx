@@ -1,7 +1,7 @@
 import { convertStructure } from '@outreader/yjk';
 import { exportExcel } from '@outreader/core';
-import { Table, message, Divider } from 'antd';
-import React from 'react';
+import { Table, message, Divider, Button, Checkbox } from 'antd';
+import React, { useState } from 'react';
 import { useDb } from '../../hooks';
 import { IStyles } from '../../interfaces';
 import { useHistory } from 'react-router';
@@ -63,9 +63,13 @@ export function StructureListPage() {
       ),
     },
   ];
+
+  //todo
+
   return (
     <div style={styles.container}>
       <Table
+        // rowSelection={rowSelection}
         columns={tableColumns}
         rowKey="hash"
         dataSource={structures}
