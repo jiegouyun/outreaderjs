@@ -416,7 +416,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
   }
 
   const { Panel } = Collapse;
-  const Drift = (
+  const Drifts = (
     <div>
       <h3>位移</h3>
       <Row>
@@ -553,5 +553,5 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
     </div>
   );
 
-  return Drift;
+  return Drifts;
 }

@@ -6,6 +6,7 @@ import {
   IPeriodFE,
   IForceFE,
   IDriftFE,
+  IGeneralResultFE,
 } from '@outreader/core';
 import { convertStructure } from '@outreader/yjk';
 import { Breadcrumb, Divider, Layout, Menu, message } from 'antd';
@@ -16,7 +17,7 @@ import {
   CompareDriftComponent,
   FactorComponent,
   CompareForceComponent,
-  GeneralResultComponent,
+  CompareGeneralResultComponent,
   CompareParametersComponent,
   ComparePeriodComponent,
   QuantityComponent,
@@ -50,6 +51,7 @@ export function StructureComparePage() {
   const periods: IPeriodFE[] = [];
   const forces: IForceFE[] = [];
   const drifts: IDriftFE[] = [];
+  const generalResults: IGeneralResultFE[] = [];
   hashes?.forEach((hash) => {
     const structureData = initDb(hash);
     const structure = structureData.value();
@@ -60,6 +62,7 @@ export function StructureComparePage() {
     periods.push(structureFE.period);
     forces.push(structureFE.force);
     drifts.push(structureFE.drift);
+    generalResults.push(structureFE.generalResult);
     if (!structure.hash) {
       message.error('找不到模型');
       history.replace('/');
@@ -95,7 +98,7 @@ export function StructureComparePage() {
   const Periods = ComparePeriodComponent(periods);
   const Forces = CompareForceComponent(forces);
   const Drifts = CompareDriftComponent(drifts);
-  // const GeneralResult = GeneralResultComponent(generalResult);
+  const GeneralResults = CompareGeneralResultComponent(generalResults);
   // const DistributeResult = DistributeResultComponent(distributeResult);
   // const Factor = FactorComponent(factor);
   // const Quantity = QuantityComponent(quantity);
@@ -119,9 +122,9 @@ export function StructureComparePage() {
     drift: () => {
       return Drifts;
     },
-    // generalResult: () => {
-    //   return GeneralResult;
-    // },
+    generalResult: () => {
+      return GeneralResults;
+    },
     // distributeResult: () => {
     //   return DistributeResult;
     // },

@@ -14,3 +14,4 @@ export * from './compare-parameters';
 export * from './compare-period';
 export * from './compare-force';
 export * from './compare-drift';
+export * from './compare-general-result';

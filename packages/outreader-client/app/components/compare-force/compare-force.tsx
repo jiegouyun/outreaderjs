@@ -295,7 +295,7 @@ export function CompareForceComponent(forces: IForceFE[]) {
   }
 
   const { Panel } = Collapse;
-  const Force = (
+  const Forces = (
     <div>
       <h3>顺风向风荷载</h3>
       <Row>
@@ -399,5 +399,5 @@ export function CompareForceComponent(forces: IForceFE[]) {
     </div>
   );
 
-  return Force;
+  return Forces;
 }
