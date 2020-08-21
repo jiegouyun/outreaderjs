@@ -11,27 +11,11 @@ import {
   Label,
   LabelList,
 } from 'recharts';
+import { IData, IDescribe } from '../../interfaces';
 
 interface ILabel {
   xLabel: string;
   yLabel?: string;
-}
-
-interface IDescribe {
-  name: string;
-  fill: string;
-  shape:
-    | 'circle'
-    | 'cross'
-    | 'diamond'
-    | 'square'
-    | 'star'
-    | 'triangle'
-    | 'wye';
-}
-interface IData {
-  x: number;
-  y: number;
 }
 
 export function StoreyChart(props: {
