@@ -192,26 +192,6 @@ export function DriftComponent(drift: IDriftFE) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '风荷载',
-            }}
-            describe={[
-              {
-                name: 'X向',
-                fill: '#8884d8',
-                shape: 'cross',
-              },
-              {
-                name: 'Y向',
-                fill: '#82ca9d',
-                shape: 'circle',
-              },
-            ]}
-            datas={[dispChartWindX, dispChartWindY]}
-          />
-        </Col>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
               xLabel: '地震作用',
             }}
             describe={[
@@ -227,6 +207,26 @@ export function DriftComponent(drift: IDriftFE) {
               },
             ]}
             datas={[dispChartSeismicX, dispChartSeismicY]}
+          />
+        </Col>
+        <Col span={12}>
+          <StoreyChart
+            labels={{
+              xLabel: '风荷载',
+            }}
+            describe={[
+              {
+                name: 'X向',
+                fill: '#8884d8',
+                shape: 'cross',
+              },
+              {
+                name: 'Y向',
+                fill: '#82ca9d',
+                shape: 'circle',
+              },
+            ]}
+            datas={[dispChartWindX, dispChartWindY]}
           />
         </Col>
       </Row>
@@ -247,26 +247,6 @@ export function DriftComponent(drift: IDriftFE) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '风荷载',
-            }}
-            describe={[
-              {
-                name: 'X向',
-                fill: '#8884d8',
-                shape: 'cross',
-              },
-              {
-                name: 'Y向',
-                fill: '#82ca9d',
-                shape: 'circle',
-              },
-            ]}
-            datas={[driftChartWindX, driftChartWindY]}
-          />
-        </Col>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
               xLabel: '地震作用',
             }}
             describe={[
@@ -282,6 +262,26 @@ export function DriftComponent(drift: IDriftFE) {
               },
             ]}
             datas={[driftChartSeismicX, driftChartSeismicY]}
+          />
+        </Col>
+        <Col span={12}>
+          <StoreyChart
+            labels={{
+              xLabel: '风荷载',
+            }}
+            describe={[
+              {
+                name: 'X向',
+                fill: '#8884d8',
+                shape: 'cross',
+              },
+              {
+                name: 'Y向',
+                fill: '#82ca9d',
+                shape: 'circle',
+              },
+            ]}
+            datas={[driftChartWindX, driftChartWindY]}
           />
         </Col>
       </Row>

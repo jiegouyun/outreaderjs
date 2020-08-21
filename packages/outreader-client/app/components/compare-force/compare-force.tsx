@@ -59,7 +59,6 @@ export function CompareForceComponent(forces: IForceFE[]) {
       storeyID: storeyID[j],
     });
     for (let i = 0; i < n; i++) {
-      // todo
       const len = forces[i].wind.storeyID.length;
       const diff = count - len;
 
