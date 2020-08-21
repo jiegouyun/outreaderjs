@@ -361,7 +361,7 @@ export function DistributeResultComponent(
         labels={{
           xLabel: '质量比',
         }}
-        describe={[
+        describes={[
           {
             name: '质量比',
             fill: '#8884d8',
@@ -394,7 +394,7 @@ export function DistributeResultComponent(
             labels={{
               xLabel: '刚度比',
             }}
-            describe={[
+            describes={[
               {
                 name: 'X向',
                 fill: '#8884d8',
@@ -414,7 +414,7 @@ export function DistributeResultComponent(
             labels={{
               xLabel: '层高修正刚度比',
             }}
-            describe={[
+            describes={[
               {
                 name: 'X向',
                 fill: '#8884d8',
@@ -447,7 +447,7 @@ export function DistributeResultComponent(
         labels={{
           xLabel: '剪重比',
         }}
-        describe={[
+        describes={[
           {
             name: 'X向',
             fill: '#8884d8',
@@ -478,7 +478,7 @@ export function DistributeResultComponent(
         labels={{
           xLabel: '抗剪承载力比',
         }}
-        describe={[
+        describes={[
           {
             name: 'X向',
             fill: '#8884d8',
@@ -511,7 +511,7 @@ export function DistributeResultComponent(
             labels={{
               xLabel: '规定水平力下倾覆力矩分配',
             }}
-            describe={[
+            describes={[
               {
                 name: 'X向',
                 fill: '#8884d8',
@@ -531,7 +531,7 @@ export function DistributeResultComponent(
             labels={{
               xLabel: '短肢墙倾覆力矩占比(%)',
             }}
-            describe={[
+            describes={[
               {
                 name: 'X向',
                 fill: '#8884d8',
@@ -564,7 +564,7 @@ export function DistributeResultComponent(
         labels={{
           xLabel: '柱剪力与分段基底剪力百分比(%)',
         }}
-        describe={[
+        describes={[
           {
             name: 'X向',
             fill: '#8884d8',

@@ -154,7 +154,7 @@ export function ForceComponent(force: IForceFE) {
             labels={{
               xLabel: '剪力(kN)',
             }}
-            describe={[
+            describes={[
               {
                 name: 'X向',
                 fill: '#8884d8',
@@ -174,7 +174,7 @@ export function ForceComponent(force: IForceFE) {
             labels={{
               xLabel: '弯矩(kNm)',
             }}
-            describe={[
+            describes={[
               {
                 name: 'X向',
                 fill: '#8884d8',
@@ -211,7 +211,7 @@ export function ForceComponent(force: IForceFE) {
                 labels={{
                   xLabel: '剪力(kN)',
                 }}
-                describe={[
+                describes={[
                   {
                     name: 'X向',
                     fill: '#8884d8',
@@ -231,7 +231,7 @@ export function ForceComponent(force: IForceFE) {
                 labels={{
                   xLabel: '弯矩(kNm)',
                 }}
-                describe={[
+                describes={[
                   {
                     name: 'X向',
                     fill: '#8884d8',
@@ -264,7 +264,7 @@ export function ForceComponent(force: IForceFE) {
             labels={{
               xLabel: '剪力(kN)',
             }}
-            describe={[
+            describes={[
               {
                 name: 'X向',
                 fill: '#8884d8',
@@ -284,7 +284,7 @@ export function ForceComponent(force: IForceFE) {
             labels={{
               xLabel: '弯矩(kNm)',
             }}
-            describe={[
+            describes={[
               {
                 name: 'X向',
                 fill: '#8884d8',

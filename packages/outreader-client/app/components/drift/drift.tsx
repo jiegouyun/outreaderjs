@@ -194,7 +194,7 @@ export function DriftComponent(drift: IDriftFE) {
             labels={{
               xLabel: '地震作用',
             }}
-            describe={[
+            describes={[
               {
                 name: 'X向',
                 fill: '#8884d8',
@@ -214,7 +214,7 @@ export function DriftComponent(drift: IDriftFE) {
             labels={{
               xLabel: '风荷载',
             }}
-            describe={[
+            describes={[
               {
                 name: 'X向',
                 fill: '#8884d8',
@@ -249,7 +249,7 @@ export function DriftComponent(drift: IDriftFE) {
             labels={{
               xLabel: '地震作用',
             }}
-            describe={[
+            describes={[
               {
                 name: 'X向',
                 fill: '#8884d8',
@@ -269,7 +269,7 @@ export function DriftComponent(drift: IDriftFE) {
             labels={{
               xLabel: '风荷载',
             }}
-            describe={[
+            describes={[
               {
                 name: 'X向',
                 fill: '#8884d8',
@@ -304,7 +304,7 @@ export function DriftComponent(drift: IDriftFE) {
             labels={{
               xLabel: 'X向',
             }}
-            describe={[
+            describes={[
               {
                 name: '+偏心',
                 fill: '#8884d8',
@@ -324,7 +324,7 @@ export function DriftComponent(drift: IDriftFE) {
             labels={{
               xLabel: 'Y向',
             }}
-            describe={[
+            describes={[
               {
                 name: '+偏心',
                 fill: '#8884d8',
@@ -359,7 +359,7 @@ export function DriftComponent(drift: IDriftFE) {
             labels={{
               xLabel: 'X向',
             }}
-            describe={[
+            describes={[
               {
                 name: '+偏心',
                 fill: '#8884d8',
@@ -379,7 +379,7 @@ export function DriftComponent(drift: IDriftFE) {
             labels={{
               xLabel: 'Y向',
             }}
-            describe={[
+            describes={[
               {
                 name: '+偏心',
                 fill: '#8884d8',

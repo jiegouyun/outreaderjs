@@ -4,7 +4,6 @@ import { IDistributeResultFE } from '@outreader/core';
 import { StoreyChart } from '../storey-chart';
 import { ICompare, IData, IDescribe } from '../../interfaces';
 import { userColors, userShaps } from '../../colors';
-import { isDate } from 'util';
 
 export function CompareDistributeResultComponent(
   distributeResults: IDistributeResultFE[]
@@ -592,7 +591,7 @@ export function CompareDistributeResultComponent(
   }
 
   const { Panel } = Collapse;
-  const DistributeResult = (
+  const DistributeResults = (
     <div>
       <h3>楼层属性</h3>
       <Collapse ghost>
@@ -756,5 +755,5 @@ export function CompareDistributeResultComponent(
     </div>
   );
 
-  return DistributeResult;
+  return DistributeResults;
 }

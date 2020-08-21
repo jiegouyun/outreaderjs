@@ -103,7 +103,7 @@ export function FactorComponent(factor: IFactorFE) {
         labels={{
           xLabel: '薄弱层剪力放大系数',
         }}
-        describe={[
+        describes={[
           {
             name: '系数',
             fill: '#8884d8',
@@ -129,7 +129,7 @@ export function FactorComponent(factor: IFactorFE) {
         labels={{
           xLabel: '剪重比调整系数',
         }}
-        describe={[
+        describes={[
           {
             name: 'X向',
             fill: '#8884d8',
@@ -160,7 +160,7 @@ export function FactorComponent(factor: IFactorFE) {
         labels={{
           xLabel: '0.2V0调整系数',
         }}
-        describe={[
+        describes={[
           {
             name: 'X向',
             fill: '#8884d8',

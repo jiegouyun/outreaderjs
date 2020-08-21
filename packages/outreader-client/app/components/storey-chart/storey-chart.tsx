@@ -20,7 +20,7 @@ interface ILabel {
 
 export function StoreyChart(props: {
   labels: ILabel;
-  describe: IDescribe[];
+  describes: IDescribe[];
   datas: IData[][];
 }) {
   return (
@@ -60,11 +60,11 @@ export function StoreyChart(props: {
         return (
           <Scatter
             key={i}
-            name={props.describe[i].name}
+            name={props.describes[i].name}
             data={data}
-            fill={props.describe[i].fill}
+            fill={props.describes[i].fill}
             line={{ strokeWidth: 2 }}
-            shape={props.describe[i].shape}
+            shape={props.describes[i].shape}
           />
         );
       })}
