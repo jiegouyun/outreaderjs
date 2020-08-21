@@ -126,8 +126,8 @@ export function DistributeResultComponent(
   const stiffRatioTableData = [];
   const stiffRatioXChartData = [];
   const stiffRatioYChartData = [];
-  const sriffRatioXModifyChartData = [];
-  const sriffRatioYModifyChartData = [];
+  const stiffRatioXModifyChartData = [];
+  const stiffRatioYModifyChartData = [];
   for (let i = 0; i < distributeResult.stiffness.storeyID.length; i++) {
     stiffRatioTableData.push({
       key: i,
@@ -146,11 +146,11 @@ export function DistributeResultComponent(
       x: distributeResult.stiffness.raty1[i],
       y: distributeResult.stiffness.storeyID[i],
     });
-    sriffRatioXModifyChartData.push({
+    stiffRatioXModifyChartData.push({
       x: distributeResult.stiffness.ratx2[i],
       y: distributeResult.stiffness.storeyID[i],
     });
-    sriffRatioYModifyChartData.push({
+    stiffRatioYModifyChartData.push({
       x: distributeResult.stiffness.raty2[i],
       y: distributeResult.stiffness.storeyID[i],
     });
@@ -426,7 +426,7 @@ export function DistributeResultComponent(
                 shape: 'circle',
               },
             ]}
-            datas={[sriffRatioXModifyChartData, sriffRatioYModifyChartData]}
+            datas={[stiffRatioXModifyChartData, stiffRatioYModifyChartData]}
           />
         </Col>
       </Row>

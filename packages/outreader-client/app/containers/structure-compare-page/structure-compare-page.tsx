@@ -7,13 +7,14 @@ import {
   IForceFE,
   IDriftFE,
   IGeneralResultFE,
+  IDistributeResultFE,
 } from '@outreader/core';
 import { convertStructure } from '@outreader/yjk';
 import { Breadcrumb, Divider, Layout, Menu, message } from 'antd';
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import {
-  DistributeResultComponent,
+  CompareDistributeResultComponent,
   CompareDriftComponent,
   FactorComponent,
   CompareForceComponent,
@@ -52,6 +53,7 @@ export function StructureComparePage() {
   const forces: IForceFE[] = [];
   const drifts: IDriftFE[] = [];
   const generalResults: IGeneralResultFE[] = [];
+  const distributeResults: IDistributeResultFE[] = [];
   hashes?.forEach((hash) => {
     const structureData = initDb(hash);
     const structure = structureData.value();
@@ -63,6 +65,7 @@ export function StructureComparePage() {
     forces.push(structureFE.force);
     drifts.push(structureFE.drift);
     generalResults.push(structureFE.generalResult);
+    distributeResults.push(structureFE.distributeResult);
     if (!structure.hash) {
       message.error('找不到模型');
       history.replace('/');
@@ -99,7 +102,7 @@ export function StructureComparePage() {
   const Forces = CompareForceComponent(forces);
   const Drifts = CompareDriftComponent(drifts);
   const GeneralResults = CompareGeneralResultComponent(generalResults);
-  // const DistributeResult = DistributeResultComponent(distributeResult);
+  const DistributeResults = CompareDistributeResultComponent(distributeResults);
   // const Factor = FactorComponent(factor);
   // const Quantity = QuantityComponent(quantity);
 
@@ -125,9 +128,9 @@ export function StructureComparePage() {
     generalResult: () => {
       return GeneralResults;
     },
-    // distributeResult: () => {
-    //   return DistributeResult;
-    // },
+    distributeResult: () => {
+      return DistributeResults;
+    },
     // factor: () => {
     //   return Factor;
     // },
