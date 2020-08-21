@@ -425,7 +425,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
             labels={{
               xLabel: '地震作用',
             }}
-            describe={describesDriftDrift}
+            describes={describesDriftDrift}
             datas={dispSeismicChartData}
           />
         </Col>
@@ -434,7 +434,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
             labels={{
               xLabel: '风荷载',
             }}
-            describe={describesDriftDrift}
+            describes={describesDriftDrift}
             datas={dispWindChartData}
           />
         </Col>
@@ -458,7 +458,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
             labels={{
               xLabel: '地震作用',
             }}
-            describe={describesDriftDrift}
+            describes={describesDriftDrift}
             datas={driftSeismicChartData}
           />
         </Col>
@@ -467,7 +467,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
             labels={{
               xLabel: '风荷载',
             }}
-            describe={describesDriftDrift}
+            describes={describesDriftDrift}
             datas={driftWindChartData}
           />
         </Col>
@@ -491,7 +491,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
             labels={{
               xLabel: 'X向',
             }}
-            describe={describesDispRatio}
+            describes={describesDispRatio}
             datas={ratioXChartData}
           />
         </Col>
@@ -500,7 +500,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
             labels={{
               xLabel: 'Y向',
             }}
-            describe={describesDispRatio}
+            describes={describesDispRatio}
             datas={ratioYChartData}
           />
         </Col>
@@ -524,7 +524,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
             labels={{
               xLabel: 'X向',
             }}
-            describe={describesDispRatio}
+            describes={describesDispRatio}
             datas={ratioDXChartData}
           />
         </Col>
@@ -533,7 +533,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
             labels={{
               xLabel: 'Y向',
             }}
-            describe={describesDispRatio}
+            describes={describesDispRatio}
             datas={ratioDYChartData}
           />
         </Col>

@@ -304,7 +304,7 @@ export function CompareForceComponent(forces: IForceFE[]) {
             labels={{
               xLabel: '剪力(kN)',
             }}
-            describe={describes}
+            describes={describes}
             datas={shearAlongWindChartData}
           />
         </Col>
@@ -313,7 +313,7 @@ export function CompareForceComponent(forces: IForceFE[]) {
             labels={{
               xLabel: '弯矩(kNm)',
             }}
-            describe={describes}
+            describes={describes}
             datas={momentAlongWindChartData}
           />
         </Col>
@@ -339,7 +339,7 @@ export function CompareForceComponent(forces: IForceFE[]) {
                 labels={{
                   xLabel: '剪力(kN)',
                 }}
-                describe={describes}
+                describes={describes}
                 datas={shearCrossWindChartData}
               />
             </Col>
@@ -348,7 +348,7 @@ export function CompareForceComponent(forces: IForceFE[]) {
                 labels={{
                   xLabel: '弯矩(kNm)',
                 }}
-                describe={describes}
+                describes={describes}
                 datas={momentCrossWindChartData}
               />
             </Col>
@@ -370,7 +370,7 @@ export function CompareForceComponent(forces: IForceFE[]) {
             labels={{
               xLabel: '剪力(kN)',
             }}
-            describe={describes}
+            describes={describes}
             datas={shearSeismicChartData}
           />
         </Col>
@@ -379,7 +379,7 @@ export function CompareForceComponent(forces: IForceFE[]) {
             labels={{
               xLabel: '弯矩(kNm)',
             }}
-            describe={describes}
+            describes={describes}
             datas={momentSeismicChartData}
           />
         </Col>

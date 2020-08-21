@@ -9,6 +9,7 @@ import {
   IGeneralResultFE,
   IDistributeResultFE,
   IFactorFE,
+  IQuantityFE,
 } from '@outreader/core';
 import { convertStructure } from '@outreader/yjk';
 import { Breadcrumb, Divider, Layout, Menu, message } from 'antd';
@@ -22,7 +23,7 @@ import {
   CompareGeneralResultComponent,
   CompareParametersComponent,
   ComparePeriodComponent,
-  QuantityComponent,
+  CompareQuantityComponent,
   CompareSummaryComponent,
   CompareSummaryQuantityComponent,
 } from '../../components';
@@ -56,6 +57,7 @@ export function StructureComparePage() {
   const generalResults: IGeneralResultFE[] = [];
   const distributeResults: IDistributeResultFE[] = [];
   const factors: IFactorFE[] = [];
+  const quantities: IQuantityFE[] = [];
   hashes?.forEach((hash) => {
     const structureData = initDb(hash);
     const structure = structureData.value();
@@ -69,6 +71,7 @@ export function StructureComparePage() {
     generalResults.push(structureFE.generalResult);
     distributeResults.push(structureFE.distributeResult);
     factors.push(structureFE.factor);
+    quantities.push(structureFE.quantity);
     if (!structure.hash) {
       message.error('找不到模型');
       history.replace('/');
@@ -78,25 +81,6 @@ export function StructureComparePage() {
   const hash = hashes[0];
   const history = useHistory();
   const [activeItemKey, setActvieItemKey] = useState('summary');
-  // const structureData = initDb(hash);
-  // const structure = structureData.value();
-  // const structureFE = convertStructure(structure);
-  // const summary = structureFE.summary;
-  // const summaryQuantity = structureFE.summaryQuantity;
-  // const parameters = structureFE.parameters;
-  // const period = structureFE.period;
-  // const force = structureFE.force;
-  // const drift = structureFE.drift;
-  // const generalResult = structureFE.generalResult;
-  // const distributeResult = structureFE.distributeResult;
-  // const factor = structureFE.factor;
-  // const quantity = structureFE.quantity;
-  // console.log(structure);
-  // console.log(structureFE);
-  // if (!structure.hash) {
-  //   message.error('找不到模型');
-  //   history.replace('/');
-  // }
 
   const Summarys = CompareSummaryComponent(summarys);
   const SummaryQuantities = CompareSummaryQuantityComponent(summaryQuantities);
@@ -107,7 +91,7 @@ export function StructureComparePage() {
   const GeneralResults = CompareGeneralResultComponent(generalResults);
   const DistributeResults = CompareDistributeResultComponent(distributeResults);
   const Factors = CompareFactorComponent(factors);
-  // const Quantity = QuantityComponent(quantity);
+  const Quantities = CompareQuantityComponent(quantities);
 
   const dataMapping = {
     summary: () => {
@@ -137,9 +121,9 @@ export function StructureComparePage() {
     factor: () => {
       return Factors;
     },
-    // quantity: () => {
-    //   return Quantity;
-    // },
+    quantity: () => {
+      return Quantities;
+    },
   };
 
   const exportXLSX = async () => {

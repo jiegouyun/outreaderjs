@@ -186,21 +186,21 @@ export function PeriodComponent(period: IPeriodFE) {
         <Scatter
           name={'X: ' + period.modeMass.sumX.toFixed(2)}
           data={modeMassX}
-          fill="#8884d8"
+          fill="#0099CC"
           line={{ strokeWidth: 2 }}
           shape="cross"
         />
         <Scatter
           name={'Y: ' + period.modeMass.sumY.toFixed(2)}
           data={modeMassY}
-          fill="#82ca9d"
+          fill="#CCCCFF"
           line={{ strokeWidth: 2 }}
           shape="circle"
         />
         <Scatter
           name={'Z: ' + period.modeMass.sumZ.toFixed(2)}
           data={modeMassZ}
-          fill="#ffc658"
+          fill="#99CCCC"
           line={{ strokeWidth: 2 }}
           shape="diamond"
         />

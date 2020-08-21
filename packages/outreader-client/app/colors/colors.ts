@@ -1,12 +1,12 @@
 export const userColors: string[] = [
-  '#8884d8',
-  '#82ca9d',
-  '#ffc658',
-  '#00FFFF',
-  '#54FF9F',
-  '#7FFFD4',
-  '#FF00FF',
-  '#00BFFF',
+  '#0099CC',
+  '#CCCCFF',
+  '#99CCCC',
+  '#FFCC99',
+  '#FF9966',
+  '#FFFFCC',
+  '#CCFFFF',
+  '#FFCCCC',
 ];
 
 export const userShaps: Array<
