@@ -3,16 +3,18 @@ import { exportExcel } from '@outreader/core';
 import { Breadcrumb, Layout, Menu, message, Divider } from 'antd';
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router';
-import { SummaryComponent } from '../../components';
-import { SummaryQuantityComponent } from '../../components';
-import { ParametersComponent } from '../../components';
-import { PeriodComponent } from '../../components';
-import { ForceComponent } from '../../components';
-import { DriftComponent } from '../../components';
-import { GeneralResultComponent } from '../../components';
-import { DistributeResultComponent } from '../../components';
-import { FactorComponent } from '../../components';
-import { QuantityComponent } from '../../components';
+import {
+  SummaryComponent,
+  SummaryQuantityComponent,
+  ParametersComponent,
+  PeriodComponent,
+  ForceComponent,
+  DriftComponent,
+  GeneralResultComponent,
+  DistributeResultComponent,
+  FactorComponent,
+  QuantityComponent,
+} from '../../components';
 import { initDb } from '../../database';
 import { IStyles } from '../../interfaces';
 

@@ -17,6 +17,7 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
   const towerTableData = [];
   for (let i = 0; i < generalResult.tower.towerID.length; i++) {
     towerTableData.push({
+      key: i,
       towerID: generalResult.tower.towerID[i],
       system: generalResult.tower.structuralSystem[i],
     });
@@ -43,12 +44,14 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
 
   const stiffRatioTableData = [
     {
+      key: 0,
       direction: 'X向',
       basement1: generalResult.constraintFloorStiffnessRatio.stiffnessX0,
       storey1: generalResult.constraintFloorStiffnessRatio.stiffnessX1,
       ratio: generalResult.constraintFloorStiffnessRatio.ratioX.toFixed(3),
     },
     {
+      key: 1,
       direction: 'Y向',
       basement1: generalResult.constraintFloorStiffnessRatio.stiffnessY0,
       storey1: generalResult.constraintFloorStiffnessRatio.stiffnessY1,
@@ -81,6 +84,7 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
 
   const overturningTableData = [
     {
+      key: 0,
       direction: 'X向风',
       mr: generalResult.overturningCheck.mrWindX,
       mov: generalResult.overturningCheck.movWindX,
@@ -88,6 +92,7 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
       zeroArea: generalResult.overturningCheck.zeroAreaWindX.toFixed(2),
     },
     {
+      key: 1,
       direction: 'Y向风',
       mr: generalResult.overturningCheck.mrWindY,
       mov: generalResult.overturningCheck.movWindY,
@@ -95,6 +100,7 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
       zeroArea: generalResult.overturningCheck.zeroAreaWindY.toFixed(2),
     },
     {
+      key: 2,
       direction: 'X向地震',
       mr: generalResult.overturningCheck.mrSeismicX,
       mov: generalResult.overturningCheck.movSeismicX,
@@ -102,6 +108,7 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
       zeroArea: generalResult.overturningCheck.zeroAreaSeismicX.toFixed(2),
     },
     {
+      key: 3,
       direction: 'Y向地震',
       mr: generalResult.overturningCheck.mrSeismicY,
       mov: generalResult.overturningCheck.movSeismicY,
@@ -135,6 +142,7 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
 
   const stableTableData = [
     {
+      key: 0,
       load: '风荷载',
       storeyNo: generalResult.stableCheck.windStoreyNo,
       towerNo: generalResult.stableCheck.windTowerNo,
@@ -142,6 +150,7 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
       ratioY: generalResult.stableCheck.windRatioY,
     },
     {
+      key: 1,
       load: '地震',
       storeyNo: generalResult.stableCheck.seismicStoreyNo,
       towerNo: generalResult.stableCheck.seismicTowerNo,
@@ -167,11 +176,13 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
 
   const windComfortTableData = [
     {
+      key: 0,
       direction: '顺风向',
       accX: generalResult.windComfort.accelerationAlongX,
       accY: generalResult.windComfort.accelerationAlongY,
     },
     {
+      key: 1,
       direction: '横风向',
       accX: generalResult.windComfort.accelerationCrossX,
       accY: generalResult.windComfort.accelerationCrossY,

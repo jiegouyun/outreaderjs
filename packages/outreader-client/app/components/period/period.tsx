@@ -43,9 +43,10 @@ export function PeriodComponent(period: IPeriodFE) {
   const periodModeTableData = [];
   for (let i = 0; i < period.modeCoupling.modeID.length; i++) {
     periodModeTableData.push({
+      key: i,
       modeID: period.modeCoupling.modeID[i],
       period: period.modeCoupling.period[i].toFixed(3),
-      angle: period.modeCoupling.angle[i].toFixed(2),
+      angle: period.modeCoupling.angle[i].toFixed(0),
       factorX: period.modeCoupling.factorX[i].toFixed(2),
       factorY: period.modeCoupling.factorY[i].toFixed(2),
       factorZ: period.modeCoupling.factorZ[i].toFixed(2),
@@ -55,9 +56,10 @@ export function PeriodComponent(period: IPeriodFE) {
   const periodSeismicTableData = [];
   for (let i = 0; i < period.modeSeismic.modeID.length; i++) {
     periodSeismicTableData.push({
+      key: i,
       modeID: period.modeSeismic.modeID[i],
       period: period.modeSeismic.period[i].toFixed(3),
-      angle: period.modeSeismic.angle[i].toFixed(2),
+      angle: period.modeSeismic.angle[i].toFixed(0),
       factorX: period.modeSeismic.factorX[i].toFixed(2),
       factorY: period.modeSeismic.factorY[i].toFixed(2),
       factorZ: period.modeSeismic.factorZ[i].toFixed(2),
@@ -92,6 +94,7 @@ export function PeriodComponent(period: IPeriodFE) {
   let sumZ: number = 0;
   for (let i = 0; i < period.modeMass.modeID.length; i++) {
     periodMassTableData.push({
+      key: i,
       modeID: period.modeMass.modeID[i],
       factorX: period.modeMass.factorX[i].toFixed(2),
       factorY: period.modeMass.factorY[i].toFixed(2),
@@ -183,21 +186,21 @@ export function PeriodComponent(period: IPeriodFE) {
         <Scatter
           name={'X: ' + period.modeMass.sumX.toFixed(2)}
           data={modeMassX}
-          fill="#8884d8"
+          fill="#0099CC"
           line={{ strokeWidth: 2 }}
           shape="cross"
         />
         <Scatter
           name={'Y: ' + period.modeMass.sumY.toFixed(2)}
           data={modeMassY}
-          fill="#82ca9d"
+          fill="#CCCCFF"
           line={{ strokeWidth: 2 }}
-          shape="cicle"
+          shape="circle"
         />
         <Scatter
           name={'Z: ' + period.modeMass.sumZ.toFixed(2)}
           data={modeMassZ}
-          fill="#ffc658"
+          fill="#99CCCC"
           line={{ strokeWidth: 2 }}
           shape="diamond"
         />

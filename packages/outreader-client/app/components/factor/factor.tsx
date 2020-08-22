@@ -23,6 +23,7 @@ export function FactorComponent(factor: IFactorFE) {
   const weakChartData = [];
   for (let i = 0; i < factor.stiffness.storeyID.length; i++) {
     weakTableData.push({
+      key: i,
       storeyID: factor.stiffness.storeyID[i],
       towerID: factor.stiffness.towerID[i],
       factor: factor.stiffness.weakStoreyFactor[i].toFixed(2),
@@ -57,6 +58,7 @@ export function FactorComponent(factor: IFactorFE) {
   const shearYChartData = [];
   for (let i = 0; i < factor.shearWeightRatioModify.storeyID.length; i++) {
     shearTableData.push({
+      key: i,
       storeyID: factor.shearWeightRatioModify.storeyID[i],
       towerID: factor.shearWeightRatioModify.towerID[i],
       factorX: factor.shearWeightRatioModify.factorX[i].toFixed(3),
@@ -77,6 +79,7 @@ export function FactorComponent(factor: IFactorFE) {
   const v02qYChartData = [];
   for (let i = 0; i < factor.v02qFactor.storeyID.length; i++) {
     v02qTableData.push({
+      key: i,
       storeyID: factor.v02qFactor.storeyID[i],
       towerID: factor.v02qFactor.towerID[i],
       factorX: factor.v02qFactor.factorX[i].toFixed(3),
@@ -97,9 +100,17 @@ export function FactorComponent(factor: IFactorFE) {
     <div>
       <h3>薄弱层剪力放大系数</h3>
       <StoreyChart
-        data1={weakChartData}
-        data2={weakChartData}
-        xLabel="薄弱层剪力放大系数"
+        labels={{
+          xLabel: '薄弱层剪力放大系数',
+        }}
+        describes={[
+          {
+            name: '系数',
+            fill: '#8884d8',
+            shape: 'cross',
+          },
+        ]}
+        datas={[weakChartData]}
       />
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -115,9 +126,22 @@ export function FactorComponent(factor: IFactorFE) {
       </Collapse>
       <h3>剪重比调整系数</h3>
       <StoreyChart
-        data1={shearXChartData}
-        data2={shearYChartData}
-        xLabel="剪重比调整系数"
+        labels={{
+          xLabel: '剪重比调整系数',
+        }}
+        describes={[
+          {
+            name: 'X向',
+            fill: '#8884d8',
+            shape: 'cross',
+          },
+          {
+            name: 'Y向',
+            fill: '#82ca9d',
+            shape: 'circle',
+          },
+        ]}
+        datas={[shearXChartData, shearYChartData]}
       />
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -133,9 +157,22 @@ export function FactorComponent(factor: IFactorFE) {
       </Collapse>
       <h3>0.2V0调整系数</h3>
       <StoreyChart
-        data1={shearXChartData}
-        data2={shearYChartData}
-        xLabel="0.2V0调整系数"
+        labels={{
+          xLabel: '0.2V0调整系数',
+        }}
+        describes={[
+          {
+            name: 'X向',
+            fill: '#8884d8',
+            shape: 'cross',
+          },
+          {
+            name: 'Y向',
+            fill: '#82ca9d',
+            shape: 'circle',
+          },
+        ]}
+        datas={[v02qXChartData, v02qYChartData]}
       />
       <Collapse ghost>
         <Panel header="详细数据" key="1">

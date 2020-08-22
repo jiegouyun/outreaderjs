@@ -9,15 +9,23 @@ import {
   Tooltip,
   Legend,
   Label,
+  LabelList,
 } from 'recharts';
+import { IData, IDescribe } from '../../interfaces';
+
+interface ILabel {
+  xLabel: string;
+  yLabel?: string;
+}
 
 export function StoreyChart(props: {
-  data1: { x: number; y: number }[];
-  data2: { x: number; y: number }[];
-  xLabel: string;
+  labels: ILabel;
+  describes: IDescribe[];
+  datas: IData[][];
 }) {
   return (
     <ScatterChart
+      key={props.labels.xLabel}
       width={300}
       height={400}
       margin={{
@@ -29,34 +37,37 @@ export function StoreyChart(props: {
     >
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis type="number" dataKey="x" name="" unit="">
-        <Label value={props.xLabel} offset={0} position="bottom" />
+        <Label value={props.labels.xLabel} offset={0} position="bottom" />
       </XAxis>
       <YAxis
         type="number"
         dataKey="y"
         name=""
         unit=""
-        domain={[0, (dataMax) => Math.ceil(dataMax / 5) * 5]}
+        domain={[0, (dataMax: number) => Math.ceil(dataMax / 5) * 5]}
       >
-        <Label value="楼层" angle={-90} offset={10} position="insideLeft" />
+        <Label
+          value={props.labels.yLabel || '楼层'}
+          angle={-90}
+          offset={10}
+          position="insideLeft"
+        />
       </YAxis>
       <ZAxis type="number" range={[25]} />
       <Tooltip cursor={{ strokeDasharray: '3 3' }} />
       <Legend align="right" verticalAlign="top" iconSize={20} iconType="line" />
-      <Scatter
-        name="X向"
-        data={props.data1}
-        fill="#8884d8"
-        line={{ strokeWidth: 2 }}
-        shape="cross"
-      />
-      <Scatter
-        name="Y向"
-        data={props.data2}
-        fill="#82ca9d"
-        line={{ strokeWidth: 2 }}
-        shape="cicle"
-      />
+      {props.datas.map(function (data, i) {
+        return (
+          <Scatter
+            key={i}
+            name={props.describes[i].name}
+            data={data}
+            fill={props.describes[i].fill}
+            line={{ strokeWidth: 2 }}
+            shape={props.describes[i].shape}
+          />
+        );
+      })}
     </ScatterChart>
   );
 }
