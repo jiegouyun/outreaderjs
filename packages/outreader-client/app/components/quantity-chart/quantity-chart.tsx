@@ -10,6 +10,15 @@ import {
   Label,
 } from 'recharts';
 
+/**
+ * @description draw quantity chart by area chaer;
+ * @param storeyID number, y axis data;
+ * @param wall number, x axis wall data;
+ * @param column number, x axis column data;
+ * @param beam number, x axis beam data;
+ * @param floor number, x axis floor data;
+ * @param xLabel strind, x axis label.
+ */
 export function QuantityChart(props: {
   data: {
     storeyID: number;
