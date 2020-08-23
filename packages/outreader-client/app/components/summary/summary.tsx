@@ -33,6 +33,7 @@ export function SummaryComponent(summary: ISummaryFE) {
   const summaryTableData = [];
   for (let i = 0; i < Math.min(6, summary.mode.modeID.length); i++) {
     summaryTableData.push({
+      key: i,
       modeID: summary.mode.modeID[i],
       period: summary.mode.period[i].toFixed(2),
       angle: summary.mode.angle[i].toFixed(0),

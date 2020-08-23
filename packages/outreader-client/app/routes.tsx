@@ -7,6 +7,7 @@ import {
   StructureListPage,
   StructurePage,
   AboutPage,
+  StructureComparePage,
 } from './containers';
 
 export default function Routes() {
@@ -43,6 +44,9 @@ export default function Routes() {
               </Route>
               <Route path={routes.STRUCTURE} exact>
                 <StructurePage />
+              </Route>
+              <Route path={routes.COMPARE} exact>
+                <StructureComparePage />
               </Route>
             </Switch>
           </Layout.Content>

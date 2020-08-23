@@ -36,6 +36,7 @@ export function DistributeResultComponent(
   const storeyTableData = [];
   for (let i = 0; i < distributeResult.storey.storeyID.length; i++) {
     storeyTableData.push({
+      key: i,
       storeyID: distributeResult.storey.storeyID[i],
       towerID: distributeResult.storey.towerID[i],
       attribute: distributeResult.storey.attribute[i],
@@ -77,6 +78,7 @@ export function DistributeResultComponent(
   const unitMassRatioChartData = [];
   for (let i = 0; i < distributeResult.massRatio.storeyID.length; i++) {
     massRatioTableData.push({
+      key: i,
       storeyID: distributeResult.massRatio.storeyID[i],
       towerID: distributeResult.massRatio.towerID[i],
       mass: (distributeResult.massRatio.storeyMass[i] / 1000).toFixed(0),
@@ -124,10 +126,11 @@ export function DistributeResultComponent(
   const stiffRatioTableData = [];
   const stiffRatioXChartData = [];
   const stiffRatioYChartData = [];
-  const sriffRatioXModifyChartData = [];
-  const sriffRatioYModifyChartData = [];
+  const stiffRatioXModifyChartData = [];
+  const stiffRatioYModifyChartData = [];
   for (let i = 0; i < distributeResult.stiffness.storeyID.length; i++) {
     stiffRatioTableData.push({
+      key: i,
       storeyID: distributeResult.stiffness.storeyID[i],
       towerID: distributeResult.stiffness.towerID[i],
       ratx1: distributeResult.stiffness.ratx1[i].toFixed(3),
@@ -143,11 +146,11 @@ export function DistributeResultComponent(
       x: distributeResult.stiffness.raty1[i],
       y: distributeResult.stiffness.storeyID[i],
     });
-    sriffRatioXModifyChartData.push({
+    stiffRatioXModifyChartData.push({
       x: distributeResult.stiffness.ratx2[i],
       y: distributeResult.stiffness.storeyID[i],
     });
-    sriffRatioYModifyChartData.push({
+    stiffRatioYModifyChartData.push({
       x: distributeResult.stiffness.raty2[i],
       y: distributeResult.stiffness.storeyID[i],
     });
@@ -177,6 +180,7 @@ export function DistributeResultComponent(
   const shearWeightYChartData = [];
   for (let i = 0; i < distributeResult.shearWeightRatio.storeyID.length; i++) {
     shearWeightTableData.push({
+      key: i,
       storeyID: distributeResult.shearWeightRatio.storeyID[i],
       towerID: distributeResult.shearWeightRatio.towerID[i],
       ratioX: distributeResult.shearWeightRatio.factorX[i].toFixed(3),
@@ -220,6 +224,7 @@ export function DistributeResultComponent(
     i++
   ) {
     shearCapacityTableData.push({
+      key: i,
       storeyID: distributeResult.shearCapacityCheck.storeyID[i],
       towerID: distributeResult.shearCapacityCheck.towerID[i],
       ratioX: distributeResult.shearCapacityCheck.ratioX[i].toFixed(2),
@@ -269,6 +274,7 @@ export function DistributeResultComponent(
   const momentWallYChartData = [];
   for (let i = 0; i < distributeResult.momentPercent.storeyID.length; i++) {
     momentDistributeTableData.push({
+      key: i,
       storeyID: distributeResult.momentPercent.storeyID[i],
       towerID: distributeResult.momentPercent.towerID[i],
       columnX: distributeResult.momentPercent.percentColumnX[i].toFixed(1),
@@ -318,6 +324,7 @@ export function DistributeResultComponent(
   const shearColumnYChartData = [];
   for (let i = 0; i < distributeResult.columnShear.storeyID.length; i++) {
     shearDistributeTableData.push({
+      key: i,
       storeyID: distributeResult.columnShear.storeyID[i],
       towerID: distributeResult.columnShear.towerID[i],
       ratioX: distributeResult.columnShear.percentColumnX[i].toFixed(1),
@@ -351,9 +358,22 @@ export function DistributeResultComponent(
       </Collapse>
       <h3>质量比</h3>
       <StoreyChart
-        data1={massRatioChartData}
-        data2={unitMassRatioChartData}
-        xLabel="质量比"
+        labels={{
+          xLabel: '质量比',
+        }}
+        describes={[
+          {
+            name: '质量比',
+            fill: '#8884d8',
+            shape: 'cross',
+          },
+          {
+            name: '单位面积质量比',
+            fill: '#82ca9d',
+            shape: 'circle',
+          },
+        ]}
+        datas={[massRatioChartData, unitMassRatioChartData]}
       />
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -371,16 +391,42 @@ export function DistributeResultComponent(
       <Row>
         <Col span={12}>
           <StoreyChart
-            data1={stiffRatioXChartData}
-            data2={stiffRatioYChartData}
-            xLabel="刚度比"
+            labels={{
+              xLabel: '刚度比',
+            }}
+            describes={[
+              {
+                name: 'X向',
+                fill: '#8884d8',
+                shape: 'cross',
+              },
+              {
+                name: 'Y向',
+                fill: '#82ca9d',
+                shape: 'circle',
+              },
+            ]}
+            datas={[stiffRatioXChartData, stiffRatioYChartData]}
           />
         </Col>
         <Col span={12}>
           <StoreyChart
-            data1={sriffRatioXModifyChartData}
-            data2={sriffRatioYModifyChartData}
-            xLabel="层高修正刚度比"
+            labels={{
+              xLabel: '层高修正刚度比',
+            }}
+            describes={[
+              {
+                name: 'X向',
+                fill: '#8884d8',
+                shape: 'cross',
+              },
+              {
+                name: 'Y向',
+                fill: '#82ca9d',
+                shape: 'circle',
+              },
+            ]}
+            datas={[stiffRatioXModifyChartData, stiffRatioYModifyChartData]}
           />
         </Col>
       </Row>
@@ -398,9 +444,22 @@ export function DistributeResultComponent(
       </Collapse>
       <h3>剪重比</h3>
       <StoreyChart
-        data1={shearWeightXChartData}
-        data2={shearWeightYChartData}
-        xLabel="剪重比"
+        labels={{
+          xLabel: '剪重比',
+        }}
+        describes={[
+          {
+            name: 'X向',
+            fill: '#8884d8',
+            shape: 'cross',
+          },
+          {
+            name: 'Y向',
+            fill: '#82ca9d',
+            shape: 'circle',
+          },
+        ]}
+        datas={[shearWeightXChartData, shearWeightYChartData]}
       />
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -416,9 +475,22 @@ export function DistributeResultComponent(
       </Collapse>
       <h3>抗剪承载力比</h3>
       <StoreyChart
-        data1={shearCapacityXChartData}
-        data2={shearCapacityYChartData}
-        xLabel="抗剪承载力比"
+        labels={{
+          xLabel: '抗剪承载力比',
+        }}
+        describes={[
+          {
+            name: 'X向',
+            fill: '#8884d8',
+            shape: 'cross',
+          },
+          {
+            name: 'Y向',
+            fill: '#82ca9d',
+            shape: 'circle',
+          },
+        ]}
+        datas={[shearCapacityXChartData, shearCapacityYChartData]}
       />
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -436,16 +508,42 @@ export function DistributeResultComponent(
       <Row>
         <Col span={12}>
           <StoreyChart
-            data1={momentColumnXChartData}
-            data2={momentColumnYChartData}
-            xLabel="框架柱倾覆力矩占比(%)"
+            labels={{
+              xLabel: '规定水平力下倾覆力矩分配',
+            }}
+            describes={[
+              {
+                name: 'X向',
+                fill: '#8884d8',
+                shape: 'cross',
+              },
+              {
+                name: 'Y向',
+                fill: '#82ca9d',
+                shape: 'circle',
+              },
+            ]}
+            datas={[momentColumnXChartData, momentColumnYChartData]}
           />
         </Col>
         <Col span={12}>
           <StoreyChart
-            data1={momentWallXChartData}
-            data2={momentWallYChartData}
-            xLabel="短肢墙倾覆力矩占比(%)"
+            labels={{
+              xLabel: '短肢墙倾覆力矩占比(%)',
+            }}
+            describes={[
+              {
+                name: 'X向',
+                fill: '#8884d8',
+                shape: 'cross',
+              },
+              {
+                name: 'Y向',
+                fill: '#82ca9d',
+                shape: 'circle',
+              },
+            ]}
+            datas={[momentWallXChartData, momentWallYChartData]}
           />
         </Col>
       </Row>
@@ -463,9 +561,22 @@ export function DistributeResultComponent(
       </Collapse>
       <h3>柱剪力与分段基底剪力百分比</h3>
       <StoreyChart
-        data1={shearColumnXChartData}
-        data2={shearColumnYChartData}
-        xLabel="柱剪力与分段基底剪力百分比(%)"
+        labels={{
+          xLabel: '柱剪力与分段基底剪力百分比(%)',
+        }}
+        describes={[
+          {
+            name: 'X向',
+            fill: '#8884d8',
+            shape: 'cross',
+          },
+          {
+            name: 'Y向',
+            fill: '#82ca9d',
+            shape: 'circle',
+          },
+        ]}
+        datas={[shearColumnXChartData, shearColumnYChartData]}
       />
       <Collapse ghost>
         <Panel header="详细数据" key="1">

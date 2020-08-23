@@ -32,6 +32,7 @@ export function SummaryQuantityComponent(summaryQuantity: ISummaryQuantityFE) {
 
   const summaryQuantityTableData = [
     {
+      key: 0,
       part: '钢筋含量(kg/m^2)',
       wall: summaryQuantity.unitRebar.wall.toFixed(2),
       column: summaryQuantity.unitRebar.column.toFixed(2),
@@ -40,6 +41,7 @@ export function SummaryQuantityComponent(summaryQuantity: ISummaryQuantityFE) {
       total: summaryQuantity.unitRebar.total.toFixed(2),
     },
     {
+      key: 1,
       part: '砼含量(m^3/m^2)',
       wall: summaryQuantity.unitConcrete.wall.toFixed(2),
       column: summaryQuantity.unitConcrete.column.toFixed(2),
@@ -48,6 +50,7 @@ export function SummaryQuantityComponent(summaryQuantity: ISummaryQuantityFE) {
       total: summaryQuantity.unitConcrete.total.toFixed(2),
     },
     {
+      key: 2,
       part: '型钢含量(kg/m^2)',
       wall: (summaryQuantity.unitSteel.wall * 1000).toFixed(2),
       column: (summaryQuantity.unitSteel.column * 1000).toFixed(2),
@@ -56,6 +59,7 @@ export function SummaryQuantityComponent(summaryQuantity: ISummaryQuantityFE) {
       total: (summaryQuantity.unitSteel.total * 1000).toFixed(2),
     },
     {
+      key: 3,
       part: '钢筋总量(t)',
       wall: (summaryQuantity.rebar.wall / 1000).toFixed(0),
       column: (summaryQuantity.rebar.column / 1000).toFixed(0),
@@ -64,6 +68,7 @@ export function SummaryQuantityComponent(summaryQuantity: ISummaryQuantityFE) {
       total: (summaryQuantity.rebar.total / 1000).toFixed(0),
     },
     {
+      key: 4,
       part: '砼总量(m^3)',
       wall: summaryQuantity.concrete.wall.toFixed(0),
       column: summaryQuantity.concrete.column.toFixed(0),
@@ -72,6 +77,7 @@ export function SummaryQuantityComponent(summaryQuantity: ISummaryQuantityFE) {
       total: summaryQuantity.concrete.total.toFixed(0),
     },
     {
+      key: 5,
       part: '型钢总量(t)',
       wall: summaryQuantity.steel.wall.toFixed(0),
       column: summaryQuantity.steel.column.toFixed(0),

@@ -3,8 +3,8 @@ import { rangeSetBorder, rangeFillColor } from './commom';
 import Excel from 'exceljs';
 
 export async function initSummaryQuantity(worksheet: Excel.Worksheet) {
+  worksheet.mergeCells('A1:B1');
   worksheet.getCell('A1').value = '工程名称';
-  worksheet.mergeCells('B1:C1');
   worksheet.getCell('A2').value = '结构高度';
   worksheet.getCell('B2').value = 'm';
   worksheet.getCell('A3').value = '结构面积';
@@ -20,8 +20,8 @@ export async function initSummaryQuantity(worksheet: Excel.Worksheet) {
 
   worksheet.mergeCells('A8:C8');
 
+  worksheet.mergeCells('A9:B9');
   worksheet.getCell('A9').value = '含量';
-  worksheet.mergeCells('B9:C9');
   worksheet.mergeCells('A10:A14');
   worksheet.getCell('A10').value = '钢筋含量\nkg/m^2';
   worksheet.getCell('B10').value = '墙';
@@ -62,8 +62,8 @@ export async function initSummaryQuantity(worksheet: Excel.Worksheet) {
 
   worksheet.mergeCells('A33:C33');
 
+  worksheet.mergeCells('A34:B34');
   worksheet.getCell('A34').value = '总量';
-  worksheet.mergeCells('B34:C34');
   worksheet.mergeCells('A35:A39');
   worksheet.getCell('A35').value = '钢筋总量\nt';
   worksheet.getCell('B35').value = '墙';
@@ -90,8 +90,8 @@ export async function initSummaryQuantity(worksheet: Excel.Worksheet) {
 
   worksheet.mergeCells('A50:C50');
 
+  worksheet.mergeCells('A51:B51');
   worksheet.getCell('A51').value = '单价';
-  worksheet.mergeCells('B51:C51');
   worksheet.getCell('A52').value = '砼';
   worksheet.getCell('B52').value = '元/m^3';
   worksheet.getCell('A53').value = '钢筋';
@@ -113,7 +113,7 @@ export async function writeSummaryQuantity(
   worksheet: Excel.Worksheet,
 ) {
   // write basic information
-  worksheet.getCell('B1').value = summaryQuantity.structure.engineering;
+  worksheet.getCell('C1').value = summaryQuantity.structure.engineering;
   worksheet.getCell('C2').value = summaryQuantity.structure.height;
   worksheet.getCell('C3').value = summaryQuantity.structure.area;
   worksheet.getCell('C4').value = summaryQuantity.structure.period;
@@ -308,13 +308,9 @@ export async function formatSummaryQuantity(worksheet: Excel.Worksheet) {
   rangeSetBorder(worksheet, 58, 3, 58, 3, 'thin', 'thin', 'medium', 'medium');
   rangeSetBorder(worksheet, 1, 3, 1, 3, 'medium', 'thin', 'thin', 'medium');
 
-  rangeFillColor(worksheet, 1, 1, 1, 1, 'solid', '00F0FFF0', '00FFFFFF');
-  rangeFillColor(worksheet, 2, 1, 7, 2, 'solid', '00F0FFF0', '00FFFFFF');
-  rangeFillColor(worksheet, 9, 1, 9, 1, 'solid', '00F0FFFF', '00FFFFFF');
-  rangeFillColor(worksheet, 10, 1, 32, 2, 'solid', '00F0FFFF', '00FFFFFF');
-  rangeFillColor(worksheet, 34, 1, 34, 1, 'solid', '00F0FFF0', '00FFFFFF');
-  rangeFillColor(worksheet, 35, 1, 49, 2, 'solid', '00F0FFF0', '00FFFFFF');
-  rangeFillColor(worksheet, 51, 1, 51, 1, 'solid', '00F0FFFF', '00FFFFFF');
-  rangeFillColor(worksheet, 52, 1, 58, 2, 'solid', '00F0FFFF', '00FFFFFF');
+  rangeFillColor(worksheet, 1, 1, 7, 2, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 9, 1, 32, 2, 'solid', '00F0FFFF', '00FFFFFF');
+  rangeFillColor(worksheet, 34, 1, 49, 2, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 51, 1, 58, 2, 'solid', '00F0FFFF', '00FFFFFF');
   rangeFillColor(worksheet, 52, 3, 58, 3, 'solid', '00FFFFF0', '00FFFFFF');
 }

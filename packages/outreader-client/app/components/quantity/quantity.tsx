@@ -38,6 +38,7 @@ export function QuantityComponent(quantity: IQuantityFE) {
   const unitConcreteTableData = [];
   for (let i = 0; i < quantity.unitConcrete.storeyID.length; i++) {
     unitConcreteTableData.push({
+      key: i,
       storeyID: quantity.storeyID[i],
       area: Math.round(quantity.area[i] * 10) / 10,
       wall: Math.round(quantity.unitConcrete.wall[i] * 100) / 100,
@@ -52,6 +53,7 @@ export function QuantityComponent(quantity: IQuantityFE) {
   const concretePercentChartData = [];
   for (let i = 0; i < quantity.concrete.storeyID.length; i++) {
     concreteTableData.push({
+      key: i,
       storeyID: quantity.storeyID[i],
       area: Math.round(quantity.area[i] * 10) / 10,
       wall: Math.round(quantity.concrete.wall[i]),
@@ -97,6 +99,7 @@ export function QuantityComponent(quantity: IQuantityFE) {
   const unitSteelTableData = [];
   for (let i = 0; i < quantity.unitSteel.storeyID.length; i++) {
     unitSteelTableData.push({
+      key: i,
       storeyID: quantity.storeyID[i],
       area: Math.round(quantity.area[i] * 10) / 10,
       wall: Math.round(quantity.unitSteel.wall[i] * 100000) / 100,
@@ -111,6 +114,7 @@ export function QuantityComponent(quantity: IQuantityFE) {
   const steelPercentChartData = [];
   for (let i = 0; i < quantity.steel.storeyID.length; i++) {
     steelTableData.push({
+      key: i,
       storeyID: quantity.storeyID[i],
       area: Math.round(quantity.area[i] * 10) / 10,
       wall: Math.round(quantity.steel.wall[i]),
@@ -154,6 +158,7 @@ export function QuantityComponent(quantity: IQuantityFE) {
   const unitRebarTableData = [];
   for (let i = 0; i < quantity.unitRebar.storeyID.length; i++) {
     unitRebarTableData.push({
+      key: i,
       storeyID: quantity.storeyID[i],
       area: Math.round(quantity.area[i] * 10) / 10,
       wall: Math.round(quantity.unitRebar.wall[i] * 100) / 100,
@@ -168,6 +173,7 @@ export function QuantityComponent(quantity: IQuantityFE) {
   const rebarPercentChartData = [];
   for (let i = 0; i < quantity.rebar.storeyID.length; i++) {
     rebarTableData.push({
+      key: i,
       storeyID: quantity.storeyID[i],
       area: Math.round(quantity.area[i] * 10) / 10,
       wall: Math.round(quantity.rebar.wall[i] / 1000),

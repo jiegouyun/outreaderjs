@@ -43,6 +43,7 @@ export function DriftComponent(drift: IDriftFE) {
   const driftChartSeismicY = [];
   for (let i = 0; i < drift.driftWindXP.storeyID.length; i++) {
     dispTableData.push({
+      key: i,
       storeyID: drift.driftWindXP.storeyID[i],
       towerID: drift.driftWindXP.towerID[i],
       windX: drift.driftWindXP.displacement[i].toFixed(2),
@@ -51,6 +52,7 @@ export function DriftComponent(drift: IDriftFE) {
       seismicY: drift.driftSeismicY.displacement[i].toFixed(2),
     });
     driftTableData.push({
+      key: i,
       storeyID: drift.driftWindXP.storeyID[i],
       towerID: drift.driftWindXP.towerID[i],
       windX: drift.driftWindXP.drift[i],
@@ -131,6 +133,7 @@ export function DriftComponent(drift: IDriftFE) {
   const ratioDChartEYN = [];
   for (let i = 0; i < drift.ratioSeismicXEccP.storeyID.length; i++) {
     dispRatioTableData.push({
+      key: i,
       storeyID: drift.ratioSeismicXEccP.storeyID[i],
       towerID: drift.ratioSeismicXEccP.towerID[i],
       eccXP: drift.ratioSeismicXEccP.ratio[i].toFixed(2),
@@ -139,6 +142,7 @@ export function DriftComponent(drift: IDriftFE) {
       eccYN: drift.ratioSeismicYEccN.ratio[i].toFixed(2),
     });
     dispRatioStoreyTableData.push({
+      key: i,
       storeyID: drift.ratioSeismicXEccP.storeyID[i],
       towerID: drift.ratioSeismicXEccP.towerID[i],
       eccXP: drift.ratioSeismicXEccP.ratioD[i].toFixed(2),
@@ -187,16 +191,42 @@ export function DriftComponent(drift: IDriftFE) {
       <Row>
         <Col span={12}>
           <StoreyChart
-            data1={dispChartWindX}
-            data2={dispChartWindY}
-            xLabel="风荷载"
+            labels={{
+              xLabel: '地震作用',
+            }}
+            describes={[
+              {
+                name: 'X向',
+                fill: '#8884d8',
+                shape: 'cross',
+              },
+              {
+                name: 'Y向',
+                fill: '#82ca9d',
+                shape: 'circle',
+              },
+            ]}
+            datas={[dispChartSeismicX, dispChartSeismicY]}
           />
         </Col>
         <Col span={12}>
           <StoreyChart
-            data1={dispChartSeismicX}
-            data2={dispChartSeismicY}
-            xLabel="地震作用"
+            labels={{
+              xLabel: '风荷载',
+            }}
+            describes={[
+              {
+                name: 'X向',
+                fill: '#8884d8',
+                shape: 'cross',
+              },
+              {
+                name: 'Y向',
+                fill: '#82ca9d',
+                shape: 'circle',
+              },
+            ]}
+            datas={[dispChartWindX, dispChartWindY]}
           />
         </Col>
       </Row>
@@ -216,16 +246,42 @@ export function DriftComponent(drift: IDriftFE) {
       <Row>
         <Col span={12}>
           <StoreyChart
-            data1={driftChartWindX}
-            data2={driftChartWindY}
-            xLabel="风荷载"
+            labels={{
+              xLabel: '地震作用',
+            }}
+            describes={[
+              {
+                name: 'X向',
+                fill: '#8884d8',
+                shape: 'cross',
+              },
+              {
+                name: 'Y向',
+                fill: '#82ca9d',
+                shape: 'circle',
+              },
+            ]}
+            datas={[driftChartSeismicX, driftChartSeismicY]}
           />
         </Col>
         <Col span={12}>
           <StoreyChart
-            data1={driftChartSeismicX}
-            data2={driftChartSeismicY}
-            xLabel="地震作用"
+            labels={{
+              xLabel: '风荷载',
+            }}
+            describes={[
+              {
+                name: 'X向',
+                fill: '#8884d8',
+                shape: 'cross',
+              },
+              {
+                name: 'Y向',
+                fill: '#82ca9d',
+                shape: 'circle',
+              },
+            ]}
+            datas={[driftChartWindX, driftChartWindY]}
           />
         </Col>
       </Row>
@@ -245,16 +301,42 @@ export function DriftComponent(drift: IDriftFE) {
       <Row>
         <Col span={12}>
           <StoreyChart
-            data1={ratioChartEXP}
-            data2={ratioChartEYP}
-            xLabel="+偏心"
+            labels={{
+              xLabel: 'X向',
+            }}
+            describes={[
+              {
+                name: '+偏心',
+                fill: '#8884d8',
+                shape: 'cross',
+              },
+              {
+                name: '-偏心',
+                fill: '#82ca9d',
+                shape: 'circle',
+              },
+            ]}
+            datas={[ratioChartEXP, ratioChartEXN]}
           />
         </Col>
         <Col span={12}>
           <StoreyChart
-            data1={ratioChartEXN}
-            data2={ratioChartEYN}
-            xLabel="-偏心"
+            labels={{
+              xLabel: 'Y向',
+            }}
+            describes={[
+              {
+                name: '+偏心',
+                fill: '#8884d8',
+                shape: 'cross',
+              },
+              {
+                name: '-偏心',
+                fill: '#82ca9d',
+                shape: 'circle',
+              },
+            ]}
+            datas={[ratioChartEYP, ratioChartEYN]}
           />
         </Col>
       </Row>
@@ -274,16 +356,42 @@ export function DriftComponent(drift: IDriftFE) {
       <Row>
         <Col span={12}>
           <StoreyChart
-            data1={ratioDChartEXP}
-            data2={ratioDChartEYP}
-            xLabel="+偏心"
+            labels={{
+              xLabel: 'X向',
+            }}
+            describes={[
+              {
+                name: '+偏心',
+                fill: '#8884d8',
+                shape: 'cross',
+              },
+              {
+                name: '-偏心',
+                fill: '#82ca9d',
+                shape: 'circle',
+              },
+            ]}
+            datas={[ratioDChartEXP, ratioDChartEXN]}
           />
         </Col>
         <Col span={12}>
           <StoreyChart
-            data1={ratioDChartEXN}
-            data2={ratioDChartEYN}
-            xLabel="-偏心"
+            labels={{
+              xLabel: 'Y向',
+            }}
+            describes={[
+              {
+                name: '+偏心',
+                fill: '#8884d8',
+                shape: 'cross',
+              },
+              {
+                name: '-偏心',
+                fill: '#82ca9d',
+                shape: 'circle',
+              },
+            ]}
+            datas={[ratioDChartEYP, ratioDChartEYN]}
           />
         </Col>
       </Row>
