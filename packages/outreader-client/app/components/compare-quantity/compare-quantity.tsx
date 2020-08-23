@@ -60,41 +60,41 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
 
       concreteTableData[j][`area${i}`] =
         quantities[i].storeyID[j - diff] === storeyID[j]
-          ? quantities[i].area[j - diff].toFixed(0)
+          ? Math.round(quantities[i].area[j - diff])
           : '';
       concreteTableData[j][`quantity${i}`] =
         quantities[i].storeyID[j - diff] === storeyID[j]
-          ? quantities[i].concrete.storey[j - diff].toFixed(0)
+          ? Math.round(quantities[i].concrete.storey[j - diff])
           : '';
       concreteTableData[j][`unit${i}`] =
         quantities[i].storeyID[j - diff] === storeyID[j]
-          ? quantities[i].unitConcrete.storey[j - diff].toFixed(2)
+          ? Math.round(quantities[i].unitConcrete.storey[j - diff] * 100) / 100
           : '';
 
       steelTableData[j][`area${i}`] =
         quantities[i].storeyID[j - diff] === storeyID[j]
-          ? quantities[i].area[j - diff].toFixed(0)
+          ? Math.round(quantities[i].area[j - diff])
           : '';
       steelTableData[j][`quantity${i}`] =
         quantities[i].storeyID[j - diff] === storeyID[j]
-          ? quantities[i].steel.storey[j - diff].toFixed(0)
+          ? Math.round(quantities[i].steel.storey[j - diff])
           : '';
       steelTableData[j][`unit${i}`] =
         quantities[i].storeyID[j - diff] === storeyID[j]
-          ? (quantities[i].unitSteel.storey[j - diff] * 1000).toFixed(2)
+          ? Math.round(quantities[i].unitSteel.storey[j - diff] * 100000) / 100
           : '';
 
       rebarTableData[j][`area${i}`] =
         quantities[i].storeyID[j - diff] === storeyID[j]
-          ? quantities[i].area[j - diff].toFixed(0)
+          ? Math.round(quantities[i].area[j - diff])
           : '';
       rebarTableData[j][`quantity${i}`] =
         quantities[i].storeyID[j - diff] === storeyID[j]
-          ? (quantities[i].rebar.storey[j - diff] / 1000).toFixed(0)
+          ? Math.round(quantities[i].rebar.storey[j - diff] / 1000)
           : '';
       rebarTableData[j][`unit${i}`] =
         quantities[i].storeyID[j - diff] === storeyID[j]
-          ? quantities[i].unitRebar.storey[j - diff].toFixed(2)
+          ? Math.round(quantities[i].unitRebar.storey[j - diff] * 100) / 100
           : '';
     }
   }

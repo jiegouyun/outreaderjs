@@ -488,12 +488,24 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
   ];
 
   for (let i = 0; i < n; i++) {
-    periodTableData[0][`model${i}`] = summarys[i].mode.period[0].toFixed(2);
-    periodTableData[1][`model${i}`] = summarys[i].mode.angle[0].toFixed(0);
-    periodTableData[2][`model${i}`] = summarys[i].mode.period[1].toFixed(2);
-    periodTableData[3][`model${i}`] = summarys[i].mode.angle[1].toFixed(0);
-    periodTableData[4][`model${i}`] = summarys[i].mode.period[2].toFixed(2);
-    periodTableData[5][`model${i}`] = summarys[i].mode.angle[2].toFixed(0);
+    periodTableData[0][`model${i}`] = (summarys[i].mode.period[0] || 0).toFixed(
+      2
+    );
+    periodTableData[1][`model${i}`] = (summarys[i].mode.angle[0] || 0).toFixed(
+      0
+    );
+    periodTableData[2][`model${i}`] = (summarys[i].mode.period[1] || 0).toFixed(
+      2
+    );
+    periodTableData[3][`model${i}`] = (summarys[i].mode.angle[1] || 0).toFixed(
+      0
+    );
+    periodTableData[4][`model${i}`] = (summarys[i].mode.period[2] || 0).toFixed(
+      2
+    );
+    periodTableData[5][`model${i}`] = (summarys[i].mode.angle[2] || 0).toFixed(
+      0
+    );
   }
 
   const modeMassTableData: ICompare[] = [
