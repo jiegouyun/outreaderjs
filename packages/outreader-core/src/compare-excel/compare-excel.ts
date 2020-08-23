@@ -48,10 +48,10 @@ export async function exportCompareExcel(
   await formatSummary(sheetSummary, nums);
 
   // // write worksheet sumamary quantity information.
-  // const sheetSummaryQuantity = workbook.addWorksheet('含钢量汇总');
-  // await initSummaryQuantity(sheetSummaryQuantity);
-  // await writeSummaryQuantity(structure.summaryQuantity, sheetSummaryQuantity);
-  // await formatSummaryQuantity(sheetSummaryQuantity);
+  const sheetSummaryQuantity = workbook.addWorksheet('含钢量汇总');
+  await initSummaryQuantity(sheetSummaryQuantity, nums);
+  await writeSummaryQuantity(structures, sheetSummaryQuantity);
+  await formatSummaryQuantity(sheetSummaryQuantity, nums);
 
   // // write worksheet parameters information.
   // const sheetParameters = workbook.addWorksheet('计算参数');
