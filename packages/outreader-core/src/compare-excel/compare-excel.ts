@@ -78,10 +78,10 @@ export async function exportCompareExcel(
   await formatDrift(sheetDrift, nums);
 
   // // write feneral result information
-  // const sheetGeneralResult = workbook.addWorksheet('整体验算结果');
-  // await initGeneralResult(sheetGeneralResult);
-  // await writeGeneralResult(structure.generalResult, sheetGeneralResult);
-  // await formatGeneralResult(sheetGeneralResult);
+  const sheetGeneralResult = workbook.addWorksheet('整体验算结果');
+  await initGeneralResult(sheetGeneralResult, nums);
+  await writeGeneralResult(structures, sheetGeneralResult);
+  await formatGeneralResult(sheetGeneralResult, nums);
 
   // // write distribute result
   // const sheetDistributeResult = workbook.addWorksheet('楼层分布数据');
