@@ -72,10 +72,10 @@ export async function exportCompareExcel(
   await formatForce(sheetForce, nums);
 
   // // write drift information
-  // const sheetDrift = workbook.addWorksheet('位移角');
-  // await initDrift(sheetDrift);
-  // await writeDrift(structure.drift, sheetDrift);
-  // await formatDrift(sheetDrift);
+  const sheetDrift = workbook.addWorksheet('位移角');
+  await initDrift(sheetDrift, nums);
+  await writeDrift(structures, sheetDrift);
+  await formatDrift(sheetDrift, nums);
 
   // // write feneral result information
   // const sheetGeneralResult = workbook.addWorksheet('整体验算结果');

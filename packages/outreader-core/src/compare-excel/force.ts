@@ -58,6 +58,7 @@ export async function writeForce(
   for (let i = 0; i < nums; i++) {
     const force: IForceFE = structures[i].force;
     const diff = count - (force.wind.storeyID || force.seismic.storeyID).length;
+
     for (let j = 0; j < count; j++) {
       // write wind force
       worksheet.getCell(4 + j, 2 + 8 * i).value =
