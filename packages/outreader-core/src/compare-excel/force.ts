@@ -1,87 +1,131 @@
-import { IForceFE } from '../interfaces';
-import { rangeFillColor, distributeFormat } from '../excel/commom';
+import { IForceFE, IStructureFrontEnd } from '../interfaces';
+import { rangeFillColor } from '../excel/commom';
+import { compareDistributeFormat } from './commom';
 import Excel from 'exceljs';
 
-export async function initForce(worksheet: Excel.Worksheet) {
-  worksheet.mergeCells('A1:B1');
-  worksheet.getCell('A1').value = '楼层信息';
-  worksheet.getCell('A2').value = '层号';
-  worksheet.getCell('B2').value = '塔号';
+export async function initForce(worksheet: Excel.Worksheet, nums: number) {
+  worksheet.getCell('A2').value = '模型';
+  worksheet.getCell('A3').value = '层号';
 
-  worksheet.mergeCells('C1:N1');
-  worksheet.getCell('C1').value = '风荷载';
-  worksheet.getCell('C2').value = '顺风外力X\nkN';
-  worksheet.getCell('D2').value = '顺风剪力X\nkN';
-  worksheet.getCell('E2').value = '顺风弯矩X\nkNm';
-  worksheet.getCell('F2').value = '顺风外力Y\nkN';
-  worksheet.getCell('G2').value = '顺风剪力Y\nkN';
-  worksheet.getCell('H2').value = '顺风弯矩Y\nkNm';
-  worksheet.getCell('I2').value = '横风外力X\nkN';
-  worksheet.getCell('J2').value = '横风剪力X\nkN';
-  worksheet.getCell('K2').value = '横风弯矩X\nkNm';
-  worksheet.getCell('L2').value = '横风外力Y\nkN';
-  worksheet.getCell('M2').value = '横风剪力Y\nkN';
-  worksheet.getCell('N2').value = '横风弯矩Y\nkNm';
+  worksheet.mergeCells(1, 2, 1, 1 + 8 * nums);
+  worksheet.getCell(1, 2).value = '风荷载';
+  worksheet.mergeCells(1, 2 + 8 * nums, 1, 1 + 12 * nums);
+  worksheet.getCell(1, 2 + 8 * nums).value = '地震作用';
 
-  worksheet.mergeCells('O1:T1');
-  worksheet.getCell('O1').value = '地震作用';
-  worksheet.getCell('O2').value = '外力X\nkN';
-  worksheet.getCell('P2').value = '剪力X\nkN';
-  worksheet.getCell('Q2').value = '弯矩X\nkNm';
-  worksheet.getCell('R2').value = '外力Y\nkN';
-  worksheet.getCell('S2').value = '剪力Y\nkN';
-  worksheet.getCell('T2').value = '弯矩Y\nkNm';
-}
+  for (let i = 0; i < nums; i++) {
+    worksheet.mergeCells(2, 2 + 8 * i, 2, 9 + 8 * i);
+    worksheet.getCell(2, 2 + 8 * i).value = `模型${i + 1}`;
+    worksheet.getCell(3, 2 + 8 * i).value = '顺风剪力X\nkN';
+    worksheet.getCell(3, 3 + 8 * i).value = '顺风弯矩X\nkNm';
+    worksheet.getCell(3, 4 + 8 * i).value = '顺风剪力Y\nkN';
+    worksheet.getCell(3, 5 + 8 * i).value = '顺风弯矩Y\nkNm';
+    worksheet.getCell(3, 6 + 8 * i).value = '横风剪力X\nkN';
+    worksheet.getCell(3, 7 + 8 * i).value = '横风弯矩X\nkNm';
+    worksheet.getCell(3, 8 + 8 * i).value = '横风剪力Y\nkN';
+    worksheet.getCell(3, 9 + 8 * i).value = '横风弯矩Y\nkNm';
 
-export async function writeForce(force: IForceFE, worksheet: Excel.Worksheet) {
-  // write storey
-  const count: number = force.wind.storeyID.length;
-  for (let i = 0; i < count; i++) {
-    worksheet.getCell(`A${3 + i}`).value = force.wind.storeyID[i];
-    worksheet.getCell(`B${3 + i}`).value = force.wind.towerID[i];
-
-    // write wind force
-    worksheet.getCell(`C${3 + i}`).value = force.wind.forceAlongX[i];
-    worksheet.getCell(`D${3 + i}`).value = force.wind.shearAlongX[i];
-    worksheet.getCell(`E${3 + i}`).value = force.wind.momentAlongX[i];
-    worksheet.getCell(`F${3 + i}`).value = force.wind.forceAlongY[i];
-    worksheet.getCell(`G${3 + i}`).value = force.wind.shearAlongY[i];
-    worksheet.getCell(`H${3 + i}`).value = force.wind.momentAlongY[i];
-    worksheet.getCell(`I${3 + i}`).value = force.wind.forceCrossX[i];
-    worksheet.getCell(`J${3 + i}`).value = force.wind.shearCrossX[i];
-    worksheet.getCell(`K${3 + i}`).value = force.wind.momentCrossX[i];
-    worksheet.getCell(`L${3 + i}`).value = force.wind.forceCrossY[i];
-    worksheet.getCell(`M${3 + i}`).value = force.wind.shearCrossY[i];
-    worksheet.getCell(`N${3 + i}`).value = force.wind.momentCrossY[i];
-
-    // write seismic force
-    worksheet.getCell(`O${3 + i}`).value = force.seismic.forceX[i];
-    worksheet.getCell(`P${3 + i}`).value = force.seismic.shearX[i];
-    worksheet.getCell(`Q${3 + i}`).value = force.seismic.momentX[i];
-    worksheet.getCell(`R${3 + i}`).value = force.seismic.forceY[i];
-    worksheet.getCell(`S${3 + i}`).value = force.seismic.shearY[i];
-    worksheet.getCell(`T${3 + i}`).value = force.seismic.momentY[i];
+    worksheet.mergeCells(2, 2 + 4 * i + 8 * nums, 2, 5 + 4 * i + 8 * nums);
+    worksheet.getCell(2, 2 + 4 * i + 8 * nums).value = `模型${i + 1}`;
+    worksheet.getCell(3, 2 + 4 * i + 8 * nums).value = '剪力X\nkN';
+    worksheet.getCell(3, 3 + 4 * i + 8 * nums).value = '弯矩X\nkNm';
+    worksheet.getCell(3, 4 + 4 * i + 8 * nums).value = '剪力Y\nkN';
+    worksheet.getCell(3, 5 + 4 * i + 8 * nums).value = '弯矩Y\nkNm';
   }
 }
 
-export async function formatForce(worksheet: Excel.Worksheet) {
-  distributeFormat(worksheet);
+export async function writeForce(
+  structures: IStructureFrontEnd[],
+  worksheet: Excel.Worksheet,
+) {
+  const nums = structures.length;
+  let storeyID: number[] = [];
+  for (let i = 0; i < nums; i++) {
+    if (
+      (structures[i].force.wind || structures[i].force.seismic).storeyID
+        .length > storeyID.length
+    ) {
+      storeyID = (structures[i].force.wind || structures[i].force.seismic)
+        .storeyID;
+    }
+  }
+  const count = storeyID.length;
 
-  worksheet.getRow(2).height = 30;
+  for (let j = 0; j < count; j++) {
+    // write storey
+    worksheet.getCell(4 + j, 1).value = storeyID[j];
+  }
 
-  rangeFillColor(worksheet, 1, 1, 2, 2, 'solid', '00F0FFF0', '00FFFFFF');
+  for (let i = 0; i < nums; i++) {
+    const force: IForceFE = structures[i].force;
+    const diff = count - (force.wind.storeyID || force.seismic.storeyID).length;
+    for (let j = 0; j < count; j++) {
+      // write wind force
+      worksheet.getCell(4 + j, 2 + 8 * i).value =
+        force.wind.shearAlongX[j - diff] || '';
+      worksheet.getCell(4 + j, 3 + 8 * i).value =
+        force.wind.momentAlongX[j - diff] || '';
+      worksheet.getCell(4 + j, 4 + 8 * i).value =
+        force.wind.shearAlongY[j - diff] || '';
+      worksheet.getCell(4 + j, 5 + 8 * i).value =
+        force.wind.momentAlongY[j - diff] || '';
+      worksheet.getCell(4 + j, 6 + 8 * i).value =
+        force.wind.shearCrossX[j - diff] || '';
+      worksheet.getCell(4 + j, 7 + 8 * i).value =
+        force.wind.momentCrossX[j - diff] || '';
+      worksheet.getCell(4 + j, 8 + 8 * i).value =
+        force.wind.shearCrossY[j - diff] || '';
+      worksheet.getCell(4 + j, 9 + 8 * i).value =
+        force.wind.momentCrossY[j - diff] || '';
+
+      // write seismic force
+      worksheet.getCell(4 + j, 2 + 4 * i + 8 * nums).value =
+        force.seismic.shearX[j - diff] || '';
+      worksheet.getCell(4 + j, 3 + 4 * i + 8 * nums).value =
+        force.seismic.momentX[j - diff] || '';
+      worksheet.getCell(4 + j, 4 + 4 * i + 8 * nums).value =
+        force.seismic.shearY[j - diff] || '';
+      worksheet.getCell(4 + j, 5 + 4 * i + 8 * nums).value =
+        force.seismic.momentY[j - diff] || '';
+    }
+  }
+}
+
+export async function formatForce(worksheet: Excel.Worksheet, nums: number) {
+  compareDistributeFormat(worksheet);
+
+  worksheet.getRow(3).height = 30;
+
+  rangeFillColor(worksheet, 1, 1, 3, 1, 'solid', '00F0FFF0', '00FFFFFF');
   rangeFillColor(
     worksheet,
-    3,
-    2,
+    4,
+    1,
     worksheet.rowCount,
-    2,
+    1,
     'solid',
     '00F0FFF0',
     '00FFFFFF',
   );
-  rangeFillColor(worksheet, 1, 3, 2, 14, 'solid', '00F0FFFF', '00FFFFFF');
-  rangeFillColor(worksheet, 1, 15, 2, 20, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(
+    worksheet,
+    1,
+    2,
+    3,
+    1 + 8 * nums,
+    'solid',
+    '00F0FFFF',
+    '00FFFFFF',
+  );
+  rangeFillColor(
+    worksheet,
+    1,
+    2 + 8 * nums,
+    3,
+    1 + 12 * nums,
+    'solid',
+    '00F0FFF0',
+    '00FFFFFF',
+  );
 
-  worksheet.views = [{ state: 'frozen', xSplit: 2, ySplit: 2 }];
+  worksheet.views = [{ state: 'frozen', xSplit: 1, ySplit: 3 }];
 }

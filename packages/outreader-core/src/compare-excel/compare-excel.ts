@@ -66,10 +66,10 @@ export async function exportCompareExcel(
   await formatPeriod(sheetPeriod, nums);
 
   // // write force information
-  // const sheetForce = workbook.addWorksheet('内力');
-  // await initForce(sheetForce);
-  // await writeForce(structure.force, sheetForce);
-  // await formatForce(sheetForce);
+  const sheetForce = workbook.addWorksheet('内力');
+  await initForce(sheetForce, nums);
+  await writeForce(structures, sheetForce);
+  await formatForce(sheetForce, nums);
 
   // // write drift information
   // const sheetDrift = workbook.addWorksheet('位移角');
