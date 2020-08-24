@@ -1,5 +1,5 @@
 import {
-  exportExcel,
+  exportCompareExcel,
   ISummaryFE,
   ISummaryQuantityFE,
   IParametersFE,
@@ -10,6 +10,7 @@ import {
   IDistributeResultFE,
   IFactorFE,
   IQuantityFE,
+  IStructureFrontEnd,
 } from '@outreader/core';
 import { convertStructure } from '@outreader/yjk';
 import { Breadcrumb, Divider, Layout, Menu, message } from 'antd';
@@ -48,6 +49,7 @@ export function StructureComparePage() {
   console.log(hashes);
 
   // TODO: read all structures to compare
+  const structureFEs: IStructureFrontEnd[] = [];
   const summarys: ISummaryFE[] = [];
   const summaryQuantities: ISummaryQuantityFE[] = [];
   const parameters: IParametersFE[] = [];
@@ -62,6 +64,7 @@ export function StructureComparePage() {
     const structureData = initDb(hash);
     const structure = structureData.value();
     const structureFE = convertStructure(structure);
+    structureFEs.push(structureFE);
     summarys.push(structureFE.summary);
     summaryQuantities.push(structureFE.summaryQuantity);
     parameters.push(structureFE.parameters);
@@ -127,15 +130,15 @@ export function StructureComparePage() {
   };
 
   const exportXLSX = async () => {
-    // try {
-    //   const res = await exportExcel(structureFE);
-    //   if (res) message.success('导出成功');
-    // } catch (error) {
-    //   if (error) {
-    //     message.error('导出失败，请检查');
-    //     console.error(error);
-    //   }
-    // }
+    try {
+      const res = await exportCompareExcel(structureFEs);
+      if (res) message.success('导出成功');
+    } catch (error) {
+      if (error) {
+        message.error('导出失败，请检查');
+        console.error(error);
+      }
+    }
   };
 
   return (

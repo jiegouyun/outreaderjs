@@ -309,8 +309,8 @@ export async function formatSummaryQuantity(worksheet: Excel.Worksheet) {
   rangeSetBorder(worksheet, 1, 3, 1, 3, 'medium', 'thin', 'thin', 'medium');
 
   rangeFillColor(worksheet, 1, 1, 7, 2, 'solid', '00F0FFF0', '00FFFFFF');
-  rangeFillColor(worksheet, 9, 1, 32, 2, 'solid', '00F0FFFF', '00FFFFFF');
+  rangeFillColor(worksheet, 9, 1, 32, 2, 'solid', '00F0FFF0', '00FFFFFF');
   rangeFillColor(worksheet, 34, 1, 49, 2, 'solid', '00F0FFF0', '00FFFFFF');
-  rangeFillColor(worksheet, 51, 1, 58, 2, 'solid', '00F0FFFF', '00FFFFFF');
+  rangeFillColor(worksheet, 51, 1, 58, 2, 'solid', '00F0FFF0', '00FFFFFF');
   rangeFillColor(worksheet, 52, 3, 58, 3, 'solid', '00FFFFF0', '00FFFFFF');
 }

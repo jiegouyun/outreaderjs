@@ -62,11 +62,11 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
     },
     {
       key: 2,
-      iterms: '楼层数',
+      iterms: '结构高度',
     },
     {
       key: 3,
-      iterms: '结构高度',
+      iterms: '楼层数',
     },
     {
       key: 4,
@@ -97,10 +97,10 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
   for (let i = 0; i < n; i++) {
     structureTableData[0][`model${i}`] = summarys[i].structures.system;
     structureTableData[1][`model${i}`] = summarys[i].structures.material;
-    structureTableData[2][`model${i}`] = summarys[i].structures.storeys;
-    structureTableData[3][`model${i}`] = summarys[i].structures.height.toFixed(
+    structureTableData[2][`model${i}`] = summarys[i].structures.height.toFixed(
       1
     );
+    structureTableData[3][`model${i}`] = summarys[i].structures.storeys;
     structureTableData[4][`model${i}`] = summarys[i].structures.basement;
     structureTableData[5][`model${i}`] = summarys[i].structures.constraintFloor;
     structureTableData[6][`model${i}`] = summarys[i].structures.intensity;
