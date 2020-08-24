@@ -60,10 +60,10 @@ export async function exportCompareExcel(
   await formatParameters(sheetParameters, nums);
 
   // // write worksheet period information
-  // const sheetPeriod = workbook.addWorksheet('周期');
-  // await initPeriod(sheetPeriod);
-  // await writePeriod(structure.period, sheetPeriod);
-  // await formatPeriod(sheetPeriod);
+  const sheetPeriod = workbook.addWorksheet('周期');
+  await initPeriod(sheetPeriod, nums);
+  await writePeriod(structures, sheetPeriod);
+  await formatPeriod(sheetPeriod, nums);
 
   // // write force information
   // const sheetForce = workbook.addWorksheet('内力');

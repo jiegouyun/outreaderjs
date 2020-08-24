@@ -457,4 +457,6 @@ export async function formatSummary(worksheet: Excel.Worksheet, nums: number) {
   rangeFillColor(worksheet, 23, 1, 69, 3, 'solid', '00F0FFF0', '00FFFFFF');
   rangeFillColor(worksheet, 71, 1, 80, 3, 'solid', '00F0FFF0', '00FFFFFF');
   rangeFillColor(worksheet, 82, 1, 89, 3, 'solid', '00F0FFF0', '00FFFFFF');
+
+  worksheet.views = [{ state: 'frozen', xSplit: 3, ySplit: 3 }];
 }

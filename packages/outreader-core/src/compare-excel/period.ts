@@ -1,70 +1,119 @@
-import { IPeriodFE } from '../interfaces';
-import { rangeFillColor, distributeFormat } from '../excel/commom';
+import { IPeriodFE, IStructureFrontEnd } from '../interfaces';
+import { rangeFillColor } from '../excel/commom';
+import { compareDistributeFormat } from './commom';
 import Excel from 'exceljs';
 
-export async function initPeriod(worksheet: Excel.Worksheet) {
-  worksheet.getCell('A2').value = '振型';
+export async function initPeriod(worksheet: Excel.Worksheet, nums: number) {
+  worksheet.getCell('A2').value = '模型';
+  worksheet.getCell('A3').value = '振型';
 
-  worksheet.mergeCells('B1:F1');
-  worksheet.getCell('B1').value = '考虑扭转耦联时的动力特性';
-  worksheet.getCell('B2').value = '周期';
-  worksheet.getCell('C2').value = '转角';
-  worksheet.getCell('D2').value = '平动系数X';
-  worksheet.getCell('E2').value = '平动系数Y';
-  worksheet.getCell('F2').value = '扭转系数Z';
+  worksheet.mergeCells(1, 2, 1, 1 + 2 * nums);
+  worksheet.getCell(1, 2).value = '考虑扭转耦联时的动力特性';
+  worksheet.mergeCells(1, 2 + 2 * nums, 1, 1 + 4 * nums);
+  worksheet.getCell(1, 2 + 2 * nums).value = '地震最大作用方向的动力特性';
+  worksheet.mergeCells(1, 2 + 4 * nums, 1, 1 + 7 * nums);
+  worksheet.getCell(1, 2 + 4 * nums).value = '质量参与系数';
 
-  worksheet.mergeCells('G1:K1');
-  worksheet.getCell('G1').value = '地震最大作用方向的动力特性';
-  worksheet.getCell('G2').value = '周期';
-  worksheet.getCell('H2').value = '转角';
-  worksheet.getCell('I2').value = '平动系数X';
-  worksheet.getCell('J2').value = '平动系数Y';
-  worksheet.getCell('K2').value = '扭转系数Z';
+  for (let i = 0; i < nums; i++) {
+    worksheet.mergeCells(2, 2 + 2 * i, 2, 3 + 2 * i);
+    worksheet.getCell(2, 2 + 2 * i).value = `模型${i + 1}`;
+    worksheet.getCell(3, 2 + 2 * i).value = '周期';
+    worksheet.getCell(3, 3 + 2 * i).value = '转角';
 
-  worksheet.mergeCells('L1:N1');
-  worksheet.getCell('L1').value = '质量参与系数';
-  worksheet.getCell('L2').value = 'X';
-  worksheet.getCell('M2').value = 'Y';
-  worksheet.getCell('N2').value = 'Z';
-}
+    worksheet.mergeCells(2, 2 + 2 * i + 2 * nums, 2, 3 + 2 * i + 2 * nums);
+    worksheet.getCell(2, 2 + 2 * i + 2 * nums).value = `模型${i + 1}`;
+    worksheet.getCell(3, 2 + 2 * i + 2 * nums).value = '周期';
+    worksheet.getCell(3, 3 + 2 * i + 2 * nums).value = '转角';
 
-export async function writePeriod(
-  period: IPeriodFE,
-  worksheet: Excel.Worksheet,
-) {
-  const modeCount: number = period.modeCoupling.modeID.length;
-  for (let i = 0; i < modeCount; i++) {
-    // write mode
-    worksheet.getCell(`A${3 + i}`).value = period.modeCoupling.modeID[i];
-
-    // write coupling period
-    worksheet.getCell(`B${3 + i}`).value = period.modeCoupling.period[i];
-    worksheet.getCell(`C${3 + i}`).value = period.modeCoupling.angle[i];
-    worksheet.getCell(`D${3 + i}`).value = period.modeCoupling.factorX[i];
-    worksheet.getCell(`E${3 + i}`).value = period.modeCoupling.factorY[i];
-    worksheet.getCell(`F${3 + i}`).value = period.modeCoupling.factorZ[i];
-
-    // write seismic period
-    worksheet.getCell(`G${3 + i}`).value = period.modeSeismic.period[i];
-    worksheet.getCell(`H${3 + i}`).value = period.modeSeismic.angle[i];
-    worksheet.getCell(`I${3 + i}`).value = period.modeSeismic.factorX[i];
-    worksheet.getCell(`J${3 + i}`).value = period.modeSeismic.factorY[i];
-    worksheet.getCell(`K${3 + i}`).value = period.modeSeismic.factorZ[i];
-
-    // write mode mass
-    worksheet.getCell(`L${3 + i}`).value = period.modeMass.factorX[i];
-    worksheet.getCell(`M${3 + i}`).value = period.modeMass.factorY[i];
-    worksheet.getCell(`N${3 + i}`).value = period.modeMass.factorZ[i];
+    worksheet.mergeCells(2, 2 + 3 * i + 4 * nums, 2, 4 + 3 * i + 4 * nums);
+    worksheet.getCell(2, 2 + 3 * i + 4 * nums).value = `模型${i + 1}`;
+    worksheet.getCell(3, 2 + 3 * i + 4 * nums).value = 'X';
+    worksheet.getCell(3, 3 + 3 * i + 4 * nums).value = 'Y';
+    worksheet.getCell(3, 4 + 3 * i + 4 * nums).value = 'Z';
   }
 }
 
-export async function formatPeriod(worksheet: Excel.Worksheet) {
-  distributeFormat(worksheet);
+export async function writePeriod(
+  structures: IStructureFrontEnd[],
+  worksheet: Excel.Worksheet,
+) {
+  const nums = structures.length;
 
-  rangeFillColor(worksheet, 1, 1, 2, 1, 'solid', '00F0FFF0', '00FFFFFF');
-  rangeFillColor(worksheet, 1, 2, 2, 6, 'solid', '00F0FFFF', '00FFFFFF');
-  rangeFillColor(worksheet, 1, 7, 2, 11, 'solid', '00F0FFF0', '00FFFFFF');
-  rangeFillColor(worksheet, 1, 12, 2, 14, 'solid', '00F0FFFF', '00FFFFFF');
+  let modeID: number[] = [];
+  for (let i = 0; i < nums; i++) {
+    if (structures[i].period.modeCoupling.modeID.length > modeID.length) {
+      modeID = structures[i].period.modeCoupling.modeID;
+    }
+  }
 
-  worksheet.views = [{ state: 'frozen', xSplit: 1, ySplit: 2 }];
+  const count = modeID.length;
+
+  for (let j = 0; j < count; j++) {
+    // write mode
+    worksheet.getCell(4 + j, 1).value = modeID[j];
+  }
+
+  for (let i = 0; i < nums; i++) {
+    const period: IPeriodFE = structures[i].period;
+
+    for (let j = 0; j < count; j++) {
+      // write coupling period
+      worksheet.getCell(4 + j, 2 + 2 * i).value =
+        period.modeCoupling.period[j] || '';
+      worksheet.getCell(4 + j, 3 + 2 * i).value =
+        period.modeCoupling.angle[j] || '';
+
+      // write seismic period
+      worksheet.getCell(4 + j, 2 + 2 * i + 2 * nums).value =
+        period.modeSeismic.period[j] || '';
+      worksheet.getCell(4 + j, 3 + 2 * i + 2 * nums).value =
+        period.modeSeismic.angle[j] || '';
+
+      // write mode mass
+      worksheet.getCell(4 + j, 2 + 3 * i + 4 * nums).value =
+        period.modeMass.factorX[j] || 0;
+      worksheet.getCell(4 + j, 3 + 3 * i + 4 * nums).value =
+        period.modeMass.factorY[j] || 0;
+      worksheet.getCell(4 + j, 4 + 3 * i + 4 * nums).value =
+        period.modeMass.factorZ[j] || 0;
+    }
+  }
+}
+
+export async function formatPeriod(worksheet: Excel.Worksheet, nums: number) {
+  compareDistributeFormat(worksheet);
+
+  rangeFillColor(worksheet, 1, 1, 3, 1, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(
+    worksheet,
+    1,
+    2,
+    3,
+    1 + 2 * nums,
+    'solid',
+    '00F0FFFF',
+    '00FFFFFF',
+  );
+  rangeFillColor(
+    worksheet,
+    1,
+    2 + 2 * nums,
+    3,
+    1 + 4 * nums,
+    'solid',
+    '00F0FFF0',
+    '00FFFFFF',
+  );
+  rangeFillColor(
+    worksheet,
+    1,
+    2 + 4 * nums,
+    3,
+    1 + 7 * nums,
+    'solid',
+    '00F0FFFF',
+    '00FFFFFF',
+  );
+
+  worksheet.views = [{ state: 'frozen', xSplit: 1, ySplit: 3 }];
 }
