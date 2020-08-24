@@ -90,10 +90,10 @@ export async function exportCompareExcel(
   await formatDistributeResult(sheetDistributeResult, nums);
 
   // // write modify factor
-  // const sheetFactor = workbook.addWorksheet('调整系数');
-  // await initFactor(sheetFactor);
-  // await writeFactor(structure.factor, sheetFactor);
-  // await formatFactor(sheetFactor);
+  const sheetFactor = workbook.addWorksheet('调整系数');
+  await initFactor(sheetFactor, nums);
+  await writeFactor(structures, sheetFactor);
+  await formatFactor(sheetFactor, nums);
 
   // // write quantity
   // const sheetQuantity = workbook.addWorksheet('工程量');

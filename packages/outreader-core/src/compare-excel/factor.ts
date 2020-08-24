@@ -1,72 +1,108 @@
-import { IFactorFE } from '../interfaces';
-import { rangeFillColor, distributeFormat } from '../excel/commom';
+import { IFactorFE, IStructureFrontEnd } from '../interfaces';
+import { rangeFillColor } from '../excel/commom';
+import { compareDistributeFormat } from './commom';
 import Excel from 'exceljs';
 
-export async function initFactor(worksheet: Excel.Worksheet) {
-  worksheet.mergeCells('A1:B1');
-  worksheet.getCell('A1').value = '楼层信息';
-  worksheet.getCell('A2').value = '层号';
-  worksheet.getCell('B2').value = '塔号';
+export async function initFactor(worksheet: Excel.Worksheet, nums: number) {
+  worksheet.getCell('A2').value = '模型';
+  worksheet.getCell('A3').value = '层号';
 
-  worksheet.getCell('C1').value = '薄弱层剪力';
-  worksheet.getCell('C2').value = '放大系数';
+  worksheet.mergeCells(1, 2, 1, 1 + nums);
+  worksheet.getCell(1, 2).value = '薄弱层剪力放大';
+  worksheet.mergeCells(1, 2 + nums, 1, 1 + 3 * nums);
+  worksheet.getCell(1, 2 + nums).value = '剪重比调整';
+  worksheet.mergeCells(1, 2 + 3 * nums, 1, 1 + 5 * nums);
+  worksheet.getCell(1, 2 + 3 * nums).value = '0.2V0调整';
 
-  worksheet.mergeCells('D1:E1');
-  worksheet.getCell('D1').value = '剪重比调整系数';
-  worksheet.getCell('D2').value = 'X向';
-  worksheet.getCell('E2').value = 'Y向';
+  for (let i = 0; i < nums; i++) {
+    worksheet.getCell(2, 2 + i).value = `模型${i + 1}`;
+    worksheet.getCell(3, 2 + i).value = '系数';
 
-  worksheet.mergeCells('F1:G1');
-  worksheet.getCell('F1').value = '0.2V0调整系数';
-  worksheet.getCell('F2').value = 'X向';
-  worksheet.getCell('G2').value = 'Y向';
+    worksheet.mergeCells(2, 2 + 2 * i + nums, 2, 3 + 2 * i + nums);
+    worksheet.getCell(2, 2 + 2 * i + nums).value = `模型${i + 1}`;
+    worksheet.getCell(3, 2 + 2 * i + nums).value = 'X向';
+    worksheet.getCell(3, 3 + 2 * i + nums).value = 'Y向';
+
+    worksheet.mergeCells(2, 2 + 2 * i + 3 * nums, 2, 3 + 2 * i + 3 * nums);
+    worksheet.getCell(2, 2 + 2 * i + 3 * nums).value = `模型${i + 1}`;
+    worksheet.getCell(3, 2 + 2 * i + 3 * nums).value = 'X向';
+    worksheet.getCell(3, 3 + 2 * i + 3 * nums).value = 'Y向';
+  }
 }
 
 export async function writeFactor(
-  factor: IFactorFE,
+  structures: IStructureFrontEnd[],
   worksheet: Excel.Worksheet,
 ) {
-  for (let i = 0; i < factor.shearWeightRatioModify.storeyID.length; i++) {
+  const nums = structures.length;
+  let storeyID: number[] = [];
+  for (let i = 0; i < nums; i++) {
+    if (
+      (structures[i].factor.stiffness || structures[i].factor.v02qFactor)
+        .storeyID.length > storeyID.length
+    ) {
+      storeyID = (
+        structures[i].factor.stiffness || structures[i].factor.v02qFactor
+      ).storeyID;
+    }
+  }
+  const count = storeyID.length;
+
+  for (let j = 0; j < count; j++) {
     // write storey
-    worksheet.getCell(`A${3 + i}`).value =
-      factor.shearWeightRatioModify.storeyID[i];
-    worksheet.getCell(`B${3 + i}`).value =
-      factor.shearWeightRatioModify.towerID[i];
-
-    // write wesk storey shear factor
-    worksheet.getCell(`C${3 + i}`).value = factor.stiffness.weakStoreyFactor[i];
-
-    // write shear weight ratio factor
-    worksheet.getCell(`D${3 + i}`).value =
-      factor.shearWeightRatioModify.factorX[i];
-    worksheet.getCell(`E${3 + i}`).value =
-      factor.shearWeightRatioModify.factorY[i];
+    worksheet.getCell(4 + j, 1).value = storeyID[j];
   }
 
-  for (let i = 0; i < factor.v02qFactor.storeyID.length; i++) {
-    // write storey
-    worksheet.getCell(`F${3 + i}`).value = factor.v02qFactor.factorX[i];
-    worksheet.getCell(`G${3 + i}`).value = factor.v02qFactor.factorY[i];
+  for (let i = 0; i < nums; i++) {
+    const factor: IFactorFE = structures[i].factor;
+    const diff =
+      count - (factor.stiffness || factor.v02qFactor).storeyID.length;
+
+    for (let j = 0; j < count; j++) {
+      // write wesk storey shear factor
+      worksheet.getCell(4 + j, 2 + i).value =
+        factor.stiffness.weakStoreyFactor[j - diff] || '';
+
+      // write shear weight ratio factor
+      worksheet.getCell(4 + j, 2 + 2 * i + nums).value =
+        factor.shearWeightRatioModify.factorX[j - diff] || '';
+      worksheet.getCell(4 + j, 3 + 2 * i + nums).value =
+        factor.shearWeightRatioModify.factorY[j - diff] || '';
+
+      // write storey
+      worksheet.getCell(4 + j, 2 + 2 * i + 3 * nums).value =
+        factor.v02qFactor.factorX[j - diff] || '';
+      worksheet.getCell(4 + j, 3 + 2 * i + 3 * nums).value =
+        factor.v02qFactor.factorY[j - diff] || '';
+    }
   }
 }
 
-export async function formatFactor(worksheet: Excel.Worksheet) {
-  distributeFormat(worksheet);
+export async function formatFactor(worksheet: Excel.Worksheet, nums: number) {
+  compareDistributeFormat(worksheet);
 
-  rangeFillColor(worksheet, 1, 1, 2, 2, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 1, 1, 3, 1, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 1, 2, 1, 1 + nums, 'solid', '00F0FFFF', '00FFFFFF');
   rangeFillColor(
     worksheet,
-    3,
-    2,
-    worksheet.rowCount,
-    2,
+    1,
+    2 + nums,
+    1,
+    1 + 3 * nums,
     'solid',
     '00F0FFF0',
     '00FFFFFF',
   );
-  rangeFillColor(worksheet, 1, 3, 2, 3, 'solid', '00F0FFFF', '00FFFFFF');
-  rangeFillColor(worksheet, 1, 4, 2, 5, 'solid', '00F0FFF0', '00FFFFFF');
-  rangeFillColor(worksheet, 1, 6, 2, 7, 'solid', '00F0FFFF', '00FFFFFF');
+  rangeFillColor(
+    worksheet,
+    1,
+    2 + 3 * nums,
+    1,
+    1 + 5 * nums,
+    'solid',
+    '00F0FFFF',
+    '00FFFFFF',
+  );
 
-  worksheet.views = [{ state: 'frozen', xSplit: 2, ySplit: 2 }];
+  worksheet.views = [{ state: 'frozen', xSplit: 1, ySplit: 3 }];
 }

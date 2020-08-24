@@ -96,7 +96,8 @@ export async function writeDistributeResult(
 
   for (let i = 0; i < nums; i++) {
     const distribute: IDistributeResultFE = structures[i].distributeResult;
-    const diff = count - distribute.storey.storeyID.length;
+    const diff =
+      count - (distribute.storey || distribute.columnShear).storeyID.length;
 
     for (let j = 0; j < count; j++) {
       // write storey
@@ -234,5 +235,5 @@ export async function formatDistributeResult(
     '00FFFFFF',
   );
 
-  worksheet.views = [{ state: 'frozen', xSplit: 2, ySplit: 3 }];
+  worksheet.views = [{ state: 'frozen', xSplit: 1, ySplit: 3 }];
 }
