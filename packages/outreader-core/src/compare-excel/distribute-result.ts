@@ -1,170 +1,238 @@
-import { IDistributeResultFE } from '../interfaces';
-import { rangeFillColor, distributeFormat } from '../excel/commom';
+import { IDistributeResultFE, IStructureFrontEnd } from '../interfaces';
+import { rangeFillColor } from '../excel/commom';
+import { compareDistributeFormat } from './commom';
 import Excel from 'exceljs';
 
-export async function initDistributeResult(worksheet: Excel.Worksheet) {
-  worksheet.mergeCells('A1:B1');
-  worksheet.getCell('A1').value = '楼层信息';
-  worksheet.getCell('A2').value = '层号';
-  worksheet.getCell('B2').value = '塔号';
+export async function initDistributeResult(
+  worksheet: Excel.Worksheet,
+  nums: number,
+) {
+  worksheet.getCell('A2').value = '模型';
+  worksheet.getCell('A3').value = '层号';
 
-  worksheet.mergeCells('C1:F1');
-  worksheet.getCell('C1').value = '楼层属性';
-  worksheet.getCell('C2').value = '属性\n标准层';
-  worksheet.getCell('D2').value = '层高\nm';
-  worksheet.getCell('E2').value = '累计高度\nm';
-  worksheet.getCell('F2').value = '面积\nm^2';
+  worksheet.mergeCells(1, 2, 1, 1 + 3 * nums);
+  worksheet.getCell(1, 2).value = '楼层属性';
+  worksheet.mergeCells(1, 2 + 3 * nums, 1, 1 + 5 * nums);
+  worksheet.getCell(1, 2 + 3 * nums).value = '质量比';
+  worksheet.mergeCells(1, 2 + 5 * nums, 1, 1 + 9 * nums);
+  worksheet.getCell(1, 2 + 5 * nums).value = '刚度比';
+  worksheet.mergeCells(1, 2 + 9 * nums, 1, 1 + 11 * nums);
+  worksheet.getCell(1, 2 + 9 * nums).value = '剪重比';
+  worksheet.mergeCells(1, 2 + 11 * nums, 1, 1 + 13 * nums);
+  worksheet.getCell(1, 2 + 11 * nums).value = '抗剪承载力比';
+  worksheet.mergeCells(1, 2 + 13 * nums, 1, 1 + 17 * nums);
+  worksheet.getCell(1, 2 + 13 * nums).value = '规定水平力下倾覆力矩分配';
+  worksheet.mergeCells(1, 2 + 17 * nums, 1, 1 + 19 * nums);
+  worksheet.getCell(1, 2 + 17 * nums).value = '地震作用下剪力分配';
 
-  worksheet.mergeCells('G1:J1');
-  worksheet.getCell('G1').value = '质量比';
-  worksheet.getCell('G2').value = '楼层质量\nkg';
-  worksheet.getCell('H2').value = '质量比';
-  worksheet.getCell('I2').value = '单位质量\nkg/m^2';
-  worksheet.getCell('J2').value = '单位\n质量比';
+  for (let i = 0; i < nums; i++) {
+    worksheet.mergeCells(2, 2 + 3 * i, 2, 4 + 3 * i);
+    worksheet.getCell(2, 2 + 3 * i).value = `模型${i + 1}`;
+    worksheet.getCell(3, 2 + 3 * i).value = '层高\nm';
+    worksheet.getCell(3, 3 + 3 * i).value = '累计高度\nm';
+    worksheet.getCell(3, 4 + 3 * i).value = '面积\nm^2';
 
-  worksheet.mergeCells('K1:T1');
-  worksheet.getCell('K1').value = '刚度比';
-  worksheet.getCell('K2').value = 'Ratx1';
-  worksheet.getCell('L2').value = 'Ratx2';
-  worksheet.getCell('M2').value = 'RJX1';
-  worksheet.getCell('N2').value = 'RJX3';
-  worksheet.getCell('O2').value = 'Raty1';
-  worksheet.getCell('P2').value = 'Raty2';
-  worksheet.getCell('Q2').value = 'RJY1';
-  worksheet.getCell('R2').value = 'RJY3';
-  worksheet.getCell('S2').value = 'RJZ1';
-  worksheet.getCell('T2').value = 'RJZ3';
+    worksheet.mergeCells(2, 2 + 2 * i + 3 * nums, 2, 3 + 2 * i + 3 * nums);
+    worksheet.getCell(2, 2 + 2 * i + 3 * nums).value = `模型${i + 1}`;
+    worksheet.getCell(3, 2 + 2 * i + 3 * nums).value = '质量比';
+    worksheet.getCell(3, 3 + 2 * i + 3 * nums).value = '单位\n质量比';
 
-  worksheet.mergeCells('U1:V1');
-  worksheet.getCell('U1').value = '剪重比';
-  worksheet.getCell('U2').value = 'X向';
-  worksheet.getCell('V2').value = 'Y向';
+    worksheet.mergeCells(2, 2 + 4 * i + 5 * nums, 2, 5 + 4 * i + 5 * nums);
+    worksheet.getCell(2, 2 + 4 * i + 5 * nums).value = `模型${i + 1}`;
+    worksheet.getCell(3, 2 + 4 * i + 5 * nums).value = 'X向';
+    worksheet.getCell(3, 3 + 4 * i + 5 * nums).value = 'Y向';
+    worksheet.getCell(3, 4 + 4 * i + 5 * nums).value = 'X向\n层高修正';
+    worksheet.getCell(3, 5 + 4 * i + 5 * nums).value = 'Y向\n层高修正';
 
-  worksheet.mergeCells('W1:Z1');
-  worksheet.getCell('W1').value = '楼层抗剪承载力验算';
-  worksheet.getCell('W2').value = '承载力X';
-  worksheet.getCell('X2').value = 'RatioX';
-  worksheet.getCell('Y2').value = '承载力Y';
-  worksheet.getCell('Z2').value = 'RatioY';
+    worksheet.mergeCells(2, 2 + 2 * i + 9 * nums, 2, 3 + 2 * i + 9 * nums);
+    worksheet.getCell(2, 2 + 2 * i + 9 * nums).value = `模型${i + 1}`;
+    worksheet.getCell(3, 2 + 2 * i + 9 * nums).value = 'X向';
+    worksheet.getCell(3, 3 + 2 * i + 9 * nums).value = 'Y向';
 
-  worksheet.mergeCells('AA1:AD1');
-  worksheet.getCell('AA1').value = '规定水平力下倾覆力矩分配';
-  worksheet.getCell('AA2').value = 'X向柱';
-  worksheet.getCell('AB2').value = 'X向\n短肢墙';
-  worksheet.getCell('AC2').value = 'Y向柱';
-  worksheet.getCell('AD2').value = 'Y向\n短肢墙';
+    worksheet.mergeCells(2, 2 + 2 * i + 11 * nums, 2, 3 + 2 * i + 11 * nums);
+    worksheet.getCell(2, 2 + 2 * i + 11 * nums).value = `模型${i + 1}`;
+    worksheet.getCell(3, 2 + 2 * i + 11 * nums).value = 'X向';
+    worksheet.getCell(3, 3 + 2 * i + 11 * nums).value = 'Y向';
 
-  worksheet.mergeCells('AE1:AL1');
-  worksheet.getCell('AE1').value = '地震作用下剪力分配';
-  worksheet.getCell('AE2').value = 'X向柱';
-  worksheet.getCell('AF2').value = 'X向墙';
-  worksheet.getCell('AG2').value = 'X向\n总剪力';
-  worksheet.getCell('AH2').value = 'X向柱\n百分比';
-  worksheet.getCell('AI2').value = 'Y向柱';
-  worksheet.getCell('AJ2').value = 'Y向墙';
-  worksheet.getCell('AK2').value = 'Y向\n总剪力';
-  worksheet.getCell('AL2').value = 'Y向柱\n百分比';
+    worksheet.mergeCells(2, 2 + 4 * i + 13 * nums, 2, 5 + 4 * i + 13 * nums);
+    worksheet.getCell(2, 2 + 4 * i + 13 * nums).value = `模型${i + 1}`;
+    worksheet.getCell(3, 2 + 4 * i + 13 * nums).value = 'X向柱';
+    worksheet.getCell(3, 3 + 4 * i + 13 * nums).value = 'X向\n短肢墙';
+    worksheet.getCell(3, 4 + 4 * i + 13 * nums).value = 'Y向柱';
+    worksheet.getCell(3, 5 + 4 * i + 13 * nums).value = 'Y向\n短肢墙';
+
+    worksheet.mergeCells(2, 2 + 2 * i + 17 * nums, 2, 3 + 2 * i + 17 * nums);
+    worksheet.getCell(2, 2 + 2 * i + 17 * nums).value = `模型${i + 1}`;
+    worksheet.getCell(3, 2 + 2 * i + 17 * nums).value = 'X向柱';
+    worksheet.getCell(3, 3 + 2 * i + 17 * nums).value = 'Y向柱';
+  }
 }
 
 export async function writeDistributeResult(
-  distribute: IDistributeResultFE,
+  structures: IStructureFrontEnd[],
   worksheet: Excel.Worksheet,
 ) {
-  for (let i = 0; i < distribute.storey.storeyID.length; i++) {
+  const nums = structures.length;
+  let storeyID: number[] = [];
+  for (let i = 0; i < nums; i++) {
+    if (
+      (
+        structures[i].distributeResult.storey ||
+        structures[i].distributeResult.columnShear
+      ).storeyID.length > storeyID.length
+    ) {
+      storeyID = (
+        structures[i].distributeResult.storey ||
+        structures[i].distributeResult.columnShear
+      ).storeyID;
+    }
+  }
+  const count = storeyID.length;
+
+  for (let j = 0; j < count; j++) {
     // write storey
-    worksheet.getCell(`A${3 + i}`).value = distribute.storey.storeyID[i];
-    worksheet.getCell(`B${3 + i}`).value = distribute.storey.towerID[i];
-    worksheet.getCell(`C${3 + i}`).value = distribute.storey.attribute[i];
-    worksheet.getCell(`D${3 + i}`).value = distribute.storey.height[i];
-    worksheet.getCell(`E${3 + i}`).value = distribute.storey.heightToGround[i];
-    worksheet.getCell(`F${3 + i}`).value = distribute.storey.area[i];
-
-    // write mass ratio
-    worksheet.getCell(`G${3 + i}`).value = distribute.massRatio.storeyMass[i];
-    worksheet.getCell(`H${3 + i}`).value = distribute.massRatio.ratio[i];
-    worksheet.getCell(`I${3 + i}`).value = distribute.massRatio.massPerArea[i];
-    worksheet.getCell(`J${3 + i}`).value =
-      distribute.massRatio.massPerAreaRatio[i];
-
-    // write stiffness
-    worksheet.getCell(`K${3 + i}`).value = distribute.stiffness.ratx1[i];
-    worksheet.getCell(`L${3 + i}`).value = distribute.stiffness.ratx2[i];
-    worksheet.getCell(`M${3 + i}`).value = distribute.stiffness.rjx1[i];
-    worksheet.getCell(`N${3 + i}`).value = distribute.stiffness.rjx3[i];
-    worksheet.getCell(`O${3 + i}`).value = distribute.stiffness.raty1[i];
-    worksheet.getCell(`P${3 + i}`).value = distribute.stiffness.raty2[i];
-    worksheet.getCell(`Q${3 + i}`).value = distribute.stiffness.rjy1[i];
-    worksheet.getCell(`R${3 + i}`).value = distribute.stiffness.rjy3[i];
-    worksheet.getCell(`S${3 + i}`).value = distribute.stiffness.rjz1[i];
-    worksheet.getCell(`T${3 + i}`).value = distribute.stiffness.rjz3[i];
-
-    // write shear capacity check
-    worksheet.getCell(`W${3 + i}`).value =
-      distribute.shearCapacityCheck.capacityX[i];
-    worksheet.getCell(`X${3 + i}`).value =
-      distribute.shearCapacityCheck.ratioX[i];
-    worksheet.getCell(`Y${3 + i}`).value =
-      distribute.shearCapacityCheck.capacityY[i];
-    worksheet.getCell(`Z${3 + i}`).value =
-      distribute.shearCapacityCheck.ratioY[i];
+    worksheet.getCell(4 + j, 1).value = storeyID[j];
   }
 
-  for (let i = 0; i < distribute.shearWeightRatio.storeyID.length; i++) {
-    // write shear weight ratio
-    worksheet.getCell(`U${3 + i}`).value =
-      distribute.shearWeightRatio.factorX[i];
-    worksheet.getCell(`V${3 + i}`).value =
-      distribute.shearWeightRatio.factorY[i];
-  }
+  for (let i = 0; i < nums; i++) {
+    const distribute: IDistributeResultFE = structures[i].distributeResult;
+    const diff = count - distribute.storey.storeyID.length;
 
-  for (let i = 0; i < distribute.momentPercent.storeyID.length; i++) {
-    // write moment distribute
-    worksheet.getCell(`AA${3 + i}`).value =
-      distribute.momentPercent.percentColumnX[i];
-    worksheet.getCell(`AB${3 + i}`).value =
-      distribute.momentPercent.percentWallX[i];
-    worksheet.getCell(`AC${3 + i}`).value =
-      distribute.momentPercent.percentColumnY[i];
-    worksheet.getCell(`AD${3 + i}`).value =
-      distribute.momentPercent.percentWallY[i];
+    for (let j = 0; j < count; j++) {
+      // write storey
+      worksheet.getCell(4 + j, 2 + 3 * i).value =
+        distribute.storey.height[j - diff] || '';
+      worksheet.getCell(4 + j, 3 + 3 * i).value =
+        distribute.storey.heightToGround[j - diff] || '';
+      worksheet.getCell(4 + j, 4 + 3 * i).value =
+        distribute.storey.area[j - diff] || '';
 
-    // write column shear distribute
-    worksheet.getCell(`AE${3 + i}`).value = distribute.columnShear.columnX[i];
-    worksheet.getCell(`AF${3 + i}`).value = distribute.columnShear.wallX[i];
-    worksheet.getCell(`AG${3 + i}`).value = distribute.columnShear.totalX[i];
-    worksheet.getCell(`AH${3 + i}`).value =
-      distribute.columnShear.percentColumnX[i];
-    worksheet.getCell(`AI${3 + i}`).value = distribute.columnShear.columnY[i];
-    worksheet.getCell(`AJ${3 + i}`).value = distribute.columnShear.wallY[i];
-    worksheet.getCell(`AK${3 + i}`).value = distribute.columnShear.totalY[i];
-    worksheet.getCell(`AL${3 + i}`).value =
-      distribute.columnShear.percentColumnY[i];
+      // write mass ratio
+      worksheet.getCell(4 + j, 2 + 2 * i + 3 * nums).value =
+        distribute.massRatio.ratio[j - diff] || '';
+      worksheet.getCell(4 + j, 3 + 2 * i + 3 * nums).value =
+        distribute.massRatio.massPerAreaRatio[j - diff] || '';
+
+      // write stiffness
+      worksheet.getCell(4 + j, 2 + 4 * i + 5 * nums).value =
+        distribute.stiffness.ratx1[j - diff] || '';
+      worksheet.getCell(4 + j, 3 + 4 * i + 5 * nums).value =
+        distribute.stiffness.raty1[j - diff] || '';
+      worksheet.getCell(4 + j, 4 + 4 * i + 5 * nums).value =
+        distribute.stiffness.ratx2[j - diff] || '';
+      worksheet.getCell(4 + j, 5 + 4 * i + 5 * nums).value =
+        distribute.stiffness.raty2[j - diff] || '';
+
+      // write shear capacity check
+      worksheet.getCell(4 + j, 2 + 2 * i + 9 * nums).value =
+        distribute.shearCapacityCheck.ratioX[j - diff] || '';
+      worksheet.getCell(4 + j, 3 + 2 * i + 9 * nums).value =
+        distribute.shearCapacityCheck.ratioY[j - diff] || '';
+
+      // write shear weight ratio
+      worksheet.getCell(4 + j, 2 + 2 * i + 11 * nums).value =
+        distribute.shearWeightRatio.factorX[j - diff] || '';
+      worksheet.getCell(4 + j, 3 + 2 * i + 11 * nums).value =
+        distribute.shearWeightRatio.factorY[j - diff] || '';
+
+      // write moment distribute
+      worksheet.getCell(4 + j, 2 + 4 * i + 13 * nums).value =
+        distribute.momentPercent.percentColumnX[j - diff] || '';
+      worksheet.getCell(4 + j, 3 + 4 * i + 13 * nums).value =
+        distribute.momentPercent.percentWallX[j - diff] || '';
+      worksheet.getCell(4 + j, 4 + 4 * i + 13 * nums).value =
+        distribute.momentPercent.percentColumnY[j - diff] || '';
+      worksheet.getCell(4 + j, 5 + 4 * i + 13 * nums).value =
+        distribute.momentPercent.percentWallY[j - diff] || '';
+
+      // write column shear distribute
+      worksheet.getCell(4 + j, 2 + 2 * i + 17 * nums).value =
+        distribute.columnShear.percentColumnX[j - diff] || '';
+      worksheet.getCell(4 + j, 3 + 2 * i + 17 * nums).value =
+        distribute.columnShear.percentColumnY[j - diff] || '';
+    }
   }
 }
 
-export async function formatDistributeResult(worksheet: Excel.Worksheet) {
-  distributeFormat(worksheet);
+export async function formatDistributeResult(
+  worksheet: Excel.Worksheet,
+  nums: number,
+) {
+  compareDistributeFormat(worksheet);
 
-  worksheet.getRow(2).height = 30;
+  worksheet.getRow(3).height = 30;
 
-  rangeFillColor(worksheet, 1, 1, 2, 2, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 1, 1, 3, 1, 'solid', '00F0FFF0', '00FFFFFF');
   rangeFillColor(
     worksheet,
-    3,
+    1,
     2,
-    worksheet.rowCount,
-    2,
+    1,
+    1 + 3 * nums,
+    'solid',
+    '00F0FFFF',
+    '00FFFFFF',
+  );
+  rangeFillColor(
+    worksheet,
+    1,
+    2 + 3 * nums,
+    1,
+    1 + 5 * nums,
     'solid',
     '00F0FFF0',
     '00FFFFFF',
   );
-  rangeFillColor(worksheet, 1, 3, 2, 6, 'solid', '00F0FFFF', '00FFFFFF');
-  rangeFillColor(worksheet, 1, 7, 2, 10, 'solid', '00F0FFF0', '00FFFFFF');
-  rangeFillColor(worksheet, 1, 11, 2, 20, 'solid', '00F0FFFF', '00FFFFFF');
-  rangeFillColor(worksheet, 1, 21, 2, 22, 'solid', '00F0FFF0', '00FFFFFF');
-  rangeFillColor(worksheet, 1, 23, 2, 26, 'solid', '00F0FFFF', '00FFFFFF');
-  rangeFillColor(worksheet, 1, 27, 2, 30, 'solid', '00F0FFF0', '00FFFFFF');
-  rangeFillColor(worksheet, 1, 31, 2, 38, 'solid', '00F0FFFF', '00FFFFFF');
+  rangeFillColor(
+    worksheet,
+    1,
+    2 + 5 * nums,
+    1,
+    1 + 9 * nums,
+    'solid',
+    '00F0FFFF',
+    '00FFFFFF',
+  );
+  rangeFillColor(
+    worksheet,
+    1,
+    2 + 9 * nums,
+    1,
+    1 + 11 * nums,
+    'solid',
+    '00F0FFF0',
+    '00FFFFFF',
+  );
+  rangeFillColor(
+    worksheet,
+    1,
+    2 + 11 * nums,
+    1,
+    1 + 13 * nums,
+    'solid',
+    '00F0FFFF',
+    '00FFFFFF',
+  );
+  rangeFillColor(
+    worksheet,
+    1,
+    2 + 13 * nums,
+    1,
+    1 + 17 * nums,
+    'solid',
+    '00F0FFF0',
+    '00FFFFFF',
+  );
+  rangeFillColor(
+    worksheet,
+    1,
+    2 + 17 * nums,
+    1,
+    1 + 19 * nums,
+    'solid',
+    '00F0FFFF',
+    '00FFFFFF',
+  );
 
-  worksheet.views = [{ state: 'frozen', xSplit: 2, ySplit: 2 }];
+  worksheet.views = [{ state: 'frozen', xSplit: 2, ySplit: 3 }];
 }

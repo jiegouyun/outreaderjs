@@ -84,13 +84,10 @@ export async function exportCompareExcel(
   await formatGeneralResult(sheetGeneralResult, nums);
 
   // // write distribute result
-  // const sheetDistributeResult = workbook.addWorksheet('楼层分布数据');
-  // await initDistributeResult(sheetDistributeResult);
-  // await writeDistributeResult(
-  //   structure.distributeResult,
-  //   sheetDistributeResult,
-  // );
-  // await formatDistributeResult(sheetDistributeResult);
+  const sheetDistributeResult = workbook.addWorksheet('楼层分布数据');
+  await initDistributeResult(sheetDistributeResult, nums);
+  await writeDistributeResult(structures, sheetDistributeResult);
+  await formatDistributeResult(sheetDistributeResult, nums);
 
   // // write modify factor
   // const sheetFactor = workbook.addWorksheet('调整系数');

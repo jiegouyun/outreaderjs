@@ -279,4 +279,6 @@ export async function formatGeneralResult(
   rangeFillColor(worksheet, 19, 1, 26, 2, 'solid', '00F0FFF0', '00FFFFFF');
   rangeFillColor(worksheet, 28, 1, 31, 2, 'solid', '00F0FFFF', '00FFFFFF');
   rangeFillColor(worksheet, 33, 1, 36, 2, 'solid', '00F0FFF0', '00FFFFFF');
+
+  worksheet.views = [{ state: 'frozen', xSplit: 2, ySplit: 3 }];
 }

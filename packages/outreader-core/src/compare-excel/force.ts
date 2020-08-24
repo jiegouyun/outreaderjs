@@ -99,16 +99,6 @@ export async function formatForce(worksheet: Excel.Worksheet, nums: number) {
   rangeFillColor(worksheet, 1, 1, 3, 1, 'solid', '00F0FFF0', '00FFFFFF');
   rangeFillColor(
     worksheet,
-    4,
-    1,
-    worksheet.rowCount,
-    1,
-    'solid',
-    '00F0FFF0',
-    '00FFFFFF',
-  );
-  rangeFillColor(
-    worksheet,
     1,
     2,
     3,
