@@ -53,11 +53,11 @@ export async function exportCompareExcel(
   await writeSummaryQuantity(structures, sheetSummaryQuantity);
   await formatSummaryQuantity(sheetSummaryQuantity, nums);
 
-  // // write worksheet parameters information.
-  // const sheetParameters = workbook.addWorksheet('计算参数');
-  // await initParameters(sheetParameters);
-  // await writeParameters(structure.parameters, sheetParameters);
-  // await formatParameters(sheetParameters);
+  // write worksheet parameters information.
+  const sheetParameters = workbook.addWorksheet('计算参数');
+  await initParameters(sheetParameters, nums);
+  await writeParameters(structures, sheetParameters);
+  await formatParameters(sheetParameters, nums);
 
   // // write worksheet period information
   // const sheetPeriod = workbook.addWorksheet('周期');
