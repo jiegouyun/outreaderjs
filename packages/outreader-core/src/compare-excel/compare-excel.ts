@@ -96,10 +96,10 @@ export async function exportCompareExcel(
   await formatFactor(sheetFactor, nums);
 
   // // write quantity
-  // const sheetQuantity = workbook.addWorksheet('工程量');
-  // await initQuantity(sheetQuantity);
-  // await writeQuantity(structure.quantity, sheetQuantity);
-  // await formatQuantity(sheetQuantity);
+  const sheetQuantity = workbook.addWorksheet('工程量');
+  await initQuantity(sheetQuantity, nums);
+  await writeQuantity(structures, sheetQuantity);
+  await formatQuantity(sheetQuantity, nums);
 
   // write xlsx file.
   const filename = path.join(
