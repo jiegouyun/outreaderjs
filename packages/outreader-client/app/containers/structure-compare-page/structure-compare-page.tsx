@@ -1,5 +1,5 @@
 import {
-  exportExcel,
+  exportCompareExcel,
   ISummaryFE,
   ISummaryQuantityFE,
   IParametersFE,
@@ -130,15 +130,15 @@ export function StructureComparePage() {
   };
 
   const exportXLSX = async () => {
-    // try {
-    //   const res = await exportExcel(structureFEs);
-    //   if (res) message.success('导出成功');
-    // } catch (error) {
-    //   if (error) {
-    //     message.error('导出失败，请检查');
-    //     console.error(error);
-    //   }
-    // }
+    try {
+      const res = await exportCompareExcel(structureFEs);
+      if (res) message.success('导出成功');
+    } catch (error) {
+      if (error) {
+        message.error('导出失败，请检查');
+        console.error(error);
+      }
+    }
   };
 
   return (

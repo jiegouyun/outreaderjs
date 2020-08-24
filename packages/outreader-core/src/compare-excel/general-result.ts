@@ -41,14 +41,14 @@ export async function initGeneralResult(
 
   worksheet.mergeCells('A19:A26');
   worksheet.getCell('A19').value = '结构整体\n抗倾覆';
-  worksheet.getCell('B19').value = 'X向风\nMr/Mov';
-  worksheet.getCell('B20').value = 'Y向风\nMr/Mov';
-  worksheet.getCell('B21').value = 'X地震\nMr/Mov';
-  worksheet.getCell('B22').value = 'Y地震\nMr/Mov';
-  worksheet.getCell('B23').value = 'X向风\n零应力区（%）';
-  worksheet.getCell('B24').value = 'Y向风\n零应力区（%）';
-  worksheet.getCell('B25').value = 'X地震\n零应力区（%）';
-  worksheet.getCell('B26').value = 'Y地震\n零应力区（%）';
+  worksheet.getCell('B19').value = 'X向风Mr/Mov';
+  worksheet.getCell('B20').value = 'Y向风Mr/Mov';
+  worksheet.getCell('B21').value = 'X地震Mr/Mov';
+  worksheet.getCell('B22').value = 'Y地震Mr/Mov';
+  worksheet.getCell('B23').value = 'X向风零应力区（%）';
+  worksheet.getCell('B24').value = 'Y向风零应力区（%）';
+  worksheet.getCell('B25').value = 'X地震零应力区（%）';
+  worksheet.getCell('B26').value = 'Y地震零应力区（%）';
 
   worksheet.mergeCells(27, 1, 27, 2 + nums);
 

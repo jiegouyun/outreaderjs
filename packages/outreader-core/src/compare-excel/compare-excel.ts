@@ -102,16 +102,16 @@ export async function exportCompareExcel(
   await formatQuantity(sheetQuantity, nums);
 
   // write xlsx file.
-  const filename = path.join(
-    dir ? dir : structures[0].summary.project.dir,
-    'Compare.xlsx',
-  );
-  await workbook.xlsx.writeFile(filename);
-  // const buffer = await workbook.xlsx.writeBuffer();
-  // const fileType =
-  //   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-  // const blob = new Blob([buffer], { type: fileType });
-  // saveAs(blob, 'Compare.xlsx');
+  // const filename = path.join(
+  //   dir ? dir : structures[0].summary.project.dir,
+  //   'Compare.xlsx',
+  // );
+  // await workbook.xlsx.writeFile(filename);
+  const buffer = await workbook.xlsx.writeBuffer();
+  const fileType =
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+  const blob = new Blob([buffer], { type: fileType });
+  saveAs(blob, 'Compare.xlsx');
 
   return true;
 }
