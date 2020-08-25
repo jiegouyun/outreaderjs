@@ -76,10 +76,13 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
       key: j,
       storeyID: storeyID[j],
     });
-    for (let i = 0; i < n; i++) {
-      const len = drifts[i].driftWindXP.storeyID.length;
-      const diff = count - len;
+  }
 
+  for (let i = 0; i < n; i++) {
+    const len = drifts[i].driftWindXP.storeyID.length;
+    const diff = count - len;
+
+    for (let j = 0; j < count; j++) {
       dispTableData[j][`seismicX${i}`] =
         drifts[i].driftSeismicX.storeyID[j - diff] === storeyID[j]
           ? drifts[i].driftSeismicX.displacement[j - diff].toFixed(2)
@@ -264,10 +267,13 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
       key: j,
       storeyID: storeyID[j],
     });
-    for (let i = 0; i < n; i++) {
-      const len = drifts[i].ratioSeismicXEccP.storeyID.length;
-      const diff = count - len;
+  }
 
+  for (let i = 0; i < n; i++) {
+    const len = drifts[i].ratioSeismicXEccP.storeyID.length;
+    const diff = count - len;
+
+    for (let j = 0; j < count; j++) {
       dispRatioTableData[j][`eccXP${i}`] =
         drifts[i].ratioSeismicXEccP.storeyID[j - diff] === storeyID[j]
           ? drifts[i].ratioSeismicXEccP.ratio[j - diff].toFixed(2)

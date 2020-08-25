@@ -39,7 +39,10 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
       key: j,
       modeID: modeID[j],
     });
-    for (let i = 0; i < n; i++) {
+  }
+
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < count; j++) {
       periodModeTableData[j][`period${i}`] = (
         periods[i].modeCoupling.period[j] || 0
       ).toFixed(3);
@@ -55,7 +58,10 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
       key: j,
       modeID: j,
     });
-    for (let i = 0; i < n; i++) {
+  }
+
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < count; j++) {
       periodSeismicTableData[j][`period${i}`] = (
         periods[i].modeSeismic.period[j] || 0
       ).toFixed(3);
@@ -95,7 +101,10 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
       key: j,
       modeID: j,
     });
-    for (let i = 0; i < n; i++) {
+  }
+
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < count; j++) {
       periodMassTableData[j][`factorX${i}`] = (
         periods[i].modeMass.factorX[j] || 0
       ).toFixed(2);

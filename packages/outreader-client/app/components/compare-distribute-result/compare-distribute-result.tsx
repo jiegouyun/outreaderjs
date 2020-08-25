@@ -52,10 +52,13 @@ export function CompareDistributeResultComponent(
       key: j,
       storeyID: storeyID[j],
     });
-    for (let i = 0; i < n; i++) {
-      const len = distributeResults[i].storey.storeyID.length;
-      const diff = count - len;
+  }
 
+  for (let i = 0; i < n; i++) {
+    const len = distributeResults[i].storey.storeyID.length;
+    const diff = count - len;
+
+    for (let j = 0; j < count; j++) {
       storeyTableData[j][`height${i}`] =
         distributeResults[i].storey.storeyID[j - diff] === storeyID[j]
           ? distributeResults[i].storey.height[j - diff].toFixed(2)
@@ -102,10 +105,13 @@ export function CompareDistributeResultComponent(
       key: j,
       storeyID: storeyID[j],
     });
-    for (let i = 0; i < n; i++) {
-      const len = distributeResults[i].massRatio.storeyID.length;
-      const diff = count - len;
+  }
 
+  for (let i = 0; i < n; i++) {
+    const len = distributeResults[i].massRatio.storeyID.length;
+    const diff = count - len;
+
+    for (let j = 0; j < count; j++) {
       massRatioTableData[j][`ratio${i}`] =
         distributeResults[i].massRatio.storeyID[j - diff] === storeyID[j]
           ? distributeResults[i].massRatio.ratio[j - diff].toFixed(2)
@@ -179,10 +185,13 @@ export function CompareDistributeResultComponent(
       key: j,
       storeyID: storeyID[j],
     });
-    for (let i = 0; i < n; i++) {
-      const len = distributeResults[i].stiffness.storeyID.length;
-      const diff = count - len;
+  }
 
+  for (let i = 0; i < n; i++) {
+    const len = distributeResults[i].stiffness.storeyID.length;
+    const diff = count - len;
+
+    for (let j = 0; j < count; j++) {
       stiffRatioTableData[j][`ratx1${i}`] =
         distributeResults[i].stiffness.storeyID[j - diff] === storeyID[j]
           ? distributeResults[i].stiffness.ratx1[j - diff].toFixed(3)
@@ -273,10 +282,13 @@ export function CompareDistributeResultComponent(
       key: j,
       storeyID: storeyID[j],
     });
-    for (let i = 0; i < n; i++) {
-      const len = distributeResults[i].shearWeightRatio.storeyID.length;
-      const diff = count - len;
+  }
 
+  for (let i = 0; i < n; i++) {
+    const len = distributeResults[i].shearWeightRatio.storeyID.length;
+    const diff = count - len;
+
+    for (let j = 0; j < count; j++) {
       shearWeightTableData[j][`ratioX${i}`] =
         distributeResults[i].shearWeightRatio.storeyID[j - diff] === storeyID[j]
           ? distributeResults[i].shearWeightRatio.factorX[j - diff].toFixed(3)
@@ -344,10 +356,13 @@ export function CompareDistributeResultComponent(
       key: j,
       storeyID: storeyID[j],
     });
-    for (let i = 0; i < n; i++) {
-      const len = distributeResults[i].shearCapacityCheck.storeyID.length;
-      const diff = count - len;
+  }
 
+  for (let i = 0; i < n; i++) {
+    const len = distributeResults[i].shearCapacityCheck.storeyID.length;
+    const diff = count - len;
+
+    for (let j = 0; j < count; j++) {
       shearCapacityTableData[j][`ratioX${i}`] =
         distributeResults[i].shearCapacityCheck.storeyID[j - diff] ===
         storeyID[j]
@@ -427,10 +442,13 @@ export function CompareDistributeResultComponent(
       key: j,
       storeyID: storeyID[j],
     });
-    for (let i = 0; i < n; i++) {
-      const len = distributeResults[i].momentPercent.storeyID.length;
-      const diff = count - len;
+  }
 
+  for (let i = 0; i < n; i++) {
+    const len = distributeResults[i].momentPercent.storeyID.length;
+    const diff = count - len;
+
+    for (let j = 0; j < count; j++) {
       momentDistributeTableData[j][`columnX${i}`] =
         distributeResults[i].momentPercent.storeyID[j - diff] === storeyID[j]
           ? distributeResults[i].momentPercent.percentColumnX[j - diff].toFixed(
@@ -525,10 +543,13 @@ export function CompareDistributeResultComponent(
       key: j,
       storeyID: storeyID[j],
     });
-    for (let i = 0; i < n; i++) {
-      const len = distributeResults[i].columnShear.storeyID.length;
-      const diff = count - len;
+  }
 
+  for (let i = 0; i < n; i++) {
+    const len = distributeResults[i].columnShear.storeyID.length;
+    const diff = count - len;
+
+    for (let j = 0; j < count; j++) {
       shearDistributeTableData[j][`ratioX${i}`] =
         distributeResults[i].columnShear.storeyID[j - diff] === storeyID[j]
           ? distributeResults[i].columnShear.percentColumnX[j - diff].toFixed(1)

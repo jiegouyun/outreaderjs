@@ -54,10 +54,13 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
       key: j,
       storeyID: storeyID[j],
     });
-    for (let i = 0; i < n; i++) {
-      const len = quantities[i].storeyID.length;
-      const diff = count - len;
+  }
 
+  for (let i = 0; i < n; i++) {
+    const len = quantities[i].storeyID.length;
+    const diff = count - len;
+
+    for (let j = 0; j < count; j++) {
       concreteTableData[j][`area${i}`] =
         quantities[i].storeyID[j - diff] === storeyID[j]
           ? Math.round(quantities[i].area[j - diff])
