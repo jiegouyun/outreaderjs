@@ -1,4 +1,5 @@
 import { Descriptions, Table } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IGeneralResultFE } from '@outreader/core';
 import { ICompare } from '../../interfaces';
@@ -8,10 +9,12 @@ export function CompareGeneralResultComponent(
 ) {
   const n = generalResults.length;
 
-  const modelColumns = [
+  const modelColumns: ColumnsType<ICompare> = [
     {
       title: '分项',
       dataIndex: 'iterms',
+      width: '15%',
+      align: 'left',
     },
   ];
 
@@ -19,6 +22,8 @@ export function CompareGeneralResultComponent(
     modelColumns.push({
       title: `模型${i + 1}`,
       dataIndex: `model${i}`,
+      width: `${85 / n}%`,
+      align: 'right',
     });
   }
 
@@ -130,19 +135,19 @@ export function CompareGeneralResultComponent(
     },
     {
       key: 4,
-      iterms: 'X向风 零应力区(%)',
+      iterms: 'X向风零应力区(%)',
     },
     {
       key: 5,
-      iterms: 'Y向风 零应力区(%)',
+      iterms: 'Y向风零应力区(%)',
     },
     {
       key: 6,
-      iterms: 'X向地震 零应力区(%)',
+      iterms: 'X向地震零应力区(%)',
     },
     {
       key: 7,
-      iterms: 'Y向地震 零应力区(%)',
+      iterms: 'Y向地震零应力区(%)',
     },
   ];
 

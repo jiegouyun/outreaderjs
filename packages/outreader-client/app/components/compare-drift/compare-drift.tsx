@@ -1,4 +1,5 @@
 import { Descriptions, Table, Row, Col, Collapse } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IDriftFE } from '@outreader/core';
 import { StoreyChart } from '../storey-chart';
@@ -18,10 +19,12 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
   }
   const count = storeyID.length;
 
-  const driftDispColumns = [
+  const driftDispColumns: ColumnsType<ICompare> = [
     {
       title: '层号',
       dataIndex: 'storeyID',
+      width: '10%',
+      align: 'right',
     },
   ];
 
@@ -30,26 +33,38 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
       {
         title: `模型${i + 1}-地震X`,
         dataIndex: `seismicX${i}`,
+        width: `${90 / 6 / n}%`,
+        align: 'right',
       },
       {
         title: `模型${i + 1}-地震Y`,
         dataIndex: `seismicY${i}`,
+        width: `${90 / 6 / n}%`,
+        align: 'right',
       },
       {
         title: `模型${i + 1}-顺风X`,
         dataIndex: `windAX${i}`,
+        width: `${90 / 6 / n}%`,
+        align: 'right',
       },
       {
         title: `模型${i + 1}-顺风Y`,
         dataIndex: `windAY${i}`,
+        width: `${90 / 6 / n}%`,
+        align: 'right',
       },
       {
         title: `模型${i + 1}-横风X`,
         dataIndex: `windCX${i}`,
+        width: `${90 / 6 / n}%`,
+        align: 'right',
       },
       {
         title: `模型${i + 1}-横风Y`,
         dataIndex: `windCY${i}`,
+        width: `${90 / 6 / n}%`,
+        align: 'right',
       }
     );
   }
@@ -217,10 +232,12 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
     }
   }
 
-  const dispRatioColumns = [
+  const dispRatioColumns: ColumnsType<ICompare> = [
     {
       title: '层号',
       dataIndex: 'storeyID',
+      width: '10%',
+      align: 'right',
     },
   ];
 
@@ -229,18 +246,26 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
       {
         title: `模型${i + 1}-X+`,
         dataIndex: `eccXP${i}`,
+        width: `${90 / 4 / n}%`,
+        align: 'right',
       },
       {
         title: `模型${i + 1}-X-`,
         dataIndex: `eccXN${i}`,
+        width: `${90 / 4 / n}%`,
+        align: 'right',
       },
       {
         title: `模型${i + 1}-Y+`,
         dataIndex: `eccYP${i}`,
+        width: `${90 / 4 / n}%`,
+        align: 'right',
       },
       {
         title: `模型${i + 1}-Y-`,
         dataIndex: `eccYN${i}`,
+        width: `${90 / 4 / n}%`,
+        align: 'right',
       }
     );
   }

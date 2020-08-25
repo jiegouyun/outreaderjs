@@ -1,4 +1,5 @@
 import { Descriptions, Table, Collapse } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IFactorFE } from '@outreader/core';
 import { StoreyChart } from '../storey-chart';
@@ -18,10 +19,12 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
   }
   const count = storeyID.length;
 
-  const weakColumns = [
+  const weakColumns: ColumnsType<ICompare> = [
     {
       title: '层号',
       dataIndex: 'storeyID',
+      width: '10%',
+      align: 'right',
     },
   ];
 
@@ -29,6 +32,8 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
     weakColumns.push({
       title: `模型${i + 1}`,
       dataIndex: `factor${i}`,
+      width: `${90 / n}%`,
+      align: 'right',
     });
   }
 
@@ -68,10 +73,12 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
     }
   }
 
-  const factorColumns = [
+  const factorColumns: ColumnsType<ICompare> = [
     {
       title: '层号',
       dataIndex: 'storeyID',
+      width: '10%',
+      align: 'right',
     },
   ];
 
@@ -80,10 +87,14 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
       {
         title: `模型${i + 1}-X`,
         dataIndex: `factorX${i}`,
+        width: `${90 / 2 / n}%`,
+        align: 'right',
       },
       {
         title: `模型${i + 1}-Y`,
         dataIndex: `factorY${i}`,
+        width: `${90 / 2 / n}%`,
+        align: 'right',
       }
     );
   }

@@ -1,4 +1,5 @@
 import { Descriptions, Table, Row, Col, Collapse } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IQuantityFE } from '@outreader/core';
 import { CompareQuantityChart } from '../compart-quantity-chart';
@@ -14,10 +15,12 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
   }
   const count = storeyID.length;
 
-  const quantityColumns = [
+  const quantityColumns: ColumnsType<ICompare> = [
     {
       title: '层号',
       dataIndex: 'storeyID',
+      width: '10%',
+      align: 'right',
     },
   ];
 
@@ -26,14 +29,20 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
       {
         title: `模型${i + 1}-面积`,
         dataIndex: `area${i}`,
+        width: `${90 / 3 / n}%`,
+        align: 'right',
       },
       {
         title: `模型${i + 1}-用量`,
         dataIndex: `quantity${i}`,
+        width: `${90 / 3 / n}%`,
+        align: 'right',
       },
       {
         title: `模型${i + 1}-含量`,
         dataIndex: `unit${i}`,
+        width: `${90 / 3 / n}%`,
+        align: 'right',
       }
     );
   }

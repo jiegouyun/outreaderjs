@@ -1,4 +1,5 @@
 import { Descriptions, Table, Layout, Row, Col, Collapse } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IForceFE } from '@outreader/core';
 import { StoreyChart } from '../storey-chart';
@@ -17,10 +18,12 @@ export function CompareForceComponent(forces: IForceFE[]) {
   }
   const count = storeyID.length;
 
-  const forceColumns = [
+  const forceColumns: ColumnsType<ICompare> = [
     {
       title: '层号',
       dataIndex: 'storeyID',
+      width: '10%',
+      align: 'right',
     },
   ];
 
@@ -29,18 +32,26 @@ export function CompareForceComponent(forces: IForceFE[]) {
       {
         title: `模型${i + 1}-剪力X`,
         dataIndex: `shearX${i}`,
+        width: `${90 / 4 / n}%`,
+        align: 'right',
       },
       {
         title: `模型${i + 1}-弯矩X`,
         dataIndex: `momentX${i}`,
+        width: `${90 / 4 / n}%`,
+        align: 'right',
       },
       {
         title: `模型${i + 1}-剪力Y`,
         dataIndex: `shearY${i}`,
+        width: `${90 / 4 / n}%`,
+        align: 'right',
       },
       {
         title: `模型${i + 1}-弯矩Y`,
         dataIndex: `momentY${i}`,
+        width: `${90 / 4 / n}%`,
+        align: 'right',
       }
     );
   }
