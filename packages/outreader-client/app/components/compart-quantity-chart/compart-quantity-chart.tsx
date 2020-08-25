@@ -10,6 +10,15 @@ import {
   Label,
 } from 'recharts';
 
+/**
+ * @description draw quantity chart by bar chaer;
+ * @param model number, x axis data;
+ * @param wall number, y axis wall data;
+ * @param column number, y axis column data;
+ * @param beam number, y axis beam data;
+ * @param floor number, y axis floor data;
+ * @param yLabel strind, y axis label.
+ */
 export function CompareQuantityChart(props: {
   data: {
     model: string;

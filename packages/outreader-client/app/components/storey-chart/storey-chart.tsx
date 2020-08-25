@@ -18,6 +18,13 @@ interface ILabel {
   yLabel?: string;
 }
 
+/**
+ * @description draw multiple liens in scatter chart;
+ * @param labels {xLabel: string, yLabel : string}, label in x axis and y axis;
+ * @param describes {name: string, fill: string, shape: string}[], name is line name in legend,
+ *                  fill is line color in ARGB type, shape is line scatter type.
+ * @param datas {x: number, y: number}[], lines data.
+ */
 export function StoreyChart(props: {
   labels: ILabel;
   describes: IDescribe[];

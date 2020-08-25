@@ -1,3 +1,6 @@
+/**
+ * @description colors used in compare chart lines;
+ */
 export const userColors: string[] = [
   '#0099CC',
   '#CCCCFF',
@@ -9,6 +12,9 @@ export const userColors: string[] = [
   '#FFCCCC',
 ];
 
+/**
+ * @description scatter shap used in compare chart lines;
+ */
 export const userShaps: Array<
   'circle' | 'cross' | 'diamond' | 'square' | 'star' | 'triangle' | 'wye'
 > = ['circle', 'cross', 'diamond', 'square', 'star', 'triangle', 'wye'];

@@ -192,10 +192,22 @@ export async function writeSummary(
   worksheet.getCell('F9').value = summary.structures.periodReductionFactor;
 
   // write mass information
-  worksheet.getCell('D10').value = summary.weight.live;
-  worksheet.getCell('D11').value = summary.weight.dead;
-  worksheet.getCell('F10').value = summary.weight.super;
-  worksheet.getCell('F11').value = summary.weight.sum;
+  worksheet.getCell('D10').value = {
+    formula: `round(${summary.weight.live},0)`,
+    date1904: false,
+  };
+  worksheet.getCell('D11').value = {
+    formula: `round(${summary.weight.dead},0)`,
+    date1904: false,
+  };
+  worksheet.getCell('F10').value = {
+    formula: `round(${summary.weight.super},0)`,
+    date1904: false,
+  };
+  worksheet.getCell('F11').value = {
+    formula: `round(${summary.weight.sum},0)`,
+    date1904: false,
+  };
 
   // write drift information
   worksheet.getCell('D12').value = summary.drift.windX[0];
