@@ -1,4 +1,4 @@
-import { Descriptions, Table, Row, Col, Collapse } from 'antd';
+import { Table, Collapse } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IQuantityFE } from '@outreader/core';

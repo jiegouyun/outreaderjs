@@ -1,4 +1,4 @@
-import { Descriptions, Table } from 'antd';
+import { Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { ISummaryFE } from '@outreader/core';

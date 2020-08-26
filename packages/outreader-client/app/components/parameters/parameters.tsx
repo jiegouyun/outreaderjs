@@ -10,7 +10,7 @@ export function ParametersComponent(parameters: IParametersFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 1 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="结构体系">
           {parameters.general.system}
@@ -42,7 +42,7 @@ export function ParametersComponent(parameters: IParametersFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 1 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="连梁刚度折减系数(地震)">
           {parameters.calculate.couplingBeamFactorSeismic}
@@ -59,7 +59,7 @@ export function ParametersComponent(parameters: IParametersFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 1 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="使用指定风荷载数据">
           {parameters.wind.assigned}
@@ -88,7 +88,7 @@ export function ParametersComponent(parameters: IParametersFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 1 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="按地震动区划图GB18306-2015计算">
           {parameters.seismic.use2015GB18306}

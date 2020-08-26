@@ -1,4 +1,5 @@
-import { Descriptions, Table, Row, Col, Collapse } from 'antd';
+import { Table, Row, Col, Collapse } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IDistributeResultFE } from '@outreader/core';
 import { StoreyChart } from './../storey-chart';
@@ -6,30 +7,36 @@ import { StoreyChart } from './../storey-chart';
 export function DistributeResultComponent(
   distributeResult: IDistributeResultFE
 ) {
-  const storeyColumns = [
+  const storeyColumns: ColumnsType<Object> = [
     {
       title: '层号',
       dataIndex: 'storeyID',
+      align: 'right',
     },
     {
       title: '塔号',
       dataIndex: 'towerID',
+      align: 'right',
     },
     {
       title: '属性(标准层)',
       dataIndex: 'attribute',
+      align: 'right',
     },
     {
       title: '层高(m)',
       dataIndex: 'height',
+      align: 'right',
     },
     {
       title: '累计高度(m)',
       dataIndex: 'heightTD',
+      align: 'right',
     },
     {
       title: '面积(m^2)',
       dataIndex: 'area',
+      align: 'right',
     },
   ];
 
@@ -50,26 +57,32 @@ export function DistributeResultComponent(
     {
       title: '层号',
       dataIndex: 'storeyID',
+      align: 'right',
     },
     {
       title: '塔号',
       dataIndex: 'towerID',
+      align: 'right',
     },
     {
       title: '楼层质量(t)',
       dataIndex: 'mass',
+      align: 'right',
     },
     {
       title: '质量比',
       dataIndex: 'ratio',
+      align: 'right',
     },
     {
       title: '单位质量(kg/m^2)',
       dataIndex: 'unitMass',
+      align: 'right',
     },
     {
       title: '单位质量比',
       dataIndex: 'unitRatio',
+      align: 'right',
     },
   ];
 
@@ -96,30 +109,36 @@ export function DistributeResultComponent(
     });
   }
 
-  const stiffRatioColumns = [
+  const stiffRatioColumns: ColumnsType<Object> = [
     {
       title: '层号',
       dataIndex: 'storeyID',
+      align: 'right',
     },
     {
       title: '塔号',
       dataIndex: 'towerID',
+      align: 'right',
     },
     {
       title: 'X',
       dataIndex: 'ratx1',
+      align: 'right',
     },
     {
       title: 'Y',
       dataIndex: 'raty1',
+      align: 'right',
     },
     {
       title: 'X(层高修正)',
       dataIndex: 'ratx2',
+      align: 'right',
     },
     {
       title: 'Y(层高修正)',
       dataIndex: 'raty2',
+      align: 'right',
     },
   ];
 
@@ -156,22 +175,26 @@ export function DistributeResultComponent(
     });
   }
 
-  const shearWeightColumns = [
+  const shearWeightColumns: ColumnsType<Object> = [
     {
       title: '层号',
       dataIndex: 'storeyID',
+      align: 'right',
     },
     {
       title: '塔号',
       dataIndex: 'towerID',
+      align: 'right',
     },
     {
       title: 'X',
       dataIndex: 'ratioX',
+      align: 'right',
     },
     {
       title: 'Y',
       dataIndex: 'ratioY',
+      align: 'right',
     },
   ];
 
@@ -196,22 +219,26 @@ export function DistributeResultComponent(
     });
   }
 
-  const shearCapacityColumns = [
+  const shearCapacityColumns: ColumnsType<Object> = [
     {
       title: '层号',
       dataIndex: 'storeyID',
+      align: 'right',
     },
     {
       title: '塔号',
       dataIndex: 'towerID',
+      align: 'right',
     },
     {
       title: 'X',
       dataIndex: 'ratioX',
+      align: 'right',
     },
     {
       title: 'Y',
       dataIndex: 'ratioY',
+      align: 'right',
     },
   ];
 
@@ -240,30 +267,36 @@ export function DistributeResultComponent(
     });
   }
 
-  const momentDistributeColumns = [
+  const momentDistributeColumns: ColumnsType<Object> = [
     {
       title: '层号',
       dataIndex: 'storeyID',
+      align: 'right',
     },
     {
       title: '塔号',
       dataIndex: 'towerID',
+      align: 'right',
     },
     {
       title: 'X向柱',
       dataIndex: 'columnX',
+      align: 'right',
     },
     {
       title: 'X向短肢墙',
       dataIndex: 'wallX',
+      align: 'right',
     },
     {
       title: 'Y向柱',
       dataIndex: 'columnY',
+      align: 'right',
     },
     {
       title: 'Y向短肢墙',
       dataIndex: 'wallY',
+      align: 'right',
     },
   ];
 
@@ -300,22 +333,26 @@ export function DistributeResultComponent(
     });
   }
 
-  const shearDistributeColumns = [
+  const shearDistributeColumns: ColumnsType<Object> = [
     {
       title: '层号',
       dataIndex: 'storeyID',
+      align: 'right',
     },
     {
       title: '塔号',
       dataIndex: 'towerID',
+      align: 'right',
     },
     {
       title: 'X',
       dataIndex: 'ratioX',
+      align: 'right',
     },
     {
       title: 'Y',
       dataIndex: 'ratioY',
+      align: 'right',
     },
   ];
 

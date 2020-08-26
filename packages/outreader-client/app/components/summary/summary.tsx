@@ -1,32 +1,39 @@
 import { Descriptions, Table } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { ISummaryFE } from '@outreader/core';
 
 export function SummaryComponent(summary: ISummaryFE) {
-  const modeColumns = [
+  const modeColumns: ColumnsType<Object> = [
     {
       title: '振型',
       dataIndex: 'modeID',
+      align: 'left',
     },
     {
       title: '周期',
       dataIndex: 'period',
+      align: 'right',
     },
     {
       title: '转角',
       dataIndex: 'angle',
+      align: 'right',
     },
     {
       title: '平动系数X',
       dataIndex: 'factorX',
+      align: 'right',
     },
     {
       title: '平动系数Y',
       dataIndex: 'factorY',
+      align: 'right',
     },
     {
       title: '扭转系数Z',
       dataIndex: 'factorZ',
+      align: 'right',
     },
   ];
 
@@ -50,7 +57,7 @@ export function SummaryComponent(summary: ISummaryFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="工程路径" span={2}>
           {summary.project.dir}
@@ -73,7 +80,7 @@ export function SummaryComponent(summary: ISummaryFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="结构体系">
           {summary.structures.system}
@@ -111,7 +118,7 @@ export function SummaryComponent(summary: ISummaryFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="活载质量">
           {summary.weight.live.toFixed(0)}
@@ -131,7 +138,7 @@ export function SummaryComponent(summary: ISummaryFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="风荷载" span={2}>
           {}
@@ -172,7 +179,7 @@ export function SummaryComponent(summary: ISummaryFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="+偏心" span={2}>
           {}
@@ -213,7 +220,7 @@ export function SummaryComponent(summary: ISummaryFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="+偏心" span={2}>
           {}
@@ -254,7 +261,7 @@ export function SummaryComponent(summary: ISummaryFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="X向">
           {summary.shearWeightRatio.x}
@@ -274,7 +281,7 @@ export function SummaryComponent(summary: ISummaryFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="风荷载" span={2}>
           {}
@@ -312,7 +319,7 @@ export function SummaryComponent(summary: ISummaryFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="X向">
           {summary.stiffRatio.x[0].toFixed(3)}
@@ -332,7 +339,7 @@ export function SummaryComponent(summary: ISummaryFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="X向">
           {summary.shearCapacityRatio.x[0]}
@@ -361,7 +368,7 @@ export function SummaryComponent(summary: ISummaryFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 3 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="周期" span={3}>
           {}
@@ -393,7 +400,7 @@ export function SummaryComponent(summary: ISummaryFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="风荷载" span={2}>
           {}
@@ -419,7 +426,7 @@ export function SummaryComponent(summary: ISummaryFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="风荷载" span={2}>
           {}
