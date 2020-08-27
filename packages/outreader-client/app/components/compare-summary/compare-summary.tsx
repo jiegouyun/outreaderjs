@@ -1,4 +1,5 @@
-import { Descriptions, Table } from 'antd';
+import { Table } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { ISummaryFE } from '@outreader/core';
 import { ICompare } from '../../interfaces';
@@ -6,10 +7,12 @@ import { ICompare } from '../../interfaces';
 export function CompareSummaryComponent(summarys: ISummaryFE[]) {
   const n = summarys.length;
 
-  const modelColumns = [
+  const modelColumns: ColumnsType<ICompare> = [
     {
       title: '分项',
       dataIndex: 'iterms',
+      width: '15%',
+      align: 'left',
     },
   ];
 
@@ -17,6 +20,8 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
     modelColumns.push({
       title: `模型${i + 1}`,
       dataIndex: `model${i}`,
+      width: `${85 / n}%`,
+      align: 'right',
     });
   }
 
@@ -620,7 +625,6 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         style={{ marginBottom: 20 }}
       />
       <h3>层间位移角</h3>
-      <label>风荷载</label>
       <Table
         columns={modelColumns}
         dataSource={windDriftTableData}
@@ -628,8 +632,8 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        title={() => '风荷载'}
       />
-      <label>地震作用</label>
       <Table
         columns={modelColumns}
         dataSource={seismicDriftTableData}
@@ -637,6 +641,7 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        title={() => '地震作用'}
       />
       <h3>位移比</h3>
       <Table
@@ -666,7 +671,6 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         style={{ marginBottom: 20 }}
       />
       <h3>刚重比</h3>
-      <label>风荷载</label>
       <Table
         columns={modelColumns}
         dataSource={windStiffWeightTableData}
@@ -674,8 +678,8 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        title={() => '风荷载'}
       />
-      <label>地震作用</label>
       <Table
         columns={modelColumns}
         dataSource={seismicStiffWeightTableData}
@@ -683,6 +687,7 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        title={() => '地震作用'}
       />
       <h3>刚度比</h3>
       <Table
@@ -703,7 +708,6 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         style={{ marginBottom: 20 }}
       />
       <h3>动力特性</h3>
-      <label>周期</label>
       <Table
         columns={modelColumns}
         dataSource={periodTableData}
@@ -711,8 +715,8 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        title={() => '周期'}
       />
-      <label>质量参与系数</label>
       <Table
         columns={modelColumns}
         dataSource={modeMassTableData}
@@ -720,6 +724,7 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        title={() => '质量参与系数'}
       />
       <h3>基底剪力</h3>
       <Table

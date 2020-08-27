@@ -1,4 +1,5 @@
-import { Descriptions, Table, Collapse } from 'antd';
+import { Table, Collapse } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IFactorFE } from '@outreader/core';
 import { StoreyChart } from '../storey-chart';
@@ -18,10 +19,12 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
   }
   const count = storeyID.length;
 
-  const weakColumns = [
+  const weakColumns: ColumnsType<ICompare> = [
     {
       title: '层号',
       dataIndex: 'storeyID',
+      width: '10%',
+      align: 'right',
     },
   ];
 
@@ -29,6 +32,8 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
     weakColumns.push({
       title: `模型${i + 1}`,
       dataIndex: `factor${i}`,
+      width: `${90 / n}%`,
+      align: 'right',
     });
   }
 
@@ -43,10 +48,13 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
       key: j,
       storeyID: storeyID[j],
     });
-    for (let i = 0; i < n; i++) {
-      const len = factors[i].stiffness.storeyID.length;
-      const diff = count - len;
+  }
 
+  for (let i = 0; i < n; i++) {
+    const len = factors[i].stiffness.storeyID.length;
+    const diff = count - len;
+
+    for (let j = 0; j < count; j++) {
       weakTableData[j][`factor${i}`] =
         factors[i].stiffness.storeyID[j - diff] === storeyID[j]
           ? factors[i].stiffness.weakStoreyFactor[j - diff].toFixed(2)
@@ -65,10 +73,12 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
     }
   }
 
-  const factorColumns = [
+  const factorColumns: ColumnsType<ICompare> = [
     {
       title: '层号',
       dataIndex: 'storeyID',
+      width: '10%',
+      align: 'right',
     },
   ];
 
@@ -77,10 +87,14 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
       {
         title: `模型${i + 1}-X`,
         dataIndex: `factorX${i}`,
+        width: `${90 / 2 / n}%`,
+        align: 'right',
       },
       {
         title: `模型${i + 1}-Y`,
         dataIndex: `factorY${i}`,
+        width: `${90 / 2 / n}%`,
+        align: 'right',
       }
     );
   }
@@ -96,10 +110,13 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
       key: j,
       storeyID: storeyID[j],
     });
-    for (let i = 0; i < n; i++) {
-      const len = factors[i].shearWeightRatioModify.storeyID.length;
-      const diff = storeyID[0] - factors[i].shearWeightRatioModify.storeyID[0];
+  }
 
+  for (let i = 0; i < n; i++) {
+    const len = factors[i].shearWeightRatioModify.storeyID.length;
+    const diff = storeyID[0] - factors[i].shearWeightRatioModify.storeyID[0];
+
+    for (let j = 0; j < count; j++) {
       shearWeightTableData[j][`factorX${i}`] =
         factors[i].shearWeightRatioModify.storeyID[j - diff] === storeyID[j]
           ? factors[i].shearWeightRatioModify.factorX[j - diff].toFixed(3)
@@ -151,10 +168,13 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
       key: j,
       storeyID: storeyID[j],
     });
-    for (let i = 0; i < n; i++) {
-      const len = factors[i].v02qFactor.storeyID.length;
-      const diff = storeyID[0] - factors[i].v02qFactor.storeyID[0];
+  }
 
+  for (let i = 0; i < n; i++) {
+    const len = factors[i].v02qFactor.storeyID.length;
+    const diff = storeyID[0] - factors[i].v02qFactor.storeyID[0];
+
+    for (let j = 0; j < count; j++) {
       v02qTableData[j][`factorX${i}`] =
         factors[i].v02qFactor.storeyID[j - diff] === storeyID[j]
           ? factors[i].v02qFactor.factorX[j - diff].toFixed(3)

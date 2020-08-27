@@ -1,4 +1,5 @@
-import { Descriptions, Table, Layout, Row, Col, Collapse } from 'antd';
+import { Table, Row, Col, Collapse } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IForceFE } from '@outreader/core';
 import { StoreyChart } from '../storey-chart';
@@ -17,10 +18,12 @@ export function CompareForceComponent(forces: IForceFE[]) {
   }
   const count = storeyID.length;
 
-  const forceColumns = [
+  const forceColumns: ColumnsType<ICompare> = [
     {
       title: '层号',
       dataIndex: 'storeyID',
+      width: '10%',
+      align: 'right',
     },
   ];
 
@@ -29,18 +32,26 @@ export function CompareForceComponent(forces: IForceFE[]) {
       {
         title: `模型${i + 1}-剪力X`,
         dataIndex: `shearX${i}`,
+        width: `${90 / 4 / n}%`,
+        align: 'right',
       },
       {
         title: `模型${i + 1}-弯矩X`,
         dataIndex: `momentX${i}`,
+        width: `${90 / 4 / n}%`,
+        align: 'right',
       },
       {
         title: `模型${i + 1}-剪力Y`,
         dataIndex: `shearY${i}`,
+        width: `${90 / 4 / n}%`,
+        align: 'right',
       },
       {
         title: `模型${i + 1}-弯矩Y`,
         dataIndex: `momentY${i}`,
+        width: `${90 / 4 / n}%`,
+        align: 'right',
       }
     );
   }
@@ -58,10 +69,13 @@ export function CompareForceComponent(forces: IForceFE[]) {
       key: j,
       storeyID: storeyID[j],
     });
-    for (let i = 0; i < n; i++) {
-      const len = forces[i].wind.storeyID.length;
-      const diff = count - len;
+  }
 
+  for (let i = 0; i < n; i++) {
+    const len = forces[i].wind.storeyID.length;
+    const diff = count - len;
+
+    for (let j = 0; j < count; j++) {
       alongWindTableData[j][`shearX${i}`] =
         forces[i].wind.storeyID[j - diff] === storeyID[j]
           ? forces[i].wind.shearAlongX[j - diff].toFixed(0)
@@ -135,11 +149,13 @@ export function CompareForceComponent(forces: IForceFE[]) {
       key: j,
       storeyID: storeyID[j],
     });
-    for (let i = 0; i < n; i++) {
-      // todo
-      const len = forces[i].wind.storeyID.length;
-      const diff = count - len;
+  }
 
+  for (let i = 0; i < n; i++) {
+    const len = forces[i].wind.storeyID.length;
+    const diff = count - len;
+
+    for (let j = 0; j < count; j++) {
       crossWindTableData[j][`shearX${i}`] =
         forces[i].wind.storeyID[j - diff] === storeyID[j]
           ? forces[i].wind.shearCrossX[j - diff].toFixed(0)
@@ -213,11 +229,13 @@ export function CompareForceComponent(forces: IForceFE[]) {
       key: j,
       storeyID: storeyID[j],
     });
-    for (let i = 0; i < n; i++) {
-      // todo
-      const len = forces[i].seismic.storeyID.length;
-      const diff = count - len;
+  }
 
+  for (let i = 0; i < n; i++) {
+    const len = forces[i].seismic.storeyID.length;
+    const diff = count - len;
+
+    for (let j = 0; j < count; j++) {
       seismicTableData[j][`shearX${i}`] =
         forces[i].seismic.storeyID[j - diff] === storeyID[j]
           ? forces[i].seismic.shearX[j - diff].toFixed(0)

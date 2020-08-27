@@ -1,33 +1,40 @@
-import { Descriptions, Table, Row, Col, Collapse } from 'antd';
+import { Table, Row, Col, Collapse } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IDriftFE } from '@outreader/core';
 import { StoreyChart } from './../storey-chart';
 
 export function DriftComponent(drift: IDriftFE) {
-  const driftDispColumns = [
+  const driftDispColumns: ColumnsType<Object> = [
     {
       title: '层号',
       dataIndex: 'storeyID',
+      align: 'right',
     },
     {
       title: '塔号',
       dataIndex: 'towerID',
+      align: 'right',
     },
     {
       title: '风荷载X',
       dataIndex: 'windX',
+      align: 'right',
     },
     {
       title: '风荷载Y',
       dataIndex: 'windY',
+      align: 'right',
     },
     {
       title: '地震X',
       dataIndex: 'seismicX',
+      align: 'right',
     },
     {
       title: '地震Y',
       dataIndex: 'seismicY',
+      align: 'right',
     },
   ];
 
@@ -94,30 +101,36 @@ export function DriftComponent(drift: IDriftFE) {
     });
   }
 
-  const dispRatioColumns = [
+  const dispRatioColumns: ColumnsType<Object> = [
     {
       title: '层号',
       dataIndex: 'storeyID',
+      align: 'right',
     },
     {
       title: '塔号',
       dataIndex: 'towerID',
+      align: 'right',
     },
     {
       title: '+X偏心',
       dataIndex: 'eccXP',
+      align: 'right',
     },
     {
       title: '-X偏心',
       dataIndex: 'eccXN',
+      align: 'right',
     },
     {
       title: '+Y偏心',
       dataIndex: 'eccYP',
+      align: 'right',
     },
     {
       title: '-Y偏心',
       dataIndex: 'eccYN',
+      align: 'right',
     },
   ];
 

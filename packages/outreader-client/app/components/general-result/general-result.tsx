@@ -1,16 +1,19 @@
 import { Descriptions, Table } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IGeneralResultFE } from '@outreader/core';
 
 export function GeneralResultComponent(generalResult: IGeneralResultFE) {
-  const towerColumns = [
+  const towerColumns: ColumnsType<Object> = [
     {
       title: '塔号',
       dataIndex: 'towerID',
+      align: 'left',
     },
     {
       title: '结构体系',
       dataIndex: 'system',
+      align: 'right',
     },
   ];
 
@@ -23,22 +26,26 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
     });
   }
 
-  const stiffRatioColumns = [
+  const stiffRatioColumns: ColumnsType<Object> = [
     {
       title: '方向',
       dataIndex: 'direction',
+      align: 'left',
     },
     {
       title: '地下一层',
       dataIndex: 'basement1',
+      align: 'right',
     },
     {
       title: '地上一层',
       dataIndex: 'storey1',
+      align: 'right',
     },
     {
       title: '刚度比',
       dataIndex: 'ratio',
+      align: 'right',
     },
   ];
 
@@ -59,26 +66,31 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
     },
   ];
 
-  const overturningColumns = [
+  const overturningColumns: ColumnsType<Object> = [
     {
       title: '方向',
       dataIndex: 'direction',
+      align: 'left',
     },
     {
       title: '抗倾覆力矩Mr',
       dataIndex: 'mr',
+      align: 'right',
     },
     {
       title: '倾覆力矩Mov',
       dataIndex: 'mov',
+      align: 'right',
     },
     {
       title: '比值Mr/Mov',
       dataIndex: 'ratio',
+      align: 'right',
     },
     {
       title: '零应力区(%)',
       dataIndex: 'zeroArea',
+      align: 'right',
     },
   ];
 
@@ -117,26 +129,31 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
     },
   ];
 
-  const stableColumns = [
+  const stableColumns: ColumnsType<Object> = [
     {
       title: '荷载',
       dataIndex: 'load',
+      align: 'left',
     },
     {
       title: '层号',
       dataIndex: 'storeyNo',
+      align: 'right',
     },
     {
       title: '塔号',
       dataIndex: 'towerNo',
+      align: 'right',
     },
     {
       title: 'X向',
       dataIndex: 'ratioX',
+      align: 'right',
     },
     {
       title: 'Y向',
       dataIndex: 'ratioY',
+      align: 'right',
     },
   ];
 
@@ -159,18 +176,21 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
     },
   ];
 
-  const windComfortColumns = [
+  const windComfortColumns: ColumnsType<Object> = [
     {
       title: '风向',
       dataIndex: 'direction',
+      align: 'left',
     },
     {
       title: 'X向',
       dataIndex: 'accX',
+      align: 'right',
     },
     {
       title: 'Y向',
       dataIndex: 'accY',
+      align: 'right',
     },
   ];
 
@@ -196,7 +216,7 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 1 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="工程名称">
           {generalResult.project.engineering}
@@ -234,7 +254,7 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 1 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="活载质量">
           {generalResult.weight.live.toFixed(0)}
@@ -254,7 +274,7 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="地下室层号">
           {generalResult.constraintFloorStiffnessRatio.storeyNo}
@@ -276,7 +296,7 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 2 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="层号">
           {generalResult.overturningCheck.storeyNo}
