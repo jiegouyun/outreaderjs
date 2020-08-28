@@ -53,7 +53,7 @@ export function DistributeResultComponent(
     });
   }
 
-  const massRatioColumns = [
+  const massRatioColumns: ColumnsType<Object> = [
     {
       title: '层号',
       dataIndex: 'storeyID',

@@ -92,10 +92,14 @@ export function extractMomentPercent(
   lineArray: string[],
   momentPercent: IMomentPercent,
 ): IMomentPercent {
-  if (lineArray[0] === '规定水平力下框架柱、短肢墙地震倾覆力矩百分比') {
+  if (
+    lineArray[0] === '规定水平力下框架柱、短肢墙地震倾覆力矩百分比' ||
+    lineArray[0] === '规定水平力下框架柱、短肢墙地震倾覆弯矩百分比'
+  ) {
     FLAG = 'keyMomentPercent';
   } else if (
-    lineArray[0] === '规定水平力下框架柱、短肢墙地震倾覆力矩（轴力方式）'
+    lineArray[0] === '规定水平力下框架柱、短肢墙地震倾覆力矩（轴力方式）' ||
+    lineArray[0] === '规定水平力下框架柱、短肢墙地震倾覆弯矩（轴力方式）'
   ) {
     if (FLAG === 'keyMomentPercent') {
       momentPercent.allExtracted = true;
@@ -127,7 +131,10 @@ export function extractColumnShear(
 ): IColumnShear {
   if (lineArray[0] === '框架柱地震剪力百分比') {
     FLAG = 'keyColumnShear';
-  } else if (lineArray[0] === '框架柱风倾覆力矩百分比') {
+  } else if (
+    lineArray[0] === '框架柱风倾覆力矩百分比' ||
+    lineArray[0] === '框架柱风倾覆弯矩百分比'
+  ) {
     if (FLAG === 'keyColumnShear') {
       columnShear.allExtracted = true;
     }
