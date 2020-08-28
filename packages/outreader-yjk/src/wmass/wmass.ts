@@ -559,6 +559,24 @@ export function extractWind(lineArray: string[], wind: IWind): IWind {
       wind.shearCrossY.push(Number(lineArray[5]));
       wind.momentCrossY.push(Number(lineArray[6]));
     }
+
+    // compatibilized v1.8.2
+    if (!isNaN(Number(lineArray[0])) && lineArray.length === 8) {
+      wind.storeyID.push(Number(lineArray[0]));
+      wind.towerID.push(Number(lineArray[1]));
+      wind.forceAlongX.push(Number(lineArray[2]));
+      wind.shearAlongX.push(Number(lineArray[3]));
+      wind.momentAlongX.push(Number(lineArray[4]));
+      // wind.forceCrossX.push(0);
+      // wind.shearCrossX.push(0);
+      // wind.momentCrossX.push(0);
+      wind.forceAlongY.push(Number(lineArray[5]));
+      wind.shearAlongY.push(Number(lineArray[6]));
+      wind.momentAlongY.push(Number(lineArray[7]));
+      // wind.forceCrossY.push(Number(0));
+      // wind.shearCrossY.push(Number(0));
+      // wind.momentCrossY.push(Number(0));
+    }
   }
 
   return wind;

@@ -53,7 +53,7 @@ export function DistributeResultComponent(
     });
   }
 
-  const massRatioColumns = [
+  const massRatioColumns: ColumnsType<Object> = [
     {
       title: '层号',
       dataIndex: 'storeyID',
@@ -152,10 +152,10 @@ export function DistributeResultComponent(
       key: i,
       storeyID: distributeResult.stiffness.storeyID[i],
       towerID: distributeResult.stiffness.towerID[i],
-      ratx1: distributeResult.stiffness.ratx1[i].toFixed(3),
-      raty1: distributeResult.stiffness.raty1[i].toFixed(3),
-      ratx2: distributeResult.stiffness.ratx2[i].toFixed(3),
-      raty2: distributeResult.stiffness.raty2[i].toFixed(3),
+      ratx1: Math.round(distributeResult.stiffness.ratx1[i] * 1000) / 1000,
+      raty1: Math.round(distributeResult.stiffness.raty1[i] * 1000) / 1000,
+      ratx2: Math.round(distributeResult.stiffness.ratx2[i] * 1000) / 1000,
+      raty2: Math.round(distributeResult.stiffness.raty2[i] * 1000) / 1000,
     });
     stiffRatioXChartData.push({
       x: distributeResult.stiffness.ratx1[i],
