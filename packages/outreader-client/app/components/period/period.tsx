@@ -1,4 +1,5 @@
-import { Descriptions, Table, Collapse } from 'antd';
+import { Table, Collapse } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import {
   ScatterChart,
@@ -14,30 +15,36 @@ import {
 import { IPeriodFE } from '@outreader/core';
 
 export function PeriodComponent(period: IPeriodFE) {
-  const modeColumns = [
+  const modeColumns: ColumnsType<Object> = [
     {
       title: '振型',
       dataIndex: 'modeID',
+      align: 'right',
     },
     {
       title: '周期',
       dataIndex: 'period',
+      align: 'right',
     },
     {
       title: '转角',
       dataIndex: 'angle',
+      align: 'right',
     },
     {
       title: '平动系数X',
       dataIndex: 'factorX',
+      align: 'right',
     },
     {
       title: '平动系数Y',
       dataIndex: 'factorY',
+      align: 'right',
     },
     {
       title: '扭转系数Z',
       dataIndex: 'factorZ',
+      align: 'right',
     },
   ];
   const periodModeTableData = [];
@@ -66,22 +73,41 @@ export function PeriodComponent(period: IPeriodFE) {
     });
   }
 
-  const periodMassColumns = [
+  const periodMassColumns: ColumnsType<Object> = [
     {
       title: '振型',
       dataIndex: 'modeID',
+      align: 'right',
     },
     {
       title: 'X',
       dataIndex: 'factorX',
+      align: 'right',
+    },
+    {
+      title: '累计X',
+      dataIndex: 'sumX',
+      align: 'right',
     },
     {
       title: 'Y',
       dataIndex: 'factorY',
+      align: 'right',
+    },
+    {
+      title: '累计Y',
+      dataIndex: 'sumY',
+      align: 'right',
     },
     {
       title: 'Z',
       dataIndex: 'factorZ',
+      align: 'right',
+    },
+    {
+      title: '累计Z',
+      dataIndex: 'sumZ',
+      align: 'right',
     },
   ];
 
@@ -93,16 +119,19 @@ export function PeriodComponent(period: IPeriodFE) {
   let sumY: number = 0;
   let sumZ: number = 0;
   for (let i = 0; i < period.modeMass.modeID.length; i++) {
+    sumX += period.modeMass.factorX[i];
+    sumY += period.modeMass.factorY[i];
+    sumZ += period.modeMass.factorZ[i];
     periodMassTableData.push({
       key: i,
       modeID: period.modeMass.modeID[i],
       factorX: period.modeMass.factorX[i].toFixed(2),
+      sumX: sumX.toFixed(2),
       factorY: period.modeMass.factorY[i].toFixed(2),
+      sumY: sumY.toFixed(2),
       factorZ: period.modeMass.factorZ[i].toFixed(2),
+      sumZ: sumZ.toFixed(2),
     });
-    sumX += period.modeMass.factorX[i];
-    sumY += period.modeMass.factorY[i];
-    sumZ += period.modeMass.factorZ[i];
     modeMassX.push({
       x: period.modeMass.modeID[i],
       y: sumX.toFixed(2),

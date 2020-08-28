@@ -1,41 +1,50 @@
-import { Descriptions, Table, Layout, Row, Col, Collapse } from 'antd';
+import { Table, Row, Col, Collapse } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IForceFE } from '@outreader/core';
 import { StoreyChart } from './../storey-chart';
 
 export function ForceComponent(force: IForceFE) {
-  const forceColumns = [
+  const forceColumns: ColumnsType<Object> = [
     {
       title: '层号',
       dataIndex: 'storeyID',
+      align: 'right',
     },
     {
       title: '塔号',
       dataIndex: 'towerID',
+      align: 'right',
     },
     {
       title: '外力X',
       dataIndex: 'forceX',
+      align: 'right',
     },
     {
       title: '剪力X',
       dataIndex: 'shearX',
+      align: 'right',
     },
     {
       title: '弯矩X',
       dataIndex: 'momentX',
+      align: 'right',
     },
     {
       title: '外力Y',
       dataIndex: 'forceY',
+      align: 'right',
     },
     {
       title: '剪力Y',
       dataIndex: 'shearY',
+      align: 'right',
     },
     {
       title: '弯矩Y',
       dataIndex: 'momentY',
+      align: 'right',
     },
   ];
 

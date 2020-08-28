@@ -1,4 +1,5 @@
-import { Descriptions, Table } from 'antd';
+import { Table } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IParametersFE } from '@outreader/core';
 import { ICompare } from '../../interfaces';
@@ -6,10 +7,12 @@ import { ICompare } from '../../interfaces';
 export function CompareParametersComponent(parameters: IParametersFE[]) {
   const n = parameters.length;
 
-  const modelColumns = [
+  const modelColumns: ColumnsType<ICompare> = [
     {
       title: '分项',
       dataIndex: 'iterms',
+      width: '20%',
+      align: 'left',
     },
   ];
 
@@ -17,6 +20,8 @@ export function CompareParametersComponent(parameters: IParametersFE[]) {
     modelColumns.push({
       title: `模型${i + 1}`,
       dataIndex: `model${i}`,
+      width: `${80 / n}%`,
+      align: 'right',
     });
   }
 

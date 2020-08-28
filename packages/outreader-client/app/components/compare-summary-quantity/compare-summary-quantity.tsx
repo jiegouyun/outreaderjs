@@ -1,4 +1,5 @@
 import { Descriptions, Table } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { ISummaryQuantityFE } from '@outreader/core';
 import { ICompare } from '../../interfaces';
@@ -8,10 +9,12 @@ export function CompareSummaryQuantityComponent(
 ) {
   const n = summaryQuantities.length;
 
-  const modelColumns = [
+  const modelColumns: ColumnsType<ICompare> = [
     {
       title: '分项',
       dataIndex: 'iterms',
+      width: '20%',
+      align: 'left',
     },
   ];
 
@@ -19,6 +22,8 @@ export function CompareSummaryQuantityComponent(
     modelColumns.push({
       title: `模型${i + 1}`,
       dataIndex: `model${i}`,
+      width: `${80 / n}%`,
+      align: 'right',
     });
   }
 
@@ -100,13 +105,23 @@ export function CompareSummaryQuantityComponent(
         bordered
         size="small"
         column={{ xs: 1, sm: 1 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
-        <Descriptions.Item label="钢筋(元/t)">{6500}</Descriptions.Item>
-        <Descriptions.Item label="砼(元/m^3)">{750}</Descriptions.Item>
-        <Descriptions.Item label="钢材(元/t)">{13500}</Descriptions.Item>
-        <Descriptions.Item label="型钢(元/t)">{10000}</Descriptions.Item>
-        <Descriptions.Item label="压型钢板(元/m^2)">{65.7}</Descriptions.Item>
+        <Descriptions.Item label="钢筋(元/t)" style={{ width: '20%' }}>
+          {6500}
+        </Descriptions.Item>
+        <Descriptions.Item label="砼(元/m^3)" style={{ width: '20%' }}>
+          {750}
+        </Descriptions.Item>
+        <Descriptions.Item label="钢材(元/t)" style={{ width: '20%' }}>
+          {13500}
+        </Descriptions.Item>
+        <Descriptions.Item label="型钢(元/t)" style={{ width: '20%' }}>
+          {10000}
+        </Descriptions.Item>
+        <Descriptions.Item label="压型钢板(元/m^2)" style={{ width: '20%' }}>
+          {65.7}
+        </Descriptions.Item>
       </Descriptions>
     </div>
   );

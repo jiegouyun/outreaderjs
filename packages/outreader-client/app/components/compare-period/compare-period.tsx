@@ -1,4 +1,5 @@
-import { Descriptions, Table, Collapse } from 'antd';
+import { Table, Collapse } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IPeriodFE } from '@outreader/core';
 import { ICompare } from '../../interfaces';
@@ -13,10 +14,12 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
   }
   const count = modeID.length;
 
-  const modeColumns = [
+  const modeColumns: ColumnsType<ICompare> = [
     {
       title: '振型',
       dataIndex: 'modeID',
+      width: '10%',
+      align: 'right',
     },
   ];
 
@@ -25,10 +28,14 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
       {
         title: `模型${i + 1}-周期`,
         dataIndex: `period${i}`,
+        width: `${90 / 2 / n}%`,
+        align: 'right',
       },
       {
         title: `模型${i + 1}-转角`,
         dataIndex: `angle${i}`,
+        width: `${90 / 2 / n}%`,
+        align: 'right',
       }
     );
   }
@@ -39,7 +46,10 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
       key: j,
       modeID: modeID[j],
     });
-    for (let i = 0; i < n; i++) {
+  }
+
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < count; j++) {
       periodModeTableData[j][`period${i}`] = (
         periods[i].modeCoupling.period[j] || 0
       ).toFixed(3);
@@ -53,9 +63,12 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
   for (let j = 0; j < count; j++) {
     periodSeismicTableData.push({
       key: j,
-      modeID: j,
+      modeID: modeID[j],
     });
-    for (let i = 0; i < n; i++) {
+  }
+
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < count; j++) {
       periodSeismicTableData[j][`period${i}`] = (
         periods[i].modeSeismic.period[j] || 0
       ).toFixed(3);
@@ -65,10 +78,12 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
     }
   }
 
-  const periodMassColumns = [
+  const periodMassColumns: ColumnsType<ICompare> = [
     {
       title: '振型',
       dataIndex: 'modeID',
+      width: '10%',
+      align: 'left',
     },
   ];
 
@@ -77,14 +92,20 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
       {
         title: `模型${i + 1}-X`,
         dataIndex: `factorX${i}`,
+        width: `${90 / 3 / n}%`,
+        align: 'right',
       },
       {
         title: `模型${i + 1}-Y`,
         dataIndex: `factorY${i}`,
+        width: `${90 / 3 / n}%`,
+        align: 'right',
       },
       {
         title: `模型${i + 1}-Z`,
         dataIndex: `factorZ${i}`,
+        width: `${90 / 3 / n}%`,
+        align: 'right',
       }
     );
   }
@@ -93,9 +114,12 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
   for (let j = 0; j < count; j++) {
     periodMassTableData.push({
       key: j,
-      modeID: j,
+      modeID: modeID[j],
     });
-    for (let i = 0; i < n; i++) {
+  }
+
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < count; j++) {
       periodMassTableData[j][`factorX${i}`] = (
         periods[i].modeMass.factorX[j] || 0
       ).toFixed(2);

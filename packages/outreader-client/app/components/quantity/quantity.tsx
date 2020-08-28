@@ -1,37 +1,45 @@
-import { Descriptions, Table, Row, Col, Collapse } from 'antd';
+import { Table, Row, Col, Collapse } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IQuantityFE } from '@outreader/core';
 import { QuantityChart } from './../quantity-chart';
 
 export function QuantityComponent(quantity: IQuantityFE) {
-  const quantityColumns = [
+  const quantityColumns: ColumnsType<Object> = [
     {
       title: '层号',
       dataIndex: 'storeyID',
+      align: 'right',
     },
     {
       title: '面积(m^2)',
       dataIndex: 'area',
+      align: 'right',
     },
     {
       title: '墙',
       dataIndex: 'wall',
+      align: 'right',
     },
     {
       title: '柱',
       dataIndex: 'column',
+      align: 'right',
     },
     {
       title: '梁',
       dataIndex: 'beam',
+      align: 'right',
     },
     {
       title: '板',
       dataIndex: 'floor',
+      align: 'right',
     },
     {
       title: '合计',
       dataIndex: 'total',
+      align: 'right',
     },
   ];
 
@@ -177,6 +185,7 @@ export function QuantityComponent(quantity: IQuantityFE) {
       storeyID: quantity.storeyID[i],
       area: Math.round(quantity.area[i] * 10) / 10,
       wall: Math.round(quantity.rebar.wall[i] / 1000),
+      column: Math.round(quantity.rebar.column[i] / 1000),
       beam: Math.round(quantity.rebar.beam[i] / 1000),
       floor: Math.round(quantity.rebar.floor[i] / 1000),
       total: Math.round(quantity.rebar.storey[i] / 1000),

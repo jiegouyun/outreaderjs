@@ -1,32 +1,39 @@
 import { Descriptions, Table } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { ISummaryQuantityFE } from '@outreader/core';
 
 export function SummaryQuantityComponent(summaryQuantity: ISummaryQuantityFE) {
-  const summaryQuantityColumns = [
+  const summaryQuantityColumns: ColumnsType<Object> = [
     {
       title: '分项',
       dataIndex: 'part',
+      align: 'left',
     },
     {
       title: '墙',
       dataIndex: 'wall',
+      align: 'right',
     },
     {
       title: '柱',
       dataIndex: 'column',
+      align: 'right',
     },
     {
       title: '梁',
       dataIndex: 'beam',
+      align: 'right',
     },
     {
       title: '板',
       dataIndex: 'floor',
+      align: 'right',
     },
     {
       title: '合计',
       dataIndex: 'total',
+      align: 'right',
     },
   ];
 
@@ -94,7 +101,7 @@ export function SummaryQuantityComponent(summaryQuantity: ISummaryQuantityFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 1 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="工程名称">
           {summaryQuantity.structure.engineering}
@@ -127,7 +134,7 @@ export function SummaryQuantityComponent(summaryQuantity: ISummaryQuantityFE) {
         bordered
         size="small"
         column={{ xs: 1, sm: 1 }}
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 20, textAlign: 'right' }}
       >
         <Descriptions.Item label="钢筋(元/t)">{6500}</Descriptions.Item>
         <Descriptions.Item label="砼(元/m^3)">{750}</Descriptions.Item>

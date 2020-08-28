@@ -1,21 +1,25 @@
-import { Descriptions, Table, Collapse } from 'antd';
+import { Table, Collapse } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IFactorFE } from '@outreader/core';
 import { StoreyChart } from './../storey-chart';
 
 export function FactorComponent(factor: IFactorFE) {
-  const weakColumns = [
+  const weakColumns: ColumnsType<Object> = [
     {
       title: '层号',
       dataIndex: 'storeyID',
+      align: 'right',
     },
     {
       title: '塔号',
       dataIndex: 'towerID',
+      align: 'right',
     },
     {
       title: '放大系数',
       dataIndex: 'factor',
+      align: 'right',
     },
   ];
 
@@ -34,22 +38,26 @@ export function FactorComponent(factor: IFactorFE) {
     });
   }
 
-  const factorColumns = [
+  const factorColumns: ColumnsType<Object> = [
     {
       title: '层号',
       dataIndex: 'storeyID',
+      align: 'right',
     },
     {
       title: '塔号',
       dataIndex: 'towerID',
+      align: 'right',
     },
     {
       title: 'X向',
       dataIndex: 'factorX',
+      align: 'right',
     },
     {
       title: 'Y向',
       dataIndex: 'factorY',
+      align: 'right',
     },
   ];
 
