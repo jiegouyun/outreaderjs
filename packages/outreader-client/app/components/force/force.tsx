@@ -93,12 +93,12 @@ export function ForceComponent(force: IForceFE) {
       key: i,
       storeyID: force.wind.storeyID[i],
       towerID: force.wind.towerID[i],
-      forceX: force.wind.forceCrossX[i].toFixed(0),
-      shearX: force.wind.shearCrossX[i].toFixed(0),
-      momentX: force.wind.momentCrossX[i].toFixed(0),
-      forceY: force.wind.forceCrossY[i].toFixed(0),
-      shearY: force.wind.shearCrossY[i].toFixed(0),
-      momentY: force.wind.momentCrossY[i].toFixed(0),
+      forceX: Math.round(force.wind.forceCrossX[i]),
+      shearX: Math.round(force.wind.shearCrossX[i]),
+      momentX: Math.round(force.wind.momentCrossX[i]),
+      forceY: Math.round(force.wind.forceCrossY[i]),
+      shearY: Math.round(force.wind.shearCrossY[i]),
+      momentY: Math.round(force.wind.momentCrossY[i]),
     });
     shearCrossWindXChartData.push({
       x: Math.abs(force.wind.shearCrossX[i]),
