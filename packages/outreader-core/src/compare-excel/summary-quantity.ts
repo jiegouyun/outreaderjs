@@ -415,5 +415,5 @@ export async function formatSummaryQuantity(
   rangeFillColor(worksheet, 53, 1, 60, 2, 'solid', '00F0FFF0', '00FFFFFF');
   rangeFillColor(worksheet, 54, 3, 60, 3, 'solid', '00FFFFF0', '00FFFFFF');
 
-  worksheet.views = [{ state: 'frozen', xSplit: 2, ySplit: 3 }];
+  worksheet.views = [{ state: 'frozen', xSplit: 2, ySplit: 1 }];
 }

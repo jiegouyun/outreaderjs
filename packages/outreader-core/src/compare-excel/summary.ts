@@ -129,12 +129,12 @@ export async function initSummary(worksheet: Excel.Worksheet, nums: number) {
 
   worksheet.mergeCells('A71:A80');
   worksheet.getCell('A71').value = '动力特性';
-  worksheet.getCell('B71:B73');
+  worksheet.mergeCells('B71:B73');
   worksheet.getCell('B71').value = '周期';
   worksheet.getCell('C71').value = 1;
   worksheet.getCell('C72').value = 2;
   worksheet.getCell('C73').value = 3;
-  worksheet.getCell('B74:B76');
+  worksheet.mergeCells('B74:B76');
   worksheet.getCell('B74').value = '转角';
   worksheet.getCell('C74').value = 1;
   worksheet.getCell('C75').value = 2;
@@ -150,7 +150,7 @@ export async function initSummary(worksheet: Excel.Worksheet, nums: number) {
   worksheet.mergeCells(81, 1, 81, 3 + nums);
 
   worksheet.mergeCells('A82:A85');
-  worksheet.getCell('A48').value = '基底剪力';
+  worksheet.getCell('A82').value = '基底剪力';
   worksheet.mergeCells('B82:B83');
   worksheet.getCell('B82').value = '风荷载';
   worksheet.getCell('C82').value = 'X向';
@@ -458,5 +458,5 @@ export async function formatSummary(worksheet: Excel.Worksheet, nums: number) {
   rangeFillColor(worksheet, 71, 1, 80, 3, 'solid', '00F0FFF0', '00FFFFFF');
   rangeFillColor(worksheet, 82, 1, 89, 3, 'solid', '00F0FFF0', '00FFFFFF');
 
-  worksheet.views = [{ state: 'frozen', xSplit: 3, ySplit: 3 }];
+  worksheet.views = [{ state: 'frozen', xSplit: 3, ySplit: 1 }];
 }

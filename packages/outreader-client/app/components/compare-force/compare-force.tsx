@@ -158,19 +158,19 @@ export function CompareForceComponent(forces: IForceFE[]) {
     for (let j = 0; j < count; j++) {
       crossWindTableData[j][`shearX${i}`] =
         forces[i].wind.storeyID[j - diff] === storeyID[j]
-          ? forces[i].wind.shearCrossX[j - diff].toFixed(0)
+          ? Math.round(forces[i].wind.shearCrossX[j - diff])
           : '';
       crossWindTableData[j][`momentX${i}`] =
         forces[i].wind.storeyID[j - diff] === storeyID[j]
-          ? forces[i].wind.momentCrossX[j - diff].toFixed(0)
+          ? Math.round(forces[i].wind.momentCrossX[j - diff])
           : '';
       crossWindTableData[j][`shearY${i}`] =
         forces[i].wind.storeyID[j - diff] === storeyID[j]
-          ? forces[i].wind.shearCrossY[j - diff].toFixed(0)
+          ? Math.round(forces[i].wind.shearCrossY[j - diff])
           : '';
       crossWindTableData[j][`momentY${i}`] =
         forces[i].wind.storeyID[j - diff] === storeyID[j]
-          ? forces[i].wind.momentCrossY[j - diff].toFixed(0)
+          ? Math.round(forces[i].wind.momentCrossY[j - diff])
           : '';
 
       shearCrossWindChartData[2 * i].push({
