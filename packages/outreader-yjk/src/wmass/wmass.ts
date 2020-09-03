@@ -567,6 +567,7 @@ export function extractWind(lineArray: string[], wind: IWind): IWind {
       wind.forceAlongX.push(Number(lineArray[2]));
       wind.shearAlongX.push(Number(lineArray[3]));
       wind.momentAlongX.push(Number(lineArray[4]));
+<<<<<<< HEAD
       wind.forceCrossX.push(0);
       wind.shearCrossX.push(0);
       wind.momentCrossX.push(0);
@@ -576,6 +577,17 @@ export function extractWind(lineArray: string[], wind: IWind): IWind {
       wind.forceCrossY.push(Number(0));
       wind.shearCrossY.push(Number(0));
       wind.momentCrossY.push(Number(0));
+=======
+      // wind.forceCrossX.push(0);
+      // wind.shearCrossX.push(0);
+      // wind.momentCrossX.push(0);
+      wind.forceAlongY.push(Number(lineArray[5]));
+      wind.shearAlongY.push(Number(lineArray[6]));
+      wind.momentAlongY.push(Number(lineArray[7]));
+      // wind.forceCrossY.push(Number(0));
+      // wind.shearCrossY.push(Number(0));
+      // wind.momentCrossY.push(Number(0));
+>>>>>>> 032cee33815ae0321c92edc92c0d45fe9c08e75d
     }
   }
 
