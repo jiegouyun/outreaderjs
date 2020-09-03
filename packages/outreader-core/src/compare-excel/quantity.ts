@@ -92,7 +92,7 @@ export async function writeQuantity(
 
       // write rebar
       worksheet.getCell(4 + j, 2 + 2 * i + 5 * nums).value = {
-        formula: `round(${quantity.rebar.storey[j - diff] || 0} / 1000,2)`,
+        formula: `round(${quantity.rebar.storey[j - diff] || 0} / 1000,0)`,
         date1904: false,
       };
 
