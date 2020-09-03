@@ -169,23 +169,23 @@ export async function writeQuantity(
   for (let i = 0; i < quantity.rebar.storeyID.length; i++) {
     // write rebar
     worksheet.getCell(`W${3 + i}`).value = {
-      formula: `round(${quantity.rebar.wall[i]} / 1000,2)`,
+      formula: `round(${quantity.rebar.wall[i]} / 1000,0)`,
       date1904: false,
     };
     worksheet.getCell(`X${3 + i}`).value = {
-      formula: `round(${quantity.rebar.column[i]} / 1000,2)`,
+      formula: `round(${quantity.rebar.column[i]} / 1000,0)`,
       date1904: false,
     };
     worksheet.getCell(`Y${3 + i}`).value = {
-      formula: `round(${quantity.rebar.beam[i]} / 1000,2)`,
+      formula: `round(${quantity.rebar.beam[i]} / 1000,0)`,
       date1904: false,
     };
     worksheet.getCell(`Z${3 + i}`).value = {
-      formula: `round(${quantity.rebar.floor[i]} / 1000,2)`,
+      formula: `round(${quantity.rebar.floor[i]} / 1000,0)`,
       date1904: false,
     };
     worksheet.getCell(`AA${3 + i}`).value = {
-      formula: `round(${quantity.rebar.storey[i]} / 1000,2)`,
+      formula: `round(${quantity.rebar.storey[i]} / 1000,0)`,
       date1904: false,
     };
 
