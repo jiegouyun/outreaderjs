@@ -230,6 +230,7 @@
     "@hot-loader/react-dom": "^16.13.0",
     "@outreader/core": "^0.0.2",
     "@outreader/yjk": "^0.0.2",
+    "@types/file-saver": "^2.0.1",
     "@types/lowdb": "^1.0.9",
     "@types/recharts": "^1.8.14",
     "antd": "^4.4.3",

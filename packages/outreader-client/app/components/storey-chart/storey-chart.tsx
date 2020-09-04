@@ -1,4 +1,5 @@
 import React from 'react';
+// import { saveAs } from 'file-saver';
 import {
   ScatterChart,
   Scatter,
@@ -9,7 +10,6 @@ import {
   Tooltip,
   Legend,
   Label,
-  LabelList,
 } from 'recharts';
 import { IData, IDescribe } from '../../interfaces';
 
@@ -30,8 +30,45 @@ export function StoreyChart(props: {
   describes: IDescribe[];
   datas: IData[][];
 }) {
-  return (
-    <ScatterChart
+  // const svgToPng = (svg: HTMLElement, width: number, height: number) => {
+
+  //   return new Promise((resolve, reject) => {
+
+  //     let canvas = document.createElement('canvas');
+  //     canvas.width = width;
+  //     canvas.height = height;
+  //     let ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+
+  //     // Set background to white
+  //     ctx.fillStyle = '#ffffff';
+  //     ctx.fillRect(0, 0, width, height);
+
+  //     let xml = new XMLSerializer().serializeToString(svg);
+  //     let dataUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(xml);
+  //     let img = new Image(width, height);
+
+  //     img.onload = () => {
+  //         ctx.drawImage(img, 0, 0);
+  //         let imageData = canvas.toDataURL('image/png', 1.0);
+  //         resolve(imageData)
+  //     }
+
+  //     img.onerror = () => reject();
+
+  //     img.src = dataUrl;
+  //   });
+  // };
+
+  // const downloadPNG = async () => {
+    // let chartSVG = document.getElementById('chart') as HTMLElement;
+    // const pngData = await svgToPng(chartSVG, 300, 400);
+    // // saveAs(pngData, `${props.labels.xLabel}.png`);
+    // console.log('Do what you need with PNG', pngData);
+  // };
+
+  const chart = (   
+    <div id="chart">
+    <ScatterChart      
       key={props.labels.xLabel}
       width={300}
       height={400}
@@ -75,6 +112,10 @@ export function StoreyChart(props: {
           />
         );
       })}
-    </ScatterChart>
+    </ScatterChart> 
+    {/* <a style={{ marginLeft: 145 }} onClick={() => downloadPNG()}>下载图片</a> */}
+    </div>
   );
+
+  return chart;
 }
