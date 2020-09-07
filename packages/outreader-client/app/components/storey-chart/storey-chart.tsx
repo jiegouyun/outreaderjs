@@ -1,5 +1,5 @@
 import React from 'react';
-// import { saveAs } from 'file-saver';
+import { downloadIMG } from '../download-image';
 import {
   ScatterChart,
   Scatter,
@@ -30,92 +30,73 @@ export function StoreyChart(props: {
   describes: IDescribe[];
   datas: IData[][];
 }) {
-  // const svgToPng = (svg: HTMLElement, width: number, height: number) => {
-
-  //   return new Promise((resolve, reject) => {
-
-  //     let canvas = document.createElement('canvas');
-  //     canvas.width = width;
-  //     canvas.height = height;
-  //     let ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
-
-  //     // Set background to white
-  //     ctx.fillStyle = '#ffffff';
-  //     ctx.fillRect(0, 0, width, height);
-
-  //     let xml = new XMLSerializer().serializeToString(svg);
-  //     let dataUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(xml);
-  //     let img = new Image(width, height);
-
-  //     img.onload = () => {
-  //         ctx.drawImage(img, 0, 0);
-  //         let imageData = canvas.toDataURL('image/png', 1.0);
-  //         resolve(imageData)
-  //     }
-
-  //     img.onerror = () => reject();
-
-  //     img.src = dataUrl;
-  //   });
+  // const downloadIMG = () => {
+  //   const chartSVG = document.getElementById(props.labels.xLabel) || new HTMLElement();
+  //   const svgURL = new XMLSerializer().serializeToString(chartSVG);
+  //   const svgBlob = new Blob([svgURL], {type: "image/svg+xml;charset=utf-8"});
+  //   saveAs(svgBlob, `${props.labels.xLabel}.svg`);
   // };
 
-  // const downloadPNG = async () => {
-    // let chartSVG = document.getElementById('chart') as HTMLElement;
-    // const pngData = await svgToPng(chartSVG, 300, 400);
-    // // saveAs(pngData, `${props.labels.xLabel}.png`);
-    // console.log('Do what you need with PNG', pngData);
-  // };
-
-  const chart = (   
-    <div id="chart">
-    <ScatterChart      
-      key={props.labels.xLabel}
-      width={300}
-      height={400}
-      margin={{
-        top: 10,
-        right: 10,
-        bottom: 30,
-        left: 0,
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis type="number" dataKey="x" name="" unit="">
-        <Label value={props.labels.xLabel} offset={0} position="bottom" />
-      </XAxis>
-      <YAxis
-        type="number"
-        dataKey="y"
-        name=""
-        unit=""
-        domain={[0, (dataMax: number) => Math.ceil(dataMax / 5) * 5]}
-      >
-        <Label
-          value={props.labels.yLabel || '楼层'}
-          angle={-90}
-          offset={10}
-          position="insideLeft"
-        />
-      </YAxis>
-      <ZAxis type="number" range={[25]} />
-      <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-      <Legend align="right" verticalAlign="top" iconSize={20} iconType="line" />
-      {props.datas.map(function (data, i) {
-        return (
-          <Scatter
-            key={i}
-            name={props.describes[i].name}
-            data={data}
-            fill={props.describes[i].fill}
-            line={{ strokeWidth: 2 }}
-            shape={props.describes[i].shape}
+  return (
+    <div>
+      <div id={props.labels.xLabel}>
+        <ScatterChart
+          key={props.labels.xLabel}
+          width={300}
+          height={400}
+          margin={{
+            top: 10,
+            right: 10,
+            bottom: 30,
+            left: 0,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis type="number" dataKey="x" name="" unit="">
+            <Label value={props.labels.xLabel} offset={0} position="bottom" />
+          </XAxis>
+          <YAxis
+            type="number"
+            dataKey="y"
+            name=""
+            unit=""
+            domain={[0, (dataMax: number) => Math.ceil(dataMax / 5) * 5]}
+          >
+            <Label
+              value={props.labels.yLabel || '楼层'}
+              angle={-90}
+              offset={10}
+              position="insideLeft"
+            />
+          </YAxis>
+          <ZAxis type="number" range={[25]} />
+          <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+          <Legend
+            align="right"
+            verticalAlign="top"
+            iconSize={20}
+            iconType="line"
           />
-        );
-      })}
-    </ScatterChart> 
-    {/* <a style={{ marginLeft: 145 }} onClick={() => downloadPNG()}>下载图片</a> */}
+          {props.datas.map(function (data, i) {
+            return (
+              <Scatter
+                key={i}
+                name={props.describes[i].name}
+                data={data}
+                fill={props.describes[i].fill}
+                line={{ strokeWidth: 2 }}
+                shape={props.describes[i].shape}
+              />
+            );
+          })}
+        </ScatterChart>
+      </div>
+      <a
+        style={{ marginLeft: 145 }}
+        onClick={() => downloadIMG(props.labels.xLabel)}
+      >
+        下载图片
+      </a>
     </div>
   );
-
-  return chart;
 }
