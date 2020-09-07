@@ -1,5 +1,6 @@
 import React from 'react';
-import { downloadIMG } from '../download-image';
+// import { downloadIMG } from '../download-image';
+import { downloadIMG } from '@outreader/core';
 import {
   ScatterChart,
   Scatter,

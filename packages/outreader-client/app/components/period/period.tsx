@@ -1,7 +1,8 @@
 import { Table, Collapse } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react';
-import { downloadIMG } from '../download-image';
+// import { downloadIMG } from '../download-image';
+import { downloadIMG } from '@outreader/core';
 import {
   ScatterChart,
   Scatter,
