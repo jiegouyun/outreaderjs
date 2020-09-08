@@ -9,7 +9,20 @@ export function downloadSVG(elementID: string) {
 
 export function downloadPNG(elementID: string) {
   const chartSVG = document.getElementById(elementID) || new HTMLElement();
-  domtoimage.toBlob(chartSVG, { bgcolor: '#ffffff' }).then((blob) => {
+  const scale = 5;
+  const style = {
+    transform: `scale(${scale})`,
+    transformOrigin: 'top left',
+    width: chartSVG.offsetWidth * scale + 'px',
+    height: chartSVG.offsetHeight * scale + 'px',
+  };
+  const param = {
+    bgcolor: '#ffffff',
+    height: chartSVG.offsetHeight * scale,
+    width: chartSVG.offsetWidth * scale,
+    style,
+  };
+  domtoimage.toBlob(chartSVG, param).then((blob) => {
     saveAs(blob, `${elementID}.png`);
   });
 }
