@@ -454,7 +454,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '地震位移',
+              xLabel: '地震位移(mm)',
             }}
             describes={describesDriftDrift}
             datas={dispSeismicChartData}
@@ -463,7 +463,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '风位移',
+              xLabel: '风位移(mm)',
             }}
             describes={describesDriftDrift}
             datas={dispWindChartData}

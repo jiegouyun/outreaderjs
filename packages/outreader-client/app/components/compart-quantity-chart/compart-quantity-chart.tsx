@@ -33,7 +33,7 @@ export function CompareQuantityChart(props: {
 }) {
   return (
     <div>
-      <div id={props.yLabel}>
+      <div id={props.yLabel} className="charts">
         <BarChart
           width={550}
           height={350}

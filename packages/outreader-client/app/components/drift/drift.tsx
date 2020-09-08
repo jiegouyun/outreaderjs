@@ -205,7 +205,7 @@ export function DriftComponent(drift: IDriftFE) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '地震位移',
+              xLabel: '地震位移(mm)',
             }}
             describes={[
               {
@@ -225,7 +225,7 @@ export function DriftComponent(drift: IDriftFE) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '风位移',
+              xLabel: '风位移(mm)',
             }}
             describes={[
               {

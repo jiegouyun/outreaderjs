@@ -1,6 +1,6 @@
 import React from 'react';
 import { downloadSVG, downloadPNG } from '@outreader/core';
-import { Divider } from 'antd';
+import { Divider, Row } from 'antd';
 import {
   ScatterChart,
   Scatter,
@@ -33,7 +33,7 @@ export function StoreyChart(props: {
 }) {
   return (
     <div>
-      <div id={props.labels.xLabel}>
+      <div id={props.labels.xLabel} className="charts">
         <ScatterChart
           key={props.labels.xLabel}
           width={300}
@@ -85,12 +85,12 @@ export function StoreyChart(props: {
           })}
         </ScatterChart>
       </div>
-      <span style={{ textAlign: 'center', display: 'block' }}>
+      <p style={{ textAlign: 'center' }}>
         图片下载：
         <a onClick={() => downloadSVG(props.labels.xLabel)}>SVG</a>
         <Divider type="vertical" />
         <a onClick={() => downloadPNG(props.labels.xLabel)}>PNG</a>
-      </span>
+      </p>
     </div>
   );
 }

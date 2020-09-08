@@ -13,7 +13,7 @@ import {
   IStructureFrontEnd,
 } from '@outreader/core';
 import { convertStructure } from '@outreader/yjk';
-import { Breadcrumb, Divider, Layout, Menu, message } from 'antd';
+import { Breadcrumb, Layout, Menu, message, Card } from 'antd';
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import {
@@ -163,10 +163,11 @@ export function StructureComparePage() {
             <Menu.Item key="distributeResult">楼层分布数据</Menu.Item>
             <Menu.Item key="factor">调整系数</Menu.Item>
             <Menu.Item key="quantity">工程量</Menu.Item>
-            <Divider />
-            <a style={{ marginLeft: 24 }} onClick={() => exportXLSX()}>
-              导出Excel
-            </a>
+            <Card>
+              <p>
+                <a onClick={() => exportXLSX()}>导出Excel</a>
+              </p>
+            </Card>
           </Menu>
         </Layout.Sider>
         <Layout.Content style={styles.content}>

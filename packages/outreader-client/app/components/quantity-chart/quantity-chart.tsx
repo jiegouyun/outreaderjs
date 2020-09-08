@@ -33,7 +33,7 @@ export function QuantityChart(props: {
 }) {
   return (
     <div>
-      <div id={props.xLabel}>
+      <div id={props.xLabel} className="charts">
         <AreaChart
           layout="vertical"
           width={300}

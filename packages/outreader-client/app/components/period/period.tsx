@@ -177,7 +177,7 @@ export function PeriodComponent(period: IPeriodFE) {
         </Panel>
       </Collapse>
       <h3>质量参与系数</h3>
-      <div id="质量参与系数">
+      <div id="质量参与系数" className="charts">
         <ScatterChart
           width={550}
           height={350}
