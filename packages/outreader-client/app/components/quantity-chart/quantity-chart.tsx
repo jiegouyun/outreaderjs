@@ -1,6 +1,6 @@
 import React from 'react';
-// import { downloadIMG } from '../download-image';
-import { downloadIMG } from '@outreader/core';
+import { downloadSVG, downloadPNG } from '@outreader/core';
+import { Divider } from 'antd';
 import {
   AreaChart,
   Area,
@@ -101,9 +101,12 @@ export function QuantityChart(props: {
           />
         </AreaChart>
       </div>
-      <a style={{ marginLeft: 145 }} onClick={() => downloadIMG(props.xLabel)}>
-        下载图片
-      </a>
+      <span style={{ textAlign: 'center', display: 'block' }}>
+        图片下载：
+        <a onClick={() => downloadSVG(props.xLabel)}>SVG</a>
+        <Divider type="vertical" />
+        <a onClick={() => downloadPNG(props.xLabel)}>PNG</a>
+      </span>
     </div>
   );
 }

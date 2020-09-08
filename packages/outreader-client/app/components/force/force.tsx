@@ -161,7 +161,7 @@ export function ForceComponent(force: IForceFE) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '剪力(kN)',
+              xLabel: '顺风剪力(kN)',
             }}
             describes={[
               {
@@ -181,7 +181,7 @@ export function ForceComponent(force: IForceFE) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '弯矩(kNm)',
+              xLabel: '顺风弯矩(kNm)',
             }}
             describes={[
               {
@@ -218,7 +218,7 @@ export function ForceComponent(force: IForceFE) {
             <Col span={12}>
               <StoreyChart
                 labels={{
-                  xLabel: '剪力(kN)',
+                  xLabel: '横风剪力(kN)',
                 }}
                 describes={[
                   {
@@ -238,7 +238,7 @@ export function ForceComponent(force: IForceFE) {
             <Col span={12}>
               <StoreyChart
                 labels={{
-                  xLabel: '弯矩(kNm)',
+                  xLabel: '横风弯矩(kNm)',
                 }}
                 describes={[
                   {
@@ -271,7 +271,7 @@ export function ForceComponent(force: IForceFE) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '剪力(kN)',
+              xLabel: '地震剪力(kN)',
             }}
             describes={[
               {
@@ -291,7 +291,7 @@ export function ForceComponent(force: IForceFE) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '弯矩(kNm)',
+              xLabel: '地震弯矩(kNm)',
             }}
             describes={[
               {

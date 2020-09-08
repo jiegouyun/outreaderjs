@@ -1,6 +1,6 @@
 import React from 'react';
-// import { downloadIMG } from '../download-image';
-import { downloadIMG } from '@outreader/core';
+import { downloadSVG, downloadPNG } from '@outreader/core';
+import { Divider } from 'antd';
 import {
   BarChart,
   Bar,
@@ -94,9 +94,12 @@ export function CompareQuantityChart(props: {
           />
         </BarChart>
       </div>
-      <a style={{ marginLeft: 275 }} onClick={() => downloadIMG(props.yLabel)}>
-        下载图片
-      </a>
+      <span style={{ textAlign: 'center', display: 'block' }}>
+        图片下载：
+        <a onClick={() => downloadSVG(props.yLabel)}>SVG</a>
+        <Divider type="vertical" />
+        <a onClick={() => downloadPNG(props.yLabel)}>PNG</a>
+      </span>
     </div>
   );
 }

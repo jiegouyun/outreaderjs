@@ -1,6 +1,6 @@
 import React from 'react';
-// import { downloadIMG } from '../download-image';
-import { downloadIMG } from '@outreader/core';
+import { downloadSVG, downloadPNG } from '@outreader/core';
+import { Divider } from 'antd';
 import {
   ScatterChart,
   Scatter,
@@ -31,13 +31,6 @@ export function StoreyChart(props: {
   describes: IDescribe[];
   datas: IData[][];
 }) {
-  // const downloadIMG = () => {
-  //   const chartSVG = document.getElementById(props.labels.xLabel) || new HTMLElement();
-  //   const svgURL = new XMLSerializer().serializeToString(chartSVG);
-  //   const svgBlob = new Blob([svgURL], {type: "image/svg+xml;charset=utf-8"});
-  //   saveAs(svgBlob, `${props.labels.xLabel}.svg`);
-  // };
-
   return (
     <div>
       <div id={props.labels.xLabel}>
@@ -92,12 +85,12 @@ export function StoreyChart(props: {
           })}
         </ScatterChart>
       </div>
-      <a
-        style={{ marginLeft: 145 }}
-        onClick={() => downloadIMG(props.labels.xLabel)}
-      >
-        下载图片
-      </a>
+      <span style={{ textAlign: 'center', display: 'block' }}>
+        图片下载：
+        <a onClick={() => downloadSVG(props.labels.xLabel)}>SVG</a>
+        <Divider type="vertical" />
+        <a onClick={() => downloadPNG(props.labels.xLabel)}>PNG</a>
+      </span>
     </div>
   );
 }

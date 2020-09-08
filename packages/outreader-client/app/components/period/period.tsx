@@ -1,8 +1,7 @@
-import { Table, Collapse } from 'antd';
+import { Table, Collapse, Divider } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react';
-// import { downloadIMG } from '../download-image';
-import { downloadIMG } from '@outreader/core';
+import { downloadSVG, downloadPNG } from '@outreader/core';
 import {
   ScatterChart,
   Scatter,
@@ -238,12 +237,12 @@ export function PeriodComponent(period: IPeriodFE) {
           />
         </ScatterChart>
       </div>
-      <a
-        style={{ marginLeft: 275 }}
-        onClick={() => downloadIMG('质量参与系数')}
-      >
-        下载图片
-      </a>
+      <span style={{ textAlign: 'center', display: 'block' }}>
+        图片下载：
+        <a onClick={() => downloadSVG('质量参与系数')}>SVG</a>
+        <Divider type="vertical" />
+        <a onClick={() => downloadPNG('质量参与系数')}>PNG</a>
+      </span>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <Table
