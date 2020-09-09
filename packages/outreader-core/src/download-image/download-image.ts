@@ -8,7 +8,7 @@ export function downloadSVG(elementID: string) {
 }
 
 export function downloadPNG(elementID: string) {
-  const chartSVG = document.getElementById(elementID)?.firstElementChild || new HTMLElement();
+  const chartSVG = document.getElementById(elementID) || new HTMLElement();
   const scale = 5;
   const style = {
     transform: `scale(${scale})`,

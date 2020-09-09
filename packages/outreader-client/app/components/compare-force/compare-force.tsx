@@ -350,7 +350,7 @@ export function CompareForceComponent(forces: IForceFE[]) {
       </Collapse>
       <h3>横风向风荷载</h3>
       <Collapse ghost>
-        <Panel header="详细数据" key="1">
+        <Panel header="展开" key="1">
           <Row>
             <Col span={12}>
               <StoreyChart
@@ -371,14 +371,18 @@ export function CompareForceComponent(forces: IForceFE[]) {
               />
             </Col>
           </Row>
-          <Table
-            columns={forceColumns}
-            dataSource={crossWindTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-          />
+          <Collapse ghost>
+            <Panel header="详细数据" key="1">
+              <Table
+                columns={forceColumns}
+                dataSource={crossWindTableData}
+                bordered
+                size="small"
+                pagination={false}
+                style={{ marginBottom: 20 }}
+              />
+            </Panel>
+          </Collapse>
         </Panel>
       </Collapse>
       <h3>地震作用</h3>

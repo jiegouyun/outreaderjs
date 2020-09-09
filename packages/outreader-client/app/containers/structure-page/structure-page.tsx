@@ -112,6 +112,8 @@ export function StructurePage() {
   const downloadImgs = () => {
     const chartsSvgList = document.getElementsByClassName('charts');
     console.log(chartsSvgList);
+    const test = document.getElementById('横风剪力(kN)');
+    console.log(test);
     // TODO
   };
 
