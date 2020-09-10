@@ -161,7 +161,7 @@ export function ForceComponent(force: IForceFE) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '剪力(kN)',
+              xLabel: '顺风剪力(kN)',
             }}
             describes={[
               {
@@ -181,7 +181,7 @@ export function ForceComponent(force: IForceFE) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '弯矩(kNm)',
+              xLabel: '顺风弯矩(kNm)',
             }}
             describes={[
               {
@@ -213,12 +213,12 @@ export function ForceComponent(force: IForceFE) {
       </Collapse>
       <h3>横风向风荷载</h3>
       <Collapse ghost>
-        <Panel header="详细数据" key="1">
+        <Panel header="展开" key="1">
           <Row>
             <Col span={12}>
               <StoreyChart
                 labels={{
-                  xLabel: '剪力(kN)',
+                  xLabel: '横风剪力(kN)',
                 }}
                 describes={[
                   {
@@ -238,7 +238,7 @@ export function ForceComponent(force: IForceFE) {
             <Col span={12}>
               <StoreyChart
                 labels={{
-                  xLabel: '弯矩(kNm)',
+                  xLabel: '横风弯矩(kNm)',
                 }}
                 describes={[
                   {
@@ -256,14 +256,18 @@ export function ForceComponent(force: IForceFE) {
               />
             </Col>
           </Row>
-          <Table
-            columns={forceColumns}
-            dataSource={forceCrossWindTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-          />
+          <Collapse ghost>
+            <Panel header="详细数据" key="1">
+              <Table
+                columns={forceColumns}
+                dataSource={forceCrossWindTableData}
+                bordered
+                size="small"
+                pagination={false}
+                style={{ marginBottom: 20 }}
+              />
+            </Panel>
+          </Collapse>
         </Panel>
       </Collapse>
       <h3>地震作用</h3>
@@ -271,7 +275,7 @@ export function ForceComponent(force: IForceFE) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '剪力(kN)',
+              xLabel: '地震剪力(kN)',
             }}
             describes={[
               {
@@ -291,7 +295,7 @@ export function ForceComponent(force: IForceFE) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '弯矩(kNm)',
+              xLabel: '地震弯矩(kNm)',
             }}
             describes={[
               {

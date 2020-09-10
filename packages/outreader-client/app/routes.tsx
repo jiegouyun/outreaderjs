@@ -9,6 +9,15 @@ import {
   AboutPage,
   StructureComparePage,
 } from './containers';
+import { IStyles } from './interfaces';
+
+const styles: IStyles = {
+  header: {
+    position: 'fixed',
+    zIndex: 1,
+    width: '100%',
+  },
+};
 
 export default function Routes() {
   const handleMenuChange = (item: any) => {
@@ -18,7 +27,7 @@ export default function Routes() {
   return (
     <Router>
       <Layout>
-        <Layout.Header>
+        <Layout.Header style={styles.header}>
           <Menu
             onClick={handleMenuChange}
             theme="dark"
@@ -31,7 +40,7 @@ export default function Routes() {
           </Menu>
         </Layout.Header>
         <Layout>
-          <Layout.Content>
+          <Layout.Content style={{ marginTop: '4rem' }}>
             <Route path={routes.HOME} exact>
               <HomePage />
             </Route>

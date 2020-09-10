@@ -205,7 +205,7 @@ export function DriftComponent(drift: IDriftFE) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '地震作用',
+              xLabel: '地震位移(mm)',
             }}
             describes={[
               {
@@ -225,7 +225,7 @@ export function DriftComponent(drift: IDriftFE) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '风荷载',
+              xLabel: '风位移(mm)',
             }}
             describes={[
               {
@@ -260,7 +260,7 @@ export function DriftComponent(drift: IDriftFE) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '地震作用',
+              xLabel: '地震位移角',
             }}
             describes={[
               {
@@ -280,7 +280,7 @@ export function DriftComponent(drift: IDriftFE) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '风荷载',
+              xLabel: '风位移角',
             }}
             describes={[
               {
@@ -315,7 +315,7 @@ export function DriftComponent(drift: IDriftFE) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: 'X向',
+              xLabel: 'X向位移比',
             }}
             describes={[
               {
@@ -335,7 +335,7 @@ export function DriftComponent(drift: IDriftFE) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: 'Y向',
+              xLabel: 'Y向位移比',
             }}
             describes={[
               {
@@ -370,7 +370,7 @@ export function DriftComponent(drift: IDriftFE) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: 'X向',
+              xLabel: 'X向层间位移比',
             }}
             describes={[
               {
@@ -390,7 +390,7 @@ export function DriftComponent(drift: IDriftFE) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: 'Y向',
+              xLabel: 'Y向层间位移比',
             }}
             describes={[
               {

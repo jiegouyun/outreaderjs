@@ -454,7 +454,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '地震作用',
+              xLabel: '地震位移(mm)',
             }}
             describes={describesDriftDrift}
             datas={dispSeismicChartData}
@@ -463,7 +463,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '风荷载',
+              xLabel: '风位移(mm)',
             }}
             describes={describesDriftDrift}
             datas={dispWindChartData}
@@ -487,7 +487,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '地震作用',
+              xLabel: '地震位移角',
             }}
             describes={describesDriftDrift}
             datas={driftSeismicChartData}
@@ -496,7 +496,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '风荷载',
+              xLabel: '风位移角',
             }}
             describes={describesDriftDrift}
             datas={driftWindChartData}
@@ -520,7 +520,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: 'X向',
+              xLabel: 'X向位移比',
             }}
             describes={describesDispRatio}
             datas={ratioXChartData}
@@ -529,7 +529,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: 'Y向',
+              xLabel: 'Y向位移比',
             }}
             describes={describesDispRatio}
             datas={ratioYChartData}
@@ -553,7 +553,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: 'X向',
+              xLabel: 'X向层间位移比',
             }}
             describes={describesDispRatio}
             datas={ratioDXChartData}
@@ -562,7 +562,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: 'Y向',
+              xLabel: 'Y向层间位移比',
             }}
             describes={describesDispRatio}
             datas={ratioDYChartData}
