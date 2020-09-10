@@ -88,7 +88,11 @@ export function StructureComparePage() {
     }
   });
 
-  const hash = hashes[0];
+  const hashTitle = (
+    hashes?.map((elem) => {
+      return elem.slice(0, 7);
+    }) || []
+  ).join(' vs. ');
   const history = useHistory();
   const [activeItemKey, setActvieItemKey] = useState('summary');
 
@@ -180,9 +184,9 @@ export function StructureComparePage() {
           <Layout.Content style={styles.content}>
             <Breadcrumb style={{ marginBottom: '1rem' }}>
               <Breadcrumb.Item>
-                <a onClick={() => history.replace('/structures')}>我的结构</a>
+                <a onClick={() => history.replace('/structures')}>模型对比</a>
               </Breadcrumb.Item>
-              <Breadcrumb.Item>{hash.slice(0, 7)}</Breadcrumb.Item>
+              <Breadcrumb.Item>{hashTitle}</Breadcrumb.Item>
             </Breadcrumb>
             <div style={styles.container}>{dataMapping[activeItemKey]()}</div>
           </Layout.Content>

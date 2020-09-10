@@ -1,6 +1,6 @@
 import { convertStructure } from '@outreader/yjk';
 import { exportExcel } from '@outreader/core';
-import { Breadcrumb, Layout, Menu, message, Card, Divider } from 'antd';
+import { Breadcrumb, Layout, Menu, message, Divider } from 'antd';
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import {
@@ -145,7 +145,13 @@ export function StructurePage() {
             <Menu.Item key="factor">调整系数</Menu.Item>
             <Menu.Item key="quantity">工程量</Menu.Item>
             <Divider />
-            <p style={{ marginLeft: '1.5rem', marginTop: '2rem', marginBottom: '2.5rem' }}>
+            <p
+              style={{
+                marginLeft: '1.5rem',
+                marginTop: '2rem',
+                marginBottom: '2.5rem',
+              }}
+            >
               <a onClick={() => exportXLSX()}>导出Excel</a>
             </p>
             {/* <p style={{ marginLeft: '1.5rem', marginTop: '2.5rem', marginBottom: '2.5rem' }}>
