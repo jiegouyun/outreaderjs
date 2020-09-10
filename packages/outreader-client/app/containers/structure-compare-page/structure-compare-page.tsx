@@ -13,7 +13,7 @@ import {
   IStructureFrontEnd,
 } from '@outreader/core';
 import { convertStructure } from '@outreader/yjk';
-import { Breadcrumb, Layout, Menu, message, Card } from 'antd';
+import { Breadcrumb, Layout, Menu, message, Divider } from 'antd';
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import {
@@ -35,6 +35,13 @@ const styles: IStyles = {
   container: {
     background: '#fff',
     padding: '2rem',
+  },
+  sider: {
+    background: '#fff',
+    overflow: 'auto',
+    height: 'calc(100vh - 4rem)',
+    position: 'fixed',
+    left: 0,
   },
   content: {
     minHeight: 'calc(100vh - 4rem)',
@@ -144,7 +151,7 @@ export function StructureComparePage() {
   return (
     <React.Fragment>
       <Layout>
-        <Layout.Sider>
+        <Layout.Sider style={styles.sider}>
           <Menu
             mode="inline"
             defaultSelectedKeys={[activeItemKey]}
@@ -163,22 +170,23 @@ export function StructureComparePage() {
             <Menu.Item key="distributeResult">楼层分布数据</Menu.Item>
             <Menu.Item key="factor">调整系数</Menu.Item>
             <Menu.Item key="quantity">工程量</Menu.Item>
-            <Card>
-              <p>
-                <a onClick={() => exportXLSX()}>导出Excel</a>
-              </p>
-            </Card>
+            <Divider />
+            <p style={{ marginLeft: '1.5rem' }}>
+              <a onClick={() => exportXLSX()}>导出Excel</a>
+            </p>
           </Menu>
         </Layout.Sider>
-        <Layout.Content style={styles.content}>
-          <Breadcrumb style={{ marginBottom: '1rem' }}>
-            <Breadcrumb.Item>
-              <a onClick={() => history.replace('/structures')}>我的结构</a>
-            </Breadcrumb.Item>
-            <Breadcrumb.Item>{hash.slice(0, 7)}</Breadcrumb.Item>
-          </Breadcrumb>
-          <div style={styles.container}>{dataMapping[activeItemKey]()}</div>
-        </Layout.Content>
+        <Layout className="site-layout" style={{ marginLeft: '12.5rem' }}>
+          <Layout.Content style={styles.content}>
+            <Breadcrumb style={{ marginBottom: '1rem' }}>
+              <Breadcrumb.Item>
+                <a onClick={() => history.replace('/structures')}>我的结构</a>
+              </Breadcrumb.Item>
+              <Breadcrumb.Item>{hash.slice(0, 7)}</Breadcrumb.Item>
+            </Breadcrumb>
+            <div style={styles.container}>{dataMapping[activeItemKey]()}</div>
+          </Layout.Content>
+        </Layout>
       </Layout>
     </React.Fragment>
   );
