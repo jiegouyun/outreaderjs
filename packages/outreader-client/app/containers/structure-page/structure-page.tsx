@@ -112,8 +112,6 @@ export function StructurePage() {
   const downloadImgs = () => {
     const chartsSvgList = document.getElementsByClassName('charts');
     console.log(chartsSvgList);
-    const test = document.querySelectorAll('.charts');
-    console.log(test);
     // TODO
   };
 
@@ -139,13 +137,13 @@ export function StructurePage() {
             <Menu.Item key="distributeResult">楼层分布数据</Menu.Item>
             <Menu.Item key="factor">调整系数</Menu.Item>
             <Menu.Item key="quantity">工程量</Menu.Item>
-            <Card title="" >
+            <Card title="">
               <p>
                 <a onClick={() => exportXLSX()}>导出Excel</a>
               </p>
-              <p>
+              {/* <p>
                 <a onClick={() => downloadImgs()}>一键下载图片</a>
-              </p>
+              </p> */}
             </Card>
           </Menu>
         </Layout.Sider>

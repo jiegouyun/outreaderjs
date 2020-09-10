@@ -1,6 +1,5 @@
 import React from 'react';
 import { downloadSVG, downloadPNG } from '@outreader/core';
-import { Divider } from 'antd';
 import {
   BarChart,
   Bar,
@@ -11,6 +10,7 @@ import {
   Legend,
   Label,
 } from 'recharts';
+import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 
 /**
  * @description draw quantity chart by bar chaer;
@@ -33,73 +33,78 @@ export function CompareQuantityChart(props: {
 }) {
   return (
     <div>
-      <div id={props.yLabel} className="charts">
-        <BarChart
-          width={550}
-          height={350}
-          data={props.data}
-          margin={{
-            top: 10,
-            right: 10,
-            bottom: 10,
-            left: 10,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="model" name="" unit="">
-            <Label value="" offset={10} position="bottom" />
-          </XAxis>
-          <YAxis>
-            <Label
-              value={props.yLabel}
-              angle={-90}
-              offset={0}
-              position="insideLeft"
+      <ContextMenuTrigger id={`CM-${props.yLabel}`}>
+        <div id={props.yLabel} className="charts">
+          <BarChart
+            width={550}
+            height={350}
+            data={props.data}
+            margin={{
+              top: 10,
+              right: 10,
+              bottom: 10,
+              left: 10,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="model" name="" unit="">
+              <Label value="" offset={10} position="bottom" />
+            </XAxis>
+            <YAxis>
+              <Label
+                value={props.yLabel}
+                angle={-90}
+                offset={0}
+                position="insideLeft"
+              />
+            </YAxis>
+            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+            <Legend
+              align="right"
+              verticalAlign="top"
+              iconSize={20}
+              iconType="line"
             />
-          </YAxis>
-          <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-          <Legend
-            align="right"
-            verticalAlign="top"
-            iconSize={20}
-            iconType="line"
-          />
-          <Bar
-            name="墙"
-            dataKey="wall"
-            stackId="1"
-            stroke="#0099CC"
-            fill="#0099CC"
-          />
-          <Bar
-            name="柱"
-            dataKey="column"
-            stackId="1"
-            stroke="#CCCCFF"
-            fill="#CCCCFF"
-          />
-          <Bar
-            name="梁"
-            dataKey="beam"
-            stackId="1"
-            stroke="#99CCCC"
-            fill="#99CCCC"
-          />
-          <Bar
-            name="板"
-            dataKey="floor"
-            stackId="1"
-            stroke="#FFCC99"
-            fill="#FFCC99"
-          />
-        </BarChart>
-      </div>
-      <div style={{ textAlign: 'center', display: 'block' }}>
-        图片下载：
-        <a onClick={() => downloadSVG(props.yLabel)}>SVG</a>
-        <Divider type="vertical" />
-        <a onClick={() => downloadPNG(props.yLabel)}>PNG</a>
-      </div>
+            <Bar
+              name="墙"
+              dataKey="wall"
+              stackId="1"
+              stroke="#0099CC"
+              fill="#0099CC"
+            />
+            <Bar
+              name="柱"
+              dataKey="column"
+              stackId="1"
+              stroke="#CCCCFF"
+              fill="#CCCCFF"
+            />
+            <Bar
+              name="梁"
+              dataKey="beam"
+              stackId="1"
+              stroke="#99CCCC"
+              fill="#99CCCC"
+            />
+            <Bar
+              name="板"
+              dataKey="floor"
+              stackId="1"
+              stroke="#FFCC99"
+              fill="#FFCC99"
+            />
+          </BarChart>
+        </div>
+      </ContextMenuTrigger>
+      <ContextMenu id={`CM-${props.yLabel}`}>
+        <MenuItem>
+          <a onClick={() => downloadSVG(props.yLabel)}>下载 SVG</a>
+        </MenuItem>
+        <MenuItem>
+          <a onClick={() => downloadPNG(props.yLabel)}>下载 PNG</a>
+        </MenuItem>
+        <MenuItem divider />
+      </ContextMenu>
     </div>
   );
 }
