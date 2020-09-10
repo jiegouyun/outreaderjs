@@ -112,7 +112,7 @@ export function StructurePage() {
   const downloadImgs = () => {
     const chartsSvgList = document.getElementsByClassName('charts');
     console.log(chartsSvgList);
-    const test = document.getElementById('横风剪力(kN)');
+    const test = document.querySelectorAll('.charts');
     console.log(test);
     // TODO
   };
@@ -139,7 +139,7 @@ export function StructurePage() {
             <Menu.Item key="distributeResult">楼层分布数据</Menu.Item>
             <Menu.Item key="factor">调整系数</Menu.Item>
             <Menu.Item key="quantity">工程量</Menu.Item>
-            <Card>
+            <Card title="" >
               <p>
                 <a onClick={() => exportXLSX()}>导出Excel</a>
               </p>

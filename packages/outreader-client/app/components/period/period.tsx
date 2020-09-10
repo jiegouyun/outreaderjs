@@ -237,12 +237,12 @@ export function PeriodComponent(period: IPeriodFE) {
           />
         </ScatterChart>
       </div>
-      <span style={{ textAlign: 'center', display: 'block' }}>
+      <div style={{ textAlign: 'center', display: 'block' }}>
         图片下载：
         <a onClick={() => downloadSVG('质量参与系数')}>SVG</a>
         <Divider type="vertical" />
         <a onClick={() => downloadPNG('质量参与系数')}>PNG</a>
-      </span>
+      </div>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <Table

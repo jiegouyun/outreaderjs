@@ -85,12 +85,12 @@ export function StoreyChart(props: {
           })}
         </ScatterChart>
       </div>
-      <p style={{ textAlign: 'center' }}>
+      <div style={{ textAlign: 'center' }}>
         图片下载：
         <a onClick={() => downloadSVG(props.labels.xLabel)}>SVG</a>
         <Divider type="vertical" />
         <a onClick={() => downloadPNG(props.labels.xLabel)}>PNG</a>
-      </p>
+      </div>
     </div>
   );
 }

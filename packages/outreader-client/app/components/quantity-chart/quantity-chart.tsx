@@ -101,12 +101,12 @@ export function QuantityChart(props: {
           />
         </AreaChart>
       </div>
-      <span style={{ textAlign: 'center', display: 'block' }}>
+      <div style={{ textAlign: 'center', display: 'block' }}>
         图片下载：
         <a onClick={() => downloadSVG(props.xLabel)}>SVG</a>
         <Divider type="vertical" />
         <a onClick={() => downloadPNG(props.xLabel)}>PNG</a>
-      </span>
+      </div>
     </div>
   );
 }

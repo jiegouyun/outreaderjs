@@ -94,12 +94,12 @@ export function CompareQuantityChart(props: {
           />
         </BarChart>
       </div>
-      <span style={{ textAlign: 'center', display: 'block' }}>
+      <div style={{ textAlign: 'center', display: 'block' }}>
         图片下载：
         <a onClick={() => downloadSVG(props.yLabel)}>SVG</a>
         <Divider type="vertical" />
         <a onClick={() => downloadPNG(props.yLabel)}>PNG</a>
-      </span>
+      </div>
     </div>
   );
 }
