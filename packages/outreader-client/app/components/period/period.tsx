@@ -1,6 +1,7 @@
-import { Table, Collapse } from 'antd';
+import { Table, Collapse, Divider } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react';
+import { downloadSVG, downloadPNG } from '@outreader/core';
 import {
   ScatterChart,
   Scatter,
@@ -13,6 +14,7 @@ import {
   Label,
 } from 'recharts';
 import { IPeriodFE } from '@outreader/core';
+import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 
 export function PeriodComponent(period: IPeriodFE) {
   const modeColumns: ColumnsType<Object> = [
@@ -176,64 +178,77 @@ export function PeriodComponent(period: IPeriodFE) {
         </Panel>
       </Collapse>
       <h3>质量参与系数</h3>
-      <ScatterChart
-        width={550}
-        height={350}
-        margin={{
-          top: 10,
-          right: 10,
-          bottom: 30,
-          left: 0,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis
-          type="number"
-          dataKey="x"
-          name=""
-          unit=""
-          domain={[0, (dataMax) => Math.ceil(dataMax / 5) * 5]}
-        >
-          <Label value="振型" offset={0} position="bottom" />
-        </XAxis>
-        <YAxis type="number" dataKey="y" name="" unit="">
-          <Label
-            value="质量参与系数"
-            angle={-90}
-            offset={10}
-            position="insideLeft"
-          />
-        </YAxis>
-        <ZAxis type="number" range={[25]} />
-        <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-        <Legend
-          align="right"
-          verticalAlign="top"
-          iconSize={20}
-          iconType="line"
-        />
-        <Scatter
-          name={'X: ' + period.modeMass.sumX.toFixed(2)}
-          data={modeMassX}
-          fill="#0099CC"
-          line={{ strokeWidth: 2 }}
-          shape="cross"
-        />
-        <Scatter
-          name={'Y: ' + period.modeMass.sumY.toFixed(2)}
-          data={modeMassY}
-          fill="#CCCCFF"
-          line={{ strokeWidth: 2 }}
-          shape="circle"
-        />
-        <Scatter
-          name={'Z: ' + period.modeMass.sumZ.toFixed(2)}
-          data={modeMassZ}
-          fill="#99CCCC"
-          line={{ strokeWidth: 2 }}
-          shape="diamond"
-        />
-      </ScatterChart>
+      <ContextMenuTrigger id="CM-质量参与系数">
+        <div id="质量参与系数" className="charts">
+          <ScatterChart
+            width={550}
+            height={350}
+            margin={{
+              top: 10,
+              right: 10,
+              bottom: 30,
+              left: 0,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis
+              type="number"
+              dataKey="x"
+              name=""
+              unit=""
+              domain={[0, (dataMax) => Math.ceil(dataMax / 5) * 5]}
+            >
+              <Label value="振型" offset={0} position="bottom" />
+            </XAxis>
+            <YAxis type="number" dataKey="y" name="" unit="">
+              <Label
+                value="质量参与系数"
+                angle={-90}
+                offset={10}
+                position="insideLeft"
+              />
+            </YAxis>
+            <ZAxis type="number" range={[25]} />
+            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+            <Legend
+              align="right"
+              verticalAlign="top"
+              iconSize={20}
+              iconType="line"
+            />
+            <Scatter
+              name={'X: ' + period.modeMass.sumX.toFixed(2)}
+              data={modeMassX}
+              fill="#0099CC"
+              line={{ strokeWidth: 2 }}
+              shape="cross"
+            />
+            <Scatter
+              name={'Y: ' + period.modeMass.sumY.toFixed(2)}
+              data={modeMassY}
+              fill="#CCCCFF"
+              line={{ strokeWidth: 2 }}
+              shape="circle"
+            />
+            <Scatter
+              name={'Z: ' + period.modeMass.sumZ.toFixed(2)}
+              data={modeMassZ}
+              fill="#99CCCC"
+              line={{ strokeWidth: 2 }}
+              shape="diamond"
+            />
+          </ScatterChart>
+        </div>
+      </ContextMenuTrigger>
+      <ContextMenu id="CM-质量参与系数">
+        <MenuItem>
+          <a onClick={() => downloadSVG('质量参与系数')}>下载 SVG</a>
+        </MenuItem>
+        <MenuItem>
+          <a onClick={() => downloadPNG('质量参与系数')}>下载 PNG</a>
+        </MenuItem>
+        <MenuItem divider />
+      </ContextMenu>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <Table

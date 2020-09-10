@@ -681,13 +681,17 @@ export function CompareDistributeResultComponent(
         </Panel>
       </Collapse>
       <h3>质量比</h3>
-      <StoreyChart
-        labels={{
-          xLabel: '质量比',
-        }}
-        describes={describesMassRatio}
-        datas={massRatioChartData}
-      />
+      <Row>
+        <Col span={12}>
+          <StoreyChart
+            labels={{
+              xLabel: '质量比',
+            }}
+            describes={describesMassRatio}
+            datas={massRatioChartData}
+          />
+        </Col>
+      </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <Table
@@ -734,13 +738,17 @@ export function CompareDistributeResultComponent(
         </Panel>
       </Collapse>
       <h3>剪重比</h3>
-      <StoreyChart
-        labels={{
-          xLabel: '剪重比',
-        }}
-        describes={describes}
-        datas={shearWeightChartData}
-      />
+      <Row>
+        <Col span={12}>
+          <StoreyChart
+            labels={{
+              xLabel: '剪重比',
+            }}
+            describes={describes}
+            datas={shearWeightChartData}
+          />
+        </Col>
+      </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <Table
@@ -754,13 +762,17 @@ export function CompareDistributeResultComponent(
         </Panel>
       </Collapse>
       <h3>抗剪承载力比</h3>
-      <StoreyChart
-        labels={{
-          xLabel: '抗剪承载力比',
-        }}
-        describes={describes}
-        datas={shearCapacityChartData}
-      />
+      <Row>
+        <Col span={12}>
+          <StoreyChart
+            labels={{
+              xLabel: '抗剪承载力比',
+            }}
+            describes={describes}
+            datas={shearCapacityChartData}
+          />
+        </Col>
+      </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <Table
@@ -778,7 +790,7 @@ export function CompareDistributeResultComponent(
         <Col span={12}>
           <StoreyChart
             labels={{
-              xLabel: '规定水平力下倾覆力矩分配',
+              xLabel: '规定水平力下倾覆力矩分配(%)',
             }}
             describes={describes}
             datas={momentColumnChartData}
@@ -807,13 +819,17 @@ export function CompareDistributeResultComponent(
         </Panel>
       </Collapse>
       <h3>柱剪力与分段基底剪力百分比</h3>
-      <StoreyChart
-        labels={{
-          xLabel: '柱剪力与分段基底剪力百分比(%)',
-        }}
-        describes={describes}
-        datas={shearColumnChartData}
-      />
+      <Row>
+        <Col span={12}>
+          <StoreyChart
+            labels={{
+              xLabel: '柱剪力与分段基底剪力百分比(%)',
+            }}
+            describes={describes}
+            datas={shearColumnChartData}
+          />
+        </Col>
+      </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <Table
