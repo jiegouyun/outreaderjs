@@ -18,8 +18,9 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
     {
       title: '振型',
       dataIndex: 'modeID',
-      width: '10%',
+      width: '3rem',
       align: 'right',
+      fixed: 'left',
     },
   ];
 
@@ -28,13 +29,13 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
       {
         title: `模型${i + 1}-周期`,
         dataIndex: `period${i}`,
-        width: `${90 / 2 / n}%`,
+        width: `${100 / 2 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-转角`,
         dataIndex: `angle${i}`,
-        width: `${90 / 2 / n}%`,
+        width: `${100 / 2 / n}%`,
         align: 'right',
       }
     );
@@ -82,8 +83,9 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
     {
       title: '振型',
       dataIndex: 'modeID',
-      width: '10%',
+      width: '3rem',
       align: 'left',
+      fixed: 'left',
     },
   ];
 
@@ -92,19 +94,19 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
       {
         title: `模型${i + 1}-X`,
         dataIndex: `factorX${i}`,
-        width: `${90 / 3 / n}%`,
+        width: `${100 / 3 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-Y`,
         dataIndex: `factorY${i}`,
-        width: `${90 / 3 / n}%`,
+        width: `${100 / 3 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-Z`,
         dataIndex: `factorZ${i}`,
-        width: `${90 / 3 / n}%`,
+        width: `${100 / 3 / n}%`,
         align: 'right',
       }
     );
@@ -145,6 +147,7 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '30rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
@@ -158,6 +161,7 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '30rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
@@ -171,6 +175,7 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '50rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>

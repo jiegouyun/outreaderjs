@@ -1,4 +1,4 @@
-import { Table, Row, Col, Collapse } from 'antd';
+import { Table, Row, Collapse } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IForceFE } from '@outreader/core';
@@ -22,8 +22,9 @@ export function CompareForceComponent(forces: IForceFE[]) {
     {
       title: '层号',
       dataIndex: 'storeyID',
-      width: '10%',
+      width: '3rem',
       align: 'right',
+      fixed: 'left',
     },
   ];
 
@@ -32,25 +33,25 @@ export function CompareForceComponent(forces: IForceFE[]) {
       {
         title: `模型${i + 1}-剪力X`,
         dataIndex: `shearX${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-弯矩X`,
         dataIndex: `momentX${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-剪力Y`,
         dataIndex: `shearY${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-弯矩Y`,
         dataIndex: `momentY${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       }
     );
@@ -316,25 +317,21 @@ export function CompareForceComponent(forces: IForceFE[]) {
   const Forces = (
     <div>
       <h3>顺风向风荷载</h3>
-      <Row>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '顺风剪力(kN)',
-            }}
-            describes={describes}
-            datas={shearAlongWindChartData}
-          />
-        </Col>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '顺风弯矩(kNm)',
-            }}
-            describes={describes}
-            datas={momentAlongWindChartData}
-          />
-        </Col>
+      <Row justify="space-around">
+        <StoreyChart
+          labels={{
+            xLabel: '顺风剪力(kN)',
+          }}
+          describes={describes}
+          datas={shearAlongWindChartData}
+        />
+        <StoreyChart
+          labels={{
+            xLabel: '顺风弯矩(kNm)',
+          }}
+          describes={describes}
+          datas={momentAlongWindChartData}
+        />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -345,34 +342,31 @@ export function CompareForceComponent(forces: IForceFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '80rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
       <h3>横风向风荷载</h3>
       <Collapse ghost>
         <Panel header="展开" key="1">
-          <Row>
-            <Col span={12}>
-              <StoreyChart
-                labels={{
-                  xLabel: '横风剪力(kN)',
-                }}
-                describes={describes}
-                datas={shearCrossWindChartData}
-              />
-            </Col>
-            <Col span={12}>
-              <StoreyChart
-                labels={{
-                  xLabel: '横风弯矩(kNm)',
-                }}
-                describes={describes}
-                datas={momentCrossWindChartData}
-              />
-            </Col>
+          <Row justify="space-around">
+            <StoreyChart
+              labels={{
+                xLabel: '横风剪力(kN)',
+              }}
+              describes={describes}
+              datas={shearCrossWindChartData}
+            />
+            <StoreyChart
+              labels={{
+                xLabel: '横风弯矩(kNm)',
+              }}
+              describes={describes}
+              datas={momentCrossWindChartData}
+            />
           </Row>
           <Collapse ghost>
-            <Panel header="详细数据" key="1">
+            <Panel header="详细数据" key="2">
               <Table
                 columns={forceColumns}
                 dataSource={crossWindTableData}
@@ -380,31 +374,28 @@ export function CompareForceComponent(forces: IForceFE[]) {
                 size="small"
                 pagination={false}
                 style={{ marginBottom: 20 }}
+                scroll={{ x: '80rem', y: 'calc(100vh - 12.5rem)' }}
               />
             </Panel>
           </Collapse>
         </Panel>
       </Collapse>
       <h3>地震作用</h3>
-      <Row>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '地震剪力(kN)',
-            }}
-            describes={describes}
-            datas={shearSeismicChartData}
-          />
-        </Col>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '地震弯矩(kNm)',
-            }}
-            describes={describes}
-            datas={momentSeismicChartData}
-          />
-        </Col>
+      <Row justify="space-around">
+        <StoreyChart
+          labels={{
+            xLabel: '地震剪力(kN)',
+          }}
+          describes={describes}
+          datas={shearSeismicChartData}
+        />
+        <StoreyChart
+          labels={{
+            xLabel: '地震弯矩(kNm)',
+          }}
+          describes={describes}
+          datas={momentSeismicChartData}
+        />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -415,6 +406,7 @@ export function CompareForceComponent(forces: IForceFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '80rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>

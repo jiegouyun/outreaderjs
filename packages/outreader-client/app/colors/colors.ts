@@ -6,8 +6,8 @@ export const userColors: string[] = [
   '#CCCCFF',
   '#99CCCC',
   '#FFCC99',
-  '#FF9966',
   '#FFFFCC',
+  '#FF9966',
   '#CCFFFF',
   '#FFCCCC',
 ];

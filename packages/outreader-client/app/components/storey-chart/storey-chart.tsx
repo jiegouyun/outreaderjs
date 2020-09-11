@@ -37,13 +37,13 @@ export function StoreyChart(props: {
         <div id={props.labels.xLabel} className="charts">
           <ScatterChart
             key={props.labels.xLabel}
-            width={300}
-            height={400}
+            width={390}
+            height={520}
             margin={{
               top: 10,
               right: 10,
               bottom: 30,
-              left: 0,
+              left: 10,
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />

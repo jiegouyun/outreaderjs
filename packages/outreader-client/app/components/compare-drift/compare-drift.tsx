@@ -23,8 +23,9 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
     {
       title: '层号',
       dataIndex: 'storeyID',
-      width: '10%',
+      width: '3rem',
       align: 'right',
+      fixed: 'left',
     },
   ];
 
@@ -33,37 +34,37 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
       {
         title: `模型${i + 1}-地震X`,
         dataIndex: `seismicX${i}`,
-        width: `${90 / 6 / n}%`,
+        width: `${100 / 6 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-地震Y`,
         dataIndex: `seismicY${i}`,
-        width: `${90 / 6 / n}%`,
+        width: `${100 / 6 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-顺风X`,
         dataIndex: `windAX${i}`,
-        width: `${90 / 6 / n}%`,
+        width: `${100 / 6 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-顺风Y`,
         dataIndex: `windAY${i}`,
-        width: `${90 / 6 / n}%`,
+        width: `${100 / 6 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-横风X`,
         dataIndex: `windCX${i}`,
-        width: `${90 / 6 / n}%`,
+        width: `${100 / 6 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-横风Y`,
         dataIndex: `windCY${i}`,
-        width: `${90 / 6 / n}%`,
+        width: `${100 / 6 / n}%`,
         align: 'right',
       }
     );
@@ -236,8 +237,9 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
     {
       title: '层号',
       dataIndex: 'storeyID',
-      width: '10%',
+      width: '3rem',
       align: 'right',
+      fixed: 'left',
     },
   ];
 
@@ -246,25 +248,25 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
       {
         title: `模型${i + 1}-X+`,
         dataIndex: `eccXP${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-X-`,
         dataIndex: `eccXN${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-Y+`,
         dataIndex: `eccYP${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-Y-`,
         dataIndex: `eccYN${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       }
     );
@@ -450,25 +452,21 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
   const Drifts = (
     <div>
       <h3>位移</h3>
-      <Row>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '地震位移(mm)',
-            }}
-            describes={describesDriftDrift}
-            datas={dispSeismicChartData}
-          />
-        </Col>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '风位移(mm)',
-            }}
-            describes={describesDriftDrift}
-            datas={dispWindChartData}
-          />
-        </Col>
+      <Row justify="space-around">
+        <StoreyChart
+          labels={{
+            xLabel: '地震位移(mm)',
+          }}
+          describes={describesDriftDrift}
+          datas={dispSeismicChartData}
+        />
+        <StoreyChart
+          labels={{
+            xLabel: '风位移(mm)',
+          }}
+          describes={describesDriftDrift}
+          datas={dispWindChartData}
+        />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -479,29 +477,26 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '100rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
       <h3>层间位移角</h3>
-      <Row>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '地震位移角',
-            }}
-            describes={describesDriftDrift}
-            datas={driftSeismicChartData}
-          />
-        </Col>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '风位移角',
-            }}
-            describes={describesDriftDrift}
-            datas={driftWindChartData}
-          />
-        </Col>
+      <Row justify="space-around">
+        <StoreyChart
+          labels={{
+            xLabel: '地震位移角',
+          }}
+          describes={describesDriftDrift}
+          datas={driftSeismicChartData}
+        />
+        <StoreyChart
+          labels={{
+            xLabel: '风位移角',
+          }}
+          describes={describesDriftDrift}
+          datas={driftWindChartData}
+        />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -512,29 +507,26 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '100rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
       <h3>位移比</h3>
-      <Row>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: 'X向位移比',
-            }}
-            describes={describesDispRatio}
-            datas={ratioXChartData}
-          />
-        </Col>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: 'Y向位移比',
-            }}
-            describes={describesDispRatio}
-            datas={ratioYChartData}
-          />
-        </Col>
+      <Row justify="space-around">
+        <StoreyChart
+          labels={{
+            xLabel: 'X向位移比',
+          }}
+          describes={describesDispRatio}
+          datas={ratioXChartData}
+        />
+        <StoreyChart
+          labels={{
+            xLabel: 'Y向位移比',
+          }}
+          describes={describesDispRatio}
+          datas={ratioYChartData}
+        />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -545,29 +537,26 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '50rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
       <h3>层间位移比</h3>
-      <Row>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: 'X向层间位移比',
-            }}
-            describes={describesDispRatio}
-            datas={ratioDXChartData}
-          />
-        </Col>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: 'Y向层间位移比',
-            }}
-            describes={describesDispRatio}
-            datas={ratioDYChartData}
-          />
-        </Col>
+      <Row justify="space-around">
+        <StoreyChart
+          labels={{
+            xLabel: 'X向层间位移比',
+          }}
+          describes={describesDispRatio}
+          datas={ratioDXChartData}
+        />
+        <StoreyChart
+          labels={{
+            xLabel: 'Y向层间位移比',
+          }}
+          describes={describesDispRatio}
+          datas={ratioDYChartData}
+        />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -578,6 +567,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '50rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>

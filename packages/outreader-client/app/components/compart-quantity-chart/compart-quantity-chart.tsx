@@ -36,13 +36,13 @@ export function CompareQuantityChart(props: {
       <ContextMenuTrigger id={`CM-${props.yLabel}`}>
         <div id={props.yLabel} className="charts">
           <BarChart
-            width={550}
-            height={350}
+            width={600}
+            height={360}
             data={props.data}
             margin={{
               top: 10,
               right: 10,
-              bottom: 10,
+              bottom: 30,
               left: 10,
             }}
           >
