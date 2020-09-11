@@ -1,4 +1,4 @@
-import { Table, Row, Col, Collapse } from 'antd';
+import { Table, Row, Collapse } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IForceFE } from '@outreader/core';
@@ -22,8 +22,9 @@ export function CompareForceComponent(forces: IForceFE[]) {
     {
       title: '层号',
       dataIndex: 'storeyID',
-      width: '10%',
+      width: '3rem',
       align: 'right',
+      fixed: 'left',
     },
   ];
 
@@ -32,25 +33,25 @@ export function CompareForceComponent(forces: IForceFE[]) {
       {
         title: `模型${i + 1}-剪力X`,
         dataIndex: `shearX${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-弯矩X`,
         dataIndex: `momentX${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-剪力Y`,
         dataIndex: `shearY${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-弯矩Y`,
         dataIndex: `momentY${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       }
     );
@@ -341,6 +342,7 @@ export function CompareForceComponent(forces: IForceFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '80rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
@@ -364,7 +366,7 @@ export function CompareForceComponent(forces: IForceFE[]) {
             />
           </Row>
           <Collapse ghost>
-            <Panel header="详细数据" key="1">
+            <Panel header="详细数据" key="2">
               <Table
                 columns={forceColumns}
                 dataSource={crossWindTableData}
@@ -372,6 +374,7 @@ export function CompareForceComponent(forces: IForceFE[]) {
                 size="small"
                 pagination={false}
                 style={{ marginBottom: 20 }}
+                scroll={{ x: '80rem', y: 'calc(100vh - 12.5rem)' }}
               />
             </Panel>
           </Collapse>
@@ -403,6 +406,7 @@ export function CompareForceComponent(forces: IForceFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '80rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>

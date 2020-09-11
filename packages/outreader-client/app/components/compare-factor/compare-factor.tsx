@@ -1,4 +1,4 @@
-import { Table, Collapse, Row, Col } from 'antd';
+import { Table, Collapse, Row } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IFactorFE } from '@outreader/core';
@@ -23,8 +23,9 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
     {
       title: '层号',
       dataIndex: 'storeyID',
-      width: '10%',
+      width: '3rem',
       align: 'right',
+      fixed: 'left',
     },
   ];
 
@@ -32,7 +33,7 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
     weakColumns.push({
       title: `模型${i + 1}`,
       dataIndex: `factor${i}`,
-      width: `${90 / n}%`,
+      width: `${100 / n}%`,
       align: 'right',
     });
   }
@@ -77,8 +78,9 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
     {
       title: '层号',
       dataIndex: 'storeyID',
-      width: '10%',
+      width: '3rem',
       align: 'right',
+      fixed: 'left',
     },
   ];
 
@@ -87,13 +89,13 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
       {
         title: `模型${i + 1}-X`,
         dataIndex: `factorX${i}`,
-        width: `${90 / 2 / n}%`,
+        width: `${100 / 2 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-Y`,
         dataIndex: `factorY${i}`,
-        width: `${90 / 2 / n}%`,
+        width: `${100 / 2 / n}%`,
         align: 'right',
       }
     );
@@ -251,6 +253,7 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '20rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
@@ -273,6 +276,7 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '30rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
@@ -295,6 +299,7 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '30rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>

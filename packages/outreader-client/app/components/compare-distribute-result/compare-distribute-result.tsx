@@ -27,8 +27,9 @@ export function CompareDistributeResultComponent(
     {
       title: '层号',
       dataIndex: 'storeyID',
-      width: '10%',
+      width: '3rem',
       align: 'right',
+      fixed: 'left',
     },
   ];
 
@@ -37,19 +38,19 @@ export function CompareDistributeResultComponent(
       {
         title: `模型${i + 1}-层高`,
         dataIndex: `height${i}`,
-        width: `${90 / 3 / n}%`,
+        width: `${100 / 3 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-累高`,
         dataIndex: `heightTD${i}`,
-        width: `${90 / 3 / n}%`,
+        width: `${100 / 3 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-面积`,
         dataIndex: `area${i}`,
-        width: `${90 / 3 / n}%`,
+        width: `${100 / 3 / n}%`,
         align: 'right',
       }
     );
@@ -87,8 +88,9 @@ export function CompareDistributeResultComponent(
     {
       title: '层号',
       dataIndex: 'storeyID',
-      width: '10%',
+      width: '3rem',
       align: 'right',
+      fixed: 'left',
     },
   ];
 
@@ -97,13 +99,13 @@ export function CompareDistributeResultComponent(
       {
         title: `模型${i + 1}-质量比`,
         dataIndex: `ratio${i}`,
-        width: `${90 / 2 / n}%`,
+        width: `${100 / 2 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-单位质量比`,
         dataIndex: `unitRatio${i}`,
-        width: `${90 / 2 / n}%`,
+        width: `${100 / 2 / n}%`,
         align: 'right',
       }
     );
@@ -163,8 +165,9 @@ export function CompareDistributeResultComponent(
     {
       title: '层号',
       dataIndex: 'storeyID',
-      width: '10%',
+      width: '3rem',
       align: 'right',
+      fixed: 'left',
     },
   ];
 
@@ -173,25 +176,25 @@ export function CompareDistributeResultComponent(
       {
         title: `模型${i + 1}-X`,
         dataIndex: `ratx1${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-Y`,
         dataIndex: `raty1${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-X(层高修正)`,
         dataIndex: `ratx2${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-Y(层高修正)`,
         dataIndex: `raty2${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       }
     );
@@ -280,8 +283,9 @@ export function CompareDistributeResultComponent(
     {
       title: '层号',
       dataIndex: 'storeyID',
-      width: '10%',
+      width: '3rem',
       align: 'right',
+      fixed: 'left',
     },
   ];
 
@@ -290,13 +294,13 @@ export function CompareDistributeResultComponent(
       {
         title: `模型${i + 1}-X`,
         dataIndex: `ratioX${i}`,
-        width: `${90 / 2 / n}%`,
+        width: `${100 / 2 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-Y`,
         dataIndex: `ratioY${i}`,
-        width: `${90 / 2 / n}%`,
+        width: `${100 / 2 / n}%`,
         align: 'right',
       }
     );
@@ -360,8 +364,9 @@ export function CompareDistributeResultComponent(
     {
       title: '层号',
       dataIndex: 'storeyID',
-      width: '10%',
+      width: '3rem',
       align: 'right',
+      fixed: 'left',
     },
   ];
 
@@ -370,13 +375,13 @@ export function CompareDistributeResultComponent(
       {
         title: `模型${i + 1}-X`,
         dataIndex: `ratioX${i}`,
-        width: `${90 / 2 / n}%`,
+        width: `${100 / 2 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-Y`,
         dataIndex: `ratioY${i}`,
-        width: `${90 / 2 / n}%`,
+        width: `${100 / 2 / n}%`,
         align: 'right',
       }
     );
@@ -442,8 +447,9 @@ export function CompareDistributeResultComponent(
     {
       title: '层号',
       dataIndex: 'storeyID',
-      width: '10%',
+      width: '3rem',
       align: 'right',
+      fixed: 'left',
     },
   ];
 
@@ -452,25 +458,25 @@ export function CompareDistributeResultComponent(
       {
         title: `模型${i + 1}-X向柱`,
         dataIndex: `columnX${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-X向短肢墙`,
         dataIndex: `wallX${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-Y向柱`,
         dataIndex: `columnY${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-Y向短肢墙`,
         dataIndex: `wallY${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       }
     );
@@ -563,8 +569,9 @@ export function CompareDistributeResultComponent(
     {
       title: '层号',
       dataIndex: 'storeyID',
-      width: '10%',
+      width: '3rem',
       align: 'right',
+      fixed: 'left',
     },
   ];
 
@@ -573,13 +580,13 @@ export function CompareDistributeResultComponent(
       {
         title: `模型${i + 1}-X`,
         dataIndex: `ratioX${i}`,
-        width: `${90 / 2 / n}%`,
+        width: `${100 / 2 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-Y`,
         dataIndex: `ratioY${i}`,
-        width: `${90 / 2 / n}%`,
+        width: `${100 / 2 / n}%`,
         align: 'right',
       }
     );
@@ -677,6 +684,7 @@ export function CompareDistributeResultComponent(
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '50rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
@@ -699,6 +707,7 @@ export function CompareDistributeResultComponent(
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '30rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
@@ -728,6 +737,7 @@ export function CompareDistributeResultComponent(
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '50rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
@@ -750,6 +760,7 @@ export function CompareDistributeResultComponent(
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '30rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
@@ -772,6 +783,7 @@ export function CompareDistributeResultComponent(
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '30rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
@@ -801,6 +813,7 @@ export function CompareDistributeResultComponent(
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '50rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
@@ -823,6 +836,7 @@ export function CompareDistributeResultComponent(
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '30rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>

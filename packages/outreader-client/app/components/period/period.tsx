@@ -1,4 +1,4 @@
-import { Table, Collapse, Divider, Row } from 'antd';
+import { Table, Collapse, Row } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { downloadSVG, downloadPNG } from '@outreader/core';
@@ -161,6 +161,7 @@ export function PeriodComponent(period: IPeriodFE) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
@@ -174,21 +175,22 @@ export function PeriodComponent(period: IPeriodFE) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
       <h3>质量参与系数</h3>
       <ContextMenuTrigger id="CM-质量参与系数">
-        <Row justify="center">
+        <Row justify="space-around">
           <div id="质量参与系数" className="charts">
             <ScatterChart
-              width={550}
-              height={350}
+              width={600}
+              height={360}
               margin={{
                 top: 10,
                 right: 10,
                 bottom: 30,
-                left: 0,
+                left: 10,
               }}
             >
               <CartesianGrid strokeDasharray="3 3" />
@@ -227,14 +229,14 @@ export function PeriodComponent(period: IPeriodFE) {
               <Scatter
                 name={'Y: ' + period.modeMass.sumY.toFixed(2)}
                 data={modeMassY}
-                fill="#CCCCFF"
+                fill="#99CCCC"
                 line={{ strokeWidth: 2 }}
                 shape="circle"
               />
               <Scatter
                 name={'Z: ' + period.modeMass.sumZ.toFixed(2)}
                 data={modeMassZ}
-                fill="#99CCCC"
+                fill="#FFCC99"
                 line={{ strokeWidth: 2 }}
                 shape="diamond"
               />
@@ -260,6 +262,7 @@ export function PeriodComponent(period: IPeriodFE) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>

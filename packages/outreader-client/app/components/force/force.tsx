@@ -1,4 +1,4 @@
-import { Table, Row, Col, Collapse } from 'antd';
+import { Table, Row, Collapse } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IForceFE } from '@outreader/core';
@@ -204,6 +204,7 @@ export function ForceComponent(force: IForceFE) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
@@ -257,6 +258,7 @@ export function ForceComponent(force: IForceFE) {
                 size="small"
                 pagination={false}
                 style={{ marginBottom: 20 }}
+                scroll={{ y: 'calc(100vh - 12.5rem)' }}
               />
             </Panel>
           </Collapse>
@@ -310,6 +312,7 @@ export function ForceComponent(force: IForceFE) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>

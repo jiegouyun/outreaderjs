@@ -19,8 +19,9 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
     {
       title: '层号',
       dataIndex: 'storeyID',
-      width: '10%',
+      width: '3rem',
       align: 'right',
+      fixed: 'left',
     },
   ];
 
@@ -29,19 +30,19 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
       {
         title: `模型${i + 1}-面积`,
         dataIndex: `area${i}`,
-        width: `${90 / 3 / n}%`,
+        width: `${100 / 3 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-用量`,
         dataIndex: `quantity${i}`,
-        width: `${90 / 3 / n}%`,
+        width: `${100 / 3 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-含量`,
         dataIndex: `unit${i}`,
-        width: `${90 / 3 / n}%`,
+        width: `${100 / 3 / n}%`,
         align: 'right',
       }
     );
@@ -304,10 +305,8 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
   const Quantities = (
     <div>
       <h3>砼用量</h3>
-      <Row justify="center">
+      <Row justify="space-around">
         <CompareQuantityChart data={concreteChartData} yLabel="砼用量(m^3)" />
-      </Row>
-      <Row justify="center">
         <CompareQuantityChart
           data={unitConcreteChartData}
           yLabel="砼含量(m^3/m^2)"
@@ -322,14 +321,13 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '50rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
       <h3>型钢用量</h3>
-      <Row justify="center">
+      <Row justify="space-around">
         <CompareQuantityChart data={steelChartData} yLabel="型钢用量(t)" />
-      </Row>
-      <Row justify="center">
         <CompareQuantityChart
           data={unitSteelChartData}
           yLabel="型钢含量(kg/m^2)"
@@ -344,14 +342,13 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '50rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
       <h3>钢筋用量</h3>
-      <Row justify="center">
+      <Row justify="space-around">
         <CompareQuantityChart data={rabarChartData} yLabel="钢筋用量(t)" />
-      </Row>
-      <Row justify="center">
         <CompareQuantityChart
           data={unitRebarChartData}
           yLabel="钢筋含量(kg/m^2)"
@@ -366,6 +363,7 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '50rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
