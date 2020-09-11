@@ -30,6 +30,7 @@
     "@babel/preset-typescript": "^7.10.4",
     "@babel/register": "^7.10.5",
     "@types/jest": "^26.0.7",
+    "bl": ">=4.0.3",
     "jest": "^26.1.0",
     "ts-node": "^8.10.2"
   },
