@@ -201,47 +201,43 @@ export function DriftComponent(drift: IDriftFE) {
   const Drift = (
     <div>
       <h3>位移</h3>
-      <Row>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '地震位移(mm)',
-            }}
-            describes={[
-              {
-                name: 'X向',
-                fill: '#8884d8',
-                shape: 'cross',
-              },
-              {
-                name: 'Y向',
-                fill: '#82ca9d',
-                shape: 'circle',
-              },
-            ]}
-            datas={[dispChartSeismicX, dispChartSeismicY]}
-          />
-        </Col>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '风位移(mm)',
-            }}
-            describes={[
-              {
-                name: 'X向',
-                fill: '#8884d8',
-                shape: 'cross',
-              },
-              {
-                name: 'Y向',
-                fill: '#82ca9d',
-                shape: 'circle',
-              },
-            ]}
-            datas={[dispChartWindX, dispChartWindY]}
-          />
-        </Col>
+      <Row justify="space-around">
+        <StoreyChart
+          labels={{
+            xLabel: '地震位移(mm)',
+          }}
+          describes={[
+            {
+              name: 'X向',
+              fill: '#8884d8',
+              shape: 'cross',
+            },
+            {
+              name: 'Y向',
+              fill: '#82ca9d',
+              shape: 'circle',
+            },
+          ]}
+          datas={[dispChartSeismicX, dispChartSeismicY]}
+        />
+        <StoreyChart
+          labels={{
+            xLabel: '风位移(mm)',
+          }}
+          describes={[
+            {
+              name: 'X向',
+              fill: '#8884d8',
+              shape: 'cross',
+            },
+            {
+              name: 'Y向',
+              fill: '#82ca9d',
+              shape: 'circle',
+            },
+          ]}
+          datas={[dispChartWindX, dispChartWindY]}
+        />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -256,47 +252,43 @@ export function DriftComponent(drift: IDriftFE) {
         </Panel>
       </Collapse>
       <h3>层间位移角</h3>
-      <Row>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '地震位移角',
-            }}
-            describes={[
-              {
-                name: 'X向',
-                fill: '#8884d8',
-                shape: 'cross',
-              },
-              {
-                name: 'Y向',
-                fill: '#82ca9d',
-                shape: 'circle',
-              },
-            ]}
-            datas={[driftChartSeismicX, driftChartSeismicY]}
-          />
-        </Col>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '风位移角',
-            }}
-            describes={[
-              {
-                name: 'X向',
-                fill: '#8884d8',
-                shape: 'cross',
-              },
-              {
-                name: 'Y向',
-                fill: '#82ca9d',
-                shape: 'circle',
-              },
-            ]}
-            datas={[driftChartWindX, driftChartWindY]}
-          />
-        </Col>
+      <Row justify="space-around">
+        <StoreyChart
+          labels={{
+            xLabel: '地震位移角',
+          }}
+          describes={[
+            {
+              name: 'X向',
+              fill: '#8884d8',
+              shape: 'cross',
+            },
+            {
+              name: 'Y向',
+              fill: '#82ca9d',
+              shape: 'circle',
+            },
+          ]}
+          datas={[driftChartSeismicX, driftChartSeismicY]}
+        />
+        <StoreyChart
+          labels={{
+            xLabel: '风位移角',
+          }}
+          describes={[
+            {
+              name: 'X向',
+              fill: '#8884d8',
+              shape: 'cross',
+            },
+            {
+              name: 'Y向',
+              fill: '#82ca9d',
+              shape: 'circle',
+            },
+          ]}
+          datas={[driftChartWindX, driftChartWindY]}
+        />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -311,47 +303,43 @@ export function DriftComponent(drift: IDriftFE) {
         </Panel>
       </Collapse>
       <h3>位移比</h3>
-      <Row>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: 'X向位移比',
-            }}
-            describes={[
-              {
-                name: '+偏心',
-                fill: '#8884d8',
-                shape: 'cross',
-              },
-              {
-                name: '-偏心',
-                fill: '#82ca9d',
-                shape: 'circle',
-              },
-            ]}
-            datas={[ratioChartEXP, ratioChartEXN]}
-          />
-        </Col>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: 'Y向位移比',
-            }}
-            describes={[
-              {
-                name: '+偏心',
-                fill: '#8884d8',
-                shape: 'cross',
-              },
-              {
-                name: '-偏心',
-                fill: '#82ca9d',
-                shape: 'circle',
-              },
-            ]}
-            datas={[ratioChartEYP, ratioChartEYN]}
-          />
-        </Col>
+      <Row justify="space-around">
+        <StoreyChart
+          labels={{
+            xLabel: 'X向位移比',
+          }}
+          describes={[
+            {
+              name: '+偏心',
+              fill: '#8884d8',
+              shape: 'cross',
+            },
+            {
+              name: '-偏心',
+              fill: '#82ca9d',
+              shape: 'circle',
+            },
+          ]}
+          datas={[ratioChartEXP, ratioChartEXN]}
+        />
+        <StoreyChart
+          labels={{
+            xLabel: 'Y向位移比',
+          }}
+          describes={[
+            {
+              name: '+偏心',
+              fill: '#8884d8',
+              shape: 'cross',
+            },
+            {
+              name: '-偏心',
+              fill: '#82ca9d',
+              shape: 'circle',
+            },
+          ]}
+          datas={[ratioChartEYP, ratioChartEYN]}
+        />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -366,47 +354,43 @@ export function DriftComponent(drift: IDriftFE) {
         </Panel>
       </Collapse>
       <h3>层间位移比</h3>
-      <Row>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: 'X向层间位移比',
-            }}
-            describes={[
-              {
-                name: '+偏心',
-                fill: '#8884d8',
-                shape: 'cross',
-              },
-              {
-                name: '-偏心',
-                fill: '#82ca9d',
-                shape: 'circle',
-              },
-            ]}
-            datas={[ratioDChartEXP, ratioDChartEXN]}
-          />
-        </Col>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: 'Y向层间位移比',
-            }}
-            describes={[
-              {
-                name: '+偏心',
-                fill: '#8884d8',
-                shape: 'cross',
-              },
-              {
-                name: '-偏心',
-                fill: '#82ca9d',
-                shape: 'circle',
-              },
-            ]}
-            datas={[ratioDChartEYP, ratioDChartEYN]}
-          />
-        </Col>
+      <Row justify="space-around">
+        <StoreyChart
+          labels={{
+            xLabel: 'X向层间位移比',
+          }}
+          describes={[
+            {
+              name: '+偏心',
+              fill: '#8884d8',
+              shape: 'cross',
+            },
+            {
+              name: '-偏心',
+              fill: '#82ca9d',
+              shape: 'circle',
+            },
+          ]}
+          datas={[ratioDChartEXP, ratioDChartEXN]}
+        />
+        <StoreyChart
+          labels={{
+            xLabel: 'Y向层间位移比',
+          }}
+          describes={[
+            {
+              name: '+偏心',
+              fill: '#8884d8',
+              shape: 'cross',
+            },
+            {
+              name: '-偏心',
+              fill: '#82ca9d',
+              shape: 'circle',
+            },
+          ]}
+          datas={[ratioDChartEYP, ratioDChartEYN]}
+        />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">

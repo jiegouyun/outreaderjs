@@ -1,4 +1,4 @@
-import { Table, Collapse } from 'antd';
+import { Table, Collapse, Row } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IQuantityFE } from '@outreader/core';
@@ -304,11 +304,15 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
   const Quantities = (
     <div>
       <h3>砼用量</h3>
-      <CompareQuantityChart data={concreteChartData} yLabel="砼用量(m^3)" />
-      <CompareQuantityChart
-        data={unitConcreteChartData}
-        yLabel="砼含量(m^3/m^2)"
-      />
+      <Row justify="center">
+        <CompareQuantityChart data={concreteChartData} yLabel="砼用量(m^3)" />
+      </Row>
+      <Row justify="center">
+        <CompareQuantityChart
+          data={unitConcreteChartData}
+          yLabel="砼含量(m^3/m^2)"
+        />
+      </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <Table
@@ -322,11 +326,15 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
         </Panel>
       </Collapse>
       <h3>型钢用量</h3>
-      <CompareQuantityChart data={steelChartData} yLabel="型钢用量(t)" />
-      <CompareQuantityChart
-        data={unitSteelChartData}
-        yLabel="型钢含量(kg/m^2)"
-      />
+      <Row justify="center">
+        <CompareQuantityChart data={steelChartData} yLabel="型钢用量(t)" />
+      </Row>
+      <Row justify="center">
+        <CompareQuantityChart
+          data={unitSteelChartData}
+          yLabel="型钢含量(kg/m^2)"
+        />
+      </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <Table
@@ -340,11 +348,15 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
         </Panel>
       </Collapse>
       <h3>钢筋用量</h3>
-      <CompareQuantityChart data={rabarChartData} yLabel="钢筋用量(t)" />
-      <CompareQuantityChart
-        data={unitRebarChartData}
-        yLabel="钢筋含量(kg/m^2)"
-      />
+      <Row justify="center">
+        <CompareQuantityChart data={rabarChartData} yLabel="钢筋用量(t)" />
+      </Row>
+      <Row justify="center">
+        <CompareQuantityChart
+          data={unitRebarChartData}
+          yLabel="钢筋含量(kg/m^2)"
+        />
+      </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <Table
