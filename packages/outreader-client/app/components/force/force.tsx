@@ -1,4 +1,4 @@
-import { Table, Row, Col, Collapse } from 'antd';
+import { Table, Row, Collapse } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IForceFE } from '@outreader/core';
@@ -157,47 +157,43 @@ export function ForceComponent(force: IForceFE) {
   const Force = (
     <div>
       <h3>顺风向风荷载</h3>
-      <Row>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '顺风剪力(kN)',
-            }}
-            describes={[
-              {
-                name: 'X向',
-                fill: '#8884d8',
-                shape: 'cross',
-              },
-              {
-                name: 'Y向',
-                fill: '#82ca9d',
-                shape: 'circle',
-              },
-            ]}
-            datas={[shearAlongWindXChartData, shearAlongWindYChartData]}
-          />
-        </Col>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '顺风弯矩(kNm)',
-            }}
-            describes={[
-              {
-                name: 'X向',
-                fill: '#8884d8',
-                shape: 'cross',
-              },
-              {
-                name: 'Y向',
-                fill: '#82ca9d',
-                shape: 'circle',
-              },
-            ]}
-            datas={[momentAlongWindXChartData, momentAlongWindYChartData]}
-          />
-        </Col>
+      <Row justify="space-around">
+        <StoreyChart
+          labels={{
+            xLabel: '顺风剪力(kN)',
+          }}
+          describes={[
+            {
+              name: 'X向',
+              fill: '#8884d8',
+              shape: 'cross',
+            },
+            {
+              name: 'Y向',
+              fill: '#82ca9d',
+              shape: 'circle',
+            },
+          ]}
+          datas={[shearAlongWindXChartData, shearAlongWindYChartData]}
+        />
+        <StoreyChart
+          labels={{
+            xLabel: '顺风弯矩(kNm)',
+          }}
+          describes={[
+            {
+              name: 'X向',
+              fill: '#8884d8',
+              shape: 'cross',
+            },
+            {
+              name: 'Y向',
+              fill: '#82ca9d',
+              shape: 'circle',
+            },
+          ]}
+          datas={[momentAlongWindXChartData, momentAlongWindYChartData]}
+        />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -208,53 +204,50 @@ export function ForceComponent(force: IForceFE) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
       <h3>横风向风荷载</h3>
       <Collapse ghost>
         <Panel header="展开" key="1">
-          <Row>
-            <Col span={12}>
-              <StoreyChart
-                labels={{
-                  xLabel: '横风剪力(kN)',
-                }}
-                describes={[
-                  {
-                    name: 'X向',
-                    fill: '#8884d8',
-                    shape: 'cross',
-                  },
-                  {
-                    name: 'Y向',
-                    fill: '#82ca9d',
-                    shape: 'circle',
-                  },
-                ]}
-                datas={[shearCrossWindXChartData, shearCrossWindYChartData]}
-              />
-            </Col>
-            <Col span={12}>
-              <StoreyChart
-                labels={{
-                  xLabel: '横风弯矩(kNm)',
-                }}
-                describes={[
-                  {
-                    name: 'X向',
-                    fill: '#8884d8',
-                    shape: 'cross',
-                  },
-                  {
-                    name: 'Y向',
-                    fill: '#82ca9d',
-                    shape: 'circle',
-                  },
-                ]}
-                datas={[momentCrossWindXChartData, momentCrossWindYChartData]}
-              />
-            </Col>
+          <Row justify="space-around">
+            <StoreyChart
+              labels={{
+                xLabel: '横风剪力(kN)',
+              }}
+              describes={[
+                {
+                  name: 'X向',
+                  fill: '#8884d8',
+                  shape: 'cross',
+                },
+                {
+                  name: 'Y向',
+                  fill: '#82ca9d',
+                  shape: 'circle',
+                },
+              ]}
+              datas={[shearCrossWindXChartData, shearCrossWindYChartData]}
+            />
+            <StoreyChart
+              labels={{
+                xLabel: '横风弯矩(kNm)',
+              }}
+              describes={[
+                {
+                  name: 'X向',
+                  fill: '#8884d8',
+                  shape: 'cross',
+                },
+                {
+                  name: 'Y向',
+                  fill: '#82ca9d',
+                  shape: 'circle',
+                },
+              ]}
+              datas={[momentCrossWindXChartData, momentCrossWindYChartData]}
+            />
           </Row>
           <Collapse ghost>
             <Panel header="详细数据" key="1">
@@ -265,53 +258,50 @@ export function ForceComponent(force: IForceFE) {
                 size="small"
                 pagination={false}
                 style={{ marginBottom: 20 }}
+                scroll={{ y: 'calc(100vh - 12.5rem)' }}
               />
             </Panel>
           </Collapse>
         </Panel>
       </Collapse>
       <h3>地震作用</h3>
-      <Row>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '地震剪力(kN)',
-            }}
-            describes={[
-              {
-                name: 'X向',
-                fill: '#8884d8',
-                shape: 'cross',
-              },
-              {
-                name: 'Y向',
-                fill: '#82ca9d',
-                shape: 'circle',
-              },
-            ]}
-            datas={[shearSeismicXChartData, shearSeismicYChartData]}
-          />
-        </Col>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '地震弯矩(kNm)',
-            }}
-            describes={[
-              {
-                name: 'X向',
-                fill: '#8884d8',
-                shape: 'cross',
-              },
-              {
-                name: 'Y向',
-                fill: '#82ca9d',
-                shape: 'circle',
-              },
-            ]}
-            datas={[momentSeismicXChartData, momentSeismicYChartData]}
-          />
-        </Col>
+      <Row justify="space-around">
+        <StoreyChart
+          labels={{
+            xLabel: '地震剪力(kN)',
+          }}
+          describes={[
+            {
+              name: 'X向',
+              fill: '#8884d8',
+              shape: 'cross',
+            },
+            {
+              name: 'Y向',
+              fill: '#82ca9d',
+              shape: 'circle',
+            },
+          ]}
+          datas={[shearSeismicXChartData, shearSeismicYChartData]}
+        />
+        <StoreyChart
+          labels={{
+            xLabel: '地震弯矩(kNm)',
+          }}
+          describes={[
+            {
+              name: 'X向',
+              fill: '#8884d8',
+              shape: 'cross',
+            },
+            {
+              name: 'Y向',
+              fill: '#82ca9d',
+              shape: 'circle',
+            },
+          ]}
+          datas={[momentSeismicXChartData, momentSeismicYChartData]}
+        />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -322,6 +312,7 @@ export function ForceComponent(force: IForceFE) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>

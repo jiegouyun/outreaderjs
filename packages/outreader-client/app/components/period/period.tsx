@@ -1,4 +1,4 @@
-import { Table, Collapse, Divider } from 'antd';
+import { Table, Collapse, Row } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { downloadSVG, downloadPNG } from '@outreader/core';
@@ -161,6 +161,7 @@ export function PeriodComponent(period: IPeriodFE) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
@@ -174,71 +175,74 @@ export function PeriodComponent(period: IPeriodFE) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
       <h3>质量参与系数</h3>
       <ContextMenuTrigger id="CM-质量参与系数">
-        <div id="质量参与系数" className="charts">
-          <ScatterChart
-            width={550}
-            height={350}
-            margin={{
-              top: 10,
-              right: 10,
-              bottom: 30,
-              left: 0,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis
-              type="number"
-              dataKey="x"
-              name=""
-              unit=""
-              domain={[0, (dataMax) => Math.ceil(dataMax / 5) * 5]}
+        <Row justify="space-around">
+          <div id="质量参与系数" className="charts">
+            <ScatterChart
+              width={600}
+              height={360}
+              margin={{
+                top: 10,
+                right: 10,
+                bottom: 30,
+                left: 10,
+              }}
             >
-              <Label value="振型" offset={0} position="bottom" />
-            </XAxis>
-            <YAxis type="number" dataKey="y" name="" unit="">
-              <Label
-                value="质量参与系数"
-                angle={-90}
-                offset={10}
-                position="insideLeft"
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis
+                type="number"
+                dataKey="x"
+                name=""
+                unit=""
+                domain={[0, (dataMax) => Math.ceil(dataMax / 5) * 5]}
+              >
+                <Label value="振型" offset={0} position="bottom" />
+              </XAxis>
+              <YAxis type="number" dataKey="y" name="" unit="">
+                <Label
+                  value="质量参与系数"
+                  angle={-90}
+                  offset={10}
+                  position="insideLeft"
+                />
+              </YAxis>
+              <ZAxis type="number" range={[25]} />
+              <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+              <Legend
+                align="right"
+                verticalAlign="top"
+                iconSize={20}
+                iconType="line"
               />
-            </YAxis>
-            <ZAxis type="number" range={[25]} />
-            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-            <Legend
-              align="right"
-              verticalAlign="top"
-              iconSize={20}
-              iconType="line"
-            />
-            <Scatter
-              name={'X: ' + period.modeMass.sumX.toFixed(2)}
-              data={modeMassX}
-              fill="#0099CC"
-              line={{ strokeWidth: 2 }}
-              shape="cross"
-            />
-            <Scatter
-              name={'Y: ' + period.modeMass.sumY.toFixed(2)}
-              data={modeMassY}
-              fill="#CCCCFF"
-              line={{ strokeWidth: 2 }}
-              shape="circle"
-            />
-            <Scatter
-              name={'Z: ' + period.modeMass.sumZ.toFixed(2)}
-              data={modeMassZ}
-              fill="#99CCCC"
-              line={{ strokeWidth: 2 }}
-              shape="diamond"
-            />
-          </ScatterChart>
-        </div>
+              <Scatter
+                name={'X: ' + period.modeMass.sumX.toFixed(2)}
+                data={modeMassX}
+                fill="#0099CC"
+                line={{ strokeWidth: 2 }}
+                shape="cross"
+              />
+              <Scatter
+                name={'Y: ' + period.modeMass.sumY.toFixed(2)}
+                data={modeMassY}
+                fill="#99CCCC"
+                line={{ strokeWidth: 2 }}
+                shape="circle"
+              />
+              <Scatter
+                name={'Z: ' + period.modeMass.sumZ.toFixed(2)}
+                data={modeMassZ}
+                fill="#FFCC99"
+                line={{ strokeWidth: 2 }}
+                shape="diamond"
+              />
+            </ScatterChart>
+          </div>
+        </Row>
       </ContextMenuTrigger>
       <ContextMenu id="CM-质量参与系数">
         <MenuItem>
@@ -258,6 +262,7 @@ export function PeriodComponent(period: IPeriodFE) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>

@@ -27,8 +27,9 @@ export function CompareDistributeResultComponent(
     {
       title: '层号',
       dataIndex: 'storeyID',
-      width: '10%',
+      width: '3rem',
       align: 'right',
+      fixed: 'left',
     },
   ];
 
@@ -37,19 +38,19 @@ export function CompareDistributeResultComponent(
       {
         title: `模型${i + 1}-层高`,
         dataIndex: `height${i}`,
-        width: `${90 / 3 / n}%`,
+        width: `${100 / 3 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-累高`,
         dataIndex: `heightTD${i}`,
-        width: `${90 / 3 / n}%`,
+        width: `${100 / 3 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-面积`,
         dataIndex: `area${i}`,
-        width: `${90 / 3 / n}%`,
+        width: `${100 / 3 / n}%`,
         align: 'right',
       }
     );
@@ -87,8 +88,9 @@ export function CompareDistributeResultComponent(
     {
       title: '层号',
       dataIndex: 'storeyID',
-      width: '10%',
+      width: '3rem',
       align: 'right',
+      fixed: 'left',
     },
   ];
 
@@ -97,13 +99,13 @@ export function CompareDistributeResultComponent(
       {
         title: `模型${i + 1}-质量比`,
         dataIndex: `ratio${i}`,
-        width: `${90 / 2 / n}%`,
+        width: `${100 / 2 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-单位质量比`,
         dataIndex: `unitRatio${i}`,
-        width: `${90 / 2 / n}%`,
+        width: `${100 / 2 / n}%`,
         align: 'right',
       }
     );
@@ -163,8 +165,9 @@ export function CompareDistributeResultComponent(
     {
       title: '层号',
       dataIndex: 'storeyID',
-      width: '10%',
+      width: '3rem',
       align: 'right',
+      fixed: 'left',
     },
   ];
 
@@ -173,25 +176,25 @@ export function CompareDistributeResultComponent(
       {
         title: `模型${i + 1}-X`,
         dataIndex: `ratx1${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-Y`,
         dataIndex: `raty1${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-X(层高修正)`,
         dataIndex: `ratx2${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-Y(层高修正)`,
         dataIndex: `raty2${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       }
     );
@@ -280,8 +283,9 @@ export function CompareDistributeResultComponent(
     {
       title: '层号',
       dataIndex: 'storeyID',
-      width: '10%',
+      width: '3rem',
       align: 'right',
+      fixed: 'left',
     },
   ];
 
@@ -290,13 +294,13 @@ export function CompareDistributeResultComponent(
       {
         title: `模型${i + 1}-X`,
         dataIndex: `ratioX${i}`,
-        width: `${90 / 2 / n}%`,
+        width: `${100 / 2 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-Y`,
         dataIndex: `ratioY${i}`,
-        width: `${90 / 2 / n}%`,
+        width: `${100 / 2 / n}%`,
         align: 'right',
       }
     );
@@ -360,8 +364,9 @@ export function CompareDistributeResultComponent(
     {
       title: '层号',
       dataIndex: 'storeyID',
-      width: '10%',
+      width: '3rem',
       align: 'right',
+      fixed: 'left',
     },
   ];
 
@@ -370,13 +375,13 @@ export function CompareDistributeResultComponent(
       {
         title: `模型${i + 1}-X`,
         dataIndex: `ratioX${i}`,
-        width: `${90 / 2 / n}%`,
+        width: `${100 / 2 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-Y`,
         dataIndex: `ratioY${i}`,
-        width: `${90 / 2 / n}%`,
+        width: `${100 / 2 / n}%`,
         align: 'right',
       }
     );
@@ -442,8 +447,9 @@ export function CompareDistributeResultComponent(
     {
       title: '层号',
       dataIndex: 'storeyID',
-      width: '10%',
+      width: '3rem',
       align: 'right',
+      fixed: 'left',
     },
   ];
 
@@ -452,25 +458,25 @@ export function CompareDistributeResultComponent(
       {
         title: `模型${i + 1}-X向柱`,
         dataIndex: `columnX${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-X向短肢墙`,
         dataIndex: `wallX${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-Y向柱`,
         dataIndex: `columnY${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-Y向短肢墙`,
         dataIndex: `wallY${i}`,
-        width: `${90 / 4 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       }
     );
@@ -563,8 +569,9 @@ export function CompareDistributeResultComponent(
     {
       title: '层号',
       dataIndex: 'storeyID',
-      width: '10%',
+      width: '3rem',
       align: 'right',
+      fixed: 'left',
     },
   ];
 
@@ -573,13 +580,13 @@ export function CompareDistributeResultComponent(
       {
         title: `模型${i + 1}-X`,
         dataIndex: `ratioX${i}`,
-        width: `${90 / 2 / n}%`,
+        width: `${100 / 2 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-Y`,
         dataIndex: `ratioY${i}`,
-        width: `${90 / 2 / n}%`,
+        width: `${100 / 2 / n}%`,
         align: 'right',
       }
     );
@@ -677,20 +684,19 @@ export function CompareDistributeResultComponent(
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '50rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
       <h3>质量比</h3>
-      <Row>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '质量比',
-            }}
-            describes={describesMassRatio}
-            datas={massRatioChartData}
-          />
-        </Col>
+      <Row justify="space-around">
+        <StoreyChart
+          labels={{
+            xLabel: '质量比',
+          }}
+          describes={describesMassRatio}
+          datas={massRatioChartData}
+        />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -701,29 +707,26 @@ export function CompareDistributeResultComponent(
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '30rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
       <h3>刚度比</h3>
-      <Row>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '刚度比',
-            }}
-            describes={describes}
-            datas={stiffRatioChartData}
-          />
-        </Col>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '层高修正刚度比',
-            }}
-            describes={describes}
-            datas={stiffRatioModifyChartData}
-          />
-        </Col>
+      <Row justify="space-around">
+        <StoreyChart
+          labels={{
+            xLabel: '刚度比',
+          }}
+          describes={describes}
+          datas={stiffRatioChartData}
+        />
+        <StoreyChart
+          labels={{
+            xLabel: '层高修正刚度比',
+          }}
+          describes={describes}
+          datas={stiffRatioModifyChartData}
+        />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -734,20 +737,19 @@ export function CompareDistributeResultComponent(
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '50rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
       <h3>剪重比</h3>
-      <Row>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '剪重比',
-            }}
-            describes={describes}
-            datas={shearWeightChartData}
-          />
-        </Col>
+      <Row justify="space-around">
+        <StoreyChart
+          labels={{
+            xLabel: '剪重比',
+          }}
+          describes={describes}
+          datas={shearWeightChartData}
+        />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -758,20 +760,19 @@ export function CompareDistributeResultComponent(
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '30rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
       <h3>抗剪承载力比</h3>
-      <Row>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '抗剪承载力比',
-            }}
-            describes={describes}
-            datas={shearCapacityChartData}
-          />
-        </Col>
+      <Row justify="space-around">
+        <StoreyChart
+          labels={{
+            xLabel: '抗剪承载力比',
+          }}
+          describes={describes}
+          datas={shearCapacityChartData}
+        />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -782,29 +783,26 @@ export function CompareDistributeResultComponent(
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '30rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
       <h3>规定水平力下倾覆力矩分配</h3>
-      <Row>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '规定水平力下倾覆力矩分配(%)',
-            }}
-            describes={describes}
-            datas={momentColumnChartData}
-          />
-        </Col>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '短肢墙倾覆力矩占比(%)',
-            }}
-            describes={describes}
-            datas={momentWallChartData}
-          />
-        </Col>
+      <Row justify="space-around">
+        <StoreyChart
+          labels={{
+            xLabel: '规定水平力下倾覆力矩分配(%)',
+          }}
+          describes={describes}
+          datas={momentColumnChartData}
+        />
+        <StoreyChart
+          labels={{
+            xLabel: '短肢墙倾覆力矩占比(%)',
+          }}
+          describes={describes}
+          datas={momentWallChartData}
+        />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -815,20 +813,19 @@ export function CompareDistributeResultComponent(
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '50rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>
       <h3>柱剪力与分段基底剪力百分比</h3>
-      <Row>
-        <Col span={12}>
-          <StoreyChart
-            labels={{
-              xLabel: '柱剪力与分段基底剪力百分比(%)',
-            }}
-            describes={describes}
-            datas={shearColumnChartData}
-          />
-        </Col>
+      <Row justify="space-around">
+        <StoreyChart
+          labels={{
+            xLabel: '柱剪力与分段基底剪力百分比(%)',
+          }}
+          describes={describes}
+          datas={shearColumnChartData}
+        />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -839,6 +836,7 @@ export function CompareDistributeResultComponent(
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
+            scroll={{ x: '30rem', y: 'calc(100vh - 12.5rem)' }}
           />
         </Panel>
       </Collapse>

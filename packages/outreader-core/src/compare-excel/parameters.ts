@@ -242,10 +242,10 @@ export async function formatParameters(
   );
 
   rangeFillColor(worksheet, 1, 1, 1, 2, 'solid', '00F0FFF0', '00FFFFFF');
-  rangeFillColor(worksheet, 3, 1, 10, 1, 'solid', '00F0FFFF', '00FFFFFF');
-  rangeFillColor(worksheet, 12, 1, 14, 1, 'solid', '00F0FFF0', '00FFFFFF');
-  rangeFillColor(worksheet, 16, 1, 22, 1, 'solid', '00F0FFFF', '00FFFFFF');
-  rangeFillColor(worksheet, 24, 1, 36, 1, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 3, 1, 10, 2, 'solid', '00F0FFFF', '00FFFFFF');
+  rangeFillColor(worksheet, 12, 1, 14, 2, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 16, 1, 22, 2, 'solid', '00F0FFFF', '00FFFFFF');
+  rangeFillColor(worksheet, 24, 1, 36, 2, 'solid', '00F0FFF0', '00FFFFFF');
 
   worksheet.views = [{ state: 'frozen', xSplit: 2, ySplit: 1 }];
 }

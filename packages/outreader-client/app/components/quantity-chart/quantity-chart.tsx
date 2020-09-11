@@ -37,14 +37,14 @@ export function QuantityChart(props: {
         <div id={props.xLabel} className="charts">
           <AreaChart
             layout="vertical"
-            width={300}
-            height={400}
+            width={390}
+            height={520}
             data={props.data}
             margin={{
               top: 10,
               right: 10,
               bottom: 30,
-              left: 0,
+              left: 10,
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
