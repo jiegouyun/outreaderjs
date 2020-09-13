@@ -1,7 +1,7 @@
 {
   "name": "@outreader/cli",
   "description": "A CLI tool to read output files",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "an-lee <an.lee.work@gmail.com>",
   "bin": {
     "outreader": "./bin/run"
