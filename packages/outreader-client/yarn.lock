@@ -402,9 +402,9 @@
     "@babel/plugin-syntax-json-strings" "^7.8.0"
 
 "@babel/plugin-proposal-logical-assignment-operators@^7.10.4":
-  version "7.10.4"
-  resolved "https://registry.npm.taobao.org/@babel/plugin-proposal-logical-assignment-operators/download/@babel/plugin-proposal-logical-assignment-operators-7.10.4.tgz#e62b5cf38e494d6cc24683e2a26cba4a28f7ea44"
-  integrity sha1-5itc845JTWzCRoPiomy6Sij36kQ=
+  version "7.11.0"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-logical-assignment-operators/-/plugin-proposal-logical-assignment-operators-7.11.0.tgz#9f80e482c03083c87125dee10026b58527ea20c8"
+  integrity sha512-/f8p4z+Auz0Uaf+i8Ekf1iM7wUNLcViFUGiPxKeXvxTSl63B875YPiVdUDdem7hREcI0E0kSpEhS8tF5RphK7Q==
   dependencies:
     "@babel/helper-plugin-utils" "^7.10.4"
     "@babel/plugin-syntax-logical-assignment-operators" "^7.10.4"
@@ -1769,11 +1769,6 @@
   version "12.12.51"
   resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-12.12.51.tgz#446a67af8c5ff98947d7cef296484c6ad47ddb16"
   integrity sha1-RGpnr4xf+YlH187ylkhMatR92xY=
-
-"@types/node@^14.0.1":
-  version "14.10.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.10.1.tgz#cc323bad8e8a533d4822f45ce4e5326f36e42177"
-  integrity sha512-aYNbO+FZ/3KGeQCEkNhHFRIzBOUgc7QvcVNKXbfnhDkSfwUv91JsQQa10rDgKSTSLkXZ1UIyPe4FJJNVgw1xWQ==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
