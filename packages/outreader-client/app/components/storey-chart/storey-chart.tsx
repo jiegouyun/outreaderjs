@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend,
   Label,
+  LegendPayload,
 } from 'recharts';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import { IData, IDescribe } from '../../interfaces';
@@ -31,6 +32,15 @@ export function StoreyChart(props: {
   describes: IDescribe[];
   datas: IData[][];
 }) {
+  const customLegend: LegendPayload[] = props.describes.map((desc, i) => {
+    return {
+      id: i,
+      value: desc.name,
+      type: desc.shape,
+      color: desc.fill,
+    };
+  });
+
   return (
     <div>
       <ContextMenuTrigger id={`CM-${props.labels.xLabel}`}>
@@ -69,8 +79,8 @@ export function StoreyChart(props: {
             <Legend
               align="right"
               verticalAlign="top"
-              iconSize={20}
-              iconType="line"
+              iconSize={8}
+              payload={customLegend}
             />
             {props.datas.map(function (data, i) {
               return (
