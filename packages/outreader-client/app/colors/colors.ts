@@ -6,10 +6,10 @@ export const userColors: string[] = [
   '#CCCCFF',
   '#99CCCC',
   '#FFCC99',
-  '#FFFFCC',
   '#FF9966',
-  '#CCFFFF',
   '#FFCCCC',
+  '#CCFFFF',
+  '#FFFFCC',
 ];
 
 /**

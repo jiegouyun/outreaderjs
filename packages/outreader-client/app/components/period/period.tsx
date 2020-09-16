@@ -12,6 +12,7 @@ import {
   Tooltip,
   Legend,
   Label,
+  LegendPayload,
 } from 'recharts';
 import { IPeriodFE } from '@outreader/core';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
@@ -148,6 +149,27 @@ export function PeriodComponent(period: IPeriodFE) {
     });
   }
 
+  const customLegend: LegendPayload[] = [
+    {
+      id: 1,
+      value: `X: ${period.modeMass.sumX.toFixed(2)}`,
+      type: 'cross',
+      color: '#0099CC',
+    },
+    {
+      id: 2,
+      value: `Y: ${period.modeMass.sumY.toFixed(2)}`,
+      type: 'circle',
+      color: '#99CCCC',
+    },
+    {
+      id: 3,
+      value: `Z: ${period.modeMass.sumZ.toFixed(2)}`,
+      type: 'diamond',
+      color: '#FFCC99',
+    },
+  ];
+
   const { Panel } = Collapse;
   const Period = (
     <div>
@@ -216,8 +238,8 @@ export function PeriodComponent(period: IPeriodFE) {
               <Legend
                 align="right"
                 verticalAlign="top"
-                iconSize={20}
-                iconType="line"
+                iconSize={8}
+                payload={customLegend}
               />
               <Scatter
                 name={'X: ' + period.modeMass.sumX.toFixed(2)}
