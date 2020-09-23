@@ -1,4 +1,4 @@
-import { Table, Row, Col, Collapse } from 'antd';
+import { Table, Row, Collapse } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IDistributeResultFE } from '@outreader/core';
@@ -38,25 +38,36 @@ export function CompareDistributeResultComponent(
       {
         title: `模型${i + 1}-层高`,
         dataIndex: `height${i}`,
-        width: `${100 / 3 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-累高`,
         dataIndex: `heightTD${i}`,
-        width: `${100 / 3 / n}%`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       },
       {
         title: `模型${i + 1}-面积`,
         dataIndex: `area${i}`,
-        width: `${100 / 3 / n}%`,
+        width: `${100 / 4 / n}%`,
+        align: 'right',
+      },
+      {
+        title: `模型${i + 1}-墙地比`,
+        dataIndex: `wallAreaRatio${i}`,
+        width: `${100 / 4 / n}%`,
         align: 'right',
       }
     );
   }
 
   const storeyTableData: ICompare[] = [];
+  const storeyChartData: IData[][] = [];
+  for (let i = 0; i < n; i++) {
+    storeyChartData.push([]);
+  }
+
   for (let j = 0; j < count; j++) {
     storeyTableData.push({
       key: j,
@@ -81,6 +92,23 @@ export function CompareDistributeResultComponent(
         distributeResults[i].storey.storeyID[j - diff] === storeyID[j]
           ? distributeResults[i].storey.area[j - diff].toFixed(0)
           : '';
+      storeyTableData[j][`wallAreaRatio${i}`] =
+        distributeResults[i].storey.storeyID[j - diff] === storeyID[j]
+          ? distributeResults[i].storey.wallSectionAreaRatio[j - diff].toFixed(
+              1
+            )
+          : '';
+
+      storeyChartData[i].push({
+        x:
+          distributeResults[i].storey.storeyID[j - diff] === storeyID[j]
+            ? distributeResults[i].storey.wallSectionAreaRatio[j - diff]
+            : distributeResults[i].storey.wallSectionAreaRatio[0],
+        y:
+          distributeResults[i].storey.storeyID[j - diff] === storeyID[j]
+            ? distributeResults[i].storey.storeyID[j - diff]
+            : distributeResults[i].storey.storeyID[0],
+      });
     }
   }
 
@@ -642,9 +670,15 @@ export function CompareDistributeResultComponent(
     }
   }
 
+  const describesStorey: IDescribe[] = [];
   const describesMassRatio: IDescribe[] = [];
   const describes: IDescribe[] = [];
   for (let i = 0; i < n; i++) {
+    describesStorey.push({
+      name: `模型${i + 1}`,
+      fill: userColors[i % 8],
+      shape: userShaps[i % 7],
+    });
     describesMassRatio.push(
       {
         name: `模型${i + 1}-质量比`,
@@ -675,6 +709,15 @@ export function CompareDistributeResultComponent(
   const DistributeResults = (
     <div>
       <h3>楼层属性</h3>
+      <Row justify="space-around">
+        <StoreyChart
+          labels={{
+            xLabel: '墙地比（%）',
+          }}
+          describes={describesStorey}
+          datas={storeyChartData}
+        />
+      </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <Table

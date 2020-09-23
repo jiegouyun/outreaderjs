@@ -86,6 +86,8 @@ export interface IStorey extends IAllExtracted, IStoreyTower {
   height: number[];
   heightToGround: number[];
   area: number[];
+  wallSectionAreaX: number[];
+  wallSectionAreaY: number[];
 }
 
 export interface ITower extends IAllExtracted {
