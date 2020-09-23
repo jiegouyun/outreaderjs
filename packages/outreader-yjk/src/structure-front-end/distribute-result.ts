@@ -11,6 +11,22 @@ export function convertDistributeResult(
       height: structure.wmass?.storey.height || [0],
       heightToGround: structure.wmass?.storey.heightToGround || [0],
       area: structure.wmass?.storey.area || [0],
+      wallSectionAreaX: structure.wmass?.storey.wallSectionAreaX || [0],
+      wallSectionAreaY: structure.wmass?.storey.wallSectionAreaY || [0],
+      wallSectionAreaStorey: (
+        structure.wmass?.storey.wallSectionAreaX || [0]
+      ).map((elem, index) => {
+        return elem + (structure.wmass?.storey.wallSectionAreaY || [0])[index];
+      }),
+      wallSectionAreaRatio: (
+        structure.wmass?.storey.wallSectionAreaX || [0]
+      ).map((elem, index) => {
+        return (
+          ((elem + (structure.wmass?.storey.wallSectionAreaY || [0])[index]) /
+            (structure.wmass?.storey.area || [1])[index]) *
+          100
+        );
+      }),
     },
     massRatio: {
       storeyID: structure.wmass?.massRatio.storeyID || [0],

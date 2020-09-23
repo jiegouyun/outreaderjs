@@ -49,6 +49,8 @@ export async function readWmassOutput(
       height: [],
       heightToGround: [],
       area: [],
+      wallSectionAreaX: [],
+      wallSectionAreaY: [],
       allExtracted: false,
     },
     tower: {
@@ -174,7 +176,7 @@ export async function readWmassOutput(
       );
     }
 
-    // Extract storey[] part1/3
+    // Extract storey[] part1/4
     if (!wmass.storey.allExtracted) {
       wmass.storey = extractStoreyPart1(lineArray, wmass.storey);
     }
@@ -194,9 +196,14 @@ export async function readWmassOutput(
       wmass.weight = extractWeight(lineArray, wmass.weight);
     }
 
-    // Extract storey[] part2/3
+    // Extract storey[] part2/4
     if (!wmass.storey.allExtracted) {
       wmass.storey = extractStoreyPart2(lineArray, wmass.storey);
+    }
+
+    // Extract storey[] part3/4
+    if (!wmass.storey.allExtracted) {
+      wmass.storey = extractStoreyPart3(lineArray, wmass.storey);
     }
 
     // Extract wind{}
@@ -204,9 +211,9 @@ export async function readWmassOutput(
       wmass.wind = extractWind(lineArray, wmass.wind);
     }
 
-    // Extract storey[] part3/3
+    // Extract storey[] part3/4
     if (!wmass.storey.allExtracted) {
-      wmass.storey = extractStoreyPart3(lineArray, wmass.storey);
+      wmass.storey = extractStoreyPart4(lineArray, wmass.storey);
     }
 
     // Extract massRatio{} part2/2
@@ -531,6 +538,26 @@ export function extractStoreyPart2(
   return storey;
 }
 
+export function extractStoreyPart3(
+  lineArray: string[],
+  storey: IStorey,
+): IStorey {
+  if (lineArray[1] === 'Y方向剪力墙截面面积') {
+    FLAG = 'keyStoreyPart3';
+  } else if (lineArray[0] === '风荷载信息') {
+    FLAG = '';
+  }
+
+  if (FLAG === 'keyStoreyPart3') {
+    if (!isNaN(Number(lineArray[0]))) {
+      storey.wallSectionAreaX.push(Number(lineArray[2]));
+      storey.wallSectionAreaY.push(Number(lineArray[3]));
+    }
+  }
+
+  return storey;
+}
+
 export function extractWind(lineArray: string[], wind: IWind): IWind {
   if (lineArray[0] === '风荷载信息') {
     FLAG = 'keyWind';
@@ -540,7 +567,7 @@ export function extractWind(lineArray: string[], wind: IWind): IWind {
   }
 
   if (FLAG === 'keyWind') {
-    if (!isNaN(Number(lineArray[0])) && lineArray.length === 9) {
+    if (!isNaN(Number(lineArray[0])) && lineArray[2] === 'X') {
       wind.storeyID.push(Number(lineArray[0]));
       wind.towerID.push(Number(lineArray[1]));
       wind.forceAlongX.push(Number(lineArray[3]));
@@ -551,7 +578,7 @@ export function extractWind(lineArray: string[], wind: IWind): IWind {
       wind.momentCrossX.push(Number(lineArray[8]));
     }
 
-    if (!isNaN(Number(lineArray[1])) && lineArray.length === 7) {
+    if (!isNaN(Number(lineArray[1])) && lineArray[0] === 'Y') {
       wind.forceAlongY.push(Number(lineArray[1]));
       wind.shearAlongY.push(Number(lineArray[2]));
       wind.momentAlongY.push(Number(lineArray[3]));
@@ -582,18 +609,18 @@ export function extractWind(lineArray: string[], wind: IWind): IWind {
   return wind;
 }
 
-export function extractStoreyPart3(
+export function extractStoreyPart4(
   lineArray: string[],
   storey: IStorey,
 ): IStorey {
   if (lineArray[0] === '各楼层等效尺寸(单位') {
-    FLAG = 'keyStoreyPart3';
+    FLAG = 'keyStoreyPart4';
   } else if (lineArray[0] === '各楼层质量') {
     storey.allExtracted = true;
     FLAG = '';
   }
 
-  if (FLAG === 'keyStoreyPart3') {
+  if (FLAG === 'keyStoreyPart4') {
     if (!isNaN(Number(lineArray[0]))) {
       storey.area.push(Number(lineArray[2]));
     }
