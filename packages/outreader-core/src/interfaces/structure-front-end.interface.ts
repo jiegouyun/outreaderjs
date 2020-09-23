@@ -381,6 +381,10 @@ export interface IStoreyFE {
   height: number[];
   heightToGround: number[];
   area: number[];
+  wallSectionAreaX: number[];
+  wallSectionAreaY: number[];
+  wallSectionAreaStorey: number[];
+  wallSectionAreaRatio: number[];
 }
 
 export interface IMassRatioFE {

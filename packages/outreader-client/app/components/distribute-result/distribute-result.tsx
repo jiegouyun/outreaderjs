@@ -38,9 +38,30 @@ export function DistributeResultComponent(
       dataIndex: 'area',
       align: 'right',
     },
+    {
+      title: '墙面积X(m^2)',
+      dataIndex: 'wallAreaX',
+      align: 'right',
+    },
+    {
+      title: '墙面积Y(m^2)',
+      dataIndex: 'wallAreaY',
+      align: 'right',
+    },
+    {
+      title: '墙面积(m^2)',
+      dataIndex: 'wallAreaStorey',
+      align: 'right',
+    },
+    {
+      title: '墙地比(%)',
+      dataIndex: 'wallAreaRatio',
+      align: 'right',
+    },
   ];
 
   const storeyTableData = [];
+  const wallAreaRatioChartData = [];
   for (let i = 0; i < distributeResult.storey.storeyID.length; i++) {
     storeyTableData.push({
       key: i,
@@ -50,6 +71,16 @@ export function DistributeResultComponent(
       height: distributeResult.storey.height[i].toFixed(2),
       heightTD: distributeResult.storey.heightToGround[i].toFixed(2),
       area: distributeResult.storey.area[i].toFixed(0),
+      wallAreaX: distributeResult.storey.wallSectionAreaX[i].toFixed(1),
+      wallAreaY: distributeResult.storey.wallSectionAreaY[i].toFixed(1),
+      wallAreaStorey: distributeResult.storey.wallSectionAreaStorey[i].toFixed(
+        0
+      ),
+      wallAreaRatio: distributeResult.storey.wallSectionAreaRatio[i].toFixed(1),
+    });
+    wallAreaRatioChartData.push({
+      x: distributeResult.storey.wallSectionAreaRatio[i],
+      y: distributeResult.storey.storeyID[i],
     });
   }
 
@@ -381,6 +412,21 @@ export function DistributeResultComponent(
   const DistributeResult = (
     <div>
       <h3>楼层属性</h3>
+      <Row justify="space-around">
+        <StoreyChart
+          labels={{
+            xLabel: '墙地比（%）',
+          }}
+          describes={[
+            {
+              name: '墙地比',
+              fill: '#8884d8',
+              shape: 'cross',
+            },
+          ]}
+          datas={[wallAreaRatioChartData]}
+        />
+      </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <Table
