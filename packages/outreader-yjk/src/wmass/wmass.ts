@@ -540,7 +540,7 @@ export function extractWind(lineArray: string[], wind: IWind): IWind {
   }
 
   if (FLAG === 'keyWind') {
-    if (!isNaN(Number(lineArray[0])) && lineArray.length === 9) {
+    if (!isNaN(Number(lineArray[0])) && lineArray[2] === 'X') {
       wind.storeyID.push(Number(lineArray[0]));
       wind.towerID.push(Number(lineArray[1]));
       wind.forceAlongX.push(Number(lineArray[3]));
@@ -551,7 +551,7 @@ export function extractWind(lineArray: string[], wind: IWind): IWind {
       wind.momentCrossX.push(Number(lineArray[8]));
     }
 
-    if (!isNaN(Number(lineArray[1])) && lineArray.length === 7) {
+    if (!isNaN(Number(lineArray[1])) && lineArray[0] === 'Y') {
       wind.forceAlongY.push(Number(lineArray[1]));
       wind.shearAlongY.push(Number(lineArray[2]));
       wind.momentAlongY.push(Number(lineArray[3]));
