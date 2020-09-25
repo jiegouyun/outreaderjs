@@ -1,1 +1,1 @@
-// export * from './wpj';
+export * from './wpj';

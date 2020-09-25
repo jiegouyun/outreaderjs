@@ -180,7 +180,7 @@ export function extractColumnPj(
  * @description devide line string and return string array
  * @param line: original line string
  */
-export function lineToArray(line: string): string[] {
+function lineToArray(line: string): string[] {
   // const regexp: RegExp = /[a-zA-Z\u4e00-\u9fa5]+\d*\-?\d*|-?\d+\.?\d*[a-zA-Z]*\+?\d*/g;
   const regexp: RegExp = /[a-zA-Z\u4e00-\u9fa50-9\u2150-\u218f\.\-\+\_\*]+/g;
   return line.match(regexp) || [];
