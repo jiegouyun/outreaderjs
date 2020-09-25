@@ -1,4 +1,10 @@
-import { hashFile, IColumnPj, IWpj, readLineByLine } from '@outreader/core';
+import {
+  hashFile,
+  hashStr,
+  IColumnPj,
+  IWpj,
+  readLineByLine,
+} from '@outreader/core';
 import path from 'path';
 import fs from 'fs';
 
@@ -15,7 +21,7 @@ export async function readWpjOutput(dir: string): Promise<IWpj | undefined> {
   const files = filenames.map((value) => path.join(dir, value));
   const storeys = filenames.length;
   let wpj: IWpj = {
-    hash: hashFile(files[0]),
+    hash: hashStr(files.map((file) => hashFile(file)).join('')),
     column: {
       storeyID: [],
       colName: [],
@@ -73,11 +79,11 @@ export async function readWpjOutput(dir: string): Promise<IWpj | undefined> {
         }
       });
     }
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error(error);
   }
 
-  console.log(wpj.column.colID);
+  console.log(wpj.hash);
   return wpj;
 }
 
