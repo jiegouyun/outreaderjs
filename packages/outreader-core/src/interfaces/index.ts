@@ -6,3 +6,4 @@ export * from './wzq.interface';
 export * from './concrete-steel.interface';
 export * from './rebar.interface';
 export * from './structure-front-end.interface';
+export * from './wpj.interface';
