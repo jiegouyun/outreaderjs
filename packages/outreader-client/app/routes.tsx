@@ -8,6 +8,8 @@ import {
   StructurePage,
   AboutPage,
   StructureComparePage,
+  ElementListPage,
+  ElementPage,
 } from './containers';
 import { IStyles } from './interfaces';
 
@@ -36,6 +38,7 @@ export default function Routes() {
           >
             <Menu.Item key={routes.HOME}>首页</Menu.Item>
             <Menu.Item key={routes.STRUCTURES}>我的结构</Menu.Item>
+            <Menu.Item key={routes.ELEMENTS}>构件数据</Menu.Item>
             <Menu.Item key={routes.ABOUT}>关于</Menu.Item>
           </Menu>
         </Layout.Header>
@@ -56,6 +59,14 @@ export default function Routes() {
               </Route>
               <Route path={routes.COMPARE} exact>
                 <StructureComparePage />
+              </Route>
+            </Switch>
+            <Switch>
+              <Route path={routes.ELEMENTS} exact>
+                <ElementListPage />
+              </Route>
+              <Route path={routes.ELEMENT} exact>
+                <ElementPage />
               </Route>
             </Switch>
           </Layout.Content>

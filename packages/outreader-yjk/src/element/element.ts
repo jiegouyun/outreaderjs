@@ -5,7 +5,7 @@ export async function readElement(dir: string): Promise<IElement> {
   const wpj = await readWpjOutput(dir);
 
   const hash = hashStr(
-    wpj ? wpj.hash : '', // +
+    wpj ? wpj.hash : '', //+
     // (wwnl ? wwnl.hash : '')
   );
 

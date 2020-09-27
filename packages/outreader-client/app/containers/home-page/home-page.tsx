@@ -1,4 +1,4 @@
-import { readStructure } from '@outreader/yjk';
+import { readStructure, readElement } from '@outreader/yjk';
 import { Button, Divider, message, Row, Space } from 'antd';
 import { remote } from 'electron';
 import React, { useState } from 'react';
@@ -19,26 +19,47 @@ export function HomePage() {
   const db = useDb();
   const history = useHistory();
   const [dir, setDir] = useState('');
-  const [loading, setLoading] = useState(false);
-  const readYjkOutputs = async () => {
-    setLoading(true);
+  const [strLoading, setStrLoading] = useState(false);
+  const readYjkStrOutputs = async () => {
+    setStrLoading(true);
     try {
-      const res = await readStructure(dir);
-      res.dir = dir;
-      if (!db.get('structures').find({ hash: res.hash }).value()) {
-        db.get('structures').push({ hash: res.hash, dir }).write();
+      const strRes = await readStructure(dir);
+      strRes.dir = dir;
+      if (!db.get('structures').find({ hash: strRes.hash }).value()) {
+        db.get('structures').push({ hash: strRes.hash, dir }).write();
       }
-      const structure = initDb(res.hash);
-      structure.defaults(res).write();
+      const structure = initDb(strRes.hash);
+      structure.defaults(strRes).write();
       message.success('读取成功');
-      history.push(`/structures/${res.hash}`);
+      history.push(`/structures/${strRes.hash}`);
     } catch (error) {
       if (error) {
         message.error('读取失败，请选择正确的模型目录');
         console.error(error);
       }
     }
-    setLoading(false);
+    setStrLoading(false);
+  };
+  const [eleLoading, setEleLoading] = useState(false);
+  const readYjkEleOutputs = async () => {
+    setEleLoading(true);
+    try {
+      const eleRes = await readElement(dir);
+      eleRes.dir = dir;
+      if (!db.get('elements').find({ hash: eleRes.hash }).value()) {
+        db.get('elements').push({ hash: eleRes.hash, dir }).write();
+      }
+      const element = initDb(eleRes.hash);
+      element.defaults(eleRes).write();
+      message.success('读取成功');
+      history.push(`/elements/${eleRes.hash}`);
+    } catch (error) {
+      if (error) {
+        message.error('读取失败，请选择正确的模型目录');
+        console.error(error);
+      }
+    }
+    setEleLoading(false);
   };
   return (
     <div style={styles.container}>
@@ -66,10 +87,21 @@ export function HomePage() {
         <Button
           type="primary"
           disabled={!Boolean(dir)}
-          loading={loading}
-          onClick={() => readYjkOutputs()}
+          loading={strLoading}
+          onClick={() => readYjkStrOutputs()}
         >
-          开始读取
+          读取模型
+        </Button>
+      </Row>
+      <br />
+      <Row>
+        <Button
+          type="primary"
+          disabled={!Boolean(dir)}
+          loading={eleLoading}
+          onClick={() => readYjkEleOutputs()}
+        >
+          读取构件
         </Button>
       </Row>
     </div>

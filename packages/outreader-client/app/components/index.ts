@@ -18,3 +18,4 @@ export * from './compare-general-result';
 export * from './compare-distribute-result';
 export * from './compare-factor';
 export * from './compare-quantity';
+export * from './properties';
