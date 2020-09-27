@@ -61,17 +61,10 @@
       ]
     },
     "win": {
-      "target": [
-        "nsis",
-        "msi"
-      ]
+      "target": ["nsis", "msi"]
     },
     "linux": {
-      "target": [
-        "deb",
-        "rpm",
-        "AppImage"
-      ],
+      "target": ["deb", "rpm", "AppImage"],
       "category": "Development"
     },
     "directories": {
@@ -105,13 +98,7 @@
   "bugs": {
     "url": "https://github.com/jiegouyun/outreaderjs/issues"
   },
-  "keywords": [
-    "outreader",
-    "structural engineer",
-    "react",
-    "typescript",
-    "ts"
-  ],
+  "keywords": ["outreader", "structural engineer", "react", "typescript", "ts"],
   "homepage": "https://outreader.com",
   "jest": {
     "testURL": "http://localhost/",
@@ -119,29 +106,18 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/internals/mocks/fileMock.js",
       "\\.(css|less|sass|scss)$": "identity-obj-proxy"
     },
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "ts",
-      "tsx",
-      "json"
-    ],
-    "moduleDirectories": [
-      "node_modules",
-      "app/node_modules"
-    ],
-    "setupFiles": [
-      "./internals/scripts/CheckBuildsExist.js"
-    ]
+    "moduleFileExtensions": ["js", "jsx", "ts", "tsx", "json"],
+    "moduleDirectories": ["node_modules", "app/node_modules"],
+    "setupFiles": ["./internals/scripts/CheckBuildsExist.js"]
   },
   "devDependencies": {
-    "@babel/core": "^7.10.5",
+    "@babel/core": "^7.11.6",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/plugin-proposal-decorators": "^7.10.5",
     "@babel/plugin-proposal-do-expressions": "^7.10.4",
     "@babel/plugin-proposal-export-default-from": "^7.10.4",
     "@babel/plugin-proposal-export-namespace-from": "^7.10.4",
-    "@babel/plugin-proposal-function-bind": "^7.10.5",
+    "@babel/plugin-proposal-function-bind": "^7.11.5",
     "@babel/plugin-proposal-function-sent": "^7.10.4",
     "@babel/plugin-proposal-json-strings": "^7.10.4",
     "@babel/plugin-proposal-logical-assignment-operators": "^7.10.4",
@@ -154,14 +130,14 @@
     "@babel/plugin-syntax-import-meta": "^7.10.4",
     "@babel/plugin-transform-react-constant-elements": "^7.10.4",
     "@babel/plugin-transform-react-inline-elements": "^7.10.4",
-    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
-    "@babel/register": "^7.10.5",
-    "@types/enzyme": "^3.10.5",
+    "@babel/register": "^7.11.5",
+    "@types/enzyme": "^3.10.7",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/history": "^4.7.6",
-    "@types/jest": "^26.0.5",
+    "@types/jest": "^26.0.14",
     "@types/node": "^14.0.24",
     "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
@@ -189,13 +165,13 @@
     "electron-devtools-installer": "^3.1.1",
     "electron-rebuild": "^2.0.3",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-adapter-react-16": "^1.15.5",
     "enzyme-to-json": "^3.5.0",
     "fbjs-scripts": "^2.0.0",
     "file-loader": "^6.0.0",
     "husky": "^4.2.5",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^26.1.0",
+    "jest": "^26.4.2",
     "mini-css-extract-plugin": "^0.11.2",
     "node-sass": "^4.14.1",
     "opencollective-postinstall": "^2.0.3",
@@ -205,12 +181,12 @@
     "rimraf": "^3.0.2",
     "sass-loader": "^10.0.2",
     "sinon": "^9.0.2",
-    "spectron": "^11.1.0",
+    "spectron": "^12.0.0",
     "style-loader": "^1.2.1",
     "stylelint": "^13.6.1",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^20.0.0",
-    "terser-webpack-plugin": "^3.0.7",
+    "terser-webpack-plugin": "^4.2.2",
     "testcafe": "^1.8.8",
     "testcafe-browser-provider-electron": "^0.0.15",
     "testcafe-react-selectors": "^4.0.0",
@@ -221,13 +197,13 @@
     "webpack-bundle-analyzer": "^3.8.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^5.0.9",
+    "webpack-merge": "^5.1.4",
     "yarn": "^1.22.4"
   },
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
     "@fortawesome/fontawesome-free": "^5.14.0",
-    "@hot-loader/react-dom": "^16.13.0",
+    "@hot-loader/react-dom": "^17.0.0-rc.2",
     "@outreader/core": "^0.0.3",
     "@outreader/yjk": "^0.0.3",
     "@types/lowdb": "^1.0.9",
@@ -254,17 +230,11 @@
     "npm": ">=4.x",
     "yarn": ">=0.21.3"
   },
-  "browserslist": [
-    "extends browserslist-config-erb"
-  ],
+  "browserslist": ["extends browserslist-config-erb"],
   "prettier": {
     "overrides": [
       {
-        "files": [
-          ".prettierrc",
-          ".babelrc",
-          ".stylelintrc"
-        ],
+        "files": [".prettierrc", ".babelrc", ".stylelintrc"],
         "options": {
           "parser": "json"
         }
@@ -273,15 +243,10 @@
     "singleQuote": true
   },
   "stylelint": {
-    "extends": [
-      "stylelint-config-standard",
-      "stylelint-config-prettier"
-    ]
+    "extends": ["stylelint-config-standard", "stylelint-config-prettier"]
   },
   "renovate": {
-    "extends": [
-      "bliss"
-    ]
+    "extends": ["bliss"]
   },
   "publishConfig": {
     "access": "public"
