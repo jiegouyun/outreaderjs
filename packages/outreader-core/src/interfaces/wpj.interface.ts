@@ -21,6 +21,7 @@ export interface IColumnPj extends IStoreyID, IAllExtracted {
   section: number[][][];
   ang: number[][];
   uc: number[][];
+  ucG: number[][];
   rs: number[][];
   rsv: number[][];
   cbX: number[][];

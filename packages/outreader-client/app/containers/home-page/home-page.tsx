@@ -20,13 +20,16 @@ export function HomePage() {
   const history = useHistory();
   const [dir, setDir] = useState('');
   const [strLoading, setStrLoading] = useState(false);
+  const [eleLoading, setEleLoading] = useState(false);
   const readYjkStrOutputs = async () => {
     setStrLoading(true);
     try {
       const strRes = await readStructure(dir);
       strRes.dir = dir;
       if (!db.get('structures').find({ hash: strRes.hash }).value()) {
-        db.get('structures').push({ hash: strRes.hash, dir }).write();
+        db.get('structures')
+          .push({ hash: strRes.hash, dir: strRes.dir })
+          .write();
       }
       const structure = initDb(strRes.hash);
       structure.defaults(strRes).write();
@@ -40,16 +43,16 @@ export function HomePage() {
     }
     setStrLoading(false);
   };
-  const [eleLoading, setEleLoading] = useState(false);
   const readYjkEleOutputs = async () => {
     setEleLoading(true);
     try {
       const eleRes = await readElement(dir);
       eleRes.dir = dir;
       if (!db.get('elements').find({ hash: eleRes.hash }).value()) {
-        db.get('elements').push({ hash: eleRes.hash, dir }).write();
+        db.get('elements').push({ hash: eleRes.hash, dir: eleRes.dir }).write();
       }
       const element = initDb(eleRes.hash);
+      console.log(element);
       element.defaults(eleRes).write();
       message.success('读取成功');
       history.push(`/elements/${eleRes.hash}`);

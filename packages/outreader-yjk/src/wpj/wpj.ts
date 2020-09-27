@@ -33,6 +33,7 @@ export async function readWpjOutput(dir: string): Promise<IWpj | undefined> {
       section: [],
       ang: [],
       uc: [],
+      ucG: [],
       rs: [],
       rsv: [],
       cbX: [],
@@ -128,6 +129,7 @@ export function extractColumnPj(
         column.ang.push(Array(storeys));
         column.colProps.push(Array(storeys));
         column.uc.push(Array(storeys));
+        column.ucG.push(Array(storeys));
         column.rs.push(Array(storeys));
         column.rsv.push(Array(storeys));
         column.cbX.push(Array(storeys));
@@ -154,6 +156,11 @@ export function extractColumnPj(
       column.uc[col][storeys - storey] = Number(lineArray[4]);
       column.rs[col][storeys - storey] = Number(lineArray[6]);
       column.rsv[col][storeys - storey] = Number(lineArray[8]);
+    }
+
+    if (lineArray[0] === 'Nu_G') {
+      // console.log(lineArray);
+      column.ucG[col][storeys - storey] = Number(lineArray[3]);
     }
 
     propsFlag && propsFlag++;
