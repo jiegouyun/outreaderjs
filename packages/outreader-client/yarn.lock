@@ -1891,9 +1891,9 @@
   integrity sha1-Q9cWj+xvoJiLsaUTppeykpZyGvs=
 
 "@types/sinon@^9.0.4":
-  version "9.0.5"
-  resolved "https://registry.npm.taobao.org/@types/sinon/download/@types/sinon-9.0.5.tgz#56b2a12662dd8c7d081cdc511af5f872cb37377f"
-  integrity sha1-VrKhJmLdjH0IHNxRGvX4css3N38=
+  version "9.0.6"
+  resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-9.0.6.tgz#fb4b6883fe0417e6a1ac5d9753bdcb7016dd4dd0"
+  integrity sha512-j3GK0fiHgn8fe7sqOpInMjm0A2Tary1NBZ8gbI/sZ0C0JxYeO+nh8H0/pW/0l94vNWcH1FnZOZu/cOvIfNZTrg==
   dependencies:
     "@types/sinonjs__fake-timers" "*"
 
