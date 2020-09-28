@@ -34,32 +34,35 @@ export function CompareDistributeResultComponent(
   ];
 
   for (let i = 0; i < n; i++) {
-    storeyColumns.push(
-      {
-        title: `模型${i + 1}-层高`,
-        dataIndex: `height${i}`,
-        width: `${100 / 4 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-累高`,
-        dataIndex: `heightTD${i}`,
-        width: `${100 / 4 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-面积`,
-        dataIndex: `area${i}`,
-        width: `${100 / 4 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-墙地比`,
-        dataIndex: `wallAreaRatio${i}`,
-        width: `${100 / 4 / n}%`,
-        align: 'right',
-      }
-    );
+    storeyColumns.push({
+      title: `模型${i + 1}`,
+      children: [
+        {
+          title: `层高`,
+          dataIndex: `height${i}`,
+          width: `${100 / 4 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `累高`,
+          dataIndex: `heightTD${i}`,
+          width: `${100 / 4 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `面积`,
+          dataIndex: `area${i}`,
+          width: `${100 / 4 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `墙地比`,
+          dataIndex: `wallAreaRatio${i}`,
+          width: `${100 / 4 / n}%`,
+          align: 'right',
+        },
+      ],
+    });
   }
 
   const storeyTableData: ICompare[] = [];
@@ -123,20 +126,23 @@ export function CompareDistributeResultComponent(
   ];
 
   for (let i = 0; i < n; i++) {
-    massRatioColumns.push(
-      {
-        title: `模型${i + 1}-质量比`,
-        dataIndex: `ratio${i}`,
-        width: `${100 / 2 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-单位质量比`,
-        dataIndex: `unitRatio${i}`,
-        width: `${100 / 2 / n}%`,
-        align: 'right',
-      }
-    );
+    massRatioColumns.push({
+      title: `模型${i + 1}`,
+      children: [
+        {
+          title: `质量比`,
+          dataIndex: `ratio${i}`,
+          width: `${100 / 2 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `单位质量比`,
+          dataIndex: `unitRatio${i}`,
+          width: `${100 / 2 / n}%`,
+          align: 'right',
+        },
+      ],
+    });
   }
 
   const massRatioTableData: ICompare[] = [];
@@ -200,32 +206,35 @@ export function CompareDistributeResultComponent(
   ];
 
   for (let i = 0; i < n; i++) {
-    stiffRatioColumns.push(
-      {
-        title: `模型${i + 1}-X`,
-        dataIndex: `ratx1${i}`,
-        width: `${100 / 4 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-Y`,
-        dataIndex: `raty1${i}`,
-        width: `${100 / 4 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-X(层高修正)`,
-        dataIndex: `ratx2${i}`,
-        width: `${100 / 4 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-Y(层高修正)`,
-        dataIndex: `raty2${i}`,
-        width: `${100 / 4 / n}%`,
-        align: 'right',
-      }
-    );
+    stiffRatioColumns.push({
+      title: `模型${i + 1}`,
+      children: [
+        {
+          title: `X`,
+          dataIndex: `ratx1${i}`,
+          width: `${100 / 4 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `Y`,
+          dataIndex: `raty1${i}`,
+          width: `${100 / 4 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `X(层高修正)`,
+          dataIndex: `ratx2${i}`,
+          width: `${100 / 4 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `Y(层高修正)`,
+          dataIndex: `raty2${i}`,
+          width: `${100 / 4 / n}%`,
+          align: 'right',
+        },
+      ],
+    });
   }
 
   const stiffRatioTableData: ICompare[] = [];
@@ -318,20 +327,23 @@ export function CompareDistributeResultComponent(
   ];
 
   for (let i = 0; i < n; i++) {
-    shearWeightColumns.push(
-      {
-        title: `模型${i + 1}-X`,
-        dataIndex: `ratioX${i}`,
-        width: `${100 / 2 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-Y`,
-        dataIndex: `ratioY${i}`,
-        width: `${100 / 2 / n}%`,
-        align: 'right',
-      }
-    );
+    shearWeightColumns.push({
+      title: `模型${i + 1}`,
+      children: [
+        {
+          title: `X`,
+          dataIndex: `ratioX${i}`,
+          width: `${100 / 2 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `Y`,
+          dataIndex: `ratioY${i}`,
+          width: `${100 / 2 / n}%`,
+          align: 'right',
+        },
+      ],
+    });
   }
 
   const shearWeightTableData: ICompare[] = [];
@@ -399,20 +411,23 @@ export function CompareDistributeResultComponent(
   ];
 
   for (let i = 0; i < n; i++) {
-    shearCapacityColumns.push(
-      {
-        title: `模型${i + 1}-X`,
-        dataIndex: `ratioX${i}`,
-        width: `${100 / 2 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-Y`,
-        dataIndex: `ratioY${i}`,
-        width: `${100 / 2 / n}%`,
-        align: 'right',
-      }
-    );
+    shearCapacityColumns.push({
+      title: `模型${i + 1}`,
+      children: [
+        {
+          title: `X`,
+          dataIndex: `ratioX${i}`,
+          width: `${100 / 2 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `Y`,
+          dataIndex: `ratioY${i}`,
+          width: `${100 / 2 / n}%`,
+          align: 'right',
+        },
+      ],
+    });
   }
 
   const shearCapacityTableData: ICompare[] = [];
@@ -482,32 +497,45 @@ export function CompareDistributeResultComponent(
   ];
 
   for (let i = 0; i < n; i++) {
-    momentDistributeColumns.push(
-      {
-        title: `模型${i + 1}-X向柱`,
-        dataIndex: `columnX${i}`,
-        width: `${100 / 4 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-X向短肢墙`,
-        dataIndex: `wallX${i}`,
-        width: `${100 / 4 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-Y向柱`,
-        dataIndex: `columnY${i}`,
-        width: `${100 / 4 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-Y向短肢墙`,
-        dataIndex: `wallY${i}`,
-        width: `${100 / 4 / n}%`,
-        align: 'right',
-      }
-    );
+    momentDistributeColumns.push({
+      title: `模型${i + 1}`,
+      children: [
+        {
+          title: `X`,
+          children: [
+            {
+              title: `柱`,
+              dataIndex: `columnX${i}`,
+              width: `${100 / 4 / n}%`,
+              align: 'right',
+            },
+            {
+              title: `短肢墙`,
+              dataIndex: `wallX${i}`,
+              width: `${100 / 4 / n}%`,
+              align: 'right',
+            },
+          ],
+        },
+        {
+          title: `Y`,
+          children: [
+            {
+              title: `柱`,
+              dataIndex: `columnY${i}`,
+              width: `${100 / 4 / n}%`,
+              align: 'right',
+            },
+            {
+              title: `短肢墙`,
+              dataIndex: `wallY${i}`,
+              width: `${100 / 4 / n}%`,
+              align: 'right',
+            },
+          ],
+        },
+      ],
+    });
   }
 
   const momentDistributeTableData: ICompare[] = [];
@@ -604,20 +632,23 @@ export function CompareDistributeResultComponent(
   ];
 
   for (let i = 0; i < n; i++) {
-    shearDistributeColumns.push(
-      {
-        title: `模型${i + 1}-X`,
-        dataIndex: `ratioX${i}`,
-        width: `${100 / 2 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-Y`,
-        dataIndex: `ratioY${i}`,
-        width: `${100 / 2 / n}%`,
-        align: 'right',
-      }
-    );
+    shearDistributeColumns.push({
+      title: `模型${i + 1}`,
+      children: [
+        {
+          title: `X`,
+          dataIndex: `ratioX${i}`,
+          width: `${100 / 2 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `Y`,
+          dataIndex: `ratioY${i}`,
+          width: `${100 / 2 / n}%`,
+          align: 'right',
+        },
+      ],
+    });
   }
 
   const shearDistributeTableData: ICompare[] = [];
@@ -727,7 +758,7 @@ export function CompareDistributeResultComponent(
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
-            scroll={{ x: '50rem', y: 'calc(100vh - 12.5rem)' }}
+            scroll={{ x: '50rem', y: 'calc(100vh - 14rem)' }}
           />
         </Panel>
       </Collapse>
@@ -750,7 +781,7 @@ export function CompareDistributeResultComponent(
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
-            scroll={{ x: '30rem', y: 'calc(100vh - 12.5rem)' }}
+            scroll={{ x: '30rem', y: 'calc(100vh - 14rem)' }}
           />
         </Panel>
       </Collapse>
@@ -780,7 +811,7 @@ export function CompareDistributeResultComponent(
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
-            scroll={{ x: '50rem', y: 'calc(100vh - 12.5rem)' }}
+            scroll={{ x: '50rem', y: 'calc(100vh - 14rem)' }}
           />
         </Panel>
       </Collapse>
@@ -803,7 +834,7 @@ export function CompareDistributeResultComponent(
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
-            scroll={{ x: '30rem', y: 'calc(100vh - 12.5rem)' }}
+            scroll={{ x: '30rem', y: 'calc(100vh - 14rem)' }}
           />
         </Panel>
       </Collapse>
@@ -826,7 +857,7 @@ export function CompareDistributeResultComponent(
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
-            scroll={{ x: '30rem', y: 'calc(100vh - 12.5rem)' }}
+            scroll={{ x: '30rem', y: 'calc(100vh - 14rem)' }}
           />
         </Panel>
       </Collapse>
@@ -834,7 +865,7 @@ export function CompareDistributeResultComponent(
       <Row justify="space-around">
         <StoreyChart
           labels={{
-            xLabel: '规定水平力下倾覆力矩分配(%)',
+            xLabel: '柱倾覆力矩占比(%)',
           }}
           describes={describes}
           datas={momentColumnChartData}
@@ -856,7 +887,7 @@ export function CompareDistributeResultComponent(
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
-            scroll={{ x: '50rem', y: 'calc(100vh - 12.5rem)' }}
+            scroll={{ x: '50rem', y: 'calc(100vh - 16rem)' }}
           />
         </Panel>
       </Collapse>
@@ -879,7 +910,7 @@ export function CompareDistributeResultComponent(
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
-            scroll={{ x: '30rem', y: 'calc(100vh - 12.5rem)' }}
+            scroll={{ x: '30rem', y: 'calc(100vh - 14rem)' }}
           />
         </Panel>
       </Collapse>

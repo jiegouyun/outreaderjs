@@ -29,32 +29,35 @@ export function CompareForceComponent(forces: IForceFE[]) {
   ];
 
   for (let i = 0; i < n; i++) {
-    forceColumns.push(
-      {
-        title: `模型${i + 1}-剪力X`,
-        dataIndex: `shearX${i}`,
-        width: `${100 / 4 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-弯矩X`,
-        dataIndex: `momentX${i}`,
-        width: `${100 / 4 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-剪力Y`,
-        dataIndex: `shearY${i}`,
-        width: `${100 / 4 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-弯矩Y`,
-        dataIndex: `momentY${i}`,
-        width: `${100 / 4 / n}%`,
-        align: 'right',
-      }
-    );
+    forceColumns.push({
+      title: `模型${i + 1}`,
+      children: [
+        {
+          title: `剪力X`,
+          dataIndex: `shearX${i}`,
+          width: `${100 / 4 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `弯矩X`,
+          dataIndex: `momentX${i}`,
+          width: `${100 / 4 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `剪力Y`,
+          dataIndex: `shearY${i}`,
+          width: `${100 / 4 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `弯矩Y`,
+          dataIndex: `momentY${i}`,
+          width: `${100 / 4 / n}%`,
+          align: 'right',
+        },
+      ],
+    });
   }
 
   const alongWindTableData: ICompare[] = [];
@@ -342,7 +345,7 @@ export function CompareForceComponent(forces: IForceFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
-            scroll={{ x: '80rem', y: 'calc(100vh - 12.5rem)' }}
+            scroll={{ x: '80rem', y: 'calc(100vh - 14rem)' }}
           />
         </Panel>
       </Collapse>
@@ -374,7 +377,7 @@ export function CompareForceComponent(forces: IForceFE[]) {
                 size="small"
                 pagination={false}
                 style={{ marginBottom: 20 }}
-                scroll={{ x: '80rem', y: 'calc(100vh - 12.5rem)' }}
+                scroll={{ x: '80rem', y: 'calc(100vh - 14rem)' }}
               />
             </Panel>
           </Collapse>
@@ -406,7 +409,7 @@ export function CompareForceComponent(forces: IForceFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
-            scroll={{ x: '80rem', y: 'calc(100vh - 12.5rem)' }}
+            scroll={{ x: '80rem', y: 'calc(100vh - 14rem)' }}
           />
         </Panel>
       </Collapse>

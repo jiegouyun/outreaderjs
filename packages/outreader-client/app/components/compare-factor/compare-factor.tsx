@@ -85,20 +85,23 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
   ];
 
   for (let i = 0; i < n; i++) {
-    factorColumns.push(
-      {
-        title: `模型${i + 1}-X`,
-        dataIndex: `factorX${i}`,
-        width: `${100 / 2 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-Y`,
-        dataIndex: `factorY${i}`,
-        width: `${100 / 2 / n}%`,
-        align: 'right',
-      }
-    );
+    factorColumns.push({
+      title: `模型${i + 1}`,
+      children: [
+        {
+          title: `X`,
+          dataIndex: `factorX${i}`,
+          width: `${100 / 2 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `Y`,
+          dataIndex: `factorY${i}`,
+          width: `${100 / 2 / n}%`,
+          align: 'right',
+        },
+      ],
+    });
   }
 
   const shearWeightTableData: ICompare[] = [];
@@ -276,7 +279,7 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
-            scroll={{ x: '30rem', y: 'calc(100vh - 12.5rem)' }}
+            scroll={{ x: '30rem', y: 'calc(100vh - 14rem)' }}
           />
         </Panel>
       </Collapse>
@@ -299,7 +302,7 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
-            scroll={{ x: '30rem', y: 'calc(100vh - 12.5rem)' }}
+            scroll={{ x: '30rem', y: 'calc(100vh - 14rem)' }}
           />
         </Panel>
       </Collapse>

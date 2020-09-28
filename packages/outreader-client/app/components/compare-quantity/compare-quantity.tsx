@@ -26,26 +26,29 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
   ];
 
   for (let i = 0; i < n; i++) {
-    quantityColumns.push(
-      {
-        title: `模型${i + 1}-面积`,
-        dataIndex: `area${i}`,
-        width: `${100 / 3 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-用量`,
-        dataIndex: `quantity${i}`,
-        width: `${100 / 3 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-含量`,
-        dataIndex: `unit${i}`,
-        width: `${100 / 3 / n}%`,
-        align: 'right',
-      }
-    );
+    quantityColumns.push({
+      title: `模型${i + 1}`,
+      children: [
+        {
+          title: `面积`,
+          dataIndex: `area${i}`,
+          width: `${100 / 3 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `用量`,
+          dataIndex: `quantity${i}`,
+          width: `${100 / 3 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `含量`,
+          dataIndex: `unit${i}`,
+          width: `${100 / 3 / n}%`,
+          align: 'right',
+        },
+      ],
+    });
   }
 
   const concreteTableData: ICompare[] = [];
@@ -321,7 +324,7 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
-            scroll={{ x: '50rem', y: 'calc(100vh - 12.5rem)' }}
+            scroll={{ x: '50rem', y: 'calc(100vh - 14rem)' }}
           />
         </Panel>
       </Collapse>
@@ -342,7 +345,7 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
-            scroll={{ x: '50rem', y: 'calc(100vh - 12.5rem)' }}
+            scroll={{ x: '50rem', y: 'calc(100vh - 14rem)' }}
           />
         </Panel>
       </Collapse>
@@ -363,7 +366,7 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
-            scroll={{ x: '50rem', y: 'calc(100vh - 12.5rem)' }}
+            scroll={{ x: '50rem', y: 'calc(100vh - 14rem)' }}
           />
         </Panel>
       </Collapse>
