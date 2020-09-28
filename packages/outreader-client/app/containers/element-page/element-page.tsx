@@ -2,7 +2,12 @@ import { exportExcel } from '@outreader/core';
 import { Breadcrumb, Layout, Menu, message, Divider } from 'antd';
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router';
-import { PropertiesComponent } from '../../components';
+import {
+  PropertiesComponent,
+  AxialCompRatioComponent,
+  ReinforcementComponent,
+  ShearCapacityComponent,
+} from '../../components';
 import { initDb } from '../../database';
 import { IStyles } from '../../interfaces';
 
@@ -39,10 +44,22 @@ export function ElementPage() {
   }
 
   const Properties = PropertiesComponent(wpj);
+  const AxialCompRatio = AxialCompRatioComponent(wpj);
+  const Reinforcement = ReinforcementComponent(wpj);
+  const ShearCapacity = ShearCapacityComponent(wpj);
 
   const dataMapping = {
     properties: () => {
       return Properties;
+    },
+    axialCompRatio: () => {
+      return AxialCompRatio;
+    },
+    reinforcement: () => {
+      return Reinforcement;
+    },
+    shearCapacity: () => {
+      return ShearCapacity;
     },
   };
 
@@ -77,6 +94,9 @@ export function ElementPage() {
             }}
           >
             <Menu.Item key="properties">构件信息</Menu.Item>
+            <Menu.Item key="axialCompRatio">轴压比</Menu.Item>
+            <Menu.Item key="reinforcement">配筋率</Menu.Item>
+            <Menu.Item key="shearCapacity">抗剪承载力</Menu.Item>
             <Divider />
             <p
               style={{
