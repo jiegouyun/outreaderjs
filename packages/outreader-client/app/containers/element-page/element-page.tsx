@@ -1,4 +1,4 @@
-import { exportExcel } from '@outreader/core';
+import { exportElementExcel } from '@outreader/core';
 import { Breadcrumb, Layout, Menu, message, Divider } from 'antd';
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router';
