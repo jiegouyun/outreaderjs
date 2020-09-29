@@ -1,4 +1,4 @@
-import { exportExcel } from '@outreader/core';
+import { exportElementExcel } from '@outreader/core';
 import { convertStructure } from '@outreader/yjk';
 import { Button, Divider, message, Table } from 'antd';
 import React, { useState } from 'react';
