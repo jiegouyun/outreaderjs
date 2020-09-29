@@ -25,10 +25,9 @@ export function HomePage() {
     setStrLoading(true);
     try {
       const strRes = await readStructure(dir);
-      // strRes.dir = dir;
-      // if (!db.has('structures').value()) {
-      //   db.set('structures', []);
-      // }
+      if (!db.has('structures').value()) {
+        db.set('structures', []).write();
+      }
       if (!db.get('structures').find({ hash: strRes.hash }).value()) {
         db.get('structures')
           .push({ hash: strRes.hash, dir: strRes.dir })
@@ -50,10 +49,9 @@ export function HomePage() {
     setEleLoading(true);
     try {
       const eleRes = await readElement(dir);
-      // eleRes.dir = dir;
-      // if (!db.has('elements').value()) {
-      //   db.set('elements', []);
-      // }
+      if (!db.has('elements').value()) {
+        db.set('elements', []).write();
+      }
       if (!db.get('elements').find({ hash: eleRes.hash }).value()) {
         db.get('elements').push({ hash: eleRes.hash, dir: eleRes.dir }).write();
       }
