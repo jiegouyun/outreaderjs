@@ -10,7 +10,7 @@ describe('exportElementExcel1', () => {
 
   beforeEach(async () => {
     element = await readElement(dir);
-    result = await exportElementExcel(element);
+    // result = await exportElementExcel(element);
     result = true;
   });
 
