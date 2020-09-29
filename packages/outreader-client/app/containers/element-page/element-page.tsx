@@ -33,11 +33,9 @@ export function ElementPage() {
   const { hash } = useParams();
   const history = useHistory();
   const [activeItemKey, setActvieItemKey] = useState('properties');
-  const elementData = initDb(hash);
-  const element = elementData.value();
+  const element = initDb(hash).value();
   const wpj = element.wpj;
-  // console.log(structure);
-  // console.log(structureFE);
+  // console.log(element);
   if (!element.hash) {
     message.error('找不到模型');
     history.replace('/');
@@ -64,15 +62,15 @@ export function ElementPage() {
   };
 
   const exportXLSX = async () => {
-    // try {
-    //   const res = await exportExcel(structureFE);
-    //   if (res) message.success('导出成功');
-    // } catch (error) {
-    //   if (error) {
-    //     message.error('导出失败，请检查');
-    //     console.error(error);
-    //   }
-    // }
+    try {
+      const res = await exportElementExcel(element);
+      if (res) message.success('导出成功');
+    } catch (error) {
+      if (error) {
+        message.error('导出失败，请检查');
+        console.error(error);
+      }
+    }
   };
 
   // const downloadImgs = () => {
