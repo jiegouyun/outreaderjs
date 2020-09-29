@@ -25,20 +25,23 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
   ];
 
   for (let i = 0; i < n; i++) {
-    modeColumns.push(
-      {
-        title: `模型${i + 1}-周期`,
-        dataIndex: `period${i}`,
-        width: `${100 / 2 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-转角`,
-        dataIndex: `angle${i}`,
-        width: `${100 / 2 / n}%`,
-        align: 'right',
-      }
-    );
+    modeColumns.push({
+      title: `模型${i + 1}`,
+      children: [
+        {
+          title: `周期`,
+          dataIndex: `period${i}`,
+          width: `${100 / 2 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `转角`,
+          dataIndex: `angle${i}`,
+          width: `${100 / 2 / n}%`,
+          align: 'right',
+        },
+      ],
+    });
   }
 
   const periodModeTableData: ICompare[] = [];
@@ -90,26 +93,29 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
   ];
 
   for (let i = 0; i < n; i++) {
-    periodMassColumns.push(
-      {
-        title: `模型${i + 1}-X`,
-        dataIndex: `factorX${i}`,
-        width: `${100 / 3 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-Y`,
-        dataIndex: `factorY${i}`,
-        width: `${100 / 3 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-Z`,
-        dataIndex: `factorZ${i}`,
-        width: `${100 / 3 / n}%`,
-        align: 'right',
-      }
-    );
+    periodMassColumns.push({
+      title: `模型${i + 1}`,
+      children: [
+        {
+          title: `X`,
+          dataIndex: `factorX${i}`,
+          width: `${100 / 3 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `Y`,
+          dataIndex: `factorY${i}`,
+          width: `${100 / 3 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `Z`,
+          dataIndex: `factorZ${i}`,
+          width: `${100 / 3 / n}%`,
+          align: 'right',
+        },
+      ],
+    });
   }
 
   const periodMassTableData: ICompare[] = [];
@@ -147,7 +153,7 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
-            scroll={{ x: '30rem', y: 'calc(100vh - 12.5rem)' }}
+            scroll={{ x: '30rem', y: 'calc(100vh - 14rem)' }}
           />
         </Panel>
       </Collapse>
@@ -161,7 +167,7 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
-            scroll={{ x: '30rem', y: 'calc(100vh - 12.5rem)' }}
+            scroll={{ x: '30rem', y: 'calc(100vh - 14rem)' }}
           />
         </Panel>
       </Collapse>
@@ -175,7 +181,7 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
-            scroll={{ x: '50rem', y: 'calc(100vh - 12.5rem)' }}
+            scroll={{ x: '50rem', y: 'calc(100vh - 14rem)' }}
           />
         </Panel>
       </Collapse>

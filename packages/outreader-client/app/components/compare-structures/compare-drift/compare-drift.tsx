@@ -30,44 +30,47 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
   ];
 
   for (let i = 0; i < n; i++) {
-    driftDispColumns.push(
-      {
-        title: `模型${i + 1}-地震X`,
-        dataIndex: `seismicX${i}`,
-        width: `${100 / 6 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-地震Y`,
-        dataIndex: `seismicY${i}`,
-        width: `${100 / 6 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-顺风X`,
-        dataIndex: `windAX${i}`,
-        width: `${100 / 6 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-顺风Y`,
-        dataIndex: `windAY${i}`,
-        width: `${100 / 6 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-横风X`,
-        dataIndex: `windCX${i}`,
-        width: `${100 / 6 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-横风Y`,
-        dataIndex: `windCY${i}`,
-        width: `${100 / 6 / n}%`,
-        align: 'right',
-      }
-    );
+    driftDispColumns.push({
+      title: `模型${i + 1}`,
+      children: [
+        {
+          title: `地震X`,
+          dataIndex: `seismicX${i}`,
+          width: `${100 / 6 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `地震Y`,
+          dataIndex: `seismicY${i}`,
+          width: `${100 / 6 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `顺风X`,
+          dataIndex: `windAX${i}`,
+          width: `${100 / 6 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `顺风Y`,
+          dataIndex: `windAY${i}`,
+          width: `${100 / 6 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `横风X`,
+          dataIndex: `windCX${i}`,
+          width: `${100 / 6 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `横风Y`,
+          dataIndex: `windCY${i}`,
+          width: `${100 / 6 / n}%`,
+          align: 'right',
+        },
+      ],
+    });
   }
 
   const dispTableData: ICompare[] = [];
@@ -244,32 +247,35 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
   ];
 
   for (let i = 0; i < n; i++) {
-    dispRatioColumns.push(
-      {
-        title: `模型${i + 1}-X+`,
-        dataIndex: `eccXP${i}`,
-        width: `${100 / 4 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-X-`,
-        dataIndex: `eccXN${i}`,
-        width: `${100 / 4 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-Y+`,
-        dataIndex: `eccYP${i}`,
-        width: `${100 / 4 / n}%`,
-        align: 'right',
-      },
-      {
-        title: `模型${i + 1}-Y-`,
-        dataIndex: `eccYN${i}`,
-        width: `${100 / 4 / n}%`,
-        align: 'right',
-      }
-    );
+    dispRatioColumns.push({
+      title: `模型${i + 1}`,
+      children: [
+        {
+          title: `+X`,
+          dataIndex: `eccXP${i}`,
+          width: `${100 / 4 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `-X`,
+          dataIndex: `eccXN${i}`,
+          width: `${100 / 4 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `+Y`,
+          dataIndex: `eccYP${i}`,
+          width: `${100 / 4 / n}%`,
+          align: 'right',
+        },
+        {
+          title: `-Y`,
+          dataIndex: `eccYN${i}`,
+          width: `${100 / 4 / n}%`,
+          align: 'right',
+        },
+      ],
+    });
   }
 
   const dispRatioTableData: ICompare[] = [];
@@ -477,7 +483,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
-            scroll={{ x: '100rem', y: 'calc(100vh - 12.5rem)' }}
+            scroll={{ x: '100rem', y: 'calc(100vh - 14rem)' }}
           />
         </Panel>
       </Collapse>
@@ -507,7 +513,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
-            scroll={{ x: '100rem', y: 'calc(100vh - 12.5rem)' }}
+            scroll={{ x: '100rem', y: 'calc(100vh - 14rem)' }}
           />
         </Panel>
       </Collapse>
@@ -537,7 +543,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
-            scroll={{ x: '50rem', y: 'calc(100vh - 12.5rem)' }}
+            scroll={{ x: '50rem', y: 'calc(100vh - 14rem)' }}
           />
         </Panel>
       </Collapse>
@@ -567,7 +573,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
             size="small"
             pagination={false}
             style={{ marginBottom: 20 }}
-            scroll={{ x: '50rem', y: 'calc(100vh - 12.5rem)' }}
+            scroll={{ x: '50rem', y: 'calc(100vh - 14rem)' }}
           />
         </Panel>
       </Collapse>
