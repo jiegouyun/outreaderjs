@@ -3,6 +3,8 @@ import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IDistributeResultFE } from '@outreader/core';
 import { StoreyChart } from '../../chart-tools';
+import { IDescribe, IData } from '../../../interfaces';
+import { userColors, userShaps } from '../../../colors';
 
 export function DistributeResultComponent(
   distributeResult: IDistributeResultFE
@@ -331,11 +333,67 @@ export function DistributeResultComponent(
     },
   ];
 
+  const lackWallColumns: ColumnsType<Object> = [
+    {
+      title: '层号',
+      dataIndex: 'storeyID',
+      align: 'right',
+    },
+    {
+      title: '塔号',
+      dataIndex: 'towerID',
+      align: 'right',
+    },
+    {
+      title: 'X向',
+      children: [
+        {
+          title: '长墙',
+          dataIndex: 'wallXX',
+          align: 'right',
+        },
+        {
+          title: '扁柱框架',
+          dataIndex: 'wallYX',
+          align: 'right',
+        },
+        {
+          title: '框架',
+          dataIndex: 'edgeX',
+          align: 'right',
+        },
+      ],
+    },
+    {
+      title: 'Y向',
+      children: [
+        {
+          title: '长墙',
+          dataIndex: 'wallYY',
+          align: 'right',
+        },
+        {
+          title: '扁柱框架',
+          dataIndex: 'wallXY',
+          align: 'right',
+        },
+        {
+          title: '框架',
+          dataIndex: 'edgeY',
+          align: 'right',
+        },
+      ],
+    },
+  ];
+
   const momentDistributeTableData = [];
+  const lackWallMomentTableData = [];
   const momentColumnXChartData = [];
   const momentColumnYChartData = [];
   const momentWallXChartData = [];
   const momentWallYChartData = [];
+  const lackWallMomentXChartData: IData[][] = [[], [], []];
+  const lackWallMomentYChartData: IData[][] = [[], [], []];
   for (let i = 0; i < distributeResult.momentPercent.storeyID.length; i++) {
     momentDistributeTableData.push({
       key: i,
@@ -360,6 +418,50 @@ export function DistributeResultComponent(
     });
     momentWallYChartData.push({
       x: distributeResult.momentPercent.percentWallY[i],
+      y: distributeResult.momentPercent.storeyID[i],
+    });
+
+    lackWallMomentTableData.push({
+      key: i,
+      storeyID: distributeResult.momentPercent.storeyID[i],
+      towerID: distributeResult.momentPercent.towerID[i],
+      wallXX:
+        Math.round(distributeResult.momentPercent.percentWallXX[i] * 10) / 10,
+      wallYX:
+        Math.round(distributeResult.momentPercent.percentWallYX[i] * 10) / 10,
+      edgeX:
+        Math.round(distributeResult.momentPercent.percentEdgeX[i] * 10) / 10,
+      wallYY:
+        Math.round(distributeResult.momentPercent.percentWallYY[i] * 10) / 10,
+      wallXY:
+        Math.round(distributeResult.momentPercent.percentWallXY[i] * 10) / 10,
+      edgeY:
+        Math.round(distributeResult.momentPercent.percentEdgeY[i] * 10) / 10,
+    });
+
+    lackWallMomentXChartData[0].push({
+      x: distributeResult.momentPercent.percentWallXX[i],
+      y: distributeResult.momentPercent.storeyID[i],
+    });
+    lackWallMomentXChartData[1].push({
+      x: distributeResult.momentPercent.percentWallYX[i],
+      y: distributeResult.momentPercent.storeyID[i],
+    });
+    lackWallMomentXChartData[2].push({
+      x: distributeResult.momentPercent.percentEdgeX[i],
+      y: distributeResult.momentPercent.storeyID[i],
+    });
+
+    lackWallMomentYChartData[0].push({
+      x: distributeResult.momentPercent.percentWallYY[i],
+      y: distributeResult.momentPercent.storeyID[i],
+    });
+    lackWallMomentYChartData[1].push({
+      x: distributeResult.momentPercent.percentWallXY[i],
+      y: distributeResult.momentPercent.storeyID[i],
+    });
+    lackWallMomentYChartData[2].push({
+      x: distributeResult.momentPercent.percentEdgeY[i],
       y: distributeResult.momentPercent.storeyID[i],
     });
   }
@@ -390,6 +492,9 @@ export function DistributeResultComponent(
   const shearDistributeTableData = [];
   const shearColumnXChartData = [];
   const shearColumnYChartData = [];
+  const lackWallShearTableData = [];
+  const lackWallShearXChartData: IData[][] = [[], [], []];
+  const lackWallShearYChartData: IData[][] = [[], [], []];
   for (let i = 0; i < distributeResult.columnShear.storeyID.length; i++) {
     shearDistributeTableData.push({
       key: i,
@@ -406,7 +511,80 @@ export function DistributeResultComponent(
       x: distributeResult.columnShear.percentColumnY[i],
       y: distributeResult.columnShear.storeyID[i],
     });
+
+    lackWallShearTableData.push({
+      key: i,
+      storeyID: distributeResult.columnShear.storeyID[i],
+      towerID: distributeResult.columnShear.towerID[i],
+      wallXX:
+        Math.round(distributeResult.columnShear.percentWallXX[i] * 10) / 10,
+      wallYX:
+        Math.round(distributeResult.columnShear.percentWallYX[i] * 10) / 10,
+      edgeX: Math.round(distributeResult.columnShear.percentEdgeX[i] * 10) / 10,
+      wallYY:
+        Math.round(distributeResult.columnShear.percentWallYY[i] * 10) / 10,
+      wallXY:
+        Math.round(distributeResult.columnShear.percentWallXY[i] * 10) / 10,
+      edgeY: Math.round(distributeResult.columnShear.percentEdgeY[i] * 10) / 10,
+    });
+
+    lackWallShearXChartData[0].push({
+      x: distributeResult.columnShear.percentWallXX[i],
+      y: distributeResult.columnShear.storeyID[i],
+    });
+    lackWallShearXChartData[1].push({
+      x: distributeResult.columnShear.percentWallYX[i],
+      y: distributeResult.columnShear.storeyID[i],
+    });
+    lackWallShearXChartData[2].push({
+      x: distributeResult.columnShear.percentEdgeX[i],
+      y: distributeResult.columnShear.storeyID[i],
+    });
+
+    lackWallShearYChartData[0].push({
+      x: distributeResult.columnShear.percentWallYY[i],
+      y: distributeResult.columnShear.storeyID[i],
+    });
+    lackWallShearYChartData[1].push({
+      x: distributeResult.columnShear.percentWallXY[i],
+      y: distributeResult.columnShear.storeyID[i],
+    });
+    lackWallShearYChartData[2].push({
+      x: distributeResult.columnShear.percentEdgeY[i],
+      y: distributeResult.columnShear.storeyID[i],
+    });
   }
+
+  const describes: IDescribe[] = [
+    {
+      name: `X向`,
+      fill: userColors[0],
+      shape: userShaps[0],
+    },
+    {
+      name: `Y向`,
+      fill: userColors[1],
+      shape: userShaps[1],
+    },
+  ];
+
+  const describesLackWall: IDescribe[] = [
+    {
+      name: `长墙`,
+      fill: userColors[0],
+      shape: userShaps[0],
+    },
+    {
+      name: `扁柱框架`,
+      fill: userColors[1],
+      shape: userShaps[1],
+    },
+    {
+      name: `框架`,
+      fill: userColors[2],
+      shape: userShaps[2],
+    },
+  ];
 
   const { Panel } = Collapse;
   const DistributeResult = (
@@ -480,36 +658,14 @@ export function DistributeResultComponent(
           labels={{
             xLabel: '刚度比',
           }}
-          describes={[
-            {
-              name: 'X向',
-              fill: '#8884d8',
-              shape: 'cross',
-            },
-            {
-              name: 'Y向',
-              fill: '#82ca9d',
-              shape: 'circle',
-            },
-          ]}
+          describes={describes}
           datas={[stiffRatioXChartData, stiffRatioYChartData]}
         />
         <StoreyChart
           labels={{
             xLabel: '层高修正刚度比',
           }}
-          describes={[
-            {
-              name: 'X向',
-              fill: '#8884d8',
-              shape: 'cross',
-            },
-            {
-              name: 'Y向',
-              fill: '#82ca9d',
-              shape: 'circle',
-            },
-          ]}
+          describes={describes}
           datas={[stiffRatioXModifyChartData, stiffRatioYModifyChartData]}
         />
       </Row>
@@ -532,18 +688,7 @@ export function DistributeResultComponent(
           labels={{
             xLabel: '剪重比',
           }}
-          describes={[
-            {
-              name: 'X向',
-              fill: '#8884d8',
-              shape: 'cross',
-            },
-            {
-              name: 'Y向',
-              fill: '#82ca9d',
-              shape: 'circle',
-            },
-          ]}
+          describes={describes}
           datas={[shearWeightXChartData, shearWeightYChartData]}
         />
       </Row>
@@ -566,18 +711,7 @@ export function DistributeResultComponent(
           labels={{
             xLabel: '抗剪承载力比',
           }}
-          describes={[
-            {
-              name: 'X向',
-              fill: '#8884d8',
-              shape: 'cross',
-            },
-            {
-              name: 'Y向',
-              fill: '#82ca9d',
-              shape: 'circle',
-            },
-          ]}
+          describes={describes}
           datas={[shearCapacityXChartData, shearCapacityYChartData]}
         />
       </Row>
@@ -600,36 +734,14 @@ export function DistributeResultComponent(
           labels={{
             xLabel: '规定水平力下倾覆力矩分配(%)',
           }}
-          describes={[
-            {
-              name: 'X向',
-              fill: '#8884d8',
-              shape: 'cross',
-            },
-            {
-              name: 'Y向',
-              fill: '#82ca9d',
-              shape: 'circle',
-            },
-          ]}
+          describes={describes}
           datas={[momentColumnXChartData, momentColumnYChartData]}
         />
         <StoreyChart
           labels={{
             xLabel: '短肢墙倾覆力矩占比(%)',
           }}
-          describes={[
-            {
-              name: 'X向',
-              fill: '#8884d8',
-              shape: 'cross',
-            },
-            {
-              name: 'Y向',
-              fill: '#82ca9d',
-              shape: 'circle',
-            },
-          ]}
+          describes={describes}
           datas={[momentWallXChartData, momentWallYChartData]}
         />
       </Row>
@@ -652,18 +764,7 @@ export function DistributeResultComponent(
           labels={{
             xLabel: '柱剪力与分段基底剪力百分比(%)',
           }}
-          describes={[
-            {
-              name: 'X向',
-              fill: '#8884d8',
-              shape: 'cross',
-            },
-            {
-              name: 'Y向',
-              fill: '#82ca9d',
-              shape: 'circle',
-            },
-          ]}
+          describes={describes}
           datas={[shearColumnXChartData, shearColumnYChartData]}
         />
       </Row>
@@ -672,6 +773,65 @@ export function DistributeResultComponent(
           <Table
             columns={shearDistributeColumns}
             dataSource={shearDistributeTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+          />
+        </Panel>
+      </Collapse>
+      <h3>单向少墙分析</h3>
+      <Row justify="space-around">
+        <StoreyChart
+          labels={{
+            xLabel: 'X向剪力(%)',
+          }}
+          describes={describesLackWall}
+          datas={lackWallShearXChartData}
+        />
+        <StoreyChart
+          labels={{
+            xLabel: 'Y向剪力(%)',
+          }}
+          describes={describesLackWall}
+          datas={lackWallShearYChartData}
+        />
+      </Row>
+      <Collapse ghost>
+        <Panel header="剪力分配" key="1">
+          <Table
+            columns={lackWallColumns}
+            dataSource={lackWallShearTableData}
+            bordered
+            size="small"
+            pagination={false}
+            style={{ marginBottom: 20 }}
+            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+          />
+        </Panel>
+      </Collapse>
+      <Row justify="space-around">
+        <StoreyChart
+          labels={{
+            xLabel: 'X向弯矩(%)',
+          }}
+          describes={describesLackWall}
+          datas={lackWallMomentXChartData}
+        />
+        <StoreyChart
+          labels={{
+            xLabel: 'Y向弯矩(%)',
+          }}
+          describes={describesLackWall}
+          datas={lackWallMomentYChartData}
+        />
+      </Row>
+      <Collapse ghost>
+        <Panel header="倾覆力矩分配" key="1">
+          <Table
+            columns={lackWallColumns}
+            dataSource={lackWallMomentTableData}
             bordered
             size="small"
             pagination={false}

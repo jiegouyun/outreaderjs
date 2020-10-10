@@ -434,6 +434,12 @@ export interface IMomentPercentFE {
   percentWallX: number[];
   percentColumnY: number[];
   percentWallY: number[];
+  percentWallXX: number[];
+  percentWallYX: number[];
+  percentEdgeX: number[];
+  percentWallXY: number[];
+  percentWallYY: number[];
+  percentEdgeY: number[];
 }
 
 export interface IColumnShearFE {
@@ -447,6 +453,12 @@ export interface IColumnShearFE {
   wallY: number[];
   totalY: number[];
   percentColumnY: number[];
+  percentWallXX: number[];
+  percentWallYX: number[];
+  percentEdgeX: number[];
+  percentWallXY: number[];
+  percentWallYY: number[];
+  percentEdgeY: number[];
 }
 
 export interface IFactorFE {

@@ -2,10 +2,10 @@
  * @description colors used in compare chart lines;
  */
 export const userColors: string[] = [
-  '#0099CC',
-  '#CCCCFF',
-  '#99CCCC',
+  '#8884D8',
+  '#82CA9D',
   '#FFCC99',
+  '#99CCCC',
   '#FF9966',
   '#FFCCCC',
   '#CCFFFF',

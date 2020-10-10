@@ -19,6 +19,12 @@ export interface IMomentPercent extends IAllExtracted, IStoreyTower {
   percentWallX: number[];
   percentColumnY: number[];
   percentWallY: number[];
+  percentWallXX: number[];
+  percentWallYX: number[];
+  percentEdgeX: number[];
+  percentWallXY: number[];
+  percentWallYY: number[];
+  percentEdgeY: number[];
 }
 
 export interface IColumnShear extends IAllExtracted, IStoreyTower {
@@ -30,6 +36,12 @@ export interface IColumnShear extends IAllExtracted, IStoreyTower {
   wallY: number[];
   totalY: number[];
   percentColumnY: number[];
+  percentWallXX: number[];
+  percentWallYX: number[];
+  percentEdgeX: number[];
+  percentWallXY: number[];
+  percentWallYY: number[];
+  percentEdgeY: number[];
 }
 
 export interface IV02qFactor extends IAllExtracted, IStoreyTower {
