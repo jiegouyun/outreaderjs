@@ -9,6 +9,7 @@ import { convertGeneralResult } from './general-result';
 import { convertDistributeResult } from './distribute-result';
 import { convertFactor } from './factor';
 import { convertQuantity } from './quantity';
+import { convertElement } from './element';
 import { initStructureData } from './tools';
 
 export function convertStructure(structure: IStructure): IStructureFrontEnd {
@@ -26,6 +27,7 @@ export function convertStructure(structure: IStructure): IStructureFrontEnd {
     distributeResult: convertDistributeResult(structure),
     factor: convertFactor(structure),
     quantity: convertQuantity(structure),
+    element: convertElement(structure),
   };
 
   return structureFE;

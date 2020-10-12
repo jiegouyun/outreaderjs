@@ -10,7 +10,8 @@ import fs from 'fs';
 import path from 'path';
 
 // Define flag
-let FLAG: string;
+let FLAG = '';
+let INFLAG = '';
 
 export async function readWv02qOutput(
   dir: string,
@@ -29,6 +30,12 @@ export async function readWv02qOutput(
       percentWallX: [],
       percentColumnY: [],
       percentWallY: [],
+      percentWallXX: [],
+      percentWallYX: [],
+      percentEdgeX: [],
+      percentWallXY: [],
+      percentWallYY: [],
+      percentEdgeY: [],
       allExtracted: false,
     },
     columnShear: {
@@ -42,6 +49,12 @@ export async function readWv02qOutput(
       wallY: [],
       totalY: [],
       percentColumnY: [],
+      percentWallXX: [],
+      percentWallYX: [],
+      percentEdgeX: [],
+      percentWallXY: [],
+      percentWallYY: [],
+      percentEdgeY: [],
       allExtracted: false,
     },
     v02qFactor: {
@@ -104,11 +117,17 @@ export function extractMomentPercent(
     if (FLAG === 'keyMomentPercent') {
       momentPercent.allExtracted = true;
     }
-
     FLAG = '';
+    INFLAG = '';
   }
 
   if (FLAG === 'keyMomentPercent') {
+    if (lineArray[lineArray.length - 1] === '边缘构件X力矩百分比') {
+      INFLAG = 'keyMomentLackWallX';
+    } else if (lineArray[lineArray.length - 1] === '边缘构件Y力矩百分比') {
+      INFLAG = 'keyMomentLackWallY';
+    }
+
     if (!isNaN(Number(lineArray[0]))) {
       if (lineArray[2] === 'X') {
         momentPercent.storeyID.push(Number(lineArray[0]));
@@ -118,6 +137,16 @@ export function extractMomentPercent(
       } else if (lineArray[2] === 'Y') {
         momentPercent.percentColumnY.push(Number(lineArray[3]));
         momentPercent.percentWallY.push(Number(lineArray[4]));
+      }
+
+      if (INFLAG === 'keyMomentLackWallX') {
+        momentPercent.percentWallXX.push(Number(lineArray[6]));
+        momentPercent.percentWallYX.push(Number(lineArray[7]));
+        momentPercent.percentEdgeX.push(Number(lineArray[8]));
+      } else if (INFLAG === 'keyMomentLackWallY') {
+        momentPercent.percentWallXY.push(Number(lineArray[6]));
+        momentPercent.percentWallYY.push(Number(lineArray[7]));
+        momentPercent.percentEdgeY.push(Number(lineArray[8]));
       }
     }
   }
@@ -138,11 +167,17 @@ export function extractColumnShear(
     if (FLAG === 'keyColumnShear') {
       columnShear.allExtracted = true;
     }
-
     FLAG = '';
+    INFLAG = '';
   }
 
   if (FLAG === 'keyColumnShear') {
+    if (lineArray[lineArray.length - 1] === '边缘构件X剪力百分比') {
+      INFLAG = 'keyShearLackWallX';
+    } else if (lineArray[lineArray.length - 1] === '边缘构件Y剪力百分比') {
+      INFLAG = 'keyShearLackWallY';
+    }
+
     if (!isNaN(Number(lineArray[0]))) {
       if (lineArray[2] === 'X') {
         columnShear.storeyID.push(Number(lineArray[0]));
@@ -156,6 +191,16 @@ export function extractColumnShear(
         columnShear.wallY.push(Number(lineArray[4]));
         columnShear.totalY.push(Number(lineArray[5]));
         columnShear.percentColumnY.push(Number(lineArray[7]));
+      }
+
+      if (INFLAG === 'keyShearLackWallX') {
+        columnShear.percentWallXX.push(Number(lineArray[6]));
+        columnShear.percentWallYX.push(Number(lineArray[7]));
+        columnShear.percentEdgeX.push(Number(lineArray[8]));
+      } else if (INFLAG === 'keyShearLackWallY') {
+        columnShear.percentWallXY.push(Number(lineArray[6]));
+        columnShear.percentWallYY.push(Number(lineArray[7]));
+        columnShear.percentEdgeY.push(Number(lineArray[8]));
       }
     }
   }

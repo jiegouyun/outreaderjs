@@ -14,9 +14,12 @@ import {
   DistributeResultComponent,
   FactorComponent,
   QuantityComponent,
+  AxialCompRatioComponent,
+  ReinforcementComponent,
 } from '../../components';
 import { initDb } from '../../database';
 import { IStyles } from '../../interfaces';
+import SubMenu from 'antd/lib/menu/SubMenu';
 
 const styles: IStyles = {
   container: {
@@ -53,6 +56,8 @@ export function StructurePage() {
   const distributeResult = structureFE.distributeResult;
   const factor = structureFE.factor;
   const quantity = structureFE.quantity;
+  const axialCompRatio = structureFE.element.uc;
+  const reinforcements = structureFE.element.rs;
   // console.log(structure);
   // console.log(structureFE);
   if (!structure.hash) {
@@ -70,6 +75,8 @@ export function StructurePage() {
   const DistributeResult = DistributeResultComponent(distributeResult);
   const Factor = FactorComponent(factor);
   const Quantity = QuantityComponent(quantity);
+  const AxialCompRatio = AxialCompRatioComponent(axialCompRatio);
+  const Reinforcement = ReinforcementComponent(reinforcements);
 
   const dataMapping = {
     summary: () => {
@@ -101,6 +108,12 @@ export function StructurePage() {
     },
     quantity: () => {
       return Quantity;
+    },
+    axialCompRatio: () => {
+      return AxialCompRatio;
+    },
+    reinforcement: () => {
+      return Reinforcement;
     },
   };
 
@@ -144,6 +157,10 @@ export function StructurePage() {
             <Menu.Item key="distributeResult">楼层分布数据</Menu.Item>
             <Menu.Item key="factor">调整系数</Menu.Item>
             <Menu.Item key="quantity">工程量</Menu.Item>
+            <SubMenu key="element" title="构件指标">
+              <Menu.Item key="axialCompRatio">轴压比</Menu.Item>
+              <Menu.Item key="reinforcement">配筋率</Menu.Item>
+            </SubMenu>
             <Divider />
             <p
               style={{

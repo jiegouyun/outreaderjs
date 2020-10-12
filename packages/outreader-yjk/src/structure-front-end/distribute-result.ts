@@ -71,6 +71,12 @@ export function convertDistributeResult(
       percentWallX: structure.wv02q?.momentPercent.percentWallX || [0],
       percentColumnY: structure.wv02q?.momentPercent.percentColumnY || [0],
       percentWallY: structure.wv02q?.momentPercent.percentWallY || [0],
+      percentWallXX: structure.wv02q?.momentPercent.percentWallXX || [0],
+      percentWallYX: structure.wv02q?.momentPercent.percentWallYX || [0],
+      percentEdgeX: structure.wv02q?.momentPercent.percentEdgeX || [0],
+      percentWallXY: structure.wv02q?.momentPercent.percentWallXY || [0],
+      percentWallYY: structure.wv02q?.momentPercent.percentWallYY || [0],
+      percentEdgeY: structure.wv02q?.momentPercent.percentEdgeY || [0],
     },
     columnShear: {
       storeyID: structure.wv02q?.columnShear.storeyID || [0],
@@ -83,6 +89,12 @@ export function convertDistributeResult(
       wallY: structure.wv02q?.columnShear.wallY || [0],
       totalY: structure.wv02q?.columnShear.totalY || [0],
       percentColumnY: structure.wv02q?.columnShear.percentColumnY || [0],
+      percentWallXX: structure.wv02q?.columnShear.percentWallXX || [0],
+      percentWallYX: structure.wv02q?.columnShear.percentWallYX || [0],
+      percentEdgeX: structure.wv02q?.columnShear.percentEdgeX || [0],
+      percentWallXY: structure.wv02q?.columnShear.percentWallXY || [0],
+      percentWallYY: structure.wv02q?.columnShear.percentWallYY || [0],
+      percentEdgeY: structure.wv02q?.columnShear.percentEdgeY || [0],
     },
   };
 

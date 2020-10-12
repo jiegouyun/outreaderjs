@@ -2,6 +2,8 @@
   "HOME": "/",
   "STRUCTURES": "/structures",
   "STRUCTURE": "/structures/:hash",
+  "ELEMENTS": "/elements",
+  "ELEMENT": "/elements/:hash",
   "COMPARE": "/compare",
   "ABOUT": "/about"
 }

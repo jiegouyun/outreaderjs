@@ -51,23 +51,35 @@ export async function initDistributeResult(worksheet: Excel.Worksheet) {
   worksheet.getCell('AC2').value = '承载力Y';
   worksheet.getCell('AD2').value = 'RatioY';
 
-  worksheet.mergeCells('AE1:AH1');
+  worksheet.mergeCells('AE1:AN1');
   worksheet.getCell('AE1').value = '规定水平力下倾覆力矩分配';
   worksheet.getCell('AE2').value = 'X向柱';
   worksheet.getCell('AF2').value = 'X向\n短肢墙';
   worksheet.getCell('AG2').value = 'Y向柱';
   worksheet.getCell('AH2').value = 'Y向\n短肢墙';
+  worksheet.getCell('AI2').value = 'X向长墙\n百分比';
+  worksheet.getCell('AJ2').value = 'X向扁柱框架\n百分比';
+  worksheet.getCell('AK2').value = 'X向框架\n百分比';
+  worksheet.getCell('AL2').value = 'Y向长墙\n百分比';
+  worksheet.getCell('AM2').value = 'Y向扁柱框架\n百分比';
+  worksheet.getCell('AN2').value = 'Y向框架\n百分比';
 
-  worksheet.mergeCells('AI1:AP1');
-  worksheet.getCell('AI1').value = '地震作用下剪力分配';
-  worksheet.getCell('AI2').value = 'X向柱';
-  worksheet.getCell('AJ2').value = 'X向墙';
-  worksheet.getCell('AK2').value = 'X向\n总剪力';
-  worksheet.getCell('AL2').value = 'X向柱\n百分比';
-  worksheet.getCell('AM2').value = 'Y向柱';
-  worksheet.getCell('AN2').value = 'Y向墙';
-  worksheet.getCell('AO2').value = 'Y向\n总剪力';
-  worksheet.getCell('AP2').value = 'Y向柱\n百分比';
+  worksheet.mergeCells('AO1:BB1');
+  worksheet.getCell('AO1').value = '地震作用下剪力分配';
+  worksheet.getCell('AO2').value = 'X向柱';
+  worksheet.getCell('AP2').value = 'X向墙';
+  worksheet.getCell('AQ2').value = 'X向\n总剪力';
+  worksheet.getCell('AR2').value = 'X向柱\n百分比';
+  worksheet.getCell('AS2').value = 'Y向柱';
+  worksheet.getCell('AT2').value = 'Y向墙';
+  worksheet.getCell('AU2').value = 'Y向\n总剪力';
+  worksheet.getCell('AV2').value = 'Y向柱\n百分比';
+  worksheet.getCell('AW2').value = 'X向长墙\n百分比';
+  worksheet.getCell('AX2').value = 'X向扁柱框架\n百分比';
+  worksheet.getCell('AY2').value = 'X向框架\n百分比';
+  worksheet.getCell('AZ2').value = 'Y向长墙\n百分比';
+  worksheet.getCell('BA2').value = 'Y向扁柱框架\n百分比';
+  worksheet.getCell('BB2').value = 'Y向框架\n百分比';
 }
 
 export async function writeDistributeResult(
@@ -141,18 +153,42 @@ export async function writeDistributeResult(
       distribute.momentPercent.percentColumnY[i];
     worksheet.getCell(`AH${3 + i}`).value =
       distribute.momentPercent.percentWallY[i];
+    worksheet.getCell(`AI${3 + i}`).value =
+      distribute.momentPercent.percentWallXX[i];
+    worksheet.getCell(`AJ${3 + i}`).value =
+      distribute.momentPercent.percentWallYX[i];
+    worksheet.getCell(`AK${3 + i}`).value =
+      distribute.momentPercent.percentEdgeX[i];
+    worksheet.getCell(`AL${3 + i}`).value =
+      distribute.momentPercent.percentWallYY[i];
+    worksheet.getCell(`AM${3 + i}`).value =
+      distribute.momentPercent.percentWallXY[i];
+    worksheet.getCell(`AN${3 + i}`).value =
+      distribute.momentPercent.percentEdgeY[i];
 
     // write column shear distribute
-    worksheet.getCell(`AI${3 + i}`).value = distribute.columnShear.columnX[i];
-    worksheet.getCell(`AJ${3 + i}`).value = distribute.columnShear.wallX[i];
-    worksheet.getCell(`AK${3 + i}`).value = distribute.columnShear.totalX[i];
-    worksheet.getCell(`AL${3 + i}`).value =
+    worksheet.getCell(`AO${3 + i}`).value = distribute.columnShear.columnX[i];
+    worksheet.getCell(`AP${3 + i}`).value = distribute.columnShear.wallX[i];
+    worksheet.getCell(`AQ${3 + i}`).value = distribute.columnShear.totalX[i];
+    worksheet.getCell(`AR${3 + i}`).value =
       distribute.columnShear.percentColumnX[i];
-    worksheet.getCell(`AM${3 + i}`).value = distribute.columnShear.columnY[i];
-    worksheet.getCell(`AN${3 + i}`).value = distribute.columnShear.wallY[i];
-    worksheet.getCell(`AO${3 + i}`).value = distribute.columnShear.totalY[i];
-    worksheet.getCell(`AP${3 + i}`).value =
+    worksheet.getCell(`AS${3 + i}`).value = distribute.columnShear.columnY[i];
+    worksheet.getCell(`AT${3 + i}`).value = distribute.columnShear.wallY[i];
+    worksheet.getCell(`AU${3 + i}`).value = distribute.columnShear.totalY[i];
+    worksheet.getCell(`AV${3 + i}`).value =
       distribute.columnShear.percentColumnY[i];
+    worksheet.getCell(`AW${3 + i}`).value =
+      distribute.columnShear.percentWallXX[i];
+    worksheet.getCell(`AX${3 + i}`).value =
+      distribute.columnShear.percentWallYX[i];
+    worksheet.getCell(`AY${3 + i}`).value =
+      distribute.columnShear.percentEdgeX[i];
+    worksheet.getCell(`AZ${3 + i}`).value =
+      distribute.columnShear.percentWallYY[i];
+    worksheet.getCell(`BA${3 + i}`).value =
+      distribute.columnShear.percentWallXY[i];
+    worksheet.getCell(`BB${3 + i}`).value =
+      distribute.columnShear.percentEdgeY[i];
   }
 }
 
@@ -177,8 +213,8 @@ export async function formatDistributeResult(worksheet: Excel.Worksheet) {
   rangeFillColor(worksheet, 1, 15, 2, 24, 'solid', '00F0FFFF', '00FFFFFF');
   rangeFillColor(worksheet, 1, 25, 2, 26, 'solid', '00F0FFF0', '00FFFFFF');
   rangeFillColor(worksheet, 1, 27, 2, 30, 'solid', '00F0FFFF', '00FFFFFF');
-  rangeFillColor(worksheet, 1, 31, 2, 34, 'solid', '00F0FFF0', '00FFFFFF');
-  rangeFillColor(worksheet, 1, 35, 2, 42, 'solid', '00F0FFFF', '00FFFFFF');
+  rangeFillColor(worksheet, 1, 31, 2, 40, 'solid', '00F0FFF0', '00FFFFFF');
+  rangeFillColor(worksheet, 1, 41, 2, 54, 'solid', '00F0FFFF', '00FFFFFF');
 
   worksheet.views = [{ state: 'frozen', xSplit: 2, ySplit: 2 }];
 }

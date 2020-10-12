@@ -41,24 +41,15 @@
   "engines": {
     "node": ">=8.0.0"
   },
-  "files": [
-    "/bin",
-    "/lib",
-    "/npm-shrinkwrap.json",
-    "/oclif.manifest.json"
-  ],
+  "files": ["/bin", "/lib", "/npm-shrinkwrap.json", "/oclif.manifest.json"],
   "homepage": "https://github.com/an-lee/outreaderjs",
-  "keywords": [
-    "oclif"
-  ],
+  "keywords": ["oclif"],
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "oclif": {
     "commands": "./lib/commands",
     "bin": "outreader",
-    "plugins": [
-      "@oclif/plugin-help"
-    ]
+    "plugins": ["@oclif/plugin-help"]
   },
   "repository": "outreaderjs/outreaderjs",
   "scripts": {

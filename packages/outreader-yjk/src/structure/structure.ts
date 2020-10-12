@@ -4,6 +4,7 @@ import { readWzqOutput } from '../wzq';
 import { readWv02qOutput } from '../wv02q';
 import { readConcreteSteelOutput } from '../concrete-steel';
 import { readRebarOutput } from '../rebar';
+import { readWpjOutput } from '../wpj';
 import { IStructure, hashStr } from '@outreader/core';
 
 export async function readStructure(dir: string): Promise<IStructure> {
@@ -13,13 +14,15 @@ export async function readStructure(dir: string): Promise<IStructure> {
   const wv02q = await readWv02qOutput(dir);
   const concreteSteel = await readConcreteSteelOutput(dir);
   const rebar = await readRebarOutput(dir);
+  const wpj = await readWpjOutput(dir);
   const hash = hashStr(
     (wmass ? wmass.hash : '') +
       (wdisp ? wdisp.hash : '') +
       (wzq ? wzq.hash : '') +
       (wv02q ? wv02q.hash : '') +
       (concreteSteel ? concreteSteel.hash : '') +
-      (rebar ? rebar.hash : ''),
+      (rebar ? rebar.hash : '') +
+      (wpj ? wpj.hash : ''),
   );
 
   return {
@@ -31,5 +34,6 @@ export async function readStructure(dir: string): Promise<IStructure> {
     wzq,
     concreteSteel,
     rebar,
+    wpj,
   };
 }

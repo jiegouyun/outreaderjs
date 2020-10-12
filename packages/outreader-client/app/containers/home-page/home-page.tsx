@@ -19,26 +19,30 @@ export function HomePage() {
   const db = useDb();
   const history = useHistory();
   const [dir, setDir] = useState('');
-  const [loading, setLoading] = useState(false);
-  const readYjkOutputs = async () => {
-    setLoading(true);
+  const [strLoading, setStrLoading] = useState(false);
+  const readYjkStrOutputs = async () => {
+    setStrLoading(true);
     try {
-      const res = await readStructure(dir);
-      res.dir = dir;
-      if (!db.get('structures').find({ hash: res.hash }).value()) {
-        db.get('structures').push({ hash: res.hash, dir }).write();
+      const strRes = await readStructure(dir);
+      if (!db.has('structures').value()) {
+        db.set('structures', []).write();
       }
-      const structure = initDb(res.hash);
-      structure.defaults(res).write();
+      if (!db.get('structures').find({ hash: strRes.hash }).value()) {
+        db.get('structures')
+          .push({ hash: strRes.hash, dir: strRes.dir })
+          .write();
+      }
+      const structure = initDb(strRes.hash);
+      structure.defaults(strRes).write();
       message.success('读取成功');
-      history.push(`/structures/${res.hash}`);
+      history.push(`/structures/${strRes.hash}`);
     } catch (error) {
       if (error) {
         message.error('读取失败，请选择正确的模型目录');
         console.error(error);
       }
     }
-    setLoading(false);
+    setStrLoading(false);
   };
   return (
     <div style={styles.container}>
@@ -66,8 +70,8 @@ export function HomePage() {
         <Button
           type="primary"
           disabled={!Boolean(dir)}
-          loading={loading}
-          onClick={() => readYjkOutputs()}
+          loading={strLoading}
+          onClick={() => readYjkStrOutputs()}
         >
           开始读取
         </Button>

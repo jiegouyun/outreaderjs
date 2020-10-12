@@ -9,6 +9,7 @@ export interface IStructureFrontEnd {
   distributeResult: IDistributeResultFE;
   factor: IFactorFE;
   quantity: IQuantityFE;
+  element: IElementFE;
 }
 
 export interface ISummaryFE {
@@ -434,6 +435,12 @@ export interface IMomentPercentFE {
   percentWallX: number[];
   percentColumnY: number[];
   percentWallY: number[];
+  percentWallXX: number[];
+  percentWallYX: number[];
+  percentEdgeX: number[];
+  percentWallXY: number[];
+  percentWallYY: number[];
+  percentEdgeY: number[];
 }
 
 export interface IColumnShearFE {
@@ -447,6 +454,12 @@ export interface IColumnShearFE {
   wallY: number[];
   totalY: number[];
   percentColumnY: number[];
+  percentWallXX: number[];
+  percentWallYX: number[];
+  percentEdgeX: number[];
+  percentWallXY: number[];
+  percentWallYY: number[];
+  percentEdgeY: number[];
 }
 
 export interface IFactorFE {
@@ -492,4 +505,60 @@ export interface ISubQuantityFE {
   column: number[];
   floor: number[];
   storey: number[];
+}
+
+export interface IElementFE {
+  def: IElementDefFE;
+  uc: IElementUcFE;
+  rs: IElementRsFE;
+  cb: IElementCbFE;
+}
+
+export interface IElementDefFE {
+  col: IColDefFE;
+}
+
+export interface IElementUcFE {
+  col: IColUcFE;
+}
+
+export interface IElementRsFE {
+  col: IColRsFE;
+}
+
+export interface IElementCbFE {
+  col: IColCbFE;
+}
+
+export interface IColDefFE {
+  storeyID: number[];
+  colName: number[];
+  colID: number[][];
+  secType: number[][];
+  colProps: string[][][];
+  startNode: number[][];
+  endNode: number[][];
+  section: number[][][];
+  ang: number[][];
+}
+
+export interface IColUcFE {
+  storeyID: number[];
+  colName: number[];
+  uc: number[][];
+  ucG: number[][];
+}
+
+export interface IColRsFE {
+  storeyID: number[];
+  colName: number[];
+  rs: number[][];
+  rsv: number[][];
+}
+
+export interface IColCbFE {
+  storeyID: number[];
+  colName: number[];
+  cbX: number[][];
+  cbY: number[][];
 }

@@ -25,3 +25,5 @@ export interface IDescribe {
     | 'triangle'
     | 'wye';
 }
+
+export interface IEleData extends ICompare {}
