@@ -1,11 +1,11 @@
 import { Table, Collapse } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react';
-import { IWpj } from '@outreader/core';
+import { IElementUcFE } from '@outreader/core';
 import { IEleData } from '../../../interfaces';
 
-export function AxialCompRatioComponent(wpj: IWpj) {
-  const col = wpj.column;
+export function AxialCompRatioComponent(uc: IElementUcFE) {
+  const col = uc.col;
   const n = col.colName.length;
   const count = col.storeyID.length;
 

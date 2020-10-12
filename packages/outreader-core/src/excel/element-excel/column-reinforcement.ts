@@ -1,5 +1,5 @@
-import { IColumnPj } from '../interfaces';
-import { rangeFillColor, distributeFormat } from '../excel/commom';
+import { IColRsFE } from '../../interfaces';
+import { rangeFillColor, distributeFormat } from '../commom';
 import Excel from 'exceljs';
 
 export async function initColRs(worksheet: Excel.Worksheet, nums: number) {
@@ -13,7 +13,7 @@ export async function initColRs(worksheet: Excel.Worksheet, nums: number) {
   }
 }
 
-export async function writeColRs(col: IColumnPj, worksheet: Excel.Worksheet) {
+export async function writeColRs(col: IColRsFE, worksheet: Excel.Worksheet) {
   // write storey
   const count = col.storeyID.length;
   const nums = col.colName.length;

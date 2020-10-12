@@ -25,6 +25,20 @@ import {
 } from './distribute-result';
 import { initFactor, writeFactor, formatFactor } from './factor';
 import { initQuantity, writeQuantity, formatQuantity } from './quantity';
+import {
+  initColDef,
+  writeColDef,
+  formatColDef,
+  initColUc,
+  writeColUc,
+  formatColUc,
+  initColRs,
+  writeColRs,
+  formatColRs,
+  initColVCapacity,
+  writeColVCapacity,
+  formatColVCapacity,
+} from './element-excel';
 import { IStructureFrontEnd } from '../interfaces';
 import Excel from 'exceljs';
 import path from 'path';
@@ -99,6 +113,33 @@ export async function exportExcel(structure: IStructureFrontEnd, dir?: string) {
   await initQuantity(sheetQuantity);
   await writeQuantity(structure.quantity, sheetQuantity);
   await formatQuantity(sheetQuantity);
+
+  const colNums = structure.element.def.col.colName.length || 0;
+  if (colNums !== 0) {
+    // write worksheet column definition.
+    const sheetColDef = workbook.addWorksheet('柱定义信息');
+    await initColDef(sheetColDef, colNums);
+    await writeColDef(structure.element.def.col, sheetColDef);
+    await formatColDef(sheetColDef, colNums);
+
+    // write worksheet column axial compression ratio.
+    const sheetColUc = workbook.addWorksheet('柱轴压比');
+    await initColUc(sheetColUc, colNums);
+    await writeColUc(structure.element.uc.col, sheetColUc);
+    await formatColUc(sheetColUc, colNums);
+
+    // write worksheet column reinforcement.
+    const sheetColRs = workbook.addWorksheet('柱配筋率');
+    await initColRs(sheetColRs, colNums);
+    await writeColRs(structure.element.rs.col, sheetColRs);
+    await formatColRs(sheetColRs, colNums);
+
+    // write worksheet column shear capacity.
+    const sheetColVCapacity = workbook.addWorksheet('柱抗剪承载力');
+    await initColVCapacity(sheetColVCapacity, colNums);
+    await writeColVCapacity(structure.element.cb.col, sheetColVCapacity);
+    await formatColVCapacity(sheetColVCapacity, colNums);
+  }
 
   // write xlsx file.
   // const filename = path.join(dir ? dir : structure.summary.project.dir, 'OutReader.xlsx');

@@ -160,7 +160,7 @@ export async function writeDrift(drift: IDriftFE, worksheet: Excel.Worksheet) {
     worksheet.getCell(`BC${3 + i}`).value = drift.driftWindXP.ratioD[i];
     worksheet.getCell(`BD${3 + i}`).value = drift.driftWindXN.ratioD[i];
     worksheet.getCell(`BE${3 + i}`).value = drift.driftWindYP.ratioD[i];
-    worksheet.getCell(`BF${3 + i}`).value = drift.driftCrossWindYN.ratioD[i];
+    worksheet.getCell(`BF${3 + i}`).value = drift.driftWindYN.ratioD[i];
     worksheet.getCell(`BG${3 + i}`).value = drift.driftCrossWindXP.ratioD[i];
     worksheet.getCell(`BH${3 + i}`).value = drift.driftCrossWindXN.ratioD[i];
     worksheet.getCell(`BI${3 + i}`).value = drift.driftCrossWindYP.ratioD[i];

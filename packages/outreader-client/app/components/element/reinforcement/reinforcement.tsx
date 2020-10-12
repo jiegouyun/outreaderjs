@@ -1,11 +1,11 @@
 import { Table, Collapse } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react';
-import { IWpj } from '@outreader/core';
+import { IElementRsFE } from '@outreader/core';
 import { IEleData } from '../../../interfaces';
 
-export function ReinforcementComponent(wpj: IWpj) {
-  const col = wpj.column;
+export function ReinforcementComponent(rs: IElementRsFE) {
+  const col = rs.col;
   const n = col.colName.length;
   const count = col.storeyID.length;
 

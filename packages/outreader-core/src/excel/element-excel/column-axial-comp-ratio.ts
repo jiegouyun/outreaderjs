@@ -1,5 +1,5 @@
-import { IColumnPj } from '../interfaces';
-import { rangeFillColor, distributeFormat } from '../excel/commom';
+import { IColUcFE } from '../../interfaces';
+import { rangeFillColor, distributeFormat } from '../commom';
 import Excel from 'exceljs';
 
 export async function initColUc(worksheet: Excel.Worksheet, nums: number) {
@@ -13,7 +13,7 @@ export async function initColUc(worksheet: Excel.Worksheet, nums: number) {
   }
 }
 
-export async function writeColUc(col: IColumnPj, worksheet: Excel.Worksheet) {
+export async function writeColUc(col: IColUcFE, worksheet: Excel.Worksheet) {
   // write storey
   const count = col.storeyID.length;
   const nums = col.colName.length;

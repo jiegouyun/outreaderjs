@@ -1,5 +1,5 @@
-import { IColumnPj } from '../interfaces';
-import { rangeFillColor, distributeFormat } from '../excel/commom';
+import { IColCbFE } from '../../interfaces';
+import { rangeFillColor, distributeFormat } from '../commom';
 import Excel from 'exceljs';
 
 export async function initColVCapacity(
@@ -17,7 +17,7 @@ export async function initColVCapacity(
 }
 
 export async function writeColVCapacity(
-  col: IColumnPj,
+  col: IColCbFE,
   worksheet: Excel.Worksheet,
 ) {
   // write storey

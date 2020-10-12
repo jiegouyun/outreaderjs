@@ -1,5 +1,5 @@
-import { IColumnPj } from '../interfaces';
-import { rangeFillColor, distributeFormat } from '../excel/commom';
+import { IColDefFE } from '../../interfaces';
+import { rangeFillColor, distributeFormat } from '../commom';
 import Excel from 'exceljs';
 
 export async function initColDef(worksheet: Excel.Worksheet, nums: number) {
@@ -18,7 +18,7 @@ export async function initColDef(worksheet: Excel.Worksheet, nums: number) {
   }
 }
 
-export async function writeColDef(col: IColumnPj, worksheet: Excel.Worksheet) {
+export async function writeColDef(col: IColDefFE, worksheet: Excel.Worksheet) {
   // write storey
   const count = col.storeyID.length;
   const nums = col.colName.length;
