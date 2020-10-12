@@ -157,7 +157,7 @@ export function StructurePage() {
             <Menu.Item key="distributeResult">楼层分布数据</Menu.Item>
             <Menu.Item key="factor">调整系数</Menu.Item>
             <Menu.Item key="quantity">工程量</Menu.Item>
-            <SubMenu key="element" title="构件信息">
+            <SubMenu key="element" title="构件指标">
               <Menu.Item key="axialCompRatio">轴压比</Menu.Item>
               <Menu.Item key="reinforcement">配筋率</Menu.Item>
             </SubMenu>

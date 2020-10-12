@@ -1,8 +1,9 @@
-import { Table, Collapse } from 'antd';
+import { Table, Collapse, Row } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import { IElementRsFE } from '@outreader/core';
 import { IEleData } from '../../../interfaces';
+import { ElementChart } from '../../chart-tools';
 
 export function ReinforcementComponent(rs: IElementRsFE) {
   const col = rs.col;
@@ -40,10 +41,29 @@ export function ReinforcementComponent(rs: IElementRsFE) {
   }
 
   const colRsTableData: IEleData[] = [];
+  const colRsChartData = [];
+  const colRsvChartData = [];
   for (let j = 0; j < count; j++) {
     colRsTableData.push({
       key: j,
       storeyID: col.storeyID[j],
+    });
+    const rs = col.colName.map((val, i) => {
+      return col.rs[i][j];
+    });
+    colRsChartData.push({
+      storeyID: col.storeyID[j],
+      range: [Math.min(...rs.filter(Boolean)), Math.max(...rs.filter(Boolean))],
+    });
+    const rsv = col.colName.map((val, i) => {
+      return col.rsv[i][j];
+    });
+    colRsvChartData.push({
+      storeyID: col.storeyID[j],
+      range: [
+        Math.min(...rsv.filter(Boolean)),
+        Math.max(...rsv.filter(Boolean)),
+      ],
     });
   }
 
@@ -58,6 +78,10 @@ export function ReinforcementComponent(rs: IElementRsFE) {
   const axialCompRatio = (
     <div>
       <h3>柱</h3>
+      <Row justify="space-around">
+        <ElementChart data={colRsChartData} xLabel="柱截面配筋率(%)" />
+        <ElementChart data={colRsvChartData} xLabel="柱体积配箍率(%)" />
+      </Row>
       <Collapse ghost>
         <Panel header="详细信息" key="1">
           <Table
