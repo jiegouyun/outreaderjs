@@ -38,7 +38,7 @@ import {
   initColVCapacity,
   writeColVCapacity,
   formatColVCapacity,
-} from './element-excel';
+} from '../element-excel';
 import { IStructureFrontEnd } from '../interfaces';
 import Excel from 'exceljs';
 import path from 'path';

@@ -1,5 +1,5 @@
-import { IColDefFE } from '../../interfaces';
-import { rangeFillColor, distributeFormat } from '../commom';
+import { IColDefFE } from '../interfaces';
+import { rangeFillColor, distributeFormat } from '../excel/commom';
 import Excel from 'exceljs';
 
 export async function initColDef(worksheet: Excel.Worksheet, nums: number) {

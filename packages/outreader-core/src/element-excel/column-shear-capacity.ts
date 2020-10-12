@@ -1,5 +1,5 @@
-import { IColCbFE } from '../../interfaces';
-import { rangeFillColor, distributeFormat } from '../commom';
+import { IColCbFE } from '../interfaces';
+import { rangeFillColor, distributeFormat } from '../excel/commom';
 import Excel from 'exceljs';
 
 export async function initColVCapacity(

@@ -1,19 +1,19 @@
-import { IColRsFE } from '../../interfaces';
-import { rangeFillColor, distributeFormat } from '../commom';
+import { IColUcFE } from '../interfaces';
+import { rangeFillColor, distributeFormat } from '../excel/commom';
 import Excel from 'exceljs';
 
-export async function initColRs(worksheet: Excel.Worksheet, nums: number) {
+export async function initColUc(worksheet: Excel.Worksheet, nums: number) {
   worksheet.getCell('A1').value = '柱名';
   worksheet.getCell('A2').value = '层号';
 
   for (let i = 0; i < nums; i++) {
     worksheet.mergeCells(1, 2 + 2 * i, 1, 3 + 2 * i);
-    worksheet.getCell(2, 2 + 2 * i).value = 'Rs';
-    worksheet.getCell(2, 3 + 2 * i).value = 'Rsv';
+    worksheet.getCell(2, 2 + 2 * i).value = 'Uc';
+    worksheet.getCell(2, 3 + 2 * i).value = 'Uc_G';
   }
 }
 
-export async function writeColRs(col: IColRsFE, worksheet: Excel.Worksheet) {
+export async function writeColUc(col: IColUcFE, worksheet: Excel.Worksheet) {
   // write storey
   const count = col.storeyID.length;
   const nums = col.colName.length;
@@ -26,13 +26,13 @@ export async function writeColRs(col: IColRsFE, worksheet: Excel.Worksheet) {
     worksheet.getCell(1, 2 + 2 * i).value = `C-${col.colName[i]}`;
     for (let j = 0; j < count; j++) {
       // write displacement
-      worksheet.getCell(3 + j, 2 + 2 * i).value = col.rs[i][j];
-      worksheet.getCell(3 + j, 3 + 2 * i).value = col.rsv[i][j];
+      worksheet.getCell(3 + j, 2 + 2 * i).value = col.uc[i][j];
+      worksheet.getCell(3 + j, 3 + 2 * i).value = col.ucG[i][j];
     }
   }
 }
 
-export async function formatColRs(worksheet: Excel.Worksheet, nums: number) {
+export async function formatColUc(worksheet: Excel.Worksheet, nums: number) {
   distributeFormat(worksheet);
 
   rangeFillColor(worksheet, 1, 1, 2, 1, 'solid', '00F0FFF0', '00FFFFFF');
