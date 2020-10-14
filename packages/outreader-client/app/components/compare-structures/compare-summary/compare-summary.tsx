@@ -596,7 +596,7 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
   }
 
   const Summarys = (
-    <div>
+    <React.Fragment>
       <h3>工程信息</h3>
       <Table
         columns={modelColumns}
@@ -744,7 +744,7 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         pagination={false}
         style={{ marginBottom: 20 }}
       />
-    </div>
+    </React.Fragment>
   );
 
   return Summarys;

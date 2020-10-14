@@ -76,7 +76,7 @@ export function AxialCompRatioComponent(uc: IElementUcFE) {
 
   const { Panel } = Collapse;
   const axialCompRatio = (
-    <div>
+    <React.Fragment>
       <h3>柱</h3>
       <Row justify="space-around">
         <ElementChart data={colUcChartData} xLabel="柱轴压比" />
@@ -98,7 +98,7 @@ export function AxialCompRatioComponent(uc: IElementUcFE) {
           />
         </Panel>
       </Collapse>
-    </div>
+    </React.Fragment>
   );
 
   return axialCompRatio;

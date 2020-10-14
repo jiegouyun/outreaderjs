@@ -107,37 +107,17 @@ export function StructureComparePage() {
   const Factors = CompareFactorComponent(factors);
   const Quantities = CompareQuantityComponent(quantities);
 
-  const dataMapping = {
-    summary: () => {
-      return Summarys;
-    },
-    summaryQuantity: () => {
-      return SummaryQuantities;
-    },
-    parameters: () => {
-      return Parameters;
-    },
-    period: () => {
-      return Periods;
-    },
-    force: () => {
-      return Forces;
-    },
-    drift: () => {
-      return Drifts;
-    },
-    generalResult: () => {
-      return GeneralResults;
-    },
-    distributeResult: () => {
-      return DistributeResults;
-    },
-    factor: () => {
-      return Factors;
-    },
-    quantity: () => {
-      return Quantities;
-    },
+  const dataMapping: { [key: string]: JSX.Element } = {
+    summary: Summarys,
+    summaryQuantity: SummaryQuantities,
+    parameters: Parameters,
+    period: Periods,
+    force: Forces,
+    drift: Drifts,
+    generalResult: GeneralResults,
+    distributeResult: DistributeResults,
+    factor: Factors,
+    quantity: Quantities,
   };
 
   const exportXLSX = async () => {
@@ -160,7 +140,7 @@ export function StructureComparePage() {
             mode="inline"
             defaultSelectedKeys={[activeItemKey]}
             style={{ height: '100%' }}
-            onSelect={({ _, key }) => {
+            onClick={({ item, key }) => {
               setActvieItemKey(key as string);
             }}
           >
@@ -188,7 +168,7 @@ export function StructureComparePage() {
               </Breadcrumb.Item>
               <Breadcrumb.Item>{hashTitle}</Breadcrumb.Item>
             </Breadcrumb>
-            <div style={styles.container}>{dataMapping[activeItemKey]()}</div>
+            <div style={styles.container}>{dataMapping[activeItemKey]}</div>
           </Layout.Content>
         </Layout>
       </Layout>

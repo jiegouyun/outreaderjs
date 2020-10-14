@@ -155,7 +155,7 @@ export function ForceComponent(force: IForceFE) {
 
   const { Panel } = Collapse;
   const Force = (
-    <div>
+    <React.Fragment>
       <h3>顺风向风荷载</h3>
       <Row justify="space-around">
         <StoreyChart
@@ -316,7 +316,7 @@ export function ForceComponent(force: IForceFE) {
           />
         </Panel>
       </Collapse>
-    </div>
+    </React.Fragment>
   );
 
   return Force;

@@ -133,7 +133,7 @@ export function PropertiesComponent(wpj: IWpj) {
 
   const { Panel } = Collapse;
   const Properties = (
-    <div>
+    <React.Fragment>
       <h3>柱</h3>
       <Collapse ghost>
         <Panel header="属性" key="1">
@@ -174,7 +174,7 @@ export function PropertiesComponent(wpj: IWpj) {
           />
         </Panel>
       </Collapse>
-    </div>
+    </React.Fragment>
   );
 
   return Properties;

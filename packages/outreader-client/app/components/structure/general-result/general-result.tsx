@@ -210,7 +210,7 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
   ];
 
   const GeneralResult = (
-    <div>
+    <React.Fragment>
       <h3>工程信息</h3>
       <Descriptions
         bordered
@@ -331,7 +331,7 @@ export function GeneralResultComponent(generalResult: IGeneralResultFE) {
         pagination={false}
         style={{ marginBottom: 20 }}
       />
-    </div>
+    </React.Fragment>
   );
 
   return GeneralResult;

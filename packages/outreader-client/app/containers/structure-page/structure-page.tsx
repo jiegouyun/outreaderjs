@@ -78,43 +78,19 @@ export function StructurePage() {
   const AxialCompRatio = AxialCompRatioComponent(axialCompRatio);
   const Reinforcement = ReinforcementComponent(reinforcements);
 
-  const dataMapping = {
-    summary: () => {
-      return Summary;
-    },
-    summaryQuantity: () => {
-      return SummaryQuantity;
-    },
-    parameters: () => {
-      return Parameters;
-    },
-    period: () => {
-      return Period;
-    },
-    force: () => {
-      return Force;
-    },
-    drift: () => {
-      return Drift;
-    },
-    generalResult: () => {
-      return GeneralResult;
-    },
-    distributeResult: () => {
-      return DistributeResult;
-    },
-    factor: () => {
-      return Factor;
-    },
-    quantity: () => {
-      return Quantity;
-    },
-    axialCompRatio: () => {
-      return AxialCompRatio;
-    },
-    reinforcement: () => {
-      return Reinforcement;
-    },
+  const dataMapping: { [key: string]: JSX.Element } = {
+    summary: Summary,
+    summaryQuantity: SummaryQuantity,
+    parameters: Parameters,
+    period: Period,
+    force: Force,
+    drift: Drift,
+    generalResult: GeneralResult,
+    distributeResult: DistributeResult,
+    factor: Factor,
+    quantity: Quantity,
+    axialCompRatio: AxialCompRatio,
+    reinforcement: Reinforcement,
   };
 
   const exportXLSX = async () => {
@@ -129,11 +105,11 @@ export function StructurePage() {
     }
   };
 
-  const downloadImgs = () => {
-    const chartsSvgList = document.getElementsByClassName('charts');
-    console.log(chartsSvgList);
-    // TODO
-  };
+  // const downloadImgs = () => {
+  //   const chartsSvgList = document.getElementsByClassName('charts');
+  //   console.log(chartsSvgList);
+  //   // TODO
+  // };
 
   return (
     <React.Fragment>
@@ -143,7 +119,7 @@ export function StructurePage() {
             mode="inline"
             defaultSelectedKeys={[activeItemKey]}
             style={{ height: '100%' }}
-            onSelect={({ _, key }) => {
+            onClick={({ item, key }) => {
               setActvieItemKey(key as string);
             }}
           >
@@ -184,7 +160,7 @@ export function StructurePage() {
               </Breadcrumb.Item>
               <Breadcrumb.Item>{hash.slice(0, 7)}</Breadcrumb.Item>
             </Breadcrumb>
-            <div style={styles.container}>{dataMapping[activeItemKey]()}</div>
+            <div style={styles.container}>{dataMapping[activeItemKey]}</div>
           </Layout.Content>
         </Layout>
       </Layout>

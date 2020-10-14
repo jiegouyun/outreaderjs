@@ -76,7 +76,7 @@ export function ReinforcementComponent(rs: IElementRsFE) {
 
   const { Panel } = Collapse;
   const axialCompRatio = (
-    <div>
+    <React.Fragment>
       <h3>柱</h3>
       <Row justify="space-around">
         <ElementChart data={colRsChartData} xLabel="柱截面配筋率(%)" />
@@ -95,7 +95,7 @@ export function ReinforcementComponent(rs: IElementRsFE) {
           />
         </Panel>
       </Collapse>
-    </div>
+    </React.Fragment>
   );
 
   return axialCompRatio;

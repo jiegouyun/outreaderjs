@@ -172,7 +172,7 @@ export function PeriodComponent(period: IPeriodFE) {
 
   const { Panel } = Collapse;
   const Period = (
-    <div>
+    <React.Fragment>
       <h3>考虑扭转耦联时的动力特性</h3>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -288,7 +288,7 @@ export function PeriodComponent(period: IPeriodFE) {
           />
         </Panel>
       </Collapse>
-    </div>
+    </React.Fragment>
   );
 
   return Period;

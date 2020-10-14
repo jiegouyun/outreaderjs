@@ -237,7 +237,7 @@ export function CompareGeneralResultComponent(
   }
 
   const GeneralResult = (
-    <div>
+    <React.Fragment>
       <h3>工程信息</h3>
       <Table
         columns={modelColumns}
@@ -292,7 +292,7 @@ export function CompareGeneralResultComponent(
         pagination={false}
         style={{ marginBottom: 20 }}
       />
-    </div>
+    </React.Fragment>
   );
 
   return GeneralResult;
