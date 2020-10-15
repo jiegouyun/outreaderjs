@@ -48,23 +48,26 @@ export function AxialCompRatioComponent(uc: IElementUcFE) {
       key: j,
       storeyID: col.storeyID[j],
     });
-    const uc = col.colName.map((val, i) => {
+    const ucOrig = col.colName.map((val, i) => {
       return col.uc[i][j];
     });
-    colUcChartData.push({
-      storeyID: col.storeyID[j],
-      range: [Math.min(...uc.filter(Boolean)), Math.max(...uc.filter(Boolean))],
-    });
-    const ucG = col.colName.map((val, i) => {
+    const uc = ucOrig.filter(Boolean);
+    if (uc.length) {
+      colUcChartData.push({
+        storeyID: col.storeyID[j],
+        range: [Math.min(...uc), Math.max(...uc)],
+      });
+    }
+    const ucGOrig = col.colName.map((val, i) => {
       return col.ucG[i][j];
     });
-    colUcGChartData.push({
-      storeyID: col.storeyID[j],
-      range: [
-        Math.min(...ucG.filter(Boolean)),
-        Math.max(...ucG.filter(Boolean)),
-      ],
-    });
+    const ucG = ucGOrig.filter(Boolean);
+    if (ucG.length) {
+      colUcGChartData.push({
+        storeyID: col.storeyID[j],
+        range: [Math.min(...ucG), Math.max(...ucG)],
+      });
+    }
   }
 
   for (let i = 0; i < n; i++) {

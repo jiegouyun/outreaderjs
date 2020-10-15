@@ -48,23 +48,29 @@ export function ReinforcementComponent(rs: IElementRsFE) {
       key: j,
       storeyID: col.storeyID[j],
     });
-    const rs = col.colName.map((val, i) => {
+    const rsOrig = col.colName.map((val, i) => {
       return col.rs[i][j];
     });
-    colRsChartData.push({
-      storeyID: col.storeyID[j],
-      range: [Math.min(...rs.filter(Boolean)), Math.max(...rs.filter(Boolean))],
-    });
-    const rsv = col.colName.map((val, i) => {
+    const rs = rsOrig.filter(Boolean);
+    if (rs.length) {
+      colRsChartData.push({
+        storeyID: col.storeyID[j],
+        range: [Math.min(...rs), Math.max(...rs)],
+      });
+    }
+    const rsvOrig = col.colName.map((val, i) => {
       return col.rsv[i][j];
     });
-    colRsvChartData.push({
-      storeyID: col.storeyID[j],
-      range: [
-        Math.min(...rsv.filter(Boolean)),
-        Math.max(...rsv.filter(Boolean)),
-      ],
-    });
+    const rsv = rsvOrig.filter(Boolean);
+    if (rsv.length) {
+      colRsvChartData.push({
+        storeyID: col.storeyID[j],
+        range: [
+          Math.min(...rsv.filter(Boolean)),
+          Math.max(...rsv.filter(Boolean)),
+        ],
+      });
+    }
   }
 
   for (let i = 0; i < n; i++) {
