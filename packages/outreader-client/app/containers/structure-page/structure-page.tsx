@@ -65,32 +65,19 @@ export function StructurePage() {
     history.replace('/');
   }
 
-  const Summary = SummaryComponent(summary);
-  const SummaryQuantity = SummaryQuantityComponent(summaryQuantity);
-  const Parameters = ParametersComponent(parameters);
-  const Period = PeriodComponent(period);
-  const Force = ForceComponent(force);
-  const Drift = DriftComponent(drift);
-  const GeneralResult = GeneralResultComponent(generalResult);
-  const DistributeResult = DistributeResultComponent(distributeResult);
-  const Factor = FactorComponent(factor);
-  const Quantity = QuantityComponent(quantity);
-  const AxialCompRatio = AxialCompRatioComponent(axialCompRatio);
-  const Reinforcement = ReinforcementComponent(reinforcements);
-
   const dataMapping: { [key: string]: JSX.Element } = {
-    summary: Summary,
-    summaryQuantity: SummaryQuantity,
-    parameters: Parameters,
-    period: Period,
-    force: Force,
-    drift: Drift,
-    generalResult: GeneralResult,
-    distributeResult: DistributeResult,
-    factor: Factor,
-    quantity: Quantity,
-    axialCompRatio: AxialCompRatio,
-    reinforcement: Reinforcement,
+    summary: SummaryComponent(summary),
+    summaryQuantity: SummaryQuantityComponent(summaryQuantity),
+    parameters: ParametersComponent(parameters),
+    period: PeriodComponent(period),
+    force: ForceComponent(force),
+    drift: DriftComponent(drift),
+    generalResult: GeneralResultComponent(generalResult),
+    distributeResult: DistributeResultComponent(distributeResult),
+    factor: FactorComponent(factor),
+    quantity: QuantityComponent(quantity),
+    axialCompRatio: AxialCompRatioComponent(axialCompRatio),
+    reinforcement: ReinforcementComponent(reinforcements),
   };
 
   const exportXLSX = async () => {

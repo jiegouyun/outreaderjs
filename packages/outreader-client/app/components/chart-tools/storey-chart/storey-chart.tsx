@@ -83,10 +83,10 @@ export function StoreyChart(props: {
               iconSize={8}
               payload={customLegend}
             />
-            {datas.map(function (data, i) {
+            {datas.map((data, i) => {
               return (
                 <Scatter
-                  key={i}
+                  key={labels.xLabel + i}
                   name={describes[i].name}
                   data={data}
                   fill={describes[i].fill}

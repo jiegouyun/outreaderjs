@@ -96,28 +96,17 @@ export function StructureComparePage() {
   const history = useHistory();
   const [activeItemKey, setActvieItemKey] = useState('summary');
 
-  const Summarys = CompareSummaryComponent(summarys);
-  const SummaryQuantities = CompareSummaryQuantityComponent(summaryQuantities);
-  const Parameters = CompareParametersComponent(parameters);
-  const Periods = ComparePeriodComponent(periods);
-  const Forces = CompareForceComponent(forces);
-  const Drifts = CompareDriftComponent(drifts);
-  const GeneralResults = CompareGeneralResultComponent(generalResults);
-  const DistributeResults = CompareDistributeResultComponent(distributeResults);
-  const Factors = CompareFactorComponent(factors);
-  const Quantities = CompareQuantityComponent(quantities);
-
   const dataMapping: { [key: string]: JSX.Element } = {
-    summary: Summarys,
-    summaryQuantity: SummaryQuantities,
-    parameters: Parameters,
-    period: Periods,
-    force: Forces,
-    drift: Drifts,
-    generalResult: GeneralResults,
-    distributeResult: DistributeResults,
-    factor: Factors,
-    quantity: Quantities,
+    summary: CompareSummaryComponent(summarys),
+    summaryQuantity: CompareSummaryQuantityComponent(summaryQuantities),
+    parameters: CompareParametersComponent(parameters),
+    period: ComparePeriodComponent(periods),
+    force: CompareForceComponent(forces),
+    drift: CompareDriftComponent(drifts),
+    generalResult: CompareGeneralResultComponent(generalResults),
+    distributeResult: CompareDistributeResultComponent(distributeResults),
+    factor: CompareFactorComponent(factors),
+    quantity: CompareQuantityComponent(quantities),
   };
 
   const exportXLSX = async () => {
