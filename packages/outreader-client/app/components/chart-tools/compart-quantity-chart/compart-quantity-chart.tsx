@@ -31,14 +31,15 @@ export function CompareQuantityChart(props: {
   }[];
   yLabel: string;
 }) {
+  const { data, yLabel } = props;
   return (
-    <div>
-      <ContextMenuTrigger id={`CM-${props.yLabel}`}>
-        <div id={props.yLabel} className="charts">
+    <React.Fragment>
+      <ContextMenuTrigger id={`CM-${yLabel}`}>
+        <div id={yLabel} className="charts">
           <BarChart
             width={600}
             height={360}
-            data={props.data}
+            data={data}
             margin={{
               top: 10,
               right: 10,
@@ -52,7 +53,7 @@ export function CompareQuantityChart(props: {
             </XAxis>
             <YAxis>
               <Label
-                value={props.yLabel}
+                value={yLabel}
                 angle={-90}
                 offset={0}
                 position="insideLeft"
@@ -96,15 +97,15 @@ export function CompareQuantityChart(props: {
           </BarChart>
         </div>
       </ContextMenuTrigger>
-      <ContextMenu id={`CM-${props.yLabel}`}>
+      <ContextMenu id={`CM-${yLabel}`}>
         <MenuItem>
-          <a onClick={() => downloadSVG(props.yLabel)}>下载 SVG</a>
+          <a onClick={() => downloadSVG(yLabel)}>下载 SVG</a>
         </MenuItem>
         <MenuItem>
-          <a onClick={() => downloadPNG(props.yLabel)}>下载 PNG</a>
+          <a onClick={() => downloadPNG(yLabel)}>下载 PNG</a>
         </MenuItem>
         <MenuItem divider />
       </ContextMenu>
-    </div>
+    </React.Fragment>
   );
 }

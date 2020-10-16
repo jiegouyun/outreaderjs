@@ -738,7 +738,7 @@ export function CompareDistributeResultComponent(
 
   const { Panel } = Collapse;
   const DistributeResults = (
-    <div>
+    <React.Fragment>
       <h3>楼层属性</h3>
       <Row justify="space-around">
         <StoreyChart
@@ -914,7 +914,7 @@ export function CompareDistributeResultComponent(
           />
         </Panel>
       </Collapse>
-    </div>
+    </React.Fragment>
   );
 
   return DistributeResults;

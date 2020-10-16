@@ -456,7 +456,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
 
   const { Panel } = Collapse;
   const Drifts = (
-    <div>
+    <React.Fragment>
       <h3>位移</h3>
       <Row justify="space-around">
         <StoreyChart
@@ -577,7 +577,7 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
           />
         </Panel>
       </Collapse>
-    </div>
+    </React.Fragment>
   );
 
   return Drifts;

@@ -90,7 +90,7 @@ export function CompareSummaryQuantityComponent(
   }
 
   const SummaryQuantities = (
-    <div>
+    <React.Fragment>
       <h3>含钢量汇总</h3>
       <Table
         columns={modelColumns}
@@ -123,7 +123,7 @@ export function CompareSummaryQuantityComponent(
           {65.7}
         </Descriptions.Item>
       </Descriptions>
-    </div>
+    </React.Fragment>
   );
 
   return SummaryQuantities;

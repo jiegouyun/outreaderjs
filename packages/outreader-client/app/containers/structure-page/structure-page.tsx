@@ -65,56 +65,19 @@ export function StructurePage() {
     history.replace('/');
   }
 
-  const Summary = SummaryComponent(summary);
-  const SummaryQuantity = SummaryQuantityComponent(summaryQuantity);
-  const Parameters = ParametersComponent(parameters);
-  const Period = PeriodComponent(period);
-  const Force = ForceComponent(force);
-  const Drift = DriftComponent(drift);
-  const GeneralResult = GeneralResultComponent(generalResult);
-  const DistributeResult = DistributeResultComponent(distributeResult);
-  const Factor = FactorComponent(factor);
-  const Quantity = QuantityComponent(quantity);
-  const AxialCompRatio = AxialCompRatioComponent(axialCompRatio);
-  const Reinforcement = ReinforcementComponent(reinforcements);
-
-  const dataMapping = {
-    summary: () => {
-      return Summary;
-    },
-    summaryQuantity: () => {
-      return SummaryQuantity;
-    },
-    parameters: () => {
-      return Parameters;
-    },
-    period: () => {
-      return Period;
-    },
-    force: () => {
-      return Force;
-    },
-    drift: () => {
-      return Drift;
-    },
-    generalResult: () => {
-      return GeneralResult;
-    },
-    distributeResult: () => {
-      return DistributeResult;
-    },
-    factor: () => {
-      return Factor;
-    },
-    quantity: () => {
-      return Quantity;
-    },
-    axialCompRatio: () => {
-      return AxialCompRatio;
-    },
-    reinforcement: () => {
-      return Reinforcement;
-    },
+  const dataMapping: { [key: string]: JSX.Element } = {
+    summary: SummaryComponent(summary),
+    summaryQuantity: SummaryQuantityComponent(summaryQuantity),
+    parameters: ParametersComponent(parameters),
+    period: PeriodComponent(period),
+    force: ForceComponent(force),
+    drift: DriftComponent(drift),
+    generalResult: GeneralResultComponent(generalResult),
+    distributeResult: DistributeResultComponent(distributeResult),
+    factor: FactorComponent(factor),
+    quantity: QuantityComponent(quantity),
+    axialCompRatio: AxialCompRatioComponent(axialCompRatio),
+    reinforcement: ReinforcementComponent(reinforcements),
   };
 
   const exportXLSX = async () => {
@@ -129,11 +92,11 @@ export function StructurePage() {
     }
   };
 
-  const downloadImgs = () => {
-    const chartsSvgList = document.getElementsByClassName('charts');
-    console.log(chartsSvgList);
-    // TODO
-  };
+  // const downloadImgs = () => {
+  //   const chartsSvgList = document.getElementsByClassName('charts');
+  //   console.log(chartsSvgList);
+  //   // TODO
+  // };
 
   return (
     <React.Fragment>
@@ -143,7 +106,7 @@ export function StructurePage() {
             mode="inline"
             defaultSelectedKeys={[activeItemKey]}
             style={{ height: '100%' }}
-            onSelect={({ _, key }) => {
+            onClick={({ item, key }) => {
               setActvieItemKey(key as string);
             }}
           >
@@ -184,7 +147,7 @@ export function StructurePage() {
               </Breadcrumb.Item>
               <Breadcrumb.Item>{hash.slice(0, 7)}</Breadcrumb.Item>
             </Breadcrumb>
-            <div style={styles.container}>{dataMapping[activeItemKey]()}</div>
+            <div style={styles.container}>{dataMapping[activeItemKey]}</div>
           </Layout.Content>
         </Layout>
       </Layout>

@@ -32,7 +32,7 @@ export async function initDistributeResult(worksheet: Excel.Worksheet) {
   worksheet.getCell('P2').value = 'Ratx2';
   worksheet.getCell('Q2').value = 'RJX1';
   worksheet.getCell('R2').value = 'RJX3';
-  worksheet.getCell('W2').value = 'Raty1';
+  worksheet.getCell('S2').value = 'Raty1';
   worksheet.getCell('T2').value = 'Raty2';
   worksheet.getCell('U2').value = 'RJY1';
   worksheet.getCell('V2').value = 'RJY3';

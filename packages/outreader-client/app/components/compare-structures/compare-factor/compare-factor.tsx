@@ -236,7 +236,7 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
 
   const { Panel } = Collapse;
   const Factors = (
-    <div>
+    <React.Fragment>
       <h3>薄弱层剪力放大系数</h3>
       <Row justify="space-around">
         <StoreyChart
@@ -306,7 +306,7 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
           />
         </Panel>
       </Collapse>
-    </div>
+    </React.Fragment>
   );
 
   return Factors;

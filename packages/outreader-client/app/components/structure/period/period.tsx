@@ -172,7 +172,7 @@ export function PeriodComponent(period: IPeriodFE) {
 
   const { Panel } = Collapse;
   const Period = (
-    <div>
+    <React.Fragment>
       <h3>考虑扭转耦联时的动力特性</h3>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
@@ -225,7 +225,13 @@ export function PeriodComponent(period: IPeriodFE) {
               >
                 <Label value="振型" offset={0} position="bottom" />
               </XAxis>
-              <YAxis type="number" dataKey="y" name="" unit="">
+              <YAxis
+                type="number"
+                dataKey="y"
+                name=""
+                unit=""
+                domain={[0, 100]}
+              >
                 <Label
                   value="质量参与系数"
                   angle={-90}
@@ -288,7 +294,7 @@ export function PeriodComponent(period: IPeriodFE) {
           />
         </Panel>
       </Collapse>
-    </div>
+    </React.Fragment>
   );
 
   return Period;

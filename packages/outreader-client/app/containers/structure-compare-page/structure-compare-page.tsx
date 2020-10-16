@@ -96,48 +96,17 @@ export function StructureComparePage() {
   const history = useHistory();
   const [activeItemKey, setActvieItemKey] = useState('summary');
 
-  const Summarys = CompareSummaryComponent(summarys);
-  const SummaryQuantities = CompareSummaryQuantityComponent(summaryQuantities);
-  const Parameters = CompareParametersComponent(parameters);
-  const Periods = ComparePeriodComponent(periods);
-  const Forces = CompareForceComponent(forces);
-  const Drifts = CompareDriftComponent(drifts);
-  const GeneralResults = CompareGeneralResultComponent(generalResults);
-  const DistributeResults = CompareDistributeResultComponent(distributeResults);
-  const Factors = CompareFactorComponent(factors);
-  const Quantities = CompareQuantityComponent(quantities);
-
-  const dataMapping = {
-    summary: () => {
-      return Summarys;
-    },
-    summaryQuantity: () => {
-      return SummaryQuantities;
-    },
-    parameters: () => {
-      return Parameters;
-    },
-    period: () => {
-      return Periods;
-    },
-    force: () => {
-      return Forces;
-    },
-    drift: () => {
-      return Drifts;
-    },
-    generalResult: () => {
-      return GeneralResults;
-    },
-    distributeResult: () => {
-      return DistributeResults;
-    },
-    factor: () => {
-      return Factors;
-    },
-    quantity: () => {
-      return Quantities;
-    },
+  const dataMapping: { [key: string]: JSX.Element } = {
+    summary: CompareSummaryComponent(summarys),
+    summaryQuantity: CompareSummaryQuantityComponent(summaryQuantities),
+    parameters: CompareParametersComponent(parameters),
+    period: ComparePeriodComponent(periods),
+    force: CompareForceComponent(forces),
+    drift: CompareDriftComponent(drifts),
+    generalResult: CompareGeneralResultComponent(generalResults),
+    distributeResult: CompareDistributeResultComponent(distributeResults),
+    factor: CompareFactorComponent(factors),
+    quantity: CompareQuantityComponent(quantities),
   };
 
   const exportXLSX = async () => {
@@ -160,7 +129,7 @@ export function StructureComparePage() {
             mode="inline"
             defaultSelectedKeys={[activeItemKey]}
             style={{ height: '100%' }}
-            onSelect={({ _, key }) => {
+            onClick={({ item, key }) => {
               setActvieItemKey(key as string);
             }}
           >
@@ -188,7 +157,7 @@ export function StructureComparePage() {
               </Breadcrumb.Item>
               <Breadcrumb.Item>{hashTitle}</Breadcrumb.Item>
             </Breadcrumb>
-            <div style={styles.container}>{dataMapping[activeItemKey]()}</div>
+            <div style={styles.container}>{dataMapping[activeItemKey]}</div>
           </Layout.Content>
         </Layout>
       </Layout>
