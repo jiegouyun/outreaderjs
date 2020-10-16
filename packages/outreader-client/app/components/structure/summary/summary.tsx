@@ -51,7 +51,7 @@ export function SummaryComponent(summary: ISummaryFE) {
   }
 
   const Summary = (
-    <div>
+    <React.Fragment>
       <h3>工程信息</h3>
       <Descriptions
         bordered
@@ -447,7 +447,7 @@ export function SummaryComponent(summary: ISummaryFE) {
           {summary.baseMoment.seismicY.toFixed(0)}
         </Descriptions.Item>
       </Descriptions>
-    </div>
+    </React.Fragment>
   );
 
   return Summary;

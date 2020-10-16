@@ -318,7 +318,7 @@ export function CompareForceComponent(forces: IForceFE[]) {
 
   const { Panel } = Collapse;
   const Forces = (
-    <div>
+    <React.Fragment>
       <h3>顺风向风荷载</h3>
       <Row justify="space-around">
         <StoreyChart
@@ -413,7 +413,7 @@ export function CompareForceComponent(forces: IForceFE[]) {
           />
         </Panel>
       </Collapse>
-    </div>
+    </React.Fragment>
   );
 
   return Forces;

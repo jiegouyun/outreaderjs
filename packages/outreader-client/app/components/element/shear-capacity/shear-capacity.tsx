@@ -58,7 +58,7 @@ export function ShearCapacityComponent(wpj: IWpj) {
 
   const { Panel } = Collapse;
   const axialCompRatio = (
-    <div>
+    <React.Fragment>
       <h3>柱</h3>
       <Collapse ghost>
         <Panel header="详细信息" key="1">
@@ -73,7 +73,7 @@ export function ShearCapacityComponent(wpj: IWpj) {
           />
         </Panel>
       </Collapse>
-    </div>
+    </React.Fragment>
   );
 
   return axialCompRatio;

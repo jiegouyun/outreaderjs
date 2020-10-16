@@ -48,23 +48,29 @@ export function ReinforcementComponent(rs: IElementRsFE) {
       key: j,
       storeyID: col.storeyID[j],
     });
-    const rs = col.colName.map((val, i) => {
+    const rsOrig = col.colName.map((val, i) => {
       return col.rs[i][j];
     });
-    colRsChartData.push({
-      storeyID: col.storeyID[j],
-      range: [Math.min(...rs.filter(Boolean)), Math.max(...rs.filter(Boolean))],
-    });
-    const rsv = col.colName.map((val, i) => {
+    const rs = rsOrig.filter(Boolean);
+    if (rs.length) {
+      colRsChartData.push({
+        storeyID: col.storeyID[j],
+        range: [Math.min(...rs), Math.max(...rs)],
+      });
+    }
+    const rsvOrig = col.colName.map((val, i) => {
       return col.rsv[i][j];
     });
-    colRsvChartData.push({
-      storeyID: col.storeyID[j],
-      range: [
-        Math.min(...rsv.filter(Boolean)),
-        Math.max(...rsv.filter(Boolean)),
-      ],
-    });
+    const rsv = rsvOrig.filter(Boolean);
+    if (rsv.length) {
+      colRsvChartData.push({
+        storeyID: col.storeyID[j],
+        range: [
+          Math.min(...rsv.filter(Boolean)),
+          Math.max(...rsv.filter(Boolean)),
+        ],
+      });
+    }
   }
 
   for (let i = 0; i < n; i++) {
@@ -76,7 +82,7 @@ export function ReinforcementComponent(rs: IElementRsFE) {
 
   const { Panel } = Collapse;
   const axialCompRatio = (
-    <div>
+    <React.Fragment>
       <h3>柱</h3>
       <Row justify="space-around">
         <ElementChart data={colRsChartData} xLabel="柱截面配筋率(%)" />
@@ -95,7 +101,7 @@ export function ReinforcementComponent(rs: IElementRsFE) {
           />
         </Panel>
       </Collapse>
-    </div>
+    </React.Fragment>
   );
 
   return axialCompRatio;

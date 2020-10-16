@@ -306,7 +306,7 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
 
   const { Panel } = Collapse;
   const Quantities = (
-    <div>
+    <React.Fragment>
       <h3>砼用量</h3>
       <Row justify="space-around">
         <CompareQuantityChart data={concreteChartData} yLabel="砼用量(m^3)" />
@@ -370,7 +370,7 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
           />
         </Panel>
       </Collapse>
-    </div>
+    </React.Fragment>
   );
 
   return Quantities;

@@ -105,7 +105,7 @@ export function FactorComponent(factor: IFactorFE) {
 
   const { Panel } = Collapse;
   const Factor = (
-    <div>
+    <React.Fragment>
       <h3>薄弱层剪力放大系数</h3>
       <Row justify="space-around">
         <StoreyChart
@@ -203,7 +203,7 @@ export function FactorComponent(factor: IFactorFE) {
           />
         </Panel>
       </Collapse>
-    </div>
+    </React.Fragment>
   );
 
   return Factor;

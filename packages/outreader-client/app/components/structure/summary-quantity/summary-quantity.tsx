@@ -95,7 +95,7 @@ export function SummaryQuantityComponent(summaryQuantity: ISummaryQuantityFE) {
   ];
 
   const SummaryQuantity = (
-    <div>
+    <React.Fragment>
       <h3>含钢量汇总</h3>
       <Descriptions
         bordered
@@ -142,7 +142,7 @@ export function SummaryQuantityComponent(summaryQuantity: ISummaryQuantityFE) {
         <Descriptions.Item label="型钢(元/t)">{10000}</Descriptions.Item>
         <Descriptions.Item label="压型钢板(元/m^2)">{65.7}</Descriptions.Item>
       </Descriptions>
-    </div>
+    </React.Fragment>
   );
 
   return SummaryQuantity;

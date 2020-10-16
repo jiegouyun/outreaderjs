@@ -224,7 +224,7 @@ export function QuantityComponent(quantity: IQuantityFE) {
 
   const { Panel } = Collapse;
   const Quantity = (
-    <div>
+    <React.Fragment>
       <h3>砼用量</h3>
       <Row justify="space-around">
         <QuantityChart data={concreteTableData.slice()} xLabel="砼用量(m^3)" />
@@ -321,7 +321,7 @@ export function QuantityComponent(quantity: IQuantityFE) {
           />
         </Panel>
       </Collapse>
-    </div>
+    </React.Fragment>
   );
 
   return Quantity;

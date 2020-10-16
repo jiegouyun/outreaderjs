@@ -25,15 +25,16 @@ export function ElementChart(props: {
   }[];
   xLabel: string;
 }) {
+  const { data, xLabel } = props;
   return (
-    <div>
-      <ContextMenuTrigger id={`CM-${props.xLabel}`}>
-        <div id={props.xLabel} className="charts">
+    <React.Fragment>
+      <ContextMenuTrigger id={`CM-${xLabel}`}>
+        <div id={xLabel} className="charts">
           <AreaChart
             layout="vertical"
             width={390}
             height={520}
-            data={props.data}
+            data={data}
             margin={{
               top: 10,
               right: 10,
@@ -43,7 +44,7 @@ export function ElementChart(props: {
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis type="number" dataKey="" name="" unit="">
-              <Label value={props.xLabel} offset={0} position="bottom" />
+              <Label value={xLabel} offset={0} position="bottom" />
             </XAxis>
             <YAxis
               type="number"
@@ -76,15 +77,15 @@ export function ElementChart(props: {
           </AreaChart>
         </div>
       </ContextMenuTrigger>
-      <ContextMenu id={`CM-${props.xLabel}`}>
+      <ContextMenu id={`CM-${xLabel}`}>
         <MenuItem>
-          <a onClick={() => downloadSVG(props.xLabel)}>下载 SVG</a>
+          <a onClick={() => downloadSVG(xLabel)}>下载 SVG</a>
         </MenuItem>
         <MenuItem>
-          <a onClick={() => downloadPNG(props.xLabel)}>下载 PNG</a>
+          <a onClick={() => downloadPNG(xLabel)}>下载 PNG</a>
         </MenuItem>
         <MenuItem divider />
       </ContextMenu>
-    </div>
+    </React.Fragment>
   );
 }

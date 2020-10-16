@@ -32,7 +32,8 @@ export function StoreyChart(props: {
   describes: IDescribe[];
   datas: IData[][];
 }) {
-  const customLegend: LegendPayload[] = props.describes.map((desc, i) => {
+  const { labels, describes, datas } = props;
+  const customLegend: LegendPayload[] = describes.map((desc, i) => {
     return {
       id: i,
       value: desc.name,
@@ -42,11 +43,11 @@ export function StoreyChart(props: {
   });
 
   return (
-    <div>
-      <ContextMenuTrigger id={`CM-${props.labels.xLabel}`}>
-        <div id={props.labels.xLabel} className="charts">
+    <React.Fragment>
+      <ContextMenuTrigger id={`CM-${labels.xLabel}`}>
+        <div id={labels.xLabel} className="charts">
           <ScatterChart
-            key={props.labels.xLabel}
+            key={labels.xLabel}
             width={390}
             height={520}
             margin={{
@@ -58,7 +59,7 @@ export function StoreyChart(props: {
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis type="number" dataKey="x" name="" unit="">
-              <Label value={props.labels.xLabel} offset={0} position="bottom" />
+              <Label value={labels.xLabel} offset={0} position="bottom" />
             </XAxis>
             <YAxis
               type="number"
@@ -68,7 +69,7 @@ export function StoreyChart(props: {
               domain={[0, (dataMax: number) => Math.ceil(dataMax / 5) * 5]}
             >
               <Label
-                value={props.labels.yLabel || '楼层'}
+                value={labels.yLabel || '楼层'}
                 angle={-90}
                 offset={10}
                 position="insideLeft"
@@ -82,30 +83,30 @@ export function StoreyChart(props: {
               iconSize={8}
               payload={customLegend}
             />
-            {props.datas.map(function (data, i) {
+            {datas.map((data, i) => {
               return (
                 <Scatter
-                  key={i}
-                  name={props.describes[i].name}
+                  key={labels.xLabel + i}
+                  name={describes[i].name}
                   data={data}
-                  fill={props.describes[i].fill}
+                  fill={describes[i].fill}
                   line={{ strokeWidth: 2 }}
-                  shape={props.describes[i].shape}
+                  shape={describes[i].shape}
                 />
               );
             })}
           </ScatterChart>
         </div>
       </ContextMenuTrigger>
-      <ContextMenu id={`CM-${props.labels.xLabel}`}>
+      <ContextMenu id={`CM-${labels.xLabel}`}>
         <MenuItem>
-          <a onClick={() => downloadSVG(props.labels.xLabel)}>下载 SVG</a>
+          <a onClick={() => downloadSVG(labels.xLabel)}>下载 SVG</a>
         </MenuItem>
         <MenuItem>
-          <a onClick={() => downloadPNG(props.labels.xLabel)}>下载 PNG</a>
+          <a onClick={() => downloadPNG(labels.xLabel)}>下载 PNG</a>
         </MenuItem>
         <MenuItem divider />
       </ContextMenu>
-    </div>
+    </React.Fragment>
   );
 }

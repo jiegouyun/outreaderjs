@@ -4,7 +4,7 @@ import { IParametersFE } from '@outreader/core';
 
 export function ParametersComponent(parameters: IParametersFE) {
   const Parameters = (
-    <div>
+    <React.Fragment>
       <h3>结构总体信息</h3>
       <Descriptions
         bordered
@@ -130,7 +130,7 @@ export function ParametersComponent(parameters: IParametersFE) {
           {parameters.seismic.modifiedSeismicReductionFactor}
         </Descriptions.Item>
       </Descriptions>
-    </div>
+    </React.Fragment>
   );
 
   return Parameters;

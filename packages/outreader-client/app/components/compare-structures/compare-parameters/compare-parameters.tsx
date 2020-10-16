@@ -213,7 +213,7 @@ export function CompareParametersComponent(parameters: IParametersFE[]) {
   }
 
   const Parameters = (
-    <div>
+    <React.Fragment>
       <h3>结构总体信息</h3>
       <Table
         columns={modelColumns}
@@ -250,7 +250,7 @@ export function CompareParametersComponent(parameters: IParametersFE[]) {
         pagination={false}
         style={{ marginBottom: 20 }}
       />
-    </div>
+    </React.Fragment>
   );
 
   return Parameters;

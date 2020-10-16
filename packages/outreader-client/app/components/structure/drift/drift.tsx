@@ -199,7 +199,7 @@ export function DriftComponent(drift: IDriftFE) {
 
   const { Panel } = Collapse;
   const Drift = (
-    <div>
+    <React.Fragment>
       <h3>位移</h3>
       <Row justify="space-around">
         <StoreyChart
@@ -408,7 +408,7 @@ export function DriftComponent(drift: IDriftFE) {
           />
         </Panel>
       </Collapse>
-    </div>
+    </React.Fragment>
   );
 
   return Drift;
