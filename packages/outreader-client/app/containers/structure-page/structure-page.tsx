@@ -1,6 +1,6 @@
 import { convertStructure } from '@outreader/yjk';
 import { exportExcel } from '@outreader/core';
-import { Breadcrumb, Layout, Menu, message, Divider } from 'antd';
+import { Breadcrumb, Button, Layout, Menu, message } from 'antd';
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import {
@@ -29,9 +29,16 @@ const styles: IStyles = {
   sider: {
     background: '#fff',
     overflow: 'auto',
-    height: 'calc(100vh - 4rem)',
+    height: 'calc(100vh - 6rem)',
     position: 'fixed',
     left: 0,
+  },
+  siderButton: {
+    background: '#fff',
+    height: '2rem',
+    position: 'fixed',
+    left: 0,
+    bottom: 0,
   },
   content: {
     minHeight: 'calc(100vh - 4rem)',
@@ -124,20 +131,14 @@ export function StructurePage() {
               <Menu.Item key="axialCompRatio">轴压比</Menu.Item>
               <Menu.Item key="reinforcement">配筋率</Menu.Item>
             </SubMenu>
-            <Divider />
-            <p
-              style={{
-                marginLeft: '1.5rem',
-                marginTop: '2rem',
-                marginBottom: '2.5rem',
-              }}
-            >
-              <a onClick={() => exportXLSX()}>导出Excel</a>
-            </p>
-            {/* <p style={{ marginLeft: '1.5rem', marginTop: '2.5rem', marginBottom: '2.5rem' }}>
-              <a onClick={() => downloadImgs()}>一键下载图片</a>
-            </p> */}
+            <Menu.Divider />
           </Menu>
+        </Layout.Sider>
+        <Layout.Sider style={styles.siderButton}>
+          <Button type="primary" block onClick={() => exportXLSX()}>
+            导出Excel
+          </Button>
+          {/* <Button type="primary"  block onClick={() => downloadImgs()}>一键下载图片</Button> */}
         </Layout.Sider>
         <Layout className="site-layout" style={{ marginLeft: '12.5rem' }}>
           <Layout.Content style={styles.content}>

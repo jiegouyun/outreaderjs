@@ -13,7 +13,7 @@ import {
   IStructureFrontEnd,
 } from '@outreader/core';
 import { convertStructure } from '@outreader/yjk';
-import { Breadcrumb, Layout, Menu, message, Divider } from 'antd';
+import { Breadcrumb, Layout, Menu, message, Button } from 'antd';
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import {
@@ -39,9 +39,16 @@ const styles: IStyles = {
   sider: {
     background: '#fff',
     overflow: 'auto',
-    height: 'calc(100vh - 4rem)',
+    height: 'calc(100vh - 6rem)',
     position: 'fixed',
     left: 0,
+  },
+  siderButton: {
+    background: '#fff',
+    height: '2rem',
+    position: 'fixed',
+    left: 0,
+    bottom: 0,
   },
   content: {
     minHeight: 'calc(100vh - 4rem)',
@@ -143,11 +150,13 @@ export function StructureComparePage() {
             <Menu.Item key="distributeResult">楼层分布数据</Menu.Item>
             <Menu.Item key="factor">调整系数</Menu.Item>
             <Menu.Item key="quantity">工程量</Menu.Item>
-            <Divider />
-            <p style={{ marginLeft: '1.5rem' }}>
-              <a onClick={() => exportXLSX()}>导出Excel</a>
-            </p>
+            <Menu.Divider />
           </Menu>
+        </Layout.Sider>
+        <Layout.Sider style={styles.siderButton}>
+          <Button type="primary" block onClick={() => exportXLSX()}>
+            导出Excel
+          </Button>
         </Layout.Sider>
         <Layout className="site-layout" style={{ marginLeft: '12.5rem' }}>
           <Layout.Content style={styles.content}>

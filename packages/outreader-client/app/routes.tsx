@@ -41,22 +41,20 @@ export default function Routes() {
         </Layout.Header>
         <Layout>
           <Layout.Content style={{ marginTop: '4rem' }}>
-            <Route path={routes.HOME} exact>
-              <HomePage />
-            </Route>
-            <Route path={routes.ABOUT} exact>
-              <AboutPage />
-            </Route>
+            <Route path={routes.HOME} exact component={HomePage} />
+            <Route path={routes.ABOUT} exact component={AboutPage} />
             <Switch>
-              <Route path={routes.STRUCTURES} exact>
-                <StructureListPage />
-              </Route>
-              <Route path={routes.STRUCTURE} exact>
-                <StructurePage />
-              </Route>
-              <Route path={routes.COMPARE} exact>
-                <StructureComparePage />
-              </Route>
+              <Route
+                path={routes.STRUCTURES}
+                exact
+                component={StructureListPage}
+              />
+              <Route path={routes.STRUCTURE} exact component={StructurePage} />
+              <Route
+                path={routes.COMPARE}
+                exact
+                component={StructureComparePage}
+              />
             </Switch>
           </Layout.Content>
         </Layout>
