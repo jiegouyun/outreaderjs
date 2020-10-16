@@ -1,7 +1,7 @@
 {
   "name": "@outreader/client",
   "productName": "OutreaderClient",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "A helper for structural engineer",
   "main": "./main.prod.js",
   "author": {
