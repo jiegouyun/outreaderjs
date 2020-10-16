@@ -1,7 +1,7 @@
 {
   "name": "@outreader/client",
   "productName": "OutreaderClient",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A real helper for structural engineer",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
@@ -204,8 +204,8 @@
     "@ant-design/icons": "^4.2.1",
     "@fortawesome/fontawesome-free": "^5.14.0",
     "@hot-loader/react-dom": "^17.0.0-rc.2",
-    "@outreader/core": "^0.0.3",
-    "@outreader/yjk": "^0.0.3",
+    "@outreader/core": "^0.0.4",
+    "@outreader/yjk": "^0.0.4",
     "@types/lowdb": "^1.0.9",
     "@types/recharts": "^1.8.14",
     "antd": "^4.4.3",
