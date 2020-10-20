@@ -1,4 +1,4 @@
-import { IStructure, ISummaryFE } from '@outreader/core';
+import { IStructure, ISummaryFE } from '../interfaces';
 import { lookUp, calcDriftLimit, stiffnessWeightRatioCheck } from './tools';
 
 export function convertSummary(structure: IStructure): ISummaryFE {

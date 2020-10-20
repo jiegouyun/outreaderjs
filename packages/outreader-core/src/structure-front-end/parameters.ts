@@ -1,4 +1,4 @@
-import { IStructure, IParametersFE } from '@outreader/core';
+import { IStructure, IParametersFE } from '../interfaces';
 
 export function convertParameters(structure: IStructure): IParametersFE {
   const parameters: IParametersFE = {

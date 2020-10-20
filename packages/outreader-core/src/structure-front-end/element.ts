@@ -1,4 +1,4 @@
-import { IStructure, IElementFE } from '@outreader/core';
+import { IStructure, IElementFE } from '../interfaces';
 
 export function convertElement(structure: IStructure): IElementFE {
   const element: IElementFE = {

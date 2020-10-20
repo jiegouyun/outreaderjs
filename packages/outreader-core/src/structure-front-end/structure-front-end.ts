@@ -1,4 +1,4 @@
-import { IStructure, IStructureFrontEnd } from '@outreader/core';
+import { IStructure, IStructureFrontEnd } from '../interfaces';
 import { convertSummary } from './summary';
 import { convertSummaryQuantity } from './summary-quantity';
 import { convertParameters } from './parameters';

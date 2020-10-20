@@ -1,4 +1,4 @@
-import { IStructure, IDistributeResultFE } from '@outreader/core';
+import { IStructure, IDistributeResultFE } from '../interfaces';
 
 export function convertDistributeResult(
   structure: IStructure,

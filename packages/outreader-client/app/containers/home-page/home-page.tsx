@@ -1,4 +1,4 @@
-import { readStructure } from '@outreader/yjk';
+import { readYJKStructure } from '@outreader/yjk';
 import { Button, Divider, message, Row, Space } from 'antd';
 import { remote } from 'electron';
 import React, { useState } from 'react';
@@ -23,7 +23,7 @@ export function HomePage() {
   const readYjkStrOutputs = async () => {
     setStrLoading(true);
     try {
-      const strRes = await readStructure(dir);
+      const strRes = await readYJKStructure(dir);
       if (!db.has('structures').value()) {
         db.set('structures', []).write();
       }

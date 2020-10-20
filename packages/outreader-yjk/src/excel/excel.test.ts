@@ -1,7 +1,11 @@
-import { readStructure } from '../structure';
-import { convertStructure } from '../structure-front-end';
+import { readYJKStructure } from '../structure';
 // import { exportExcel } from '@outreader/core/src/excel/excel';
-import { IStructure, IStructureFrontEnd, exportExcel } from '@outreader/core';
+import {
+  IStructure,
+  IStructureFrontEnd,
+  exportExcel,
+  convertStructure,
+} from '@outreader/core';
 import * as path from 'path';
 
 describe('exportExcel1', () => {
@@ -11,7 +15,7 @@ describe('exportExcel1', () => {
   let result: boolean;
 
   beforeEach(async () => {
-    structure = await readStructure(dir);
+    structure = await readYJKStructure(dir);
     structureFE = convertStructure(structure);
     // result = await exportExcel(structureFE);
     result = true;
@@ -29,7 +33,7 @@ describe('exportExcel2', () => {
   let result: boolean;
 
   beforeEach(async () => {
-    structure = await readStructure(dir);
+    structure = await readYJKStructure(dir);
     structureFE = convertStructure(structure);
     // result = await exportExcel(structureFE);
     result = true;

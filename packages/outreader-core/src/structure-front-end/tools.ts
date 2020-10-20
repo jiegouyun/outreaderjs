@@ -1,4 +1,4 @@
-import { IStructure } from '@outreader/core';
+import { IStructure } from '../interfaces';
 
 /**
  * @description look up a specific value in lookUp array, get value;

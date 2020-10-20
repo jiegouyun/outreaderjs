@@ -1,4 +1,4 @@
-import { IStructure, ISummaryQuantityFE } from '@outreader/core';
+import { IStructure, ISummaryQuantityFE } from '../interfaces';
 
 export function convertSummaryQuantity(
   structure: IStructure,

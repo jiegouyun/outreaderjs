@@ -7,7 +7,7 @@ import { readRebarOutput } from '../rebar';
 import { readWpjOutput } from '../wpj';
 import { IStructure, hashStr } from '@outreader/core';
 
-export async function readStructure(dir: string): Promise<IStructure> {
+export async function readYJKStructure(dir: string): Promise<IStructure> {
   const wmass = await readWmassOutput(dir);
   const wdisp = await readWdispOutput(dir);
   const wzq = await readWzqOutput(dir);

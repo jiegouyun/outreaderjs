@@ -1,4 +1,4 @@
-import { IStructure, IPeriodFE, IModeFE, IModeMassFE } from '@outreader/core';
+import { IStructure, IPeriodFE } from '../interfaces';
 
 export function convertPeriod(structure: IStructure): IPeriodFE {
   const period: IPeriodFE = {

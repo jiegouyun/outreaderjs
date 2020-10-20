@@ -1,4 +1,4 @@
-import { IStructure, IQuantityFE } from '@outreader/core';
+import { IStructure, IQuantityFE } from '../interfaces';
 
 export function convertQuantity(structure: IStructure): IQuantityFE {
   const area: number[] = structure.wmass?.storey.area ||

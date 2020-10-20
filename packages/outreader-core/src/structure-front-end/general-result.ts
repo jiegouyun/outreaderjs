@@ -1,4 +1,4 @@
-import { IStructure, IGeneralResultFE } from '@outreader/core';
+import { IStructure, IGeneralResultFE } from '../interfaces';
 
 export function convertGeneralResult(structure: IStructure): IGeneralResultFE {
   const generalResult: IGeneralResultFE = {

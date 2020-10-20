@@ -1,4 +1,4 @@
-import { IStructure, IForceFE } from '@outreader/core';
+import { IStructure, IForceFE } from '../interfaces';
 
 export function convertForce(structure: IStructure): IForceFE {
   const force: IForceFE = {

@@ -1,5 +1,5 @@
-import { readStructure } from '../structure';
-import { convertStructure } from '../structure-front-end';
+import { readYJKStructure } from '../structure';
+import { convertStructure } from '@outreader/core';
 // import { exportCompareExcel } from '@outreader/core/src/excel/excel';
 import {
   IStructure,
@@ -19,7 +19,7 @@ describe('exportExcel1', () => {
 
   beforeEach(async () => {
     for (let i = 0; i < 2; i++) {
-      structures[i] = await readStructure(dirs[i]);
+      structures[i] = await readYJKStructure(dirs[i]);
       structureFEs[i] = convertStructure(structures[i]);
     }
     // results = await exportCompareExcel(structureFEs);

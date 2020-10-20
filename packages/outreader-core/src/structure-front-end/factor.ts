@@ -1,4 +1,4 @@
-import { IStructure, IFactorFE } from '@outreader/core';
+import { IStructure, IFactorFE } from '../interfaces';
 
 export function convertFactor(structure: IStructure): IFactorFE {
   const factor: IFactorFE = {

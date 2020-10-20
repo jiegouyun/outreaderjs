@@ -1,4 +1,4 @@
-import { IStructure, IDriftFE } from '@outreader/core';
+import { IStructure, IDriftFE } from '../interfaces';
 
 export function convertDrift(structure: IStructure): IDriftFE {
   const drift: IDriftFE = {
