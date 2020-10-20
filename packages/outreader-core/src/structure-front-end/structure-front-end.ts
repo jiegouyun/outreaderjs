@@ -17,17 +17,36 @@ export function convertStructure(structure: IStructure): IStructureFrontEnd {
   initStructureData(structure);
 
   const structureFE: IStructureFrontEnd = {
-    summary: convertSummary(structure),
-    summaryQuantity: convertSummaryQuantity(structure),
-    parameters: convertParameters(structure),
-    period: convertPeriod(structure),
-    force: convertForce(structure),
-    drift: convertDrift(structure),
-    generalResult: convertGeneralResult(structure),
-    distributeResult: convertDistributeResult(structure),
-    factor: convertFactor(structure),
-    quantity: convertQuantity(structure),
-    element: convertElement(structure),
+    summary: convertSummary(
+      structure.dir,
+      structure.wmass,
+      structure.wdisp,
+      structure.wzq,
+    ),
+    summaryQuantity: convertSummaryQuantity(
+      structure.wmass,
+      structure.wdisp,
+      structure.wzq,
+      structure.concreteSteel,
+      structure.rebar,
+    ),
+    parameters: convertParameters(structure.wmass),
+    period: convertPeriod(structure.wzq),
+    force: convertForce(structure.wmass, structure.wzq),
+    drift: convertDrift(structure.wdisp),
+    generalResult: convertGeneralResult(structure.wmass),
+    distributeResult: convertDistributeResult(
+      structure.wmass,
+      structure.wzq,
+      structure.wv02q,
+    ),
+    factor: convertFactor(structure.wmass, structure.wv02q),
+    quantity: convertQuantity(
+      structure.wmass,
+      structure.concreteSteel,
+      structure.rebar,
+    ),
+    element: convertElement(structure.wpj),
   };
 
   return structureFE;

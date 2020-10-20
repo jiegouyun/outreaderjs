@@ -1,55 +1,51 @@
-import { IStructure, IParametersFE } from '../interfaces';
+import { IParametersFE, IWmass } from '../interfaces';
 
-export function convertParameters(structure: IStructure): IParametersFE {
+export function convertParameters(wmass?: IWmass): IParametersFE {
   const parameters: IParametersFE = {
     general: {
-      system: structure.wmass?.generalInformation.structuralSystem || '',
-      material: structure.wmass?.generalInformation.structuralMaterial || '',
-      location: structure.wmass?.generalInformation.location || '',
-      basement: structure.wmass?.generalInformation.basement || 0,
-      constraintFloor: structure.wmass?.generalInformation.constraintFloor || 0,
-      podium: structure.wmass?.generalInformation.podium || 0,
-      transferStorey: structure.wmass?.generalInformation.transferStorey || 0,
-      reinforceStorey: structure.wmass?.generalInformation.reinforceStorey || 0,
+      system: wmass?.generalInformation.structuralSystem || '',
+      material: wmass?.generalInformation.structuralMaterial || '',
+      location: wmass?.generalInformation.location || '',
+      basement: wmass?.generalInformation.basement || 0,
+      constraintFloor: wmass?.generalInformation.constraintFloor || 0,
+      podium: wmass?.generalInformation.podium || 0,
+      transferStorey: wmass?.generalInformation.transferStorey || 0,
+      reinforceStorey: wmass?.generalInformation.reinforceStorey || 0,
     },
     calculate: {
       couplingBeamFactorSeismic:
-        structure.wmass?.calculationControl.couplingBeamFactorSeismic || 0,
+        wmass?.calculationControl.couplingBeamFactorSeismic || 0,
       couplingBeamFactorWind:
-        structure.wmass?.calculationControl.couplingBeamFactorWind || 0,
+        wmass?.calculationControl.couplingBeamFactorWind || 0,
       rigidFloorAssumption:
-        structure.wmass?.calculationControl.rigidFloorAssumption || '',
+        wmass?.calculationControl.rigidFloorAssumption || '',
     },
     wind: {
-      assigned: structure.wmass?.windInformation.useAssigned || '',
-      loadCode: structure.wmass?.windInformation.loadCode || '',
-      terrainRoughness: structure.wmass?.windInformation.terrainRoughness || '',
-      pressureModified: structure.wmass?.windInformation.pressureModified || 0,
-      dampingRatio: structure.wmass?.windInformation.dampingRatio || 0,
-      pressureComfort: structure.wmass?.windInformation.pressureComfort || 0,
-      dampingRationComfort:
-        structure.wmass?.windInformation.dampingRationComfort || 0,
+      assigned: wmass?.windInformation.useAssigned || '',
+      loadCode: wmass?.windInformation.loadCode || '',
+      terrainRoughness: wmass?.windInformation.terrainRoughness || '',
+      pressureModified: wmass?.windInformation.pressureModified || 0,
+      dampingRatio: wmass?.windInformation.dampingRatio || 0,
+      pressureComfort: wmass?.windInformation.pressureComfort || 0,
+      dampingRationComfort: wmass?.windInformation.dampingRationComfort || 0,
     },
     seismic: {
-      use2015GB18306: structure.wmass?.seismicInformation.use2015GB18306 || '',
-      group: structure.wmass?.seismicInformation.group || '',
-      intensity: structure.wmass?.seismicInformation.intensity || '',
-      siteCategory: structure.wmass?.seismicInformation.siteCategory || '',
-      characteristicPeriod:
-        structure.wmass?.seismicInformation.characteristicPeriod || 0,
-      dampingRatio: structure.wmass?.seismicInformation.dampingRatio || 0,
+      use2015GB18306: wmass?.seismicInformation.use2015GB18306 || '',
+      group: wmass?.seismicInformation.group || '',
+      intensity: wmass?.seismicInformation.intensity || '',
+      siteCategory: wmass?.seismicInformation.siteCategory || '',
+      characteristicPeriod: wmass?.seismicInformation.characteristicPeriod || 0,
+      dampingRatio: wmass?.seismicInformation.dampingRatio || 0,
       periodReductionFactor:
-        structure.wmass?.seismicInformation.periodReductionFactor || 0,
-      eccentricityX: structure.wmass?.seismicInformation.eccentricityX || 0,
-      eccentricityY: structure.wmass?.seismicInformation.eccentricityY || 0,
-      maxSpectrumValue:
-        structure.wmass?.seismicInformation.maxSpectrumValue || 0,
-      maxSpectrumValueL3:
-        structure.wmass?.seismicInformation.maxSpectrumValueL3 || 0,
+        wmass?.seismicInformation.periodReductionFactor || 0,
+      eccentricityX: wmass?.seismicInformation.eccentricityX || 0,
+      eccentricityY: wmass?.seismicInformation.eccentricityY || 0,
+      maxSpectrumValue: wmass?.seismicInformation.maxSpectrumValue || 0,
+      maxSpectrumValueL3: wmass?.seismicInformation.maxSpectrumValueL3 || 0,
       additionalDampingRatio:
-        structure.wmass?.seismicInformation.additionalDampingRatio || 0,
+        wmass?.seismicInformation.additionalDampingRatio || 0,
       modifiedSeismicReductionFactor:
-        structure.wmass?.seismicInformation.modifiedSeismicReductionFactor || 0,
+        wmass?.seismicInformation.modifiedSeismicReductionFactor || 0,
     },
   };
 

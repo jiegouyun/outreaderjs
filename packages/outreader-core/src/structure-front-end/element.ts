@@ -1,42 +1,42 @@
-import { IStructure, IElementFE } from '../interfaces';
+import { IElementFE, IWpj } from '../interfaces';
 
-export function convertElement(structure: IStructure): IElementFE {
+export function convertElement(wpj?: IWpj): IElementFE {
   const element: IElementFE = {
     def: {
       col: {
-        storeyID: structure.wpj?.column.storeyID || [],
-        colName: structure.wpj?.column.colName || [],
-        colID: structure.wpj?.column.colID || [],
-        secType: structure.wpj?.column.secType || [],
-        colProps: structure.wpj?.column.colProps || [],
-        startNode: structure.wpj?.column.startNode || [],
-        endNode: structure.wpj?.column.endNode || [],
-        section: structure.wpj?.column.section || [],
-        ang: structure.wpj?.column.ang || [],
+        storeyID: wpj?.column.storeyID || [],
+        colName: wpj?.column.colName || [],
+        colID: wpj?.column.colID || [],
+        secType: wpj?.column.secType || [],
+        colProps: wpj?.column.colProps || [],
+        startNode: wpj?.column.startNode || [],
+        endNode: wpj?.column.endNode || [],
+        section: wpj?.column.section || [],
+        ang: wpj?.column.ang || [],
       },
     },
     uc: {
       col: {
-        storeyID: structure.wpj?.column.storeyID || [],
-        colName: structure.wpj?.column.colName || [],
-        uc: structure.wpj?.column.uc || [],
-        ucG: structure.wpj?.column.ucG || [],
+        storeyID: wpj?.column.storeyID || [],
+        colName: wpj?.column.colName || [],
+        uc: wpj?.column.uc || [],
+        ucG: wpj?.column.ucG || [],
       },
     },
     rs: {
       col: {
-        storeyID: structure.wpj?.column.storeyID || [],
-        colName: structure.wpj?.column.colName || [],
-        rs: structure.wpj?.column.rs || [],
-        rsv: structure.wpj?.column.rsv || [],
+        storeyID: wpj?.column.storeyID || [],
+        colName: wpj?.column.colName || [],
+        rs: wpj?.column.rs || [],
+        rsv: wpj?.column.rsv || [],
       },
     },
     cb: {
       col: {
-        storeyID: structure.wpj?.column.storeyID || [],
-        colName: structure.wpj?.column.colName || [],
-        cbX: structure.wpj?.column.cbX || [],
-        cbY: structure.wpj?.column.cbY || [],
+        storeyID: wpj?.column.storeyID || [],
+        colName: wpj?.column.colName || [],
+        cbX: wpj?.column.cbX || [],
+        cbY: wpj?.column.cbY || [],
       },
     },
   };

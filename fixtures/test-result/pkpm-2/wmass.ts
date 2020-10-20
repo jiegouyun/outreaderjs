@@ -1,59 +1,47 @@
 export const wmass: any = {
-  engineering: '2A',
-  software: '盈建科建筑结构设计软件',
+  engineering: 'default',
+  software: 'SATWE2010',
 
-  structuralSystem: '框筒结构',
+  structuralSystem: '剪力墙结构',
   podium: 0,
   transferStorey: 0,
-  reinforceStorey: 0,
 
   couplingBeamFactorSeismic: 0.7,
   couplingBeamFactorWind: 1.0,
 
   windPressureModified: 0.75,
-  windDampingRatio: 0.04,
+  windDampingRatio: 5,
 
-  seismicGroup: '一',
-  seismicDampingRatio: 0.04,
+  seismicGroup: '一组',
+  seismicDampingRatio: 5.0,
 
-  storeyID: 42,
-  storeyHeight: 4.2,
-  sotreyArea: 1855.48,
-
-  towerID: 1,
+  storeyID: 5,
+  storeyHeight: 2.9,
+  sotreyArea: 339.62,
 
   massRatio: 1.0,
-  massPerArea: 1410.15,
+  massPerArea: 1582.71,
 
-  live: 24965.887,
-  dead: 151653.734,
+  live: 839.801,
+  dead: 10900.656,
 
-  shearAlongX: 3139.0,
-  shearAlongY: 3530.5,
+  shearAlongX: 691.4,
+  shearAlongY: 849.1,
 
   stiffnessStoreyID: 5,
-  ratx1: 1.6922,
-  ratx2: 1.3162,
-  rjx1: 1.3965e8,
-  rjx3: 6.536e6,
+  ratx1: 1.4948,
+  ratx2: 1.2391,
+  rjx1: 1.9204e7,
+  rjx3: 8.3581e5,
 
-  constraintFloorStiffnessRatioStoreyNo: 3,
-  constraintFloorStiffnessRatioRatioX: 4.5365,
-  constraintFloorStiffnessRatioRatioY: 4.4689,
+  overturningCheckMrWindX: 1942861.8,
+  overturningCheckMrSeismicY: 1338335.9,
 
-  overturningCheckStoreyNo: 1,
-  overturningCheckMrWindX: 5.071e7,
-  overturningCheckMrSeismicY: 4.169e7,
+  stableCheckSeismicRatioX: 3.05,
+  stableCheckSeismicRatioY: 3.62,
 
-  stableCheckSeismicStoreyNo: 4,
-  stableCheckSeismicRatioX: 1.413,
-  stableCheckWindStoreyNo: 4,
-  stableCheckWindRatioY: 1.546,
+  accelerationAlongX: 0.159,
+  accelerationCrossY: 0.092,
 
-  shearWeightRatioModifyFactorX: 1.317,
-
-  accelerationAlongX: 0.066,
-  accelerationCrossY: 0.096,
-
-  shearCapacityCheckRatioX: 1.0,
+  shearCapacityCheckRatioX: 1.03,
 };

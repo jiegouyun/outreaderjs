@@ -1,111 +1,78 @@
-import { IStructure, IQuantityFE } from '../interfaces';
+import { IQuantityFE, IWmass, IConcreteSteel, IRebar } from '../interfaces';
 
-export function convertQuantity(structure: IStructure): IQuantityFE {
-  const area: number[] = structure.wmass?.storey.area ||
-    structure.rebar?.area.storey || [1];
+export function convertQuantity(
+  wmass?: IWmass,
+  concreteSteel?: IConcreteSteel,
+  rebar?: IRebar,
+): IQuantityFE {
+  const area: number[] = wmass?.storey.area || rebar?.area.storey || [1];
   const quantity: IQuantityFE = {
-    storeyID: structure.wmass?.storey.storeyID ||
-      structure.concreteSteel?.concrete.storeyID ||
-      structure.rebar?.area.storeyID || [0],
-    towerID: structure.wmass?.storey.towerID || [0],
+    storeyID: wmass?.storey.storeyID ||
+      concreteSteel?.concrete.storeyID ||
+      rebar?.area.storeyID || [0],
+    towerID: wmass?.storey.towerID || [0],
     area: area,
     concrete: {
-      storeyID: structure.concreteSteel?.concrete.storeyID || [0],
-      wall: structure.concreteSteel?.concrete.wall || [0],
-      beam: structure.concreteSteel?.concrete.beam || [0],
-      column: structure.concreteSteel?.concrete.column || [0],
-      floor: structure.concreteSteel?.concrete.floor || [0],
-      storey: structure.concreteSteel?.concrete.storey || [0],
+      storeyID: concreteSteel?.concrete.storeyID || [0],
+      wall: concreteSteel?.concrete.wall || [0],
+      beam: concreteSteel?.concrete.beam || [0],
+      column: concreteSteel?.concrete.column || [0],
+      floor: concreteSteel?.concrete.floor || [0],
+      storey: concreteSteel?.concrete.storey || [0],
     },
     unitConcrete: {
-      storeyID: structure.concreteSteel?.concrete.storeyID || [0],
-      wall: quantityPerArea(
-        structure.concreteSteel?.concrete.wall || [0],
-        area,
-      ) || [0],
-      beam: quantityPerArea(
-        structure.concreteSteel?.concrete.beam || [0],
-        area,
-      ) || [0],
-      column: quantityPerArea(
-        structure.concreteSteel?.concrete.column || [0],
-        area,
-      ) || [0],
-      floor: quantityPerArea(
-        structure.concreteSteel?.concrete.floor || [0],
-        area,
-      ) || [0],
-      storey: quantityPerArea(
-        structure.concreteSteel?.concrete.storey || [0],
-        area,
-      ) || [0],
+      storeyID: concreteSteel?.concrete.storeyID || [0],
+      wall: quantityPerArea(concreteSteel?.concrete.wall || [0], area) || [0],
+      beam: quantityPerArea(concreteSteel?.concrete.beam || [0], area) || [0],
+      column: quantityPerArea(concreteSteel?.concrete.column || [0], area) || [
+        0,
+      ],
+      floor: quantityPerArea(concreteSteel?.concrete.floor || [0], area) || [0],
+      storey: quantityPerArea(concreteSteel?.concrete.storey || [0], area) || [
+        0,
+      ],
     },
     steel: {
-      storeyID: structure.concreteSteel?.steel.storeyID || [0],
-      wall: structure.concreteSteel?.steel.wall || [0],
-      beam: structure.concreteSteel?.steel.beam || [0],
-      column: structure.concreteSteel?.steel.column || [0],
-      floor: structure.concreteSteel?.steel.floor || [0],
-      storey: structure.concreteSteel?.steel.storey || [0],
+      storeyID: concreteSteel?.steel.storeyID || [0],
+      wall: concreteSteel?.steel.wall || [0],
+      beam: concreteSteel?.steel.beam || [0],
+      column: concreteSteel?.steel.column || [0],
+      floor: concreteSteel?.steel.floor || [0],
+      storey: concreteSteel?.steel.storey || [0],
     },
     unitSteel: {
-      storeyID: structure.concreteSteel?.steel.storeyID || [0],
-      wall: quantityPerArea(
-        structure.concreteSteel?.steel.wall || [0],
-        area,
-      ) || [0],
-      beam: quantityPerArea(
-        structure.concreteSteel?.steel.beam || [0],
-        area,
-      ) || [0],
-      column: quantityPerArea(
-        structure.concreteSteel?.steel.column || [0],
-        area,
-      ) || [0],
-      floor: quantityPerArea(
-        structure.concreteSteel?.steel.floor || [0],
-        area,
-      ) || [0],
-      storey: quantityPerArea(
-        structure.concreteSteel?.steel.storey || [0],
-        area,
-      ) || [0],
+      storeyID: concreteSteel?.steel.storeyID || [0],
+      wall: quantityPerArea(concreteSteel?.steel.wall || [0], area) || [0],
+      beam: quantityPerArea(concreteSteel?.steel.beam || [0], area) || [0],
+      column: quantityPerArea(concreteSteel?.steel.column || [0], area) || [0],
+      floor: quantityPerArea(concreteSteel?.steel.floor || [0], area) || [0],
+      storey: quantityPerArea(concreteSteel?.steel.storey || [0], area) || [0],
     },
     rebar: {
-      storeyID: structure.rebar?.area.storeyID || [0],
-      wall: structure.rebar?.wallRebar.storey || [0],
-      beam: structure.rebar?.beamRebar.storey || [0],
-      column: structure.rebar?.columnRebar.storey || [0],
-      floor: structure.rebar?.floorRebar.storey || [0],
+      storeyID: rebar?.area.storeyID || [0],
+      wall: rebar?.wallRebar.storey || [0],
+      beam: rebar?.beamRebar.storey || [0],
+      column: rebar?.columnRebar.storey || [0],
+      floor: rebar?.floorRebar.storey || [0],
       storey: storeyRebar(
-        structure.rebar?.wallRebar.storey || [0],
-        structure.rebar?.columnRebar.storey || [0],
-        structure.rebar?.beamRebar.storey || [0],
-        structure.rebar?.floorRebar.storey || [0],
+        rebar?.wallRebar.storey || [0],
+        rebar?.columnRebar.storey || [0],
+        rebar?.beamRebar.storey || [0],
+        rebar?.floorRebar.storey || [0],
       ) || [0],
     },
     unitRebar: {
-      storeyID: structure.rebar?.area.storeyID || [0],
-      wall: quantityPerArea(structure.rebar?.wallRebar.storey || [0], area) || [
-        0,
-      ],
-      beam: quantityPerArea(structure.rebar?.beamRebar.storey || [0], area) || [
-        0,
-      ],
-      column: quantityPerArea(
-        structure.rebar?.columnRebar.storey || [0],
-        area,
-      ) || [0],
-      floor: quantityPerArea(
-        structure.rebar?.floorRebar.storey || [0],
-        area,
-      ) || [0],
+      storeyID: rebar?.area.storeyID || [0],
+      wall: quantityPerArea(rebar?.wallRebar.storey || [0], area) || [0],
+      beam: quantityPerArea(rebar?.beamRebar.storey || [0], area) || [0],
+      column: quantityPerArea(rebar?.columnRebar.storey || [0], area) || [0],
+      floor: quantityPerArea(rebar?.floorRebar.storey || [0], area) || [0],
       storey: quantityPerArea(
         storeyRebar(
-          structure.rebar?.wallRebar.storey || [0],
-          structure.rebar?.columnRebar.storey || [0],
-          structure.rebar?.beamRebar.storey || [0],
-          structure.rebar?.floorRebar.storey || [0],
+          rebar?.wallRebar.storey || [0],
+          rebar?.columnRebar.storey || [0],
+          rebar?.beamRebar.storey || [0],
+          rebar?.floorRebar.storey || [0],
         ) || [0],
         area,
       ) || [0],
