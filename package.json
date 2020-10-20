@@ -4,10 +4,12 @@
     "lint": "prettier --write packages/**/*.{ts,js,tsx} fixtures/test-result/**/*.ts",
     "lint:check": "prettier --check packages/**/*.{ts,js,tsx}",
     "test:yjk": "cd packages/outreader-yjk && yarn test",
+    "test:pkpm": "cd packages/outreader-pkpm && yarn test",
     "dev:client": "cd packages/outreader-client && yarn dev",
     "build": "lerna run build",
     "build:core": "cd packages/outreader-core && yarn build",
     "build:yjk": "cd packages/outreader-yjk && yarn build",
+    "build:pkpm": "cd packages/outreader-pkpm && yarn build",
     "cli": "./packages/outreader-cli/bin/run",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"

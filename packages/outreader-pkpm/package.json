@@ -1,0 +1,40 @@
+{
+  "name": "@outreader/pkpm",
+  "version": "0.0.1",
+  "description": "A PKPM output files reader",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "./node_modules/.bin/babel src --out-dir lib --extensions \".ts\" && tsc",
+    "test": "jest src/**/*.test.ts"
+  },
+  "directories": {
+    "lib": "./lib",
+    "src": "./src",
+    "test": "./test"
+  },
+  "repository": "https://github.com/jiegouyun/outreaderjs.git",
+  "author": "ym6 <yangml.work@gmail.com>",
+  "license": "Apache-2.0",
+  "private": false,
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-typescript": "^7.12.1",
+    "@babel/register": "^7.12.1",
+    "@types/jest": "^26.0.14",
+    "bl": "^4.0.3",
+    "jest": "^26.6.0",
+    "ts-node": "^9.0.0"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.12.1",
+    "@outreader/core": "^0.0.3",
+    "lodash": "^4.17.20"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
