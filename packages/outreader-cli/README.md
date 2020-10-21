@@ -1,5 +1,4 @@
-outreader-cli
-=============
+# outreader-cli
 
 A CLI tool to read output files
 
@@ -9,27 +8,35 @@ A CLI tool to read output files
 [![License](https://img.shields.io/npm/l/outreader-cli.svg)](https://github.com/outreaderjs/outreaderjs/blob/master/package.json)
 
 <!-- toc -->
-* [Usage](#usage)
-* [Commands](#commands)
+
+- [Usage](#usage)
+- [Commands](#commands)
 <!-- tocstop -->
+
 # Usage
+
 <!-- usage -->
+
 ```sh-session
 $ npm install -g @outreader/cli
 $ outreader COMMAND
 running command...
 $ outreader (-v|--version|version)
-@outreader/cli/0.0.3 linux-x64 node-v12.18.0
+@outreader/cli/0.0.4 linux-x64 node-v12.18.0
 $ outreader --help [COMMAND]
 USAGE
   $ outreader COMMAND
 ...
 ```
+
 <!-- usagestop -->
+
 # Commands
+
 <!-- commands -->
-* [`outreader help [COMMAND]`](#outreader-help-command)
-* [`outreader yjk DIR`](#outreader-yjk-dir)
+
+- [`outreader help [COMMAND]`](#outreader-help-command)
+- [`outreader yjk DIR`](#outreader-yjk-dir)
 
 ## `outreader help [COMMAND]`
 
@@ -46,7 +53,7 @@ OPTIONS
   --all  see all commands in CLI
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.1.0/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
 
 ## `outreader yjk DIR`
 
@@ -63,5 +70,6 @@ EXAMPLE
   $ outreader yjk path/to/yjk/model
 ```
 
-_See code: [src/commands/yjk.ts](https://github.com/outreaderjs/outreaderjs/blob/v0.0.3/src/commands/yjk.ts)_
+_See code: [src/commands/yjk.ts](https://github.com/outreaderjs/outreaderjs/blob/v0.0.4/src/commands/yjk.ts)_
+
 <!-- commandsstop -->

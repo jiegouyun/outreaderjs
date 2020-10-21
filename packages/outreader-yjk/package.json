@@ -1,6 +1,6 @@
 {
   "name": "@outreader/yjk",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A YJK output files reader",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -19,7 +19,7 @@
   "private": false,
   "dependencies": {
     "@babel/runtime": "^7.11.2",
-    "@outreader/core": "^0.0.3",
+    "@outreader/core": "^0.0.4",
     "lodash": "^4.17.20"
   },
   "devDependencies": {
