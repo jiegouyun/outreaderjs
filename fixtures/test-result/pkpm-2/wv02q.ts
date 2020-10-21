@@ -1,17 +1,17 @@
 export const wv02q: any = {
-  storeyID: 42,
+  storeyID: 17,
 
-  momentPercentPercentColumnX: 66.4,
-  momentPercentPercentWallX: 0.0,
-  momentPercentPercentColumnY: 74.6,
-  momentPercentPercentWallY: 0.0,
+  momentPercentPercentColumnX: 11.65,
+  momentPercentPercentWallX: 48.21,
+  momentPercentPercentColumnY: 3.59,
+  momentPercentPercentWallY: 52.59,
 
-  columnShearColumnX: 1776.1,
-  columnShearPercentColumnX: 11.61,
-  columnShearColumnY: 1973.2,
-  columnShearPercentColumnY: 12.9,
+  columnShearColumnX: 33.9,
+  columnShearPercentColumnX: 3.87,
+  columnShearColumnY: 1.5,
+  columnShearPercentColumnY: 0.16,
 
-  v02qFactorStoreyID: 8,
-  factorX: 1.689,
-  factorY: 2.338,
+  v02qFactorStoreyID: 5,
+  factorX: 2.0,
+  factorY: 2.0,
 };
