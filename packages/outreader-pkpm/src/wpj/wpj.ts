@@ -49,7 +49,6 @@ export async function readWpjOutput(dir: string): Promise<IWpj | undefined> {
       let flags: IFlags = {
         flag: '',
         colFlag: 0,
-        propsFlag: 0,
       };
 
       // Add storeyID
@@ -96,7 +95,6 @@ export function extractColumnPj(
 ): [IFlags, IColumnPj, Set<number>] {
   let flag = flags.flag;
   let col = flags.colFlag;
-  let propsFlag = flags.propsFlag;
   const [storey, storeys] = storeyInfo;
 
   if (lineArray[0] === '柱配筋和验算输出') {
@@ -111,7 +109,7 @@ export function extractColumnPj(
   if (flag === 'keyColumn') {
     if (lineArray[0] === 'N-C') {
       const colName = Number(lineArray[1]);
-      const col = colName - 1;
+      col = colName - 1;
       if (!colIDSet.has(colName)) {
         colIDSet.add(colName);
         column.colName.push(colName);
@@ -158,7 +156,6 @@ export function extractColumnPj(
   flags = {
     flag: flag,
     colFlag: col,
-    propsFlag: propsFlag,
   };
   return [flags, column, colIDSet];
 }
@@ -176,5 +173,4 @@ function lineToArray(line: string): string[] {
 interface IFlags {
   flag: string;
   colFlag: number;
-  propsFlag: number;
 }
