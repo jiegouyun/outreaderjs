@@ -1,6 +1,9 @@
-import { readStructure } from '../structure';
-import { convertStructure } from '../structure-front-end';
-import { IStructure, IStructureFrontEnd } from '@outreader/core';
+import { readYJKStructure } from '../structure';
+import {
+  IStructure,
+  IStructureFrontEnd,
+  convertStructure,
+} from '@outreader/core';
 import * as path from 'path';
 
 describe('convertStructure1', () => {
@@ -9,7 +12,7 @@ describe('convertStructure1', () => {
   let result: IStructureFrontEnd;
 
   beforeEach(async () => {
-    structure = await readStructure(dir);
+    structure = await readYJKStructure(dir);
     result = convertStructure(structure);
   });
 
@@ -24,7 +27,7 @@ describe('convertStructure2', () => {
   let result: IStructureFrontEnd;
 
   beforeEach(async () => {
-    structure = await readStructure(dir);
+    structure = await readYJKStructure(dir);
     result = convertStructure(structure);
   });
 

@@ -1,1 +1,1 @@
-export * from './structure-front-end';
+export * from './structure-front-end.test';

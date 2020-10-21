@@ -1,9 +1,12 @@
+import { IShearWeightRatioModify } from './wmass.interface';
+
 export interface IWzq {
   hash: string;
   modeCoupling: IMode;
   modeSeismic: IMode;
   modeMass: IModeMass;
   seismicForce: ISeismicForce;
+  shearWeightRatioModify?: IShearWeightRatioModify;
 }
 
 interface IAllExtracted {

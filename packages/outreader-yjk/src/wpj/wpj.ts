@@ -84,7 +84,6 @@ export async function readWpjOutput(dir: string): Promise<IWpj | undefined> {
     console.error(error);
   }
 
-  console.log(wpj.hash);
   return wpj;
 }
 

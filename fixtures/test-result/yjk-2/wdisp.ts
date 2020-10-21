@@ -12,14 +12,14 @@ export const wdisp: any = {
   driftSeismicYEccNDrift: 793,
 
   driftWindXPDrift: 846,
-  driftWindXPRatioD: 1.01,
+  driftWindXPRatio: 1.01,
   driftCrossWindXNDrift: 777,
-  driftCrossWindXNRatioD: 1.0,
+  driftCrossWindXNRatio: 1.0,
 
   driftWindYPDrift: 597,
-  driftWindYPRatioD: 1.0,
+  driftWindYPRatio: 1.0,
   driftCrossWindYNDrift: 959,
-  driftCrossWindYNRatioD: 1.01,
+  driftCrossWindYNRatio: 1.01,
 
   ratioSeismicXRatioD: 1.01,
   ratioSeismicXEccPRatioD: 1.06,
