@@ -1,12 +1,12 @@
 {
   "name": "@outreader/pkpm",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "A PKPM output files reader",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "./node_modules/.bin/babel src --out-dir lib --extensions \".ts\" && tsc",
-    "test": "jest src/**/wpj.test.ts"
+    "test": "jest src/**/*.test.ts"
   },
   "directories": {
     "lib": "./lib",

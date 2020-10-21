@@ -205,6 +205,7 @@
     "@fortawesome/fontawesome-free": "^5.14.0",
     "@hot-loader/react-dom": "^17.0.0-rc.2",
     "@outreader/core": "^0.0.3",
+    "@outreader/pkpm": "^0.0.3",
     "@outreader/yjk": "^0.0.3",
     "@types/lowdb": "^1.0.9",
     "@types/recharts": "^1.8.14",
