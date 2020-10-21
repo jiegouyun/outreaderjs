@@ -11,10 +11,10 @@ import fs from 'fs';
 export async function readWpjOutput(dir: string): Promise<IWpj | undefined> {
   const folder = fs.readdirSync(dir);
   const filenames = folder.filter((item) => {
-    return item.match(/wpj\d*.out/gi);
+    return item.match(/WPJ\d*.OUT/gi);
   });
   if (!filenames.length) {
-    console.error('cannot find file', 'wpj*.out');
+    console.error('cannot find file', 'WPJ*.OUT');
     return;
   }
   filenames.sort((a, b) => parseInt(b.substr(3)) - parseInt(a.substr(3)));
@@ -42,7 +42,7 @@ export async function readWpjOutput(dir: string): Promise<IWpj | undefined> {
     },
   };
 
-  let colIDMap = new Map<number, number>();
+  let colIDSet = new Set<number>();
   try {
     for await (const file of files) {
       // Define flag
@@ -53,7 +53,7 @@ export async function readWpjOutput(dir: string): Promise<IWpj | undefined> {
       };
 
       // Add storeyID
-      const storey = parseInt(path.basename(file, '.out').substr(3));
+      const storey = parseInt(path.basename(file, '.OUT').substr(3));
       wpj.column.storeyID.push(storey);
 
       await readLineByLine(file, (line: string) => {
@@ -70,11 +70,11 @@ export async function readWpjOutput(dir: string): Promise<IWpj | undefined> {
 
         // Extract column{}
         if (!wpj.column.allExtracted) {
-          [flags, wpj.column, colIDMap] = extractColumnPj(
+          [flags, wpj.column, colIDSet] = extractColumnPj(
             flags,
             lineArray,
             wpj.column,
-            colIDMap,
+            colIDSet,
             [storey, storeys],
           );
         }
@@ -91,17 +91,17 @@ export function extractColumnPj(
   flags: IFlags,
   lineArray: string[],
   column: IColumnPj,
-  colIDMap: Map<number, number>,
+  colIDSet: Set<number>,
   storeyInfo: number[],
-): [IFlags, IColumnPj, Map<number, number>] {
+): [IFlags, IColumnPj, Set<number>] {
   let flag = flags.flag;
   let col = flags.colFlag;
   let propsFlag = flags.propsFlag;
   const [storey, storeys] = storeyInfo;
 
-  if (lineArray[0] === '柱配筋设计及验算') {
+  if (lineArray[0] === '柱配筋和验算输出') {
     flag = 'keyColumn';
-  } else if (lineArray[0] === '支撑配筋设计及验算') {
+  } else if (lineArray[0] === '墙配筋和验算输出') {
     flag = '';
     if (storey === 1) {
       column.allExtracted = true;
@@ -110,44 +110,31 @@ export function extractColumnPj(
 
   if (flag === 'keyColumn') {
     if (lineArray[0] === 'N-C') {
-      const startNode = Number(lineArray[3]);
-      const endNode = Number(lineArray[5]);
-      col =
-        (colIDMap.get(startNode) === undefined
-          ? colIDMap.size
-          : colIDMap.get(startNode)) || col;
-
-      if (!colIDMap.has(startNode)) {
-        colIDMap.set(endNode, colIDMap.size);
-        column.colName.push(colIDMap.size);
+      const colName = Number(lineArray[1]);
+      const col = colName - 1;
+      if (!colIDSet.has(colName)) {
+        colIDSet.add(colName);
+        column.colName.push(colName);
         column.colID.push(Array(storeys));
-        column.startNode.push(Array(storeys));
-        column.endNode.push(Array(storeys));
+        // column.startNode.push(Array(storeys));
+        // column.endNode.push(Array(storeys));
         column.secType.push(Array(storeys));
         column.section.push(Array(storeys));
-        column.ang.push(Array(storeys));
+        // column.ang.push(Array(storeys));
         column.colProps.push(Array(storeys));
         column.uc.push(Array(storeys));
-        column.ucG.push(Array(storeys));
+        // column.ucG.push(Array(storeys));
         column.rs.push(Array(storeys));
         column.rsv.push(Array(storeys));
         column.cbX.push(Array(storeys));
         column.cbY.push(Array(storeys));
-      } else {
-        colIDMap.delete(startNode);
-        colIDMap.set(endNode, col);
       }
 
       column.colID[col][storeys - storey] = Number(lineArray[1]);
-      column.startNode[col][storeys - storey] = Number(lineArray[3]);
-      column.endNode[col][storeys - storey] = Number(lineArray[5]);
-      column.secType[col][storeys - storey] = Number(lineArray[6]);
-      column.section[col][storeys - storey] = lineArray[9]
-        .split('*')
-        .map((value) => Number(value));
-      column.ang[col][storeys - storey] = Number(lineArray[11] || 0);
-
-      propsFlag = 1;
+      column.secType[col][storeys - storey] = Number(lineArray[2]);
+      column.section[col][storeys - storey] = lineArray
+        .slice(5)
+        .map((value) => parseInt(value));
     }
 
     if (lineArray[1] === 'Nu') {
@@ -157,14 +144,8 @@ export function extractColumnPj(
       column.rsv[col][storeys - storey] = Number(lineArray[8]);
     }
 
-    if (lineArray[0] === 'Nu_G') {
-      // console.log(lineArray);
-      column.ucG[col][storeys - storey] = Number(lineArray[3]);
-    }
-
-    propsFlag && propsFlag++;
-    if (propsFlag === 4) {
-      column.colProps[col][storeys - storey] = lineArray;
+    if (lineArray[0] === 'RLIVEC') {
+      column.colProps[col][storeys - storey] = lineArray.slice(4);
     }
 
     if (lineArray[0] === '抗剪承载力') {
@@ -179,7 +160,7 @@ export function extractColumnPj(
     colFlag: col,
     propsFlag: propsFlag,
   };
-  return [flags, column, colIDMap];
+  return [flags, column, colIDSet];
 }
 
 /**
