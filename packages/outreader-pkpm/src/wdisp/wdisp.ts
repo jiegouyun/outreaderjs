@@ -353,7 +353,7 @@ export function extractDriftSeismicX(
   lineArray: string[],
   loadCaseDrift: IDrift,
 ): IDrift {
-  if (lineArray[2] === 'X' && lineArray[3] === '方向地震作用下的楼层最大位移') {
+  if (lineArray[2] + lineArray[3] === 'X方向地震作用下的楼层最大位移') {
     FLAG = 'keyDriftSeismicX';
   } else if (lineArray[0] === 'X方向最大层间位移角') {
     if (FLAG === 'keyDriftSeismicX') {
@@ -374,7 +374,7 @@ export function extractDriftSeismicTwoWayX(
   lineArray: string[],
   loadCaseDrift: IDrift,
 ): IDrift {
-  if (lineArray[2] === 'X' && lineArray[3] === '双向地震作用下的楼层最大位移') {
+  if (lineArray[2] + lineArray[3] === 'X双向地震作用下的楼层最大位移') {
     FLAG = 'keyDriftSeismicTwoWayX';
   } else if (lineArray[0] === 'X方向最大层间位移角') {
     if (FLAG === 'keyDriftSeismicTwoWayX') {
@@ -395,10 +395,7 @@ export function extractDriftSeismicXEccP(
   lineArray: string[],
   loadCaseDrift: IDrift,
 ): IDrift {
-  if (
-    lineArray[2] === 'X+' &&
-    lineArray[3] === '偶然偏心地震作用下的楼层最大位移'
-  ) {
+  if (lineArray[2] + lineArray[3] === 'X+偶然偏心地震作用下的楼层最大位移') {
     FLAG = 'keydriftSeismicXEccP';
   } else if (lineArray[0] === 'X方向最大层间位移角') {
     if (FLAG === 'keydriftSeismicXEccP') {
@@ -419,10 +416,7 @@ export function extractDriftSeismicXEccN(
   lineArray: string[],
   loadCaseDrift: IDrift,
 ): IDrift {
-  if (
-    lineArray[2] === 'X-' &&
-    lineArray[3] === '偶然偏心地震作用下的楼层最大位移'
-  ) {
+  if (lineArray[2] + lineArray[3] === 'X-偶然偏心地震作用下的楼层最大位移') {
     FLAG = 'keydriftSeismicXEccN';
   } else if (lineArray[0] === 'X方向最大层间位移角') {
     if (FLAG === 'keydriftSeismicXEccN') {
@@ -443,7 +437,7 @@ export function extractDriftSeismicY(
   lineArray: string[],
   loadCaseDrift: IDrift,
 ): IDrift {
-  if (lineArray[2] === 'Y' && lineArray[3] === '方向地震作用下的楼层最大位移') {
+  if (lineArray[2] + lineArray[3] === 'Y方向地震作用下的楼层最大位移') {
     FLAG = 'keyDriftSeismicY';
   } else if (lineArray[0] === 'Y方向最大层间位移角') {
     if (FLAG === 'keyDriftSeismicY') {
@@ -464,7 +458,7 @@ export function extractDriftSeismicTwoWayY(
   lineArray: string[],
   loadCaseDrift: IDrift,
 ): IDrift {
-  if (lineArray[2] === 'Y' && lineArray[3] === '双向地震作用下的楼层最大位移') {
+  if (lineArray[2] + lineArray[3] === 'Y双向地震作用下的楼层最大位移') {
     FLAG = 'keyDriftSeismicTwoWayY';
   } else if (lineArray[0] === 'Y方向最大层间位移角') {
     if (FLAG === 'keyDriftSeismicTwoWayY') {
@@ -485,10 +479,7 @@ export function extractDriftSeismicYEccP(
   lineArray: string[],
   loadCaseDrift: IDrift,
 ): IDrift {
-  if (
-    lineArray[2] === 'Y+' &&
-    lineArray[3] === '偶然偏心地震作用下的楼层最大位移'
-  ) {
+  if (lineArray[2] + lineArray[3] === 'Y+偶然偏心地震作用下的楼层最大位移') {
     FLAG = 'keydriftSeismicYEccP';
   } else if (lineArray[0] === 'Y方向最大层间位移角') {
     if (FLAG === 'keydriftSeismicYEccP') {
@@ -509,10 +500,7 @@ export function extractDriftSeismicYEccN(
   lineArray: string[],
   loadCaseDrift: IDrift,
 ): IDrift {
-  if (
-    lineArray[2] === 'Y-' &&
-    lineArray[3] === '偶然偏心地震作用下的楼层最大位移'
-  ) {
+  if (lineArray[2] + lineArray[3] === 'Y-偶然偏心地震作用下的楼层最大位移') {
     FLAG = 'keydriftSeismicYEccN';
   } else if (lineArray[0] === 'Y方向最大层间位移角') {
     if (FLAG === 'keydriftSeismicYEccN') {
@@ -533,10 +521,7 @@ export function extractDriftWindXP(
   lineArray: string[],
   loadCaseDrift: IWindDriftDisp,
 ): IWindDriftDisp {
-  if (
-    lineArray[2] === 'X' &&
-    lineArray[3] === '方向风荷载作用下的楼层最大位移'
-  ) {
+  if (lineArray[2] + lineArray[3] === 'X方向风荷载作用下的楼层最大位移') {
     FLAG = 'keyDriftWindXP';
   } else if (lineArray[0] === 'X方向最大层间位移角') {
     if (FLAG === 'keyDriftWindXP') {
@@ -558,8 +543,7 @@ export function extractDriftWindXP(
 //   loadCaseDrift: IWindDriftDisp,
 // ): IWindDriftDisp {
 //   if (
-//     lineArray[2] === 'X' &&
-//     lineArray[3] === '方向风荷载作用下的楼层最大位移'
+//     lineArray[2] + lineArray[3] === 'X方向风荷载作用下的楼层最大位移'
 //   ) {
 //     FLAG = 'keyDriftCrossWindXP';
 //   } else if (lineArray[0] === 'X方向最大层间位移角') {
@@ -581,10 +565,7 @@ export function extractDriftWindYP(
   lineArray: string[],
   loadCaseDrift: IWindDriftDisp,
 ): IWindDriftDisp {
-  if (
-    lineArray[2] === 'Y' &&
-    lineArray[3] === '方向风荷载作用下的楼层最大位移'
-  ) {
+  if (lineArray[2] + lineArray[3] === 'Y方向风荷载作用下的楼层最大位移') {
     FLAG = 'keyDriftWindYP';
   } else if (lineArray[0] === 'Y方向最大层间位移角') {
     if (FLAG === 'keyDriftWindYP') {
@@ -606,8 +587,7 @@ export function extractDriftWindYP(
 //   loadCaseDrift: IWindDriftDisp,
 // ): IWindDriftDisp {
 //   if (
-//     lineArray[2] === 'Y' &&
-//     lineArray[3] === '方向风荷载作用下的楼层最大位移'
+//     lineArray[2] + lineArray[3] === 'Y方向风荷载作用下的楼层最大位移'
 //   ) {
 //     FLAG = 'keyDriftCrossWindYP';
 //   } else if (lineArray[0] === 'Y方向最大层间位移角') {
@@ -630,8 +610,8 @@ export function extractRatioSeismicX(
   loadCaseRatio: IDispRatio,
 ): IDispRatio {
   if (
-    lineArray[2] === 'X' &&
-    lineArray[3] === '方向地震作用规定水平力下的楼层最大位移'
+    lineArray[2] + lineArray[3] ===
+    'X方向地震作用规定水平力下的楼层最大位移'
   ) {
     FLAG = 'keyRatioSeismicX';
   } else if (lineArray[0] === 'X方向最大位移与层平均位移的比值') {
@@ -696,8 +676,8 @@ export function extractRatioSeismicY(
   loadCaseRatio: IDispRatio,
 ): IDispRatio {
   if (
-    lineArray[2] === 'Y' &&
-    lineArray[3] === '方向地震作用规定水平力下的楼层最大位移'
+    lineArray[2] + lineArray[3] ===
+    'Y方向地震作用规定水平力下的楼层最大位移'
   ) {
     FLAG = 'keyRatioSeismicY';
   } else if (lineArray[0] === 'Y方向最大位移与层平均位移的比值') {

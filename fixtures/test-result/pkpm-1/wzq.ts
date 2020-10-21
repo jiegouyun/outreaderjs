@@ -1,15 +1,12 @@
 export const wzq: any = {
   modeID: 4,
-  modeCouplingPeriod: 1.6191,
-  modeCouplingFactorX: 0.92,
+  modeCouplingPeriod: 1.1738,
+  modeCouplingFactorX: 0.85,
 
-  modeSeismicPeriod: 1.6242,
-  modeSeismicFactorX: 0.86,
-
-  modeMassFactorX: 13.91,
-  modeMassFactorY: 1.5,
+  modeMassFactorX: 12.63,
+  modeMassFactorY: 1.91,
 
   storeyID: 50,
-  shearX: 3694.25,
-  shearY: 4011.83,
+  shearX: 819.66,
+  shearY: 994.15,
 };
