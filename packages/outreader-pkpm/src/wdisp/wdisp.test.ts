@@ -1,11 +1,11 @@
 import { readWdispOutput } from './wdisp';
 import { IWdisp } from '@outreader/core';
 import * as path from 'path';
-import { wdisp as wdisp1 } from '../../../../fixtures/test-result/yjk-1/wdisp';
-import { wdisp as wdisp2 } from '../../../../fixtures/test-result/yjk-2/wdisp';
+import { wdisp as wdisp1 } from '../../../../fixtures/test-result/pkpm-1/wdisp';
+import { wdisp as wdisp2 } from '../../../../fixtures/test-result/pkpm-2/wdisp';
 
 describe('wdisp1', () => {
-  const dir = path.join(__dirname, '../../../../fixtures/yjk/1');
+  const dir = path.join(__dirname, '../../../../fixtures/pkpm/1');
   let wdisp: IWdisp;
 
   beforeEach(async () => {
@@ -68,28 +68,14 @@ describe('wdisp1', () => {
     const driftWindXP = wdisp.driftWindXP;
     expect(driftWindXP.storeyID[4]).toBe(wdisp1.storeyID);
     expect(driftWindXP.drift[4]).toBe(wdisp1.driftWindXPDrift);
-    expect(driftWindXP.ratio[4]).toBe(wdisp1.driftWindXPRatio);
-  });
-
-  it('should extract driftWindXN', async () => {
-    const driftWindXN = wdisp.driftWindXN;
-    expect(driftWindXN.storeyID[4]).toBe(wdisp1.storeyID);
-    expect(driftWindXN.drift[4]).toBe(wdisp1.driftWindXNDrift);
-    expect(driftWindXN.ratio[4]).toBe(wdisp1.driftWindXNRatio);
+    expect(driftWindXP.ratioD[4]).toBe(wdisp1.driftWindXPRatioD);
   });
 
   it('should extract driftWindYP', async () => {
     const driftWindYP = wdisp.driftWindYP;
     expect(driftWindYP.storeyID[4]).toBe(wdisp1.storeyID);
     expect(driftWindYP.drift[4]).toBe(wdisp1.driftWindYPDrift);
-    expect(driftWindYP.ratio[4]).toBe(wdisp1.driftWindYPRatio);
-  });
-
-  it('should extract driftWindYN', async () => {
-    const driftWindYN = wdisp.driftWindYN;
-    expect(driftWindYN.storeyID[4]).toBe(wdisp1.storeyID);
-    expect(driftWindYN.drift[4]).toBe(wdisp1.driftWindYNDrift);
-    expect(driftWindYN.ratio[4]).toBe(wdisp1.driftWindYNRatio);
+    expect(driftWindYP.ratioD[4]).toBe(wdisp1.driftWindYPRatioD);
   });
 
   it('should extract ratioSeismicX', async () => {
@@ -130,7 +116,7 @@ describe('wdisp1', () => {
 });
 
 describe('wdisp2', () => {
-  const dir = path.join(__dirname, '../../../../fixtures/yjk/2');
+  const dir = path.join(__dirname, '../../../../fixtures/pkpm/2');
   let wdisp: IWdisp;
 
   beforeEach(async () => {
@@ -193,28 +179,14 @@ describe('wdisp2', () => {
     const driftWindXP = wdisp.driftWindXP;
     expect(driftWindXP.storeyID[4]).toBe(wdisp2.storeyID);
     expect(driftWindXP.drift[4]).toBe(wdisp2.driftWindXPDrift);
-    expect(driftWindXP.ratio[4]).toBe(wdisp2.driftWindXPRatio);
-  });
-
-  it('should extract driftCrossWindXN', async () => {
-    const driftCrossWindXN = wdisp.driftCrossWindXN;
-    expect(driftCrossWindXN.storeyID[4]).toBe(wdisp2.storeyID);
-    expect(driftCrossWindXN.drift[4]).toBe(wdisp2.driftCrossWindXNDrift);
-    expect(driftCrossWindXN.ratio[4]).toBe(wdisp2.driftCrossWindXNRatio);
+    expect(driftWindXP.ratioD[4]).toBe(wdisp2.driftWindXPRatioD);
   });
 
   it('should extract driftWindYP', async () => {
     const driftWindYP = wdisp.driftWindYP;
     expect(driftWindYP.storeyID[4]).toBe(wdisp2.storeyID);
     expect(driftWindYP.drift[4]).toBe(wdisp2.driftWindYPDrift);
-    expect(driftWindYP.ratio[4]).toBe(wdisp2.driftWindYPRatio);
-  });
-
-  it('should extract driftCrossWindYN', async () => {
-    const driftCrossWindYN = wdisp.driftCrossWindYN;
-    expect(driftCrossWindYN.storeyID[4]).toBe(wdisp2.storeyID);
-    expect(driftCrossWindYN.drift[4]).toBe(wdisp2.driftCrossWindYNDrift);
-    expect(driftCrossWindYN.ratio[4]).toBe(wdisp2.driftCrossWindYNRatio);
+    expect(driftWindYP.ratioD[4]).toBe(wdisp2.driftWindYPRatioD);
   });
 
   it('should extract ratioSeismicX', async () => {

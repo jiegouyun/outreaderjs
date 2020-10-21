@@ -25,7 +25,6 @@ import fs from 'fs';
 
 // Define flag
 let FLAG: string;
-let INNERFLAG: string;
 
 export async function readPKPMWmassOutput(
   dir: string,
