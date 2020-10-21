@@ -40,7 +40,7 @@ export function convertStructure(structure: IStructure): IStructureFrontEnd {
       structure.wzq,
       structure.wv02q,
     ),
-    factor: convertFactor(structure.wmass, structure.wv02q),
+    factor: convertFactor(structure.wmass, structure.wv02q, structure.wzq),
     quantity: convertQuantity(
       structure.wmass,
       structure.concreteSteel,

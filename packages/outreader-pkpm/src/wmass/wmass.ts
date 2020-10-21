@@ -26,7 +26,7 @@ import fs from 'fs';
 // Define flag
 let FLAG: string;
 
-export async function readPKPMWmassOutput(
+export async function readWmassOutput(
   dir: string,
 ): Promise<IWmass | undefined> {
   const file = path.join(dir, 'WMASS.OUT');
