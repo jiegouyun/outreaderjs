@@ -38,11 +38,16 @@ export async function writeFactor(
   let storeyID: number[] = [];
   for (let i = 0; i < nums; i++) {
     if (
-      (structures[i].factor.stiffness || structures[i].factor.v02qFactor)
-        .storeyID.length > storeyID.length
+      (
+        structures[i].factor.stiffness ||
+        structures[i].factor.v02qFactor ||
+        structures[i].factor.shearWeightRatioModify
+      ).storeyID.length > storeyID.length
     ) {
       storeyID = (
-        structures[i].factor.stiffness || structures[i].factor.v02qFactor
+        structures[i].factor.stiffness ||
+        structures[i].factor.v02qFactor ||
+        structures[i].factor.shearWeightRatioModify
       ).storeyID;
     }
   }

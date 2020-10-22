@@ -12,14 +12,14 @@ export function convertFactor(
       weakStoreyFactor: wmass?.stiffness.weakStoreyFactor || [0],
     },
     shearWeightRatioModify: {
-      storeyID: wmass?.shearWeightRatioModify.storeyID ||
-        wzq?.shearWeightRatioModify?.storeyID || [0],
-      towerID: wmass?.shearWeightRatioModify.towerID ||
-        wzq?.shearWeightRatioModify?.towerID || [0],
-      factorX: wmass?.shearWeightRatioModify.factorX ||
-        wzq?.shearWeightRatioModify?.factorX || [0],
-      factorY: wmass?.shearWeightRatioModify.factorY ||
-        wzq?.shearWeightRatioModify?.factorY || [0],
+      storeyID: wzq?.shearWeightRatioModify?.storeyID ||
+        wmass?.shearWeightRatioModify.storeyID || [0],
+      towerID: wzq?.shearWeightRatioModify?.towerID ||
+        wmass?.shearWeightRatioModify.towerID || [0],
+      factorX: wzq?.shearWeightRatioModify?.factorX ||
+        wmass?.shearWeightRatioModify.factorX || [0],
+      factorY: wzq?.shearWeightRatioModify?.factorY ||
+        wmass?.shearWeightRatioModify.factorY || [0],
     },
     v02qFactor: {
       storeyID: wv02q?.v02qFactor.storeyID || [0],

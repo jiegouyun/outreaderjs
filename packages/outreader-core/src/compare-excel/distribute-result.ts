@@ -79,12 +79,14 @@ export async function writeDistributeResult(
     if (
       (
         structures[i].distributeResult.storey ||
-        structures[i].distributeResult.columnShear
+        structures[i].distributeResult.columnShear ||
+        structures[i].distributeResult.shearWeightRatio
       ).storeyID.length > storeyID.length
     ) {
       storeyID = (
         structures[i].distributeResult.storey ||
-        structures[i].distributeResult.columnShear
+        structures[i].distributeResult.columnShear ||
+        structures[i].distributeResult.shearWeightRatio
       ).storeyID;
     }
   }

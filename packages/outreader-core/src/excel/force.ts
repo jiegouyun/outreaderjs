@@ -34,12 +34,16 @@ export async function initForce(worksheet: Excel.Worksheet) {
 }
 
 export async function writeForce(force: IForceFE, worksheet: Excel.Worksheet) {
-  // write storey
-  const count: number = force.wind.storeyID.length;
-  for (let i = 0; i < count; i++) {
-    worksheet.getCell(`A${3 + i}`).value = force.wind.storeyID[i];
-    worksheet.getCell(`B${3 + i}`).value = force.wind.towerID[i];
+  const storeyID = force.seismic.storeyID || force.wind.storeyID;
+  const towerID = force.seismic.towerID || force.wind.towerID;
 
+  for (let i = 0; i < storeyID.length; i++) {
+    // write storey
+    worksheet.getCell(`A${3 + i}`).value = storeyID[i];
+    worksheet.getCell(`B${3 + i}`).value = towerID[i];
+  }
+
+  for (let i = 0; i < force.wind.storeyID.length; i++) {
     // write wind force
     worksheet.getCell(`C${3 + i}`).value = force.wind.forceAlongX[i];
     worksheet.getCell(`D${3 + i}`).value = force.wind.shearAlongX[i];
@@ -53,7 +57,9 @@ export async function writeForce(force: IForceFE, worksheet: Excel.Worksheet) {
     worksheet.getCell(`L${3 + i}`).value = force.wind.forceCrossY[i];
     worksheet.getCell(`M${3 + i}`).value = force.wind.shearCrossY[i];
     worksheet.getCell(`N${3 + i}`).value = force.wind.momentCrossY[i];
+  }
 
+  for (let i = 0; i < force.seismic.storeyID.length; i++) {
     // write seismic force
     worksheet.getCell(`O${3 + i}`).value = force.seismic.forceX[i];
     worksheet.getCell(`P${3 + i}`).value = force.seismic.shearX[i];
