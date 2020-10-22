@@ -256,9 +256,9 @@ function writeMode(wzq?: IWzq) {
   const modeID: number[] = wzq?.modeCoupling.modeID || [0];
   const period: number[] = wzq?.modeCoupling.period || [0];
   const angle: number[] = wzq?.modeCoupling.angle || [0];
-  const factorX: number[] = wzq?.modeMass.factorX || [0];
-  const factorY: number[] = wzq?.modeMass.factorY || [0];
-  const factorZ: number[] = wzq?.modeMass.factorZ || [0];
+  const factorX: number[] = wzq?.modeCoupling.factorX || [0];
+  const factorY: number[] = wzq?.modeCoupling.factorY || [0];
+  const factorZ: number[] = wzq?.modeCoupling.factorZ || [0];
 
   const indexPeriodZ: number =
     wzq?.modeCoupling.factorZ.findIndex((value) => value >= 0.5) || 0;

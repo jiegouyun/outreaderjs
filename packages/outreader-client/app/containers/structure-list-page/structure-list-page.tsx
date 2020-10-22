@@ -1,5 +1,4 @@
-import { exportExcel } from '@outreader/core';
-import { convertStructure } from '@outreader/yjk';
+import { exportExcel, convertStructure } from '@outreader/core';
 import { Button, Divider, message, Table } from 'antd';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
@@ -57,7 +56,17 @@ export function StructureListPage() {
       ),
     },
     {
-      title: '项目地址',
+      title: '项目',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: '软件',
+      dataIndex: 'software',
+      key: 'dsoftwareir',
+    },
+    {
+      title: '地址',
       dataIndex: 'dir',
       key: 'dir',
     },

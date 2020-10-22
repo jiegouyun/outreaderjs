@@ -671,11 +671,15 @@ export function CompareDistributeResultComponent(
     for (let j = 0; j < count; j++) {
       shearDistributeTableData[j][`ratioX${i}`] =
         distributeResults[i].columnShear.storeyID[j - diff] === storeyID[j]
-          ? distributeResults[i].columnShear.percentColumnX[j - diff].toFixed(1)
+          ? Math.round(
+              distributeResults[i].columnShear.percentColumnX[j - diff] * 10
+            ) / 10
           : '';
       shearDistributeTableData[j][`ratioY${i}`] =
         distributeResults[i].columnShear.storeyID[j - diff] === storeyID[j]
-          ? distributeResults[i].columnShear.percentColumnY[j - diff].toFixed(1)
+          ? Math.round(
+              distributeResults[i].columnShear.percentColumnY[j - diff] * 10
+            ) / 10
           : '';
 
       shearColumnChartData[2 * i].push({

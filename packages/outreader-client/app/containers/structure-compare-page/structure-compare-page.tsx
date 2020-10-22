@@ -11,8 +11,8 @@ import {
   IFactorFE,
   IQuantityFE,
   IStructureFrontEnd,
+  convertStructure,
 } from '@outreader/core';
-import { convertStructure } from '@outreader/yjk';
 import { Breadcrumb, Layout, Menu, message, Button } from 'antd';
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
@@ -60,7 +60,7 @@ export function StructureComparePage() {
   const query = new URLSearchParams(useLocation().search);
   const hashes = query.get('hashes')?.split(',');
   // TODO: guard hashed undefined or hashes.length < 2
-  console.log(hashes);
+  // console.log(hashes);
 
   // TODO: read all structures to compare
   const structureFEs: IStructureFrontEnd[] = [];

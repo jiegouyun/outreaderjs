@@ -44,9 +44,9 @@ export function SummaryComponent(summary: ISummaryFE) {
       modeID: summary.mode.modeID[i],
       period: summary.mode.period[i].toFixed(2),
       angle: summary.mode.angle[i].toFixed(0),
-      factorX: summary.mode.factorX[i].toFixed(0),
-      factorY: summary.mode.factorY[i].toFixed(0),
-      factorZ: summary.mode.factorZ[i].toFixed(0),
+      factorX: summary.mode.factorX[i].toFixed(2),
+      factorY: summary.mode.factorY[i].toFixed(2),
+      factorZ: summary.mode.factorZ[i].toFixed(2),
     });
   }
 

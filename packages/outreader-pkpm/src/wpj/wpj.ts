@@ -114,14 +114,14 @@ export function extractColumnPj(
         colIDSet.add(colName);
         column.colName.push(colName);
         column.colID.push(Array(storeys));
-        // column.startNode.push(Array(storeys));
-        // column.endNode.push(Array(storeys));
+        column.startNode.push(Array(storeys));
+        column.endNode.push(Array(storeys));
         column.secType.push(Array(storeys));
         column.section.push(Array(storeys));
-        // column.ang.push(Array(storeys));
+        column.ang.push(Array(storeys));
         column.colProps.push(Array(storeys));
         column.uc.push(Array(storeys));
-        // column.ucG.push(Array(storeys));
+        column.ucG.push(Array(storeys));
         column.rs.push(Array(storeys));
         column.rsv.push(Array(storeys));
         column.cbX.push(Array(storeys));

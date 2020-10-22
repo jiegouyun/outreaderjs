@@ -9,6 +9,8 @@ import { IWpj } from './wpj.interface';
 export interface IStructure {
   hash: string;
   dir: string;
+  name?: string;
+  software?: string;
   wmass?: IWmass;
   wdisp?: IWdisp;
   wv02q?: IWv02q;

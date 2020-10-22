@@ -121,6 +121,9 @@ export function PeriodComponent(period: IPeriodFE) {
   let sumX: number = 0;
   let sumY: number = 0;
   let sumZ: number = 0;
+  if (!period.modeMass.factorZ.length) {
+    period.modeMass.factorZ = new Array(period.modeMass.modeID.length).fill(0);
+  }
   for (let i = 0; i < period.modeMass.modeID.length; i++) {
     sumX += period.modeMass.factorX[i];
     sumY += period.modeMass.factorY[i];
