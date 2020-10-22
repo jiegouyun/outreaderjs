@@ -86,10 +86,23 @@ export async function writeDistributeResult(
   distribute: IDistributeResultFE,
   worksheet: Excel.Worksheet,
 ) {
+  const storeyID =
+    distribute.storey.storeyID ||
+    distribute.shearWeightRatio.storeyID ||
+    distribute.columnShear.storeyID;
+  const towerID =
+    distribute.storey.towerID ||
+    distribute.shearWeightRatio.towerID ||
+    distribute.columnShear.towerID;
+
+  for (let i = 0; i < storeyID.length; i++) {
+    // write storey
+    worksheet.getCell(`A${3 + i}`).value = storeyID[i];
+    worksheet.getCell(`B${3 + i}`).value = towerID[i];
+  }
+
   for (let i = 0; i < distribute.storey.storeyID.length; i++) {
     // write storey
-    worksheet.getCell(`A${3 + i}`).value = distribute.storey.storeyID[i];
-    worksheet.getCell(`B${3 + i}`).value = distribute.storey.towerID[i];
     worksheet.getCell(`C${3 + i}`).value = distribute.storey.attribute[i];
     worksheet.getCell(`D${3 + i}`).value = distribute.storey.height[i];
     worksheet.getCell(`E${3 + i}`).value = distribute.storey.heightToGround[i];

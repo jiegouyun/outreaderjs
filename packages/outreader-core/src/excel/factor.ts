@@ -26,13 +26,22 @@ export async function writeFactor(
   factor: IFactorFE,
   worksheet: Excel.Worksheet,
 ) {
-  for (let i = 0; i < factor.shearWeightRatioModify.storeyID.length; i++) {
-    // write storey
-    worksheet.getCell(`A${3 + i}`).value =
-      factor.shearWeightRatioModify.storeyID[i];
-    worksheet.getCell(`B${3 + i}`).value =
-      factor.shearWeightRatioModify.towerID[i];
+  const storeyID =
+    factor.shearWeightRatioModify.storeyID ||
+    factor.stiffness.storeyID ||
+    factor.v02qFactor.storeyID;
+  const towerID =
+    factor.shearWeightRatioModify.towerID ||
+    factor.stiffness.towerID ||
+    factor.v02qFactor.towerID;
 
+  for (let i = 0; i < storeyID.length; i++) {
+    // write storey
+    worksheet.getCell(`A${3 + i}`).value = storeyID[i];
+    worksheet.getCell(`B${3 + i}`).value = towerID[i];
+  }
+
+  for (let i = 0; i < factor.shearWeightRatioModify.storeyID.length; i++) {
     // write wesk storey shear factor
     worksheet.getCell(`C${3 + i}`).value = factor.stiffness.weakStoreyFactor[i];
 
