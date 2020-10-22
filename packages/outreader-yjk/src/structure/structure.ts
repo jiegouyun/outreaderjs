@@ -24,10 +24,14 @@ export async function readYJKStructure(dir: string): Promise<IStructure> {
       (rebar ? rebar.hash : '') +
       (wpj ? wpj.hash : ''),
   );
+  const software = 'YJK';
+  const name = getProjectName(dir);
 
   return {
     hash,
     dir,
+    name,
+    software,
     wmass,
     wdisp,
     wv02q,
@@ -36,4 +40,12 @@ export async function readYJKStructure(dir: string): Promise<IStructure> {
     rebar,
     wpj,
   };
+}
+
+function getProjectName(dir: string): string {
+  const paths = dir.split('/');
+  if (paths[paths.length - 1].match('设计结果')) {
+    return paths[paths.length - 2];
+  }
+  return paths[paths.length - 1];
 }

@@ -7,7 +7,7 @@ import { readRebarOutput } from '../rebar';
 import { readWpjOutput } from '../wpj';
 import { IStructure, hashStr } from '@outreader/core';
 
-export async function readYJKStructure(dir: string): Promise<IStructure> {
+export async function readPKPMStructure(dir: string): Promise<IStructure> {
   const wmass = await readWmassOutput(dir);
   const wdisp = await readWdispOutput(dir);
   const wzq = await readWzqOutput(dir);
@@ -24,10 +24,14 @@ export async function readYJKStructure(dir: string): Promise<IStructure> {
       (rebar ? rebar.hash : '') +
       (wpj ? wpj.hash : ''),
   );
+  const software = 'PKPM';
+  const name = getProjectName(dir);
 
   return {
     hash,
     dir,
+    name,
+    software,
     wmass,
     wdisp,
     wv02q,
@@ -36,4 +40,12 @@ export async function readYJKStructure(dir: string): Promise<IStructure> {
     rebar,
     wpj,
   };
+}
+
+function getProjectName(dir: string): string {
+  const paths = dir.split('/');
+  if (paths[paths.length - 1].match('设计结果')) {
+    return paths[paths.length - 2];
+  }
+  return paths[paths.length - 1];
 }

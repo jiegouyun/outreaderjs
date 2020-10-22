@@ -1,4 +1,6 @@
 import { readYJKStructure } from '@outreader/yjk';
+import { readPKPMStructure } from '@outreader/pkpm';
+import { checkSoftware, IStructure } from '@outreader/core';
 import { Button, Divider, message, Row, Space } from 'antd';
 import { remote } from 'electron';
 import React, { useState } from 'react';
@@ -20,16 +22,34 @@ export function HomePage() {
   const history = useHistory();
   const [dir, setDir] = useState('');
   const [strLoading, setStrLoading] = useState(false);
-  const readYjkStrOutputs = async () => {
+  const readStrOutputs = async () => {
     setStrLoading(true);
     try {
-      const strRes = await readYJKStructure(dir);
+      console.log(checkSoftware(dir));
+      let res: any;
+      switch (checkSoftware(dir)) {
+        case 'YJK':
+          res = await readYJKStructure(dir);
+          break;
+        case 'PKPM':
+          res = await readPKPMStructure(dir);
+          break;
+        case 'unknwn':
+          message.info('无法确认计算软件，请提供完整文件信息');
+      }
+      const strRes = res as IStructure;
+      // const strRes = await readYJKStructure(dir);
       if (!db.has('structures').value()) {
         db.set('structures', []).write();
       }
       if (!db.get('structures').find({ hash: strRes.hash }).value()) {
         db.get('structures')
-          .push({ hash: strRes.hash, dir: strRes.dir })
+          .push({
+            hash: strRes.hash,
+            name: strRes.name,
+            software: strRes.software,
+            dir: strRes.dir,
+          })
           .write();
       }
       const structure = initDb(strRes.hash);
@@ -71,7 +91,7 @@ export function HomePage() {
           type="primary"
           disabled={!Boolean(dir)}
           loading={strLoading}
-          onClick={() => readYjkStrOutputs()}
+          onClick={() => readStrOutputs()}
         >
           开始读取
         </Button>

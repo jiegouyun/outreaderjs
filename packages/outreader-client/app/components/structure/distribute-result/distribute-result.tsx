@@ -500,8 +500,10 @@ export function DistributeResultComponent(
       key: i,
       storeyID: distributeResult.columnShear.storeyID[i],
       towerID: distributeResult.columnShear.towerID[i],
-      ratioX: distributeResult.columnShear.percentColumnX[i].toFixed(1),
-      ratioY: distributeResult.columnShear.percentColumnY[i].toFixed(1),
+      ratioX:
+        Math.round(distributeResult.columnShear.percentColumnX[i] * 10) / 10,
+      ratioY:
+        Math.round(distributeResult.columnShear.percentColumnY[i] * 10) / 10,
     });
     shearColumnXChartData.push({
       x: distributeResult.columnShear.percentColumnX[i],
