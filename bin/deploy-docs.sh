@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-# 确保脚本抛出遇到的错误
+# make sure throw error
 set -e
 
-# 生成静态文件
-yarn run docs:build
+# build static files
+yarn run build:docs
 
-# 进入生成的文件夹
+# build files folder
 cd docs/.vuepress/dist
 
-# 如果是发布到自定义域名
+# add customized domain
 echo 'outreader.com' > CNAME
 
 

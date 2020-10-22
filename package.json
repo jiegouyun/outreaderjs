@@ -11,8 +11,8 @@
     "build:yjk": "cd packages/outreader-yjk && yarn build",
     "build:pkpm": "cd packages/outreader-pkpm && yarn build",
     "cli": "./packages/outreader-cli/bin/run",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "dev:docs": "vuepress dev docs",
+    "build:docs": "vuepress build docs"
   },
   "devDependencies": {
     "@types/jest": "^26.0.10",
