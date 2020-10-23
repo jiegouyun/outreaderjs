@@ -13,7 +13,8 @@
     "cli": "./packages/outreader-cli/bin/run",
     "dev:docs": "vuepress dev docs",
     "build:docs": "vuepress build docs",
-    "package:client": "cd packages/outreader-client && yarn package-win"
+    "package:client": "cd packages/outreader-client && yarn package-win",
+    "package-ci:client": "cd packages/outreader-client && yarn package-ci"
   },
   "devDependencies": {
     "@types/jest": "^26.0.10",
