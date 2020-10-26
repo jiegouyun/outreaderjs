@@ -1,7 +1,7 @@
 import { readYJKStructure } from '@outreader/yjk';
 import { readPKPMStructure } from '@outreader/pkpm';
 import { checkSoftware, IStructure } from '@outreader/core';
-import { Button, Divider, message, Row, Space } from 'antd';
+import { Button, Divider, message, Row, Space, Modal } from 'antd';
 import { remote } from 'electron';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
@@ -22,20 +22,36 @@ export function HomePage() {
   const history = useHistory();
   const [dir, setDir] = useState('');
   const [strLoading, setStrLoading] = useState(false);
-  const readStrOutputs = async () => {
+
+  const [visible, setVisible] = useState(false);
+  const selectSoftware = () => {
+    const software = checkSoftware(dir);
+    if (software === 'unknown') {
+      setVisible(true);
+    } else {
+      readStrOutputs(software);
+    }
+  };
+  const handleOk = () => {
+    setVisible(false);
+    readStrOutputs('YJK');
+  };
+  const handleCancel = () => {
+    setVisible(false);
+    readStrOutputs('PKPM');
+  };
+
+  const readStrOutputs = async (software?: string) => {
     setStrLoading(true);
     try {
-      console.log(checkSoftware(dir));
+      // console.log(software);
       let res: any;
-      switch (checkSoftware(dir)) {
+      switch (software) {
         case 'YJK':
           res = await readYJKStructure(dir);
           break;
         case 'PKPM':
           res = await readPKPMStructure(dir);
-          break;
-        case 'unknwn':
-          message.info('无法确认计算软件，请提供完整文件信息');
       }
       const strRes = res as IStructure;
       // const strRes = await readYJKStructure(dir);
@@ -91,11 +107,22 @@ export function HomePage() {
           type="primary"
           disabled={!Boolean(dir)}
           loading={strLoading}
-          onClick={() => readStrOutputs()}
+          onClick={() => selectSoftware()}
         >
           开始读取
         </Button>
       </Row>
+      <Modal
+        title="软件选择"
+        visible={visible}
+        okText="YJK"
+        cancelText="PKPM"
+        onOk={() => handleOk()}
+        onCancel={() => handleCancel()}
+        cancelButtonProps={{ type: 'primary' }}
+      >
+        无法判断软件类型，请选择。
+      </Modal>
     </div>
   );
 }
