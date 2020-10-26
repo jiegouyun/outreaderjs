@@ -41,7 +41,7 @@ export function HomePage() {
     readStrOutputs('PKPM');
   };
 
-  const readStrOutputs = async (software?: string) => {
+  const readStrOutputs = async (software: string) => {
     setStrLoading(true);
     try {
       // console.log(software);
@@ -121,7 +121,7 @@ export function HomePage() {
         onCancel={() => handleCancel()}
         cancelButtonProps={{ type: 'primary' }}
       >
-        无法判断软件类型，请选择。
+        无法判断出结构计算软件类型，请选择。
       </Modal>
     </div>
   );
