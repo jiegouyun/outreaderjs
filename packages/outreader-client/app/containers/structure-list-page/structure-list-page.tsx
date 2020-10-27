@@ -66,7 +66,7 @@ export function StructureListPage() {
       key: 'dsoftwareir',
     },
     {
-      title: '地址',
+      title: '项目地址',
       dataIndex: 'dir',
       key: 'dir',
     },
