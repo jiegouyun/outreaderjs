@@ -4,6 +4,7 @@ module.exports = {
   base: '/',
   themeConfig: {
     nav: [
+      { text: '软件下载', link: '/download/' },
       { text: '技术手册', link: '/guide/' },
       { text: 'GitHub', link: 'https://github.com/jiegouyun/outreaderjs' },
     ],

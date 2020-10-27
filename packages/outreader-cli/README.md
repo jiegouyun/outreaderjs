@@ -9,6 +9,7 @@ A CLI tool to read output files
 
 <!-- toc -->
 
+- [outreader-cli](#outreader-cli)
 - [Usage](#usage)
 - [Commands](#commands)
 <!-- tocstop -->
@@ -22,7 +23,7 @@ $ npm install -g @outreader/cli
 $ outreader COMMAND
 running command...
 $ outreader (-v|--version|version)
-@outreader/cli/0.0.4 linux-x64 node-v12.18.0
+@outreader/cli/0.0.5 linux-x64 node-v12.18.0
 $ outreader --help [COMMAND]
 USAGE
   $ outreader COMMAND
@@ -70,6 +71,6 @@ EXAMPLE
   $ outreader yjk path/to/yjk/model
 ```
 
-_See code: [src/commands/yjk.ts](https://github.com/outreaderjs/outreaderjs/blob/v0.0.4/src/commands/yjk.ts)_
+_See code: [src/commands/yjk.ts](https://github.com/outreaderjs/outreaderjs/blob/v0.0.5/src/commands/yjk.ts)_
 
 <!-- commandsstop -->
