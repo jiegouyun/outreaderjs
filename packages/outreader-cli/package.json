@@ -1,7 +1,7 @@
 {
   "name": "@outreader/cli",
   "description": "A CLI tool to read output files",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "an-lee <an.lee.work@gmail.com>",
   "bin": {
     "outreader": "./bin/run"
@@ -12,8 +12,8 @@
     "@oclif/command": "^1.7.0",
     "@oclif/config": "^1.16.0",
     "@oclif/plugin-help": "^3.1.0",
-    "@outreader/core": "^0.0.4",
-    "@outreader/yjk": "^0.0.4",
+    "@outreader/core": "^0.0.5",
+    "@outreader/yjk": "^0.0.5",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
