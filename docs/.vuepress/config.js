@@ -6,6 +6,7 @@ module.exports = {
     nav: [
       { text: '软件下载', link: '/download/' },
       { text: '技术手册', link: '/guide/' },
+      { text: '联系我们', link: '/contact/' },
       { text: 'GitHub', link: 'https://github.com/jiegouyun/outreaderjs' },
     ],
     sidebar: {
