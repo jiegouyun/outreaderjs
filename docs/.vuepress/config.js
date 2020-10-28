@@ -4,8 +4,19 @@ module.exports = {
   base: '/',
   themeConfig: {
     nav: [
-      { text: '指南', link: '/guide/' },
+      { text: '软件下载', link: '/download/' },
+      { text: '技术手册', link: '/guide/' },
+      { text: '联系我们', link: '/contact/' },
       { text: 'GitHub', link: 'https://github.com/jiegouyun/outreaderjs' },
     ],
+    sidebar: {
+      '/guide/': [
+        {
+          title: 'OutReader 使用说明',
+          collapseble: false,
+          children: ['', 'extract', 'structure', 'compare', 'update'],
+        },
+      ],
+    },
   },
 };
