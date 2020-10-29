@@ -12,7 +12,7 @@ OutReader 客户端是一款开源免费软件，目前由李安、杨名流、�
 
 GitHub：[an-lee](https://github.com/an-lee)
 
-邮箱：an.lee.work@gmail.com
+邮箱：[an.lee.work@gmail.com]()
 
 微信：
 
@@ -22,7 +22,7 @@ GitHub：[an-lee](https://github.com/an-lee)
 
 GitHub：[ym6](https://github.com/ym6)
 
-邮箱：yangml.work@gmail.com
+邮箱：[yangml.work@gmail.com]()
 
 微信：
 
@@ -32,7 +32,7 @@ GitHub：[ym6](https://github.com/ym6)
 
 GitHub：[meiputi](https://github.com/meiputi)
 
-邮箱：meiputi@gmail.com
+邮箱：[meiputi@gmail.com]()
 
 微信：
 
