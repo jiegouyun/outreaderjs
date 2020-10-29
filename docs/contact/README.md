@@ -8,7 +8,7 @@ description: '联系方式'
 OutReader 客户端是一款开源免费软件，目前由李安、杨名流、韩艳波共同维护，非常欢迎大家参与其中。
 如您在使用过程中出现任何问题或建议，请随时联系我们。
 
-**李安**
+- **李安**
 
 GitHub：[an-lee](https://github.com/an-lee)
 
@@ -16,9 +16,9 @@ GitHub：[an-lee](https://github.com/an-lee)
 
 微信：
 
-<img src='/an-lee.jpeg' width="500">
+<img src='/contact/an-lee.jpeg' width="500">
 
-**杨名流**
+- **杨名流**
 
 GitHub：[ym6](https://github.com/ym6)
 
@@ -26,9 +26,9 @@ GitHub：[ym6](https://github.com/ym6)
 
 微信：
 
-<img src='/ym6.jpeg' width="500">
+<img src='/contact/ym6.jpeg' width="500">
 
-**韩艳波**
+- **韩艳波**
 
 GitHub：[meiputi](https://github.com/meiputi)
 
@@ -36,4 +36,4 @@ GitHub：[meiputi](https://github.com/meiputi)
 
 微信：
 
-<img src='/hyb.jpeg' width="500">
+<img src='/contact/hyb.jpeg' width="500">
