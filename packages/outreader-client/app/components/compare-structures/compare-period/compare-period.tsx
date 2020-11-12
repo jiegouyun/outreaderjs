@@ -1,5 +1,5 @@
-import { Table, Collapse } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import { Collapse } from 'antd';
+import { BaseTable, ArtColumn } from 'ali-react-table';
 import React from 'react';
 import { IPeriodFE } from '@outreader/core';
 import { ICompare } from '../../../interfaces';
@@ -14,30 +14,29 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
   }
   const count = modeID.length;
 
-  const modeColumns: ColumnsType<ICompare> = [
+  const modeColumns: ArtColumn[] = [
     {
-      title: '振型',
-      dataIndex: 'modeID',
-      width: '3rem',
+      name: '振型',
+      code: 'modeID',
+      width: 64,
       align: 'right',
-      fixed: 'left',
+      lock: true,
     },
   ];
 
   for (let i = 0; i < n; i++) {
     modeColumns.push({
-      title: `模型${i + 1}`,
+      name: `模型${i + 1}`,
+      align: 'center',
       children: [
         {
-          title: `周期`,
-          dataIndex: `period${i}`,
-          width: `${100 / 2 / n}%`,
+          name: `周期`,
+          code: `period${i}`,
           align: 'right',
         },
         {
-          title: `转角`,
-          dataIndex: `angle${i}`,
-          width: `${100 / 2 / n}%`,
+          name: `转角`,
+          code: `angle${i}`,
           align: 'right',
         },
       ],
@@ -82,36 +81,34 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
     }
   }
 
-  const periodMassColumns: ColumnsType<ICompare> = [
+  const periodMassColumns: ArtColumn[] = [
     {
-      title: '振型',
-      dataIndex: 'modeID',
-      width: '3rem',
+      name: '振型',
+      code: 'modeID',
+      width: 64,
       align: 'left',
-      fixed: 'left',
+      lock: true,
     },
   ];
 
   for (let i = 0; i < n; i++) {
     periodMassColumns.push({
-      title: `模型${i + 1}`,
+      name: `模型${i + 1}`,
+      align: 'center',
       children: [
         {
-          title: `X`,
-          dataIndex: `factorX${i}`,
-          width: `${100 / 3 / n}%`,
+          name: `X`,
+          code: `factorX${i}`,
           align: 'right',
         },
         {
-          title: `Y`,
-          dataIndex: `factorY${i}`,
-          width: `${100 / 3 / n}%`,
+          name: `Y`,
+          code: `factorY${i}`,
           align: 'right',
         },
         {
-          title: `Z`,
-          dataIndex: `factorZ${i}`,
-          width: `${100 / 3 / n}%`,
+          name: `Z`,
+          code: `factorZ${i}`,
           align: 'right',
         },
       ],
@@ -146,42 +143,45 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
       <h3>考虑扭转耦联时的动力特性</h3>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={modeColumns}
             dataSource={periodModeTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '30rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
       <h3>地震最大作用方向的动力特性</h3>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={modeColumns}
             dataSource={periodSeismicTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '30rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
       <h3>质量参与系数</h3>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={periodMassColumns}
             dataSource={periodMassTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '50rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>

@@ -1,39 +1,39 @@
-import { Table, Row, Collapse } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import { Row, Collapse } from 'antd';
+import { BaseTable, ArtColumn } from 'ali-react-table';
 import React from 'react';
 import { IDriftFE } from '@outreader/core';
 import { StoreyChart } from '../../chart-tools';
 
 export function DriftComponent(drift: IDriftFE) {
-  const driftDispColumns: ColumnsType<Object> = [
+  const driftDispColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
+      name: '层号',
+      code: 'storeyID',
       align: 'right',
     },
     {
-      title: '塔号',
-      dataIndex: 'towerID',
+      name: '塔号',
+      code: 'towerID',
       align: 'right',
     },
     {
-      title: '风荷载X',
-      dataIndex: 'windX',
+      name: '风荷载X',
+      code: 'windX',
       align: 'right',
     },
     {
-      title: '风荷载Y',
-      dataIndex: 'windY',
+      name: '风荷载Y',
+      code: 'windY',
       align: 'right',
     },
     {
-      title: '地震X',
-      dataIndex: 'seismicX',
+      name: '地震X',
+      code: 'seismicX',
       align: 'right',
     },
     {
-      title: '地震Y',
-      dataIndex: 'seismicY',
+      name: '地震Y',
+      code: 'seismicY',
       align: 'right',
     },
   ];
@@ -101,35 +101,35 @@ export function DriftComponent(drift: IDriftFE) {
     });
   }
 
-  const dispRatioColumns: ColumnsType<Object> = [
+  const dispRatioColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
+      name: '层号',
+      code: 'storeyID',
       align: 'right',
     },
     {
-      title: '塔号',
-      dataIndex: 'towerID',
+      name: '塔号',
+      code: 'towerID',
       align: 'right',
     },
     {
-      title: '+X偏心',
-      dataIndex: 'eccXP',
+      name: '+X偏心',
+      code: 'eccXP',
       align: 'right',
     },
     {
-      title: '-X偏心',
-      dataIndex: 'eccXN',
+      name: '-X偏心',
+      code: 'eccXN',
       align: 'right',
     },
     {
-      title: '+Y偏心',
-      dataIndex: 'eccYP',
+      name: '+Y偏心',
+      code: 'eccYP',
       align: 'right',
     },
     {
-      title: '-Y偏心',
-      dataIndex: 'eccYN',
+      name: '-Y偏心',
+      code: 'eccYN',
       align: 'right',
     },
   ];
@@ -241,14 +241,14 @@ export function DriftComponent(drift: IDriftFE) {
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={driftDispColumns}
             dataSource={dispTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -293,14 +293,14 @@ export function DriftComponent(drift: IDriftFE) {
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={driftDispColumns}
             dataSource={driftTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -345,14 +345,14 @@ export function DriftComponent(drift: IDriftFE) {
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={dispRatioColumns}
             dataSource={dispRatioTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -397,14 +397,14 @@ export function DriftComponent(drift: IDriftFE) {
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={dispRatioColumns}
             dataSource={dispRatioStoreyTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>

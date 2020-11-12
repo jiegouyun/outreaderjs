@@ -1,44 +1,44 @@
-import { Table, Row, Collapse } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import { Row, Collapse } from 'antd';
+import { BaseTable, ArtColumn } from 'ali-react-table';
 import React from 'react';
 import { IQuantityFE } from '@outreader/core';
 import { QuantityChart } from '../../chart-tools';
 
 export function QuantityComponent(quantity: IQuantityFE) {
-  const quantityColumns: ColumnsType<Object> = [
+  const quantityColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
+      name: '层号',
+      code: 'storeyID',
       align: 'right',
     },
     {
-      title: '面积(m^2)',
-      dataIndex: 'area',
+      name: '面积(m^2)',
+      code: 'area',
       align: 'right',
     },
     {
-      title: '墙',
-      dataIndex: 'wall',
+      name: '墙',
+      code: 'wall',
       align: 'right',
     },
     {
-      title: '柱',
-      dataIndex: 'column',
+      name: '柱',
+      code: 'column',
       align: 'right',
     },
     {
-      title: '梁',
-      dataIndex: 'beam',
+      name: '梁',
+      code: 'beam',
       align: 'right',
     },
     {
-      title: '板',
-      dataIndex: 'floor',
+      name: '板',
+      code: 'floor',
       align: 'right',
     },
     {
-      title: '合计',
-      dataIndex: 'total',
+      name: '合计',
+      code: 'total',
       align: 'right',
     },
   ];
@@ -232,28 +232,28 @@ export function QuantityComponent(quantity: IQuantityFE) {
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={quantityColumns}
             dataSource={concreteTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
       <h3>砼含量</h3>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={quantityColumns}
             dataSource={unitConcreteTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -264,28 +264,28 @@ export function QuantityComponent(quantity: IQuantityFE) {
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={quantityColumns}
             dataSource={steelTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
       <h3>型钢含量</h3>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={quantityColumns}
             dataSource={unitSteelTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -296,28 +296,28 @@ export function QuantityComponent(quantity: IQuantityFE) {
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={quantityColumns}
             dataSource={rebarTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
       <h3>钢筋含量</h3>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={quantityColumns}
             dataSource={unitRebarTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>

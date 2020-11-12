@@ -1,5 +1,5 @@
-import { Table, Row, Collapse } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import { Row, Collapse } from 'antd';
+import { BaseTable, ArtColumn } from 'ali-react-table';
 import React from 'react';
 import { IDistributeResultFE } from '@outreader/core';
 import { StoreyChart } from '../../chart-tools';
@@ -23,42 +23,39 @@ export function CompareDistributeResultComponent(
   }
   const count = storeyID.length;
 
-  const storeyColumns: ColumnsType<ICompare> = [
+  const storeyColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
-      width: '3rem',
+      name: '层号',
+      code: 'storeyID',
+      width: 64,
       align: 'right',
-      fixed: 'left',
+      lock: true,
     },
   ];
 
   for (let i = 0; i < n; i++) {
     storeyColumns.push({
-      title: `模型${i + 1}`,
+      name: `模型${i + 1}`,
+      align: 'center',
       children: [
         {
-          title: `层高`,
-          dataIndex: `height${i}`,
-          width: `${100 / 4 / n}%`,
+          name: `层高`,
+          code: `height${i}`,
           align: 'right',
         },
         {
-          title: `累高`,
-          dataIndex: `heightTD${i}`,
-          width: `${100 / 4 / n}%`,
+          name: `累高`,
+          code: `heightTD${i}`,
           align: 'right',
         },
         {
-          title: `面积`,
-          dataIndex: `area${i}`,
-          width: `${100 / 4 / n}%`,
+          name: `面积`,
+          code: `area${i}`,
           align: 'right',
         },
         {
-          title: `墙地比`,
-          dataIndex: `wallAreaRatio${i}`,
-          width: `${100 / 4 / n}%`,
+          name: `墙地比`,
+          code: `wallAreaRatio${i}`,
           align: 'right',
         },
       ],
@@ -115,30 +112,29 @@ export function CompareDistributeResultComponent(
     }
   }
 
-  const massRatioColumns: ColumnsType<ICompare> = [
+  const massRatioColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
-      width: '3rem',
+      name: '层号',
+      code: 'storeyID',
+      width: 64,
       align: 'right',
-      fixed: 'left',
+      lock: true,
     },
   ];
 
   for (let i = 0; i < n; i++) {
     massRatioColumns.push({
-      title: `模型${i + 1}`,
+      name: `模型${i + 1}`,
+      align: 'center',
       children: [
         {
-          title: `质量比`,
-          dataIndex: `ratio${i}`,
-          width: `${100 / 2 / n}%`,
+          name: `质量比`,
+          code: `ratio${i}`,
           align: 'right',
         },
         {
-          title: `单位质量比`,
-          dataIndex: `unitRatio${i}`,
-          width: `${100 / 2 / n}%`,
+          name: `单位质量比`,
+          code: `unitRatio${i}`,
           align: 'right',
         },
       ],
@@ -195,42 +191,39 @@ export function CompareDistributeResultComponent(
     }
   }
 
-  const stiffRatioColumns: ColumnsType<ICompare> = [
+  const stiffRatioColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
-      width: '3rem',
+      name: '层号',
+      code: 'storeyID',
+      width: 64,
       align: 'right',
-      fixed: 'left',
+      lock: true,
     },
   ];
 
   for (let i = 0; i < n; i++) {
     stiffRatioColumns.push({
-      title: `模型${i + 1}`,
+      name: `模型${i + 1}`,
+      align: 'center',
       children: [
         {
-          title: `X`,
-          dataIndex: `ratx1${i}`,
-          width: `${100 / 4 / n}%`,
+          name: `X`,
+          code: `ratx1${i}`,
           align: 'right',
         },
         {
-          title: `Y`,
-          dataIndex: `raty1${i}`,
-          width: `${100 / 4 / n}%`,
+          name: `Y`,
+          code: `raty1${i}`,
           align: 'right',
         },
         {
-          title: `X(层高修正)`,
-          dataIndex: `ratx2${i}`,
-          width: `${100 / 4 / n}%`,
+          name: `X(层高修正)`,
+          code: `ratx2${i}`,
           align: 'right',
         },
         {
-          title: `Y(层高修正)`,
-          dataIndex: `raty2${i}`,
-          width: `${100 / 4 / n}%`,
+          name: `Y(层高修正)`,
+          code: `raty2${i}`,
           align: 'right',
         },
       ],
@@ -316,30 +309,29 @@ export function CompareDistributeResultComponent(
     }
   }
 
-  const shearWeightColumns: ColumnsType<ICompare> = [
+  const shearWeightColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
-      width: '3rem',
+      name: '层号',
+      code: 'storeyID',
+      width: 64,
       align: 'right',
-      fixed: 'left',
+      lock: true,
     },
   ];
 
   for (let i = 0; i < n; i++) {
     shearWeightColumns.push({
-      title: `模型${i + 1}`,
+      name: `模型${i + 1}`,
+      align: 'center',
       children: [
         {
-          title: `X`,
-          dataIndex: `ratioX${i}`,
-          width: `${100 / 2 / n}%`,
+          name: `X`,
+          code: `ratioX${i}`,
           align: 'right',
         },
         {
-          title: `Y`,
-          dataIndex: `ratioY${i}`,
-          width: `${100 / 2 / n}%`,
+          name: `Y`,
+          code: `ratioY${i}`,
           align: 'right',
         },
       ],
@@ -400,30 +392,29 @@ export function CompareDistributeResultComponent(
     }
   }
 
-  const shearCapacityColumns: ColumnsType<ICompare> = [
+  const shearCapacityColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
-      width: '3rem',
+      name: '层号',
+      code: 'storeyID',
+      width: 64,
       align: 'right',
-      fixed: 'left',
+      lock: true,
     },
   ];
 
   for (let i = 0; i < n; i++) {
     shearCapacityColumns.push({
-      title: `模型${i + 1}`,
+      name: `模型${i + 1}`,
+      align: 'center',
       children: [
         {
-          title: `X`,
-          dataIndex: `ratioX${i}`,
-          width: `${100 / 2 / n}%`,
+          name: `X`,
+          code: `ratioX${i}`,
           align: 'right',
         },
         {
-          title: `Y`,
-          dataIndex: `ratioY${i}`,
-          width: `${100 / 2 / n}%`,
+          name: `Y`,
+          code: `ratioY${i}`,
           align: 'right',
         },
       ],
@@ -486,50 +477,47 @@ export function CompareDistributeResultComponent(
     }
   }
 
-  const momentDistributeColumns: ColumnsType<ICompare> = [
+  const momentDistributeColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
-      width: '3rem',
+      name: '层号',
+      code: 'storeyID',
+      width: 64,
       align: 'right',
-      fixed: 'left',
+      lock: true,
     },
   ];
 
   for (let i = 0; i < n; i++) {
     momentDistributeColumns.push({
-      title: `模型${i + 1}`,
+      name: `模型${i + 1}`,
+      align: 'center',
       children: [
         {
-          title: `X`,
+          name: `X`,
           children: [
             {
-              title: `柱`,
-              dataIndex: `columnX${i}`,
-              width: `${100 / 4 / n}%`,
+              name: `柱`,
+              code: `columnX${i}`,
               align: 'right',
             },
             {
-              title: `短肢墙`,
-              dataIndex: `wallX${i}`,
-              width: `${100 / 4 / n}%`,
+              name: `短肢墙`,
+              code: `wallX${i}`,
               align: 'right',
             },
           ],
         },
         {
-          title: `Y`,
+          name: `Y`,
           children: [
             {
-              title: `柱`,
-              dataIndex: `columnY${i}`,
-              width: `${100 / 4 / n}%`,
+              name: `柱`,
+              code: `columnY${i}`,
               align: 'right',
             },
             {
-              title: `短肢墙`,
-              dataIndex: `wallY${i}`,
-              width: `${100 / 4 / n}%`,
+              name: `短肢墙`,
+              code: `wallY${i}`,
               align: 'right',
             },
           ],
@@ -621,30 +609,29 @@ export function CompareDistributeResultComponent(
     }
   }
 
-  const shearDistributeColumns: ColumnsType<ICompare> = [
+  const shearDistributeColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
-      width: '3rem',
+      name: '层号',
+      code: 'storeyID',
+      width: 64,
       align: 'right',
-      fixed: 'left',
+      lock: true,
     },
   ];
 
   for (let i = 0; i < n; i++) {
     shearDistributeColumns.push({
-      title: `模型${i + 1}`,
+      name: `模型${i + 1}`,
+      align: 'center',
       children: [
         {
-          title: `X`,
-          dataIndex: `ratioX${i}`,
-          width: `${100 / 2 / n}%`,
+          name: `X`,
+          code: `ratioX${i}`,
           align: 'right',
         },
         {
-          title: `Y`,
-          dataIndex: `ratioY${i}`,
-          width: `${100 / 2 / n}%`,
+          name: `Y`,
+          code: `ratioY${i}`,
           align: 'right',
         },
       ],
@@ -755,14 +742,15 @@ export function CompareDistributeResultComponent(
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={storeyColumns}
             dataSource={storeyTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '50rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -778,14 +766,15 @@ export function CompareDistributeResultComponent(
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={massRatioColumns}
             dataSource={massRatioTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '30rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -808,14 +797,15 @@ export function CompareDistributeResultComponent(
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={stiffRatioColumns}
             dataSource={stiffRatioTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '50rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -831,14 +821,15 @@ export function CompareDistributeResultComponent(
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={shearWeightColumns}
             dataSource={shearWeightTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '30rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -854,14 +845,15 @@ export function CompareDistributeResultComponent(
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={shearCapacityColumns}
             dataSource={shearCapacityTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '30rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -884,14 +876,15 @@ export function CompareDistributeResultComponent(
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={momentDistributeColumns}
             dataSource={momentDistributeTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '50rem', y: 'calc(100vh - 16rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -907,14 +900,15 @@ export function CompareDistributeResultComponent(
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={shearDistributeColumns}
             dataSource={shearDistributeTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '30rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>

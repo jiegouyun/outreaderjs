@@ -1,5 +1,5 @@
-import { Table, Row, Collapse } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import { Row, Collapse } from 'antd';
+import { BaseTable, ArtColumn } from 'ali-react-table';
 import React from 'react';
 import { IForceFE } from '@outreader/core';
 import { StoreyChart } from '../../chart-tools';
@@ -18,42 +18,39 @@ export function CompareForceComponent(forces: IForceFE[]) {
   }
   const count = storeyID.length;
 
-  const forceColumns: ColumnsType<ICompare> = [
+  const forceColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
-      width: '3rem',
+      name: '层号',
+      code: 'storeyID',
+      width: 64,
       align: 'right',
-      fixed: 'left',
+      lock: true,
     },
   ];
 
   for (let i = 0; i < n; i++) {
     forceColumns.push({
-      title: `模型${i + 1}`,
+      name: `模型${i + 1}`,
+      align: 'center',
       children: [
         {
-          title: `剪力X`,
-          dataIndex: `shearX${i}`,
-          width: `${100 / 4 / n}%`,
+          name: `剪力X`,
+          code: `shearX${i}`,
           align: 'right',
         },
         {
-          title: `弯矩X`,
-          dataIndex: `momentX${i}`,
-          width: `${100 / 4 / n}%`,
+          name: `弯矩X`,
+          code: `momentX${i}`,
           align: 'right',
         },
         {
-          title: `剪力Y`,
-          dataIndex: `shearY${i}`,
-          width: `${100 / 4 / n}%`,
+          name: `剪力Y`,
+          code: `shearY${i}`,
           align: 'right',
         },
         {
-          title: `弯矩Y`,
-          dataIndex: `momentY${i}`,
-          width: `${100 / 4 / n}%`,
+          name: `弯矩Y`,
+          code: `momentY${i}`,
           align: 'right',
         },
       ],
@@ -338,14 +335,15 @@ export function CompareForceComponent(forces: IForceFE[]) {
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={forceColumns}
             dataSource={alongWindTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '80rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            defaultColumnWidth={80}
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -370,14 +368,15 @@ export function CompareForceComponent(forces: IForceFE[]) {
           </Row>
           <Collapse ghost>
             <Panel header="详细数据" key="2">
-              <Table
+              <BaseTable
                 columns={forceColumns}
                 dataSource={crossWindTableData}
-                bordered
-                size="small"
-                pagination={false}
-                style={{ marginBottom: 20 }}
-                scroll={{ x: '80rem', y: 'calc(100vh - 14rem)' }}
+                primaryKey={'key'}
+                useVirtual={true}
+                hasHeader={true}
+                useOuterBorder
+                defaultColumnWidth={80}
+                style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
               />
             </Panel>
           </Collapse>
@@ -402,14 +401,15 @@ export function CompareForceComponent(forces: IForceFE[]) {
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={forceColumns}
             dataSource={seismicTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '80rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            defaultColumnWidth={80}
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>

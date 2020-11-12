@@ -99,6 +99,7 @@ export function CompareSummaryQuantityComponent(
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
       />
       <h3>材料价格参考</h3>
       <Descriptions

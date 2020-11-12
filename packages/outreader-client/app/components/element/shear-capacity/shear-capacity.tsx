@@ -1,5 +1,5 @@
-import { Table, Collapse } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import { Collapse } from 'antd';
+import { BaseTable, ArtColumn } from 'ali-react-table';
 import React from 'react';
 import { IWpj } from '@outreader/core';
 import { IEleData } from '../../../interfaces';
@@ -9,30 +9,31 @@ export function ShearCapacityComponent(wpj: IWpj) {
   const n = col.colName.length;
   const count = col.storeyID.length;
 
-  const colVCapacityColumns: ColumnsType<IEleData> = [
+  const colVCapacityColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
-      width: '3rem',
+      name: '层号',
+      code: 'storeyID',
+      width: 64,
       align: 'right',
-      fixed: 'left',
+      lock: true,
     },
   ];
 
   for (let i = 0; i < n; i++) {
     colVCapacityColumns.push({
-      title: `C-${col.colName[i]}`,
+      name: `C-${col.colName[i]}`,
+      align: 'center',
       children: [
         {
-          title: 'X',
-          dataIndex: `cbX${i}`,
-          width: `${100 / 2 / n}%`,
+          name: 'X',
+          code: `cbX${i}`,
+          width: 80,
           align: 'right',
         },
         {
-          title: 'Y',
-          dataIndex: `cbY${i}`,
-          width: `${100 / 2 / n}%`,
+          name: 'Y',
+          code: `cbY${i}`,
+          width: 80,
           align: 'right',
         },
       ],
@@ -62,14 +63,14 @@ export function ShearCapacityComponent(wpj: IWpj) {
       <h3>柱</h3>
       <Collapse ghost>
         <Panel header="详细信息" key="1">
-          <Table
+          <BaseTable
             columns={colVCapacityColumns}
             dataSource={colVCapacityTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '800rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
