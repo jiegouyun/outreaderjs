@@ -1,5 +1,4 @@
-import { Table, Collapse, Row } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import { Collapse, Row } from 'antd';
 import { BaseTable, ArtColumn } from 'ali-react-table';
 import React from 'react';
 import { IElementUcFE } from '@outreader/core';
@@ -15,7 +14,7 @@ export function AxialCompRatioComponent(uc: IElementUcFE) {
     {
       name: '层号',
       code: 'storeyID',
-      width: 48,
+      width: 64,
       align: 'right',
       lock: true,
     },
@@ -24,6 +23,7 @@ export function AxialCompRatioComponent(uc: IElementUcFE) {
   for (let i = 0; i < n; i++) {
     colUcColumns.push({
       name: `C-${col.colName[i]}`,
+      align: 'center',
       children: [
         {
           name: 'Uc',
@@ -92,14 +92,13 @@ export function AxialCompRatioComponent(uc: IElementUcFE) {
       <Collapse ghost>
         <Panel header="详细信息" key="1">
           <BaseTable
-            useVirtual={true}
             columns={colUcColumns}
             dataSource={colUcTableData}
-            // bordered
-            // size="small"
-            // pagination={false}
-            // style={{ marginBottom: 20 }}
-            // scroll={{ x: '800rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>

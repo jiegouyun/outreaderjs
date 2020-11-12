@@ -605,6 +605,7 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
       />
       <h3>结构信息</h3>
       <Table
@@ -614,6 +615,7 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
       />
       <h3>质量</h3>
       <Table
@@ -623,6 +625,7 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
       />
       <h3>层间位移角</h3>
       <Table
@@ -632,6 +635,7 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
         title={() => '风荷载'}
       />
       <Table
@@ -641,6 +645,7 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
         title={() => '地震作用'}
       />
       <h3>位移比</h3>
@@ -651,6 +656,7 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
       />
       <h3>层间位移比</h3>
       <Table
@@ -660,6 +666,7 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
       />
       <h3>剪重比</h3>
       <Table
@@ -669,6 +676,7 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
       />
       <h3>刚重比</h3>
       <Table
@@ -678,6 +686,7 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
         title={() => '风荷载'}
       />
       <Table
@@ -687,6 +696,7 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
         title={() => '地震作用'}
       />
       <h3>刚度比</h3>
@@ -697,6 +707,7 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
       />
       <h3>受剪承载力比</h3>
       <Table
@@ -706,6 +717,7 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
       />
       <h3>动力特性</h3>
       <Table
@@ -715,6 +727,7 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
         title={() => '周期'}
       />
       <Table
@@ -724,6 +737,7 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
         title={() => '质量参与系数'}
       />
       <h3>基底剪力</h3>
@@ -734,6 +748,7 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
       />
       <h3>基底倾覆力矩</h3>
       <Table
@@ -743,6 +758,7 @@ export function CompareSummaryComponent(summarys: ISummaryFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
       />
     </React.Fragment>
   );

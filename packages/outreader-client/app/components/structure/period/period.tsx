@@ -1,5 +1,5 @@
-import { Table, Collapse, Row } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import { Collapse, Row } from 'antd';
+import { BaseTable, ArtColumn } from 'ali-react-table';
 import React from 'react';
 import { downloadSVG, downloadPNG } from '@outreader/core';
 import {
@@ -18,35 +18,35 @@ import { IPeriodFE } from '@outreader/core';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 
 export function PeriodComponent(period: IPeriodFE) {
-  const modeColumns: ColumnsType<Object> = [
+  const modeColumns: ArtColumn[] = [
     {
-      title: '振型',
-      dataIndex: 'modeID',
+      name: '振型',
+      code: 'modeID',
       align: 'right',
     },
     {
-      title: '周期',
-      dataIndex: 'period',
+      name: '周期',
+      code: 'period',
       align: 'right',
     },
     {
-      title: '转角',
-      dataIndex: 'angle',
+      name: '转角',
+      code: 'angle',
       align: 'right',
     },
     {
-      title: '平动系数X',
-      dataIndex: 'factorX',
+      name: '平动系数X',
+      code: 'factorX',
       align: 'right',
     },
     {
-      title: '平动系数Y',
-      dataIndex: 'factorY',
+      name: '平动系数Y',
+      code: 'factorY',
       align: 'right',
     },
     {
-      title: '扭转系数Z',
-      dataIndex: 'factorZ',
+      name: '扭转系数Z',
+      code: 'factorZ',
       align: 'right',
     },
   ];
@@ -76,40 +76,40 @@ export function PeriodComponent(period: IPeriodFE) {
     });
   }
 
-  const periodMassColumns: ColumnsType<Object> = [
+  const periodMassColumns: ArtColumn[] = [
     {
-      title: '振型',
-      dataIndex: 'modeID',
+      name: '振型',
+      code: 'modeID',
       align: 'right',
     },
     {
-      title: 'X',
-      dataIndex: 'factorX',
+      name: 'X',
+      code: 'factorX',
       align: 'right',
     },
     {
-      title: '累计X',
-      dataIndex: 'sumX',
+      name: '累计X',
+      code: 'sumX',
       align: 'right',
     },
     {
-      title: 'Y',
-      dataIndex: 'factorY',
+      name: 'Y',
+      code: 'factorY',
       align: 'right',
     },
     {
-      title: '累计Y',
-      dataIndex: 'sumY',
+      name: '累计Y',
+      code: 'sumY',
       align: 'right',
     },
     {
-      title: 'Z',
-      dataIndex: 'factorZ',
+      name: 'Z',
+      code: 'factorZ',
       align: 'right',
     },
     {
-      title: '累计Z',
-      dataIndex: 'sumZ',
+      name: '累计Z',
+      code: 'sumZ',
       align: 'right',
     },
   ];
@@ -179,28 +179,28 @@ export function PeriodComponent(period: IPeriodFE) {
       <h3>考虑扭转耦联时的动力特性</h3>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={modeColumns}
             dataSource={periodModeTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
       <h3>地震最大作用方向的动力特性</h3>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={modeColumns}
             dataSource={periodSeismicTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -286,14 +286,14 @@ export function PeriodComponent(period: IPeriodFE) {
       </ContextMenu>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={periodMassColumns}
             dataSource={periodMassTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>

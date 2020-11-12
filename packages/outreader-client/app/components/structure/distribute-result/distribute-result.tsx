@@ -1,5 +1,5 @@
-import { Table, Row, Collapse } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import { Row, Collapse } from 'antd';
+import { BaseTable, ArtColumn } from 'ali-react-table';
 import React from 'react';
 import { IDistributeResultFE } from '@outreader/core';
 import { StoreyChart } from '../../chart-tools';
@@ -9,55 +9,56 @@ import { userColors, userShaps } from '../../../colors';
 export function DistributeResultComponent(
   distributeResult: IDistributeResultFE
 ) {
-  const storeyColumns: ColumnsType<Object> = [
+  const storeyColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
+      name: '层号',
+      code: 'storeyID',
       align: 'right',
     },
     {
-      title: '塔号',
-      dataIndex: 'towerID',
+      name: '塔号',
+      code: 'towerID',
       align: 'right',
     },
     {
-      title: '属性(标准层)',
-      dataIndex: 'attribute',
+      name: `属性(标准层)`,
+      code: 'attribute',
+      width: 70,
       align: 'right',
     },
     {
-      title: '层高(m)',
-      dataIndex: 'height',
+      name: '层高(m)',
+      code: 'height',
       align: 'right',
     },
     {
-      title: '累计高度(m)',
-      dataIndex: 'heightTD',
+      name: '累计高度(m)',
+      code: 'heightTD',
       align: 'right',
     },
     {
-      title: '面积(m^2)',
-      dataIndex: 'area',
+      name: '面积(m^2)',
+      code: 'area',
       align: 'right',
     },
     {
-      title: '墙面积X(m^2)',
-      dataIndex: 'wallAreaX',
+      name: '墙面积X(m^2)',
+      code: 'wallAreaX',
       align: 'right',
     },
     {
-      title: '墙面积Y(m^2)',
-      dataIndex: 'wallAreaY',
+      name: '墙面积Y(m^2)',
+      code: 'wallAreaY',
       align: 'right',
     },
     {
-      title: '墙面积(m^2)',
-      dataIndex: 'wallAreaStorey',
+      name: '墙面积(m^2)',
+      code: 'wallAreaStorey',
       align: 'right',
     },
     {
-      title: '墙地比(%)',
-      dataIndex: 'wallAreaRatio',
+      name: '墙地比(%)',
+      code: 'wallAreaRatio',
       align: 'right',
     },
   ];
@@ -86,35 +87,35 @@ export function DistributeResultComponent(
     });
   }
 
-  const massRatioColumns: ColumnsType<Object> = [
+  const massRatioColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
+      name: '层号',
+      code: 'storeyID',
       align: 'right',
     },
     {
-      title: '塔号',
-      dataIndex: 'towerID',
+      name: '塔号',
+      code: 'towerID',
       align: 'right',
     },
     {
-      title: '楼层质量(t)',
-      dataIndex: 'mass',
+      name: '楼层质量(t)',
+      code: 'mass',
       align: 'right',
     },
     {
-      title: '质量比',
-      dataIndex: 'ratio',
+      name: '质量比',
+      code: 'ratio',
       align: 'right',
     },
     {
-      title: '单位质量(kg/m^2)',
-      dataIndex: 'unitMass',
+      name: '单位质量(kg/m^2)',
+      code: 'unitMass',
       align: 'right',
     },
     {
-      title: '单位质量比',
-      dataIndex: 'unitRatio',
+      name: '单位质量比',
+      code: 'unitRatio',
       align: 'right',
     },
   ];
@@ -142,35 +143,35 @@ export function DistributeResultComponent(
     });
   }
 
-  const stiffRatioColumns: ColumnsType<Object> = [
+  const stiffRatioColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
+      name: '层号',
+      code: 'storeyID',
       align: 'right',
     },
     {
-      title: '塔号',
-      dataIndex: 'towerID',
+      name: '塔号',
+      code: 'towerID',
       align: 'right',
     },
     {
-      title: 'X',
-      dataIndex: 'ratx1',
+      name: 'X',
+      code: 'ratx1',
       align: 'right',
     },
     {
-      title: 'Y',
-      dataIndex: 'raty1',
+      name: 'Y',
+      code: 'raty1',
       align: 'right',
     },
     {
-      title: 'X(层高修正)',
-      dataIndex: 'ratx2',
+      name: 'X(层高修正)',
+      code: 'ratx2',
       align: 'right',
     },
     {
-      title: 'Y(层高修正)',
-      dataIndex: 'raty2',
+      name: 'Y(层高修正)',
+      code: 'raty2',
       align: 'right',
     },
   ];
@@ -208,25 +209,25 @@ export function DistributeResultComponent(
     });
   }
 
-  const shearWeightColumns: ColumnsType<Object> = [
+  const shearWeightColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
+      name: '层号',
+      code: 'storeyID',
       align: 'right',
     },
     {
-      title: '塔号',
-      dataIndex: 'towerID',
+      name: '塔号',
+      code: 'towerID',
       align: 'right',
     },
     {
-      title: 'X',
-      dataIndex: 'ratioX',
+      name: 'X',
+      code: 'ratioX',
       align: 'right',
     },
     {
-      title: 'Y',
-      dataIndex: 'ratioY',
+      name: 'Y',
+      code: 'ratioY',
       align: 'right',
     },
   ];
@@ -252,25 +253,25 @@ export function DistributeResultComponent(
     });
   }
 
-  const shearCapacityColumns: ColumnsType<Object> = [
+  const shearCapacityColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
+      name: '层号',
+      code: 'storeyID',
       align: 'right',
     },
     {
-      title: '塔号',
-      dataIndex: 'towerID',
+      name: '塔号',
+      code: 'towerID',
       align: 'right',
     },
     {
-      title: 'X',
-      dataIndex: 'ratioX',
+      name: 'X',
+      code: 'ratioX',
       align: 'right',
     },
     {
-      title: 'Y',
-      dataIndex: 'ratioY',
+      name: 'Y',
+      code: 'ratioY',
       align: 'right',
     },
   ];
@@ -300,86 +301,86 @@ export function DistributeResultComponent(
     });
   }
 
-  const momentDistributeColumns: ColumnsType<Object> = [
+  const momentDistributeColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
+      name: '层号',
+      code: 'storeyID',
       align: 'right',
     },
     {
-      title: '塔号',
-      dataIndex: 'towerID',
+      name: '塔号',
+      code: 'towerID',
       align: 'right',
     },
     {
-      title: 'X向柱',
-      dataIndex: 'columnX',
+      name: 'X向柱',
+      code: 'columnX',
       align: 'right',
     },
     {
-      title: 'X向短肢墙',
-      dataIndex: 'wallX',
+      name: 'X向短肢墙',
+      code: 'wallX',
       align: 'right',
     },
     {
-      title: 'Y向柱',
-      dataIndex: 'columnY',
+      name: 'Y向柱',
+      code: 'columnY',
       align: 'right',
     },
     {
-      title: 'Y向短肢墙',
-      dataIndex: 'wallY',
+      name: 'Y向短肢墙',
+      code: 'wallY',
       align: 'right',
     },
   ];
 
-  const lackWallColumns: ColumnsType<Object> = [
+  const lackWallColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
+      name: '层号',
+      code: 'storeyID',
       align: 'right',
     },
     {
-      title: '塔号',
-      dataIndex: 'towerID',
+      name: '塔号',
+      code: 'towerID',
       align: 'right',
     },
     {
-      title: 'X向',
+      name: 'X向',
       children: [
         {
-          title: '长墙',
-          dataIndex: 'wallXX',
+          name: '长墙',
+          code: 'wallXX',
           align: 'right',
         },
         {
-          title: '扁柱框架',
-          dataIndex: 'wallYX',
+          name: '扁柱框架',
+          code: 'wallYX',
           align: 'right',
         },
         {
-          title: '框架',
-          dataIndex: 'edgeX',
+          name: '框架',
+          code: 'edgeX',
           align: 'right',
         },
       ],
     },
     {
-      title: 'Y向',
+      name: 'Y向',
       children: [
         {
-          title: '长墙',
-          dataIndex: 'wallYY',
+          name: '长墙',
+          code: 'wallYY',
           align: 'right',
         },
         {
-          title: '扁柱框架',
-          dataIndex: 'wallXY',
+          name: '扁柱框架',
+          code: 'wallXY',
           align: 'right',
         },
         {
-          title: '框架',
-          dataIndex: 'edgeY',
+          name: '框架',
+          code: 'edgeY',
           align: 'right',
         },
       ],
@@ -466,25 +467,25 @@ export function DistributeResultComponent(
     });
   }
 
-  const shearDistributeColumns: ColumnsType<Object> = [
+  const shearDistributeColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
+      name: '层号',
+      code: 'storeyID',
       align: 'right',
     },
     {
-      title: '塔号',
-      dataIndex: 'towerID',
+      name: '塔号',
+      code: 'towerID',
       align: 'right',
     },
     {
-      title: 'X',
-      dataIndex: 'ratioX',
+      name: 'X',
+      code: 'ratioX',
       align: 'right',
     },
     {
-      title: 'Y',
-      dataIndex: 'ratioY',
+      name: 'Y',
+      code: 'ratioY',
       align: 'right',
     },
   ];
@@ -609,14 +610,14 @@ export function DistributeResultComponent(
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={storeyColumns}
             dataSource={storeyTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -643,14 +644,14 @@ export function DistributeResultComponent(
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={massRatioColumns}
             dataSource={massRatioTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -673,14 +674,14 @@ export function DistributeResultComponent(
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={stiffRatioColumns}
             dataSource={stiffRatioTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -696,14 +697,14 @@ export function DistributeResultComponent(
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={shearWeightColumns}
             dataSource={shearWeightTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -719,14 +720,14 @@ export function DistributeResultComponent(
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={shearCapacityColumns}
             dataSource={shearCapacityTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -749,14 +750,14 @@ export function DistributeResultComponent(
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={momentDistributeColumns}
             dataSource={momentDistributeTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -772,14 +773,14 @@ export function DistributeResultComponent(
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={shearDistributeColumns}
             dataSource={shearDistributeTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -802,14 +803,14 @@ export function DistributeResultComponent(
       </Row>
       <Collapse ghost>
         <Panel header="剪力分配" key="1">
-          <Table
+          <BaseTable
             columns={lackWallColumns}
             dataSource={lackWallShearTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -831,14 +832,14 @@ export function DistributeResultComponent(
       </Row>
       <Collapse ghost>
         <Panel header="倾覆力矩分配" key="1">
-          <Table
+          <BaseTable
             columns={lackWallColumns}
             dataSource={lackWallMomentTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>

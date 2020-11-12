@@ -1,5 +1,5 @@
-import { Table, Collapse, Row } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import { Collapse, Row } from 'antd';
+import { BaseTable, ArtColumn } from 'ali-react-table';
 import React from 'react';
 import { IFactorFE } from '@outreader/core';
 import { StoreyChart } from '../../chart-tools';
@@ -19,21 +19,20 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
   }
   const count = storeyID.length;
 
-  const weakColumns: ColumnsType<ICompare> = [
+  const weakColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
-      width: '3rem',
+      name: '层号',
+      code: 'storeyID',
+      width: 64,
       align: 'right',
-      fixed: 'left',
+      lock: true,
     },
   ];
 
   for (let i = 0; i < n; i++) {
     weakColumns.push({
-      title: `模型${i + 1}`,
-      dataIndex: `factor${i}`,
-      width: `${100 / n}%`,
+      name: `模型${i + 1}`,
+      code: `factor${i}`,
       align: 'right',
     });
   }
@@ -74,30 +73,29 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
     }
   }
 
-  const factorColumns: ColumnsType<ICompare> = [
+  const factorColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
-      width: '3rem',
+      name: '层号',
+      code: 'storeyID',
+      width: 64,
       align: 'right',
-      fixed: 'left',
+      lock: true,
     },
   ];
 
   for (let i = 0; i < n; i++) {
     factorColumns.push({
-      title: `模型${i + 1}`,
+      name: `模型${i + 1}`,
+      align: 'center',
       children: [
         {
-          title: `X`,
-          dataIndex: `factorX${i}`,
-          width: `${100 / 2 / n}%`,
+          name: `X`,
+          code: `factorX${i}`,
           align: 'right',
         },
         {
-          title: `Y`,
-          dataIndex: `factorY${i}`,
-          width: `${100 / 2 / n}%`,
+          name: `Y`,
+          code: `factorY${i}`,
           align: 'right',
         },
       ],
@@ -249,14 +247,15 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={weakColumns}
             dataSource={weakTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '20rem', y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -272,14 +271,15 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={factorColumns}
             dataSource={shearWeightTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '30rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -295,14 +295,15 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={factorColumns}
             dataSource={v02qTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '30rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>

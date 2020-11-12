@@ -14,7 +14,7 @@ import { IStyles } from './interfaces';
 const styles: IStyles = {
   header: {
     position: 'fixed',
-    zIndex: 1,
+    zIndex: 1000,
     width: '100%',
   },
 };

@@ -1,5 +1,5 @@
-import { Table, Collapse, Row } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import { Collapse, Row } from 'antd';
+import { BaseTable, ArtColumn } from 'ali-react-table';
 import React from 'react';
 import { IQuantityFE } from '@outreader/core';
 import { CompareQuantityChart } from '../../chart-tools';
@@ -15,36 +15,34 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
   }
   const count = storeyID.length;
 
-  const quantityColumns: ColumnsType<ICompare> = [
+  const quantityColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
-      width: '3rem',
+      name: '层号',
+      code: 'storeyID',
+      width: 64,
       align: 'right',
-      fixed: 'left',
+      lock: true,
     },
   ];
 
   for (let i = 0; i < n; i++) {
     quantityColumns.push({
-      title: `模型${i + 1}`,
+      name: `模型${i + 1}`,
+      align: 'center',
       children: [
         {
-          title: `面积`,
-          dataIndex: `area${i}`,
-          width: `${100 / 3 / n}%`,
+          name: `面积`,
+          code: `area${i}`,
           align: 'right',
         },
         {
-          title: `用量`,
-          dataIndex: `quantity${i}`,
-          width: `${100 / 3 / n}%`,
+          name: `用量`,
+          code: `quantity${i}`,
           align: 'right',
         },
         {
-          title: `含量`,
-          dataIndex: `unit${i}`,
-          width: `${100 / 3 / n}%`,
+          name: `含量`,
+          code: `unit${i}`,
           align: 'right',
         },
       ],
@@ -317,14 +315,15 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={quantityColumns}
             dataSource={concreteTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '50rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -338,14 +337,15 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={quantityColumns}
             dataSource={steelTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '50rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -359,14 +359,15 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={quantityColumns}
             dataSource={rebarTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '50rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
