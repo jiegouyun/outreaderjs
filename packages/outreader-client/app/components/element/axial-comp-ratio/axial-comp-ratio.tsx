@@ -1,5 +1,5 @@
-import { Table, Collapse, Row } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import { Collapse, Row } from 'antd';
+import { BaseTable, ArtColumn } from 'ali-react-table';
 import React from 'react';
 import { IElementUcFE } from '@outreader/core';
 import { IEleData } from '../../../interfaces';
@@ -10,30 +10,31 @@ export function AxialCompRatioComponent(uc: IElementUcFE) {
   const n = col.colName.length;
   const count = col.storeyID.length;
 
-  const colUcColumns: ColumnsType<IEleData> = [
+  const colUcColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
-      width: '3rem',
+      name: '层号',
+      code: 'storeyID',
+      width: 64,
       align: 'right',
-      fixed: 'left',
+      lock: true,
     },
   ];
 
   for (let i = 0; i < n; i++) {
     colUcColumns.push({
-      title: `C-${col.colName[i]}`,
+      name: `C-${col.colName[i]}`,
+      align: 'center',
       children: [
         {
-          title: 'Uc',
-          dataIndex: `uc${i}`,
-          width: `${100 / 2 / n}%`,
+          name: 'Uc',
+          code: `uc${i}`,
+          width: 80,
           align: 'right',
         },
         {
-          title: 'Uc_G',
-          dataIndex: `ucG${i}`,
-          width: `${100 / 2 / n}%`,
+          name: 'Uc_G',
+          code: `ucG${i}`,
+          width: 80,
           align: 'right',
         },
       ],
@@ -90,14 +91,14 @@ export function AxialCompRatioComponent(uc: IElementUcFE) {
       </Row>
       <Collapse ghost>
         <Panel header="详细信息" key="1">
-          <Table
+          <BaseTable
             columns={colUcColumns}
             dataSource={colUcTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '800rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>

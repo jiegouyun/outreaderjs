@@ -222,6 +222,7 @@ export function CompareParametersComponent(parameters: IParametersFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
       />
       <h3>计算控制信息</h3>
       <Table
@@ -231,6 +232,7 @@ export function CompareParametersComponent(parameters: IParametersFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
       />
       <h3>风荷载信息</h3>
       <Table
@@ -240,6 +242,7 @@ export function CompareParametersComponent(parameters: IParametersFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
       />
       <h3>地震信息</h3>
       <Table
@@ -249,6 +252,7 @@ export function CompareParametersComponent(parameters: IParametersFE[]) {
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
       />
     </React.Fragment>
   );

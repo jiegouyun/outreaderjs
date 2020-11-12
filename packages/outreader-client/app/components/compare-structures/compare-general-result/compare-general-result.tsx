@@ -246,6 +246,7 @@ export function CompareGeneralResultComponent(
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
       />
       <h3>质量信息</h3>
       <Table
@@ -255,6 +256,7 @@ export function CompareGeneralResultComponent(
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
       />
       <h3>地下室楼层侧向刚度比验算(剪切刚度)</h3>
       <Table
@@ -264,6 +266,7 @@ export function CompareGeneralResultComponent(
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
       />
       <h3>结构整体抗倾覆验算</h3>
       <Table
@@ -273,6 +276,7 @@ export function CompareGeneralResultComponent(
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
       />
       <h3>结构整体稳定验算(刚重比)</h3>
       <Table
@@ -282,6 +286,7 @@ export function CompareGeneralResultComponent(
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
       />
       <h3>风振舒适度验算(顶点加速度)</h3>
       <Table
@@ -291,6 +296,7 @@ export function CompareGeneralResultComponent(
         size="small"
         pagination={false}
         style={{ marginBottom: 20 }}
+        scroll={{ x: true }}
       />
     </React.Fragment>
   );

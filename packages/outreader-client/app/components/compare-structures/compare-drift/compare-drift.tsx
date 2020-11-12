@@ -1,5 +1,5 @@
-import { Table, Row, Collapse } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import { Row, Collapse } from 'antd';
+import { BaseTable, ArtColumn } from 'ali-react-table';
 import React from 'react';
 import { IDriftFE } from '@outreader/core';
 import { StoreyChart } from '../../chart-tools';
@@ -19,54 +19,49 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
   }
   const count = storeyID.length;
 
-  const driftDispColumns: ColumnsType<ICompare> = [
+  const driftDispColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
-      width: '3rem',
+      name: '层号',
+      code: 'storeyID',
+      width: 64,
       align: 'right',
-      fixed: 'left',
+      lock: true,
     },
   ];
 
   for (let i = 0; i < n; i++) {
     driftDispColumns.push({
-      title: `模型${i + 1}`,
+      name: `模型${i + 1}`,
+      align: 'center',
       children: [
         {
-          title: `地震X`,
-          dataIndex: `seismicX${i}`,
-          width: `${100 / 6 / n}%`,
+          name: `地震X`,
+          code: `seismicX${i}`,
           align: 'right',
         },
         {
-          title: `地震Y`,
-          dataIndex: `seismicY${i}`,
-          width: `${100 / 6 / n}%`,
+          name: `地震Y`,
+          code: `seismicY${i}`,
           align: 'right',
         },
         {
-          title: `顺风X`,
-          dataIndex: `windAX${i}`,
-          width: `${100 / 6 / n}%`,
+          name: `顺风X`,
+          code: `windAX${i}`,
           align: 'right',
         },
         {
-          title: `顺风Y`,
-          dataIndex: `windAY${i}`,
-          width: `${100 / 6 / n}%`,
+          name: `顺风Y`,
+          code: `windAY${i}`,
           align: 'right',
         },
         {
-          title: `横风X`,
-          dataIndex: `windCX${i}`,
-          width: `${100 / 6 / n}%`,
+          name: `横风X`,
+          code: `windCX${i}`,
           align: 'right',
         },
         {
-          title: `横风Y`,
-          dataIndex: `windCY${i}`,
-          width: `${100 / 6 / n}%`,
+          name: `横风Y`,
+          code: `windCY${i}`,
           align: 'right',
         },
       ],
@@ -236,42 +231,39 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
     }
   }
 
-  const dispRatioColumns: ColumnsType<ICompare> = [
+  const dispRatioColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
-      width: '3rem',
+      name: '层号',
+      code: 'storeyID',
+      width: 64,
       align: 'right',
-      fixed: 'left',
+      lock: true,
     },
   ];
 
   for (let i = 0; i < n; i++) {
     dispRatioColumns.push({
-      title: `模型${i + 1}`,
+      name: `模型${i + 1}`,
+      align: 'center',
       children: [
         {
-          title: `+X`,
-          dataIndex: `eccXP${i}`,
-          width: `${100 / 4 / n}%`,
+          name: `+X`,
+          code: `eccXP${i}`,
           align: 'right',
         },
         {
-          title: `-X`,
-          dataIndex: `eccXN${i}`,
-          width: `${100 / 4 / n}%`,
+          name: `-X`,
+          code: `eccXN${i}`,
           align: 'right',
         },
         {
-          title: `+Y`,
-          dataIndex: `eccYP${i}`,
-          width: `${100 / 4 / n}%`,
+          name: `+Y`,
+          code: `eccYP${i}`,
           align: 'right',
         },
         {
-          title: `-Y`,
-          dataIndex: `eccYN${i}`,
-          width: `${100 / 4 / n}%`,
+          name: `-Y`,
+          code: `eccYN${i}`,
           align: 'right',
         },
       ],
@@ -476,14 +468,15 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={driftDispColumns}
             dataSource={dispTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '100rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -506,14 +499,15 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={driftDispColumns}
             dataSource={driftTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '100rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -536,14 +530,15 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={dispRatioColumns}
             dataSource={dispRatioTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '50rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -566,14 +561,15 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={dispRatioColumns}
             dataSource={dispRatioDTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '50rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>

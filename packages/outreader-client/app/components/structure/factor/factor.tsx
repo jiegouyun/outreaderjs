@@ -1,24 +1,24 @@
-import { Table, Collapse, Row } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import { Collapse, Row } from 'antd';
+import { BaseTable, ArtColumn } from 'ali-react-table';
 import React from 'react';
 import { IFactorFE } from '@outreader/core';
 import { StoreyChart } from '../../chart-tools';
 
 export function FactorComponent(factor: IFactorFE) {
-  const weakColumns: ColumnsType<Object> = [
+  const weakColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
+      name: '层号',
+      code: 'storeyID',
       align: 'right',
     },
     {
-      title: '塔号',
-      dataIndex: 'towerID',
+      name: '塔号',
+      code: 'towerID',
       align: 'right',
     },
     {
-      title: '放大系数',
-      dataIndex: 'factor',
+      name: '放大系数',
+      code: 'factor',
       align: 'right',
     },
   ];
@@ -38,25 +38,25 @@ export function FactorComponent(factor: IFactorFE) {
     });
   }
 
-  const factorColumns: ColumnsType<Object> = [
+  const factorColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
+      name: '层号',
+      code: 'storeyID',
       align: 'right',
     },
     {
-      title: '塔号',
-      dataIndex: 'towerID',
+      name: '塔号',
+      code: 'towerID',
       align: 'right',
     },
     {
-      title: 'X向',
-      dataIndex: 'factorX',
+      name: 'X向',
+      code: 'factorX',
       align: 'right',
     },
     {
-      title: 'Y向',
-      dataIndex: 'factorY',
+      name: 'Y向',
+      code: 'factorY',
       align: 'right',
     },
   ];
@@ -124,14 +124,14 @@ export function FactorComponent(factor: IFactorFE) {
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={weakColumns}
             dataSource={weakTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -158,14 +158,14 @@ export function FactorComponent(factor: IFactorFE) {
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={factorColumns}
             dataSource={shearTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
@@ -192,14 +192,14 @@ export function FactorComponent(factor: IFactorFE) {
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
-          <Table
+          <BaseTable
             columns={factorColumns}
             dataSource={v02qTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ y: 'calc(100vh - 12.5rem)' }}
+            primaryKey={'key'}
+            useVirtual={{ horizontal: false, header: false, vertical: true }}
+            useOuterBorder
+            defaultColumnWidth={64}
+            style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>

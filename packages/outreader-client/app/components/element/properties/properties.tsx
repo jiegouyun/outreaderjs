@@ -1,5 +1,5 @@
-import { Table, Collapse } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import { Collapse } from 'antd';
+import { BaseTable, ArtColumn } from 'ali-react-table';
 import React from 'react';
 import { IWpj } from '@outreader/core';
 import { IEleData } from '../../../interfaces';
@@ -9,88 +9,90 @@ export function PropertiesComponent(wpj: IWpj) {
   const n = col.colName.length;
   const count = col.storeyID.length;
 
-  const colInfoColumns: ColumnsType<IEleData> = [
+  const colInfoColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
-      width: '3rem',
+      name: '层号',
+      code: 'storeyID',
+      width: 64,
       align: 'right',
-      fixed: 'left',
+      lock: true,
     },
   ];
-  const colConnectColumns: ColumnsType<IEleData> = [
+  const colConnectColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
-      width: '3rem',
+      name: '层号',
+      code: 'storeyID',
+      width: 64,
       align: 'right',
-      fixed: 'left',
+      lock: true,
     },
   ];
-  const colSecColumns: ColumnsType<IEleData> = [
+  const colSecColumns: ArtColumn[] = [
     {
-      title: '层号',
-      dataIndex: 'storeyID',
-      width: '3rem',
+      name: '层号',
+      code: 'storeyID',
+      width: 64,
       align: 'right',
-      fixed: 'left',
+      lock: true,
     },
   ];
 
   for (let i = 0; i < n; i++) {
     colInfoColumns.push({
-      title: `C-${col.colName[i]}`,
+      name: `C-${col.colName[i]}`,
+      align: 'center',
       children: [
         {
-          title: '编号',
-          dataIndex: `colID${i}`,
-          width: `${((100 / 2 / n) * 1) / 2}%`,
+          name: '编号',
+          code: `colID${i}`,
+          width: 80,
           align: 'right',
         },
         {
-          title: '属性',
-          dataIndex: `colProp${i}`,
-          width: `${((100 / 2 / n) * 3) / 2}%`,
+          name: '属性',
+          code: `colProp${i}`,
+          width: 80,
           align: 'right',
         },
       ],
     });
     colConnectColumns.push({
-      title: `C-${col.colName[i]}`,
+      name: `C-${col.colName[i]}`,
+      align: 'center',
       children: [
         {
-          title: 'i',
-          dataIndex: `startNode${i}`,
-          width: `${100 / 2 / n}%`,
+          name: 'i',
+          code: `startNode${i}`,
+          width: 80,
           align: 'right',
         },
         {
-          title: 'j',
-          dataIndex: `endNode${i}`,
-          width: `${100 / 2 / n}%`,
+          name: 'j',
+          code: `endNode${i}`,
+          width: 80,
           align: 'right',
         },
       ],
     });
     colSecColumns.push({
-      title: `C-${col.colName[i]}`,
+      name: `C-${col.colName[i]}`,
       children: [
         {
-          title: '类型',
-          dataIndex: `secType${i}`,
-          width: `${((100 / 3 / n) * 3) / 4}%`,
+          name: '类型',
+          code: `secType${i}`,
+          width: 80,
           align: 'right',
         },
         {
-          title: '尺寸',
-          dataIndex: `section${i}`,
-          width: `${((100 / 3 / n) * 6) / 4}%`,
+          name: '尺寸',
+          code: `section${i}`,
+          width: 80,
           align: 'right',
         },
         {
-          title: '转角',
-          dataIndex: `ang${i}`,
-          width: `${((100 / 3 / n) * 3) / 4}%`,
+          name: '转角',
+          code: `ang${i}`,
+          width: 80,
           align: 'right',
         },
       ],
@@ -137,40 +139,40 @@ export function PropertiesComponent(wpj: IWpj) {
       <h3>柱</h3>
       <Collapse ghost>
         <Panel header="属性" key="1">
-          <Table
+          <BaseTable
             columns={colInfoColumns}
             dataSource={colInfoTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '800rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
       <Collapse ghost>
         <Panel header="连接" key="2">
-          <Table
+          <BaseTable
             columns={colConnectColumns}
             dataSource={colConnectTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '800rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
       <Collapse ghost>
         <Panel header="截面" key="3">
-          <Table
+          <BaseTable
             columns={colSecColumns}
             dataSource={colSecTableData}
-            bordered
-            size="small"
-            pagination={false}
-            style={{ marginBottom: 20 }}
-            scroll={{ x: '800rem', y: 'calc(100vh - 14rem)' }}
+            primaryKey={'key'}
+            useVirtual={true}
+            hasHeader={true}
+            useOuterBorder
+            style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
           />
         </Panel>
       </Collapse>
