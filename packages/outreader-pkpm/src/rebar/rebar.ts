@@ -5,6 +5,7 @@ import {
   IRebarQuantity,
   IProjectQuantity,
   readLineByLine,
+  hashStr,
 } from '@outreader/core';
 import fs from 'fs';
 import path from 'path';
@@ -15,15 +16,11 @@ let FLAG: string;
 export async function readRebarOutput(
   dir: string,
 ): Promise<IRebar | undefined> {
-  const files = fs.readdirSync(dir);
-  const filename = files.filter(function (item) {
-    return item.match(/全楼钢筋用量\w*.txt/gi);
-  });
-  if (!filename[0]) {
-    console.error('cannot find file', '全楼钢筋用量.txt');
+  const file = path.join(dir, '全楼钢筋用量.txt');
+  if (!fs.existsSync(file)) {
+    console.error('cannot find file', file);
     return;
   }
-  const file = path.join(dir, filename[0]);
   let rebar: IRebar = {
     hash: hashFile(file),
     area: {
@@ -107,6 +104,37 @@ export async function readRebarOutput(
     },
     { encoding: 'gb2312' },
   );
+
+  // Extract floorRebar{}
+  const fileFloor = path.join(dir, '全楼楼板钢筋用量.dat');
+  if (fs.existsSync(fileFloor)) {
+    rebar.hash = hashStr((rebar.hash || '') + hashFile(fileFloor));
+    await readLineByLine(
+      fileFloor,
+      (line: string) => {
+        // Extract valuable data from .out
+
+        if (line.length === 0) {
+          return;
+        }
+
+        // Divide line into array
+        const lineArray = lineToArray(line);
+        if (lineArray.length === 0) {
+          return;
+        }
+
+        // Extract floorRebar{}
+        if (!rebar.floorRebar.allExtracted) {
+          rebar.floorRebar = extractFloorRebarAlone(
+            lineArray,
+            rebar.floorRebar,
+          );
+        }
+      },
+      { encoding: 'UTF-16 LE' },
+    );
+  }
 
   return rebar;
 }
@@ -211,6 +239,32 @@ export function extractRebar(
   }
 
   return partRebar;
+}
+
+export function extractFloorRebarAlone(
+  lineArray: string[],
+  floorRebar: IRebarQuantity,
+): IRebarQuantity {
+  if (lineArray[0] === '层号') {
+    FLAG = 'keyFloorRebar';
+  } else if (lineArray[0] === '合计') {
+    if (FLAG === 'keyFloorRebar') {
+      floorRebar.total = Number(lineArray[1]);
+      floorRebar.totalPerArea = Number(lineArray[3]);
+      floorRebar.allExtracted = true;
+      FLAG = '';
+    }
+  }
+
+  if (FLAG === 'keyFloorRebar') {
+    if (!isNaN(Number(lineArray[0]))) {
+      floorRebar.storeyID.push(Number(lineArray[0]));
+      floorRebar.storey.push(Number(lineArray[1]));
+      floorRebar.perArea.push(Number(lineArray[3]));
+    }
+  }
+
+  return floorRebar;
 }
 
 /**
