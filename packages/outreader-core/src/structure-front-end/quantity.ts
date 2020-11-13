@@ -7,9 +7,9 @@ export function convertQuantity(
 ): IQuantityFE {
   const area = wmass?.storey.area || rebar?.area.storey || [1];
   const quantity: IQuantityFE = {
-    storeyID: wmass?.storey.storeyID ||
-      concreteSteel?.concrete.storeyID ||
-      rebar?.area.storeyID || [0],
+    storeyID: concreteSteel?.concrete.storeyID ||
+      rebar?.area.storeyID ||
+      wmass?.storey.storeyID || [0],
     towerID: wmass?.storey.towerID || [0],
     area: area,
     concrete: {

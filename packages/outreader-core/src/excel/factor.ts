@@ -26,14 +26,16 @@ export async function writeFactor(
   factor: IFactorFE,
   worksheet: Excel.Worksheet,
 ) {
-  const storeyID =
-    factor.shearWeightRatioModify.storeyID ||
-    factor.stiffness.storeyID ||
-    factor.v02qFactor.storeyID;
-  const towerID =
-    factor.shearWeightRatioModify.towerID ||
-    factor.stiffness.towerID ||
-    factor.v02qFactor.towerID;
+  const storeyID = factor.stiffness.storeyID.length
+    ? factor.stiffness.storeyID
+    : factor.shearWeightRatioModify.storeyID.length
+    ? factor.shearWeightRatioModify.storeyID
+    : factor.v02qFactor.storeyID;
+  const towerID = factor.stiffness.towerID.length
+    ? factor.stiffness.towerID
+    : factor.shearWeightRatioModify.towerID.length
+    ? factor.shearWeightRatioModify.towerID
+    : factor.v02qFactor.towerID;
 
   for (let i = 0; i < storeyID.length; i++) {
     // write storey
@@ -41,10 +43,12 @@ export async function writeFactor(
     worksheet.getCell(`B${3 + i}`).value = towerID[i];
   }
 
-  for (let i = 0; i < factor.shearWeightRatioModify.storeyID.length; i++) {
+  for (let i = 0; i < factor.stiffness.storeyID.length; i++) {
     // write wesk storey shear factor
     worksheet.getCell(`C${3 + i}`).value = factor.stiffness.weakStoreyFactor[i];
+  }
 
+  for (let i = 0; i < factor.shearWeightRatioModify.storeyID.length; i++) {
     // write shear weight ratio factor
     worksheet.getCell(`D${3 + i}`).value =
       factor.shearWeightRatioModify.factorX[i];
@@ -53,7 +57,7 @@ export async function writeFactor(
   }
 
   for (let i = 0; i < factor.v02qFactor.storeyID.length; i++) {
-    // write storey
+    // write v02q factor
     worksheet.getCell(`F${3 + i}`).value = factor.v02qFactor.factorX[i];
     worksheet.getCell(`G${3 + i}`).value = factor.v02qFactor.factorY[i];
   }

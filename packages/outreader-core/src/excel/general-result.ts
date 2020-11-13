@@ -13,7 +13,7 @@ export async function initGeneralResult(worksheet: Excel.Worksheet) {
   worksheet.getCell('A7').value = '版本';
   worksheet.getCell('A8').value = '计算日期';
 
-  worksheet.mergeCells('A10:B10');
+  // worksheet.mergeCells('A10:B10');
   worksheet.getCell('A10').value = '塔属性';
   worksheet.getCell('A11').value = '塔号';
   worksheet.getCell('A12').value = '结构体系';
@@ -164,21 +164,55 @@ export async function formatGeneralResult(worksheet: Excel.Worksheet) {
   rangeSetBorder(worksheet, 8, 2, 8, 2, 'thin', 'thin', 'medium', 'medium');
   rangeSetBorder(worksheet, 2, 2, 7, 2, 'thin', 'thin', 'thin', 'medium');
 
+  const rowNum = worksheet.getRow(11).actualCellCount || 2;
+  worksheet.mergeCells(10, 1, 10, rowNum);
   rangeSetBorder(
     worksheet,
     10,
     1,
     10,
-    1,
+    rowNum,
     'medium',
     'medium',
     'medium',
     'medium',
   );
+  rangeSetBorder(worksheet, 11, 1, 12, rowNum, 'thin', 'thin', 'thin', 'thin');
   rangeSetBorder(worksheet, 11, 1, 11, 1, 'thin', 'medium', 'thin', 'thin');
+  rangeSetBorder(
+    worksheet,
+    12,
+    1,
+    12,
+    rowNum,
+    'thin',
+    'thin',
+    'medium',
+    'thin',
+  );
   rangeSetBorder(worksheet, 12, 1, 12, 1, 'thin', 'medium', 'medium', 'thin');
-  rangeSetBorder(worksheet, 12, 2, 12, 2, 'thin', 'thin', 'medium', 'medium');
-  rangeSetBorder(worksheet, 11, 2, 11, 2, 'thin', 'thin', 'thin', 'medium');
+  rangeSetBorder(
+    worksheet,
+    12,
+    rowNum,
+    12,
+    rowNum,
+    'thin',
+    'thin',
+    'medium',
+    'medium',
+  );
+  rangeSetBorder(
+    worksheet,
+    11,
+    rowNum,
+    11,
+    rowNum,
+    'thin',
+    'thin',
+    'thin',
+    'medium',
+  );
 
   rangeSetBorder(
     worksheet,

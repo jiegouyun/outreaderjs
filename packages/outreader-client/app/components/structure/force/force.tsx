@@ -1,5 +1,10 @@
 import { Row, Collapse } from 'antd';
-import { BaseTable, ArtColumn } from 'ali-react-table';
+import {
+  BaseTable,
+  ArtColumn,
+  useTablePipeline,
+  features,
+} from 'ali-react-table';
 import React from 'react';
 import { IForceFE } from '@outreader/core';
 import { StoreyChart } from '../../chart-tools';
@@ -10,11 +15,13 @@ export function ForceComponent(force: IForceFE) {
       name: '层号',
       code: 'storeyID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: '塔号',
       code: 'towerID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: '外力X',
@@ -153,6 +160,33 @@ export function ForceComponent(force: IForceFE) {
     });
   }
 
+  const pipelineAlongWind = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: forceAlongWindTableData, columns: forceColumns })
+    .use(
+      features.sort({
+        mode: 'multiple',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineCrossWind = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: forceCrossWindTableData, columns: forceColumns })
+    .use(
+      features.sort({
+        mode: 'multiple',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineSeismic = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: forceSeismicTableData, columns: forceColumns })
+    .use(
+      features.sort({
+        mode: 'multiple',
+        highlightColumnWhenActive: true,
+      })
+    );
+
   const { Panel } = Collapse;
   const Force = (
     <React.Fragment>
@@ -198,13 +232,14 @@ export function ForceComponent(force: IForceFE) {
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={forceColumns}
-            dataSource={forceAlongWindTableData}
+            // columns={forceColumns}
+            // dataSource={forceAlongWindTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineAlongWind.getProps()}
           />
         </Panel>
       </Collapse>
@@ -252,8 +287,8 @@ export function ForceComponent(force: IForceFE) {
           <Collapse ghost>
             <Panel header="详细数据" key="1">
               <BaseTable
-                columns={forceColumns}
-                dataSource={forceCrossWindTableData}
+                // columns={forceColumns}
+                // dataSource={forceCrossWindTableData}
                 primaryKey={'key'}
                 useVirtual={{
                   horizontal: false,
@@ -263,6 +298,7 @@ export function ForceComponent(force: IForceFE) {
                 useOuterBorder
                 defaultColumnWidth={64}
                 style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+                {...pipelineCrossWind.getProps()}
               />
             </Panel>
           </Collapse>
@@ -310,13 +346,14 @@ export function ForceComponent(force: IForceFE) {
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={forceColumns}
-            dataSource={forceSeismicTableData}
+            // columns={forceColumns}
+            // dataSource={forceSeismicTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineSeismic.getProps()}
           />
         </Panel>
       </Collapse>
