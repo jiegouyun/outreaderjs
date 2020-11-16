@@ -8,6 +8,8 @@ import {
 import React from 'react';
 import { IForceFE } from '@outreader/core';
 import { StoreyChart } from '../../chart-tools';
+import { IData, IDescribe } from '../../../interfaces';
+import { userColors, userShaps } from '../../../colors';
 
 export function ForceComponent(force: IForceFE) {
   const forceColumns: ArtColumn[] = [
@@ -55,11 +57,15 @@ export function ForceComponent(force: IForceFE) {
     },
   ];
 
+  const n = new Set([...force.wind.towerID, ...force.seismic.towerID]).size;
   const forceAlongWindTableData = [];
-  const shearAlongWindXChartData = [];
-  const shearAlongWindYChartData = [];
-  const momentAlongWindXChartData = [];
-  const momentAlongWindYChartData = [];
+  const shearAlongWindChartData: IData[][] = [];
+  const momentAlongWindChartData: IData[][] = [];
+  for (let i = 0; i < n; i++) {
+    shearAlongWindChartData.push([], []);
+    momentAlongWindChartData.push([], []);
+  }
+
   for (let i = 0; i < force.wind.storeyID.length; i++) {
     forceAlongWindTableData.push({
       key: i,
@@ -72,29 +78,34 @@ export function ForceComponent(force: IForceFE) {
       shearY: force.wind.shearAlongY[i].toFixed(0),
       momentY: force.wind.momentAlongY[i].toFixed(0),
     });
-    shearAlongWindXChartData.push({
+
+    const towerIndex = force.wind.towerID[i] - 1;
+    shearAlongWindChartData[2 * towerIndex].push({
       x: Math.abs(force.wind.shearAlongX[i]),
       y: force.wind.storeyID[i],
     });
-    shearAlongWindYChartData.push({
+    shearAlongWindChartData[2 * towerIndex + 1].push({
       x: Math.abs(force.wind.shearAlongY[i]),
       y: force.wind.storeyID[i],
     });
-    momentAlongWindXChartData.push({
+    momentAlongWindChartData[2 * towerIndex].push({
       x: Math.abs(force.wind.momentAlongX[i]),
       y: force.wind.storeyID[i],
     });
-    momentAlongWindYChartData.push({
+    momentAlongWindChartData[2 * towerIndex + 1].push({
       x: Math.abs(force.wind.momentAlongY[i]),
       y: force.wind.storeyID[i],
     });
   }
 
   const forceCrossWindTableData = [];
-  const shearCrossWindXChartData = [];
-  const shearCrossWindYChartData = [];
-  const momentCrossWindXChartData = [];
-  const momentCrossWindYChartData = [];
+  const shearCrossWindChartData: IData[][] = [];
+  const momentCrossWindChartData: IData[][] = [];
+  for (let i = 0; i < n; i++) {
+    shearCrossWindChartData.push([], []);
+    momentCrossWindChartData.push([], []);
+  }
+
   for (let i = 0; i < force.wind.storeyID.length; i++) {
     forceCrossWindTableData.push({
       key: i,
@@ -107,29 +118,34 @@ export function ForceComponent(force: IForceFE) {
       shearY: Math.round(force.wind.shearCrossY[i]),
       momentY: Math.round(force.wind.momentCrossY[i]),
     });
-    shearCrossWindXChartData.push({
+
+    const towerIndex = force.wind.towerID[i] - 1;
+    shearCrossWindChartData[2 * towerIndex].push({
       x: Math.abs(force.wind.shearCrossX[i]),
       y: force.wind.storeyID[i],
     });
-    shearCrossWindYChartData.push({
+    shearCrossWindChartData[2 * towerIndex + 1].push({
       x: Math.abs(force.wind.shearCrossY[i]),
       y: force.wind.storeyID[i],
     });
-    momentCrossWindXChartData.push({
+    momentCrossWindChartData[2 * towerIndex].push({
       x: Math.abs(force.wind.momentCrossX[i]),
       y: force.wind.storeyID[i],
     });
-    momentCrossWindYChartData.push({
+    momentCrossWindChartData[2 * towerIndex + 1].push({
       x: Math.abs(force.wind.momentCrossY[i]),
       y: force.wind.storeyID[i],
     });
   }
 
   const forceSeismicTableData = [];
-  const shearSeismicXChartData = [];
-  const shearSeismicYChartData = [];
-  const momentSeismicXChartData = [];
-  const momentSeismicYChartData = [];
+  const shearSeismicChartData: IData[][] = [];
+  const momentSeismicChartData: IData[][] = [];
+  for (let i = 0; i < n; i++) {
+    shearSeismicChartData.push([], []);
+    momentSeismicChartData.push([], []);
+  }
+
   for (let i = 0; i < force.seismic.storeyID.length; i++) {
     forceSeismicTableData.push({
       key: i,
@@ -142,19 +158,21 @@ export function ForceComponent(force: IForceFE) {
       shearY: force.seismic.shearY[i].toFixed(0),
       momentY: force.seismic.momentY[i].toFixed(0),
     });
-    shearSeismicXChartData.push({
+
+    const towerIndex = force.seismic.towerID[i] - 1;
+    shearSeismicChartData[2 * towerIndex].push({
       x: Math.abs(force.seismic.shearX[i]),
       y: force.seismic.storeyID[i],
     });
-    shearSeismicYChartData.push({
+    shearSeismicChartData[2 * towerIndex + 1].push({
       x: Math.abs(force.seismic.shearY[i]),
       y: force.seismic.storeyID[i],
     });
-    momentSeismicXChartData.push({
+    momentSeismicChartData[2 * towerIndex].push({
       x: Math.abs(force.seismic.momentX[i]),
       y: force.seismic.storeyID[i],
     });
-    momentSeismicYChartData.push({
+    momentSeismicChartData[2 * towerIndex + 1].push({
       x: Math.abs(force.seismic.momentY[i]),
       y: force.seismic.storeyID[i],
     });
@@ -187,6 +205,22 @@ export function ForceComponent(force: IForceFE) {
       })
     );
 
+  const describes: IDescribe[] = [];
+  for (let i = 0; i < n; i++) {
+    describes.push(
+      {
+        name: n === 1 ? `X向` : `塔${i + 1}-X`,
+        fill: userColors[(2 * i) % 8],
+        shape: userShaps[(2 * i) % 7],
+      },
+      {
+        name: n === 1 ? `Y向` : `塔${i + 1}-Y`,
+        fill: userColors[(2 * i + 1) % 8],
+        shape: userShaps[(2 * i + 1) % 7],
+      }
+    );
+  }
+
   const { Panel } = Collapse;
   const Force = (
     <React.Fragment>
@@ -196,44 +230,20 @@ export function ForceComponent(force: IForceFE) {
           labels={{
             xLabel: '顺风剪力(kN)',
           }}
-          describes={[
-            {
-              name: 'X向',
-              fill: '#8884d8',
-              shape: 'cross',
-            },
-            {
-              name: 'Y向',
-              fill: '#82ca9d',
-              shape: 'circle',
-            },
-          ]}
-          datas={[shearAlongWindXChartData, shearAlongWindYChartData]}
+          describes={describes}
+          datas={shearAlongWindChartData}
         />
         <StoreyChart
           labels={{
             xLabel: '顺风弯矩(kNm)',
           }}
-          describes={[
-            {
-              name: 'X向',
-              fill: '#8884d8',
-              shape: 'cross',
-            },
-            {
-              name: 'Y向',
-              fill: '#82ca9d',
-              shape: 'circle',
-            },
-          ]}
-          datas={[momentAlongWindXChartData, momentAlongWindYChartData]}
+          describes={describes}
+          datas={momentAlongWindChartData}
         />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            // columns={forceColumns}
-            // dataSource={forceAlongWindTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
@@ -251,44 +261,20 @@ export function ForceComponent(force: IForceFE) {
               labels={{
                 xLabel: '横风剪力(kN)',
               }}
-              describes={[
-                {
-                  name: 'X向',
-                  fill: '#8884d8',
-                  shape: 'cross',
-                },
-                {
-                  name: 'Y向',
-                  fill: '#82ca9d',
-                  shape: 'circle',
-                },
-              ]}
-              datas={[shearCrossWindXChartData, shearCrossWindYChartData]}
+              describes={describes}
+              datas={shearCrossWindChartData}
             />
             <StoreyChart
               labels={{
                 xLabel: '横风弯矩(kNm)',
               }}
-              describes={[
-                {
-                  name: 'X向',
-                  fill: '#8884d8',
-                  shape: 'cross',
-                },
-                {
-                  name: 'Y向',
-                  fill: '#82ca9d',
-                  shape: 'circle',
-                },
-              ]}
-              datas={[momentCrossWindXChartData, momentCrossWindYChartData]}
+              describes={describes}
+              datas={momentCrossWindChartData}
             />
           </Row>
           <Collapse ghost>
             <Panel header="详细数据" key="1">
               <BaseTable
-                // columns={forceColumns}
-                // dataSource={forceCrossWindTableData}
                 primaryKey={'key'}
                 useVirtual={{
                   horizontal: false,
@@ -310,44 +296,20 @@ export function ForceComponent(force: IForceFE) {
           labels={{
             xLabel: '地震剪力(kN)',
           }}
-          describes={[
-            {
-              name: 'X向',
-              fill: '#8884d8',
-              shape: 'cross',
-            },
-            {
-              name: 'Y向',
-              fill: '#82ca9d',
-              shape: 'circle',
-            },
-          ]}
-          datas={[shearSeismicXChartData, shearSeismicYChartData]}
+          describes={describes}
+          datas={shearSeismicChartData}
         />
         <StoreyChart
           labels={{
             xLabel: '地震弯矩(kNm)',
           }}
-          describes={[
-            {
-              name: 'X向',
-              fill: '#8884d8',
-              shape: 'cross',
-            },
-            {
-              name: 'Y向',
-              fill: '#82ca9d',
-              shape: 'circle',
-            },
-          ]}
-          datas={[momentSeismicXChartData, momentSeismicYChartData]}
+          describes={describes}
+          datas={momentSeismicChartData}
         />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            // columns={forceColumns}
-            // dataSource={forceSeismicTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
