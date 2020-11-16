@@ -417,10 +417,10 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
     }
   }
 
-  const describesDriftDrift: IDescribe[] = [];
+  const describesDrift: IDescribe[] = [];
   const describesDispRatio: IDescribe[] = [];
   for (let i = 0; i < n; i++) {
-    describesDriftDrift.push(
+    describesDrift.push(
       {
         name: `模型${i + 1}-X`,
         fill: userColors[(2 * i) % 8],
@@ -455,14 +455,14 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
           labels={{
             xLabel: '地震位移(mm)',
           }}
-          describes={describesDriftDrift}
+          describes={describesDrift}
           datas={dispSeismicChartData}
         />
         <StoreyChart
           labels={{
             xLabel: '风位移(mm)',
           }}
-          describes={describesDriftDrift}
+          describes={describesDrift}
           datas={dispWindChartData}
         />
       </Row>
@@ -486,14 +486,14 @@ export function CompareDriftComponent(drifts: IDriftFE[]) {
           labels={{
             xLabel: '地震位移角',
           }}
-          describes={describesDriftDrift}
+          describes={describesDrift}
           datas={driftSeismicChartData}
         />
         <StoreyChart
           labels={{
             xLabel: '风位移角',
           }}
-          describes={describesDriftDrift}
+          describes={describesDrift}
           datas={driftWindChartData}
         />
       </Row>

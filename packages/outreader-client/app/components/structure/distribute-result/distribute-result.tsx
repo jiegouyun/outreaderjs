@@ -362,36 +362,24 @@ export function DistributeResultComponent(
       features: { sortable: true },
     },
     {
-      name: 'X向',
-      align: 'center',
-      children: [
-        {
-          name: '柱',
-          code: 'columnX',
-          align: 'right',
-        },
-        {
-          name: '短肢墙',
-          code: 'wallX',
-          align: 'right',
-        },
-      ],
+      name: '柱X',
+      code: 'columnX',
+      align: 'right',
     },
     {
-      name: 'Y向',
-      align: 'center',
-      children: [
-        {
-          name: '柱',
-          code: 'columnY',
-          align: 'right',
-        },
-        {
-          name: '短肢墙',
-          code: 'wallY',
-          align: 'right',
-        },
-      ],
+      name: '短肢墙X',
+      code: 'wallX',
+      align: 'right',
+    },
+    {
+      name: '柱Y',
+      code: 'columnY',
+      align: 'right',
+    },
+    {
+      name: '短肢墙Y',
+      code: 'wallY',
+      align: 'right',
     },
   ];
 
