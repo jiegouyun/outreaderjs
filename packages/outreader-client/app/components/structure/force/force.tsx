@@ -12,6 +12,8 @@ import { IData, IDescribe } from '../../../interfaces';
 import { userColors, userShaps } from '../../../colors';
 
 export function ForceComponent(force: IForceFE) {
+  const n = new Set([...force.wind.towerID, ...force.seismic.towerID]).size;
+
   const forceColumns: ArtColumn[] = [
     {
       name: '层号',
@@ -57,7 +59,6 @@ export function ForceComponent(force: IForceFE) {
     },
   ];
 
-  const n = new Set([...force.wind.towerID, ...force.seismic.towerID]).size;
   const forceAlongWindTableData = [];
   const shearAlongWindChartData: IData[][] = [];
   const momentAlongWindChartData: IData[][] = [];

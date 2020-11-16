@@ -1,5 +1,10 @@
 import { Row, Collapse } from 'antd';
-import { BaseTable, ArtColumn } from 'ali-react-table';
+import {
+  BaseTable,
+  ArtColumn,
+  useTablePipeline,
+  features,
+} from 'ali-react-table';
 import React from 'react';
 import { IDistributeResultFE } from '@outreader/core';
 import { StoreyChart } from '../../chart-tools';
@@ -9,16 +14,24 @@ import { userColors, userShaps } from '../../../colors';
 export function DistributeResultComponent(
   distributeResult: IDistributeResultFE
 ) {
+  const n = new Set([
+    ...distributeResult.storey.towerID,
+    ...distributeResult.shearWeightRatio.towerID,
+    ...distributeResult.momentPercent.towerID,
+  ]).size;
+
   const storeyColumns: ArtColumn[] = [
     {
       name: '层号',
       code: 'storeyID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: '塔号',
       code: 'towerID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: `属性(标准层)`,
@@ -64,7 +77,11 @@ export function DistributeResultComponent(
   ];
 
   const storeyTableData = [];
-  const wallAreaRatioChartData = [];
+  const storeyChartData: IData[][] = [];
+  for (let i = 0; i < n; i++) {
+    storeyChartData.push([]);
+  }
+
   for (let i = 0; i < distributeResult.storey.storeyID.length; i++) {
     storeyTableData.push({
       key: i,
@@ -81,7 +98,9 @@ export function DistributeResultComponent(
       ),
       wallAreaRatio: distributeResult.storey.wallSectionAreaRatio[i].toFixed(1),
     });
-    wallAreaRatioChartData.push({
+
+    const towerIndex = distributeResult.storey.towerID[i] - 1;
+    storeyChartData[towerIndex].push({
       x: distributeResult.storey.wallSectionAreaRatio[i],
       y: distributeResult.storey.storeyID[i],
     });
@@ -92,11 +111,13 @@ export function DistributeResultComponent(
       name: '层号',
       code: 'storeyID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: '塔号',
       code: 'towerID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: '楼层质量(t)',
@@ -121,8 +142,11 @@ export function DistributeResultComponent(
   ];
 
   const massRatioTableData = [];
-  const massRatioChartData = [];
-  const unitMassRatioChartData = [];
+  const massRatioChartData: IData[][] = [];
+  for (let i = 0; i < n; i++) {
+    massRatioChartData.push([], []);
+  }
+
   for (let i = 0; i < distributeResult.massRatio.storeyID.length; i++) {
     massRatioTableData.push({
       key: i,
@@ -133,11 +157,13 @@ export function DistributeResultComponent(
       unitMass: distributeResult.massRatio.massPerArea[i].toFixed(2),
       unitRatio: distributeResult.massRatio.massPerAreaRatio[i].toFixed(2),
     });
-    massRatioChartData.push({
+
+    const towerIndex = distributeResult.massRatio.towerID[i] - 1;
+    massRatioChartData[2 * towerIndex].push({
       x: distributeResult.massRatio.ratio[i],
       y: distributeResult.massRatio.storeyID[i],
     });
-    unitMassRatioChartData.push({
+    massRatioChartData[2 * towerIndex + 1].push({
       x: distributeResult.massRatio.massPerAreaRatio[i],
       y: distributeResult.massRatio.storeyID[i],
     });
@@ -148,11 +174,13 @@ export function DistributeResultComponent(
       name: '层号',
       code: 'storeyID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: '塔号',
       code: 'towerID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: 'X',
@@ -177,10 +205,13 @@ export function DistributeResultComponent(
   ];
 
   const stiffRatioTableData = [];
-  const stiffRatioXChartData = [];
-  const stiffRatioYChartData = [];
-  const stiffRatioXModifyChartData = [];
-  const stiffRatioYModifyChartData = [];
+  const stiffRatioChartData: IData[][] = [];
+  const stiffRatioModifyChartData: IData[][] = [];
+  for (let i = 0; i < n; i++) {
+    stiffRatioChartData.push([], []);
+    stiffRatioModifyChartData.push([], []);
+  }
+
   for (let i = 0; i < distributeResult.stiffness.storeyID.length; i++) {
     stiffRatioTableData.push({
       key: i,
@@ -191,19 +222,21 @@ export function DistributeResultComponent(
       ratx2: Math.round(distributeResult.stiffness.ratx2[i] * 1000) / 1000,
       raty2: Math.round(distributeResult.stiffness.raty2[i] * 1000) / 1000,
     });
-    stiffRatioXChartData.push({
+
+    const towerIndex = distributeResult.stiffness.towerID[i] - 1;
+    stiffRatioChartData[2 * towerIndex].push({
       x: distributeResult.stiffness.ratx1[i],
       y: distributeResult.stiffness.storeyID[i],
     });
-    stiffRatioYChartData.push({
+    stiffRatioChartData[2 * towerIndex + 1].push({
       x: distributeResult.stiffness.raty1[i],
       y: distributeResult.stiffness.storeyID[i],
     });
-    stiffRatioXModifyChartData.push({
+    stiffRatioModifyChartData[2 * towerIndex].push({
       x: distributeResult.stiffness.ratx2[i],
       y: distributeResult.stiffness.storeyID[i],
     });
-    stiffRatioYModifyChartData.push({
+    stiffRatioModifyChartData[2 * towerIndex + 1].push({
       x: distributeResult.stiffness.raty2[i],
       y: distributeResult.stiffness.storeyID[i],
     });
@@ -214,11 +247,13 @@ export function DistributeResultComponent(
       name: '层号',
       code: 'storeyID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: '塔号',
       code: 'towerID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: 'X',
@@ -233,8 +268,11 @@ export function DistributeResultComponent(
   ];
 
   const shearWeightTableData = [];
-  const shearWeightXChartData = [];
-  const shearWeightYChartData = [];
+  const shearWeightChartData: IData[][] = [];
+  for (let i = 0; i < n; i++) {
+    shearWeightChartData.push([], []);
+  }
+
   for (let i = 0; i < distributeResult.shearWeightRatio.storeyID.length; i++) {
     shearWeightTableData.push({
       key: i,
@@ -243,11 +281,13 @@ export function DistributeResultComponent(
       ratioX: distributeResult.shearWeightRatio.factorX[i].toFixed(3),
       ratioY: distributeResult.shearWeightRatio.factorY[i].toFixed(3),
     });
-    shearWeightXChartData.push({
+
+    const towerIndex = distributeResult.shearWeightRatio.towerID[i] - 1;
+    shearWeightChartData[2 * towerIndex].push({
       x: distributeResult.shearWeightRatio.factorX[i],
       y: distributeResult.shearWeightRatio.storeyID[i],
     });
-    shearWeightYChartData.push({
+    shearWeightChartData[2 * towerIndex + 1].push({
       x: distributeResult.shearWeightRatio.factorY[i],
       y: distributeResult.shearWeightRatio.storeyID[i],
     });
@@ -258,11 +298,13 @@ export function DistributeResultComponent(
       name: '层号',
       code: 'storeyID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: '塔号',
       code: 'towerID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: 'X',
@@ -277,8 +319,11 @@ export function DistributeResultComponent(
   ];
 
   const shearCapacityTableData = [];
-  const shearCapacityXChartData = [];
-  const shearCapacityYChartData = [];
+  const shearCapacityChartData: IData[][] = [];
+  for (let i = 0; i < n; i++) {
+    shearCapacityChartData.push([], []);
+  }
+
   for (
     let i = 0;
     i < distributeResult.shearCapacityCheck.storeyID.length;
@@ -291,11 +336,13 @@ export function DistributeResultComponent(
       ratioX: distributeResult.shearCapacityCheck.ratioX[i].toFixed(2),
       ratioY: distributeResult.shearCapacityCheck.ratioY[i].toFixed(2),
     });
-    shearCapacityXChartData.push({
+
+    const towerIndex = distributeResult.shearCapacityCheck.towerID[i] - 1;
+    shearCapacityChartData[2 * towerIndex].push({
       x: distributeResult.shearCapacityCheck.ratioX[i],
       y: distributeResult.shearCapacityCheck.storeyID[i],
     });
-    shearCapacityYChartData.push({
+    shearCapacityChartData[2 * towerIndex + 1].push({
       x: distributeResult.shearCapacityCheck.ratioY[i],
       y: distributeResult.shearCapacityCheck.storeyID[i],
     });
@@ -306,31 +353,45 @@ export function DistributeResultComponent(
       name: '层号',
       code: 'storeyID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: '塔号',
       code: 'towerID',
       align: 'right',
+      features: { sortable: true },
     },
     {
-      name: 'X向柱',
-      code: 'columnX',
-      align: 'right',
+      name: 'X向',
+      align: 'center',
+      children: [
+        {
+          name: '柱',
+          code: 'columnX',
+          align: 'right',
+        },
+        {
+          name: '短肢墙',
+          code: 'wallX',
+          align: 'right',
+        },
+      ],
     },
     {
-      name: 'X向短肢墙',
-      code: 'wallX',
-      align: 'right',
-    },
-    {
-      name: 'Y向柱',
-      code: 'columnY',
-      align: 'right',
-    },
-    {
-      name: 'Y向短肢墙',
-      code: 'wallY',
-      align: 'right',
+      name: 'Y向',
+      align: 'center',
+      children: [
+        {
+          name: '柱',
+          code: 'columnY',
+          align: 'right',
+        },
+        {
+          name: '短肢墙',
+          code: 'wallY',
+          align: 'right',
+        },
+      ],
     },
   ];
 
@@ -339,14 +400,17 @@ export function DistributeResultComponent(
       name: '层号',
       code: 'storeyID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: '塔号',
       code: 'towerID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: 'X向',
+      align: 'center',
       children: [
         {
           name: '长墙',
@@ -367,6 +431,7 @@ export function DistributeResultComponent(
     },
     {
       name: 'Y向',
+      align: 'center',
       children: [
         {
           name: '长墙',
@@ -388,13 +453,16 @@ export function DistributeResultComponent(
   ];
 
   const momentDistributeTableData = [];
+  const momentColumnChartData: IData[][] = [];
+  const momentWallChartData: IData[][] = [];
   const lackWallMomentTableData = [];
-  const momentColumnXChartData = [];
-  const momentColumnYChartData = [];
-  const momentWallXChartData = [];
-  const momentWallYChartData = [];
   const lackWallMomentXChartData: IData[][] = [[], [], []];
   const lackWallMomentYChartData: IData[][] = [[], [], []];
+  for (let i = 0; i < n; i++) {
+    momentColumnChartData.push([], []);
+    momentWallChartData.push([], []);
+  }
+
   for (let i = 0; i < distributeResult.momentPercent.storeyID.length; i++) {
     momentDistributeTableData.push({
       key: i,
@@ -405,19 +473,21 @@ export function DistributeResultComponent(
       columnY: distributeResult.momentPercent.percentColumnY[i].toFixed(1),
       wallY: distributeResult.momentPercent.percentWallY[i].toFixed(1),
     });
-    momentColumnXChartData.push({
+
+    const towerIndex = distributeResult.shearCapacityCheck.towerID[i] - 1;
+    momentColumnChartData[2 * towerIndex].push({
       x: distributeResult.momentPercent.percentColumnX[i],
       y: distributeResult.momentPercent.storeyID[i],
     });
-    momentColumnYChartData.push({
+    momentColumnChartData[2 * towerIndex + 1].push({
       x: distributeResult.momentPercent.percentColumnY[i],
       y: distributeResult.momentPercent.storeyID[i],
     });
-    momentWallXChartData.push({
+    momentWallChartData[2 * towerIndex].push({
       x: distributeResult.momentPercent.percentWallX[i],
       y: distributeResult.momentPercent.storeyID[i],
     });
-    momentWallYChartData.push({
+    momentWallChartData[2 * towerIndex + 1].push({
       x: distributeResult.momentPercent.percentWallY[i],
       y: distributeResult.momentPercent.storeyID[i],
     });
@@ -472,11 +542,13 @@ export function DistributeResultComponent(
       name: '层号',
       code: 'storeyID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: '塔号',
       code: 'towerID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: 'X',
@@ -491,11 +563,14 @@ export function DistributeResultComponent(
   ];
 
   const shearDistributeTableData = [];
-  const shearColumnXChartData = [];
-  const shearColumnYChartData = [];
+  const shearColumnChartData: IData[][] = [];
   const lackWallShearTableData = [];
   const lackWallShearXChartData: IData[][] = [[], [], []];
   const lackWallShearYChartData: IData[][] = [[], [], []];
+  for (let i = 0; i < n; i++) {
+    shearColumnChartData.push([], []);
+  }
+
   for (let i = 0; i < distributeResult.columnShear.storeyID.length; i++) {
     shearDistributeTableData.push({
       key: i,
@@ -506,11 +581,13 @@ export function DistributeResultComponent(
       ratioY:
         Math.round(distributeResult.columnShear.percentColumnY[i] * 10) / 10,
     });
-    shearColumnXChartData.push({
+
+    const towerIndex = distributeResult.columnShear.towerID[i] - 1;
+    shearColumnChartData[2 * towerIndex].push({
       x: distributeResult.columnShear.percentColumnX[i],
       y: distributeResult.columnShear.storeyID[i],
     });
-    shearColumnYChartData.push({
+    shearColumnChartData[2 * towerIndex + 1].push({
       x: distributeResult.columnShear.percentColumnY[i],
       y: distributeResult.columnShear.storeyID[i],
     });
@@ -558,18 +635,118 @@ export function DistributeResultComponent(
     });
   }
 
-  const describes: IDescribe[] = [
-    {
-      name: `X向`,
-      fill: userColors[0],
-      shape: userShaps[0],
-    },
-    {
-      name: `Y向`,
-      fill: userColors[1],
-      shape: userShaps[1],
-    },
-  ];
+  const pipelineStorey = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: storeyTableData, columns: storeyColumns })
+    .use(
+      features.sort({
+        mode: 'multiple',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineMassRatio = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: massRatioTableData, columns: massRatioColumns })
+    .use(
+      features.sort({
+        mode: 'multiple',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineStiffRatio = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: stiffRatioTableData, columns: stiffRatioColumns })
+    .use(
+      features.sort({
+        mode: 'multiple',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineShearWeight = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: shearWeightTableData, columns: shearWeightColumns })
+    .use(
+      features.sort({
+        mode: 'multiple',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineShearCapacity = useTablePipeline({
+    components: BaseTable as any,
+  })
+    .input({
+      dataSource: shearCapacityTableData,
+      columns: shearCapacityColumns,
+    })
+    .use(
+      features.sort({
+        mode: 'multiple',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineMomentDistribute = useTablePipeline({
+    components: BaseTable as any,
+  })
+    .input({
+      dataSource: momentDistributeTableData,
+      columns: momentDistributeColumns,
+    })
+    .use(
+      features.sort({
+        mode: 'multiple',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineShearDistribute = useTablePipeline({
+    components: BaseTable as any,
+  })
+    .input({
+      dataSource: shearDistributeTableData,
+      columns: shearDistributeColumns,
+    })
+    .use(
+      features.sort({
+        mode: 'multiple',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const describesStorey: IDescribe[] = [];
+  const describesMassRatio: IDescribe[] = [];
+  const describes: IDescribe[] = [];
+  for (let i = 0; i < n; i++) {
+    describesStorey.push({
+      name: n === 1 ? `墙地比` : `塔${i + 1}`,
+      fill: userColors[i % 8],
+      shape: userShaps[i % 7],
+    });
+    describesMassRatio.push(
+      {
+        name: n === 1 ? `质量比` : `塔${i + 1}-质量比`,
+        fill: userColors[(2 * i) % 8],
+        shape: userShaps[(2 * i) % 7],
+      },
+      {
+        name: n === 1 ? `单位质量比` : `塔${i + 1}-单位质量比`,
+        fill: userColors[(2 * i + 1) % 8],
+        shape: userShaps[(2 * i + 1) % 7],
+      }
+    );
+    describes.push(
+      {
+        name: n === 1 ? `X向` : `塔${i + 1}-X`,
+        fill: userColors[(2 * i) % 8],
+        shape: userShaps[(2 * i) % 7],
+      },
+      {
+        name: n === 1 ? `Y向` : `塔${i + 1}-Y`,
+        fill: userColors[(2 * i + 1) % 8],
+        shape: userShaps[(2 * i + 1) % 7],
+      }
+    );
+  }
 
   const describesLackWall: IDescribe[] = [
     {
@@ -598,26 +775,19 @@ export function DistributeResultComponent(
           labels={{
             xLabel: '墙地比（%）',
           }}
-          describes={[
-            {
-              name: '墙地比',
-              fill: '#8884d8',
-              shape: 'cross',
-            },
-          ]}
-          datas={[wallAreaRatioChartData]}
+          describes={describesStorey}
+          datas={storeyChartData}
         />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={storeyColumns}
-            dataSource={storeyTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineStorey.getProps()}
           />
         </Panel>
       </Collapse>
@@ -627,31 +797,19 @@ export function DistributeResultComponent(
           labels={{
             xLabel: '质量比',
           }}
-          describes={[
-            {
-              name: '质量比',
-              fill: '#8884d8',
-              shape: 'cross',
-            },
-            {
-              name: '单位面积质量比',
-              fill: '#82ca9d',
-              shape: 'circle',
-            },
-          ]}
-          datas={[massRatioChartData, unitMassRatioChartData]}
+          describes={describesMassRatio}
+          datas={massRatioChartData}
         />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={massRatioColumns}
-            dataSource={massRatioTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineMassRatio.getProps()}
           />
         </Panel>
       </Collapse>
@@ -662,26 +820,25 @@ export function DistributeResultComponent(
             xLabel: '刚度比',
           }}
           describes={describes}
-          datas={[stiffRatioXChartData, stiffRatioYChartData]}
+          datas={stiffRatioChartData}
         />
         <StoreyChart
           labels={{
             xLabel: '层高修正刚度比',
           }}
           describes={describes}
-          datas={[stiffRatioXModifyChartData, stiffRatioYModifyChartData]}
+          datas={stiffRatioModifyChartData}
         />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={stiffRatioColumns}
-            dataSource={stiffRatioTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineStiffRatio.getProps()}
           />
         </Panel>
       </Collapse>
@@ -692,19 +849,18 @@ export function DistributeResultComponent(
             xLabel: '剪重比',
           }}
           describes={describes}
-          datas={[shearWeightXChartData, shearWeightYChartData]}
+          datas={shearWeightChartData}
         />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={shearWeightColumns}
-            dataSource={shearWeightTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineShearWeight.getProps()}
           />
         </Panel>
       </Collapse>
@@ -715,19 +871,18 @@ export function DistributeResultComponent(
             xLabel: '抗剪承载力比',
           }}
           describes={describes}
-          datas={[shearCapacityXChartData, shearCapacityYChartData]}
+          datas={shearCapacityChartData}
         />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={shearCapacityColumns}
-            dataSource={shearCapacityTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineShearCapacity.getProps()}
           />
         </Panel>
       </Collapse>
@@ -735,29 +890,28 @@ export function DistributeResultComponent(
       <Row justify="space-around">
         <StoreyChart
           labels={{
-            xLabel: '规定水平力下倾覆力矩分配(%)',
+            xLabel: '柱倾覆力矩占比(%)',
           }}
           describes={describes}
-          datas={[momentColumnXChartData, momentColumnYChartData]}
+          datas={momentColumnChartData}
         />
         <StoreyChart
           labels={{
             xLabel: '短肢墙倾覆力矩占比(%)',
           }}
           describes={describes}
-          datas={[momentWallXChartData, momentWallYChartData]}
+          datas={momentWallChartData}
         />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={momentDistributeColumns}
-            dataSource={momentDistributeTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineMomentDistribute.getProps()}
           />
         </Panel>
       </Collapse>
@@ -768,19 +922,18 @@ export function DistributeResultComponent(
             xLabel: '柱剪力与分段基底剪力百分比(%)',
           }}
           describes={describes}
-          datas={[shearColumnXChartData, shearColumnYChartData]}
+          datas={shearColumnChartData}
         />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={shearDistributeColumns}
-            dataSource={shearDistributeTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineShearDistribute.getProps()}
           />
         </Panel>
       </Collapse>
