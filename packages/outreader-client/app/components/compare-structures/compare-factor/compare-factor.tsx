@@ -313,21 +313,21 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
     for (let k = 0; k < towers[i]; k++) {
       describesWeak.push({
         name: towers[i] === 1 ? `模型${i + 1}` : `模型${i + 1}-塔${k + 1}`,
-        fill: userColors[i % 8],
-        shape: userShaps[i % 7],
+        fill: userColors[m % 8],
+        shape: userShaps[m % 7],
       });
       describes.push(
         {
           name:
             towers[i] === 1 ? `模型${i + 1}-X` : `模型${i + 1}-塔${k + 1}-X`,
-          fill: userColors[(2 * i) % 8],
-          shape: userShaps[(2 * i) % 7],
+          fill: userColors[(2 * m) % 8],
+          shape: userShaps[(2 * m) % 7],
         },
         {
           name:
             towers[i] === 1 ? `模型${i + 1}-Y` : `模型${i + 1}-塔${k + 1}-Y`,
-          fill: userColors[(2 * i + 1) % 8],
-          shape: userShaps[(2 * i + 1) % 7],
+          fill: userColors[(2 * m + 1) % 8],
+          shape: userShaps[(2 * m + 1) % 7],
         }
       );
       m++;
