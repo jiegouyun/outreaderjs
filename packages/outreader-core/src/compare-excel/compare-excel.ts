@@ -111,7 +111,13 @@ export async function exportCompareExcel(
   const fileType =
     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
   const blob = new Blob([buffer], { type: fileType });
-  saveAs(blob, 'Compare.xlsx');
+  const date = new Date();
+  saveAs(
+    blob,
+    `Compare_${date.getFullYear()}${
+      date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
+    }${date.getDate()}.xlsx`,
+  );
 
   return true;
 }
