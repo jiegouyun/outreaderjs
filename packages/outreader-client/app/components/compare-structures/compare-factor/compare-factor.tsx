@@ -1,5 +1,10 @@
 import { Collapse, Row } from 'antd';
-import { BaseTable, ArtColumn } from 'ali-react-table';
+import {
+  BaseTable,
+  ArtColumn,
+  useTablePipeline,
+  features,
+} from 'ali-react-table';
 import React from 'react';
 import { IFactorFE } from '@outreader/core';
 import { StoreyChart } from '../../chart-tools';
@@ -8,16 +13,32 @@ import { userColors, userShaps } from '../../../colors';
 
 export function CompareFactorComponent(factors: IFactorFE[]) {
   const n = factors.length;
-  let storeyID: number[] = [];
+  let count = 0;
+  const towers = new Array(n).fill(0);
   for (let i = 0; i < n; i++) {
-    if (
-      (factors[i].stiffness || factors[i].v02qFactor).storeyID.length >
-      storeyID.length
-    ) {
-      storeyID = (factors[i].stiffness || factors[i].v02qFactor).storeyID;
-    }
+    towers[i] = new Set([
+      ...factors[i].stiffness.towerID,
+      ...factors[i].v02qFactor.towerID,
+      ...factors[i].shearWeightRatioModify.towerID,
+    ]).size;
+
+    count =
+      (
+        factors[i].stiffness ||
+        factors[i].v02qFactor ||
+        factors[i].shearWeightRatioModify
+      ).storeyID[0] > count
+        ? (
+            factors[i].stiffness ||
+            factors[i].v02qFactor ||
+            factors[i].shearWeightRatioModify
+          ).storeyID[0]
+        : count;
   }
-  const count = storeyID.length;
+
+  const storeyID = Array.from(Array(count).keys())
+    .reverse()
+    .map((val) => val + 1);
 
   const weakColumns: ArtColumn[] = [
     {
@@ -26,21 +47,38 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
       width: 64,
       align: 'right',
       lock: true,
+      features: { sortable: true },
     },
   ];
 
   for (let i = 0; i < n; i++) {
-    weakColumns.push({
-      name: `模型${i + 1}`,
-      code: `factor${i}`,
-      align: 'right',
-    });
+    weakColumns.push(
+      towers[i] === 1
+        ? {
+            name: `模型${i + 1}`,
+            code: `factor${i}-0`,
+            align: 'right',
+          }
+        : {
+            name: `模型${i + 1}`,
+            align: 'center',
+            children: Array.from(Array(towers[i]).keys()).map((val) => {
+              return {
+                name: `塔${val + 1}`,
+                code: `factor${i}-${val}`,
+                align: 'right',
+              };
+            }),
+          }
+    );
   }
 
   const weakTableData: ICompare[] = [];
   const weakChartData: IData[][] = [];
   for (let i = 0; i < n; i++) {
-    weakChartData.push([]);
+    for (let k = 0; k < towers[i]; k++) {
+      weakChartData.push([]);
+    }
   }
 
   for (let j = 0; j < count; j++) {
@@ -50,26 +88,35 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
     });
   }
 
-  for (let i = 0; i < n; i++) {
-    const len = factors[i].stiffness.storeyID.length;
-    const diff = count - len;
-
-    for (let j = 0; j < count; j++) {
-      weakTableData[j][`factor${i}`] =
-        factors[i].stiffness.storeyID[j - diff] === storeyID[j]
-          ? factors[i].stiffness.weakStoreyFactor[j - diff].toFixed(2)
-          : '';
-
-      weakChartData[i].push({
-        x:
-          factors[i].stiffness.storeyID[j - diff] === storeyID[j]
-            ? factors[i].stiffness.weakStoreyFactor[j - diff]
-            : factors[i].stiffness.weakStoreyFactor[0],
-        y:
-          factors[i].stiffness.storeyID[j - diff] === storeyID[j]
-            ? factors[i].stiffness.storeyID[j - diff]
-            : factors[i].stiffness.storeyID[0],
+  for (let i = 0, m = 0; i < n; i++) {
+    for (let k = 0; k < towers[i]; k++) {
+      const tempStoreyID: number[] = [];
+      const tempWeakStoreyFactor: number[] = [];
+      factors[i].stiffness.towerID.forEach((val, index) => {
+        if (val === k + 1) {
+          tempStoreyID.push(factors[i].stiffness.storeyID[index]);
+          tempWeakStoreyFactor.push(
+            factors[i].stiffness.weakStoreyFactor[index]
+          );
+        }
       });
+      const len = tempStoreyID[0];
+      const diff = count - len;
+
+      for (let j = 0; j < count; j++) {
+        weakTableData[j][`factor${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempWeakStoreyFactor[j - diff].toFixed(2)
+            : '';
+
+        if (j < tempStoreyID.length) {
+          weakChartData[m].push({
+            x: tempWeakStoreyFactor[j],
+            y: tempStoreyID[j],
+          });
+        }
+      }
+      m++;
     }
   }
 
@@ -80,6 +127,7 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
       width: 64,
       align: 'right',
       lock: true,
+      features: { sortable: true },
     },
   ];
 
@@ -87,25 +135,47 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
     factorColumns.push({
       name: `模型${i + 1}`,
       align: 'center',
-      children: [
-        {
-          name: `X`,
-          code: `factorX${i}`,
-          align: 'right',
-        },
-        {
-          name: `Y`,
-          code: `factorY${i}`,
-          align: 'right',
-        },
-      ],
+      children:
+        towers[i] === 1
+          ? [
+              {
+                name: `X`,
+                code: `factorX${i}-0`,
+                align: 'right',
+              },
+              {
+                name: `Y`,
+                code: `factorY${i}-0`,
+                align: 'right',
+              },
+            ]
+          : Array.from(Array(towers[i]).keys()).map((val) => {
+              return {
+                name: `塔${val + 1}`,
+                align: 'center',
+                children: [
+                  {
+                    name: `X`,
+                    code: `factorX${i}-${val}`,
+                    align: 'right',
+                  },
+                  {
+                    name: `Y`,
+                    code: `factorY${i}-${val}`,
+                    align: 'right',
+                  },
+                ],
+              };
+            }),
     });
   }
 
   const shearWeightTableData: ICompare[] = [];
   const shearWeightChartData: IData[][] = [];
   for (let i = 0; i < n; i++) {
-    shearWeightChartData.push([], []);
+    for (let k = 0; k < towers[i]; k++) {
+      shearWeightChartData.push([], []);
+    }
   }
 
   for (let j = 0; j < count; j++) {
@@ -115,55 +185,52 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
     });
   }
 
-  for (let i = 0; i < n; i++) {
-    const len = factors[i].shearWeightRatioModify.storeyID.length;
-    const diff = storeyID[0] - factors[i].shearWeightRatioModify.storeyID[0];
-
-    for (let j = 0; j < count; j++) {
-      shearWeightTableData[j][`factorX${i}`] =
-        factors[i].shearWeightRatioModify.storeyID[j - diff] === storeyID[j]
-          ? factors[i].shearWeightRatioModify.factorX[j - diff].toFixed(3)
-          : '';
-      shearWeightTableData[j][`factorY${i}`] =
-        factors[i].shearWeightRatioModify.storeyID[j - diff] === storeyID[j]
-          ? factors[i].shearWeightRatioModify.factorY[j - diff].toFixed(3)
-          : '';
-
-      shearWeightChartData[2 * i].push({
-        x:
-          factors[i].shearWeightRatioModify.storeyID[j - diff] === storeyID[j]
-            ? factors[i].shearWeightRatioModify.factorX[j - diff]
-            : factors[i].shearWeightRatioModify.factorX[
-                Math.round(j / count) * (len - 1)
-              ],
-        y:
-          factors[i].shearWeightRatioModify.storeyID[j - diff] === storeyID[j]
-            ? factors[i].shearWeightRatioModify.storeyID[j - diff]
-            : factors[i].shearWeightRatioModify.storeyID[
-                Math.round(j / count) * (len - 1)
-              ],
+  for (let i = 0, m = 0; i < n; i++) {
+    for (let k = 0; k < towers[i]; k++) {
+      const tempStoreyID: number[] = [];
+      const tempFactorX: number[] = [];
+      const tempFactorY: number[] = [];
+      factors[i].shearWeightRatioModify.towerID.forEach((val, index) => {
+        if (val === k + 1) {
+          tempStoreyID.push(factors[i].shearWeightRatioModify.storeyID[index]);
+          tempFactorX.push(factors[i].shearWeightRatioModify.factorX[index]);
+          tempFactorY.push(factors[i].shearWeightRatioModify.factorY[index]);
+        }
       });
-      shearWeightChartData[2 * i + 1].push({
-        x:
-          factors[i].shearWeightRatioModify.storeyID[j - diff] === storeyID[j]
-            ? factors[i].shearWeightRatioModify.factorY[j - diff]
-            : factors[i].shearWeightRatioModify.factorY[
-                Math.round(j / count) * (len - 1)
-              ],
-        y:
-          factors[i].shearWeightRatioModify.storeyID[j - diff] === storeyID[j]
-            ? factors[i].shearWeightRatioModify.storeyID[j - diff]
-            : factors[i].shearWeightRatioModify.storeyID[
-                Math.round(j / count) * (len - 1)
-              ],
-      });
+      const len = tempStoreyID[0];
+      const diff = count - len;
+
+      for (let j = 0; j < count; j++) {
+        shearWeightTableData[j][`factorX${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempFactorX[j - diff].toFixed(3)
+            : '';
+        shearWeightTableData[j][`factorY${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempFactorY[j - diff].toFixed(3)
+            : '';
+
+        if (j < tempStoreyID.length) {
+          shearWeightChartData[2 * m].push({
+            x: tempFactorX[j],
+            y: tempStoreyID[j],
+          });
+          shearWeightChartData[2 * m + 1].push({
+            x: tempFactorY[j],
+            y: tempStoreyID[j],
+          });
+        }
+      }
+      m++;
     }
   }
 
   const v02qTableData: ICompare[] = [];
   const v02qChartData: IData[][] = [];
   for (let i = 0; i < n; i++) {
-    v02qChartData.push([], []);
+    for (let k = 0; k < towers[i]; k++) {
+      v02qChartData.push([], []);
+    }
   }
 
   for (let j = 0; j < count; j++) {
@@ -173,63 +240,98 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
     });
   }
 
-  for (let i = 0; i < n; i++) {
-    const len = factors[i].v02qFactor.storeyID.length;
-    const diff = storeyID[0] - factors[i].v02qFactor.storeyID[0];
-
-    for (let j = 0; j < count; j++) {
-      v02qTableData[j][`factorX${i}`] =
-        factors[i].v02qFactor.storeyID[j - diff] === storeyID[j]
-          ? factors[i].v02qFactor.factorX[j - diff].toFixed(3)
-          : '';
-      v02qTableData[j][`factorY${i}`] =
-        factors[i].v02qFactor.storeyID[j - diff] === storeyID[j]
-          ? factors[i].v02qFactor.factorY[j - diff].toFixed(3)
-          : '';
-
-      v02qChartData[2 * i].push({
-        x:
-          factors[i].v02qFactor.storeyID[j - diff] === storeyID[j]
-            ? factors[i].v02qFactor.factorX[j - diff]
-            : factors[i].v02qFactor.factorX[Math.round(j / count) * (len - 1)],
-        y:
-          factors[i].v02qFactor.storeyID[j - diff] === storeyID[j]
-            ? factors[i].v02qFactor.storeyID[j - diff]
-            : factors[i].v02qFactor.storeyID[Math.round(j / count) * (len - 1)],
+  for (let i = 0, m = 0; i < n; i++) {
+    for (let k = 0; k < towers[i]; k++) {
+      const tempStoreyID: number[] = [];
+      const tempFactorX: number[] = [];
+      const tempFactorY: number[] = [];
+      factors[i].v02qFactor.towerID.forEach((val, index) => {
+        if (val === k + 1) {
+          tempStoreyID.push(factors[i].v02qFactor.storeyID[index]);
+          tempFactorX.push(factors[i].v02qFactor.factorX[index]);
+          tempFactorY.push(factors[i].v02qFactor.factorY[index]);
+        }
       });
-      v02qChartData[2 * i + 1].push({
-        x:
-          factors[i].v02qFactor.storeyID[j - diff] === storeyID[j]
-            ? factors[i].v02qFactor.factorY[j - diff]
-            : factors[i].v02qFactor.factorY[Math.round(j / count) * (len - 1)],
-        y:
-          factors[i].v02qFactor.storeyID[j - diff] === storeyID[j]
-            ? factors[i].v02qFactor.storeyID[j - diff]
-            : factors[i].v02qFactor.storeyID[Math.round(j / count) * (len - 1)],
-      });
+      const len = tempStoreyID[0];
+      const diff = count - len;
+
+      for (let j = 0; j < count; j++) {
+        v02qTableData[j][`factorX${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempFactorX[j - diff].toFixed(3)
+            : '';
+        v02qTableData[j][`factorY${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempFactorY[j - diff].toFixed(3)
+            : '';
+
+        if (j < tempStoreyID.length) {
+          v02qChartData[2 * m].push({
+            x: tempFactorX[j],
+            y: tempStoreyID[j],
+          });
+          v02qChartData[2 * m + 1].push({
+            x: tempFactorY[j],
+            y: tempStoreyID[j],
+          });
+        }
+      }
+      m++;
     }
   }
 
+  const pipelineWeak = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: weakTableData, columns: weakColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineShearWeight = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: shearWeightTableData, columns: factorColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineV02q = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: v02qTableData, columns: factorColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
   const describesWeak: IDescribe[] = [];
   const describes: IDescribe[] = [];
-  for (let i = 0; i < n; i++) {
-    describesWeak.push({
-      name: `模型${i + 1}`,
-      fill: userColors[i % 8],
-      shape: userShaps[i % 7],
-    });
-    describes.push(
-      {
-        name: `模型${i + 1}-X`,
-        fill: userColors[(2 * i) % 8],
-        shape: userShaps[(2 * i) % 7],
-      },
-      {
-        name: `模型${i + 1}-Y`,
-        fill: userColors[(2 * i + 1) % 8],
-        shape: userShaps[(2 * i + 1) % 7],
-      }
-    );
+  for (let i = 0, m = 0; i < n; i++) {
+    for (let k = 0; k < towers[i]; k++) {
+      describesWeak.push({
+        name: towers[i] === 1 ? `模型${i + 1}` : `模型${i + 1}-塔${k + 1}`,
+        fill: userColors[i % 8],
+        shape: userShaps[i % 7],
+      });
+      describes.push(
+        {
+          name:
+            towers[i] === 1 ? `模型${i + 1}-X` : `模型${i + 1}-塔${k + 1}-X`,
+          fill: userColors[(2 * i) % 8],
+          shape: userShaps[(2 * i) % 7],
+        },
+        {
+          name:
+            towers[i] === 1 ? `模型${i + 1}-Y` : `模型${i + 1}-塔${k + 1}-Y`,
+          fill: userColors[(2 * i + 1) % 8],
+          shape: userShaps[(2 * i + 1) % 7],
+        }
+      );
+      m++;
+    }
   }
 
   const { Panel } = Collapse;
@@ -248,14 +350,13 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={weakColumns}
-            dataSource={weakTableData}
             primaryKey={'key'}
             useVirtual={true}
             hasHeader={true}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineWeak.getProps()}
           />
         </Panel>
       </Collapse>
@@ -272,14 +373,13 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={factorColumns}
-            dataSource={shearWeightTableData}
             primaryKey={'key'}
             useVirtual={true}
             hasHeader={true}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineShearWeight.getProps()}
           />
         </Panel>
       </Collapse>
@@ -296,14 +396,13 @@ export function CompareFactorComponent(factors: IFactorFE[]) {
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={factorColumns}
-            dataSource={v02qTableData}
             primaryKey={'key'}
             useVirtual={true}
             hasHeader={true}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineV02q.getProps()}
           />
         </Panel>
       </Collapse>
