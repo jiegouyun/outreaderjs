@@ -1,5 +1,10 @@
 import { Row, Collapse } from 'antd';
-import { BaseTable, ArtColumn } from 'ali-react-table';
+import {
+  BaseTable,
+  ArtColumn,
+  useTablePipeline,
+  features,
+} from 'ali-react-table';
 import React from 'react';
 import { IDistributeResultFE } from '@outreader/core';
 import { StoreyChart } from '../../chart-tools';
@@ -10,18 +15,26 @@ export function CompareDistributeResultComponent(
   distributeResults: IDistributeResultFE[]
 ) {
   const n = distributeResults.length;
-  let storeyID: number[] = [];
+  let count = 0;
+  const towers = new Array(n).fill(0);
   for (let i = 0; i < n; i++) {
-    if (
-      (distributeResults[i].storey || distributeResults[i].columnShear).storeyID
-        .length > storeyID.length
-    ) {
-      storeyID = (
-        distributeResults[i].storey || distributeResults[i].columnShear
-      ).storeyID;
-    }
+    towers[i] = new Set([
+      ...distributeResults[i].storey.towerID,
+      ...distributeResults[i].shearWeightRatio.towerID,
+      ...distributeResults[i].momentPercent.towerID,
+    ]).size;
+
+    count =
+      (distributeResults[i].storey || distributeResults[i].columnShear)
+        .storeyID[0] > count
+        ? (distributeResults[i].storey || distributeResults[i].columnShear)
+            .storeyID[0]
+        : count;
   }
-  const count = storeyID.length;
+
+  const storeyID = Array.from(Array(count).keys())
+    .reverse()
+    .map((val) => val + 1);
 
   const storeyColumns: ArtColumn[] = [
     {
@@ -30,6 +43,7 @@ export function CompareDistributeResultComponent(
       width: 64,
       align: 'right',
       lock: true,
+      features: { sortable: true },
     },
   ];
 
@@ -37,35 +51,67 @@ export function CompareDistributeResultComponent(
     storeyColumns.push({
       name: `模型${i + 1}`,
       align: 'center',
-      children: [
-        {
-          name: `层高`,
-          code: `height${i}`,
-          align: 'right',
-        },
-        {
-          name: `累高`,
-          code: `heightTD${i}`,
-          align: 'right',
-        },
-        {
-          name: `面积`,
-          code: `area${i}`,
-          align: 'right',
-        },
-        {
-          name: `墙地比`,
-          code: `wallAreaRatio${i}`,
-          align: 'right',
-        },
-      ],
+      children:
+        towers[i] === 1
+          ? [
+              {
+                name: `层高`,
+                code: `height${i}-0`,
+                align: 'right',
+              },
+              {
+                name: `累高`,
+                code: `heightTD${i}-0`,
+                align: 'right',
+              },
+              {
+                name: `面积`,
+                code: `area${i}-0`,
+                align: 'right',
+              },
+              {
+                name: `墙地比`,
+                code: `wallAreaRatio${i}-0`,
+                align: 'right',
+              },
+            ]
+          : Array.from(Array(towers[i]).keys()).map((val) => {
+              return {
+                name: `塔${val + 1}`,
+                align: 'center',
+                children: [
+                  {
+                    name: `层高`,
+                    code: `height${i}-${val}`,
+                    align: 'right',
+                  },
+                  {
+                    name: `累高`,
+                    code: `heightTD${i}-${val}`,
+                    align: 'right',
+                  },
+                  {
+                    name: `面积`,
+                    code: `area${i}-${val}`,
+                    align: 'right',
+                  },
+                  {
+                    name: `墙地比`,
+                    code: `wallAreaRatio${i}-${val}`,
+                    align: 'right',
+                  },
+                ],
+              };
+            }),
     });
   }
 
   const storeyTableData: ICompare[] = [];
   const storeyChartData: IData[][] = [];
   for (let i = 0; i < n; i++) {
-    storeyChartData.push([]);
+    for (let k = 0; k < towers[i]; k++) {
+      storeyChartData.push([]);
+    }
   }
 
   for (let j = 0; j < count; j++) {
@@ -75,40 +121,56 @@ export function CompareDistributeResultComponent(
     });
   }
 
-  for (let i = 0; i < n; i++) {
-    const len = distributeResults[i].storey.storeyID.length;
-    const diff = count - len;
-
-    for (let j = 0; j < count; j++) {
-      storeyTableData[j][`height${i}`] =
-        distributeResults[i].storey.storeyID[j - diff] === storeyID[j]
-          ? distributeResults[i].storey.height[j - diff].toFixed(2)
-          : '';
-      storeyTableData[j][`heightTD${i}`] =
-        distributeResults[i].storey.storeyID[j - diff] === storeyID[j]
-          ? distributeResults[i].storey.heightToGround[j - diff].toFixed(2)
-          : '';
-      storeyTableData[j][`area${i}`] =
-        distributeResults[i].storey.storeyID[j - diff] === storeyID[j]
-          ? distributeResults[i].storey.area[j - diff].toFixed(0)
-          : '';
-      storeyTableData[j][`wallAreaRatio${i}`] =
-        distributeResults[i].storey.storeyID[j - diff] === storeyID[j]
-          ? distributeResults[i].storey.wallSectionAreaRatio[j - diff].toFixed(
-              1
-            )
-          : '';
-
-      storeyChartData[i].push({
-        x:
-          distributeResults[i].storey.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].storey.wallSectionAreaRatio[j - diff]
-            : distributeResults[i].storey.wallSectionAreaRatio[0],
-        y:
-          distributeResults[i].storey.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].storey.storeyID[j - diff]
-            : distributeResults[i].storey.storeyID[0],
+  for (let i = 0, m = 0; i < n; i++) {
+    for (let k = 0; k < towers[i]; k++) {
+      const tempStoreyID: number[] = [];
+      const tempHeight: number[] = [];
+      const tempHeightToGround: number[] = [];
+      const tempArea: number[] = [];
+      const tempAllSectionAreaRatio: number[] = [];
+      distributeResults[i].storey.towerID.forEach((val, index) => {
+        if (val === k + 1) {
+          tempStoreyID.push(distributeResults[i].storey.storeyID[index]);
+          tempHeight.push(distributeResults[i].storey.height[index]);
+          tempHeightToGround.push(
+            distributeResults[i].storey.heightToGround[index]
+          );
+          tempArea.push(distributeResults[i].storey.area[index]);
+          tempAllSectionAreaRatio.push(
+            distributeResults[i].storey.wallSectionAreaRatio[index]
+          );
+        }
       });
+      const len = tempStoreyID[0];
+      const diff = count - len;
+
+      for (let j = 0; j < count; j++) {
+        storeyTableData[j][`height${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempHeight[j - diff].toFixed(2)
+            : '';
+        storeyTableData[j][`heightTD${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempHeightToGround[j - diff].toFixed(2)
+            : '';
+        storeyTableData[j][`area${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempArea[j - diff].toFixed(0)
+            : '';
+        storeyTableData[j][`wallAreaRatio${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempAllSectionAreaRatio[j - diff].toFixed(1)
+            : '';
+
+        if (j < tempStoreyID.length) {
+          storeyChartData[m].push({
+            x: tempAllSectionAreaRatio[j],
+            y: tempStoreyID[j],
+          });
+        }
+      }
+
+      m++;
     }
   }
 
@@ -119,6 +181,7 @@ export function CompareDistributeResultComponent(
       width: 64,
       align: 'right',
       lock: true,
+      features: { sortable: true },
     },
   ];
 
@@ -126,25 +189,47 @@ export function CompareDistributeResultComponent(
     massRatioColumns.push({
       name: `模型${i + 1}`,
       align: 'center',
-      children: [
-        {
-          name: `质量比`,
-          code: `ratio${i}`,
-          align: 'right',
-        },
-        {
-          name: `单位质量比`,
-          code: `unitRatio${i}`,
-          align: 'right',
-        },
-      ],
+      children:
+        towers[i] === 1
+          ? [
+              {
+                name: `质量比`,
+                code: `ratio${i}-0`,
+                align: 'right',
+              },
+              {
+                name: `单位质量比`,
+                code: `unitRatio${i}-0`,
+                align: 'right',
+              },
+            ]
+          : Array.from(Array(towers[i]).keys()).map((val) => {
+              return {
+                name: `塔${val + 1}`,
+                align: 'center',
+                children: [
+                  {
+                    name: `质量比`,
+                    code: `ratio${i}-${val}`,
+                    align: 'right',
+                  },
+                  {
+                    name: `单位质量比`,
+                    code: `unitRatio${i}-${val}`,
+                    align: 'right',
+                  },
+                ],
+              };
+            }),
     });
   }
 
   const massRatioTableData: ICompare[] = [];
   const massRatioChartData: IData[][] = [];
   for (let i = 0; i < n; i++) {
-    massRatioChartData.push([], []);
+    for (let k = 0; k < towers[i]; k++) {
+      massRatioChartData.push([], []);
+    }
   }
 
   for (let j = 0; j < count; j++) {
@@ -154,40 +239,46 @@ export function CompareDistributeResultComponent(
     });
   }
 
-  for (let i = 0; i < n; i++) {
-    const len = distributeResults[i].massRatio.storeyID.length;
-    const diff = count - len;
-
-    for (let j = 0; j < count; j++) {
-      massRatioTableData[j][`ratio${i}`] =
-        distributeResults[i].massRatio.storeyID[j - diff] === storeyID[j]
-          ? distributeResults[i].massRatio.ratio[j - diff].toFixed(2)
-          : '';
-      massRatioTableData[j][`unitRatio${i}`] =
-        distributeResults[i].massRatio.storeyID[j - diff] === storeyID[j]
-          ? distributeResults[i].massRatio.massPerAreaRatio[j - diff].toFixed(2)
-          : '';
-
-      massRatioChartData[2 * i].push({
-        x:
-          distributeResults[i].massRatio.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].massRatio.ratio[j - diff]
-            : distributeResults[i].massRatio.ratio[0],
-        y:
-          distributeResults[i].massRatio.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].massRatio.storeyID[j - diff]
-            : distributeResults[i].massRatio.storeyID[0],
+  for (let i = 0, m = 0; i < n; i++) {
+    for (let k = 0; k < towers[i]; k++) {
+      const tempStoreyID: number[] = [];
+      const tempMassRatio: number[] = [];
+      const tempMassPerAreaRatio: number[] = [];
+      distributeResults[i].massRatio.towerID.forEach((val, index) => {
+        if (val === k + 1) {
+          tempStoreyID.push(distributeResults[i].massRatio.storeyID[index]);
+          tempMassRatio.push(distributeResults[i].massRatio.ratio[index]);
+          tempMassPerAreaRatio.push(
+            distributeResults[i].massRatio.massPerAreaRatio[index]
+          );
+        }
       });
-      massRatioChartData[2 * i + 1].push({
-        x:
-          distributeResults[i].massRatio.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].massRatio.massPerAreaRatio[j - diff]
-            : distributeResults[i].massRatio.massPerAreaRatio[0],
-        y:
-          distributeResults[i].massRatio.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].massRatio.storeyID[j - diff]
-            : distributeResults[i].massRatio.storeyID[0],
-      });
+      const len = tempStoreyID[0];
+      const diff = count - len;
+
+      for (let j = 0; j < count; j++) {
+        massRatioTableData[j][`ratio${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempMassRatio[j - diff].toFixed(2)
+            : '';
+        massRatioTableData[j][`unitRatio${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempMassPerAreaRatio[j - diff].toFixed(2)
+            : '';
+
+        if (j < tempStoreyID.length) {
+          massRatioChartData[2 * m].push({
+            x: tempMassRatio[j],
+            y: tempStoreyID[j],
+          });
+          massRatioChartData[2 * m + 1].push({
+            x: tempMassPerAreaRatio[j],
+            y: tempStoreyID[j],
+          });
+        }
+      }
+
+      m++;
     }
   }
 
@@ -198,6 +289,7 @@ export function CompareDistributeResultComponent(
       width: 64,
       align: 'right',
       lock: true,
+      features: { sortable: true },
     },
   ];
 
@@ -205,28 +297,58 @@ export function CompareDistributeResultComponent(
     stiffRatioColumns.push({
       name: `模型${i + 1}`,
       align: 'center',
-      children: [
-        {
-          name: `X`,
-          code: `ratx1${i}`,
-          align: 'right',
-        },
-        {
-          name: `Y`,
-          code: `raty1${i}`,
-          align: 'right',
-        },
-        {
-          name: `X(层高修正)`,
-          code: `ratx2${i}`,
-          align: 'right',
-        },
-        {
-          name: `Y(层高修正)`,
-          code: `raty2${i}`,
-          align: 'right',
-        },
-      ],
+      children:
+        towers[i] === 1
+          ? [
+              {
+                name: `X`,
+                code: `ratx1${i}-0`,
+                align: 'right',
+              },
+              {
+                name: `Y`,
+                code: `raty1${i}-0`,
+                align: 'right',
+              },
+              {
+                name: `X(层高修正)`,
+                code: `ratx2${i}-0`,
+                align: 'right',
+              },
+              {
+                name: `Y(层高修正)`,
+                code: `raty2${i}-0`,
+                align: 'right',
+              },
+            ]
+          : Array.from(Array(towers[i]).keys()).map((val) => {
+              return {
+                name: `塔${val + 1}`,
+                align: 'center',
+                children: [
+                  {
+                    name: `X`,
+                    code: `ratx1${i}-${val}`,
+                    align: 'right',
+                  },
+                  {
+                    name: `Y`,
+                    code: `raty1${i}-${val}`,
+                    align: 'right',
+                  },
+                  {
+                    name: `X(层高修正)`,
+                    code: `ratx2${i}-${val}`,
+                    align: 'right',
+                  },
+                  {
+                    name: `Y(层高修正)`,
+                    code: `raty2${i}-${val}`,
+                    align: 'right',
+                  },
+                ],
+              };
+            }),
     });
   }
 
@@ -234,8 +356,10 @@ export function CompareDistributeResultComponent(
   const stiffRatioChartData: IData[][] = [];
   const stiffRatioModifyChartData: IData[][] = [];
   for (let i = 0; i < n; i++) {
-    stiffRatioChartData.push([], []);
-    stiffRatioModifyChartData.push([], []);
+    for (let k = 0; k < towers[i]; k++) {
+      stiffRatioChartData.push([], []);
+      stiffRatioModifyChartData.push([], []);
+    }
   }
 
   for (let j = 0; j < count; j++) {
@@ -245,67 +369,63 @@ export function CompareDistributeResultComponent(
     });
   }
 
-  for (let i = 0; i < n; i++) {
-    const len = distributeResults[i].stiffness.storeyID.length;
-    const diff = count - len;
+  for (let i = 0, m = 0; i < n; i++) {
+    for (let k = 0; k < towers[i]; k++) {
+      const tempStoreyID: number[] = [];
+      const tempRatx1: number[] = [];
+      const tempRaty1: number[] = [];
+      const tempRatx2: number[] = [];
+      const tempRaty2: number[] = [];
+      distributeResults[i].stiffness.towerID.forEach((val, index) => {
+        if (val === k + 1) {
+          tempStoreyID.push(distributeResults[i].stiffness.storeyID[index]);
+          tempRatx1.push(distributeResults[i].stiffness.ratx1[index]);
+          tempRaty1.push(distributeResults[i].stiffness.raty1[index]);
+          tempRatx2.push(distributeResults[i].stiffness.ratx2[index]);
+          tempRaty2.push(distributeResults[i].stiffness.raty2[index]);
+        }
+      });
+      const len = tempStoreyID[0];
+      const diff = count - len;
 
-    for (let j = 0; j < count; j++) {
-      stiffRatioTableData[j][`ratx1${i}`] =
-        distributeResults[i].stiffness.storeyID[j - diff] === storeyID[j]
-          ? distributeResults[i].stiffness.ratx1[j - diff].toFixed(3)
-          : '';
-      stiffRatioTableData[j][`raty1${i}`] =
-        distributeResults[i].stiffness.storeyID[j - diff] === storeyID[j]
-          ? distributeResults[i].stiffness.raty1[j - diff].toFixed(3)
-          : '';
-      stiffRatioTableData[j][`ratx2${i}`] =
-        distributeResults[i].stiffness.storeyID[j - diff] === storeyID[j]
-          ? distributeResults[i].stiffness.ratx2[j - diff].toFixed(3)
-          : '';
-      stiffRatioTableData[j][`raty2${i}`] =
-        distributeResults[i].stiffness.storeyID[j - diff] === storeyID[j]
-          ? distributeResults[i].stiffness.raty2[j - diff].toFixed(3)
-          : '';
-      stiffRatioChartData[2 * i].push({
-        x:
-          distributeResults[i].stiffness.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].stiffness.ratx1[j - diff]
-            : distributeResults[i].stiffness.ratx1[0],
-        y:
-          distributeResults[i].stiffness.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].stiffness.storeyID[j - diff]
-            : distributeResults[i].stiffness.storeyID[0],
-      });
-      stiffRatioChartData[2 * i + 1].push({
-        x:
-          distributeResults[i].stiffness.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].stiffness.raty1[j - diff]
-            : distributeResults[i].stiffness.raty1[0],
-        y:
-          distributeResults[i].stiffness.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].stiffness.storeyID[j - diff]
-            : distributeResults[i].stiffness.storeyID[0],
-      });
-      stiffRatioModifyChartData[2 * i].push({
-        x:
-          distributeResults[i].stiffness.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].stiffness.ratx2[j - diff]
-            : distributeResults[i].stiffness.ratx2[0],
-        y:
-          distributeResults[i].stiffness.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].stiffness.storeyID[j - diff]
-            : distributeResults[i].stiffness.storeyID[0],
-      });
-      stiffRatioModifyChartData[2 * i + 1].push({
-        x:
-          distributeResults[i].stiffness.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].stiffness.raty2[j - diff]
-            : distributeResults[i].stiffness.raty2[0],
-        y:
-          distributeResults[i].stiffness.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].stiffness.storeyID[j - diff]
-            : distributeResults[i].stiffness.storeyID[0],
-      });
+      for (let j = 0; j < count; j++) {
+        stiffRatioTableData[j][`ratx1${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempRatx1[j - diff].toFixed(3)
+            : '';
+        stiffRatioTableData[j][`raty1${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempRaty1[j - diff].toFixed(3)
+            : '';
+        stiffRatioTableData[j][`ratx2${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempRatx2[j - diff].toFixed(3)
+            : '';
+        stiffRatioTableData[j][`raty2${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempRaty2[j - diff].toFixed(3)
+            : '';
+
+        if (j < tempStoreyID.length) {
+          stiffRatioChartData[2 * m].push({
+            x: tempRatx1[j],
+            y: tempStoreyID[j],
+          });
+          stiffRatioChartData[2 * m + 1].push({
+            x: tempRaty1[j],
+            y: tempStoreyID[j],
+          });
+          stiffRatioModifyChartData[2 * m].push({
+            x: tempRatx2[j],
+            y: tempStoreyID[j],
+          });
+          stiffRatioModifyChartData[2 * m + 1].push({
+            x: tempRaty2[j],
+            y: tempStoreyID[j],
+          });
+        }
+      }
+      m++;
     }
   }
 
@@ -316,6 +436,7 @@ export function CompareDistributeResultComponent(
       width: 64,
       align: 'right',
       lock: true,
+      features: { sortable: true },
     },
   ];
 
@@ -323,25 +444,47 @@ export function CompareDistributeResultComponent(
     shearWeightColumns.push({
       name: `模型${i + 1}`,
       align: 'center',
-      children: [
-        {
-          name: `X`,
-          code: `ratioX${i}`,
-          align: 'right',
-        },
-        {
-          name: `Y`,
-          code: `ratioY${i}`,
-          align: 'right',
-        },
-      ],
+      children:
+        towers[i] === 1
+          ? [
+              {
+                name: `X`,
+                code: `ratioX${i}-0`,
+                align: 'right',
+              },
+              {
+                name: `Y`,
+                code: `ratioY${i}-0`,
+                align: 'right',
+              },
+            ]
+          : Array.from(Array(towers[i]).keys()).map((val) => {
+              return {
+                name: `塔${val + 1}`,
+                align: 'center',
+                children: [
+                  {
+                    name: `X`,
+                    code: `ratioX${i}-${val}`,
+                    align: 'right',
+                  },
+                  {
+                    name: `Y`,
+                    code: `ratioY${i}-${val}`,
+                    align: 'right',
+                  },
+                ],
+              };
+            }),
     });
   }
 
   const shearWeightTableData: ICompare[] = [];
   const shearWeightChartData: IData[][] = [];
   for (let i = 0; i < n; i++) {
-    shearWeightChartData.push([], []);
+    for (let k = 0; k < towers[i]; k++) {
+      shearWeightChartData.push([], []);
+    }
   }
 
   for (let j = 0; j < count; j++) {
@@ -351,44 +494,50 @@ export function CompareDistributeResultComponent(
     });
   }
 
-  for (let i = 0; i < n; i++) {
-    const len = distributeResults[i].shearWeightRatio.storeyID.length;
-    const diff = count - len;
-
-    for (let j = 0; j < count; j++) {
-      shearWeightTableData[j][`ratioX${i}`] =
-        distributeResults[i].shearWeightRatio.storeyID[j - diff] === storeyID[j]
-          ? distributeResults[i].shearWeightRatio.factorX[j - diff].toFixed(3)
-          : '';
-      shearWeightTableData[j][`ratioY${i}`] =
-        distributeResults[i].shearWeightRatio.storeyID[j - diff] === storeyID[j]
-          ? distributeResults[i].shearWeightRatio.factorY[j - diff].toFixed(3)
-          : '';
-
-      shearWeightChartData[2 * i].push({
-        x:
-          distributeResults[i].shearWeightRatio.storeyID[j - diff] ===
-          storeyID[j]
-            ? distributeResults[i].shearWeightRatio.factorX[j - diff]
-            : distributeResults[i].shearWeightRatio.factorX[0],
-        y:
-          distributeResults[i].shearWeightRatio.storeyID[j - diff] ===
-          storeyID[j]
-            ? distributeResults[i].shearWeightRatio.storeyID[j - diff]
-            : distributeResults[i].shearWeightRatio.storeyID[0],
+  for (let i = 0, m = 0; i < n; i++) {
+    for (let k = 0; k < towers[i]; k++) {
+      const tempStoreyID: number[] = [];
+      const tempFactorX: number[] = [];
+      const tempFactorY: number[] = [];
+      distributeResults[i].shearWeightRatio.towerID.forEach((val, index) => {
+        if (val === k + 1) {
+          tempStoreyID.push(
+            distributeResults[i].shearWeightRatio.storeyID[index]
+          );
+          tempFactorX.push(
+            distributeResults[i].shearWeightRatio.factorX[index]
+          );
+          tempFactorY.push(
+            distributeResults[i].shearWeightRatio.factorY[index]
+          );
+        }
       });
-      shearWeightChartData[2 * i + 1].push({
-        x:
-          distributeResults[i].shearWeightRatio.storeyID[j - diff] ===
-          storeyID[j]
-            ? distributeResults[i].shearWeightRatio.factorY[j - diff]
-            : distributeResults[i].shearWeightRatio.factorY[0],
-        y:
-          distributeResults[i].shearWeightRatio.storeyID[j - diff] ===
-          storeyID[j]
-            ? distributeResults[i].shearWeightRatio.storeyID[j - diff]
-            : distributeResults[i].shearWeightRatio.storeyID[0],
-      });
+      const len = tempStoreyID[0];
+      const diff = count - len;
+
+      for (let j = 0; j < count; j++) {
+        shearWeightTableData[j][`ratioX${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempFactorX[j - diff].toFixed(3)
+            : '';
+        shearWeightTableData[j][`ratioY${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempFactorY[j - diff].toFixed(3)
+            : '';
+
+        if (j < tempStoreyID.length) {
+          shearWeightChartData[2 * m].push({
+            x: tempFactorX[j],
+            y: tempStoreyID[j],
+          });
+          shearWeightChartData[2 * m + 1].push({
+            x: tempFactorY[j],
+            y: tempStoreyID[j],
+          });
+        }
+      }
+
+      m++;
     }
   }
 
@@ -399,6 +548,7 @@ export function CompareDistributeResultComponent(
       width: 64,
       align: 'right',
       lock: true,
+      features: { sortable: true },
     },
   ];
 
@@ -406,25 +556,47 @@ export function CompareDistributeResultComponent(
     shearCapacityColumns.push({
       name: `模型${i + 1}`,
       align: 'center',
-      children: [
-        {
-          name: `X`,
-          code: `ratioX${i}`,
-          align: 'right',
-        },
-        {
-          name: `Y`,
-          code: `ratioY${i}`,
-          align: 'right',
-        },
-      ],
+      children:
+        towers[i] === 1
+          ? [
+              {
+                name: `X`,
+                code: `ratioX${i}-0`,
+                align: 'right',
+              },
+              {
+                name: `Y`,
+                code: `ratioY${i}-0`,
+                align: 'right',
+              },
+            ]
+          : Array.from(Array(towers[i]).keys()).map((val) => {
+              return {
+                name: `塔${val + 1}`,
+                align: 'center',
+                children: [
+                  {
+                    name: `X`,
+                    code: `ratioX${i}-${val}`,
+                    align: 'right',
+                  },
+                  {
+                    name: `Y`,
+                    code: `ratioY${i}-${val}`,
+                    align: 'right',
+                  },
+                ],
+              };
+            }),
     });
   }
 
   const shearCapacityTableData: ICompare[] = [];
   const shearCapacityChartData: IData[][] = [];
   for (let i = 0; i < n; i++) {
-    shearCapacityChartData.push([], []);
+    for (let k = 0; k < towers[i]; k++) {
+      shearCapacityChartData.push([], []);
+    }
   }
 
   for (let j = 0; j < count; j++) {
@@ -434,46 +606,50 @@ export function CompareDistributeResultComponent(
     });
   }
 
-  for (let i = 0; i < n; i++) {
-    const len = distributeResults[i].shearCapacityCheck.storeyID.length;
-    const diff = count - len;
-
-    for (let j = 0; j < count; j++) {
-      shearCapacityTableData[j][`ratioX${i}`] =
-        distributeResults[i].shearCapacityCheck.storeyID[j - diff] ===
-        storeyID[j]
-          ? distributeResults[i].shearCapacityCheck.ratioX[j - diff].toFixed(2)
-          : '';
-      shearCapacityTableData[j][`ratioY${i}`] =
-        distributeResults[i].shearCapacityCheck.storeyID[j - diff] ===
-        storeyID[j]
-          ? distributeResults[i].shearCapacityCheck.ratioY[j - diff].toFixed(2)
-          : '';
-
-      shearCapacityChartData[2 * i].push({
-        x:
-          distributeResults[i].shearCapacityCheck.storeyID[j - diff] ===
-          storeyID[j]
-            ? distributeResults[i].shearCapacityCheck.ratioX[j - diff]
-            : distributeResults[i].shearCapacityCheck.ratioX[0],
-        y:
-          distributeResults[i].shearCapacityCheck.storeyID[j - diff] ===
-          storeyID[j]
-            ? distributeResults[i].shearCapacityCheck.storeyID[j - diff]
-            : distributeResults[i].shearCapacityCheck.storeyID[0],
+  for (let i = 0, m = 0; i < n; i++) {
+    for (let k = 0; k < towers[i]; k++) {
+      const tempStoreyID: number[] = [];
+      const tempRatioX: number[] = [];
+      const tempRatioY: number[] = [];
+      distributeResults[i].shearCapacityCheck.towerID.forEach((val, index) => {
+        if (val === k + 1) {
+          tempStoreyID.push(
+            distributeResults[i].shearCapacityCheck.storeyID[index]
+          );
+          tempRatioX.push(
+            distributeResults[i].shearCapacityCheck.ratioX[index]
+          );
+          tempRatioY.push(
+            distributeResults[i].shearCapacityCheck.ratioY[index]
+          );
+        }
       });
-      shearCapacityChartData[2 * i + 1].push({
-        x:
-          distributeResults[i].shearCapacityCheck.storeyID[j - diff] ===
-          storeyID[j]
-            ? distributeResults[i].shearCapacityCheck.ratioY[j - diff]
-            : distributeResults[i].shearCapacityCheck.ratioY[0],
-        y:
-          distributeResults[i].shearCapacityCheck.storeyID[j - diff] ===
-          storeyID[j]
-            ? distributeResults[i].shearCapacityCheck.storeyID[j - diff]
-            : distributeResults[i].shearCapacityCheck.storeyID[0],
-      });
+      const len = tempStoreyID[0];
+      const diff = count - len;
+
+      for (let j = 0; j < count; j++) {
+        shearCapacityTableData[j][`ratioX${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempRatioX[j - diff].toFixed(2)
+            : '';
+        shearCapacityTableData[j][`ratioY${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempRatioY[j - diff].toFixed(2)
+            : '';
+
+        if (j < tempStoreyID.length) {
+          shearCapacityChartData[2 * m].push({
+            x: tempRatioX[j],
+            y: tempStoreyID[j],
+          });
+          shearCapacityChartData[2 * m + 1].push({
+            x: tempRatioY[j],
+            y: tempStoreyID[j],
+          });
+        }
+      }
+
+      m++;
     }
   }
 
@@ -484,6 +660,7 @@ export function CompareDistributeResultComponent(
       width: 64,
       align: 'right',
       lock: true,
+      features: { sortable: true },
     },
   ];
 
@@ -491,38 +668,82 @@ export function CompareDistributeResultComponent(
     momentDistributeColumns.push({
       name: `模型${i + 1}`,
       align: 'center',
-      children: [
-        {
-          name: `X`,
-          children: [
-            {
-              name: `柱`,
-              code: `columnX${i}`,
-              align: 'right',
-            },
-            {
-              name: `短肢墙`,
-              code: `wallX${i}`,
-              align: 'right',
-            },
-          ],
-        },
-        {
-          name: `Y`,
-          children: [
-            {
-              name: `柱`,
-              code: `columnY${i}`,
-              align: 'right',
-            },
-            {
-              name: `短肢墙`,
-              code: `wallY${i}`,
-              align: 'right',
-            },
-          ],
-        },
-      ],
+      children:
+        towers[i] === 1
+          ? [
+              {
+                name: `X`,
+                align: 'center',
+                children: [
+                  {
+                    name: `柱`,
+                    code: `columnX${i}-0`,
+                    align: 'right',
+                  },
+                  {
+                    name: `短肢墙`,
+                    code: `wallX${i}-0`,
+                    align: 'right',
+                  },
+                ],
+              },
+              {
+                name: `Y`,
+                align: 'center',
+                children: [
+                  {
+                    name: `柱`,
+                    code: `columnY${i}-0`,
+                    align: 'right',
+                  },
+                  {
+                    name: `短肢墙`,
+                    code: `wallY${i}-0`,
+                    align: 'right',
+                  },
+                ],
+              },
+            ]
+          : Array.from(Array(towers[i]).keys()).map((val) => {
+              return {
+                name: `塔${val + 1}`,
+                align: 'center',
+                children: [
+                  {
+                    name: `X`,
+                    align: 'center',
+                    children: [
+                      {
+                        name: `柱`,
+                        code: `columnX${i}-${val}`,
+                        align: 'right',
+                      },
+                      {
+                        name: `短肢墙`,
+                        code: `wallX${i}-${val}`,
+                        align: 'right',
+                      },
+                    ],
+                  },
+                  {
+                    name: `Y`,
+                    align: 'center',
+                    children: [
+                      {
+                        name: `柱`,
+                        code: `columnY${i}-${val}`,
+                        align: 'right',
+                      },
+                      {
+                        name: `短肢墙`,
+                        code: `wallY${i}-${val}`,
+                        align: 'right',
+                      },
+                    ],
+                  },
+                ],
+              };
+            }),
     });
   }
 
@@ -530,8 +751,10 @@ export function CompareDistributeResultComponent(
   const momentColumnChartData: IData[][] = [];
   const momentWallChartData: IData[][] = [];
   for (let i = 0; i < n; i++) {
-    momentColumnChartData.push([], []);
-    momentWallChartData.push([], []);
+    for (let k = 0; k < towers[i]; k++) {
+      momentColumnChartData.push([], []);
+      momentWallChartData.push([], []);
+    }
   }
 
   for (let j = 0; j < count; j++) {
@@ -541,71 +764,72 @@ export function CompareDistributeResultComponent(
     });
   }
 
-  for (let i = 0; i < n; i++) {
-    const len = distributeResults[i].momentPercent.storeyID.length;
-    const diff = count - len;
+  for (let i = 0, m = 0; i < n; i++) {
+    for (let k = 0; k < towers[i]; k++) {
+      const tempStoreyID: number[] = [];
+      const tempPercentColumnX: number[] = [];
+      const tempPercentWallX: number[] = [];
+      const tempPercentColumnY: number[] = [];
+      const tempPercentWallY: number[] = [];
+      distributeResults[i].momentPercent.towerID.forEach((val, index) => {
+        if (val === k + 1) {
+          tempStoreyID.push(distributeResults[i].momentPercent.storeyID[index]);
+          tempPercentColumnX.push(
+            distributeResults[i].momentPercent.percentColumnX[index]
+          );
+          tempPercentWallX.push(
+            distributeResults[i].momentPercent.percentWallX[index]
+          );
+          tempPercentColumnY.push(
+            distributeResults[i].momentPercent.percentColumnY[index]
+          );
+          tempPercentWallY.push(
+            distributeResults[i].momentPercent.percentWallY[index]
+          );
+        }
+      });
+      const len = tempStoreyID[0];
+      const diff = count - len;
 
-    for (let j = 0; j < count; j++) {
-      momentDistributeTableData[j][`columnX${i}`] =
-        distributeResults[i].momentPercent.storeyID[j - diff] === storeyID[j]
-          ? distributeResults[i].momentPercent.percentColumnX[j - diff].toFixed(
-              1
-            )
-          : '';
-      momentDistributeTableData[j][`wallX${i}`] =
-        distributeResults[i].momentPercent.storeyID[j - diff] === storeyID[j]
-          ? distributeResults[i].momentPercent.percentWallX[j - diff].toFixed(1)
-          : '';
-      momentDistributeTableData[j][`columnY${i}`] =
-        distributeResults[i].momentPercent.storeyID[j - diff] === storeyID[j]
-          ? distributeResults[i].momentPercent.percentColumnY[j - diff].toFixed(
-              1
-            )
-          : '';
-      momentDistributeTableData[j][`wallY${i}`] =
-        distributeResults[i].momentPercent.storeyID[j - diff] === storeyID[j]
-          ? distributeResults[i].momentPercent.percentWallY[j - diff].toFixed(1)
-          : '';
-      momentColumnChartData[2 * i].push({
-        x:
-          distributeResults[i].momentPercent.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].momentPercent.percentColumnX[j - diff]
-            : distributeResults[i].momentPercent.percentColumnX[0],
-        y:
-          distributeResults[i].momentPercent.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].momentPercent.storeyID[j - diff]
-            : distributeResults[i].momentPercent.storeyID[0],
-      });
-      momentColumnChartData[2 * i + 1].push({
-        x:
-          distributeResults[i].momentPercent.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].momentPercent.percentColumnY[j - diff]
-            : distributeResults[i].momentPercent.percentColumnY[0],
-        y:
-          distributeResults[i].momentPercent.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].momentPercent.storeyID[j - diff]
-            : distributeResults[i].momentPercent.storeyID[0],
-      });
-      momentWallChartData[2 * i].push({
-        x:
-          distributeResults[i].momentPercent.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].momentPercent.percentWallX[j - diff]
-            : distributeResults[i].momentPercent.percentWallX[0],
-        y:
-          distributeResults[i].momentPercent.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].momentPercent.storeyID[j - diff]
-            : distributeResults[i].momentPercent.storeyID[0],
-      });
-      momentWallChartData[2 * i + 1].push({
-        x:
-          distributeResults[i].momentPercent.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].momentPercent.percentWallY[j - diff]
-            : distributeResults[i].momentPercent.percentWallY[0],
-        y:
-          distributeResults[i].momentPercent.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].momentPercent.storeyID[j - diff]
-            : distributeResults[i].momentPercent.storeyID[0],
-      });
+      for (let j = 0; j < count; j++) {
+        momentDistributeTableData[j][`columnX${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempPercentColumnX[j - diff].toFixed(1)
+            : '';
+        momentDistributeTableData[j][`wallX${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempPercentWallX[j - diff].toFixed(1)
+            : '';
+        momentDistributeTableData[j][`columnY${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempPercentColumnY[j - diff].toFixed(1)
+            : '';
+        momentDistributeTableData[j][`wallY${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempPercentWallY[j - diff].toFixed(1)
+            : '';
+
+        if (j < tempStoreyID.length) {
+          momentColumnChartData[2 * m].push({
+            x: tempPercentColumnX[j],
+            y: tempStoreyID[j],
+          });
+          momentColumnChartData[2 * m + 1].push({
+            x: tempPercentColumnY[j],
+            y: tempStoreyID[j],
+          });
+          momentWallChartData[2 * m].push({
+            x: tempPercentWallX[j],
+            y: tempStoreyID[j],
+          });
+          momentWallChartData[2 * m + 1].push({
+            x: tempPercentWallY[j],
+            y: tempStoreyID[j],
+          });
+        }
+      }
+
+      m++;
     }
   }
 
@@ -616,6 +840,7 @@ export function CompareDistributeResultComponent(
       width: 64,
       align: 'right',
       lock: true,
+      features: { sortable: true },
     },
   ];
 
@@ -623,25 +848,47 @@ export function CompareDistributeResultComponent(
     shearDistributeColumns.push({
       name: `模型${i + 1}`,
       align: 'center',
-      children: [
-        {
-          name: `X`,
-          code: `ratioX${i}`,
-          align: 'right',
-        },
-        {
-          name: `Y`,
-          code: `ratioY${i}`,
-          align: 'right',
-        },
-      ],
+      children:
+        towers[i] === 1
+          ? [
+              {
+                name: `X`,
+                code: `ratioX${i}-0`,
+                align: 'right',
+              },
+              {
+                name: `Y`,
+                code: `ratioY${i}-0`,
+                align: 'right',
+              },
+            ]
+          : Array.from(Array(towers[i]).keys()).map((val) => {
+              return {
+                name: `塔${val + 1}`,
+                align: 'center',
+                children: [
+                  {
+                    name: `X`,
+                    code: `ratioX${i}-${val}`,
+                    align: 'right',
+                  },
+                  {
+                    name: `Y`,
+                    code: `ratioY${i}-${val}`,
+                    align: 'right',
+                  },
+                ],
+              };
+            }),
     });
   }
 
   const shearDistributeTableData: ICompare[] = [];
   const shearColumnChartData: IData[][] = [];
   for (let i = 0; i < n; i++) {
-    shearColumnChartData.push([], []);
+    for (let k = 0; k < towers[i]; k++) {
+      shearColumnChartData.push([], []);
+    }
   }
 
   for (let j = 0; j < count; j++) {
@@ -651,80 +898,173 @@ export function CompareDistributeResultComponent(
     });
   }
 
-  for (let i = 0; i < n; i++) {
-    const len = distributeResults[i].columnShear.storeyID.length;
-    const diff = count - len;
-
-    for (let j = 0; j < count; j++) {
-      shearDistributeTableData[j][`ratioX${i}`] =
-        distributeResults[i].columnShear.storeyID[j - diff] === storeyID[j]
-          ? Math.round(
-              distributeResults[i].columnShear.percentColumnX[j - diff] * 10
-            ) / 10
-          : '';
-      shearDistributeTableData[j][`ratioY${i}`] =
-        distributeResults[i].columnShear.storeyID[j - diff] === storeyID[j]
-          ? Math.round(
-              distributeResults[i].columnShear.percentColumnY[j - diff] * 10
-            ) / 10
-          : '';
-
-      shearColumnChartData[2 * i].push({
-        x:
-          distributeResults[i].columnShear.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].columnShear.percentColumnX[j - diff]
-            : distributeResults[i].columnShear.percentColumnX[0],
-        y:
-          distributeResults[i].columnShear.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].columnShear.storeyID[j - diff]
-            : distributeResults[i].columnShear.storeyID[0],
+  for (let i = 0, m = 0; i < n; i++) {
+    for (let k = 0; k < towers[i]; k++) {
+      const tempStoreyID: number[] = [];
+      const tempPercentColumnX: number[] = [];
+      const tempPercentColumnY: number[] = [];
+      distributeResults[i].columnShear.towerID.forEach((val, index) => {
+        if (val === k + 1) {
+          tempStoreyID.push(distributeResults[i].columnShear.storeyID[index]);
+          tempPercentColumnX.push(
+            distributeResults[i].columnShear.percentColumnX[index]
+          );
+          tempPercentColumnY.push(
+            distributeResults[i].columnShear.percentColumnY[index]
+          );
+        }
       });
-      shearColumnChartData[2 * i + 1].push({
-        x:
-          distributeResults[i].columnShear.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].columnShear.percentColumnY[j - diff]
-            : distributeResults[i].columnShear.percentColumnY[0],
-        y:
-          distributeResults[i].columnShear.storeyID[j - diff] === storeyID[j]
-            ? distributeResults[i].columnShear.storeyID[j - diff]
-            : distributeResults[i].columnShear.storeyID[0],
-      });
+      const len = tempStoreyID[0];
+      const diff = count - len;
+
+      for (let j = 0; j < count; j++) {
+        shearDistributeTableData[j][`ratioX${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? Math.round(tempPercentColumnX[j - diff] * 10) / 10
+            : '';
+        shearDistributeTableData[j][`ratioY${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? Math.round(tempPercentColumnY[j - diff] * 10) / 10
+            : '';
+
+        if (j < tempStoreyID.length) {
+          shearColumnChartData[2 * m].push({
+            x: tempPercentColumnX[j],
+            y: tempStoreyID[j],
+          });
+          shearColumnChartData[2 * m + 1].push({
+            x: tempPercentColumnY[j],
+            y: tempStoreyID[j],
+          });
+        }
+      }
+
+      m++;
     }
   }
+
+  const pipelineStorey = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: storeyTableData, columns: storeyColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineMassRatio = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: massRatioTableData, columns: massRatioColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineStiffRatio = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: stiffRatioTableData, columns: stiffRatioColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineShearWeight = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: shearWeightTableData, columns: shearWeightColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineShearCapacity = useTablePipeline({
+    components: BaseTable as any,
+  })
+    .input({
+      dataSource: shearCapacityTableData,
+      columns: shearCapacityColumns,
+    })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineMomentDistribute = useTablePipeline({
+    components: BaseTable as any,
+  })
+    .input({
+      dataSource: momentDistributeTableData,
+      columns: momentDistributeColumns,
+    })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineShearDistribute = useTablePipeline({
+    components: BaseTable as any,
+  })
+    .input({
+      dataSource: shearDistributeTableData,
+      columns: shearDistributeColumns,
+    })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
 
   const describesStorey: IDescribe[] = [];
   const describesMassRatio: IDescribe[] = [];
   const describes: IDescribe[] = [];
-  for (let i = 0; i < n; i++) {
-    describesStorey.push({
-      name: `模型${i + 1}`,
-      fill: userColors[i % 8],
-      shape: userShaps[i % 7],
-    });
-    describesMassRatio.push(
-      {
-        name: `模型${i + 1}-质量比`,
-        fill: userColors[(2 * i) % 8],
-        shape: userShaps[(2 * i) % 7],
-      },
-      {
-        name: `模型${i + 1}-单位质量比`,
-        fill: userColors[(2 * i + 1) % 8],
-        shape: userShaps[(2 * i + 1) % 7],
-      }
-    );
-    describes.push(
-      {
-        name: `模型${i + 1}-X`,
-        fill: userColors[(2 * i) % 8],
-        shape: userShaps[(2 * i) % 7],
-      },
-      {
-        name: `模型${i + 1}-Y`,
-        fill: userColors[(2 * i + 1) % 8],
-        shape: userShaps[(2 * i + 1) % 7],
-      }
-    );
+  for (let i = 0, m = 0; i < n; i++) {
+    for (let k = 0; k < towers[i]; k++) {
+      describesStorey.push({
+        name: towers[i] === 1 ? `模型${i + 1}` : `模型${i + 1}-塔${k + 1}`,
+        fill: userColors[m % 8],
+        shape: userShaps[m % 7],
+      });
+      describesMassRatio.push(
+        {
+          name:
+            towers[i] === 1
+              ? `模型${i + 1}-质量比`
+              : `模型${i + 1}-塔${k + 1}-质量比`,
+          fill: userColors[(2 * m) % 8],
+          shape: userShaps[(2 * m) % 7],
+        },
+        {
+          name:
+            towers[i] === 1
+              ? `模型${i + 1}-单位质量比`
+              : `模型${i + 1}-塔${k + 1}-单位质量比`,
+          fill: userColors[(2 * m + 1) % 8],
+          shape: userShaps[(2 * m + 1) % 7],
+        }
+      );
+      describes.push(
+        {
+          name:
+            towers[i] === 1 ? `模型${i + 1}-X` : `模型${i + 1}-塔${k + 1}-X`,
+          fill: userColors[(2 * m) % 8],
+          shape: userShaps[(2 * m) % 7],
+        },
+        {
+          name:
+            towers[i] === 1 ? `模型${i + 1}-Y` : `模型${i + 1}-塔${k + 1}-Y`,
+          fill: userColors[(2 * m + 1) % 8],
+          shape: userShaps[(2 * m + 1) % 7],
+        }
+      );
+      m++;
+    }
   }
 
   const { Panel } = Collapse;
@@ -743,14 +1083,13 @@ export function CompareDistributeResultComponent(
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={storeyColumns}
-            dataSource={storeyTableData}
             primaryKey={'key'}
             useVirtual={true}
             hasHeader={true}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineStorey.getProps()}
           />
         </Panel>
       </Collapse>
@@ -767,14 +1106,13 @@ export function CompareDistributeResultComponent(
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={massRatioColumns}
-            dataSource={massRatioTableData}
             primaryKey={'key'}
             useVirtual={true}
             hasHeader={true}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineMassRatio.getProps()}
           />
         </Panel>
       </Collapse>
@@ -798,14 +1136,13 @@ export function CompareDistributeResultComponent(
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={stiffRatioColumns}
-            dataSource={stiffRatioTableData}
             primaryKey={'key'}
             useVirtual={true}
             hasHeader={true}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineStiffRatio.getProps()}
           />
         </Panel>
       </Collapse>
@@ -822,14 +1159,13 @@ export function CompareDistributeResultComponent(
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={shearWeightColumns}
-            dataSource={shearWeightTableData}
             primaryKey={'key'}
             useVirtual={true}
             hasHeader={true}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineShearWeight.getProps()}
           />
         </Panel>
       </Collapse>
@@ -846,14 +1182,13 @@ export function CompareDistributeResultComponent(
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={shearCapacityColumns}
-            dataSource={shearCapacityTableData}
             primaryKey={'key'}
             useVirtual={true}
             hasHeader={true}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineShearCapacity.getProps()}
           />
         </Panel>
       </Collapse>
@@ -877,14 +1212,13 @@ export function CompareDistributeResultComponent(
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={momentDistributeColumns}
-            dataSource={momentDistributeTableData}
             primaryKey={'key'}
             useVirtual={true}
             hasHeader={true}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineMomentDistribute.getProps()}
           />
         </Panel>
       </Collapse>
@@ -901,14 +1235,13 @@ export function CompareDistributeResultComponent(
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={shearDistributeColumns}
-            dataSource={shearDistributeTableData}
             primaryKey={'key'}
             useVirtual={true}
             hasHeader={true}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineShearDistribute.getProps()}
           />
         </Panel>
       </Collapse>
