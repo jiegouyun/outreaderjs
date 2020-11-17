@@ -1,5 +1,10 @@
 import { Row, Collapse } from 'antd';
-import { BaseTable, ArtColumn } from 'ali-react-table';
+import {
+  BaseTable,
+  ArtColumn,
+  useTablePipeline,
+  features,
+} from 'ali-react-table';
 import React from 'react';
 import { IQuantityFE } from '@outreader/core';
 import { QuantityChart } from '../../chart-tools';
@@ -10,6 +15,7 @@ export function QuantityComponent(quantity: IQuantityFE) {
       name: '层号',
       code: 'storeyID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: '面积(m^2)',
@@ -222,6 +228,62 @@ export function QuantityComponent(quantity: IQuantityFE) {
     });
   }
 
+  const pipelineConcrete = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: concreteTableData, columns: quantityColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineUnitConcrete = useTablePipeline({
+    components: BaseTable as any,
+  })
+    .input({ dataSource: unitConcreteTableData, columns: quantityColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineSteel = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: steelTableData, columns: quantityColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineUnitSteel = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: unitSteelTableData, columns: quantityColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineRebar = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: rebarTableData, columns: quantityColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineUnitRebar = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: unitRebarTableData, columns: quantityColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
   const { Panel } = Collapse;
   const Quantity = (
     <React.Fragment>
@@ -233,13 +295,12 @@ export function QuantityComponent(quantity: IQuantityFE) {
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={quantityColumns}
-            dataSource={concreteTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineConcrete.getProps()}
           />
         </Panel>
       </Collapse>
@@ -247,13 +308,12 @@ export function QuantityComponent(quantity: IQuantityFE) {
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={quantityColumns}
-            dataSource={unitConcreteTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineUnitConcrete.getProps()}
           />
         </Panel>
       </Collapse>
@@ -265,13 +325,12 @@ export function QuantityComponent(quantity: IQuantityFE) {
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={quantityColumns}
-            dataSource={steelTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineSteel.getProps()}
           />
         </Panel>
       </Collapse>
@@ -279,13 +338,12 @@ export function QuantityComponent(quantity: IQuantityFE) {
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={quantityColumns}
-            dataSource={unitSteelTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineUnitSteel.getProps()}
           />
         </Panel>
       </Collapse>
@@ -297,13 +355,12 @@ export function QuantityComponent(quantity: IQuantityFE) {
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={quantityColumns}
-            dataSource={rebarTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineRebar.getProps()}
           />
         </Panel>
       </Collapse>
@@ -311,13 +368,12 @@ export function QuantityComponent(quantity: IQuantityFE) {
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={quantityColumns}
-            dataSource={unitRebarTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineUnitRebar.getProps()}
           />
         </Panel>
       </Collapse>

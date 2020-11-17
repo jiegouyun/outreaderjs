@@ -1,5 +1,10 @@
 import { Collapse, Row } from 'antd';
-import { BaseTable, ArtColumn } from 'ali-react-table';
+import {
+  BaseTable,
+  ArtColumn,
+  useTablePipeline,
+  features,
+} from 'ali-react-table';
 import React from 'react';
 import { downloadSVG, downloadPNG } from '@outreader/core';
 import {
@@ -23,6 +28,7 @@ export function PeriodComponent(period: IPeriodFE) {
       name: '振型',
       code: 'modeID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: '周期',
@@ -81,6 +87,7 @@ export function PeriodComponent(period: IPeriodFE) {
       name: '振型',
       code: 'modeID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: 'X',
@@ -173,6 +180,33 @@ export function PeriodComponent(period: IPeriodFE) {
     },
   ];
 
+  const pipelineMode = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: periodModeTableData, columns: modeColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineModeSeismic = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: periodSeismicTableData, columns: modeColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelinePeriodMass = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: periodMassTableData, columns: periodMassColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
   const { Panel } = Collapse;
   const Period = (
     <React.Fragment>
@@ -180,13 +214,12 @@ export function PeriodComponent(period: IPeriodFE) {
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={modeColumns}
-            dataSource={periodModeTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineMode.getProps()}
           />
         </Panel>
       </Collapse>
@@ -194,13 +227,12 @@ export function PeriodComponent(period: IPeriodFE) {
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={modeColumns}
-            dataSource={periodSeismicTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineModeSeismic.getProps()}
           />
         </Panel>
       </Collapse>
@@ -287,13 +319,12 @@ export function PeriodComponent(period: IPeriodFE) {
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={periodMassColumns}
-            dataSource={periodMassTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelinePeriodMass.getProps()}
           />
         </Panel>
       </Collapse>
