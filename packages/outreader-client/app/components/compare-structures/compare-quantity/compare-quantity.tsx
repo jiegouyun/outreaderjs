@@ -1,5 +1,10 @@
 import { Collapse, Row } from 'antd';
-import { BaseTable, ArtColumn } from 'ali-react-table';
+import {
+  BaseTable,
+  ArtColumn,
+  useTablePipeline,
+  features,
+} from 'ali-react-table';
 import React from 'react';
 import { IQuantityFE } from '@outreader/core';
 import { CompareQuantityChart } from '../../chart-tools';
@@ -22,6 +27,7 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
       width: 64,
       align: 'right',
       lock: true,
+      features: { sortable: true },
     },
   ];
 
@@ -302,6 +308,33 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
     });
   }
 
+  const pipelineConcrete = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: concreteTableData, columns: quantityColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineSteel = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: steelTableData, columns: quantityColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineRebar = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: rebarTableData, columns: quantityColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
   const { Panel } = Collapse;
   const Quantities = (
     <React.Fragment>
@@ -316,14 +349,13 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={quantityColumns}
-            dataSource={concreteTableData}
             primaryKey={'key'}
             useVirtual={true}
             hasHeader={true}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineConcrete.getProps()}
           />
         </Panel>
       </Collapse>
@@ -338,14 +370,13 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={quantityColumns}
-            dataSource={steelTableData}
             primaryKey={'key'}
             useVirtual={true}
             hasHeader={true}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineSteel.getProps()}
           />
         </Panel>
       </Collapse>
@@ -360,14 +391,13 @@ export function CompareQuantityComponent(quantities: IQuantityFE[]) {
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={quantityColumns}
-            dataSource={rebarTableData}
             primaryKey={'key'}
             useVirtual={true}
             hasHeader={true}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineRebar.getProps()}
           />
         </Panel>
       </Collapse>
