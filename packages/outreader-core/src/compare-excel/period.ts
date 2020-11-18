@@ -56,26 +56,24 @@ export async function writePeriod(
   for (let i = 0; i < nums; i++) {
     const period: IPeriodFE = structures[i].period;
 
-    for (let j = 0; j < count; j++) {
+    for (let j = 0; j < period.modeMass.modeID.length; j++) {
       // write coupling period
-      worksheet.getCell(4 + j, 2 + 2 * i).value =
-        period.modeCoupling.period[j] || '';
-      worksheet.getCell(4 + j, 3 + 2 * i).value =
-        period.modeCoupling.angle[j] || '';
+      worksheet.getCell(4 + j, 2 + 2 * i).value = period.modeCoupling.period[j];
+      worksheet.getCell(4 + j, 3 + 2 * i).value = period.modeCoupling.angle[j];
 
       // write seismic period
       worksheet.getCell(4 + j, 2 + 2 * i + 2 * nums).value =
-        period.modeSeismic.period[j] || '';
+        period.modeSeismic.period[j];
       worksheet.getCell(4 + j, 3 + 2 * i + 2 * nums).value =
-        period.modeSeismic.angle[j] || '';
+        period.modeSeismic.angle[j];
 
       // write mode mass
       worksheet.getCell(4 + j, 2 + 3 * i + 4 * nums).value =
-        period.modeMass.factorX[j] || 0;
+        period.modeMass.factorX[j];
       worksheet.getCell(4 + j, 3 + 3 * i + 4 * nums).value =
-        period.modeMass.factorY[j] || 0;
+        period.modeMass.factorY[j];
       worksheet.getCell(4 + j, 4 + 3 * i + 4 * nums).value =
-        period.modeMass.factorZ[j] || 0;
+        period.modeMass.factorZ[j];
     }
   }
 }

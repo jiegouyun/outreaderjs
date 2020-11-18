@@ -57,48 +57,48 @@ export async function writeQuantity(
 
   for (let i = 0; i < nums; i++) {
     const quantity: IQuantityFE = structures[i].quantity;
-    const diff = count - quantity.storeyID.length;
 
-    for (let j = 0; j < count; j++) {
+    for (let j = 0; j < quantity.storeyID.length; j++) {
+      const index = count - quantity.storeyID[j];
       // write area
-      worksheet.getCell(4 + j, 2 + i).value = {
-        formula: `round(${quantity.area[j - diff] || 0},0)`,
+      worksheet.getCell(4 + index, 2 + i).value = {
+        formula: `round(${quantity.area[j] || 0},0)`,
         date1904: false,
       };
 
       // write concrete
-      worksheet.getCell(4 + j, 2 + 2 * i + nums).value = {
-        formula: `round(${quantity.concrete.storey[j - diff] || 0},0)`,
+      worksheet.getCell(4 + index, 2 + 2 * i + nums).value = {
+        formula: `round(${quantity.concrete.storey[j] || 0},0)`,
         date1904: false,
       };
 
       // write concrete pre area
-      worksheet.getCell(4 + j, 3 + 2 * i + nums).value = {
-        formula: `round(${quantity.unitConcrete.storey[j - diff] || 0},2)`,
+      worksheet.getCell(4 + index, 3 + 2 * i + nums).value = {
+        formula: `round(${quantity.unitConcrete.storey[j] || 0},2)`,
         date1904: false,
       };
 
       // write steel
-      worksheet.getCell(4 + j, 2 + 2 * i + 3 * nums).value = {
-        formula: `round(${quantity.steel.storey[j - diff] || 0},0)`,
+      worksheet.getCell(4 + index, 2 + 2 * i + 3 * nums).value = {
+        formula: `round(${quantity.steel.storey[j] || 0},0)`,
         date1904: false,
       };
 
       // write steel pre area
-      worksheet.getCell(4 + j, 3 + 2 * i + 3 * nums).value = {
-        formula: `round(${quantity.unitSteel.storey[j - diff] || 0} * 1000,2)`,
+      worksheet.getCell(4 + index, 3 + 2 * i + 3 * nums).value = {
+        formula: `round(${quantity.unitSteel.storey[j] || 0} * 1000,2)`,
         date1904: false,
       };
 
       // write rebar
-      worksheet.getCell(4 + j, 2 + 2 * i + 5 * nums).value = {
-        formula: `round(${quantity.rebar.storey[j - diff] || 0} / 1000,0)`,
+      worksheet.getCell(4 + index, 2 + 2 * i + 5 * nums).value = {
+        formula: `round(${quantity.rebar.storey[j] || 0} / 1000,0)`,
         date1904: false,
       };
 
       // write rebar pre area
-      worksheet.getCell(4 + j, 3 + 2 * i + 5 * nums).value = {
-        formula: `round(${quantity.unitRebar.storey[j - diff] || 0},2)`,
+      worksheet.getCell(4 + index, 3 + 2 * i + 5 * nums).value = {
+        formula: `round(${quantity.unitRebar.storey[j] || 0},2)`,
         date1904: false,
       };
     }
