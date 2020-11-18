@@ -346,7 +346,6 @@ export async function readWdispOutput(
     }
   });
 
-  console.log(wdisp);
   return wdisp;
 }
 
