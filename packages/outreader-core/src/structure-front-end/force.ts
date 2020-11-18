@@ -4,7 +4,7 @@ export function convertForce(wmass?: IWmass, wzq?: IWzq): IForceFE {
   const force: IForceFE = {
     wind: {
       storeyID: wmass?.wind.storeyID || [0],
-      towerID: wmass?.wind.towerID || [0],
+      towerID: wmass?.wind.towerID || [1],
       forceAlongX: wmass?.wind.forceAlongX || [0],
       shearAlongX: wmass?.wind.shearAlongX || [0],
       momentAlongX: wmass?.wind.momentAlongX || [0],
@@ -20,7 +20,7 @@ export function convertForce(wmass?: IWmass, wzq?: IWzq): IForceFE {
     },
     seismic: {
       storeyID: wzq?.seismicForce.storeyID || [0],
-      towerID: wzq?.seismicForce.towerID || [0],
+      towerID: wzq?.seismicForce.towerID || [1],
       forceX: wzq?.seismicForce.forceX || [0],
       shearX: wzq?.seismicForce.shearX || [0],
       momentX: wzq?.seismicForce.momentX || [0],

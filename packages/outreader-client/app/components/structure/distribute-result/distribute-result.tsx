@@ -91,12 +91,15 @@ export function DistributeResultComponent(
       height: distributeResult.storey.height[i].toFixed(2),
       heightTD: distributeResult.storey.heightToGround[i].toFixed(2),
       area: distributeResult.storey.area[i].toFixed(0),
-      wallAreaX: distributeResult.storey.wallSectionAreaX[i].toFixed(1),
-      wallAreaY: distributeResult.storey.wallSectionAreaY[i].toFixed(1),
-      wallAreaStorey: distributeResult.storey.wallSectionAreaStorey[i].toFixed(
-        0
+      wallAreaX:
+        Math.round(distributeResult.storey.wallSectionAreaX[i] * 10) / 10,
+      wallAreaY:
+        Math.round(distributeResult.storey.wallSectionAreaY[i] * 10) / 10,
+      wallAreaStorey: Math.round(
+        distributeResult.storey.wallSectionAreaStorey[i]
       ),
-      wallAreaRatio: distributeResult.storey.wallSectionAreaRatio[i].toFixed(1),
+      wallAreaRatio:
+        Math.round(distributeResult.storey.wallSectionAreaRatio[i] * 10) / 10,
     });
 
     const towerIndex = distributeResult.storey.towerID[i] - 1;

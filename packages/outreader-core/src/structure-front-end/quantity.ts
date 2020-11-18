@@ -10,7 +10,7 @@ export function convertQuantity(
     storeyID: concreteSteel?.concrete.storeyID ||
       rebar?.area.storeyID ||
       wmass?.storey.storeyID || [0],
-    towerID: wmass?.storey.towerID || [0],
+    towerID: wmass?.storey.towerID || [1],
     area: area,
     concrete: {
       storeyID: concreteSteel?.concrete.storeyID || [0],

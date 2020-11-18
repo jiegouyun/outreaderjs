@@ -8,7 +8,7 @@ export function convertDistributeResult(
   const distributeResult: IDistributeResultFE = {
     storey: {
       storeyID: wmass?.storey.storeyID || [0],
-      towerID: wmass?.storey.towerID || [0],
+      towerID: wmass?.storey.towerID || [1],
       attribute: wmass?.storey.attribute || [],
       height: wmass?.storey.height || [0],
       heightToGround: wmass?.storey.heightToGround || [0],
@@ -32,7 +32,7 @@ export function convertDistributeResult(
     },
     massRatio: {
       storeyID: wmass?.massRatio.storeyID || [0],
-      towerID: wmass?.massRatio.towerID || [0],
+      towerID: wmass?.massRatio.towerID || [1],
       ratio: wmass?.massRatio.ratio || [0],
       storeyMass: wmass?.massRatio.storeyMass || [0],
       massPerArea: wmass?.massRatio.massPerArea || [0],
@@ -40,7 +40,7 @@ export function convertDistributeResult(
     },
     stiffness: {
       storeyID: wmass?.stiffness.storeyID || [0],
-      towerID: wmass?.stiffness.towerID || [0],
+      towerID: wmass?.stiffness.towerID || [1],
       ratx1: wmass?.stiffness.ratx1 || [0],
       ratx2: wmass?.stiffness.ratx2 || [0],
       rjx1: wmass?.stiffness.rjx1 || [0],
@@ -54,13 +54,13 @@ export function convertDistributeResult(
     },
     shearWeightRatio: {
       storeyID: wzq?.seismicForce.storeyID || [0],
-      towerID: wzq?.seismicForce.towerID || [0],
+      towerID: wzq?.seismicForce.towerID || [1],
       factorX: wzq?.seismicForce.shearWeightRatioX || [0],
       factorY: wzq?.seismicForce.shearWeightRatioY || [0],
     },
     shearCapacityCheck: {
       storeyID: wmass?.shearCapacityCheck.storeyID || [0],
-      towerID: wmass?.shearCapacityCheck.towerID || [0],
+      towerID: wmass?.shearCapacityCheck.towerID || [1],
       capacityX: wmass?.shearCapacityCheck.capacityX || [0],
       ratioX: wmass?.shearCapacityCheck.ratioX || [0],
       capacityY: wmass?.shearCapacityCheck.capacityY || [0],
@@ -68,7 +68,7 @@ export function convertDistributeResult(
     },
     momentPercent: {
       storeyID: wv02q?.momentPercent.storeyID || [0],
-      towerID: wv02q?.momentPercent.towerID || [0],
+      towerID: wv02q?.momentPercent.towerID || [1],
       percentColumnX: wv02q?.momentPercent.percentColumnX || [0],
       percentWallX: wv02q?.momentPercent.percentWallX || [0],
       percentColumnY: wv02q?.momentPercent.percentColumnY || [0],
@@ -82,7 +82,7 @@ export function convertDistributeResult(
     },
     columnShear: {
       storeyID: wv02q?.columnShear.storeyID || [0],
-      towerID: wv02q?.columnShear.towerID || [0],
+      towerID: wv02q?.columnShear.towerID || [1],
       columnX: wv02q?.columnShear.columnX || [0],
       wallX: wv02q?.columnShear.wallX || [0],
       totalX: wv02q?.columnShear.totalX || [0],

@@ -197,6 +197,11 @@ export async function readWmassOutput(
 
     // Extract storey[] part3/4
     if (!wmass.storey.allExtracted) {
+      wmass.storey = extractStoreyPart3(lineArray, wmass.storey);
+    }
+
+    // Extract storey[] part4/4
+    if (!wmass.storey.allExtracted) {
       wmass.storey = extractStoreyPart4(lineArray, wmass.storey);
     }
 
@@ -498,6 +503,33 @@ export function extractWind(lineArray: string[], wind: IWind): IWind {
   return wind;
 }
 
+export function extractStoreyPart3(
+  lineArray: string[],
+  storey: IStorey,
+): IStorey {
+  if (lineArray[0] === '各楼层等效尺寸') {
+    FLAG = 'keyStoreyPart3';
+  } else if (
+    lineArray[0] === '各楼层的单位面积质量分布' ||
+    lineArray[0] === '各层的柱'
+  ) {
+    FLAG = '';
+  }
+
+  if (FLAG === 'keyStoreyPart3') {
+    if (!isNaN(Number(lineArray[0]))) {
+      if (lineArray[1].length < 4) {
+        storey.area.push(Number(lineArray[2]));
+      } else {
+        //多塔
+        storey.area.push(Number(lineArray[1]));
+      }
+    }
+  }
+
+  return storey;
+}
+
 export function extractStoreyPart4(
   lineArray: string[],
   storey: IStorey,
@@ -512,12 +544,12 @@ export function extractStoreyPart4(
   if (FLAG === 'keyStoreyPart4') {
     if (!isNaN(Number(lineArray[0]))) {
       if (lineArray[1].length < 4) {
-        storey.area.push(Number(lineArray[2]));
+        // storey.area.push(Number(lineArray[2]));
         storey.wallSectionAreaX.push(Number(lineArray[7]));
         storey.wallSectionAreaY.push(Number(lineArray[9]));
       } else {
         //多塔
-        storey.area.push(Number(lineArray[1]));
+        // storey.area.push(Number(lineArray[1]));
         storey.wallSectionAreaX.push(Number(lineArray[6]));
         storey.wallSectionAreaY.push(Number(lineArray[8]));
       }

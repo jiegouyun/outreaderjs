@@ -62,11 +62,14 @@ export async function writeFactor(
 
   for (let i = 0; i < factor.v02qFactor.storeyID.length; i++) {
     // write v02q factor
-    const index = indexMap.get(
-      `${factor.v02qFactor.storeyID[i]}-${factor.v02qFactor.towerID[i]}`,
-    );
-    worksheet.getCell(`F${3 + index}`).value = factor.v02qFactor.factorX[i];
-    worksheet.getCell(`G${3 + index}`).value = factor.v02qFactor.factorY[i];
+    let index =
+      indexMap.get(
+        `${factor.v02qFactor.storeyID[i]}-${factor.v02qFactor.towerID[i]}`,
+      ) || 0;
+    worksheet.getCell(`F${3 + index}`).value =
+      factor.v02qFactor.factorX[i] || '';
+    worksheet.getCell(`G${3 + index}`).value =
+      factor.v02qFactor.factorY[i] || '';
   }
 }
 
