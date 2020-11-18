@@ -36,6 +36,10 @@ export async function writeFactor(
     : factor.shearWeightRatioModify.towerID.length
     ? factor.shearWeightRatioModify.towerID
     : factor.v02qFactor.towerID;
+  const indexMap = new Map();
+  storeyID.forEach((val, index) => {
+    indexMap.set(`${val}-${towerID[index]}`, index);
+  });
 
   for (let i = 0; i < storeyID.length; i++) {
     // write storey
@@ -58,8 +62,11 @@ export async function writeFactor(
 
   for (let i = 0; i < factor.v02qFactor.storeyID.length; i++) {
     // write v02q factor
-    worksheet.getCell(`F${3 + i}`).value = factor.v02qFactor.factorX[i];
-    worksheet.getCell(`G${3 + i}`).value = factor.v02qFactor.factorY[i];
+    const index = indexMap.get(
+      `${factor.v02qFactor.storeyID[i]}-${factor.v02qFactor.towerID[i]}`,
+    );
+    worksheet.getCell(`F${3 + index}`).value = factor.v02qFactor.factorX[i];
+    worksheet.getCell(`G${3 + index}`).value = factor.v02qFactor.factorY[i];
   }
 }
 
