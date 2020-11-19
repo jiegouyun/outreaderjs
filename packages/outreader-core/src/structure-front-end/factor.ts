@@ -7,13 +7,13 @@ export function convertFactor(
 ): IFactorFE {
   const factor: IFactorFE = {
     stiffness: {
-      storeyID: wmass?.stiffness.storeyID || [0],
+      storeyID: wmass?.stiffness.storeyID || [1],
       towerID: wmass?.stiffness.towerID || [1],
       weakStoreyFactor: wmass?.stiffness.weakStoreyFactor || [0],
     },
     shearWeightRatioModify: {
       storeyID: wzq?.shearWeightRatioModify?.storeyID ||
-        wmass?.shearWeightRatioModify.storeyID || [0],
+        wmass?.shearWeightRatioModify.storeyID || [1],
       towerID: wzq?.shearWeightRatioModify?.towerID ||
         wmass?.shearWeightRatioModify.towerID || [1],
       factorX: wzq?.shearWeightRatioModify?.factorX ||
@@ -22,7 +22,7 @@ export function convertFactor(
         wmass?.shearWeightRatioModify.factorY || [0],
     },
     v02qFactor: {
-      storeyID: wv02q?.v02qFactor.storeyID || [0],
+      storeyID: wv02q?.v02qFactor.storeyID || [1],
       towerID: wv02q?.v02qFactor.towerID || [1],
       factorX: wv02q?.v02qFactor.factorX || [0],
       factorY: wv02q?.v02qFactor.factorY || [0],

@@ -9,11 +9,11 @@ export function convertQuantity(
   const quantity: IQuantityFE = {
     storeyID: concreteSteel?.concrete.storeyID ||
       rebar?.area.storeyID ||
-      wmass?.storey.storeyID || [0],
+      wmass?.storey.storeyID || [1],
     towerID: wmass?.storey.towerID || [1],
     area: area,
     concrete: {
-      storeyID: concreteSteel?.concrete.storeyID || [0],
+      storeyID: concreteSteel?.concrete.storeyID || [1],
       wall: concreteSteel?.concrete.wall || [0],
       beam: concreteSteel?.concrete.beam || [0],
       column: concreteSteel?.concrete.column || [0],
@@ -21,7 +21,7 @@ export function convertQuantity(
       storey: concreteSteel?.concrete.storey || [0],
     },
     unitConcrete: {
-      storeyID: concreteSteel?.concrete.storeyID || [0],
+      storeyID: concreteSteel?.concrete.storeyID || [1],
       wall: quantityPerArea(concreteSteel?.concrete.wall || [0], area) || [0],
       beam: quantityPerArea(concreteSteel?.concrete.beam || [0], area) || [0],
       column: quantityPerArea(concreteSteel?.concrete.column || [0], area) || [
@@ -33,7 +33,7 @@ export function convertQuantity(
       ],
     },
     steel: {
-      storeyID: concreteSteel?.steel.storeyID || [0],
+      storeyID: concreteSteel?.steel.storeyID || [1],
       wall: concreteSteel?.steel.wall || [0],
       beam: concreteSteel?.steel.beam || [0],
       column: concreteSteel?.steel.column || [0],
@@ -41,7 +41,7 @@ export function convertQuantity(
       storey: concreteSteel?.steel.storey || [0],
     },
     unitSteel: {
-      storeyID: concreteSteel?.steel.storeyID || [0],
+      storeyID: concreteSteel?.steel.storeyID || [1],
       wall: quantityPerArea(concreteSteel?.steel.wall || [0], area) || [0],
       beam: quantityPerArea(concreteSteel?.steel.beam || [0], area) || [0],
       column: quantityPerArea(concreteSteel?.steel.column || [0], area) || [0],
@@ -49,7 +49,7 @@ export function convertQuantity(
       storey: quantityPerArea(concreteSteel?.steel.storey || [0], area) || [0],
     },
     rebar: {
-      storeyID: rebar?.area.storeyID || [0],
+      storeyID: rebar?.area.storeyID || [1],
       wall: rebar?.wallRebar.storey || [0],
       beam: rebar?.beamRebar.storey || [0],
       column: rebar?.columnRebar.storey || [0],
@@ -62,7 +62,7 @@ export function convertQuantity(
       ) || [0],
     },
     unitRebar: {
-      storeyID: rebar?.area.storeyID || [0],
+      storeyID: rebar?.area.storeyID || [1],
       wall: quantityPerArea(rebar?.wallRebar.storey || [0], area) || [0],
       beam: quantityPerArea(rebar?.beamRebar.storey || [0], area) || [0],
       column: quantityPerArea(rebar?.columnRebar.storey || [0], area) || [0],

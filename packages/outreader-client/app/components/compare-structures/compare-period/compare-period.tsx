@@ -132,15 +132,12 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
 
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < count; j++) {
-      periodMassTableData[j][`factorX${i}`] = (
-        periods[i].modeMass.factorX[j] || 0
-      ).toFixed(2);
-      periodMassTableData[j][`factorY${i}`] = (
-        periods[i].modeMass.factorY[j] || 0
-      ).toFixed(2);
-      periodMassTableData[j][`factorZ${i}`] = (
-        periods[i].modeMass.factorZ[j] || 0
-      ).toFixed(2);
+      periodMassTableData[j][`factorX${i}`] =
+        Math.round(periods[i].modeMass.factorX[j] * 100) / 100;
+      periodMassTableData[j][`factorY${i}`] =
+        Math.round(periods[i].modeMass.factorY[j] * 100) / 100;
+      periodMassTableData[j][`factorZ${i}`] =
+        Math.round(periods[i].modeMass.factorZ[j] * 100) / 100;
     }
   }
 

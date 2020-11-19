@@ -3,7 +3,7 @@ import { IForceFE, IWmass, IWzq } from '../interfaces';
 export function convertForce(wmass?: IWmass, wzq?: IWzq): IForceFE {
   const force: IForceFE = {
     wind: {
-      storeyID: wmass?.wind.storeyID || [0],
+      storeyID: wmass?.wind.storeyID || [1],
       towerID: wmass?.wind.towerID || [1],
       forceAlongX: wmass?.wind.forceAlongX || [0],
       shearAlongX: wmass?.wind.shearAlongX || [0],
@@ -19,7 +19,7 @@ export function convertForce(wmass?: IWmass, wzq?: IWzq): IForceFE {
       momentCrossY: wmass?.wind.momentCrossY || [0],
     },
     seismic: {
-      storeyID: wzq?.seismicForce.storeyID || [0],
+      storeyID: wzq?.seismicForce.storeyID || [1],
       towerID: wzq?.seismicForce.towerID || [1],
       forceX: wzq?.seismicForce.forceX || [0],
       shearX: wzq?.seismicForce.shearX || [0],

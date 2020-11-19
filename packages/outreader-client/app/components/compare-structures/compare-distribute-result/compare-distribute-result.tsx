@@ -159,7 +159,7 @@ export function CompareDistributeResultComponent(
             : '';
         storeyTableData[j][`wallAreaRatio${i}-${k}`] =
           tempStoreyID[j - diff] === storeyID[j]
-            ? tempAllSectionAreaRatio[j - diff].toFixed(1)
+            ? Math.round(tempAllSectionAreaRatio[j - diff] * 10) / 10
             : '';
 
         if (j < tempStoreyID.length) {
