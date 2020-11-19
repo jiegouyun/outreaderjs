@@ -1,7 +1,7 @@
 {
   "name": "@outreader/client",
   "productName": "OutreaderClient",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A real helper for structural engineer",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
@@ -61,17 +61,10 @@
       ]
     },
     "win": {
-      "target": [
-        "nsis",
-        "msi"
-      ]
+      "target": ["nsis", "msi"]
     },
     "linux": {
-      "target": [
-        "deb",
-        "rpm",
-        "AppImage"
-      ],
+      "target": ["deb", "rpm", "AppImage"],
       "category": "Development"
     },
     "directories": {
@@ -105,13 +98,7 @@
   "bugs": {
     "url": "https://github.com/jiegouyun/outreaderjs/issues"
   },
-  "keywords": [
-    "outreader",
-    "structural engineer",
-    "react",
-    "typescript",
-    "ts"
-  ],
+  "keywords": ["outreader", "structural engineer", "react", "typescript", "ts"],
   "homepage": "https://outreader.com",
   "jest": {
     "testURL": "http://localhost/",
@@ -119,20 +106,9 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/internals/mocks/fileMock.js",
       "\\.(css|less|sass|scss)$": "identity-obj-proxy"
     },
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "ts",
-      "tsx",
-      "json"
-    ],
-    "moduleDirectories": [
-      "node_modules",
-      "app/node_modules"
-    ],
-    "setupFiles": [
-      "./internals/scripts/CheckBuildsExist.js"
-    ]
+    "moduleFileExtensions": ["js", "jsx", "ts", "tsx", "json"],
+    "moduleDirectories": ["node_modules", "app/node_modules"],
+    "setupFiles": ["./internals/scripts/CheckBuildsExist.js"]
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
@@ -210,7 +186,6 @@
     "stylelint": "^13.6.1",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^20.0.0",
-    "terser-webpack-plugin": "^5.0.3",
     "testcafe": "^1.9.4",
     "testcafe-browser-provider-electron": "^0.0.15",
     "testcafe-react-selectors": "^4.1.0",
@@ -228,9 +203,9 @@
     "@ant-design/icons": "^4.2.1",
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@hot-loader/react-dom": "^17.0.0",
-    "@outreader/core": "^0.0.5",
-    "@outreader/pkpm": "^0.0.5",
-    "@outreader/yjk": "^0.0.5",
+    "@outreader/core": "^0.0.6",
+    "@outreader/pkpm": "^0.0.6",
+    "@outreader/yjk": "^0.0.6",
     "@types/lowdb": "^1.0.9",
     "@types/recharts": "^1.8.16",
     "ali-react-table": "^2.1.1",
@@ -256,17 +231,11 @@
     "npm": ">=4.x",
     "yarn": ">=0.21.3"
   },
-  "browserslist": [
-    "extends browserslist-config-erb"
-  ],
+  "browserslist": ["extends browserslist-config-erb"],
   "prettier": {
     "overrides": [
       {
-        "files": [
-          ".prettierrc",
-          ".babelrc",
-          ".stylelintrc"
-        ],
+        "files": [".prettierrc", ".babelrc", ".stylelintrc"],
         "options": {
           "parser": "json"
         }
@@ -275,15 +244,10 @@
     "singleQuote": true
   },
   "stylelint": {
-    "extends": [
-      "stylelint-config-standard",
-      "stylelint-config-prettier"
-    ]
+    "extends": ["stylelint-config-standard", "stylelint-config-prettier"]
   },
   "renovate": {
-    "extends": [
-      "bliss"
-    ]
+    "extends": ["bliss"]
   },
   "publishConfig": {
     "access": "public"
