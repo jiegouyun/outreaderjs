@@ -44,7 +44,7 @@ export default class MenuBuilder {
 
       Menu.buildFromTemplate([
         {
-          label: 'Inspect element',
+          label: '查看元素',
           click: () => {
             this.mainWindow.webContents.inspectElement(x, y);
           },
@@ -55,29 +55,29 @@ export default class MenuBuilder {
 
   buildDarwinTemplate() {
     const subMenuAbout: DarwinMenuItemConstructorOptions = {
-      label: 'Electron',
+      label: 'OutReader',
       submenu: [
         {
-          label: 'About ElectronReact',
+          label: '关于 OutReader',
           selector: 'orderFrontStandardAboutPanel:',
         },
-        { type: 'separator' },
-        { label: 'Services', submenu: [] },
-        { type: 'separator' },
+        // { type: 'separator' },
+        // { label: 'Services', submenu: [] },
+        // { type: 'separator' },
         {
-          label: 'Hide ElectronReact',
+          label: '隐藏 OutReader',
           accelerator: 'Command+H',
           selector: 'hide:',
         },
         {
-          label: 'Hide Others',
+          label: '隐藏其他',
           accelerator: 'Command+Shift+H',
           selector: 'hideOtherApplications:',
         },
-        { label: 'Show All', selector: 'unhideAllApplications:' },
+        { label: '全部显示', selector: 'unhideAllApplications:' },
         { type: 'separator' },
         {
-          label: 'Quit',
+          label: '退出',
           accelerator: 'Command+Q',
           click: () => {
             app.quit();
@@ -86,40 +86,40 @@ export default class MenuBuilder {
       ],
     };
     const subMenuEdit: DarwinMenuItemConstructorOptions = {
-      label: 'Edit',
+      label: '编辑',
       submenu: [
-        { label: 'Undo', accelerator: 'Command+Z', selector: 'undo:' },
-        { label: 'Redo', accelerator: 'Shift+Command+Z', selector: 'redo:' },
+        { label: '撤销', accelerator: 'Command+Z', selector: 'undo:' },
+        { label: '重做', accelerator: 'Shift+Command+Z', selector: 'redo:' },
         { type: 'separator' },
-        { label: 'Cut', accelerator: 'Command+X', selector: 'cut:' },
-        { label: 'Copy', accelerator: 'Command+C', selector: 'copy:' },
-        { label: 'Paste', accelerator: 'Command+V', selector: 'paste:' },
+        { label: '剪切', accelerator: 'Command+X', selector: 'cut:' },
+        { label: '拷贝', accelerator: 'Command+C', selector: 'copy:' },
+        { label: '复制', accelerator: 'Command+V', selector: 'paste:' },
         {
-          label: 'Select All',
+          label: '全选',
           accelerator: 'Command+A',
           selector: 'selectAll:',
         },
       ],
     };
     const subMenuViewDev: MenuItemConstructorOptions = {
-      label: 'View',
+      label: '视图',
       submenu: [
         {
-          label: 'Reload',
+          label: '刷新',
           accelerator: 'Command+R',
           click: () => {
             this.mainWindow.webContents.reload();
           },
         },
         {
-          label: 'Toggle Full Screen',
+          label: '全屏',
           accelerator: 'Ctrl+Command+F',
           click: () => {
             this.mainWindow.setFullScreen(!this.mainWindow.isFullScreen());
           },
         },
         {
-          label: 'Toggle Developer Tools',
+          label: '开发者工具',
           accelerator: 'Alt+Command+I',
           click: () => {
             this.mainWindow.webContents.toggleDevTools();
@@ -128,10 +128,10 @@ export default class MenuBuilder {
       ],
     };
     const subMenuViewProd: MenuItemConstructorOptions = {
-      label: 'View',
+      label: '视图',
       submenu: [
         {
-          label: 'Toggle Full Screen',
+          label: '全屏',
           accelerator: 'Ctrl+Command+F',
           click: () => {
             this.mainWindow.setFullScreen(!this.mainWindow.isFullScreen());
@@ -140,45 +140,49 @@ export default class MenuBuilder {
       ],
     };
     const subMenuWindow: DarwinMenuItemConstructorOptions = {
-      label: 'Window',
+      label: '窗口',
       submenu: [
         {
-          label: 'Minimize',
+          label: '最小化',
           accelerator: 'Command+M',
           selector: 'performMiniaturize:',
         },
-        { label: 'Close', accelerator: 'Command+W', selector: 'performClose:' },
+        { label: '关闭', accelerator: 'Command+W', selector: 'performClose:' },
         { type: 'separator' },
-        { label: 'Bring All to Front', selector: 'arrangeInFront:' },
+        { label: '前置所有窗口', selector: 'arrangeInFront:' },
       ],
     };
     const subMenuHelp: MenuItemConstructorOptions = {
-      label: 'Help',
+      label: '帮助',
       submenu: [
         {
-          label: 'Learn More',
+          label: '打开主页',
           click() {
-            shell.openExternal('https://electronjs.org');
+            shell.openExternal('https://outreader.com/');
           },
         },
         {
-          label: 'Documentation',
+          label: '软件下载',
           click() {
-            shell.openExternal(
-              'https://github.com/electron/electron/tree/master/docs#readme'
-            );
+            shell.openExternal('https://outreader.com/download/');
           },
         },
         {
-          label: 'Community Discussions',
+          label: '技术手册',
           click() {
-            shell.openExternal('https://www.electronjs.org/community');
+            shell.openExternal('https://outreader.com/guide/');
           },
         },
         {
-          label: 'Search Issues',
+          label: '联系我们',
           click() {
-            shell.openExternal('https://github.com/electron/electron/issues');
+            shell.openExternal('https://outreader.com/contact/');
+          },
+        },
+        {
+          label: 'GitHub仓库',
+          click() {
+            shell.openExternal('https://github.com/jiegouyun/outreaderjs');
           },
         },
       ],
@@ -196,14 +200,14 @@ export default class MenuBuilder {
   buildDefaultTemplate() {
     const templateDefault = [
       {
-        label: '&File',
+        label: '文件',
         submenu: [
           {
-            label: '&Open',
+            label: '打开',
             accelerator: 'Ctrl+O',
           },
           {
-            label: '&Close',
+            label: '关闭',
             accelerator: 'Ctrl+W',
             click: () => {
               this.mainWindow.close();
@@ -212,20 +216,20 @@ export default class MenuBuilder {
         ],
       },
       {
-        label: '&View',
+        label: '视图',
         submenu:
           process.env.NODE_ENV === 'development' ||
           process.env.DEBUG_PROD === 'true'
             ? [
                 {
-                  label: '&Reload',
+                  label: '刷新',
                   accelerator: 'Ctrl+R',
                   click: () => {
                     this.mainWindow.webContents.reload();
                   },
                 },
                 {
-                  label: 'Toggle &Full Screen',
+                  label: '全屏',
                   accelerator: 'F11',
                   click: () => {
                     this.mainWindow.setFullScreen(
@@ -234,7 +238,7 @@ export default class MenuBuilder {
                   },
                 },
                 {
-                  label: 'Toggle &Developer Tools',
+                  label: '开发者工具',
                   accelerator: 'Alt+Ctrl+I',
                   click: () => {
                     this.mainWindow.webContents.toggleDevTools();
@@ -243,7 +247,7 @@ export default class MenuBuilder {
               ]
             : [
                 {
-                  label: 'Toggle &Full Screen',
+                  label: '全屏',
                   accelerator: 'F11',
                   click: () => {
                     this.mainWindow.setFullScreen(
@@ -254,32 +258,36 @@ export default class MenuBuilder {
               ],
       },
       {
-        label: 'Help',
+        label: '帮助',
         submenu: [
           {
-            label: 'Learn More',
+            label: '打开主页',
             click() {
-              shell.openExternal('https://electronjs.org');
+              shell.openExternal('https://outreader.com/');
             },
           },
           {
-            label: 'Documentation',
+            label: '软件下载',
             click() {
-              shell.openExternal(
-                'https://github.com/electron/electron/tree/master/docs#readme'
-              );
+              shell.openExternal('https://outreader.com/download/');
             },
           },
           {
-            label: 'Community Discussions',
+            label: '技术手册',
             click() {
-              shell.openExternal('https://www.electronjs.org/community');
+              shell.openExternal('https://outreader.com/guide/');
             },
           },
           {
-            label: 'Search Issues',
+            label: '联系我们',
             click() {
-              shell.openExternal('https://github.com/electron/electron/issues');
+              shell.openExternal('https://outreader.com/contact/');
+            },
+          },
+          {
+            label: 'GitHub仓库',
+            click() {
+              shell.openExternal('https://github.com/jiegouyun/outreaderjs');
             },
           },
         ],

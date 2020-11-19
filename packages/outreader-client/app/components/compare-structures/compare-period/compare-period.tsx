@@ -1,5 +1,10 @@
 import { Collapse } from 'antd';
-import { BaseTable, ArtColumn } from 'ali-react-table';
+import {
+  BaseTable,
+  ArtColumn,
+  useTablePipeline,
+  features,
+} from 'ali-react-table';
 import React from 'react';
 import { IPeriodFE } from '@outreader/core';
 import { ICompare } from '../../../interfaces';
@@ -21,6 +26,7 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
       width: 64,
       align: 'right',
       lock: true,
+      features: { sortable: true },
     },
   ];
 
@@ -88,6 +94,7 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
       width: 64,
       align: 'left',
       lock: true,
+      features: { sortable: true },
     },
   ];
 
@@ -125,17 +132,41 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
 
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < count; j++) {
-      periodMassTableData[j][`factorX${i}`] = (
-        periods[i].modeMass.factorX[j] || 0
-      ).toFixed(2);
-      periodMassTableData[j][`factorY${i}`] = (
-        periods[i].modeMass.factorY[j] || 0
-      ).toFixed(2);
-      periodMassTableData[j][`factorZ${i}`] = (
-        periods[i].modeMass.factorZ[j] || 0
-      ).toFixed(2);
+      periodMassTableData[j][`factorX${i}`] =
+        Math.round(periods[i].modeMass.factorX[j] * 100) / 100;
+      periodMassTableData[j][`factorY${i}`] =
+        Math.round(periods[i].modeMass.factorY[j] * 100) / 100;
+      periodMassTableData[j][`factorZ${i}`] =
+        Math.round(periods[i].modeMass.factorZ[j] * 100) / 100;
     }
   }
+
+  const pipelineMode = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: periodModeTableData, columns: modeColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineModeSeismic = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: periodSeismicTableData, columns: modeColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelinePeriodMass = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: periodMassTableData, columns: periodMassColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
 
   const { Panel } = Collapse;
   const Periods = (
@@ -144,14 +175,13 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={modeColumns}
-            dataSource={periodModeTableData}
             primaryKey={'key'}
             useVirtual={true}
             hasHeader={true}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineMode.getProps()}
           />
         </Panel>
       </Collapse>
@@ -159,14 +189,13 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={modeColumns}
-            dataSource={periodSeismicTableData}
             primaryKey={'key'}
             useVirtual={true}
             hasHeader={true}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineModeSeismic.getProps()}
           />
         </Panel>
       </Collapse>
@@ -174,14 +203,13 @@ export function ComparePeriodComponent(periods: IPeriodFE[]) {
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={periodMassColumns}
-            dataSource={periodMassTableData}
             primaryKey={'key'}
             useVirtual={true}
             hasHeader={true}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelinePeriodMass.getProps()}
           />
         </Panel>
       </Collapse>

@@ -746,6 +746,13 @@ export function extractDrift(
       loadCaseDrift.storeyID.push(Number(lineArray[0]));
       loadCaseDrift.towerID.push(Number(lineArray[1]));
       loadCaseDrift.displacement.push(Number(lineArray[4]));
+    } else if (lineArray.length === 5) {
+      //多塔
+      loadCaseDrift.storeyID.push(
+        loadCaseDrift.storeyID[loadCaseDrift.storeyID.length - 1],
+      );
+      loadCaseDrift.towerID.push(Number(lineArray[0]));
+      loadCaseDrift.displacement.push(Number(lineArray[3]));
     } else {
       loadCaseDrift.drift.push(Number(lineArray[4]));
     }
@@ -764,6 +771,14 @@ export function extractWindDriftDisp(
       loadCaseDrift.towerID.push(Number(lineArray[1]));
       loadCaseDrift.displacement.push(Number(lineArray[4]));
       loadCaseDrift.ratio.push(Number(lineArray[5]));
+    } else if (lineArray.length === 6) {
+      //多塔
+      loadCaseDrift.storeyID.push(
+        loadCaseDrift.storeyID[loadCaseDrift.storeyID.length - 1],
+      );
+      loadCaseDrift.towerID.push(Number(lineArray[0]));
+      loadCaseDrift.displacement.push(Number(lineArray[3]));
+      loadCaseDrift.ratio.push(Number(lineArray[4]));
     } else {
       loadCaseDrift.ratioD.push(Number(lineArray[3]));
       loadCaseDrift.drift.push(Number(lineArray[5]));
@@ -782,6 +797,13 @@ export function extractRatio(
       loadCaseRatio.storeyID.push(Number(lineArray[0]));
       loadCaseRatio.towerID.push(Number(lineArray[1]));
       loadCaseRatio.ratio.push(Number(lineArray[5]));
+    } else if (lineArray.length === 6) {
+      //多塔
+      loadCaseRatio.storeyID.push(
+        loadCaseRatio.storeyID[loadCaseRatio.storeyID.length - 1],
+      );
+      loadCaseRatio.towerID.push(Number(lineArray[0]));
+      loadCaseRatio.ratio.push(Number(lineArray[4]));
     } else {
       loadCaseRatio.ratioD.push(Number(lineArray[3]));
     }

@@ -40,6 +40,16 @@ export async function exportCompareExcel(
   // initial workbook.
   const workbook = new Excel.Workbook();
   const nums = structures.length;
+  const towers = new Array(nums).fill(1);
+  structures.forEach((structure, i) => {
+    towers[i] = new Set([
+      ...structure.force.seismic.towerID,
+      ...structure.distributeResult.storey.towerID,
+      ...structure.drift.driftWindXP.towerID,
+      ...structure.factor.v02qFactor.towerID,
+    ]).size;
+  });
+  const tNums = towers.reduce((a, b) => a + b);
 
   // write worksheet sumamary information.
   const sheetSummary = workbook.addWorksheet('汇总信息');
@@ -67,15 +77,15 @@ export async function exportCompareExcel(
 
   // // write force information
   const sheetForce = workbook.addWorksheet('内力');
-  await initForce(sheetForce, nums);
+  await initForce(sheetForce, towers);
   await writeForce(structures, sheetForce);
-  await formatForce(sheetForce, nums);
+  await formatForce(sheetForce, tNums);
 
   // // write drift information
   const sheetDrift = workbook.addWorksheet('位移角');
-  await initDrift(sheetDrift, nums);
+  await initDrift(sheetDrift, towers);
   await writeDrift(structures, sheetDrift);
-  await formatDrift(sheetDrift, nums);
+  await formatDrift(sheetDrift, tNums);
 
   // // write feneral result information
   const sheetGeneralResult = workbook.addWorksheet('整体验算结果');
@@ -85,15 +95,15 @@ export async function exportCompareExcel(
 
   // // write distribute result
   const sheetDistributeResult = workbook.addWorksheet('楼层分布数据');
-  await initDistributeResult(sheetDistributeResult, nums);
+  await initDistributeResult(sheetDistributeResult, towers);
   await writeDistributeResult(structures, sheetDistributeResult);
-  await formatDistributeResult(sheetDistributeResult, nums);
+  await formatDistributeResult(sheetDistributeResult, tNums);
 
   // // write modify factor
   const sheetFactor = workbook.addWorksheet('调整系数');
-  await initFactor(sheetFactor, nums);
+  await initFactor(sheetFactor, towers);
   await writeFactor(structures, sheetFactor);
-  await formatFactor(sheetFactor, nums);
+  await formatFactor(sheetFactor, tNums);
 
   // // write quantity
   const sheetQuantity = workbook.addWorksheet('工程量');
@@ -111,7 +121,13 @@ export async function exportCompareExcel(
   const fileType =
     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
   const blob = new Blob([buffer], { type: fileType });
-  saveAs(blob, 'Compare.xlsx');
+  const date = new Date();
+  saveAs(
+    blob,
+    `Compare_${date.getFullYear()}${
+      date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
+    }${date.getDate()}.xlsx`,
+  );
 
   return true;
 }

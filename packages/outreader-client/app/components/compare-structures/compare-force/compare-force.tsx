@@ -1,5 +1,10 @@
 import { Row, Collapse } from 'antd';
-import { BaseTable, ArtColumn } from 'ali-react-table';
+import {
+  BaseTable,
+  ArtColumn,
+  useTablePipeline,
+  features,
+} from 'ali-react-table';
 import React from 'react';
 import { IForceFE } from '@outreader/core';
 import { StoreyChart } from '../../chart-tools';
@@ -8,15 +13,23 @@ import { userColors, userShaps } from '../../../colors';
 
 export function CompareForceComponent(forces: IForceFE[]) {
   const n = forces.length;
-  let storeyID: number[] = [];
+  let count = 0;
+  const towers = new Array(n).fill(0);
   for (let i = 0; i < n; i++) {
-    if (
-      (forces[i].wind || forces[i].seismic).storeyID.length > storeyID.length
-    ) {
-      storeyID = (forces[i].wind || forces[i].seismic).storeyID;
-    }
+    towers[i] = new Set([
+      ...forces[i].wind.towerID,
+      ...forces[i].seismic.towerID,
+    ]).size;
+
+    count =
+      (forces[i].wind || forces[i].seismic).storeyID[0] > count
+        ? (forces[i].wind || forces[i].seismic).storeyID[0]
+        : count;
   }
-  const count = storeyID.length;
+
+  const storeyID = Array.from(Array(count).keys())
+    .reverse()
+    .map((val) => val + 1);
 
   const forceColumns: ArtColumn[] = [
     {
@@ -25,6 +38,7 @@ export function CompareForceComponent(forces: IForceFE[]) {
       width: 64,
       align: 'right',
       lock: true,
+      features: { sortable: true },
     },
   ];
 
@@ -32,28 +46,58 @@ export function CompareForceComponent(forces: IForceFE[]) {
     forceColumns.push({
       name: `模型${i + 1}`,
       align: 'center',
-      children: [
-        {
-          name: `剪力X`,
-          code: `shearX${i}`,
-          align: 'right',
-        },
-        {
-          name: `弯矩X`,
-          code: `momentX${i}`,
-          align: 'right',
-        },
-        {
-          name: `剪力Y`,
-          code: `shearY${i}`,
-          align: 'right',
-        },
-        {
-          name: `弯矩Y`,
-          code: `momentY${i}`,
-          align: 'right',
-        },
-      ],
+      children:
+        towers[i] === 1
+          ? [
+              {
+                name: `剪力X`,
+                code: `shearX${i}-0`,
+                align: 'right',
+              },
+              {
+                name: `弯矩X`,
+                code: `momentX${i}-0`,
+                align: 'right',
+              },
+              {
+                name: `剪力Y`,
+                code: `shearY${i}-0`,
+                align: 'right',
+              },
+              {
+                name: `弯矩Y`,
+                code: `momentY${i}-0`,
+                align: 'right',
+              },
+            ]
+          : Array.from(Array(towers[i]).keys()).map((val) => {
+              return {
+                name: `塔${val + 1}`,
+                align: 'center',
+                children: [
+                  {
+                    name: `剪力X`,
+                    code: `shearX${i}-${val}`,
+                    align: 'right',
+                  },
+                  {
+                    name: `弯矩X`,
+                    code: `momentX${i}-${val}`,
+                    align: 'right',
+                  },
+                  {
+                    name: `剪力Y`,
+                    code: `shearY${i}-${val}`,
+                    align: 'right',
+                  },
+                  {
+                    name: `弯矩Y`,
+                    code: `momentY${i}-${val}`,
+                    align: 'right',
+                  },
+                ],
+              };
+            }),
     });
   }
 
@@ -61,8 +105,10 @@ export function CompareForceComponent(forces: IForceFE[]) {
   const shearAlongWindChartData: IData[][] = [];
   const momentAlongWindChartData: IData[][] = [];
   for (let i = 0; i < n; i++) {
-    shearAlongWindChartData.push([], []);
-    momentAlongWindChartData.push([], []);
+    for (let k = 0; k < towers[i]; k++) {
+      shearAlongWindChartData.push([], []);
+      momentAlongWindChartData.push([], []);
+    }
   }
 
   for (let j = 0; j < count; j++) {
@@ -72,68 +118,63 @@ export function CompareForceComponent(forces: IForceFE[]) {
     });
   }
 
-  for (let i = 0; i < n; i++) {
-    const len = forces[i].wind.storeyID.length;
-    const diff = count - len;
+  for (let i = 0, m = 0; i < n; i++) {
+    for (let k = 0; k < towers[i]; k++) {
+      const tempStoreyID: number[] = [];
+      const tempShearX: number[] = [];
+      const tempMomentX: number[] = [];
+      const tempShearY: number[] = [];
+      const tempMomentY: number[] = [];
+      forces[i].wind.towerID.forEach((val, index) => {
+        if (val === k + 1) {
+          tempStoreyID.push(forces[i].wind.storeyID[index]);
+          tempShearX.push(forces[i].wind.shearAlongX[index]);
+          tempMomentX.push(forces[i].wind.momentAlongX[index]);
+          tempShearY.push(forces[i].wind.shearAlongY[index]);
+          tempMomentY.push(forces[i].wind.momentAlongY[index]);
+        }
+      });
+      const len = tempStoreyID[0];
+      const diff = count - len;
 
-    for (let j = 0; j < count; j++) {
-      alongWindTableData[j][`shearX${i}`] =
-        forces[i].wind.storeyID[j - diff] === storeyID[j]
-          ? forces[i].wind.shearAlongX[j - diff].toFixed(0)
-          : '';
-      alongWindTableData[j][`momentX${i}`] =
-        forces[i].wind.storeyID[j - diff] === storeyID[j]
-          ? forces[i].wind.momentAlongX[j - diff].toFixed(0)
-          : '';
-      alongWindTableData[j][`shearY${i}`] =
-        forces[i].wind.storeyID[j - diff] === storeyID[j]
-          ? forces[i].wind.shearAlongY[j - diff].toFixed(0)
-          : '';
-      alongWindTableData[j][`momentY${i}`] =
-        forces[i].wind.storeyID[j - diff] === storeyID[j]
-          ? forces[i].wind.momentAlongY[j - diff].toFixed(0)
-          : '';
+      for (let j = 0; j < count; j++) {
+        alongWindTableData[j][`shearX${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempShearX[j - diff].toFixed(0)
+            : '';
+        alongWindTableData[j][`momentX${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempMomentX[j - diff].toFixed(0)
+            : '';
+        alongWindTableData[j][`shearY${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempShearY[j - diff].toFixed(0)
+            : '';
+        alongWindTableData[j][`momentY${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempMomentY[j - diff].toFixed(0)
+            : '';
 
-      shearAlongWindChartData[2 * i].push({
-        x:
-          forces[i].wind.storeyID[j - diff] === storeyID[j]
-            ? Math.abs(forces[i].wind.shearAlongX[j - diff])
-            : Math.abs(forces[i].wind.shearAlongX[0]),
-        y:
-          forces[i].wind.storeyID[j - diff] === storeyID[j]
-            ? forces[i].wind.storeyID[j - diff]
-            : forces[i].wind.storeyID[0],
-      });
-      shearAlongWindChartData[2 * i + 1].push({
-        x:
-          forces[i].wind.storeyID[j - diff] === storeyID[j]
-            ? Math.abs(forces[i].wind.shearAlongY[j - diff])
-            : Math.abs(forces[i].wind.shearAlongY[0]),
-        y:
-          forces[i].wind.storeyID[j - diff] === storeyID[j]
-            ? forces[i].wind.storeyID[j - diff]
-            : forces[i].wind.storeyID[0],
-      });
-      momentAlongWindChartData[2 * i].push({
-        x:
-          forces[i].wind.storeyID[j - diff] === storeyID[j]
-            ? Math.abs(forces[i].wind.momentAlongX[j - diff])
-            : Math.abs(forces[i].wind.momentAlongX[0]),
-        y:
-          forces[i].wind.storeyID[j - diff] === storeyID[j]
-            ? forces[i].wind.storeyID[j - diff]
-            : forces[i].wind.storeyID[0],
-      });
-      momentAlongWindChartData[2 * i + 1].push({
-        x:
-          forces[i].wind.storeyID[j - diff] === storeyID[j]
-            ? Math.abs(forces[i].wind.momentAlongY[j - diff])
-            : Math.abs(forces[i].wind.momentAlongY[0]),
-        y:
-          forces[i].wind.storeyID[j - diff] === storeyID[j]
-            ? forces[i].wind.storeyID[j - diff]
-            : forces[i].wind.storeyID[0],
-      });
+        if (j < tempStoreyID.length) {
+          shearAlongWindChartData[2 * m].push({
+            x: Math.abs(tempShearX[j]),
+            y: tempStoreyID[j],
+          });
+          shearAlongWindChartData[2 * m + 1].push({
+            x: Math.abs(tempShearY[j]),
+            y: tempStoreyID[j],
+          });
+          momentAlongWindChartData[2 * m].push({
+            x: Math.abs(tempMomentX[j]),
+            y: tempStoreyID[j],
+          });
+          momentAlongWindChartData[2 * m + 1].push({
+            x: Math.abs(tempMomentY[j]),
+            y: tempStoreyID[j],
+          });
+        }
+      }
+      m++;
     }
   }
 
@@ -141,8 +182,10 @@ export function CompareForceComponent(forces: IForceFE[]) {
   const shearCrossWindChartData: IData[][] = [];
   const momentCrossWindChartData: IData[][] = [];
   for (let i = 0; i < n; i++) {
-    shearCrossWindChartData.push([], []);
-    momentCrossWindChartData.push([], []);
+    for (let k = 0; k < towers[i]; k++) {
+      shearCrossWindChartData.push([], []);
+      momentCrossWindChartData.push([], []);
+    }
   }
 
   for (let j = 0; j < count; j++) {
@@ -152,68 +195,63 @@ export function CompareForceComponent(forces: IForceFE[]) {
     });
   }
 
-  for (let i = 0; i < n; i++) {
-    const len = forces[i].wind.storeyID.length;
-    const diff = count - len;
+  for (let i = 0, m = 0; i < n; i++) {
+    for (let k = 0; k < towers[i]; k++) {
+      const tempStoreyID: number[] = [];
+      const tempShearX: number[] = [];
+      const tempMomentX: number[] = [];
+      const tempShearY: number[] = [];
+      const tempMomentY: number[] = [];
+      forces[i].wind.towerID.forEach((val, index) => {
+        if (val === k + 1) {
+          tempStoreyID.push(forces[i].wind.storeyID[index]);
+          tempShearX.push(forces[i].wind.shearCrossX[index]);
+          tempMomentX.push(forces[i].wind.momentCrossX[index]);
+          tempShearY.push(forces[i].wind.shearCrossY[index]);
+          tempMomentY.push(forces[i].wind.momentCrossY[index]);
+        }
+      });
+      const len = tempStoreyID[0];
+      const diff = count - len;
 
-    for (let j = 0; j < count; j++) {
-      crossWindTableData[j][`shearX${i}`] =
-        forces[i].wind.storeyID[j - diff] === storeyID[j]
-          ? Math.round(forces[i].wind.shearCrossX[j - diff])
-          : '';
-      crossWindTableData[j][`momentX${i}`] =
-        forces[i].wind.storeyID[j - diff] === storeyID[j]
-          ? Math.round(forces[i].wind.momentCrossX[j - diff])
-          : '';
-      crossWindTableData[j][`shearY${i}`] =
-        forces[i].wind.storeyID[j - diff] === storeyID[j]
-          ? Math.round(forces[i].wind.shearCrossY[j - diff])
-          : '';
-      crossWindTableData[j][`momentY${i}`] =
-        forces[i].wind.storeyID[j - diff] === storeyID[j]
-          ? Math.round(forces[i].wind.momentCrossY[j - diff])
-          : '';
+      for (let j = 0; j < count; j++) {
+        crossWindTableData[j][`shearX${i}`] =
+          forces[i].wind.storeyID[j - diff] === storeyID[j]
+            ? Math.round(forces[i].wind.shearCrossX[j - diff])
+            : '';
+        crossWindTableData[j][`momentX${i}`] =
+          forces[i].wind.storeyID[j - diff] === storeyID[j]
+            ? Math.round(forces[i].wind.momentCrossX[j - diff])
+            : '';
+        crossWindTableData[j][`shearY${i}`] =
+          forces[i].wind.storeyID[j - diff] === storeyID[j]
+            ? Math.round(forces[i].wind.shearCrossY[j - diff])
+            : '';
+        crossWindTableData[j][`momentY${i}`] =
+          forces[i].wind.storeyID[j - diff] === storeyID[j]
+            ? Math.round(forces[i].wind.momentCrossY[j - diff])
+            : '';
 
-      shearCrossWindChartData[2 * i].push({
-        x:
-          forces[i].wind.storeyID[j - diff] === storeyID[j]
-            ? Math.abs(forces[i].wind.shearCrossX[j - diff])
-            : Math.abs(forces[i].wind.shearCrossX[0]),
-        y:
-          forces[i].wind.storeyID[j - diff] === storeyID[j]
-            ? forces[i].wind.storeyID[j - diff]
-            : forces[i].wind.storeyID[0],
-      });
-      shearCrossWindChartData[2 * i + 1].push({
-        x:
-          forces[i].wind.storeyID[j - diff] === storeyID[j]
-            ? Math.abs(forces[i].wind.shearCrossY[j - diff])
-            : Math.abs(forces[i].wind.shearCrossY[0]),
-        y:
-          forces[i].wind.storeyID[j - diff] === storeyID[j]
-            ? forces[i].wind.storeyID[j - diff]
-            : forces[i].wind.storeyID[0],
-      });
-      momentCrossWindChartData[2 * i].push({
-        x:
-          forces[i].wind.storeyID[j - diff] === storeyID[j]
-            ? Math.abs(forces[i].wind.momentCrossX[j - diff])
-            : Math.abs(forces[i].wind.momentCrossX[0]),
-        y:
-          forces[i].wind.storeyID[j - diff] === storeyID[j]
-            ? forces[i].wind.storeyID[j - diff]
-            : forces[i].wind.storeyID[0],
-      });
-      momentCrossWindChartData[2 * i + 1].push({
-        x:
-          forces[i].wind.storeyID[j - diff] === storeyID[j]
-            ? Math.abs(forces[i].wind.momentCrossY[j - diff])
-            : Math.abs(forces[i].wind.momentCrossY[0]),
-        y:
-          forces[i].wind.storeyID[j - diff] === storeyID[j]
-            ? forces[i].wind.storeyID[j - diff]
-            : forces[i].wind.storeyID[0],
-      });
+        if (j < tempStoreyID.length) {
+          shearCrossWindChartData[2 * m].push({
+            x: Math.abs(tempShearX[j]),
+            y: tempStoreyID[j],
+          });
+          shearCrossWindChartData[2 * m + 1].push({
+            x: Math.abs(tempShearY[j]),
+            y: tempStoreyID[j],
+          });
+          momentCrossWindChartData[2 * m].push({
+            x: Math.abs(tempMomentX[j]),
+            y: tempStoreyID[j],
+          });
+          momentCrossWindChartData[2 * m + 1].push({
+            x: Math.abs(tempMomentY[j]),
+            y: tempStoreyID[j],
+          });
+        }
+      }
+      m++;
     }
   }
 
@@ -221,8 +259,10 @@ export function CompareForceComponent(forces: IForceFE[]) {
   const shearSeismicChartData: IData[][] = [];
   const momentSeismicChartData: IData[][] = [];
   for (let i = 0; i < n; i++) {
-    shearSeismicChartData.push([], []);
-    momentSeismicChartData.push([], []);
+    for (let k = 0; k < towers[i]; k++) {
+      shearSeismicChartData.push([], []);
+      momentSeismicChartData.push([], []);
+    }
   }
 
   for (let j = 0; j < count; j++) {
@@ -232,85 +272,112 @@ export function CompareForceComponent(forces: IForceFE[]) {
     });
   }
 
-  for (let i = 0; i < n; i++) {
-    const len = forces[i].seismic.storeyID.length;
-    const diff = count - len;
+  for (let i = 0, m = 0; i < n; i++) {
+    for (let k = 0; k < towers[i]; k++) {
+      const tempStoreyID: number[] = [];
+      const tempShearX: number[] = [];
+      const tempMomentX: number[] = [];
+      const tempShearY: number[] = [];
+      const tempMomentY: number[] = [];
+      forces[i].seismic.towerID.forEach((val, index) => {
+        if (val === k + 1) {
+          tempStoreyID.push(forces[i].seismic.storeyID[index]);
+          tempShearX.push(forces[i].seismic.shearX[index]);
+          tempMomentX.push(forces[i].seismic.momentX[index]);
+          tempShearY.push(forces[i].seismic.shearY[index]);
+          tempMomentY.push(forces[i].seismic.momentY[index]);
+        }
+      });
+      const len = tempStoreyID[0];
+      const diff = count - len;
 
-    for (let j = 0; j < count; j++) {
-      seismicTableData[j][`shearX${i}`] =
-        forces[i].seismic.storeyID[j - diff] === storeyID[j]
-          ? forces[i].seismic.shearX[j - diff].toFixed(0)
-          : '';
-      seismicTableData[j][`momentX${i}`] =
-        forces[i].seismic.storeyID[j - diff] === storeyID[j]
-          ? forces[i].seismic.momentX[j - diff].toFixed(0)
-          : '';
-      seismicTableData[j][`shearY${i}`] =
-        forces[i].seismic.storeyID[j - diff] === storeyID[j]
-          ? forces[i].seismic.shearY[j - diff].toFixed(0)
-          : '';
-      seismicTableData[j][`momentY${i}`] =
-        forces[i].seismic.storeyID[j - diff] === storeyID[j]
-          ? forces[i].seismic.momentY[j - diff].toFixed(0)
-          : '';
+      for (let j = 0; j < count; j++) {
+        seismicTableData[j][`shearX${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempShearX[j - diff].toFixed(0)
+            : '';
+        seismicTableData[j][`momentX${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempMomentX[j - diff].toFixed(0)
+            : '';
+        seismicTableData[j][`shearY${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempShearY[j - diff].toFixed(0)
+            : '';
+        seismicTableData[j][`momentY${i}-${k}`] =
+          tempStoreyID[j - diff] === storeyID[j]
+            ? tempMomentY[j - diff].toFixed(0)
+            : '';
 
-      shearSeismicChartData[2 * i].push({
-        x:
-          forces[i].seismic.storeyID[j - diff] === storeyID[j]
-            ? Math.abs(forces[i].seismic.shearX[j - diff])
-            : Math.abs(forces[i].seismic.shearX[0]),
-        y:
-          forces[i].seismic.storeyID[j - diff] === storeyID[j]
-            ? forces[i].seismic.storeyID[j - diff]
-            : forces[i].seismic.storeyID[0],
-      });
-      shearSeismicChartData[2 * i + 1].push({
-        x:
-          forces[i].seismic.storeyID[j - diff] === storeyID[j]
-            ? Math.abs(forces[i].seismic.shearY[j - diff])
-            : Math.abs(forces[i].seismic.shearY[0]),
-        y:
-          forces[i].seismic.storeyID[j - diff] === storeyID[j]
-            ? forces[i].seismic.storeyID[j - diff]
-            : forces[i].seismic.storeyID[0],
-      });
-      momentSeismicChartData[2 * i].push({
-        x:
-          forces[i].seismic.storeyID[j - diff] === storeyID[j]
-            ? Math.abs(forces[i].seismic.momentX[j - diff])
-            : Math.abs(forces[i].seismic.momentX[0]),
-        y:
-          forces[i].seismic.storeyID[j - diff] === storeyID[j]
-            ? forces[i].seismic.storeyID[j - diff]
-            : forces[i].seismic.storeyID[0],
-      });
-      momentSeismicChartData[2 * i + 1].push({
-        x:
-          forces[i].seismic.storeyID[j - diff] === storeyID[j]
-            ? Math.abs(forces[i].seismic.momentY[j - diff])
-            : Math.abs(forces[i].seismic.momentY[0]),
-        y:
-          forces[i].seismic.storeyID[j - diff] === storeyID[j]
-            ? forces[i].seismic.storeyID[j - diff]
-            : forces[i].seismic.storeyID[0],
-      });
+        if (j < tempStoreyID.length) {
+          shearSeismicChartData[2 * m].push({
+            x: Math.abs(tempShearX[j]),
+            y: tempStoreyID[j],
+          });
+          shearSeismicChartData[2 * m + 1].push({
+            x: Math.abs(tempShearY[j]),
+            y: tempStoreyID[j],
+          });
+          momentSeismicChartData[2 * m].push({
+            x: Math.abs(tempMomentX[j]),
+            y: tempStoreyID[j],
+          });
+          momentSeismicChartData[2 * m + 1].push({
+            x: Math.abs(tempMomentY[j]),
+            y: tempStoreyID[j],
+          });
+        }
+      }
+      m++;
     }
   }
 
-  const describes: IDescribe[] = [];
-  for (let i = 0; i < n; i++) {
-    describes.push(
-      {
-        name: `模型${i + 1}-X`,
-        fill: userColors[(2 * i) % 8],
-        shape: userShaps[(2 * i) % 7],
-      },
-      {
-        name: `模型${i + 1}-Y`,
-        fill: userColors[(2 * i + 1) % 8],
-        shape: userShaps[(2 * i + 1) % 7],
-      }
+  const pipelineAlongWind = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: alongWindTableData, columns: forceColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
     );
+
+  const pipelineCrossWind = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: crossWindTableData, columns: forceColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineSeismic = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: seismicTableData, columns: forceColumns })
+    .use(
+      features.sort({
+        mode: 'single',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const describes: IDescribe[] = [];
+  for (let i = 0, m = 0; i < n; i++) {
+    for (let k = 0; k < towers[i]; k++) {
+      describes.push(
+        {
+          name:
+            towers[i] === 1 ? `模型${i + 1}-X` : `模型${i + 1}-塔${k + 1}-X`,
+          fill: userColors[(2 * m) % 8],
+          shape: userShaps[(2 * m) % 7],
+        },
+        {
+          name:
+            towers[i] === 1 ? `模型${i + 1}-Y` : `模型${i + 1}-塔${k + 1}-Y`,
+          fill: userColors[(2 * m + 1) % 8],
+          shape: userShaps[(2 * m + 1) % 7],
+        }
+      );
+      m++;
+    }
   }
 
   const { Panel } = Collapse;
@@ -336,14 +403,13 @@ export function CompareForceComponent(forces: IForceFE[]) {
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={forceColumns}
-            dataSource={alongWindTableData}
             primaryKey={'key'}
             useVirtual={true}
             hasHeader={true}
             useOuterBorder
             defaultColumnWidth={80}
             style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineAlongWind.getProps()}
           />
         </Panel>
       </Collapse>
@@ -369,14 +435,13 @@ export function CompareForceComponent(forces: IForceFE[]) {
           <Collapse ghost>
             <Panel header="详细数据" key="2">
               <BaseTable
-                columns={forceColumns}
-                dataSource={crossWindTableData}
                 primaryKey={'key'}
                 useVirtual={true}
                 hasHeader={true}
                 useOuterBorder
                 defaultColumnWidth={80}
                 style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+                {...pipelineCrossWind.getProps()}
               />
             </Panel>
           </Collapse>
@@ -402,14 +467,13 @@ export function CompareForceComponent(forces: IForceFE[]) {
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={forceColumns}
-            dataSource={seismicTableData}
             primaryKey={'key'}
             useVirtual={true}
             hasHeader={true}
             useOuterBorder
             defaultColumnWidth={80}
             style={{ height: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineSeismic.getProps()}
           />
         </Panel>
       </Collapse>
