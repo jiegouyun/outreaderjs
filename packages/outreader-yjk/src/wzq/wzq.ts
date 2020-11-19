@@ -3,6 +3,7 @@ import {
   IMode,
   IModeMass,
   ISeismicForce,
+  IShearWeightRatioModify,
   IWzq,
   readLineByLine,
 } from '@outreader/core';
@@ -58,6 +59,13 @@ export async function readWzqOutput(dir: string): Promise<IWzq | undefined> {
       shearWeightRatioY: [],
       allExtracted: false,
     },
+    shearWeightRatioModify: {
+      storeyID: [],
+      towerID: [],
+      factorX: [],
+      factorY: [],
+      allExtracted: false,
+    },
   };
 
   await readLineByLine(file, (line: string) => {
@@ -91,6 +99,14 @@ export async function readWzqOutput(dir: string): Promise<IWzq | undefined> {
     // Extract seismicForce{}
     if (!wzq.seismicForce.allExtracted) {
       wzq.seismicForce = extractSeismicForce(lineArray, wzq.seismicForce);
+    }
+
+    // Extract shearWeightRatioModify{}
+    if (!wzq.shearWeightRatioModify?.allExtracted) {
+      wzq.shearWeightRatioModify = extractShearWeightRatioModify(
+        lineArray,
+        wzq.shearWeightRatioModify,
+      );
     }
   });
 
@@ -226,6 +242,25 @@ export function extractSeismicForce(
   }
 
   return seismicForce;
+}
+
+export function extractShearWeightRatioModify(
+  lineArray: string[],
+  shearWeightRatioModify: IShearWeightRatioModify | undefined,
+): IShearWeightRatioModify | undefined {
+  if (lineArray[0] === '各楼层地震剪力系数调整情况') {
+    FLAG = 'keyShearWeightRatioModify';
+  }
+
+  if (FLAG === 'keyShearWeightRatioModify') {
+    if (!isNaN(Number(lineArray[0]))) {
+      shearWeightRatioModify?.storeyID.push(Number(lineArray[0]));
+      shearWeightRatioModify?.towerID.push(Number(lineArray[1]));
+      shearWeightRatioModify?.factorX.push(Number(lineArray[2]));
+      shearWeightRatioModify?.factorY.push(Number(lineArray[3]));
+    }
+  }
+  return shearWeightRatioModify;
 }
 
 export function extractMode(lineArray: string[], mode: IMode): IMode {

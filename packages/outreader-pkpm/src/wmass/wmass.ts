@@ -191,11 +191,16 @@ export async function readWmassOutput(
     }
 
     // Extract wind{}
-    if (!wmass.wind.allExtracted) {
+    if (!wmass.wind.allExtracted && wmass.weight.allExtracted) {
       wmass.wind = extractWind(lineArray, wmass.wind);
     }
 
     // Extract storey[] part3/4
+    if (!wmass.storey.allExtracted) {
+      wmass.storey = extractStoreyPart3(lineArray, wmass.storey);
+    }
+
+    // Extract storey[] part4/4
     if (!wmass.storey.allExtracted) {
       wmass.storey = extractStoreyPart4(lineArray, wmass.storey);
     }
@@ -381,12 +386,24 @@ export function extractMassRatioPart1(
 
   if (FLAG === 'keyMassRatio1') {
     if (!isNaN(Number(lineArray[0]))) {
-      massRatio.storeyID.push(Number(lineArray[0]));
-      massRatio.towerID.push(Number(lineArray[1]));
-      massRatio.storeyMass.push(
-        Number(lineArray[5]) + Number(lineArray[5]) + Number(lineArray[7]),
-      );
-      massRatio.ratio.push(Number(lineArray[8]));
+      if (lineArray[1].length < 5) {
+        massRatio.storeyID.push(Number(lineArray[0]));
+        massRatio.towerID.push(Number(lineArray[1]));
+        massRatio.storeyMass.push(
+          Number(lineArray[5]) + Number(lineArray[6]) + Number(lineArray[7]),
+        );
+        massRatio.ratio.push(Number(lineArray[8]));
+      } else {
+        // 多塔
+        massRatio.storeyID.push(
+          massRatio.storeyID[massRatio.storeyID.length - 1],
+        );
+        massRatio.towerID.push(Number(lineArray[0]));
+        massRatio.storeyMass.push(
+          Number(lineArray[4]) + Number(lineArray[5]) + Number(lineArray[6]),
+        );
+        massRatio.ratio.push(Number(lineArray[7]));
+      }
     }
   }
 
@@ -424,11 +441,20 @@ export function extractStoreyPart2(
 
   if (FLAG === 'keyStoreyPart2') {
     if (!isNaN(Number(lineArray[0]))) {
-      storey.storeyID.push(Number(lineArray[0]));
-      storey.towerID.push(Number(lineArray[2]));
-      storey.attribute.push(lineArray[1]);
-      storey.height.push(Number(lineArray[16]));
-      storey.heightToGround.push(Number(lineArray[17]));
+      if (lineArray.length === 18) {
+        storey.storeyID.push(Number(lineArray[0]));
+        storey.towerID.push(Number(lineArray[2]));
+        storey.attribute.push(lineArray[1]);
+        storey.height.push(Number(lineArray[16]));
+        storey.heightToGround.push(Number(lineArray[17]));
+      } else {
+        // 多塔
+        storey.storeyID.push(storey.storeyID[storey.storeyID.length - 1]);
+        storey.towerID.push(Number(lineArray[0]));
+        storey.attribute.push(storey.attribute[storey.attribute.length - 1]);
+        storey.height.push(Number(lineArray[14]));
+        storey.heightToGround.push(Number(lineArray[15]));
+      }
     }
   }
 
@@ -444,46 +470,64 @@ export function extractWind(lineArray: string[], wind: IWind): IWind {
   }
 
   if (FLAG === 'keyWind') {
-    if (!isNaN(Number(lineArray[0])) && lineArray[2] === 'X') {
-      wind.storeyID.push(Number(lineArray[0]));
-      wind.towerID.push(Number(lineArray[1]));
-      wind.forceAlongX.push(Number(lineArray[3]));
-      wind.shearAlongX.push(Number(lineArray[4]));
-      wind.momentAlongX.push(Number(lineArray[5]));
-      wind.forceCrossX.push(Number(lineArray[6]));
-      wind.shearCrossX.push(Number(lineArray[7]));
-      wind.momentCrossX.push(Number(lineArray[8]));
-    }
-
-    if (!isNaN(Number(lineArray[1])) && lineArray[0] === 'Y') {
-      wind.forceAlongY.push(Number(lineArray[1]));
-      wind.shearAlongY.push(Number(lineArray[2]));
-      wind.momentAlongY.push(Number(lineArray[3]));
-      wind.forceCrossY.push(Number(lineArray[4]));
-      wind.shearCrossY.push(Number(lineArray[5]));
-      wind.momentCrossY.push(Number(lineArray[6]));
-    }
-
-    // compatibilized v1.8.2
-    if (!isNaN(Number(lineArray[0])) && lineArray.length === 8) {
-      wind.storeyID.push(Number(lineArray[0]));
-      wind.towerID.push(Number(lineArray[1]));
-      wind.forceAlongX.push(Number(lineArray[2]));
-      wind.shearAlongX.push(Number(lineArray[3]));
-      wind.momentAlongX.push(Number(lineArray[4]));
-      // wind.forceCrossX.push(0);
-      // wind.shearCrossX.push(0);
-      // wind.momentCrossX.push(0);
-      wind.forceAlongY.push(Number(lineArray[5]));
-      wind.shearAlongY.push(Number(lineArray[6]));
-      wind.momentAlongY.push(Number(lineArray[7]));
-      // wind.forceCrossY.push(Number(0));
-      // wind.shearCrossY.push(Number(0));
-      // wind.momentCrossY.push(Number(0));
+    if (!isNaN(Number(lineArray[0]))) {
+      if (lineArray[1].length < 4) {
+        wind.storeyID.push(Number(lineArray[0]));
+        wind.towerID.push(Number(lineArray[1]));
+        wind.forceAlongX.push(Number(lineArray[2]));
+        wind.shearAlongX.push(Number(lineArray[3]));
+        wind.momentAlongX.push(Number(lineArray[4]));
+        // wind.forceCrossX.push(0);
+        // wind.shearCrossX.push(0);
+        // wind.momentCrossX.push(0);
+        wind.forceAlongY.push(Number(lineArray[5]));
+        wind.shearAlongY.push(Number(lineArray[6]));
+        wind.momentAlongY.push(Number(lineArray[7]));
+        // wind.forceCrossY.push(Number(0));
+        // wind.shearCrossY.push(Number(0));
+        // wind.momentCrossY.push(Number(0));
+      } else {
+        //多塔
+        wind.storeyID.push(wind.storeyID[wind.storeyID.length - 1]);
+        wind.towerID.push(Number(lineArray[0]));
+        wind.forceAlongX.push(Number(lineArray[1]));
+        wind.shearAlongX.push(Number(lineArray[2]));
+        wind.momentAlongX.push(Number(lineArray[3]));
+        wind.forceAlongY.push(Number(lineArray[4]));
+        wind.shearAlongY.push(Number(lineArray[5]));
+        wind.momentAlongY.push(Number(lineArray[6]));
+      }
     }
   }
 
   return wind;
+}
+
+export function extractStoreyPart3(
+  lineArray: string[],
+  storey: IStorey,
+): IStorey {
+  if (lineArray[0] === '各楼层等效尺寸') {
+    FLAG = 'keyStoreyPart3';
+  } else if (
+    lineArray[0] === '各楼层的单位面积质量分布' ||
+    lineArray[0] === '各层的柱'
+  ) {
+    FLAG = '';
+  }
+
+  if (FLAG === 'keyStoreyPart3') {
+    if (!isNaN(Number(lineArray[0]))) {
+      if (lineArray[1].length < 4) {
+        storey.area.push(Number(lineArray[2]));
+      } else {
+        //多塔
+        storey.area.push(Number(lineArray[1]));
+      }
+    }
+  }
+
+  return storey;
 }
 
 export function extractStoreyPart4(
@@ -499,9 +543,16 @@ export function extractStoreyPart4(
 
   if (FLAG === 'keyStoreyPart4') {
     if (!isNaN(Number(lineArray[0]))) {
-      storey.area.push(Number(lineArray[2]));
-      storey.wallSectionAreaX.push(Number(lineArray[7]));
-      storey.wallSectionAreaY.push(Number(lineArray[9]));
+      if (lineArray[1].length < 4) {
+        // storey.area.push(Number(lineArray[2]));
+        storey.wallSectionAreaX.push(Number(lineArray[7]));
+        storey.wallSectionAreaY.push(Number(lineArray[9]));
+      } else {
+        //多塔
+        // storey.area.push(Number(lineArray[1]));
+        storey.wallSectionAreaX.push(Number(lineArray[6]));
+        storey.wallSectionAreaY.push(Number(lineArray[8]));
+      }
     }
   }
 
@@ -523,8 +574,14 @@ export function extractMassRatioPart2(
 
   if (FLAG === 'keyMassRatio2') {
     if (!isNaN(Number(lineArray[0]))) {
-      massRatio.massPerArea.push(Number(lineArray[2]));
-      massRatio.massPerAreaRatio.push(Number(lineArray[3]));
+      if (lineArray[1].length < 4) {
+        massRatio.massPerArea.push(Number(lineArray[2]));
+        massRatio.massPerAreaRatio.push(Number(lineArray[3]));
+      } else {
+        //多塔
+        massRatio.massPerArea.push(Number(lineArray[1]));
+        massRatio.massPerAreaRatio.push(Number(lineArray[2]));
+      }
     }
   }
 

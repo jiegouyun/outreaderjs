@@ -239,19 +239,39 @@ export function extractSeismicForce(
 
   if (FLAG === 'keySeismicForceX') {
     if (!isNaN(Number(lineArray[0]))) {
-      seismicForce.storeyID.push(Number(lineArray[0]));
-      seismicForce.towerID.push(Number(lineArray[1]));
-      seismicForce.forceX.push(Number(lineArray[2]));
-      seismicForce.shearX.push(Number(lineArray[3]));
-      seismicForce.momentX.push(Number(lineArray[6]));
-      seismicForce.shearWeightRatioX.push(Number(lineArray[4]));
+      if (lineArray[1].length < 4) {
+        seismicForce.storeyID.push(Number(lineArray[0]));
+        seismicForce.towerID.push(Number(lineArray[1]));
+        seismicForce.forceX.push(Number(lineArray[2]));
+        seismicForce.shearX.push(Number(lineArray[3]));
+        seismicForce.momentX.push(Number(lineArray[6]));
+        seismicForce.shearWeightRatioX.push(Number(lineArray[4]));
+      } else {
+        //多塔
+        seismicForce.storeyID.push(
+          seismicForce.storeyID[seismicForce.storeyID.length - 1],
+        );
+        seismicForce.towerID.push(Number(lineArray[0]));
+        seismicForce.forceX.push(Number(lineArray[1]));
+        seismicForce.shearX.push(Number(lineArray[2]));
+        seismicForce.momentX.push(Number(lineArray[4]));
+        seismicForce.shearWeightRatioX.push(Number(lineArray[3]));
+      }
     }
   } else if (FLAG === 'keySeismicForceY') {
     if (!isNaN(Number(lineArray[0]))) {
-      seismicForce.forceY.push(Number(lineArray[2]));
-      seismicForce.shearY.push(Number(lineArray[3]));
-      seismicForce.momentY.push(Number(lineArray[6]));
-      seismicForce.shearWeightRatioY.push(Number(lineArray[4]));
+      if (lineArray[1].length < 4) {
+        seismicForce.forceY.push(Number(lineArray[2]));
+        seismicForce.shearY.push(Number(lineArray[3]));
+        seismicForce.momentY.push(Number(lineArray[6]));
+        seismicForce.shearWeightRatioY.push(Number(lineArray[4]));
+      } else {
+        //多塔
+        seismicForce.forceY.push(Number(lineArray[1]));
+        seismicForce.shearY.push(Number(lineArray[2]));
+        seismicForce.momentY.push(Number(lineArray[4]));
+        seismicForce.shearWeightRatioY.push(Number(lineArray[3]));
+      }
     }
   }
 
@@ -268,10 +288,22 @@ export function extractShearWeightRatioModify(
 
   if (FLAG === 'keyShearWeightRatioModify') {
     if (!isNaN(Number(lineArray[0]))) {
-      shearWeightRatioModify?.storeyID.push(Number(lineArray[0]));
-      shearWeightRatioModify?.towerID.push(Number(lineArray[1]));
-      shearWeightRatioModify?.factorX.push(Number(lineArray[2]));
-      shearWeightRatioModify?.factorY.push(Number(lineArray[3]));
+      if (lineArray[1].length < 5) {
+        shearWeightRatioModify?.storeyID.push(Number(lineArray[0]));
+        shearWeightRatioModify?.towerID.push(Number(lineArray[1]));
+        shearWeightRatioModify?.factorX.push(Number(lineArray[2]));
+        shearWeightRatioModify?.factorY.push(Number(lineArray[3]));
+      } else {
+        //多塔
+        shearWeightRatioModify?.storeyID.push(
+          shearWeightRatioModify.storeyID[
+            shearWeightRatioModify.storeyID.length - 1
+          ],
+        );
+        shearWeightRatioModify?.towerID.push(Number(lineArray[0]));
+        shearWeightRatioModify?.factorX.push(Number(lineArray[1]));
+        shearWeightRatioModify?.factorY.push(Number(lineArray[2]));
+      }
     }
   }
   return shearWeightRatioModify;

@@ -207,7 +207,7 @@ export async function readWmassOutput(
     }
 
     // Extract wind{}
-    if (!wmass.wind.allExtracted) {
+    if (!wmass.wind.allExtracted && wmass.weight.allExtracted) {
       wmass.wind = extractWind(lineArray, wmass.wind);
     }
 

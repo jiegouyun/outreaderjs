@@ -148,7 +148,13 @@ export async function exportExcel(structure: IStructureFrontEnd, dir?: string) {
   const fileType =
     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
   const blob = new Blob([buffer], { type: fileType });
-  saveAs(blob, 'OutReader.xlsx');
+  const date = new Date();
+  saveAs(
+    blob,
+    `OutReader_${date.getFullYear()}${
+      date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
+    }${date.getDate()}.xlsx`,
+  );
 
   return true;
 }

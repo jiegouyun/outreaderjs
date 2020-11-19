@@ -1,4 +1,4 @@
-import { readPKPMWmassOutput } from './wmass';
+import { readWmassOutput } from './wmass';
 import { IWmass } from '@outreader/core';
 import * as path from 'path';
 import { wmass as wmass1 } from '../../../../fixtures/test-result/pkpm-1/wmass';
@@ -9,7 +9,7 @@ describe('wmass1', () => {
   let wmass: IWmass;
 
   beforeEach(async () => {
-    wmass = await readPKPMWmassOutput(dir);
+    wmass = await readWmassOutput(dir);
   });
 
   it('should read wmass.out', async () => {
@@ -115,7 +115,7 @@ describe('wmass2', () => {
   let wmass: IWmass;
 
   beforeEach(async () => {
-    wmass = await readPKPMWmassOutput(dir);
+    wmass = await readWmassOutput(dir);
   });
 
   it('should read wmass.out', async () => {

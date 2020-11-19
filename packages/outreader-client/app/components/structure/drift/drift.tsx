@@ -1,20 +1,31 @@
 import { Row, Collapse } from 'antd';
-import { BaseTable, ArtColumn } from 'ali-react-table';
+import {
+  BaseTable,
+  ArtColumn,
+  useTablePipeline,
+  features,
+} from 'ali-react-table';
 import React from 'react';
 import { IDriftFE } from '@outreader/core';
 import { StoreyChart } from '../../chart-tools';
+import { IData, IDescribe } from '../../../interfaces';
+import { userColors, userShaps } from '../../../colors';
 
 export function DriftComponent(drift: IDriftFE) {
+  const n = new Set([...drift.driftSeismicX.towerID]).size;
+
   const driftDispColumns: ArtColumn[] = [
     {
       name: '层号',
       code: 'storeyID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: '塔号',
       code: 'towerID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: '风荷载X',
@@ -40,14 +51,17 @@ export function DriftComponent(drift: IDriftFE) {
 
   const dispTableData = [];
   const driftTableData = [];
-  const dispChartWindX = [];
-  const dispChartWindY = [];
-  const dispChartSeismicX = [];
-  const dispChartSeismicY = [];
-  const driftChartWindX = [];
-  const driftChartWindY = [];
-  const driftChartSeismicX = [];
-  const driftChartSeismicY = [];
+  const dispSeismicChartData: IData[][] = [];
+  const dispWindChartData: IData[][] = [];
+  const driftSeismicChartData: IData[][] = [];
+  const driftWindChartData: IData[][] = [];
+  for (let i = 0; i < n; i++) {
+    dispSeismicChartData.push([], []);
+    dispWindChartData.push([], []);
+    driftSeismicChartData.push([], []);
+    driftWindChartData.push([], []);
+  }
+
   for (let i = 0; i < drift.driftWindXP.storeyID.length; i++) {
     dispTableData.push({
       key: i,
@@ -67,37 +81,39 @@ export function DriftComponent(drift: IDriftFE) {
       seismicX: drift.driftSeismicX.drift[i],
       seismicY: drift.driftSeismicY.drift[i],
     });
-    dispChartWindX.push({
-      x: drift.driftWindXP.displacement[i],
-      y: drift.driftWindXP.storeyID[i],
-    });
-    dispChartWindY.push({
-      x: drift.driftWindYP.displacement[i],
-      y: drift.driftWindYP.storeyID[i],
-    });
-    dispChartSeismicX.push({
+
+    const towerIndex = drift.driftWindXP.towerID[i] - 1;
+    dispSeismicChartData[2 * towerIndex].push({
       x: drift.driftSeismicX.displacement[i],
       y: drift.driftSeismicX.storeyID[i],
     });
-    dispChartSeismicY.push({
+    dispSeismicChartData[2 * towerIndex + 1].push({
       x: drift.driftSeismicY.displacement[i],
       y: drift.driftSeismicY.storeyID[i],
     });
-    driftChartWindX.push({
-      x: 1 / drift.driftWindXP.drift[i],
+    dispWindChartData[2 * towerIndex].push({
+      x: drift.driftWindXP.displacement[i],
       y: drift.driftWindXP.storeyID[i],
     });
-    driftChartWindY.push({
-      x: 1 / drift.driftWindYP.drift[i],
+    dispWindChartData[2 * towerIndex + 1].push({
+      x: drift.driftWindYP.displacement[i],
       y: drift.driftWindYP.storeyID[i],
     });
-    driftChartSeismicX.push({
+    driftSeismicChartData[2 * towerIndex].push({
       x: 1 / drift.driftSeismicX.drift[i],
       y: drift.driftSeismicX.storeyID[i],
     });
-    driftChartSeismicY.push({
+    driftSeismicChartData[2 * towerIndex + 1].push({
       x: 1 / drift.driftSeismicY.drift[i],
       y: drift.driftSeismicY.storeyID[i],
+    });
+    driftWindChartData[2 * towerIndex].push({
+      x: 1 / drift.driftWindXP.drift[i],
+      y: drift.driftWindXP.storeyID[i],
+    });
+    driftWindChartData[2 * towerIndex + 1].push({
+      x: 1 / drift.driftWindYP.drift[i],
+      y: drift.driftWindYP.storeyID[i],
     });
   }
 
@@ -106,11 +122,13 @@ export function DriftComponent(drift: IDriftFE) {
       name: '层号',
       code: 'storeyID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: '塔号',
       code: 'towerID',
       align: 'right',
+      features: { sortable: true },
     },
     {
       name: '+X偏心',
@@ -136,14 +154,17 @@ export function DriftComponent(drift: IDriftFE) {
 
   const dispRatioTableData = [];
   const dispRatioStoreyTableData = [];
-  const ratioChartEXP = [];
-  const ratioChartEXN = [];
-  const ratioChartEYP = [];
-  const ratioChartEYN = [];
-  const ratioDChartEXP = [];
-  const ratioDChartEXN = [];
-  const ratioDChartEYP = [];
-  const ratioDChartEYN = [];
+  const ratioXChartData: IData[][] = [];
+  const ratioYChartData: IData[][] = [];
+  const ratioDXChartData: IData[][] = [];
+  const ratioDYChartData: IData[][] = [];
+  for (let i = 0; i < n; i++) {
+    ratioXChartData.push([], []);
+    ratioYChartData.push([], []);
+    ratioDXChartData.push([], []);
+    ratioDYChartData.push([], []);
+  }
+
   for (let i = 0; i < drift.ratioSeismicXEccP.storeyID.length; i++) {
     dispRatioTableData.push({
       key: i,
@@ -163,38 +184,107 @@ export function DriftComponent(drift: IDriftFE) {
       eccYP: drift.ratioSeismicYEccP.ratioD[i].toFixed(2),
       eccYN: drift.ratioSeismicYEccN.ratioD[i].toFixed(2),
     });
-    ratioChartEXP.push({
+
+    const towerIndex = drift.ratioSeismicXEccP.towerID[i] - 1;
+    ratioXChartData[2 * towerIndex].push({
       x: drift.ratioSeismicXEccP.ratio[i],
       y: drift.ratioSeismicXEccP.storeyID[i],
     });
-    ratioChartEXN.push({
+    ratioXChartData[2 * towerIndex + 1].push({
       x: drift.ratioSeismicXEccN.ratio[i],
       y: drift.ratioSeismicXEccN.storeyID[i],
     });
-    ratioChartEYP.push({
+    ratioYChartData[2 * towerIndex].push({
       x: drift.ratioSeismicYEccP.ratio[i],
       y: drift.ratioSeismicYEccP.storeyID[i],
     });
-    ratioChartEYN.push({
+    ratioYChartData[2 * towerIndex + 1].push({
       x: drift.ratioSeismicYEccN.ratio[i],
       y: drift.ratioSeismicYEccN.storeyID[i],
     });
-    ratioDChartEXP.push({
+    ratioDXChartData[2 * towerIndex].push({
       x: drift.ratioSeismicXEccP.ratioD[i],
       y: drift.ratioSeismicXEccP.storeyID[i],
     });
-    ratioDChartEXN.push({
+    ratioDXChartData[2 * towerIndex + 1].push({
       x: drift.ratioSeismicXEccN.ratioD[i],
       y: drift.ratioSeismicXEccN.storeyID[i],
     });
-    ratioDChartEYP.push({
+    ratioDYChartData[2 * towerIndex].push({
       x: drift.ratioSeismicYEccP.ratioD[i],
       y: drift.ratioSeismicYEccP.storeyID[i],
     });
-    ratioDChartEYN.push({
+    ratioDYChartData[2 * towerIndex + 1].push({
       x: drift.ratioSeismicYEccN.ratioD[i],
       y: drift.ratioSeismicYEccN.storeyID[i],
     });
+  }
+
+  const pipelineDisp = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: dispTableData, columns: driftDispColumns })
+    .use(
+      features.sort({
+        mode: 'multiple',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineDrift = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: driftTableData, columns: driftDispColumns })
+    .use(
+      features.sort({
+        mode: 'multiple',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineDispRatio = useTablePipeline({ components: BaseTable as any })
+    .input({ dataSource: dispRatioTableData, columns: dispRatioColumns })
+    .use(
+      features.sort({
+        mode: 'multiple',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const pipelineDispRatioStorey = useTablePipeline({
+    components: BaseTable as any,
+  })
+    .input({ dataSource: dispRatioStoreyTableData, columns: dispRatioColumns })
+    .use(
+      features.sort({
+        mode: 'multiple',
+        highlightColumnWhenActive: true,
+      })
+    );
+
+  const describesDrift: IDescribe[] = [];
+  const describesDispRatio: IDescribe[] = [];
+  for (let i = 0; i < n; i++) {
+    describesDrift.push(
+      {
+        name: n === 1 ? `X向` : `塔${i + 1}-X`,
+        fill: userColors[(2 * i) % 8],
+        shape: userShaps[(2 * i) % 7],
+      },
+      {
+        name: n === 1 ? `Y向` : `塔${i + 1}-Y`,
+        fill: userColors[(2 * i + 1) % 8],
+        shape: userShaps[(2 * i + 1) % 7],
+      }
+    );
+    describesDispRatio.push(
+      {
+        name: n === 1 ? `正偏心` : `塔${i + 1}-正偏心`,
+        fill: userColors[(2 * i) % 8],
+        shape: userShaps[(2 * i) % 7],
+      },
+      {
+        name: n === 1 ? `负偏心` : `塔${i + 1}-负偏心`,
+        fill: userColors[(2 * i + 1) % 8],
+        shape: userShaps[(2 * i + 1) % 7],
+      }
+    );
   }
 
   const { Panel } = Collapse;
@@ -206,49 +296,26 @@ export function DriftComponent(drift: IDriftFE) {
           labels={{
             xLabel: '地震位移(mm)',
           }}
-          describes={[
-            {
-              name: 'X向',
-              fill: '#8884d8',
-              shape: 'cross',
-            },
-            {
-              name: 'Y向',
-              fill: '#82ca9d',
-              shape: 'circle',
-            },
-          ]}
-          datas={[dispChartSeismicX, dispChartSeismicY]}
+          describes={describesDrift}
+          datas={dispSeismicChartData}
         />
         <StoreyChart
           labels={{
             xLabel: '风位移(mm)',
           }}
-          describes={[
-            {
-              name: 'X向',
-              fill: '#8884d8',
-              shape: 'cross',
-            },
-            {
-              name: 'Y向',
-              fill: '#82ca9d',
-              shape: 'circle',
-            },
-          ]}
-          datas={[dispChartWindX, dispChartWindY]}
+          describes={describesDrift}
+          datas={dispWindChartData}
         />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={driftDispColumns}
-            dataSource={dispTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineDisp.getProps()}
           />
         </Panel>
       </Collapse>
@@ -258,49 +325,26 @@ export function DriftComponent(drift: IDriftFE) {
           labels={{
             xLabel: '地震位移角',
           }}
-          describes={[
-            {
-              name: 'X向',
-              fill: '#8884d8',
-              shape: 'cross',
-            },
-            {
-              name: 'Y向',
-              fill: '#82ca9d',
-              shape: 'circle',
-            },
-          ]}
-          datas={[driftChartSeismicX, driftChartSeismicY]}
+          describes={describesDrift}
+          datas={driftSeismicChartData}
         />
         <StoreyChart
           labels={{
             xLabel: '风位移角',
           }}
-          describes={[
-            {
-              name: 'X向',
-              fill: '#8884d8',
-              shape: 'cross',
-            },
-            {
-              name: 'Y向',
-              fill: '#82ca9d',
-              shape: 'circle',
-            },
-          ]}
-          datas={[driftChartWindX, driftChartWindY]}
+          describes={describesDrift}
+          datas={driftWindChartData}
         />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={driftDispColumns}
-            dataSource={driftTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineDrift.getProps()}
           />
         </Panel>
       </Collapse>
@@ -310,49 +354,26 @@ export function DriftComponent(drift: IDriftFE) {
           labels={{
             xLabel: 'X向位移比',
           }}
-          describes={[
-            {
-              name: '+偏心',
-              fill: '#8884d8',
-              shape: 'cross',
-            },
-            {
-              name: '-偏心',
-              fill: '#82ca9d',
-              shape: 'circle',
-            },
-          ]}
-          datas={[ratioChartEXP, ratioChartEXN]}
+          describes={describesDispRatio}
+          datas={ratioXChartData}
         />
         <StoreyChart
           labels={{
             xLabel: 'Y向位移比',
           }}
-          describes={[
-            {
-              name: '+偏心',
-              fill: '#8884d8',
-              shape: 'cross',
-            },
-            {
-              name: '-偏心',
-              fill: '#82ca9d',
-              shape: 'circle',
-            },
-          ]}
-          datas={[ratioChartEYP, ratioChartEYN]}
+          describes={describesDispRatio}
+          datas={ratioYChartData}
         />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={dispRatioColumns}
-            dataSource={dispRatioTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineDispRatio.getProps()}
           />
         </Panel>
       </Collapse>
@@ -362,49 +383,26 @@ export function DriftComponent(drift: IDriftFE) {
           labels={{
             xLabel: 'X向层间位移比',
           }}
-          describes={[
-            {
-              name: '+偏心',
-              fill: '#8884d8',
-              shape: 'cross',
-            },
-            {
-              name: '-偏心',
-              fill: '#82ca9d',
-              shape: 'circle',
-            },
-          ]}
-          datas={[ratioDChartEXP, ratioDChartEXN]}
+          describes={describesDispRatio}
+          datas={ratioDXChartData}
         />
         <StoreyChart
           labels={{
             xLabel: 'Y向层间位移比',
           }}
-          describes={[
-            {
-              name: '+偏心',
-              fill: '#8884d8',
-              shape: 'cross',
-            },
-            {
-              name: '-偏心',
-              fill: '#82ca9d',
-              shape: 'circle',
-            },
-          ]}
-          datas={[ratioDChartEYP, ratioDChartEYN]}
+          describes={describesDispRatio}
+          datas={ratioDYChartData}
         />
       </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable
-            columns={dispRatioColumns}
-            dataSource={dispRatioStoreyTableData}
             primaryKey={'key'}
             useVirtual={{ horizontal: false, header: false, vertical: true }}
             useOuterBorder
             defaultColumnWidth={64}
             style={{ maxHeight: 'calc(100vh - 12.5rem)', overflow: 'auto' }}
+            {...pipelineDispRatioStorey.getProps()}
           />
         </Panel>
       </Collapse>

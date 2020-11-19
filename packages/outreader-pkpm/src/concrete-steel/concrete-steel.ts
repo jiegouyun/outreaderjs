@@ -14,15 +14,11 @@ let FLAG: string;
 export async function readConcreteSteelOutput(
   dir: string,
 ): Promise<IConcreteSteel | undefined> {
-  const files = fs.readdirSync(dir);
-  const filename = files.filter(function (item) {
-    return item.match(/上部结构工程量\w*.txt/gi);
-  });
-  if (!filename[0]) {
-    console.error('cannot find file', '上部结构工程量.txt');
+  const file = path.join(dir, '上部结构工程量.txt');
+  if (!fs.existsSync(file)) {
+    console.error('cannot find file', file);
     return;
   }
-  const file = path.join(dir, filename[0]);
   let concreteSteel: IConcreteSteel = {
     hash: hashFile(file),
     concrete: {

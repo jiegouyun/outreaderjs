@@ -55,9 +55,13 @@ export function calcDriftLimit(
     if (['框架结构', '异形柱框架结构'].includes(system)) {
       limit = /广东/gi.test(location) ? 500 : 550;
     } else if (
-      ['框剪结构', '框筒结构', '板柱-剪力墙结构', '异形柱框剪结构'].includes(
-        system,
-      )
+      [
+        '框剪结构',
+        '框筒结构',
+        '板柱-剪力墙结构',
+        '异形柱框剪结构',
+        '框架-筒体结构',
+      ].includes(system)
     ) {
       limit = /广东/gi.test(location) ? 650 : 800;
     } else if (
@@ -74,9 +78,13 @@ export function calcDriftLimit(
               (((1 / 500 - 1 / 550) * (height - 150)) / (250 - 150) + 1 / 550),
           );
     } else if (
-      ['框剪结构', '框筒结构', '板柱-剪力墙结构', '异形柱框剪结构'].includes(
-        system,
-      )
+      [
+        '框剪结构',
+        '框筒结构',
+        '板柱-剪力墙结构',
+        '异形柱框剪结构',
+        '框架-筒体结构',
+      ].includes(system)
     ) {
       limit = /广东/gi.test(location)
         ? Math.round(

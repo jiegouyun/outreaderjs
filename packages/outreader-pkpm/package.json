@@ -1,12 +1,12 @@
 {
   "name": "@outreader/pkpm",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A PKPM output files reader",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "./node_modules/.bin/babel src --out-dir lib --extensions \".ts\" && tsc",
-    "test": "jest src/**/*.test.ts"
+    "test": "jest src/**/wmass.test.ts"
   },
   "directories": {
     "lib": "./lib",
@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.12.1",
-    "@outreader/core": "^0.0.6",
+    "@outreader/core": "^0.0.7",
     "lodash": "^4.17.20"
   },
   "publishConfig": {
