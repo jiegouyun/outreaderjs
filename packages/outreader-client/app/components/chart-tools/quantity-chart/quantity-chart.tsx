@@ -1,5 +1,5 @@
 import React from 'react';
-import { downloadSVG, downloadPNG } from '@outreader/core';
+import { downloadImg } from '@outreader/core';
 import {
   AreaChart,
   Area,
@@ -10,7 +10,7 @@ import {
   Legend,
   Label,
 } from 'recharts';
-import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
+import { Menu, Dropdown } from 'antd';
 
 /**
  * @description draw quantity chart by area chaer;
@@ -32,9 +32,17 @@ export function QuantityChart(props: {
   xLabel: string;
 }) {
   const { data, xLabel } = props;
+
+  const menu = (
+    <Menu onClick={({ item, key }) => downloadImg(xLabel, key as string)}>
+      <Menu.Item key="svg">下载 SVG</Menu.Item>
+      <Menu.Item key="png">下载 PNG</Menu.Item>
+    </Menu>
+  );
+
   return (
     <React.Fragment>
-      <ContextMenuTrigger id={`CM-${xLabel}`}>
+      <Dropdown overlay={menu} trigger={['contextMenu']}>
         <div id={xLabel} className="charts">
           <AreaChart
             layout="vertical"
@@ -108,16 +116,7 @@ export function QuantityChart(props: {
             />
           </AreaChart>
         </div>
-      </ContextMenuTrigger>
-      <ContextMenu id={`CM-${xLabel}`}>
-        <MenuItem>
-          <a onClick={() => downloadSVG(xLabel)}>下载 SVG</a>
-        </MenuItem>
-        <MenuItem>
-          <a onClick={() => downloadPNG(xLabel)}>下载 PNG</a>
-        </MenuItem>
-        <MenuItem divider />
-      </ContextMenu>
+      </Dropdown>
     </React.Fragment>
   );
 }
