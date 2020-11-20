@@ -5,7 +5,8 @@ export function downloadImg(elementID: string, format: string) {
   const chartSVG =
     document.getElementById(elementID)?.firstElementChild || new HTMLElement();
   if (format === 'svg') {
-    const svgXML = new XMLSerializer().serializeToString(chartSVG);
+    const svgChart = chartSVG.firstElementChild || new HTMLElement();
+    const svgXML = new XMLSerializer().serializeToString(svgChart);
     const svgBlob = new Blob([svgXML], { type: 'image/svg+xml;charset=utf-8' });
     saveAs(svgBlob, `${elementID}.svg`);
   } else if (format === 'png') {
