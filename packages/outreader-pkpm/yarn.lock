@@ -1142,10 +1142,10 @@
   dependencies:
     chokidar "2.1.8"
 
-"@outreader/core@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@outreader/core/-/core-0.0.5.tgz#3cae051c34f5a61e6eb1f87422b5b5c4450271d2"
-  integrity sha512-FdMqKGNyjW85mAOFc+K0kHVh3/ZLl5HN2lNp5/Qxzj6ROs5V/iDYNS7wKAuLnPvRJRXyU6nkN1NgctUhh9UCRA==
+"@outreader/core@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@outreader/core/-/core-0.0.7.tgz#c0908d2f4074911cdce94f67dd314049d308b966"
+  integrity sha512-fc/Q2vlvexvuYnkQhzW413MEAhuiT8J0BISFMY6W5wuNo45496yn8IB/Uyxzt6btDOdS4RSOGx2LS3HxvPhw1g==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@types/dom-to-image" "^2.6.2"
