@@ -1,5 +1,5 @@
 import React from 'react';
-import { downloadSVG, downloadPNG } from '@outreader/core';
+import { downloadImg } from '@outreader/core';
 import {
   BarChart,
   Bar,
@@ -10,7 +10,7 @@ import {
   Legend,
   Label,
 } from 'recharts';
-import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
+import { Menu, Dropdown } from 'antd';
 
 /**
  * @description draw quantity chart by bar chaer;
@@ -32,9 +32,17 @@ export function CompareQuantityChart(props: {
   yLabel: string;
 }) {
   const { data, yLabel } = props;
+
+  const menu = (
+    <Menu onClick={({ item, key }) => downloadImg(yLabel, key as string)}>
+      <Menu.Item key="svg">下载 SVG</Menu.Item>
+      <Menu.Item key="png">下载 PNG</Menu.Item>
+    </Menu>
+  );
+
   return (
     <React.Fragment>
-      <ContextMenuTrigger id={`CM-${yLabel}`}>
+      <Dropdown overlay={menu} trigger={['contextMenu']}>
         <div id={yLabel} className="charts">
           <BarChart
             width={600}
@@ -96,16 +104,7 @@ export function CompareQuantityChart(props: {
             />
           </BarChart>
         </div>
-      </ContextMenuTrigger>
-      <ContextMenu id={`CM-${yLabel}`}>
-        <MenuItem>
-          <a onClick={() => downloadSVG(yLabel)}>下载 SVG</a>
-        </MenuItem>
-        <MenuItem>
-          <a onClick={() => downloadPNG(yLabel)}>下载 PNG</a>
-        </MenuItem>
-        <MenuItem divider />
-      </ContextMenu>
+      </Dropdown>
     </React.Fragment>
   );
 }

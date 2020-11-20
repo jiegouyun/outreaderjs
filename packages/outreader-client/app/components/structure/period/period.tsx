@@ -1,4 +1,4 @@
-import { Collapse, Row } from 'antd';
+import { Collapse, Row, Menu, Dropdown } from 'antd';
 import {
   BaseTable,
   ArtColumn,
@@ -6,7 +6,7 @@ import {
   features,
 } from 'ali-react-table';
 import React from 'react';
-import { downloadSVG, downloadPNG } from '@outreader/core';
+import { downloadImg } from '@outreader/core';
 import {
   ScatterChart,
   Scatter,
@@ -20,7 +20,6 @@ import {
   LegendPayload,
 } from 'recharts';
 import { IPeriodFE } from '@outreader/core';
-import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 
 export function PeriodComponent(period: IPeriodFE) {
   const modeColumns: ArtColumn[] = [
@@ -207,6 +206,15 @@ export function PeriodComponent(period: IPeriodFE) {
       })
     );
 
+  const menu = (
+    <Menu
+      onClick={({ item, key }) => downloadImg('质量参与系数', key as string)}
+    >
+      <Menu.Item key="svg">下载 SVG</Menu.Item>
+      <Menu.Item key="png">下载 PNG</Menu.Item>
+    </Menu>
+  );
+
   const { Panel } = Collapse;
   const Period = (
     <React.Fragment>
@@ -237,8 +245,8 @@ export function PeriodComponent(period: IPeriodFE) {
         </Panel>
       </Collapse>
       <h3>质量参与系数</h3>
-      <ContextMenuTrigger id="CM-质量参与系数">
-        <Row justify="space-around">
+      <Row justify="space-around">
+        <Dropdown overlay={menu} trigger={['contextMenu']}>
           <div id="质量参与系数" className="charts">
             <ScatterChart
               width={600}
@@ -305,17 +313,8 @@ export function PeriodComponent(period: IPeriodFE) {
               />
             </ScatterChart>
           </div>
-        </Row>
-      </ContextMenuTrigger>
-      <ContextMenu id="CM-质量参与系数">
-        <MenuItem>
-          <a onClick={() => downloadSVG('质量参与系数')}>下载 SVG</a>
-        </MenuItem>
-        <MenuItem>
-          <a onClick={() => downloadPNG('质量参与系数')}>下载 PNG</a>
-        </MenuItem>
-        <MenuItem divider />
-      </ContextMenu>
+        </Dropdown>
+      </Row>
       <Collapse ghost>
         <Panel header="详细数据" key="1">
           <BaseTable

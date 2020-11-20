@@ -1,5 +1,5 @@
 import React from 'react';
-import { downloadSVG, downloadPNG } from '@outreader/core';
+import { downloadImg } from '@outreader/core';
 import {
   ScatterChart,
   Scatter,
@@ -12,7 +12,7 @@ import {
   Label,
   LegendPayload,
 } from 'recharts';
-import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
+import { Menu, Dropdown } from 'antd';
 import { IData, IDescribe } from '../../../interfaces';
 
 interface ILabel {
@@ -42,9 +42,18 @@ export function StoreyChart(props: {
     };
   });
 
+  const menu = (
+    <Menu
+      onClick={({ item, key }) => downloadImg(labels.xLabel, key as string)}
+    >
+      <Menu.Item key="svg">下载 SVG</Menu.Item>
+      <Menu.Item key="png">下载 PNG</Menu.Item>
+    </Menu>
+  );
+
   return (
     <React.Fragment>
-      <ContextMenuTrigger id={`CM-${labels.xLabel}`}>
+      <Dropdown overlay={menu} trigger={['contextMenu']}>
         <div id={labels.xLabel} className="charts">
           <ScatterChart
             key={labels.xLabel}
@@ -97,16 +106,7 @@ export function StoreyChart(props: {
             })}
           </ScatterChart>
         </div>
-      </ContextMenuTrigger>
-      <ContextMenu id={`CM-${labels.xLabel}`}>
-        <MenuItem>
-          <a onClick={() => downloadSVG(labels.xLabel)}>下载 SVG</a>
-        </MenuItem>
-        <MenuItem>
-          <a onClick={() => downloadPNG(labels.xLabel)}>下载 PNG</a>
-        </MenuItem>
-        <MenuItem divider />
-      </ContextMenu>
+      </Dropdown>
     </React.Fragment>
   );
 }

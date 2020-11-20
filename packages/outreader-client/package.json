@@ -218,7 +218,6 @@
     "history": "^5.0.0",
     "lowdb": "^1.0.0",
     "react": "^17.0.1",
-    "react-contextmenu": "^2.14.0",
     "react-dom": "^17.0.1",
     "react-hot-loader": "^4.12.21",
     "react-router": "^5.2.0",
