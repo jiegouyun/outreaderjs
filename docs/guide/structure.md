@@ -39,6 +39,10 @@ next: ./compare
 
 ![image](/structure/structure-force.png)
 
+当模型为多塔时，可以按塔号和层号排序显示数据。
+
+![image](/structure/multi-towers.png)
+
 ## 位移角
 
 `位移角`页面显示内容包括顺风向风荷载和地震作用下的楼层位移和层间位移角，偶然偏心地震作用规定水平力下的楼层位移比和层间位移比。
