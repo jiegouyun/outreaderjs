@@ -105,6 +105,7 @@ export function StructureListPage() {
         rowKey="hash"
         dataSource={structures}
         pagination={false}
+        scroll={{ y: 'calc(100vh - 16rem)' }}
       />
       <div style={styles.toolbar}>
         {selectedHashes.length > 1 && (
