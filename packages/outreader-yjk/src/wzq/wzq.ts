@@ -87,7 +87,7 @@ export async function readWzqOutput(dir: string): Promise<IWzq | undefined> {
     }
 
     // Extract modeSeismic{}
-    if (!wzq.modeSeismic.allExtracted) {
+    if (wzq.modeCoupling.allExtracted && !wzq.modeSeismic.allExtracted) {
       wzq.modeSeismic = extractModeSeismic(lineArray, wzq.modeSeismic);
     }
 
@@ -117,9 +117,12 @@ export function extractModeCoupling(
   lineArray: string[],
   modeCoupling: IMode,
 ): IMode {
-  if (lineArray[lineArray.length - 1] === '强制刚性楼板模型') {
+  if (lineArray[0] === '考虑扭转耦联时的振动周期') {
     FLAG = 'keyMOdeCoupling';
-  } else if (lineArray[0] === '地震作用最大的方向') {
+  } else if (
+    lineArray[0] === '地震作用最大的方向' ||
+    lineArray[1] === 'X向平动质量系数'
+  ) {
     if (FLAG === 'keyMOdeCoupling') {
       modeCoupling.allExtracted = true;
     }

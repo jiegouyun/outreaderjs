@@ -43,7 +43,7 @@ export function AboutPage() {
           style={{ color: 'darkslategray' }}
           onClick={() => exec(`${cmd} https://outreader.com/download/`)}
         >
-          版本 v0.0.5
+          版本 v0.0.8
         </a>
       </Row>
       <Divider />
