@@ -465,7 +465,7 @@ export function DistributeResultComponent(
       wallY: distributeResult.momentPercent.percentWallY[i].toFixed(1),
     });
 
-    const towerIndex = distributeResult.shearCapacityCheck.towerID[i] - 1;
+    const towerIndex = distributeResult.momentPercent.towerID[i] - 1;
     momentColumnChartData[2 * towerIndex].push({
       x: distributeResult.momentPercent.percentColumnX[i],
       y: distributeResult.momentPercent.storeyID[i],

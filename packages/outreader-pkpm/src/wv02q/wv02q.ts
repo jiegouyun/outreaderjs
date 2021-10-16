@@ -126,20 +126,10 @@ export function extractMomentPercent(
     // }
 
     if (!isNaN(Number(lineArray[0]))) {
-      if (lineArray[1] === '1') {
-        momentPercent.storeyID.push(Number(lineArray[0]));
-        momentPercent.towerID.push(Number(lineArray[1]));
-        momentPercent.percentColumnX.push(Number(lineArray[3]));
-        momentPercent.percentWallX.push(Number(lineArray[4]));
-      } else {
-        //多塔
-        momentPercent.storeyID.push(
-          momentPercent.storeyID[momentPercent.storeyID.length - 1],
-        );
-        momentPercent.towerID.push(Number(lineArray[0]));
-        momentPercent.percentColumnX.push(Number(lineArray[2]));
-        momentPercent.percentWallX.push(Number(lineArray[3]));
-      }
+      momentPercent.storeyID.push(Number(lineArray[0]));
+      momentPercent.towerID.push(Number(lineArray[1]));
+      momentPercent.percentColumnX.push(Number(lineArray[3]));
+      momentPercent.percentWallX.push(Number(lineArray[4]));
     } else if (lineArray[0] === 'Y') {
       momentPercent.percentColumnY.push(Number(lineArray[1]));
       momentPercent.percentWallY.push(Number(lineArray[2]));
@@ -181,22 +171,11 @@ export function extractColumnShear(
     // }
 
     if (!isNaN(Number(lineArray[0]))) {
-      if (lineArray[1] === '1') {
-        columnShear.storeyID.push(Number(lineArray[0]));
-        columnShear.towerID.push(Number(lineArray[1]));
-        columnShear.columnX.push(Number(lineArray[3]));
-        columnShear.totalX.push(Number(lineArray[4]));
-        columnShear.percentColumnX.push(Number(lineArray[7]));
-      } else {
-        //多塔
-        columnShear.storeyID.push(
-          columnShear.storeyID[columnShear.storeyID.length - 1],
-        );
-        columnShear.towerID.push(Number(lineArray[0]));
-        columnShear.columnX.push(Number(lineArray[2]));
-        columnShear.totalX.push(Number(lineArray[3]));
-        columnShear.percentColumnX.push(Number(lineArray[6]));
-      }
+      columnShear.storeyID.push(Number(lineArray[0]));
+      columnShear.towerID.push(Number(lineArray[1]));
+      columnShear.columnX.push(Number(lineArray[3]));
+      columnShear.totalX.push(Number(lineArray[4]));
+      columnShear.percentColumnX.push(Number(lineArray[7]));
     } else if (lineArray[0] === 'Y') {
       columnShear.columnY.push(Number(lineArray[1]));
       columnShear.totalY.push(Number(lineArray[2]));

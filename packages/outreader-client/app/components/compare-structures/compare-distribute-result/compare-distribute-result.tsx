@@ -399,11 +399,11 @@ export function CompareDistributeResultComponent(
             : '';
         stiffRatioTableData[j][`ratx2${i}-${k}`] =
           tempStoreyID[j - diff] === storeyID[j]
-            ? tempRatx2[j - diff].toFixed(3)
+            ? Math.round(tempRatx2[j - diff] * 1000) / 1000
             : '';
         stiffRatioTableData[j][`raty2${i}-${k}`] =
           tempStoreyID[j - diff] === storeyID[j]
-            ? tempRaty2[j - diff].toFixed(3)
+            ? Math.round(tempRaty2[j - diff] * 1000) / 1000
             : '';
 
         if (j < tempStoreyID.length) {
