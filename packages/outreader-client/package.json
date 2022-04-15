@@ -61,7 +61,7 @@
       ]
     },
     "win": {
-      "target": ["nsis", "msi"]
+      "target": ["portable"]
     },
     "linux": {
       "target": ["deb", "rpm", "AppImage"],

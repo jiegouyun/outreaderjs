@@ -55,14 +55,14 @@ export async function writeFactor(
 
     count =
       Math.max(
-        structures[i].factor.stiffness.storeyID[0],
-        structures[i].factor.v02qFactor.storeyID[0],
-        structures[i].factor.shearWeightRatioModify.storeyID[0],
+        structures[i].factor.stiffness.storeyID[0] || 0,
+        structures[i].factor.v02qFactor.storeyID[0] || 0,
+        structures[i].factor.shearWeightRatioModify.storeyID[0] || 0,
       ) > count
         ? Math.max(
-            structures[i].factor.stiffness.storeyID[0],
-            structures[i].factor.v02qFactor.storeyID[0],
-            structures[i].factor.shearWeightRatioModify.storeyID[0],
+            structures[i].factor.stiffness.storeyID[0] || 0,
+            structures[i].factor.v02qFactor.storeyID[0] || 0,
+            structures[i].factor.shearWeightRatioModify.storeyID[0] || 0,
           )
         : count;
   }
