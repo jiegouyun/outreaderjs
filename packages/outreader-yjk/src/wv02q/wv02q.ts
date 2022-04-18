@@ -221,7 +221,10 @@ export function extractv02qFactor(
       v02qFactor.storeyID.push(Number(lineArray[1]));
       v02qFactor.towerID.push(Number(lineArray[3]));
     }
-    if (!isNaN(Number(lineArray[0])) && lineArray.length === 4) {
+    if (
+      !isNaN(Number(lineArray[0])) &&
+      (lineArray.length === 4 || lineArray.length === 6)
+    ) {
       v02qFactor.factorX.push(Number(lineArray[0]));
       v02qFactor.factorY.push(Number(lineArray[1]));
     }
