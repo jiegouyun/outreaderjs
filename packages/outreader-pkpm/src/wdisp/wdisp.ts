@@ -11,6 +11,7 @@ import path from 'path';
 
 // Define flag
 let FLAG: string;
+let INFLAG: boolean = false;
 
 export async function readWdispOutput(
   dir: string,
@@ -742,19 +743,22 @@ export function extractDrift(
   loadCaseDrift: IDrift,
 ): IDrift {
   if (!isNaN(Number(lineArray[0]))) {
-    if (lineArray.length === 6) {
+    if (lineArray.length === 6 && !INFLAG) {
       loadCaseDrift.storeyID.push(Number(lineArray[0]));
       loadCaseDrift.towerID.push(Number(lineArray[1]));
       loadCaseDrift.displacement.push(Number(lineArray[4]));
-    } else if (lineArray.length === 5) {
+      INFLAG = true;
+    } else if (lineArray.length === 5 && !INFLAG) {
       //多塔
       loadCaseDrift.storeyID.push(
         loadCaseDrift.storeyID[loadCaseDrift.storeyID.length - 1],
       );
       loadCaseDrift.towerID.push(Number(lineArray[0]));
       loadCaseDrift.displacement.push(Number(lineArray[3]));
-    } else {
+      INFLAG = true;
+    } else if (INFLAG) {
       loadCaseDrift.drift.push(Number(lineArray[4]));
+      INFLAG = false;
     }
   }
 
@@ -766,12 +770,13 @@ export function extractWindDriftDisp(
   loadCaseDrift: IWindDriftDisp,
 ): IWindDriftDisp {
   if (!isNaN(Number(lineArray[0]))) {
-    if (lineArray.length === 7) {
+    if (lineArray.length === 7 && !INFLAG) {
       loadCaseDrift.storeyID.push(Number(lineArray[0]));
       loadCaseDrift.towerID.push(Number(lineArray[1]));
       loadCaseDrift.displacement.push(Number(lineArray[4]));
       loadCaseDrift.ratio.push(Number(lineArray[5]));
-    } else if (lineArray.length === 6) {
+      INFLAG = true;
+    } else if (lineArray.length === 6 && !INFLAG) {
       //多塔
       loadCaseDrift.storeyID.push(
         loadCaseDrift.storeyID[loadCaseDrift.storeyID.length - 1],
@@ -779,9 +784,11 @@ export function extractWindDriftDisp(
       loadCaseDrift.towerID.push(Number(lineArray[0]));
       loadCaseDrift.displacement.push(Number(lineArray[3]));
       loadCaseDrift.ratio.push(Number(lineArray[4]));
-    } else {
+      INFLAG = true;
+    } else if (INFLAG) {
       loadCaseDrift.ratioD.push(Number(lineArray[3]));
       loadCaseDrift.drift.push(Number(lineArray[5]));
+      INFLAG = false;
     }
   }
 
@@ -793,19 +800,22 @@ export function extractRatio(
   loadCaseRatio: IDispRatio,
 ): IDispRatio {
   if (!isNaN(Number(lineArray[0]))) {
-    if (lineArray.length === 7) {
+    if (lineArray.length === 7 && !INFLAG) {
       loadCaseRatio.storeyID.push(Number(lineArray[0]));
       loadCaseRatio.towerID.push(Number(lineArray[1]));
       loadCaseRatio.ratio.push(Number(lineArray[5]));
-    } else if (lineArray.length === 6) {
+      INFLAG = true;
+    } else if (lineArray.length === 6 && !INFLAG) {
       //多塔
       loadCaseRatio.storeyID.push(
         loadCaseRatio.storeyID[loadCaseRatio.storeyID.length - 1],
       );
       loadCaseRatio.towerID.push(Number(lineArray[0]));
       loadCaseRatio.ratio.push(Number(lineArray[4]));
-    } else {
+      INFLAG = true;
+    } else if (INFLAG) {
       loadCaseRatio.ratioD.push(Number(lineArray[3]));
+      INFLAG = false;
     }
   }
 
